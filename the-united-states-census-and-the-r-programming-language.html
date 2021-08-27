@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 1 The United States Census and the R programming language | Analyzing US Census Data</title>
+<meta name="author" content="Kyle E. Walker">
+<meta name="description" content="The main focus of this book is applied social data analysis in the R programming language, with a focus on data from the United States Census Bureau. This chapter introduces both topics. The first...">
+<meta name="generator" content="bookdown 0.22.17 with bs4_book()">
+<meta property="og:title" content="Chapter 1 The United States Census and the R programming language | Analyzing US Census Data">
+<meta property="og:type" content="book">
+<meta property="og:description" content="The main focus of this book is applied social data analysis in the R programming language, with a focus on data from the United States Census Bureau. This chapter introduces both topics. The first...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 1 The United States Census and the R programming language | Analyzing US Census Data">
+<meta name="twitter:description" content="The main focus of this book is applied social data analysis in the R programming language, with a focus on data from the United States Census Bureau. This chapter introduces both topics. The first...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.10.5/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.5.1/tabs.js"></script><script src="libs/bs3compat-0.2.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script><script src="libs/plotly-binding-4.9.3/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet">
+<script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="libs/plotly-main-1.57.1/plotly-latest.min.js"></script><script src="libs/d3-bundle-5.16.0/d3-bundle.min.js"></script><script src="libs/d3-lasso-0.0.5/d3-lasso.min.js"></script><script src="libs/save-svg-as-png-1.4.17/save-svg-as-png.min.js"></script><link href="libs/ggiraphjs-0.4.1/ggiraphjs.min.css" rel="stylesheet">
+<script src="libs/ggiraphjs-0.4.1/ggiraphjs.min.js"></script><script src="libs/girafe-binding-0.7.10/girafe.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-6KFYZ3W36Z"></script><script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-6KFYZ3W36Z');
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS -->
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="Methods, Maps, and Models in R">Analyzing US Census Data</a>:
+        <small class="text-muted">Methods, Maps, and Models in R</small>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Preface</a></li>
+<li><a class="active" href="the-united-states-census-and-the-r-programming-language.html"><span class="header-section-number">1</span> The United States Census and the R programming language</a></li>
+<li><a class="" href="an-introduction-to-tidycensus.html"><span class="header-section-number">2</span> An introduction to tidycensus</a></li>
+<li><a class="" href="wrangling-census-data-with-tidyverse-tools.html"><span class="header-section-number">3</span> Wrangling Census data with tidyverse tools</a></li>
+<li><a class="" href="exploring-us-census-data-with-visualization.html"><span class="header-section-number">4</span> Exploring US Census data with visualization</a></li>
+<li><a class="" href="census-geographic-data-and-applications-in-r.html"><span class="header-section-number">5</span> Census geographic data and applications in R</a></li>
+<li><a class="" href="mapping-census-data-with-r.html"><span class="header-section-number">6</span> Mapping Census data with R</a></li>
+<li><a class="" href="spatial-analysis-with-us-census-data.html"><span class="header-section-number">7</span> Spatial analysis with US Census data</a></li>
+<li><a class="" href="modeling-us-census-data.html"><span class="header-section-number">8</span> Modeling US Census data</a></li>
+<li><a class="" href="introduction-to-census-microdata.html"><span class="header-section-number">9</span> Introduction to Census microdata</a></li>
+<li><a class="" href="analyzing-census-microdata.html"><span class="header-section-number">10</span> Analyzing Census microdata</a></li>
+<li><a class="" href="other-census-and-government-data-resources.html"><span class="header-section-number">11</span> Other Census and government data resources</a></li>
+<li><a class="" href="working-with-census-data-outside-the-united-states.html"><span class="header-section-number">12</span> Working with Census data outside the United States</a></li>
+<li><a class="" href="conclusion.html">Conclusion</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="the-united-states-census-and-the-r-programming-language" class="section level1" number="1">
+<h1>
+<span class="header-section-number">1</span> The United States Census and the R programming language<a class="anchor" aria-label="anchor" href="#the-united-states-census-and-the-r-programming-language"><i class="fas fa-link"></i></a>
+</h1>
+<p>The main focus of this book is applied social data analysis in the R programming language, with a focus on data from the United States Census Bureau. This chapter introduces both topics. The first part of the chapter covers the United States Census and the US Census Bureau, and gives an overview of how Census data can be accessed and used by analysts. The second part of the chapter is an introduction to the R programming language for readers who are new to R. The chapter wraps up with some examples of applied social data analysis projects that have used R and US Census data, setting the stage for the topics covered in the remainder of the book.</p>
+<div id="census-data-an-overview" class="section level2" number="1.1">
+<h2>
+<span class="header-section-number">1.1</span> Census data: an overview<a class="anchor" aria-label="anchor" href="#census-data-an-overview"><i class="fas fa-link"></i></a>
+</h2>
+<p>The United States Constitution mandates in Article I, Sections 2 and 9 that a complete enumeration of the US population be taken every 10 years. The language from the Constitution is as follows (see <a href="https://www.census.gov/programs-surveys/decennial-census/about.html" class="uri">https://www.census.gov/programs-surveys/decennial-census/about.html</a>):</p>
+<blockquote>
+<p>The actual enumeration shall be made within three years after the first meeting of the Congress of the United States, and within every subsequent term of ten years, in such manner as they shall by law direct.</p>
+</blockquote>
+<p>The government agency tasked with completing the enumeration of the United States population is the <a href="https://www.census.gov/en.html">United States Census Bureau</a>, part of the <a href="https://www.commerce.gov/">US Department of Commerce</a>. The first US Census was conducted in 1790, with enumerations taking place every 10 years since then. By convention, “Census day” is April 1 of the Census year.</p>
+<p>The decennial US Census is intended to be a complete enumeration of the US population to assist with <em>apportionment</em>, which refers to the balanced arrangement of Congressional districts to ensure appropriate representation in the United States House of Representatives. It asks a limited set of questions on race, ethnicity, age, sex, and housing tenure.</p>
+<p>Before the 2010 decennial Census, 1 in 6 Americans also received the Census <em>long form</em>, which asked a wider range of demographic questions on income, education, language, housing, and more. The Census long form has since been replaced by the <strong>American Community Survey</strong>, which is now the premier source of detailed demographic information about the US population. The ACS is mailed to approximately 3.5 million households per year (representing around 3 percent of the US population), allowing for annual data updates. The Census Bureau releases two ACS datasets to the public: the <strong>1-year ACS</strong>, which covers areas of population 65,000 and greater, and the <strong>5-year ACS</strong>, which is a moving average of data over a 5-year period that covers geographies down to the Census block group. ACS data are distinct from decennial Census data in that data represent <em>estimates</em> rather than precise counts, and in turn are characterized by <em>margins of error</em> around those estimates. This topic is covered in more depth in Section <a href="wrangling-census-data-with-tidyverse-tools.html#handling-margins-of-error-in-the-american-community-survey-with-tidycensus">3.5</a>. Due to data collection problems resulting from the COVID-19 pandemic, 2020 1-year ACS data will not be released, replaced by experimental estimates for that year.</p>
+<p>While the decennial US Census and American Community Survey are the most popular and widely used datasets produced by the US Census Bureau, the Bureau conducts hundreds of other surveys and disseminates data on a wide range of subjects to the public. These datasets include economic and business surveys, housing surveys, international data, population estimates and projections, and much more; <a href="https://www.census.gov/programs-surveys/surveys-programs.html">a full listing is available on the Census website</a>.</p>
+</div>
+<div id="census-hierarchies" class="section level2" number="1.2">
+<h2>
+<span class="header-section-number">1.2</span> Census hierarchies<a class="anchor" aria-label="anchor" href="#census-hierarchies"><i class="fas fa-link"></i></a>
+</h2>
+<p>Aggregate data from the decennial US Census, American Community Survey, and other Census surveys are made available to the public at different <em>enumeration units</em>. Enumeration units are geographies at which Census data are tabulated. They include both <em>legal entities</em> such as states and counties, and <em>statistical entities</em> that are not official jurisdictions but used to standardize data tabulation. The smallest unit at which data are made available from the decennial US Census is the <em>block,</em> and the smallest unit available in the ACS is the <em>block group</em>, which represents a collection of blocks. Other surveys are generally available at higher levels of aggregation.</p>
+<p>Enumeration units represent different levels of the <em>Census hierarchy.</em> This hierarchy is summarized in the graphic below (from <a href="https://www.census.gov/programs-surveys/geography/guidance/hierarchy.html" class="uri">https://www.census.gov/programs-surveys/geography/guidance/hierarchy.html</a>).</p>
+<div class="figure">
+<span style="display:block;" id="fig:census-hierarchy"></span>
+<img src="img/screenshots/census-hierarchies.png" alt="Census hierarchy of enumeration units" width="100%"><p class="caption">
+Figure 1.1: Census hierarchy of enumeration units
+</p>
+</div>
+<p>The central axis of the diagram represents the central Census hierarchy of enumeration units, as each geography from Census blocks all the way up to the nation <em>nests</em> within its parent unit. This means that block groups are fully composed of Census blocks, Census tracts are fully composed of block groups, and so forth. An example of nesting is shown in the graphic below for 2020 Census tracts in Benton County, Oregon.</p>
+<div class="figure">
+<span style="display:block;" id="fig:benton-tracts"></span>
+<img src="01-intro-to-the-census_files/figure-html/benton-tracts-1.png" alt="Benton County, OR Census tracts in relationship to the county boundary" width="100%"><p class="caption">
+Figure 1.2: Benton County, OR Census tracts in relationship to the county boundary
+</p>
+</div>
+<p>The plot illustrates how Census tracts in Benton County neatly nest within its parent geography, the county. This means that the sum of Census data for Census tracts in Benton County will also equal Benton County’s published total at the county level.</p>
+<p>Reviewing the diagram shows that some Census geographies, like congressional districts, only nest within states, and that some other geographies do not nest within any parent geography at all. A good example of this is the Zip Code Tabulation Area (ZCTA), which is used by the Census Bureau to represent postal code geographies in the US. A more in-depth discussion of ZCTAs (and some of their pitfalls) is found in Section <a href="mapping-census-data-with-r.html#understanding-and-working-with-zctas">6.4.2</a>; a brief illustration is represented by the graphic below.</p>
+<div class="figure">
+<span style="display:block;" id="fig:benton-zctas"></span>
+<img src="01-intro-to-the-census_files/figure-html/benton-zctas-1.png" alt="Benton County, OR ZCTAs in relationship to the county boundary" width="100%"><p class="caption">
+Figure 1.3: Benton County, OR ZCTAs in relationship to the county boundary
+</p>
+</div>
+<p>As the graphic illustrates, while some ZCTAs do fit entirely within Benton County, others overlap the county boundaries. In turn, “ZCTAs in Benton County” does not have the same meaning as “Census tracts in Benton County,” as the former will extend into neighboring counties whereas the latter will not.</p>
+</div>
+<div id="how-to-find-us-census-data" class="section level2" number="1.3">
+<h2>
+<span class="header-section-number">1.3</span> How to find US Census data<a class="anchor" aria-label="anchor" href="#how-to-find-us-census-data"><i class="fas fa-link"></i></a>
+</h2>
+<p>US Census data are available from a variety of sources, both directly from the Census Bureau and also from third-party distributors. This section gives an overview of some of these sources.</p>
+<div id="data-downloads-from-the-census-bureau" class="section level3" number="1.3.1">
+<h3>
+<span class="header-section-number">1.3.1</span> Data downloads from the Census Bureau<a class="anchor" aria-label="anchor" href="#data-downloads-from-the-census-bureau"><i class="fas fa-link"></i></a>
+</h3>
+<p>For years, researchers would visit the US Census Bureau’s <a href="https://www.census.gov/acs/www/data/data-tables-and-tools/american-factfinder/">American FactFinder site</a> to download Census data for custom geographies. American FactFinder was decomissioned in 2020, giving way to a new data download interface, <a href="https://data.census.gov/cedsci/">data.census.gov</a>. Users can interactively search several Census Bureau datasets (the decennial Census &amp; ACS, along with the Economic Census, Population Estimates Program, and others), generate custom queries by geography, and download data extracts.</p>
+<div class="figure">
+<span style="display:block;" id="fig:data-census-gov"></span>
+<img src="img/screenshots/data-census-gov.png" alt="View of the data.census.gov interface" width="100%"><p class="caption">
+Figure 1.4: View of the data.census.gov interface
+</p>
+</div>
+<p>The graphic above shows ACS table DP02 from the ACS Data Profile for Census tracts in Arkansas.</p>
+<p>Users who are comfortable dealing with data in bulk and want to download the raw data will instead prefer the US Census Bureau’s FTP site, <a href="https://www2.census.gov/programs-surveys/" class="uri">https://www2.census.gov/programs-surveys/</a>. This site includes a directory of Census surveys that can be navigated and downloaded. The image below shows the directory structure for the <a href="https://www2.census.gov/programs-surveys/acs/summary_file/2019/data/">2019 American Community Survey</a>, which is available by state or alternatively for the entire country.</p>
+<div class="figure">
+<span style="display:block;" id="fig:census-ftp"></span>
+<img src="img/screenshots/census-ftp-site.png" alt="View of the Census FTP download site" width="100%"><p class="caption">
+Figure 1.5: View of the Census FTP download site
+</p>
+</div>
+<p>National files are very large (the full 5-year file for all geographies is over 10GB of data zipped) so users will require dedicated software and computing workflows to interact with this data.</p>
+</div>
+<div id="the-census-api" class="section level3" number="1.3.2">
+<h3>
+<span class="header-section-number">1.3.2</span> The Census API<a class="anchor" aria-label="anchor" href="#the-census-api"><i class="fas fa-link"></i></a>
+</h3>
+<p>The Obama Administration’s <a href="https://obamawhitehouse.archives.gov/digitalgov/apis">Digital Government Strategy</a> prioritized widespread dissemination of government data resources to the public, highlighted by the <a href="https://www.data.gov/">data.gov</a> data portal. As part of this strategy, <a href="https://www.census.gov/newsroom/releases/archives/miscellaneous/cb12-135.html">the Census Bureau released the Census Application Programming Interface, or API, in 2012</a>. This interface, available at <a href="https://www.census.gov/data/developers/data-sets.html" class="uri">https://www.census.gov/data/developers/data-sets.html</a>, has grown to provide developers programmatic access to hundreds of data resources from the Census Bureau.</p>
+<p>Census APIs are characterized by an <em>API endpoint</em>, which is a base web address for a given Census dataset, and a <em>query</em>, which customizes the data returned from the API. For example, the API endpoint for the 2010 Decennial US Census is <code>https://api.census.gov/data/2010/dec/sf1</code>; an example query that requests total population data for all counties in California, <code>?get=P001001,NAME&amp;for=county:*&amp;in=state:06</code>, would be appended to the endpoint in a request to the Census API. <a href="https://api.census.gov/data/2010/dec/sf1?get=P001001,NAME&amp;for=county:*&amp;in=state:06">The result of the query can be viewed here</a>, returning data in JavaScript Object Notation (JSON) format as shown below.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb2-1"><a href="the-united-states-census-and-the-r-programming-language.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ot">[[</span><span class="st">"P001001"</span><span class="ot">,</span><span class="st">"NAME"</span><span class="ot">,</span><span class="st">"state"</span><span class="ot">,</span><span class="st">"county"</span><span class="ot">],</span></span>
+<span id="cb2-2"><a href="the-united-states-census-and-the-r-programming-language.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span><span class="st">"21419"</span><span class="ot">,</span><span class="st">"Colusa County, California"</span><span class="ot">,</span><span class="st">"06"</span><span class="ot">,</span><span class="st">"011"</span><span class="ot">],</span></span>
+<span id="cb2-3"><a href="the-united-states-census-and-the-r-programming-language.html#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span><span class="st">"220000"</span><span class="ot">,</span><span class="st">"Butte County, California"</span><span class="ot">,</span><span class="st">"06"</span><span class="ot">,</span><span class="st">"007"</span><span class="ot">],</span></span>
+<span id="cb2-4"><a href="the-united-states-census-and-the-r-programming-language.html#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span><span class="st">"1510271"</span><span class="ot">,</span><span class="st">"Alameda County, California"</span><span class="ot">,</span><span class="st">"06"</span><span class="ot">,</span><span class="st">"001"</span><span class="ot">],</span></span>
+<span id="cb2-5"><a href="the-united-states-census-and-the-r-programming-language.html#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span><span class="st">"1175"</span><span class="ot">,</span><span class="st">"Alpine County, California"</span><span class="ot">,</span><span class="st">"06"</span><span class="ot">,</span><span class="st">"003"</span><span class="ot">],</span></span>
+<span id="cb2-6"><a href="the-united-states-census-and-the-r-programming-language.html#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span><span class="st">"38091"</span><span class="ot">,</span><span class="st">"Amador County, California"</span><span class="ot">,</span><span class="st">"06"</span><span class="ot">,</span><span class="st">"005"</span><span class="ot">],</span></span>
+<span id="cb2-7"><a href="the-united-states-census-and-the-r-programming-language.html#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span><span class="st">"45578"</span><span class="ot">,</span><span class="st">"Calaveras County, California"</span><span class="ot">,</span><span class="st">"06"</span><span class="ot">,</span><span class="st">"009"</span><span class="ot">],</span></span>
+<span id="cb2-8"><a href="the-united-states-census-and-the-r-programming-language.html#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span><span class="st">"1049025"</span><span class="ot">,</span><span class="st">"Contra Costa County, California"</span><span class="ot">,</span><span class="st">"06"</span><span class="ot">,</span><span class="st">"013"</span><span class="ot">],</span></span>
+<span id="cb2-9"><a href="the-united-states-census-and-the-r-programming-language.html#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span><span class="st">"28610"</span><span class="ot">,</span><span class="st">"Del Norte County, California"</span><span class="ot">,</span><span class="st">"06"</span><span class="ot">,</span><span class="st">"015"</span><span class="ot">],</span></span>
+<span id="cb2-10"><a href="the-united-states-census-and-the-r-programming-language.html#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span><span class="st">"152982"</span><span class="ot">,</span><span class="st">"Kings County, California"</span><span class="ot">,</span><span class="st">"06"</span><span class="ot">,</span><span class="st">"031"</span><span class="ot">],</span></span>
+<span id="cb2-11"><a href="the-united-states-census-and-the-r-programming-language.html#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span><span class="st">"28122"</span><span class="ot">,</span><span class="st">"Glenn County, California"</span><span class="ot">,</span><span class="st">"06"</span><span class="ot">,</span><span class="st">"021"</span><span class="ot">],</span></span>
+<span id="cb2-12"><a href="the-united-states-census-and-the-r-programming-language.html#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span><span class="st">"134623"</span><span class="ot">,</span><span class="st">"Humboldt County, California"</span><span class="ot">,</span><span class="st">"06"</span><span class="ot">,</span><span class="st">"023"</span><span class="ot">],</span></span>
+<span id="cb2-13"><a href="the-united-states-census-and-the-r-programming-language.html#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span><span class="st">"174528"</span><span class="ot">,</span><span class="st">"Imperial County, California"</span><span class="ot">,</span><span class="st">"06"</span><span class="ot">,</span><span class="st">"025"</span><span class="ot">],</span></span>
+<span id="cb2-14"><a href="the-united-states-census-and-the-r-programming-language.html#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span><span class="st">"181058"</span><span class="ot">,</span><span class="st">"El Dorado County, California"</span><span class="ot">,</span><span class="st">"06"</span><span class="ot">,</span><span class="st">"017"</span><span class="ot">],</span></span>
+<span id="cb2-15"><a href="the-united-states-census-and-the-r-programming-language.html#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span><span class="st">"930450"</span><span class="ot">,</span><span class="st">"Fresno County, California"</span><span class="ot">,</span><span class="st">"06"</span><span class="ot">,</span><span class="st">"019"</span><span class="ot">],</span></span>
+<span id="cb2-16"><a href="the-united-states-census-and-the-r-programming-language.html#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="er">...</span></span></code></pre></div>
+<p>In most cases, users will interact with the Census API through <em>software libraries</em> that offer simplified programmatic access to the API’s data resources. The example covered extensively in this book is the R package <strong>tidycensus</strong> <span class="citation">(<a href="references.html#ref-walker_and_herman2021" role="doc-biblioref">K. Walker and Herman 2021</a>)</span>, introduced in Chapter <a href="an-introduction-to-tidycensus.html#an-introduction-to-tidycensus">2</a>. Many other libraries exist for accessing the Census API; some of these resources are covered in Chapter <a href="other-census-and-government-data-resources.html#other-census-and-government-data-resources">11</a>, and readers will learn how to write their own data access functions in Section <a href="other-census-and-government-data-resources.html#writing-your-own-data-access-functions">11.4.2</a>.</p>
+<p>Users of the Census API through these software libraries will require a <a href="https://api.census.gov/data/key_signup.html">Census API key</a>, which is free and fast to acquire. Getting an API key is covered in more detail in Section <a href="an-introduction-to-tidycensus.html#getting-started-with-tidycensus">2.1</a>. Users may also want to join the <a href="https://uscensusbureau.slack.com/">US Census Bureau’s Slack Community</a>, where developers interact and answer each others’ questions about using the API and associated software libraries.</p>
+</div>
+<div id="third-party-data-distributors" class="section level3" number="1.3.3">
+<h3>
+<span class="header-section-number">1.3.3</span> Third-party data distributors<a class="anchor" aria-label="anchor" href="#third-party-data-distributors"><i class="fas fa-link"></i></a>
+</h3>
+<p>As the US Census Bureau provides data resources that are free and available for re-distribution, several third-party data distributors have developed streamlined interfaces to use Census data. One of the most comprehensive of these resources is the University of Minnesota’s <a href="https://www.nhgis.org/">National Historical Geographic Information System, or NHGIS</a> <span class="citation">(<a href="references.html#ref-manson2021" role="doc-biblioref">Manson et al. 2021</a>)</span>, which provides access to ACS data as well as decennial Census data back to 1790. NHGIS is covered in more depth in Section <a href="other-census-and-government-data-resources.html#getting-started-with-nhgis">11.1.1</a>.</p>
+<p>Two other recommended third-party Census data distributors are <a href="https://censusreporter.org/">Census Reporter</a> and <a href="https://www.socialexplorer.com/">Social Explorer</a>. Census Reporter, a project based at <a href="https://knightlab.northwestern.edu/">Northwestern University’s Knight Lab</a>, is targeted towards journalists but offers a web interface that can help anyone explore tables available in the ACS and download ACS data. Social Explorer is a commercial product that offers both table-based and a map-based interface for exploring and visualizing Census data, and makes mapping of Census data straightfoward for users who aren’t experienced with data analysis or mapping software.</p>
+<p>Most readers of this book will want to learn how to use Census data resources to produce unique insights in their field of interest. This requires identifying a workflow to access and download custom data extracts relevant to their topics and study areas, then set up a software environment to help them wrangle, visualize, and model those data extracts. This book recommends the <strong>R programming language</strong> as an ideal software environment for completing all these tasks in an integrated way. The next section introduces R to new users.</p>
+</div>
+</div>
+<div id="what-is-r" class="section level2" number="1.4">
+<h2>
+<span class="header-section-number">1.4</span> What is R?<a class="anchor" aria-label="anchor" href="#what-is-r"><i class="fas fa-link"></i></a>
+</h2>
+<p><strong>R</strong> <span class="citation">(<a href="references.html#ref-rcore2021" role="doc-biblioref">R Core Team 2021</a>)</span> is one of the most popular programming languages and software environments for statistical computing, and is the focus of this book with respect to software applications. This section introduces some basics of working with R and covers some terminology that will help readers work through the sections of this book. If you are an experienced R user, you can safely skip this section; however, readers new to R will find this information helpful before getting started with the applied examples in the book.</p>
+<div id="getting-started-with-r" class="section level3" number="1.4.1">
+<h3>
+<span class="header-section-number">1.4.1</span> Getting started with R<a class="anchor" aria-label="anchor" href="#getting-started-with-r"><i class="fas fa-link"></i></a>
+</h3>
+<p>To get started with R, visit the CRAN (Comprehensive R Archive Network) website at <a href="https://cloud.r-project.org/" class="uri">https://cloud.r-project.org/</a> and download the appropriate version of R for your operating system, then install the software. At the time of this writing, the most recent version of R is 4.1.1; it is a good idea to make sure you have the most recent version of R installed on your computer.</p>
+<p>Once R is installed, I strongly recommend that you install <strong>RStudio</strong> <span class="citation">(<a href="references.html#ref-rstudio2021" role="doc-biblioref">RStudio Team 2021</a>)</span>, the premier integrated development environment (IDE) for R. While you can run R without RStudio, RStudio offers a wide variety of utilities to make analysts’ work with R easier and more streamlined. In fact, this entire book was written inside RStudio! RStudio can be installed from <a href="http://www.rstudio.com/download" class="uri">http://www.rstudio.com/download</a>.</p>
+<p>Once RStudio is installed, open it up and find the <strong>Console</strong> pane. This is an interactive console that allows you to type or copy-paste R commands and get results back.</p>
+</div>
+<div id="basic-data-structures-in-r" class="section level3" number="1.4.2">
+<h3>
+<span class="header-section-number">1.4.2</span> Basic data structures in R<a class="anchor" aria-label="anchor" href="#basic-data-structures-in-r"><i class="fas fa-link"></i></a>
+</h3>
+<p>On a basic level, R can function as a calculator, computing everything from simple arithmetic to advanced math:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fl">2</span> <span class="op">+</span> <span class="fl">3</span></code></pre></div>
+<pre><code>## [1] 5</code></pre>
+<p>Often, you will want to <em>assign</em> analytic results like this to an <em>object</em> (also commonly called a <em>variable</em>). Objects in R are created with an <em>assignment operator</em> (either <code><a href="https://rdrr.io/r/base/assignOps.html">&lt;-</a></code> or <code><a href="https://rdrr.io/r/base/assignOps.html">=</a></code>) like this:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">2</span> <span class="op">+</span> <span class="fl">3</span></code></pre></div>
+<p>Above, we have <em>assigned</em> the result of the mathematical operation <code>2 + 3</code> to the object <code>x</code>:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">x</span></code></pre></div>
+<pre><code>## [1] 5</code></pre>
+<p>Object names can be composed of any unquoted combination of letters and numbers so long as the first character is a letter. Our object, which stores the value <code>5</code>, is characterized by a <code>class</code>:</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] "numeric"</code></pre>
+<p><code>x</code> is an object of class <code>numeric</code>, which is a general class indicating that we can perform mathematical operations on our object. Numeric objects can be contrasted with objects of class <code>"character"</code>, which represent character strings, or textual information. Objects of class <code>"character"</code> are defined by either single- or double-quotes around a block of text.</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">y</span> <span class="op">&lt;-</span> <span class="st">"census"</span>
+<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] "character"</code></pre>
+<p>There are <em>many</em> other classes of objects you’ll encounter in this book; however the distinction between objects of class <code>"numeric"</code> and <code>"character"</code> will come up frequently.</p>
+<p>Data analysts will commonly encounter another class of object: the data frame and its derivatives (class <code>"data.frame"</code>). Data frames are rectangular objects characterized by <em>rows</em>, which generally represent individual observations, and <em>columns</em>, which represent characteristics or attributes common to those rows.</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>
+  v1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">5</span>, <span class="fl">1</span>, <span class="fl">7</span>, <span class="fl">4</span><span class="op">)</span>,
+  v2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">2</span>, <span class="fl">4</span>, <span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span>,
+  v3 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>, <span class="st">"d"</span>, <span class="st">"e"</span><span class="op">)</span>
+<span class="op">)</span>
+
+<span class="va">df</span></code></pre></div>
+<pre><code>##   v1 v2 v3
+## 1  2 10  a
+## 2  5  2  b
+## 3  1  4  c
+## 4  7  2  d
+## 5  4  1  e</code></pre>
+</div>
+<div id="functions-and-packages" class="section level3" number="1.4.3">
+<h3>
+<span class="header-section-number">1.4.3</span> Functions and packages<a class="anchor" aria-label="anchor" href="#functions-and-packages"><i class="fas fa-link"></i></a>
+</h3>
+<p>The code that generates the data frame in the previous section uses two built-in <em>functions</em>: <code><a href="https://rdrr.io/r/base/data.frame.html">data.frame()</a></code>, which creates columns from one or more <em>vectors</em> (defined as sequences of objects), and <code><a href="https://rdrr.io/r/base/c.html">c()</a></code>, which was used to create the vectors for the data frame. You can think of functions as “wrappers” that condense longer code-based workflows into simpler representations. R users can define their own functions as follows:</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">multiply</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="op">{</span>
+  <span class="va">x</span> <span class="op">*</span> <span class="va">y</span>
+<span class="op">}</span>
+
+<span class="fu">multiply</span><span class="op">(</span><span class="fl">232</span>, <span class="fl">7</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] 1624</code></pre>
+<p>In this basic example, a function named <code>multiply()</code> is defined with <code>function</code>. <code>x</code> and <code>y</code> are <em>parameters</em>, which are locally-varying elements of the function. When the function is called, a user supplies <em>arguments</em>, which are passed to the parameters for some series of calculations. In this example, <code>x</code> takes on the value of 232, and <code>y</code> takes on the value of 7; the result is then returned by the <code>multiply()</code> function.</p>
+<p>You can do quite a bit in R without ever having to write your own functions; however, you will almost certainly use functions written by others. In R, functions are generally available in <em>packages</em>, which are libraries of code designed to complete a related set of tasks. For example, the main focus of Chapter <a href="an-introduction-to-tidycensus.html#an-introduction-to-tidycensus">2</a> is the <strong>tidycensus</strong> package, which includes functions to help users access Census data. Packages can be installed from CRAN with the <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code> function:</p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"tidycensus"</span><span class="op">)</span></code></pre></div>
+<p>Once installed, functions from a package can be loaded into a user’s R environment with the <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> command, e.g. <code><a href="https://walker-data.com/tidycensus">library(tidycensus)</a></code>. Alternatively, they can be used with the <code>package_name::function_name()</code> notation, e.g. <code><a href="https://walker-data.com/tidycensus/reference/get_acs.html">tidycensus::get_acs()</a></code>. Both notations are used at times in this book.</p>
+<p>While “official” versions of R packages are usually published to CRAN and installable with <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code>, more experimental or in-development R packages may be available on <a href="https://github.com/">GitHub</a> instead. These packages should be installed with the <code><a href="https://remotes.r-lib.org/reference/install_github.html">install_github()</a></code> function in the <strong>remotes</strong> package <span class="citation">(<a href="references.html#ref-hester2021_remotes" role="doc-biblioref">Hester et al. 2021</a>)</span>, referencing both the user name and the package name.</p>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://remotes.r-lib.org">remotes</a></span><span class="op">)</span>
+<span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"Shelmith-Kariuki/rKenyaCensus"</span><span class="op">)</span></code></pre></div>
+<p>While most packages used in this book are available on CRAN, some are only available on GitHub and should be installed accordingly.</p>
+</div>
+<div id="package-ecosystems-in-r" class="section level3" number="1.4.4">
+<h3>
+<span class="header-section-number">1.4.4</span> Package ecosystems in R<a class="anchor" aria-label="anchor" href="#package-ecosystems-in-r"><i class="fas fa-link"></i></a>
+</h3>
+<p>R is <a href="https://en.wikipedia.org/wiki/Free_and_open-source_software"><em>free and open source software (FOSS)</em></a>, which means that R is free to download and install and its source code is open for anyone to view. This brings the substantial benefit of encouraging innovation from the user community, as anyone can create new packages and either submit them for publication to the official CRAN repository or host them on their personal GitHub page. In turn, new methodological innovations are often quickly accessible to the R user community. However, this can make R feel fragmented, especially for users coming from commercial software designed to have a consistent interface. Package syntax will sometimes represent idiosyncratic choices of the developer which can make R confusing to beginners.</p>
+<p>The <strong>tidyverse</strong> ecosystem developed by RStudio <span class="citation">(<a href="references.html#ref-wickham2019" role="doc-biblioref">Wickham et al. 2019</a>)</span> is one of the most popular frameworks for data analysis in R, and attempts to respond to problems introduced by package fragmentation. The tidyverse consistents of a series of R packages designed to address common data analysis tasks (data wrangling, data reshaping, and data visualization, among many others) using a consistent syntax. Many R packages are now developed with integration within the tidyverse in mind. A good example of this is the <strong>sf</strong> package <span class="citation">(<a href="references.html#ref-pebesma2018" role="doc-biblioref">Pebesma 2018</a>)</span> which integrates spatial data analysis and the tidyverse. This book is largely written with the tidyverse and sf ecosystems in mind; <strong>tidyverse</strong> is covered in greater depth in Chapter <a href="wrangling-census-data-with-tidyverse-tools.html#wrangling-census-data-with-tidyverse-tools">3</a>, and <strong>sf</strong> is introduced in Chapter <a href="census-geographic-data-and-applications-in-r.html#census-geographic-data-and-applications-in-r">5</a>.</p>
+<p>Other ecosystems exist that may be preferable to R users. R’s core functionality, commonly termed “base R,” consists of the original syntax of the language which R users should get to know independent of their preferred analytic framework. Some R users prefer to maintain their analysis in base R as it does not require <em>dependencies</em>, meaning that it can run without installing external libraries. <strong>data.table</strong> <span class="citation">(<a href="references.html#ref-dowle2021" role="doc-biblioref">Dowle and Srinivasan 2021</a>)</span> and its associated packages extend base R’s <code>data.frame</code> and allow for fast and high-performance data wrangling and analysis.</p>
+</div>
+</div>
+<div id="analyses-using-r-and-us-census-data" class="section level2" number="1.5">
+<h2>
+<span class="header-section-number">1.5</span> Analyses using R and US Census data<a class="anchor" aria-label="anchor" href="#analyses-using-r-and-us-census-data"><i class="fas fa-link"></i></a>
+</h2>
+<p>A large ecosystem of R packages exists to help analysts work with US Census data. A good summary of this ecosystem is found in Ari Lamstein and Logan Powell’s <em>A Guide to Working with US Census Data in R</em> <span class="citation">(<a href="references.html#ref-lamstein2018" role="doc-biblioref">Lamstein and Powell 2018</a>)</span>, and the ecosystem has grown further since their report was published. Below is a non-comprehensive summary of some R packages that will be of interest to readers; others will be covered throughout the book.</p>
+<div id="census-data-packages-in-r-a-brief-summary" class="section level3" number="1.5.1">
+<h3>
+<span class="header-section-number">1.5.1</span> Census data packages in R: a brief summary<a class="anchor" aria-label="anchor" href="#census-data-packages-in-r-a-brief-summary"><i class="fas fa-link"></i></a>
+</h3>
+<p>For users who prefer to work with the raw Census data files, the <strong>totalcensus</strong> package <span class="citation">(<a href="references.html#ref-li2021" role="doc-biblioref">Li 2021</a>)</span> helps download Census data in bulk from the Census FTP server and loads it into R. For election analysts, the <strong>PL94171</strong> package <span class="citation">(<a href="references.html#ref-mccartan2021" role="doc-biblioref">McCartan and Kenny 2021</a>)</span> processes and loads PL-94171 redistricting files, including the most recent data from the 2020 Census.</p>
+<p>Users who want to make more custom queries will be interested in R packages that interact with the Census APIs. The pioneering package in this area is the <strong>acs</strong> package <span class="citation">(<a href="references.html#ref-haberglenn2019" role="doc-biblioref">Glenn 2019</a>)</span>, which uses a custom interface and class system to return data extracts from various Census APIs. This package has informed a variety of other convenient Census data packages, such as <strong>choroplethr</strong> <span class="citation">(<a href="references.html#ref-lamstein2020" role="doc-biblioref">Lamstein 2020</a>)</span> which automates map production with data from the Census API. More recently, the <strong>censusapi</strong> package <span class="citation">(<a href="references.html#ref-recht2021" role="doc-biblioref">Recht 2021</a>)</span> offers a comprehensive interface to the hundreds of datasets available from the Census Bureau via API. The examples in this book largely focus on the <strong>tidycensus</strong> and <strong>tigris</strong> packages created by the author, which interact with several Census API endpoints and return geographic data for mapping and spatial analysis.</p>
+<p>R interfaces to third-party Census data resources have emerged as well. A good example is the <strong>ipumsr</strong> R package <span class="citation">(<a href="references.html#ref-ellis_and_burk2020" role="doc-biblioref">Ellis and Burk 2020</a>)</span>, which helps users interact with datasets from the Minnesota Population Center like NHGIS. The aforementioned R packages - along with R’s rich ecosystem for data analysis - have contributed to wide range of projects using Census data in a variety of fields. A few such examples are highlighted below.</p>
+</div>
+<div id="health-resource-access" class="section level3" number="1.5.2">
+<h3>
+<span class="header-section-number">1.5.2</span> Health resource access<a class="anchor" aria-label="anchor" href="#health-resource-access"><i class="fas fa-link"></i></a>
+</h3>
+<p>R and Census data have widespread applications in the analysis of health care and resource access. An excellent example is <strong>censusapi</strong> developer Hannah Recht’s study of stroke care access in the Mississippi Delta and Appalachia, published in KHN in 2021 <span class="citation">(<a href="references.html#ref-pattani2021" role="doc-biblioref">Pattani, Recht, and Grey 2021</a>)</span>. The graphic below illustrate Recht’s work integrating travel-time analytics with Census data to identify populations with limited access to stroke care across the US South.</p>
+<div class="figure">
+<span style="display:block;" id="fig:recht-isochrones"></span>
+<img src="img/screenshots/recht-isochrones.png" alt="Accessibility to stroke care across the US South from Pattani et al. (2021). Image reprinted with permission from the publisher." width="100%"><p class="caption">
+Figure 1.6: Accessibility to stroke care across the US South from Pattani et al. (2021). Image reprinted with permission from the publisher.
+</p>
+</div>
+<p>Recht published her analysis code <a href="https://github.com/khnews/2021-delta-appalachia-stroke-access">in a corresponding GitHub repository</a>, allowing readers and developers to understand the methodology and reproduce the analysis. R packages used in the analysis include <strong>censusapi</strong> for Census data, <strong>sf</strong> for spatial analysis, and the <strong>tidyverse</strong> framework for data preparation and wrangling.</p>
+</div>
+<div id="covid-19-and-pandemic-response" class="section level3" number="1.5.3">
+<h3>
+<span class="header-section-number">1.5.3</span> COVID-19 and pandemic response<a class="anchor" aria-label="anchor" href="#covid-19-and-pandemic-response"><i class="fas fa-link"></i></a>
+</h3>
+<p>R and Census data can also be used together to generate applications to the benefit of public health initiatives. A great example of this is the <a href="https://texasvaccinetracker.com/">Texas COVID-19 Vaccine Tracker</a>, developed by Matt Worthington at the University of Texas LBJ School of Public Affairs.</p>
+<div class="figure">
+<span style="display:block;" id="fig:worthington-vaccines"></span>
+<img src="img/screenshots/worthington-vaccines.png" alt="Screenshot of the Texas COVID-19 Vaccine Tracker website" width="100%"><p class="caption">
+Figure 1.7: Screenshot of the Texas COVID-19 Vaccine Tracker website
+</p>
+</div>
+<p>The application, illustrated in the graphic above, provides a comprehensive set of information about vaccine uptake and access around Texas. The example map shown visualizes vaccine doses administered per 1,000 persons in Austin-area ZCTAs. Census data are used throughout the application to help visitors understand differential vaccine update by regions and by demographics.</p>
+<p>Source code for Worthington’s application <a href="https://github.com/utexas-lbjp-data/tx_vaccine_site">can be explored at its corresponding GitHub repository</a>. The site was built with a variety of R frameworks, including the Shiny framework for interactive dashboarding, and includes a range of static graphics, interactive graphics, and interactive maps generated from R.</p>
+</div>
+<div id="politics-and-gerrymandering" class="section level3" number="1.5.4">
+<h3>
+<span class="header-section-number">1.5.4</span> Politics and gerrymandering<a class="anchor" aria-label="anchor" href="#politics-and-gerrymandering"><i class="fas fa-link"></i></a>
+</h3>
+<p>As discussed above, one of the primary purposes of the US Census is to determine congressional apportionment. This process requires the re-drawing of congressional districts every 10 years, termed <em>redistricting</em>. The redistricting process is politically fraught due to <em>gerrymandering</em>, which refers to the drawing of districts in a way that gives one political party (in the US, Republican or Democratic) a built-in advantage over the other, potentially disenfranchising voters in the process.</p>
+<p><a href="https://alarm-redist.github.io/">Harvard University’s ALARM project</a> uses R to analyze redistricting and gerrymandering and contribute to equitable solutions. The ALARM project has developed a veritable ecosystem of R packages that incorporate Census data and make Census data accessible to redistricting analysts. This includes the <strong>PL94171</strong> package mentioned above to get 2020 redistricting data, the <strong>geomander</strong> package to prepare data for redistricting analysis <span class="citation">(<a href="references.html#ref-kenny2021" role="doc-biblioref">Kenny et al. 2021</a>)</span>, and the <strong>redist</strong> package to algorithmically derive and evaluate redistricting solutions <span class="citation">(<a href="references.html#ref-kenny2021" role="doc-biblioref">Kenny et al. 2021</a>)</span>. The example below, which is generated with modified code from the <strong>redist</strong> documentation, shows a basic example of potential redistricting solutions based on Census data for Iowa.</p>
+<div class="figure">
+<span style="display:block;" id="fig:iowa-redist-map"></span>
+<img src="01-intro-to-the-census_files/figure-html/iowa-redist-map-1.png" alt="Example redistricting solutions using the redist package" width="100%"><p class="caption">
+Figure 1.8: Example redistricting solutions using the redist package
+</p>
+</div>
+<p>As court battles and contentious discussions around redistricting ramp up following the release of the 2020 Census redistricting files, R users can use ALARM’s family of packages to analyze and produce potential solutions.</p>
+</div>
+<div id="social-equity-research" class="section level3" number="1.5.5">
+<h3>
+<span class="header-section-number">1.5.5</span> Social equity research<a class="anchor" aria-label="anchor" href="#social-equity-research"><i class="fas fa-link"></i></a>
+</h3>
+<p>Census data is a core resource for a large body of research in the social sciences as it speaks directly to issues of inequality and opportunity. Jerry Shannon’s study of dollar store geography <span class="citation">(<a href="references.html#ref-shannon2020" role="doc-biblioref">Shannon 2020</a>)</span> uses Census data with R in a compelling way for this purpose. His analysis examines the growth of dollar stores across the United States in relationship to patterns of racial segregation in the United States. Shannon finds that dollar stores are more likely to be found nearer to predominantly Black and Latino neighborhoods as opposed to predominantly white neighborhoods, even after controlling for structural and economic characteristics of those neighborhoods. Shannon’s analysis was completed in R, and his analysis code <a href="https://github.com/jshannon75/metrodollars">is available in the corresponding GitHub repository</a>. The demographic analysis uses American Community Survey data obtained from NHGIS.</p>
+</div>
+<div id="census-data-visualization" class="section level3" number="1.5.6">
+<h3>
+<span class="header-section-number">1.5.6</span> Census data visualization<a class="anchor" aria-label="anchor" href="#census-data-visualization"><i class="fas fa-link"></i></a>
+</h3>
+<p>One of my favorite projects that I have worked on is <em>Mapping Immigrant America</em>, an interactive map of the US foreign-born population. The map scatters dots within Census tracts to proportionally represent the residences of immigrants based on data from the American Community Survey. <a href="https://personal.tcu.edu/kylewalker/immigrant-america/#11.08/41.872/-87.7436">The map is viewable at this link</a> .</p>
+<div class="figure">
+<span style="display:block;" id="fig:mb-immigrants-show"></span>
+<img src="img/screenshots/mb-immigrants.png" alt="Screenshot of the Mapping Immigrant America interactive map" width="100%"><p class="caption">
+Figure 1.9: Screenshot of the Mapping Immigrant America interactive map
+</p>
+</div>
+<p>While version 1 of the map used a variety of tools to process the data including ArcGIS and QGIS, the data processing for version 2 was completed entirely in R, with data then uploaded to the <a href="https://studio.mapbox.com/">Mapbox Studio</a> platform for hosting and visualization. The data preparation code can be viewed <a href="https://github.com/walkerke/mb-immigrants">in the map’s GitHub repository</a>.</p>
+<p>The map uses a <em>dasymetric dot-density</em> methodology <span class="citation">(<a href="references.html#ref-walker2018a" role="doc-biblioref">K. E. Walker 2018</a>)</span> implemented in R using a series of techniques covered in this book. ACS data and their corresponding Census tract boundaries were acquired using tools learned in Chapter <a href="an-introduction-to-tidycensus.html#an-introduction-to-tidycensus">2</a> and Section <a href="mapping-census-data-with-r.html#using-geometry-in-tidycensus">6.1</a>; areas with no population were removed from Census tracts using a spatial analysis technique covered in Section <a href="spatial-analysis-with-us-census-data.html#erasing-areas-from-census-polygons">7.4.1</a>; and dots were generated for mapping using a method introduced in Section <a href="mapping-census-data-with-r.html#dot-density-maps">6.3.3.3</a>.</p>
+<p>These examples are only a small sampling of the volumes of work completed by analysts using R and US Census Bureau data. In the next chapter, you will get started using R to access Census data for yourselves, with a focus on the <strong>tidycensus</strong> package.</p>
+
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="index.html">Preface</a></div>
+<div class="next"><a href="an-introduction-to-tidycensus.html"><span class="header-section-number">2</span> An introduction to tidycensus</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#the-united-states-census-and-the-r-programming-language"><span class="header-section-number">1</span> The United States Census and the R programming language</a></li>
+<li><a class="nav-link" href="#census-data-an-overview"><span class="header-section-number">1.1</span> Census data: an overview</a></li>
+<li><a class="nav-link" href="#census-hierarchies"><span class="header-section-number">1.2</span> Census hierarchies</a></li>
+<li>
+<a class="nav-link" href="#how-to-find-us-census-data"><span class="header-section-number">1.3</span> How to find US Census data</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#data-downloads-from-the-census-bureau"><span class="header-section-number">1.3.1</span> Data downloads from the Census Bureau</a></li>
+<li><a class="nav-link" href="#the-census-api"><span class="header-section-number">1.3.2</span> The Census API</a></li>
+<li><a class="nav-link" href="#third-party-data-distributors"><span class="header-section-number">1.3.3</span> Third-party data distributors</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#what-is-r"><span class="header-section-number">1.4</span> What is R?</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#getting-started-with-r"><span class="header-section-number">1.4.1</span> Getting started with R</a></li>
+<li><a class="nav-link" href="#basic-data-structures-in-r"><span class="header-section-number">1.4.2</span> Basic data structures in R</a></li>
+<li><a class="nav-link" href="#functions-and-packages"><span class="header-section-number">1.4.3</span> Functions and packages</a></li>
+<li><a class="nav-link" href="#package-ecosystems-in-r"><span class="header-section-number">1.4.4</span> Package ecosystems in R</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#analyses-using-r-and-us-census-data"><span class="header-section-number">1.5</span> Analyses using R and US Census data</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#census-data-packages-in-r-a-brief-summary"><span class="header-section-number">1.5.1</span> Census data packages in R: a brief summary</a></li>
+<li><a class="nav-link" href="#health-resource-access"><span class="header-section-number">1.5.2</span> Health resource access</a></li>
+<li><a class="nav-link" href="#covid-19-and-pandemic-response"><span class="header-section-number">1.5.3</span> COVID-19 and pandemic response</a></li>
+<li><a class="nav-link" href="#politics-and-gerrymandering"><span class="header-section-number">1.5.4</span> Politics and gerrymandering</a></li>
+<li><a class="nav-link" href="#social-equity-research"><span class="header-section-number">1.5.5</span> Social equity research</a></li>
+<li><a class="nav-link" href="#census-data-visualization"><span class="header-section-number">1.5.6</span> Census data visualization</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Analyzing US Census Data</strong>: Methods, Maps, and Models in R" was written by Kyle E. Walker. It was last built on 2021-08-27.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

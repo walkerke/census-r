@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Preface | Analyzing US Census Data</title>
+<meta name="author" content="Kyle E. Walker">
+<meta name="description" content="This book is an overview of how practitioners can acquire, wrangle, visualize, and model US Census data with the R programming language.">
+<meta name="generator" content="bookdown 0.22.17 with bs4_book()">
+<meta property="og:title" content="Preface | Analyzing US Census Data">
+<meta property="og:type" content="book">
+<meta property="og:description" content="This book is an overview of how practitioners can acquire, wrangle, visualize, and model US Census data with the R programming language.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Preface | Analyzing US Census Data">
+<meta name="twitter:description" content="This book is an overview of how practitioners can acquire, wrangle, visualize, and model US Census data with the R programming language.">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.10.5/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.5.1/tabs.js"></script><script src="libs/bs3compat-0.2.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script><script src="libs/plotly-binding-4.9.3/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet">
+<script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="libs/plotly-main-1.57.1/plotly-latest.min.js"></script><script src="libs/d3-bundle-5.16.0/d3-bundle.min.js"></script><script src="libs/d3-lasso-0.0.5/d3-lasso.min.js"></script><script src="libs/save-svg-as-png-1.4.17/save-svg-as-png.min.js"></script><link href="libs/ggiraphjs-0.4.1/ggiraphjs.min.css" rel="stylesheet">
+<script src="libs/ggiraphjs-0.4.1/ggiraphjs.min.js"></script><script src="libs/girafe-binding-0.7.10/girafe.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-6KFYZ3W36Z"></script><script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-6KFYZ3W36Z');
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS -->
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="Methods, Maps, and Models in R">Analyzing US Census Data</a>:
+        <small class="text-muted">Methods, Maps, and Models in R</small>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="active" href="index.html">Preface</a></li>
+<li><a class="" href="the-united-states-census-and-the-r-programming-language.html"><span class="header-section-number">1</span> The United States Census and the R programming language</a></li>
+<li><a class="" href="an-introduction-to-tidycensus.html"><span class="header-section-number">2</span> An introduction to tidycensus</a></li>
+<li><a class="" href="wrangling-census-data-with-tidyverse-tools.html"><span class="header-section-number">3</span> Wrangling Census data with tidyverse tools</a></li>
+<li><a class="" href="exploring-us-census-data-with-visualization.html"><span class="header-section-number">4</span> Exploring US Census data with visualization</a></li>
+<li><a class="" href="census-geographic-data-and-applications-in-r.html"><span class="header-section-number">5</span> Census geographic data and applications in R</a></li>
+<li><a class="" href="mapping-census-data-with-r.html"><span class="header-section-number">6</span> Mapping Census data with R</a></li>
+<li><a class="" href="spatial-analysis-with-us-census-data.html"><span class="header-section-number">7</span> Spatial analysis with US Census data</a></li>
+<li><a class="" href="modeling-us-census-data.html"><span class="header-section-number">8</span> Modeling US Census data</a></li>
+<li><a class="" href="introduction-to-census-microdata.html"><span class="header-section-number">9</span> Introduction to Census microdata</a></li>
+<li><a class="" href="analyzing-census-microdata.html"><span class="header-section-number">10</span> Analyzing Census microdata</a></li>
+<li><a class="" href="other-census-and-government-data-resources.html"><span class="header-section-number">11</span> Other Census and government data resources</a></li>
+<li><a class="" href="working-with-census-data-outside-the-united-states.html"><span class="header-section-number">12</span> Working with Census data outside the United States</a></li>
+<li><a class="" href="conclusion.html">Conclusion</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><!--bookdown:title:end--><!--bookdown:title:start--><div id="preface" class="section level1 unnumbered">
+<h1>Preface<a class="anchor" aria-label="anchor" href="#preface"><i class="fas fa-link"></i></a>
+</h1>
+<p>This is the online home of <em>Analyzing US Census Data: Methods, Maps, and Models in R</em>, a forthcoming book published with <a href="https://www.routledge.com/our-products/books">CRC Press</a>.</p>
+<div class="inline-figure"><img src="img/crc.png" width="20%"></div>
+<p>The online version of the book is published with the <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0) license</a>. To support the development of the book, please consider purchasing a hard copy of the book from CRC Press, or contributing to the book by making a pull request at <a href="https://github.com/walkerke/census-with-r-book">the book’s GitHub repository</a>.</p>
+<div id="about-the-book" class="section level2" number="0.1">
+<h2>
+<span class="header-section-number">0.1</span> About the book<a class="anchor" aria-label="anchor" href="#about-the-book"><i class="fas fa-link"></i></a>
+</h2>
+<p>Census data are widely used in the United States across numerous research and applied fields, including education, business, journalism, and many others. Until recently, the process of working with US Census data has required the use of a wide array of web interfaces and software platforms to prepare, map, and present data products. The goal of this book is to illustrate the utility of the R programming language for handling these tasks, allowing Census data users to manage their projects in a single computing environment.</p>
+<p>The book focuses on two types of Census data products commonly used by analysts:</p>
+<ul>
+<li><p><strong>Aggregate data</strong>, which involve counts or estimates released by the Census Bureau that are aggregated to some geographic unit of interest, such as a state;</p></li>
+<li><p><strong>Microdata</strong>, which are individual, anonymized Census records that represent a sample of a given Census dataset.</p></li>
+</ul>
+<p>Readers new to R and Census data should read the book in order, as each chapter includes concepts that build upon examples introduced in previous chapters. More experienced analysts might use chapters as standalone manuals tailored to specific tasks and topics of interest to them. A brief overview of each chapter follows below.</p>
+<ul>
+<li>Chapter 1 is a general overview of US Census data terms and definitions, and gives some brief background about the R language and why R is an excellent environment for working with US Census data. It ends with motivating examples of excellent applied projects that use R and Census data.</li>
+<li>Chapter 2 introduces <strong>tidycensus</strong>, an R package for working with US Census Bureau data in a tidy format. Readers will learn how to make basic data requests with the package and understand various options in the package.</li>
+<li>Chapter 3 covers analysis of US Census data using the <strong>tidyverse</strong>, an integrated framework of packages for data preparation and wrangling. It includes both simple and more complex examples of common <strong>tidyverse</strong> data wrangling tasks, and discusses workflows for handling margins of error in the American Community Survey.</li>
+<li>Chapter 4 introduces workflows for Census data visualization with a focus on the <strong>ggplot2</strong> package. Examples focus on best practices for preparing data for visualization and building charts well-suited for presenting Census data analyses.</li>
+<li>Chapter 5 introduces the <strong>tigris</strong> package for working with US Census Bureau geographic data in R. It includes an overview of spatial data structures in R with the <strong>sf</strong> package and covers key geospatial data topics like coordinate reference systems.</li>
+<li>Chapter 6 is all about mapping in R. Readers learn how to make simple shaded maps with US Census data using packages like <strong>ggplot2</strong> and <strong>tmap</strong>; maps with more complex data requirements like dot-density maps; and interactive geographic visualizations and apps.</li>
+<li>Chapter 7 covers spatial data analysis. Topics include geographic data overlay; distance and proximity analysis; and exploratory spatial data analysis with the <strong>spdep</strong> package.</li>
+<li>Chapter 8’s topic is modeling of geographic data. Readers learn how to compute indices of segregation and diversity with Census data; fit linear, spatial, and geographically weighted regression models; and develop workflows for geodemographic segmentation and regionalization.</li>
+<li>Chapter 9 focuses on individual-level <em>microdata</em> from the US Census Bureau’s Public Use Microdata Sample. Readers will learn how to acquire these datasets with <strong>tidycensus</strong> and use them to generate unique insights.</li>
+<li>Chapter 10 covers analysis of microdata with a focus on methods for analyzing and modeling complex survey samples. Topics include estimation of standard errors with replicate weights, mapping microdata, and modeling microdata appropriately with the <strong>survey</strong> and <strong>srvyr</strong> packages.</li>
+<li>Chapter 11’s focus is Census datasets beyond the decennial US Census and American Community Survey. The first part of the chapter focuses on historical mapping with the National Historical Geographic Information System (NHGIS) and historical microdata analysis with IPUMS-USA; readers learn how to use the <strong>ipumsr</strong> R package and R’s database tools to assist with these tasks. The second part of the chapter covers the wide range of datasets available from the US Census Bureau, and R packages like <strong>censusapi</strong> and <strong>lehdr</strong> that help analysts access those datasets.</li>
+<li>Chapter 12 covers Census data resources for regions outside the United States. It covers global demographic analysis with the US Census Bureau’s International Data Base as well as country-specific examples from Canada, Mexico, Brazil, and Kenya.</li>
+</ul>
+</div>
+<div id="who-this-book-is-for" class="section level2" number="0.2">
+<h2>
+<span class="header-section-number">0.2</span> Who this book is for<a class="anchor" aria-label="anchor" href="#who-this-book-is-for"><i class="fas fa-link"></i></a>
+</h2>
+<p>This book is designed for practitioners interested in working efficiently with data from the United States Census Bureau. It defines “practitioners” quite broadly, and analysts at all levels of expertise should find topics within this book useful. While the book focuses on examples from the United States, the topics covered are designed to be more general and applicable to use-cases outside the United States and also outside the domain of working with Census data.</p>
+<ul>
+<li><p>Students and analysts newer to R will likely want to start with Chapters 2 through 4 which cover the basics of <strong>tidycensus</strong> and give examples of several tidyverse-centric workflows.</p></li>
+<li><p>Chapters 5 through 7 will likely appeal to analysts from a Geographic Information Systems (GIS) background, as these chapters introduce methods for handling and mapping spatial data that might alternatively be done in desktop GIS software like ArcGIS or QGIS.</p></li>
+<li><p>More experienced social science researchers will find Chapters 9 through 11 useful as they cover ACS microdata, an essential resource for many social science disciplines. Analysts coming to R from Stata or SAS will also learn how to use R’s survey data modeling tools in these chapters.</p></li>
+<li><p>Data scientists interested in integrating spatial analysis into their work may want to focus on Chapters 7 and 8, which cover a range of methods that can be incorporated into business intelligence workflows.</p></li>
+<li><p>Journalists will find value throughout the book, though Chapters 2, 5-6, 9, and 12 may prove especially useful as they focus on rapid retrieval of US and international Census data that can be incorporated into articles and reports.</p></li>
+</ul>
+<p>Of course, there are many other use cases for Census data that are not covered in this overview. If you are using the examples in this book for unique applications, please reach out!</p>
+</div>
+<div id="about-the-author" class="section level2" number="0.3">
+<h2>
+<span class="header-section-number">0.3</span> About the author<a class="anchor" aria-label="anchor" href="#about-the-author"><i class="fas fa-link"></i></a>
+</h2>
+<p>I (Kyle Walker) work as an associate professor of Geography at Texas Christian University and as a spatial data science consultant. I’m a proud graduate of the University of Oregon (Go Ducks!) and I hold a Ph.D. in Geography from the University of Minnesota. I do research in the field of population geography, focusing on metropolitan demographic trends, and I consult broadly in areas such as commercial real estate, the health sciences, and general R training/software development. For consulting inquiries, please reach out to <a href="mailto:kyle@walker-data.com" class="email">kyle@walker-data.com</a>.</p>
+<p>I live in Fort Worth, Texas with my wife Molly and our three children Michaela, Landry, and Clara, to whom this book is dedicated. While I enjoy developing open source software, my true passions are exploring the country with my family and earnestly (though not always successfully) coaching my kids’ sports teams.</p>
+</div>
+<div id="technical-details" class="section level2" number="0.4">
+<h2>
+<span class="header-section-number">0.4</span> Technical details<a class="anchor" aria-label="anchor" href="#technical-details"><i class="fas fa-link"></i></a>
+</h2>
+<p>This book was written using RStudio’s <a href="https://rstudio.github.io/visual-markdown-editing/">Visual Editor for R Markdown</a>, and published with the <strong>bookdown</strong> R package <span class="citation">(<a href="references.html#ref-xie2016" role="doc-biblioref">Xie 2016</a>)</span>.</p>
+<p>At the time of the most recent book build, the following R version was used:</p>
+<pre><code>## R version 4.1.1 (2021-08-10) -- "Kick Things"</code></pre>
+<p>The examples in this book were created with the following R package versions:</p>
+<div class="inline-table"><table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:book-pkgs">Table 0.1: </span>Packages used in this book
+</caption>
+<thead><tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+package
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+version
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+source
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+blscrapeR
+</td>
+<td style="text-align:left;">
+3.2.0
+</td>
+<td style="text-align:left;">
+Github (keberwein/blscrapeR@db918aa)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+cancensus
+</td>
+<td style="text-align:left;">
+0.4.2
+</td>
+<td style="text-align:left;">
+CRAN (R 4.1.0)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+censusapi
+</td>
+<td style="text-align:left;">
+0.7.2
+</td>
+<td style="text-align:left;">
+Github (hrecht/censusapi@b085e9d)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+crsuggest
+</td>
+<td style="text-align:left;">
+0.3.1
+</td>
+<td style="text-align:left;">
+CRAN (R 4.1.0)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+geobr
+</td>
+<td style="text-align:left;">
+1.6.1
+</td>
+<td style="text-align:left;">
+CRAN (R 4.1.0)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+geofacet
+</td>
+<td style="text-align:left;">
+0.2.0
+</td>
+<td style="text-align:left;">
+CRAN (R 4.1.0)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ggbeeswarm
+</td>
+<td style="text-align:left;">
+0.6.0
+</td>
+<td style="text-align:left;">
+CRAN (R 4.1.0)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ggiraph
+</td>
+<td style="text-align:left;">
+0.7.10
+</td>
+<td style="text-align:left;">
+CRAN (R 4.1.0)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ggridges
+</td>
+<td style="text-align:left;">
+0.5.3
+</td>
+<td style="text-align:left;">
+CRAN (R 4.1.0)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+GWmodel
+</td>
+<td style="text-align:left;">
+2.2-6
+</td>
+<td style="text-align:left;">
+CRAN (R 4.1.0)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+httr
+</td>
+<td style="text-align:left;">
+1.4.2
+</td>
+<td style="text-align:left;">
+CRAN (R 4.1.0)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+idbr
+</td>
+<td style="text-align:left;">
+1.0
+</td>
+<td style="text-align:left;">
+CRAN (R 4.1.0)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+inegiR
+</td>
+<td style="text-align:left;">
+3.0.0
+</td>
+<td style="text-align:left;">
+Github (Eflores89/inegiR@692bf6a)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ipumsr
+</td>
+<td style="text-align:left;">
+0.4.5
+</td>
+<td style="text-align:left;">
+CRAN (R 4.1.0)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+jsonlite
+</td>
+<td style="text-align:left;">
+1.7.2
+</td>
+<td style="text-align:left;">
+CRAN (R 4.1.0)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+leaflet
+</td>
+<td style="text-align:left;">
+2.0.4.1
+</td>
+<td style="text-align:left;">
+CRAN (R 4.1.0)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+lehdr
+</td>
+<td style="text-align:left;">
+0.2.4
+</td>
+<td style="text-align:left;">
+Github (jamgreen/lehdr@8e2fe25)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+mapboxapi
+</td>
+<td style="text-align:left;">
+0.2.1.9000
+</td>
+<td style="text-align:left;">
+Github (walkerke/mapboxapi@f7c33e6)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+mapview
+</td>
+<td style="text-align:left;">
+2.10.1
+</td>
+<td style="text-align:left;">
+Github (r-spatial/mapview@5090810)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+mxmaps
+</td>
+<td style="text-align:left;">
+2020.0.0
+</td>
+<td style="text-align:left;">
+Github (diegovalle/mxmaps@8a4c1b9)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+plotly
+</td>
+<td style="text-align:left;">
+4.9.3
+</td>
+<td style="text-align:left;">
+CRAN (R 4.1.0)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+rKenyaCensus
+</td>
+<td style="text-align:left;">
+0.0.2
+</td>
+<td style="text-align:left;">
+Github (Shelmith-Kariuki/rKenyaCensus@6db00e5)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+segregation
+</td>
+<td style="text-align:left;">
+0.5.0.9000
+</td>
+<td style="text-align:left;">
+Github (elbersb/segregation@a2196af)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+sf
+</td>
+<td style="text-align:left;">
+1.0-2
+</td>
+<td style="text-align:left;">
+CRAN (R 4.1.0)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+spatialreg
+</td>
+<td style="text-align:left;">
+1.1-8
+</td>
+<td style="text-align:left;">
+CRAN (R 4.1.0)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+spdep
+</td>
+<td style="text-align:left;">
+1.1-8
+</td>
+<td style="text-align:left;">
+CRAN (R 4.1.0)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+srvyr
+</td>
+<td style="text-align:left;">
+1.0.1
+</td>
+<td style="text-align:left;">
+CRAN (R 4.1.0)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+survey
+</td>
+<td style="text-align:left;">
+4.0
+</td>
+<td style="text-align:left;">
+CRAN (R 4.1.0)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+tidycensus
+</td>
+<td style="text-align:left;">
+1.0.0.9000
+</td>
+<td style="text-align:left;">
+local
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+tidyUSDA
+</td>
+<td style="text-align:left;">
+0.3.1
+</td>
+<td style="text-align:left;">
+CRAN (R 4.1.0)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+tidyverse
+</td>
+<td style="text-align:left;">
+1.3.1
+</td>
+<td style="text-align:left;">
+CRAN (R 4.1.0)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+tigris
+</td>
+<td style="text-align:left;">
+1.4.1.9000
+</td>
+<td style="text-align:left;">
+local
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+tmap
+</td>
+<td style="text-align:left;">
+3.3-1
+</td>
+<td style="text-align:left;">
+CRAN (R 4.1.0)
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="empty"></div>
+<div class="next"><a href="the-united-states-census-and-the-r-programming-language.html"><span class="header-section-number">1</span> The United States Census and the R programming language</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#preface">Preface</a></li>
+<li><a class="nav-link" href="#about-the-book"><span class="header-section-number">0.1</span> About the book</a></li>
+<li><a class="nav-link" href="#who-this-book-is-for"><span class="header-section-number">0.2</span> Who this book is for</a></li>
+<li><a class="nav-link" href="#about-the-author"><span class="header-section-number">0.3</span> About the author</a></li>
+<li><a class="nav-link" href="#technical-details"><span class="header-section-number">0.4</span> Technical details</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Analyzing US Census Data</strong>: Methods, Maps, and Models in R" was written by Kyle E. Walker. It was last built on 2021-08-27.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

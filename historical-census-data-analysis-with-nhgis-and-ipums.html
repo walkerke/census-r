@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 11 Historical Census data analysis with NHGIS and IPUMS | Analyzing the US Census with R</title>
+<meta name="author" content="Kyle E. Walker">
+<meta name="description" content="Most of the examples covered in the book to this point use data from recent US Census Bureau datasets such as the Decennial Census since 2000 and the American Community Survey. These datasets are...">
+<meta name="generator" content="bookdown 0.22.11 with bs4_book()">
+<meta property="og:title" content="Chapter 11 Historical Census data analysis with NHGIS and IPUMS | Analyzing the US Census with R">
+<meta property="og:type" content="book">
+<meta property="og:description" content="Most of the examples covered in the book to this point use data from recent US Census Bureau datasets such as the Decennial Census since 2000 and the American Community Survey. These datasets are...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 11 Historical Census data analysis with NHGIS and IPUMS | Analyzing the US Census with R">
+<meta name="twitter:description" content="Most of the examples covered in the book to this point use data from recent US Census Bureau datasets such as the Decennial Census since 2000 and the American Community Survey. These datasets are...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.9.2/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.5.1/tabs.js"></script><script src="libs/bs3compat-0.2.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script><script src="libs/plotly-binding-4.9.3/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet">
+<script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="libs/plotly-main-1.57.1/plotly-latest.min.js"></script><script src="libs/d3-bundle-5.16.0/d3-bundle.min.js"></script><script src="libs/d3-lasso-0.0.5/d3-lasso.min.js"></script><script src="libs/save-svg-as-png-1.4.17/save-svg-as-png.min.js"></script><link href="libs/ggiraphjs-0.4.1/ggiraphjs.min.css" rel="stylesheet">
+<script src="libs/ggiraphjs-0.4.1/ggiraphjs.min.js"></script><script src="libs/girafe-binding-0.7.10/girafe.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS -->
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Analyzing the US Census with R</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Preface</a></li>
+<li><a class="" href="an-introduction-to-the-united-states-census-and-the-r-programming-language.html"><span class="header-section-number">1</span> An introduction to the United States Census and the R programming language</a></li>
+<li><a class="" href="an-introduction-to-tidycensus.html"><span class="header-section-number">2</span> An introduction to tidycensus</a></li>
+<li><a class="" href="wrangling-census-data-with-tidyverse-tools.html"><span class="header-section-number">3</span> Wrangling Census data with tidyverse tools</a></li>
+<li><a class="" href="exploring-us-census-data-with-visualization.html"><span class="header-section-number">4</span> Exploring US Census data with visualization</a></li>
+<li><a class="" href="census-geographic-data-and-applications-in-r.html"><span class="header-section-number">5</span> Census geographic data and applications in R</a></li>
+<li><a class="" href="mapping-census-data-with-r.html"><span class="header-section-number">6</span> Mapping Census data with R</a></li>
+<li><a class="" href="spatial-analysis-with-us-census-data.html"><span class="header-section-number">7</span> Spatial analysis with US Census data</a></li>
+<li><a class="" href="modeling-us-census-data.html"><span class="header-section-number">8</span> Modeling US Census data</a></li>
+<li><a class="" href="introduction-to-census-microdata.html"><span class="header-section-number">9</span> Introduction to Census microdata</a></li>
+<li><a class="" href="analyzing-census-microdata.html"><span class="header-section-number">10</span> Analyzing Census microdata</a></li>
+<li><a class="active" href="historical-census-data-analysis-with-nhgis-and-ipums.html"><span class="header-section-number">11</span> Historical Census data analysis with NHGIS and IPUMS</a></li>
+<li><a class="" href="working-with-census-data-outside-the-united-states.html"><span class="header-section-number">12</span> Working with Census data outside the United States</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="historical-census-data-analysis-with-nhgis-and-ipums" class="section level1" number="11">
+<h1>
+<span class="header-section-number">11</span> Historical Census data analysis with NHGIS and IPUMS<a class="anchor" aria-label="anchor" href="#historical-census-data-analysis-with-nhgis-and-ipums"><i class="fas fa-link"></i></a>
+</h1>
+<p>Most of the examples covered in the book to this point use data from recent US Census Bureau datasets such as the Decennial Census since 2000 and the American Community Survey. These datasets are available through the US Census Bureau’s APIs and in turn accessible with tidycensus and related tools. However, analysts and historians may be interested in accessing data from much earlier - perhaps all the way back to 1790, the first US Census! Fortunately, these historical datasets are available to analysts through the <a href="https://www.nhgis.org/">National Historical Geographic Information System (NHGIS) project</a> and the <a href="https://pop.umn.edu/">Minnesota Population Center’s</a> <a href="https://ipums.org/">IPUMS project</a>. While both of these data repositories have typically attracted researchers using commercial software such as ArcGIS (for NHGIS) and Stata/SAS (for IPUMS), the Minnesota Population Center has developed an associated <a href="http://tech.popdata.org/ipumsr/">ipumsr</a> R package to help analysts integrate these datasets into R-based workflows.</p>
+<p>This chapter provides an overview of how to access and use historical US Census datasets in R with NHGIS, IPUMS, and the ipumsr package. Due to the size of the datasets involved, these datasets are not provided with the sample data available in the book’s data repository. To reproduce, readers should follow the steps provided to sign up for an IPUMS account and download the data themselves.</p>
+<div id="getting-started-with-nhgis" class="section level2" number="11.1">
+<h2>
+<span class="header-section-number">11.1</span> Getting started with NHGIS<a class="anchor" aria-label="anchor" href="#getting-started-with-nhgis"><i class="fas fa-link"></i></a>
+</h2>
+<p>To get started with NHGIS, visit…</p>
+</div>
+<div id="example" class="section level2" number="11.2">
+<h2>
+<span class="header-section-number">11.2</span> Example<a class="anchor" aria-label="anchor" href="#example"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb382"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.ipums.org">ipumsr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
+
+<span class="va">nyc_1910</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ipumsr/man/read_nhgis.html">read_nhgis_sf</a></span><span class="op">(</span>
+  data_file <span class="op">=</span> <span class="st">"data/NHGIS/nhgis0099_csv.zip"</span>,
+  shape_file <span class="op">=</span> <span class="st">"data/NHGIS/nhgis0099_shape.zip"</span>
+<span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="http://gdfe.co/srvyr/reference/dplyr_single.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">TRACTA</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<pre><code>## Use of data from NHGIS is subject to conditions including that users should
+## cite the data appropriately. Use command `ipums_conditions()` for more details.
+## 
+## 
+## Reading data file...
+## Reading geography...
+## options:        ENCODING=latin1 
+## Reading layer `US_tract_1910' from data source 
+##   `/tmp/Rtmp7vZadR/file53f2257365b7/US_tract_1910.shp' using driver `ESRI Shapefile'
+## Simple feature collection with 1989 features and 6 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: 489737.4 ymin: 130629.6 xmax: 2029575 ymax: 816129.7
+## Projected CRS: USA_Contiguous_Albers_Equal_Area_Conic
+## options:        ENCODING=latin1 
+## Reading layer `US_tractcounty_1910' from data source 
+##   `/tmp/Rtmp7vZadR/file53f2257365b7/US_tractcounty_1910.shp' 
+##   using driver `ESRI Shapefile'
+## Simple feature collection with 472 features and 16 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: 18912.79 ymin: -153678.5 xmax: 2137763 ymax: 1051772
+## Projected CRS: USA_Contiguous_Albers_Equal_Area_Conic</code></pre>
+<div class="sourceCode" id="cb384"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">nyc_1910</span></code></pre></div>
+<pre><code>## Simple feature collection with 704 features and 58 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: 1810884 ymin: 544085.4 xmax: 1851324 ymax: 596805.5
+## Projected CRS: USA_Contiguous_Albers_Equal_Area_Conic
+## # A tibble: 704 x 59
+##    NHGISST NHGISCTY GISJOIN       GISJOIN2     SHAPE_AREA SHAPE_LEN
+##  * &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;         &lt;chr&gt;             &lt;dbl&gt;     &lt;dbl&gt;
+##  1 360     0610     G3600610B0002 3600610B0002    382739.     3279.
+##  2 360     0610     G3600610B0001 3600610B0001   1141818.     6311.
+##  3 360     0470     G36004700058  36004700058     153367.     1603.
+##  4 360     0470     G36004700059  36004700059     209366.     2082.
+##  5 360     0470     G36004700062  36004700062     155479.     1608.
+##  6 360     0470     G36004700042  36004700042     215673.     1939.
+##  7 360     0470     G36004700030  36004700030     178404.     1718.
+##  8 360     0470     G36004700031  36004700031     163969.     1605.
+##  9 360     0470     G36004700032  36004700032     326661.     2511.
+## 10 360     0470     G36004700033  36004700033     252369.     2200.
+## # … with 694 more rows, and 53 more variables: geometry &lt;MULTIPOLYGON [m]&gt;,
+## #   layer &lt;chr&gt;, DECADE &lt;chr&gt;, ICPSRCTY &lt;chr&gt;, ICPSRCTYI &lt;dbl&gt;, ICPSRFIP &lt;dbl&gt;,
+## #   ICPSRNAM &lt;chr&gt;, ICPSRST &lt;chr&gt;, ICPSRSTI &lt;dbl&gt;, ICPSRUNI &lt;chr&gt;,
+## #   NHGISNAM &lt;chr&gt;, STATENAM &lt;chr&gt;, YEAR &lt;dbl&gt;, STATE &lt;chr&gt;, STATEA &lt;dbl&gt;,
+## #   COUNTY &lt;chr&gt;, COUNTYA &lt;chr&gt;, PRETRACTA &lt;chr&gt;, TRACTA &lt;chr&gt;,
+## #   POSTTRCTA &lt;lgl&gt;, AREANAME &lt;chr&gt;, A6G001 &lt;dbl&gt;, A6G002 &lt;dbl&gt;, A6G003 &lt;dbl&gt;,
+## #   A6G004 &lt;dbl&gt;, A6G005 &lt;dbl&gt;, A6G006 &lt;dbl&gt;, A6G007 &lt;dbl&gt;, A6G008 &lt;dbl&gt;,
+## #   A6G009 &lt;dbl&gt;, A6G010 &lt;dbl&gt;, A6G011 &lt;dbl&gt;, A6G012 &lt;dbl&gt;, A6G013 &lt;dbl&gt;,
+## #   A6G014 &lt;dbl&gt;, A6G015 &lt;dbl&gt;, A6G016 &lt;dbl&gt;, A6G017 &lt;dbl&gt;, A6G018 &lt;dbl&gt;,
+## #   A6G019 &lt;dbl&gt;, A6G020 &lt;dbl&gt;, A6G021 &lt;dbl&gt;, A6G022 &lt;dbl&gt;, A6G023 &lt;dbl&gt;,
+## #   A6G024 &lt;dbl&gt;, A6G025 &lt;dbl&gt;, A60001 &lt;dbl&gt;, A60002 &lt;dbl&gt;, A60003 &lt;dbl&gt;,
+## #   A60004 &lt;dbl&gt;, A60005 &lt;dbl&gt;, A60006 &lt;dbl&gt;, A60007 &lt;dbl&gt;</code></pre>
+<div class="sourceCode" id="cb386"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">nyc_1910</span><span class="op">$</span><span class="va">geometry</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="11-historical-census-data_files/figure-html/unnamed-chunk-2-1.png" width="672"></div>
+<div class="sourceCode" id="cb387"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">crsuggest</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span>
+
+<span class="va">nyc_crs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/crsuggest/man/suggest_top_crs.html">suggest_top_crs</a></span><span class="op">(</span><span class="va">nyc_1910</span>, inherit_gcs <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+
+<span class="va">nyc_crs</span></code></pre></div>
+<pre><code>## [1] 6539</code></pre>
+<div class="sourceCode" id="cb389"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">nyc_pctfb</span> <span class="op">&lt;-</span> <span class="va">nyc_1910</span> <span class="op">%&gt;%</span>
+  <span class="fu">rowwise</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="http://gdfe.co/srvyr/reference/dplyr_single.html">mutate</a></span><span class="op">(</span>total <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/c_across.html">c_across</a></span><span class="op">(</span><span class="va">A60001</span><span class="op">:</span><span class="va">A60007</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="http://gdfe.co/srvyr/reference/groups.html">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="http://gdfe.co/srvyr/reference/dplyr_single.html">transmute</a></span><span class="op">(</span>
+    tract_id <span class="op">=</span> <span class="va">GISJOIN</span>,
+    pct_fb <span class="op">=</span> <span class="va">A60005</span> <span class="op">/</span> <span class="va">total</span>
+  <span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html">st_transform</a></span><span class="op">(</span><span class="va">nyc_crs</span><span class="op">)</span></code></pre></div>
+<p>And visualize:</p>
+<div class="sourceCode" id="cb390"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">nyc_pctfb</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">pct_fb</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span>color <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html">scale_fill_viridis_c</a></span><span class="op">(</span>option <span class="op">=</span> <span class="st">"magma"</span>, labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org/reference/label_percent.html">percent</a></span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span>base_family <span class="op">=</span> <span class="st">"Verdana"</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Percent foreign-born by Census tract, 1910"</span>,
+       subtitle <span class="op">=</span> <span class="st">"New York City"</span>,
+       caption <span class="op">=</span>  <span class="st">"Data source: NHGIS"</span>,
+       fill <span class="op">=</span> <span class="st">"Percentage"</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="11-historical-census-data_files/figure-html/unnamed-chunk-5-1.png" width="672"></div>
+<p>Alternatively, a dot-density map of a group of immigrants:</p>
+<div class="sourceCode" id="cb391"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">italy_dots</span> <span class="op">&lt;-</span> <span class="va">nyc_1910</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html">st_transform</a></span><span class="op">(</span><span class="va">nyc_crs</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_sample.html">st_sample</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="va">.</span><span class="op">$</span><span class="va">A6G014</span> <span class="op">/</span> <span class="fl">100</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/sf.html">st_sf</a></span><span class="op">(</span><span class="op">)</span>
+
+<span class="va">nyc_base</span> <span class="op">&lt;-</span> <span class="va">nyc_1910</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html">st_transform</a></span><span class="op">(</span><span class="va">nyc_crs</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_combine.html">st_union</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<p>And visualize the result:</p>
+<div class="sourceCode" id="cb392"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">nyc_base</span>, size <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">italy_dots</span>, shape <span class="op">=</span> <span class="st">"."</span>, color <span class="op">=</span> <span class="st">"darkgreen"</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span>base_family <span class="op">=</span> <span class="st">"Verdana"</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Italy-born population in New York City, 1910"</span>,
+       subtitle <span class="op">=</span> <span class="st">"1 dot = 100 people"</span>,
+       caption <span class="op">=</span> <span class="st">"Data source: NHGIS"</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="11-historical-census-data_files/figure-html/unnamed-chunk-7-1.png" width="672"></div>
+</div>
+<div id="historical-microdata-with-ipums" class="section level2" number="11.3">
+<h2>
+<span class="header-section-number">11.3</span> Historical microdata with IPUMS<a class="anchor" aria-label="anchor" href="#historical-microdata-with-ipums"><i class="fas fa-link"></i></a>
+</h2>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="analyzing-census-microdata.html"><span class="header-section-number">10</span> Analyzing Census microdata</a></div>
+<div class="next"><a href="working-with-census-data-outside-the-united-states.html"><span class="header-section-number">12</span> Working with Census data outside the United States</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#historical-census-data-analysis-with-nhgis-and-ipums"><span class="header-section-number">11</span> Historical Census data analysis with NHGIS and IPUMS</a></li>
+<li><a class="nav-link" href="#getting-started-with-nhgis"><span class="header-section-number">11.1</span> Getting started with NHGIS</a></li>
+<li><a class="nav-link" href="#example"><span class="header-section-number">11.2</span> Example</a></li>
+<li><a class="nav-link" href="#historical-microdata-with-ipums"><span class="header-section-number">11.3</span> Historical microdata with IPUMS</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Analyzing the US Census with R</strong>" was written by Kyle E. Walker. It was last built on 2021-07-11.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

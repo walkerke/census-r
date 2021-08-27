@@ -1,0 +1,1996 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 7 Spatial analysis with US Census data | Analyzing US Census Data</title>
+<meta name="author" content="Kyle E. Walker">
+<meta name="description" content="A very common use-case of spatial data from the US Census Bureau is spatial analysis. Spatial analysis refers to the performance of analytic tasks that explicitly incorporate the spatial...">
+<meta name="generator" content="bookdown 0.22.17 with bs4_book()">
+<meta property="og:title" content="Chapter 7 Spatial analysis with US Census data | Analyzing US Census Data">
+<meta property="og:type" content="book">
+<meta property="og:description" content="A very common use-case of spatial data from the US Census Bureau is spatial analysis. Spatial analysis refers to the performance of analytic tasks that explicitly incorporate the spatial...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 7 Spatial analysis with US Census data | Analyzing US Census Data">
+<meta name="twitter:description" content="A very common use-case of spatial data from the US Census Bureau is spatial analysis. Spatial analysis refers to the performance of analytic tasks that explicitly incorporate the spatial...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.10.5/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.5.1/tabs.js"></script><script src="libs/bs3compat-0.2.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script><script src="libs/plotly-binding-4.9.3/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet">
+<script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="libs/plotly-main-1.57.1/plotly-latest.min.js"></script><script src="libs/d3-bundle-5.16.0/d3-bundle.min.js"></script><script src="libs/d3-lasso-0.0.5/d3-lasso.min.js"></script><script src="libs/save-svg-as-png-1.4.17/save-svg-as-png.min.js"></script><link href="libs/ggiraphjs-0.4.1/ggiraphjs.min.css" rel="stylesheet">
+<script src="libs/ggiraphjs-0.4.1/ggiraphjs.min.js"></script><script src="libs/girafe-binding-0.7.10/girafe.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-6KFYZ3W36Z"></script><script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-6KFYZ3W36Z');
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS -->
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="Methods, Maps, and Models in R">Analyzing US Census Data</a>:
+        <small class="text-muted">Methods, Maps, and Models in R</small>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Preface</a></li>
+<li><a class="" href="the-united-states-census-and-the-r-programming-language.html"><span class="header-section-number">1</span> The United States Census and the R programming language</a></li>
+<li><a class="" href="an-introduction-to-tidycensus.html"><span class="header-section-number">2</span> An introduction to tidycensus</a></li>
+<li><a class="" href="wrangling-census-data-with-tidyverse-tools.html"><span class="header-section-number">3</span> Wrangling Census data with tidyverse tools</a></li>
+<li><a class="" href="exploring-us-census-data-with-visualization.html"><span class="header-section-number">4</span> Exploring US Census data with visualization</a></li>
+<li><a class="" href="census-geographic-data-and-applications-in-r.html"><span class="header-section-number">5</span> Census geographic data and applications in R</a></li>
+<li><a class="" href="mapping-census-data-with-r.html"><span class="header-section-number">6</span> Mapping Census data with R</a></li>
+<li><a class="active" href="spatial-analysis-with-us-census-data.html"><span class="header-section-number">7</span> Spatial analysis with US Census data</a></li>
+<li><a class="" href="modeling-us-census-data.html"><span class="header-section-number">8</span> Modeling US Census data</a></li>
+<li><a class="" href="introduction-to-census-microdata.html"><span class="header-section-number">9</span> Introduction to Census microdata</a></li>
+<li><a class="" href="analyzing-census-microdata.html"><span class="header-section-number">10</span> Analyzing Census microdata</a></li>
+<li><a class="" href="other-census-and-government-data-resources.html"><span class="header-section-number">11</span> Other Census and government data resources</a></li>
+<li><a class="" href="working-with-census-data-outside-the-united-states.html"><span class="header-section-number">12</span> Working with Census data outside the United States</a></li>
+<li><a class="" href="conclusion.html">Conclusion</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="spatial-analysis-with-us-census-data" class="section level1" number="7">
+<h1>
+<span class="header-section-number">7</span> Spatial analysis with US Census data<a class="anchor" aria-label="anchor" href="#spatial-analysis-with-us-census-data"><i class="fas fa-link"></i></a>
+</h1>
+<p>A very common use-case of spatial data from the US Census Bureau is <em>spatial analysis</em>. Spatial analysis refers to the performance of analytic tasks that explicitly incorporate the spatial properties of a dataset. Principles in spatial analysis are closely related to the field of <em>geographic information science</em>, which incorporates both theoretical perspectives and methodological insights with regards to the use of geographic data.</p>
+<p>Traditionally, geographic information science has been performed in a <em>geographic information system</em>, or “GIS,” which refers to an integrated software platform for the management, processing, analysis, and visualization of geographic data. As evidenced in this book already, R packages exist for handling these tasks, allowing R to function as a capable substitute for desktop GIS software like ArcGIS or QGIS.</p>
+<p>Traditionally, spatial analytic tasks in R have been handled by the <strong>sp</strong> package and allied packages such as <strong>rgeos</strong>. In recent years, however, the <strong>sf</strong> package has emerged as the next-generation alternative to <strong>sp</strong> for spatial data analysis in R. In addition to the simpler representation of vector spatial data in R, as discussed in previous chapters, <strong>sf</strong> also includes significant functionality for spatial data analysis that integrates seamlessly with tidyverse tools.</p>
+<p>This chapter covers how to perform common spatial analysis tasks with Census data using the <strong>sf</strong> package. As with previous chapters, the examples will focus on data acquired with the <strong>tidycensus</strong> and <strong>tigris</strong> packages, and will cover common workflows of use to practitioners who work with US Census Bureau data.</p>
+<div id="spatial-overlay" class="section level2" number="7.1">
+<h2>
+<span class="header-section-number">7.1</span> Spatial overlay<a class="anchor" aria-label="anchor" href="#spatial-overlay"><i class="fas fa-link"></i></a>
+</h2>
+<p>Spatial data analysis allows practitioners to consider how geographic datasets interrelate in geographic space. This analytic functionality facilitates answering a wide range of research and analytic questions that would otherwise prove difficult without reference to a dataset’s geographic properties.</p>
+<p>One common use-case employed by the geospatial analyst is <em>spatial overlay</em>. Key to the concept of spatial overlay is the representation of geographic datasets as <em>layers</em> in a GIS. This representation is exemplified by the graphic below (<a href="https://www.urbandemographics.org/post/figures-map-layers-r/">credit to Rafael Pereira for the implementation</a>).</p>
+<div class="figure">
+<span style="display:block;" id="fig:layers-view"></span>
+<img src="img/screenshots/layers-view.png" alt="Conceptual view of GIS layers" width="100%"><p class="caption">
+Figure 7.1: Conceptual view of GIS layers
+</p>
+</div>
+<p>In this representation, different components of the landscape that interact in the real world are abstracted out into different layers, represented by different geometries. For example, Census tracts might be represented as polygons; customers as points; and roads as linestrings. Separating out these components has significant utility for the geospatial analyst, however. By using spatial analytic tools, a researcher could answer questions like “How many customers live within a given Census tract?” or “Which roads intersect a given Census tract?”</p>
+<div id="note-aligning-coordinate-reference-systems" class="section level3" number="7.1.1">
+<h3>
+<span class="header-section-number">7.1.1</span> Note: aligning coordinate reference systems<a class="anchor" aria-label="anchor" href="#note-aligning-coordinate-reference-systems"><i class="fas fa-link"></i></a>
+</h3>
+<p>Section <a href="census-geographic-data-and-applications-in-r.html#coordinate-reference-systems">5.4</a> covered <em>coordinate reference systems</em> in R, their importance to spatial data, and how to select appropriate projected coordinate reference systems using the <strong>crsuggest</strong> package. In any workflow using spatial overlay, including all of the methods discussed in this chapter, it is essential that all layers share the same CRS for overlay methods to work.</p>
+<p>Spatial datasets obtained with <strong>tigris</strong> or <strong>tidycensus</strong> will by default share the same geographic CRS, NAD 1983. For geographic coordinate reference systems, the <strong>sf</strong> package uses the <strong>s2</strong> spherical geometry library <span class="citation">(<a href="references.html#ref-dunnington2021" role="doc-biblioref">Dunnington, Pebesma, and Rubak 2021</a>)</span> to compute three-dimensional overlay rather than assuming planar geometries for geographic coordinates. This represents a significant technical advancement; however I have found that it can be much slower to compute spatial overlay operations in this way than if the same workflow were using a projected coordinate reference system.</p>
+<p>In turn, a recommended spatial analysis data preparation workflow is as follows:</p>
+<ol style="list-style-type: decimal">
+<li>Download the datasets you plan to use in your spatial analysis;</li>
+<li>Use <code><a href="https://rdrr.io/pkg/crsuggest/man/suggest_crs.html">suggest_crs()</a></code> in the <strong>crsuggest</strong> package to identify an appropriate projected CRS for your layers;</li>
+<li>Transform your data to the projected CRS using <code><a href="https://r-spatial.github.io/sf/reference/st_transform.html">st_transform()</a></code>;</li>
+<li>Compute the spatial overlay operation.</li>
+</ol>
+<p>To avoid redundancy, step 2 is implied in the examples in this chapter and an appropriate projected coordinate reference system has been pre-selected for all sections.</p>
+</div>
+<div id="identifying-geometries-within-a-metropolitan-area" class="section level3" number="7.1.2">
+<h3>
+<span class="header-section-number">7.1.2</span> Identifying geometries within a metropolitan area<a class="anchor" aria-label="anchor" href="#identifying-geometries-within-a-metropolitan-area"><i class="fas fa-link"></i></a>
+</h3>
+<p>One example of the utility of spatial overlay for the Census data analyst is the use of overlay techniques to find out which geographies lie within a given metropolitan area. Core-based statistical areas, also known as metropolitan or micropolitan areas, are common geographies defined by the US Census Bureau for regional analysis. Core-based statistical areas are defined as agglomerations of counties that are oriented around a central core or cores, and have a significant degree of population interaction as measured through commuting patterns. Metropolitan areas are those core-based statistical areas that have a population exceeding 50,000.</p>
+<p>A Census data analyst in the United States will often need to know which Census geographies, such as Census tracts or block groups, fall within a given metropolitan area. However, these geographies are only organized by state and county, and don’t have metropolitan area identification included by default. Given that Census spatial datasets are designed to align with one another, spatial overlay can be used to identify geographic features that fall within a given metropolitan area and extract those features.</p>
+<p>Let’s use the example of the Kansas City metropolitan area, which includes Census tracts in both Kansas and Missouri. We’ll first use <strong>tigris</strong> to acquire 2020 Census tracts for the two states that comprise the Kansas City region as well as the boundary of the Kansas City metropolitan area.</p>
+<div class="sourceCode" id="cb200"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/walkerke/tigris">tigris</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>tigris_use_cache <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+
+<span class="co"># CRS used: NAD83(2011) Kansas Regional Coordinate System </span>
+<span class="co"># Zone 11 (for Kansas City)</span>
+<span class="va">ks_mo_tracts</span> <span class="op">&lt;-</span> <span class="fu">map_dfr</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"KS"</span>, <span class="st">"MO"</span><span class="op">)</span>, <span class="op">~</span><span class="op">{</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/tigris/man/tracts.html">tracts</a></span><span class="op">(</span><span class="va">.x</span>, cb <span class="op">=</span> <span class="cn">TRUE</span>, year <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span>
+<span class="op">}</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html">st_transform</a></span><span class="op">(</span><span class="fl">8528</span><span class="op">)</span>  
+
+<span class="va">kc_metro</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tigris/man/core_based_statistical_areas.html">core_based_statistical_areas</a></span><span class="op">(</span>cb <span class="op">=</span> <span class="cn">TRUE</span>, year <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu">str_detect</span><span class="op">(</span><span class="va">NAME</span>, <span class="st">"Kansas City"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html">st_transform</a></span><span class="op">(</span><span class="fl">8528</span><span class="op">)</span>
+
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">ks_mo_tracts</span>, fill <span class="op">=</span> <span class="st">"white"</span>, color <span class="op">=</span> <span class="st">"grey"</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">kc_metro</span>, fill <span class="op">=</span> <span class="cn">NA</span>, color <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:kc-metro"></span>
+<img src="07-spatial-analysis-census_files/figure-html/kc-metro-1.png" alt="The Kansas City CBSA relative to Kansas and Missouri" width="100%"><p class="caption">
+Figure 7.2: The Kansas City CBSA relative to Kansas and Missouri
+</p>
+</div>
+<p>We can see visually from the plot which Census tracts are <em>within</em> the Kansas City metropolitan area, and which lay outside. This spatial relationship represented in the image can be expressed through code using <em>spatial subsetting</em>, enabled by functionality in the <strong>sf</strong> package.</p>
+</div>
+<div id="spatial-subsets-and-spatial-predicates" class="section level3" number="7.1.3">
+<h3>
+<span class="header-section-number">7.1.3</span> Spatial subsets and spatial predicates<a class="anchor" aria-label="anchor" href="#spatial-subsets-and-spatial-predicates"><i class="fas fa-link"></i></a>
+</h3>
+<p>Spatial subsetting uses the extent of one spatial dataset to extract features from another spatial dataset based on co-location, defined by a <em>spatial predicate</em>. Spatial subsets can be expressed through base R indexing notation:</p>
+<div class="sourceCode" id="cb201"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">kc_tracts</span> <span class="op">&lt;-</span> <span class="va">ks_mo_tracts</span><span class="op">[</span><span class="va">kc_metro</span>, <span class="op">]</span>
+
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">kc_tracts</span>, fill <span class="op">=</span> <span class="st">"white"</span>, color <span class="op">=</span> <span class="st">"grey"</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">kc_metro</span>, fill <span class="op">=</span> <span class="cn">NA</span>, color <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:kc-tracts-intersect"></span>
+<img src="07-spatial-analysis-census_files/figure-html/kc-tracts-intersect-1.png" alt="Census tracts that intersect the Kansas City CBSA" width="100%"><p class="caption">
+Figure 7.3: Census tracts that intersect the Kansas City CBSA
+</p>
+</div>
+<p>The spatial subsetting operation returns all the Census tracts that <em>intersect</em> the extent of the Kansas City metropolitan area, using the default spatial predicate, <code><a href="https://r-spatial.github.io/sf/reference/geos_binary_pred.html">st_intersects()</a></code>. This gives us back tracts that fall within the metro area’s boundary and those that cross or touch the boundary. For many analysts, however, this will be insufficient as they will want to tabulate statistics exclusively for tracts that fall <em>within</em> the metropolitan area’s boundaries. In this case, a different spatial predicate can be used with the <code>op</code> argument.</p>
+<p>Generally, Census analysts will want to use the <code><a href="https://r-spatial.github.io/sf/reference/geos_binary_pred.html">st_within()</a></code> spatial predicate to return tracts within a given metropolitan area. As long as objects within the core Census hierarchy are obtained for the same year from <strong>tigris</strong>, the <code><a href="https://r-spatial.github.io/sf/reference/geos_binary_pred.html">st_within()</a></code> spatial predicate will cleanly return geographies that fall within the larger geography when requested. The example below illustrates the same process using the <code><a href="https://r-spatial.github.io/sf/reference/st_join.html">st_filter()</a></code> function in <strong>sf</strong>, which allows spatial subsetting to be used cleanly within a tidyverse-style pipeline. The key difference between these two approaches to spatial subsetting is the argument name for the spatial predicate (<code>op</code> vs. <code>.predicate</code>).</p>
+<div class="sourceCode" id="cb202"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">kc_tracts_within</span> <span class="op">&lt;-</span> <span class="va">ks_mo_tracts</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_join.html">st_filter</a></span><span class="op">(</span><span class="va">kc_metro</span>, .predicate <span class="op">=</span> <span class="va">st_within</span><span class="op">)</span>
+
+<span class="co"># Equivalent syntax: </span>
+<span class="co"># kc_metro2 &lt;- kc_tracts[kc_metro, op = st_within]</span>
+
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">kc_tracts_within</span>, fill <span class="op">=</span> <span class="st">"white"</span>, color <span class="op">=</span> <span class="st">"grey"</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">kc_metro</span>, fill <span class="op">=</span> <span class="cn">NA</span>, color <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:kc-tracts-within"></span>
+<img src="07-spatial-analysis-census_files/figure-html/kc-tracts-within-1.png" alt="Census tracts that are within the Kansas City CBSA" width="100%"><p class="caption">
+Figure 7.4: Census tracts that are within the Kansas City CBSA
+</p>
+</div>
+</div>
+</div>
+<div id="spatial-joins-and-group-wise-spatial-analysis" class="section level2" number="7.2">
+<h2>
+<span class="header-section-number">7.2</span> Spatial joins and group-wise spatial analysis<a class="anchor" aria-label="anchor" href="#spatial-joins-and-group-wise-spatial-analysis"><i class="fas fa-link"></i></a>
+</h2>
+<p>Spatial data operations can also be embedded in workflows where analysts are interested in understanding how characteristics vary by group. For example, while demographic data for metropolitan areas can be readily acquired using <strong>tidycensus</strong> functions, we might also be interested in learning about how demographic characteristics of <em>neighborhoods within metropolitan areas</em> vary across the United States. We can accomplish this using a <em>spatial join</em>, which transfers attributes between spatial layers based on a relationship defined by a spatial predicate, as discussed above. Spatial joins in R are implemented in <strong>sf</strong>’s <code><a href="https://r-spatial.github.io/sf/reference/st_join.html">st_join()</a></code> function.</p>
+<div id="spatial-join-data-setup" class="section level3" number="7.2.1">
+<h3>
+<span class="header-section-number">7.2.1</span> Spatial join data setup<a class="anchor" aria-label="anchor" href="#spatial-join-data-setup"><i class="fas fa-link"></i></a>
+</h3>
+<p>Let’s say that we are interested in analyzing the distributions of neighborhoods (defined here as Census tracts) by Hispanic population for the four largest metropolitan areas in Texas. We’ll use the variable <code>B01003_001</code> from the 2019 1-year ACS to acquire population data by core-based statistical area (CBSA) along with simple feature geometry, and filter the data to retain the four target metro areas (Dallas-Fort Worth, Houston, Austin, and San Antonio) by GEOID.</p>
+<div class="sourceCode" id="cb203"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://walker-data.com/tidycensus">tidycensus</a></span><span class="op">)</span>
+
+<span class="co"># CRS: NAD83(2011) / Texas North Central</span>
+<span class="va">tx_cbsa</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs</a></span><span class="op">(</span>
+  geography <span class="op">=</span> <span class="st">"cbsa"</span>,
+  variables <span class="op">=</span> <span class="st">"B01003_001"</span>,
+  year <span class="op">=</span> <span class="fl">2019</span>,
+  survey <span class="op">=</span> <span class="st">"acs1"</span>,
+  geometry <span class="op">=</span> <span class="cn">TRUE</span>
+<span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">GEOID</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"19100"</span>, <span class="st">"26420"</span>, <span class="st">"41700"</span>, <span class="st">"12420"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html">st_transform</a></span><span class="op">(</span><span class="fl">6583</span><span class="op">)</span></code></pre></div>
+<div class="inline-table"><table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:tx-cbsa-show">Table 7.1: </span>Large CBSAs in Texas
+</caption>
+<thead><tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+GEOID
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+NAME
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+variable
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+estimate
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+moe
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+geometry
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+26420
+</td>
+<td style="text-align:left;">
+Houston-The Woodlands-Sugar Land, TX Metro Area
+</td>
+<td style="text-align:left;">
+B01003_001
+</td>
+<td style="text-align:right;">
+7066140
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+MULTIPOLYGON (((966350.1 17…
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+19100
+</td>
+<td style="text-align:left;">
+Dallas-Fort Worth-Arlington, TX Metro Area
+</td>
+<td style="text-align:left;">
+B01003_001
+</td>
+<td style="text-align:right;">
+7573136
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+MULTIPOLYGON (((640777 2103…
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+12420
+</td>
+<td style="text-align:left;">
+Austin-Round Rock-Georgetown, TX Metro Area
+</td>
+<td style="text-align:left;">
+B01003_001
+</td>
+<td style="text-align:right;">
+2227083
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+MULTIPOLYGON (((619874.4 18…
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+41700
+</td>
+<td style="text-align:left;">
+San Antonio-New Braunfels, TX Metro Area
+</td>
+<td style="text-align:left;">
+B01003_001
+</td>
+<td style="text-align:right;">
+2550960
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+MULTIPOLYGON (((493109 1786…
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>Given that all four of these metropolitan areas are completely contained within the state of Texas, we can obtain data on percent Hispanic by tract from the ACS Data Profile for 2015-2019.</p>
+<div class="sourceCode" id="cb204"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">pct_hispanic</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs</a></span><span class="op">(</span>
+  geography <span class="op">=</span> <span class="st">"tract"</span>,
+  variables <span class="op">=</span> <span class="st">"DP05_0071P"</span>,
+  state <span class="op">=</span> <span class="st">"TX"</span>,
+  year <span class="op">=</span> <span class="fl">2019</span>,
+  geometry <span class="op">=</span> <span class="cn">TRUE</span>
+<span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html">st_transform</a></span><span class="op">(</span><span class="fl">6583</span><span class="op">)</span></code></pre></div>
+<div class="inline-table"><table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:tx-hispanic-show">Table 7.2: </span>Percent Hispanic by Census tract in Texas
+</caption>
+<thead><tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+GEOID
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+NAME
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+variable
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+estimate
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+moe
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+geometry
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+48113019204
+</td>
+<td style="text-align:left;">
+Census Tract 192.04, Dallas County, Texas
+</td>
+<td style="text-align:left;">
+DP05_0071P
+</td>
+<td style="text-align:right;">
+58.1
+</td>
+<td style="text-align:right;">
+5.7
+</td>
+<td style="text-align:left;">
+MULTIPOLYGON (((761835.4 21…
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+48377950200
+</td>
+<td style="text-align:left;">
+Census Tract 9502, Presidio County, Texas
+</td>
+<td style="text-align:left;">
+DP05_0071P
+</td>
+<td style="text-align:right;">
+95.6
+</td>
+<td style="text-align:right;">
+3.7
+</td>
+<td style="text-align:left;">
+MULTIPOLYGON (((14228.99 18…
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+48029190601
+</td>
+<td style="text-align:left;">
+Census Tract 1906.01, Bexar County, Texas
+</td>
+<td style="text-align:left;">
+DP05_0071P
+</td>
+<td style="text-align:right;">
+86.2
+</td>
+<td style="text-align:right;">
+6.7
+</td>
+<td style="text-align:left;">
+MULTIPOLYGON (((597472 1756…
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+48355002301
+</td>
+<td style="text-align:left;">
+Census Tract 23.01, Nueces County, Texas
+</td>
+<td style="text-align:left;">
+DP05_0071P
+</td>
+<td style="text-align:right;">
+80.6
+</td>
+<td style="text-align:right;">
+3.9
+</td>
+<td style="text-align:left;">
+MULTIPOLYGON (((707829.4 15…
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+48441012300
+</td>
+<td style="text-align:left;">
+Census Tract 123, Taylor County, Texas
+</td>
+<td style="text-align:left;">
+DP05_0071P
+</td>
+<td style="text-align:right;">
+26.4
+</td>
+<td style="text-align:right;">
+6.3
+</td>
+<td style="text-align:left;">
+MULTIPOLYGON (((481547.9 20…
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+48051970500
+</td>
+<td style="text-align:left;">
+Census Tract 9705, Burleson County, Texas
+</td>
+<td style="text-align:left;">
+DP05_0071P
+</td>
+<td style="text-align:right;">
+20.4
+</td>
+<td style="text-align:right;">
+6.1
+</td>
+<td style="text-align:left;">
+MULTIPOLYGON (((769306.1 18…
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+48441010400
+</td>
+<td style="text-align:left;">
+Census Tract 104, Taylor County, Texas
+</td>
+<td style="text-align:left;">
+DP05_0071P
+</td>
+<td style="text-align:right;">
+64.4
+</td>
+<td style="text-align:right;">
+7.7
+</td>
+<td style="text-align:left;">
+MULTIPOLYGON (((481778.2 20…
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+48201311900
+</td>
+<td style="text-align:left;">
+Census Tract 3119, Harris County, Texas
+</td>
+<td style="text-align:left;">
+DP05_0071P
+</td>
+<td style="text-align:right;">
+84.9
+</td>
+<td style="text-align:right;">
+5.8
+</td>
+<td style="text-align:left;">
+MULTIPOLYGON (((906812.7 17…
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+48113015500
+</td>
+<td style="text-align:left;">
+Census Tract 155, Dallas County, Texas
+</td>
+<td style="text-align:left;">
+DP05_0071P
+</td>
+<td style="text-align:right;">
+56.6
+</td>
+<td style="text-align:right;">
+7.5
+</td>
+<td style="text-align:left;">
+MULTIPOLYGON (((738672.9 21…
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+48217960500
+</td>
+<td style="text-align:left;">
+Census Tract 9605, Hill County, Texas
+</td>
+<td style="text-align:left;">
+DP05_0071P
+</td>
+<td style="text-align:right;">
+9.3
+</td>
+<td style="text-align:right;">
+4.8
+</td>
+<td style="text-align:left;">
+MULTIPOLYGON (((700273.8 20…
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>The returned dataset covers Census tracts in the entirety of the state of Texas; however we only need to retain those tracts that fall within our four metropolitan areas of interest. We can accomplish this with a spatial join using <code><a href="https://r-spatial.github.io/sf/reference/st_join.html">st_join()</a></code>.</p>
+</div>
+<div id="computing-and-visualizing-the-spatial-join" class="section level3" number="7.2.2">
+<h3>
+<span class="header-section-number">7.2.2</span> Computing and visualizing the spatial join<a class="anchor" aria-label="anchor" href="#computing-and-visualizing-the-spatial-join"><i class="fas fa-link"></i></a>
+</h3>
+<p>In a call to <code><a href="https://r-spatial.github.io/sf/reference/st_join.html">st_join()</a></code>, we request that a given spatial dataset <code>x</code>, for which geometry will be retained, gains attributes from a second spatial dataset <code>y</code> based on their spatial relationship. This spatial relationship, as in the above examples, will be defined by a spatial predicate passed to the <code>join</code> parameter. The argument <code>suffix</code> defines the suffixes to be used for columns that share the same names, which will be important given that both datasets came from <strong>tidycensus</strong>. The argument <code>left = FALSE</code> requests an inner spatial join, returning only those tracts that fall within the four metropolitan areas.</p>
+<div class="sourceCode" id="cb205"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">hispanic_by_metro</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_join.html">st_join</a></span><span class="op">(</span>
+  <span class="va">pct_hispanic</span>,
+  <span class="va">tx_cbsa</span>,
+  join <span class="op">=</span> <span class="va">st_within</span>,
+  suffix <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"_tracts"</span>, <span class="st">"_metro"</span><span class="op">)</span>,
+  left <span class="op">=</span> <span class="cn">FALSE</span>
+<span class="op">)</span> </code></pre></div>
+<div class="inline-table"><table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:hispanic-by-metro-show">Table 7.3: </span>Census tracts after spatial join operation
+</caption>
+<thead><tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+GEOID_tracts
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+NAME_tracts
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+variable_tracts
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+estimate_tracts
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+moe_tracts
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+GEOID_metro
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+NAME_metro
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+variable_metro
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+estimate_metro
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+moe_metro
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+geometry
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+48113019204
+</td>
+<td style="text-align:left;">
+Census Tract 192.04, Dallas County, Texas
+</td>
+<td style="text-align:left;">
+DP05_0071P
+</td>
+<td style="text-align:right;">
+58.1
+</td>
+<td style="text-align:right;">
+5.7
+</td>
+<td style="text-align:left;">
+19100
+</td>
+<td style="text-align:left;">
+Dallas-Fort Worth-Arlington, TX Metro Area
+</td>
+<td style="text-align:left;">
+B01003_001
+</td>
+<td style="text-align:right;">
+7573136
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+MULTIPOLYGON (((761835.4 21…
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+48029190601
+</td>
+<td style="text-align:left;">
+Census Tract 1906.01, Bexar County, Texas
+</td>
+<td style="text-align:left;">
+DP05_0071P
+</td>
+<td style="text-align:right;">
+86.2
+</td>
+<td style="text-align:right;">
+6.7
+</td>
+<td style="text-align:left;">
+41700
+</td>
+<td style="text-align:left;">
+San Antonio-New Braunfels, TX Metro Area
+</td>
+<td style="text-align:left;">
+B01003_001
+</td>
+<td style="text-align:right;">
+2550960
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+MULTIPOLYGON (((597472 1756…
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+48201311900
+</td>
+<td style="text-align:left;">
+Census Tract 3119, Harris County, Texas
+</td>
+<td style="text-align:left;">
+DP05_0071P
+</td>
+<td style="text-align:right;">
+84.9
+</td>
+<td style="text-align:right;">
+5.8
+</td>
+<td style="text-align:left;">
+26420
+</td>
+<td style="text-align:left;">
+Houston-The Woodlands-Sugar Land, TX Metro Area
+</td>
+<td style="text-align:left;">
+B01003_001
+</td>
+<td style="text-align:right;">
+7066140
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+MULTIPOLYGON (((906812.7 17…
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+9
+</td>
+<td style="text-align:left;">
+48113015500
+</td>
+<td style="text-align:left;">
+Census Tract 155, Dallas County, Texas
+</td>
+<td style="text-align:left;">
+DP05_0071P
+</td>
+<td style="text-align:right;">
+56.6
+</td>
+<td style="text-align:right;">
+7.5
+</td>
+<td style="text-align:left;">
+19100
+</td>
+<td style="text-align:left;">
+Dallas-Fort Worth-Arlington, TX Metro Area
+</td>
+<td style="text-align:left;">
+B01003_001
+</td>
+<td style="text-align:right;">
+7573136
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+MULTIPOLYGON (((738672.9 21…
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+11
+</td>
+<td style="text-align:left;">
+48439102000
+</td>
+<td style="text-align:left;">
+Census Tract 1020, Tarrant County, Texas
+</td>
+<td style="text-align:left;">
+DP05_0071P
+</td>
+<td style="text-align:right;">
+15.7
+</td>
+<td style="text-align:right;">
+6.4
+</td>
+<td style="text-align:left;">
+19100
+</td>
+<td style="text-align:left;">
+Dallas-Fort Worth-Arlington, TX Metro Area
+</td>
+<td style="text-align:left;">
+B01003_001
+</td>
+<td style="text-align:right;">
+7573136
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+MULTIPOLYGON (((705890.8 21…
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+13
+</td>
+<td style="text-align:left;">
+48201450200
+</td>
+<td style="text-align:left;">
+Census Tract 4502, Harris County, Texas
+</td>
+<td style="text-align:left;">
+DP05_0071P
+</td>
+<td style="text-align:right;">
+10.7
+</td>
+<td style="text-align:right;">
+3.9
+</td>
+<td style="text-align:left;">
+26420
+</td>
+<td style="text-align:left;">
+Houston-The Woodlands-Sugar Land, TX Metro Area
+</td>
+<td style="text-align:left;">
+B01003_001
+</td>
+<td style="text-align:right;">
+7066140
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+MULTIPOLYGON (((881728.9 17…
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+14
+</td>
+<td style="text-align:left;">
+48201450400
+</td>
+<td style="text-align:left;">
+Census Tract 4504, Harris County, Texas
+</td>
+<td style="text-align:left;">
+DP05_0071P
+</td>
+<td style="text-align:right;">
+26.8
+</td>
+<td style="text-align:right;">
+13.1
+</td>
+<td style="text-align:left;">
+26420
+</td>
+<td style="text-align:left;">
+Houston-The Woodlands-Sugar Land, TX Metro Area
+</td>
+<td style="text-align:left;">
+B01003_001
+</td>
+<td style="text-align:right;">
+7066140
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+MULTIPOLYGON (((878488.5 17…
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+22
+</td>
+<td style="text-align:left;">
+48157670300
+</td>
+<td style="text-align:left;">
+Census Tract 6703, Fort Bend County, Texas
+</td>
+<td style="text-align:left;">
+DP05_0071P
+</td>
+<td style="text-align:right;">
+27.0
+</td>
+<td style="text-align:right;">
+5.8
+</td>
+<td style="text-align:left;">
+26420
+</td>
+<td style="text-align:left;">
+Houston-The Woodlands-Sugar Land, TX Metro Area
+</td>
+<td style="text-align:left;">
+B01003_001
+</td>
+<td style="text-align:right;">
+7066140
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+MULTIPOLYGON (((891606.1 17…
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+25
+</td>
+<td style="text-align:left;">
+48201554502
+</td>
+<td style="text-align:left;">
+Census Tract 5545.02, Harris County, Texas
+</td>
+<td style="text-align:left;">
+DP05_0071P
+</td>
+<td style="text-align:right;">
+13.4
+</td>
+<td style="text-align:right;">
+3.0
+</td>
+<td style="text-align:left;">
+26420
+</td>
+<td style="text-align:left;">
+Houston-The Woodlands-Sugar Land, TX Metro Area
+</td>
+<td style="text-align:left;">
+B01003_001
+</td>
+<td style="text-align:right;">
+7066140
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+MULTIPOLYGON (((875016 1817…
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+27
+</td>
+<td style="text-align:left;">
+48121020503
+</td>
+<td style="text-align:left;">
+Census Tract 205.03, Denton County, Texas
+</td>
+<td style="text-align:left;">
+DP05_0071P
+</td>
+<td style="text-align:right;">
+35.3
+</td>
+<td style="text-align:right;">
+8.7
+</td>
+<td style="text-align:left;">
+19100
+</td>
+<td style="text-align:left;">
+Dallas-Fort Worth-Arlington, TX Metro Area
+</td>
+<td style="text-align:left;">
+B01003_001
+</td>
+<td style="text-align:right;">
+7573136
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+MULTIPOLYGON (((727489.9 21…
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>The output dataset has been reduced from 5,265 Census tracts to 3,201 as a result of the inner spatial join. Notably, the output dataset now includes information for each Census tract about the metropolitan area that it falls within. This enables group-wise data visualization and analysis across metro areas such as a faceted plot:</p>
+<div class="sourceCode" id="cb206"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">hispanic_by_metro</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>NAME_metro <span class="op">=</span> <span class="fu">str_replace</span><span class="op">(</span><span class="va">NAME_metro</span>, <span class="st">", TX Metro Area"</span>, <span class="st">""</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">estimate_tracts</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"navy"</span>, fill <span class="op">=</span> <span class="st">"navy"</span>, 
+               alpha <span class="op">=</span> <span class="fl">0.4</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">NAME_metro</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Distribution of Hispanic/Latino population by Census tract"</span>,
+       subtitle <span class="op">=</span> <span class="st">"Largest metropolitan areas in Texas"</span>,
+       y <span class="op">=</span> <span class="st">"Kernel density estimate"</span>,
+       x <span class="op">=</span> <span class="st">"Percent Hispanic/Latino in Census tract"</span><span class="op">)</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:plot-hispanic-by-metro"></span>
+<img src="07-spatial-analysis-census_files/figure-html/plot-hispanic-by-metro-1.png" alt="Faceted density plot of tract Hispanic populations by CBSA in Texas" width="100%"><p class="caption">
+Figure 7.5: Faceted density plot of tract Hispanic populations by CBSA in Texas
+</p>
+</div>
+<p>Output from a spatial join operation can also be “rolled up” to a larger geography through group-wise data analysis. For example, let’s say we want to know the median value of the four distributions visualized in the plot above. As explained in Section <a href="wrangling-census-data-with-tidyverse-tools.html#group-wise-census-data-analysis">3.3</a>, we can accomplish this by grouping our dataset by metro area then summarizing using the <code><a href="https://rdrr.io/r/stats/median.html">median()</a></code> function.</p>
+<div class="sourceCode" id="cb207"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">median_by_metro</span> <span class="op">&lt;-</span> <span class="va">hispanic_by_metro</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">NAME_metro</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">summarize</span><span class="op">(</span>median_hispanic <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">estimate_tracts</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="inline-table"><table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:median-by-metro-show">Table 7.4: </span>Summarized median Hispanic population by metro
+</caption>
+<thead><tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+NAME_metro
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+median_hispanic
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+geometry
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Austin-Round Rock-Georgetown, TX Metro Area
+</td>
+<td style="text-align:right;">
+25.9
+</td>
+<td style="text-align:left;">
+POLYGON ((687521.6 1774488,…
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Dallas-Fort Worth-Arlington, TX Metro Area
+</td>
+<td style="text-align:right;">
+22.6
+</td>
+<td style="text-align:left;">
+POLYGON ((827821.1 2092787,…
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Houston-The Woodlands-Sugar Land, TX Metro Area
+</td>
+<td style="text-align:right;">
+32.4
+</td>
+<td style="text-align:left;">
+MULTIPOLYGON (((912978.5 17…
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+San Antonio-New Braunfels, TX Metro Area
+</td>
+<td style="text-align:right;">
+53.5
+</td>
+<td style="text-align:left;">
+POLYGON ((654106.1 1711157,…
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>The grouping column (<code>NAME_metro</code>) and the output of <code>summarize()</code> (<code>median_hispanic</code>) are returned as expected. However, the <code>group_by() %&gt;% summarize()</code> operations also return the dataset as a simple features object with geometry, but in this case with only 4 rows. Let’s take a look at the output geometry:</p>
+<div class="sourceCode" id="cb208"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">median_by_metro</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span><span class="op">$</span><span class="va">geometry</span><span class="op">)</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:plot-metro-geometry"></span>
+<img src="07-spatial-analysis-census_files/figure-html/plot-metro-geometry-1.png" alt="Dissolved geometry of Census tracts identified within the Austin CBSA" width="100%"><p class="caption">
+Figure 7.6: Dissolved geometry of Census tracts identified within the Austin CBSA
+</p>
+</div>
+<p>The returned geometry represents the extent of the given metropolitan area (in the above example, Austin-Round Rock). The analytic process we carried out not only summarized the data by group, it also summarized the geometry by group. The typical name for this geometric process in geographic information systems is a <em>dissolve</em> operation, where geometries are identified by group and combined to return a single larger geometry. In this case, the Census tracts are dissolved by metropolitan area, returning metropolitan area geometries. This type of process is extremely useful when creating custom geographies (e.g. sales territories) from Census geometry building blocks that may belong to the same group.</p>
+</div>
+</div>
+<div id="distance-and-proximity-analysis" class="section level2" number="7.3">
+<h2>
+<span class="header-section-number">7.3</span> Distance and proximity analysis<a class="anchor" aria-label="anchor" href="#distance-and-proximity-analysis"><i class="fas fa-link"></i></a>
+</h2>
+<p>A common use case for spatially-referenced demographic data is the analysis of <em>accessibility</em>. This might include studying the relative accessibility of different demographic groups to resources within a given region, or analyzing the characteristics of potential customers who live within a given distance of a store. Conceptually, there are a variety of ways to measure accessibility. The most straightforward method, computationally, is using straight-line (Euclidean) distances over geographic data in a projected coordinate system. A more computationally complex - but potentially more accurate - method involves the use of transportation networks to model accessibility, where proximity is measured not based on distance from a given location but instead based on travel times for a given transit mode, such as walking, cycling, or driving. This section will illustrate both types of approaches. Let’s consider the topic of accessibility to Level I and Level II trauma hospitals by Census tract in the state of Iowa. 2019 Census tract boundaries are acquired from <strong>tigris</strong>, and we use <code><a href="https://r-spatial.github.io/sf/reference/st_read.html">st_read()</a></code> to read in a shapefile of hospital locations acquired from the US Department of Homeland Security.</p>
+<div class="sourceCode" id="cb209"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/walkerke/tigris">tigris</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>tigris_use_cache <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+
+<span class="co"># CRS: NAD83 / Iowa North</span>
+<span class="va">ia_tracts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tigris/man/tracts.html">tracts</a></span><span class="op">(</span><span class="st">"IA"</span>, cb <span class="op">=</span> <span class="cn">TRUE</span>, year <span class="op">=</span> <span class="fl">2019</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html">st_transform</a></span><span class="op">(</span><span class="fl">26975</span><span class="op">)</span>
+
+<span class="va">trauma</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html">st_read</a></span><span class="op">(</span><span class="st">"data/Hospitals.shp"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu">str_detect</span><span class="op">(</span><span class="va">TRAUMA</span>, <span class="st">"LEVEL I\\b|LEVEL II\\b|RTH|RTC"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html">st_transform</a></span><span class="op">(</span><span class="fl">26975</span><span class="op">)</span></code></pre></div>
+<pre><code>## Reading layer `Hospitals' from data source 
+##   `/home/kyle/Dropbox/Research/census-with-r-book/data/Hospitals.shp' 
+##   using driver `ESRI Shapefile'
+## Simple feature collection with 7596 features and 32 fields
+## Geometry type: POINT
+## Dimension:     XY
+## Bounding box:  xmin: -19663500 ymin: -1607536 xmax: 16221970 ymax: 11504850
+## Projected CRS: WGS 84 / Pseudo-Mercator</code></pre>
+<div class="sourceCode" id="cb211"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">trauma</span><span class="op">)</span></code></pre></div>
+<pre><code>##  [1] "FID"        "ID"         "NAME"       "ADDRESS"    "CITY"      
+##  [6] "STATE"      "ZIP"        "ZIP4"       "TELEPHONE"  "TYPE"      
+## [11] "STATUS"     "POPULATION" "COUNTY"     "COUNTYFIPS" "COUNTRY"   
+## [16] "LATITUDE"   "LONGITUDE"  "NAICS_CODE" "NAICS_DESC" "SOURCE"    
+## [21] "SOURCEDATE" "VAL_METHOD" "VAL_DATE"   "WEBSITE"    "STATE_ID"  
+## [26] "ALT_NAME"   "ST_FIPS"    "OWNER"      "TTL_STAFF"  "BEDS"      
+## [31] "TRAUMA"     "HELIPAD"    "geometry"</code></pre>
+<div id="calculating-distances" class="section level3" number="7.3.1">
+<h3>
+<span class="header-section-number">7.3.1</span> Calculating distances<a class="anchor" aria-label="anchor" href="#calculating-distances"><i class="fas fa-link"></i></a>
+</h3>
+<p>To determine accessibility of Iowa Census tracts to Level I or II trauma centers, we need to identify not only those hospitals that are located in Iowa, but also those in other states near to the Iowa border, such as in Omaha, Nebraska and Rock Island, Illinois. We can accomplish this by applying a distance threshold in <code><a href="https://r-spatial.github.io/sf/reference/st_join.html">st_filter()</a></code>. In this example, we use the spatial predicate <code>st_is_within_distance</code>, and set a 100km distance threshold with the <code>dist = 100000</code> argument (specified in meters, the base measurement unit of our coordinate system used).</p>
+<div class="sourceCode" id="cb213"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">ia_trauma</span> <span class="op">&lt;-</span> <span class="va">trauma</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_join.html">st_filter</a></span><span class="op">(</span><span class="va">ia_tracts</span>, 
+            .predicate <span class="op">=</span> <span class="va">st_is_within_distance</span>,
+            dist <span class="op">=</span> <span class="fl">100000</span><span class="op">)</span>
+
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">ia_tracts</span>, color <span class="op">=</span> <span class="st">"NA"</span>, fill <span class="op">=</span> <span class="st">"grey50"</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">ia_trauma</span>, color <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:identify-iowa-hospitals"></span>
+<img src="07-spatial-analysis-census_files/figure-html/identify-iowa-hospitals-1.png" alt="Level I or II trauma centers within 100km of Iowa" width="100%"><p class="caption">
+Figure 7.7: Level I or II trauma centers within 100km of Iowa
+</p>
+</div>
+<p>As illustrated in the visualization, the <code><a href="https://r-spatial.github.io/sf/reference/st_join.html">st_filter()</a></code> operation has retained Level I and II trauma centers <em>within</em> the state of Iowa, but also within the 100km threshold beyond the state’s borders.</p>
+<p>With the Census tract and hospital data in hand, we can calculate distances from Census tracts to trauma centers by using the <code><a href="https://r-spatial.github.io/sf/reference/geos_measures.html">st_distance()</a></code> function in the <strong>sf</strong> package. <code><a href="https://r-spatial.github.io/sf/reference/geos_measures.html">st_distance(x, y)</a></code> by default returns the dense matrix of distances computed from the geometries in <code>x</code> to the geometries in <code>y</code>. In this example, we will calculate the distances from the <em>centroids</em> of Iowa Census tracts (reflecting the center points of each tract geometry) to each trauma center.</p>
+<div class="sourceCode" id="cb214"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dist</span> <span class="op">&lt;-</span> <span class="va">ia_tracts</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_centroid</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_measures.html">st_distance</a></span><span class="op">(</span><span class="va">ia_trauma</span><span class="op">)</span> 
+
+<span class="va">dist</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span></code></pre></div>
+<pre><code>## Units: [m]
+##           [,1]      [,2]     [,3]     [,4]     [,5]
+## [1,] 279570.18 279188.81 385140.7 383863.7 257745.5
+## [2,] 298851.01 298409.46 400428.5 399022.9 276955.8
+## [3,] 350121.53 347800.57 353428.8 350263.3 404616.0
+## [4,] 361742.20 360450.59 421691.6 419364.9 369415.7
+## [5,]  66762.19  63479.67 143552.1 143935.5 194001.0</code></pre>
+<p>A glimpse at the matrix shows distances (in meters) between the first five Census tracts in the dataset and the first five hospitals. When considering <em>accessibility</em>, we may be interested in the distance to the <em>nearest</em> hospital to each Census tract. The code below extracts the minimum distance from the matrix for each row, converts to a vector, and divides each value by 1000 to convert values to kilometers. A quick histogram visualizes the distribution of minimum distances.</p>
+<div class="sourceCode" id="cb216"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">min_dist</span> <span class="op">&lt;-</span> <span class="va">dist</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">min</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">magrittr</span><span class="fu">::</span><span class="fu"><a href="https://magrittr.tidyverse.org/reference/aliases.html">divide_by</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">min_dist</span><span class="op">)</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:get-min-dist"></span>
+<img src="07-spatial-analysis-census_files/figure-html/get-min-dist-1.png" alt="Base R histogram of minimum distances to trauma centers" width="100%"><p class="caption">
+Figure 7.8: Base R histogram of minimum distances to trauma centers
+</p>
+</div>
+<p>While many tracts are within 10km of a trauma center, around 16 percent of Iowa Census tracts are beyond 100km from a Level I or II trauma center, suggesting significant accessibility issues for these areas.</p>
+</div>
+<div id="calculating-travel-times" class="section level3" number="7.3.2">
+<h3>
+<span class="header-section-number">7.3.2</span> Calculating travel times<a class="anchor" aria-label="anchor" href="#calculating-travel-times"><i class="fas fa-link"></i></a>
+</h3>
+<p>An alternative way to model accessibility to hospitals is through <em>travel times</em> rather than distance, as the way that people experience access to locations is through time expended given a transportation network. While network-based accessibility may be a more accurate representation of people’s lived experiences, it is more computationally complex and requires additional tools. To perform spatial network analyses, R users will either need to obtain network data (like roadways) and use appropriate tools that can model the network; set up a routing engine that R can connect to; or connect to a hosted routing engine via a web API. In this example, we’ll use the <strong>mapboxapi</strong> R package <span class="citation">(<a href="references.html#ref-walker_mapbox" role="doc-biblioref">K. Walker 2021c</a>)</span> to perform network analysis using <a href="https://docs.mapbox.com/api/navigation/matrix/">Mapbox’s travel-time Matrix API</a>.</p>
+<p>The function <code><a href="https://rdrr.io/pkg/mapboxapi/man/mb_matrix.html">mb_matrix()</a></code> in <strong>mapboxapi</strong> works much like <code><a href="https://r-spatial.github.io/sf/reference/geos_measures.html">st_distance()</a></code> in that it only requires arguments for origins and destinations, and will return the dense matrix of travel times by default. In turn, much of the computational complexity of routing is abstracted away by the function. However, as routes will be computed across the state of Iowa and API usage is subject to rate-limitations, the function can take several minutes to compute for larger matrices like this one.</p>
+<p>If you are using <strong>mapboxapi</strong> for the first time, visit <a href="">mapbox.com</a>, register for an account, and obtain an access token. The function <code><a href="https://rdrr.io/pkg/mapboxapi/man/mb_access_token.html">mb_access_token()</a></code> installs this token in your .Renviron for future use.</p>
+<div class="sourceCode" id="cb217"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">mapboxapi</span><span class="op">)</span>
+<span class="co"># mb_access_token("pk.eybcasq..., install = TRUE)</span>
+
+<span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mapboxapi/man/mb_matrix.html">mb_matrix</a></span><span class="op">(</span><span class="va">ia_tracts</span>, <span class="va">ia_trauma</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb218"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">times</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span></code></pre></div>
+<pre><code>##           [,1]      [,2]     [,3]     [,4]     [,5]
+## [1,] 211.43833 212.50667 278.5733 284.9717 212.1050
+## [2,] 218.15167 214.06000 280.1267 286.5250 226.7733
+## [3,] 274.84500 270.75333 291.8367 290.7117 292.2767
+## [4,] 274.58333 270.49167 291.5750 290.4500 292.0150
+## [5,]  56.80333  52.71167 122.3017 128.7000 161.2617</code></pre>
+<p>A glimpse at the travel-time matrix shows a similar format to the distance matrix, but with travel times in minutes used instead of meters. As with the distance-based example, we can determine the minimum travel time from each tract to a Level I or Level II trauma center. In this instance, we will visualize the result on a map.</p>
+<div class="sourceCode" id="cb220"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">min_time</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">times</span>, <span class="fl">1</span>, <span class="va">min</span><span class="op">)</span>
+
+<span class="va">ia_tracts</span><span class="op">$</span><span class="va">time</span> <span class="op">&lt;-</span> <span class="va">min_time</span>
+
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">ia_tracts</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">time</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span>color <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html">scale_fill_viridis_c</a></span><span class="op">(</span>option <span class="op">=</span> <span class="st">"magma"</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"Time (minutes)"</span>,
+       title <span class="op">=</span> <span class="st">"Travel time to nearest Level I or Level II trauma hospital"</span>,
+       subtitle <span class="op">=</span> <span class="st">"Census tracts in Iowa"</span>,
+       caption <span class="op">=</span> <span class="st">"Data sources: US Census Bureau, US DHS, Mapbox"</span><span class="op">)</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:show-min-times"></span>
+<img src="07-spatial-analysis-census_files/figure-html/show-min-times-1.png" alt="Map of travel-times to trauma centers by Census tract in Iowa" width="100%"><p class="caption">
+Figure 7.9: Map of travel-times to trauma centers by Census tract in Iowa
+</p>
+</div>
+<p>The map illustrates considerable accessibility gaps to trauma centers across the state. Whereas urban residents typically live within 20 minutes of a trauma center, travel times in rural Iowa can exceed two hours.</p>
+<div class="rmdnote">
+<p>An advantage to using a package like <strong>mapboxapi</strong> for routing and travel times is that users can connect directly to a hosted routing engine using an API. Due to rate limitations, however, web APIs are likely inadequate for more advanced users who need to compute travel times at scale. There are several R packages that can connect to user-hosted routing engines which may be better-suited to such tasks. These packages include <a href="https://github.com/rCarto/osrm">osrm</a> for the Open Source Routing Machine; <a href="https://docs.ropensci.org/opentripplanner/">opentripplanner</a> for OpenTripPlanner; and <a href="https://ipeagit.github.io/r5r/">r5r</a> for R5.</p>
+</div>
+</div>
+<div id="catchment-areas-with-buffers-and-isochrones" class="section level3" number="7.3.3">
+<h3>
+<span class="header-section-number">7.3.3</span> Catchment areas with buffers and isochrones<a class="anchor" aria-label="anchor" href="#catchment-areas-with-buffers-and-isochrones"><i class="fas fa-link"></i></a>
+</h3>
+<p>The above example considers a broader accessibility analysis across the state of Iowa. In many cases, however, you’ll want to analyze accessibility in a more local way. A common use case might involve a study of the demographic characteristics of a hospital <em>catchment area</em>, defined as the area around a hospital from which patients will likely come.</p>
+<p>As with the matrix-based accessibility approach outlined above, catchment area-based proximity can be modeled with either Euclidean distances or network travel times as well. Let’s consider the example of <a href="https://www.unitypoint.org/desmoines/iowa-methodist-medical-center.aspx">Iowa Methodist Medical Center in Des Moines</a>, one of two Level I trauma centers in the state of Iowa.</p>
+<p>The example below illustrates the distance-based approach using a <em>buffer</em>, implemented with the <code><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_buffer()</a></code> function in <strong>sf</strong>. A buffer is a common GIS operation that represents the area within a given distance of a location. The code below creates a 5km buffer around Iowa Methodist Medical Center by using the argument <code>dist = 5000</code>.</p>
+<div class="sourceCode" id="cb221"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">iowa_methodist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">ia_trauma</span>, <span class="va">NAME</span> <span class="op">==</span> <span class="st">"IOWA METHODIST MEDICAL CENTER"</span><span class="op">)</span>
+
+<span class="va">buf5km</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_buffer</a></span><span class="op">(</span><span class="va">iowa_methodist</span>, dist <span class="op">=</span> <span class="fl">5000</span><span class="op">)</span> </code></pre></div>
+<p>An alternative option is to create network-based <em>isochrones</em>, which are polygons that represent the accessible area around a given location within a given travel time for a given travel mode. Isochrones are implemented in the <strong>mapboxapi</strong> package with the <code><a href="https://rdrr.io/pkg/mapboxapi/man/mb_isochrone.html">mb_isochrone()</a></code> function. The example below draws a 10-minute driving isochrone around Iowa Methodist.</p>
+<div class="sourceCode" id="cb222"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">iso10min</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mapboxapi/man/mb_isochrone.html">mb_isochrone</a></span><span class="op">(</span><span class="va">iowa_methodist</span>, time <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></code></pre></div>
+<p>We can visualize the comparative extents of these two methods in Des Moines. Run the code on your own computer to get a synced interactive map showing the two methods.</p>
+<div class="sourceCode" id="cb223"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/leaflet/">leaflet</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-spatial/leafsync">leafsync</a></span><span class="op">)</span>
+
+<span class="va">hospital_icon</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/leaflet/man/makeAwesomeIcon.html">makeAwesomeIcon</a></span><span class="op">(</span>icon <span class="op">=</span> <span class="st">"ios-medical"</span>, 
+                                 markerColor <span class="op">=</span> <span class="st">"red"</span>,
+                                 library <span class="op">=</span> <span class="st">"ion"</span><span class="op">)</span>
+
+<span class="co"># The Leaflet package requires data be in CRS 4326</span>
+<span class="va">map1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/leaflet/man/leaflet.html">leaflet</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rdrr.io/pkg/leaflet/man/map-layers.html">addTiles</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/leaflet/man/map-layers.html">addPolygons</a></span><span class="op">(</span>data <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html">st_transform</a></span><span class="op">(</span><span class="va">buf5km</span>, <span class="fl">4326</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rdrr.io/pkg/leaflet/man/addAwesomeMarkers.html">addAwesomeMarkers</a></span><span class="op">(</span>data <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html">st_transform</a></span><span class="op">(</span><span class="va">iowa_methodist</span>, <span class="fl">4326</span><span class="op">)</span>,
+                    icon <span class="op">=</span> <span class="va">hospital_icon</span><span class="op">)</span>
+
+<span class="va">map2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/leaflet/man/leaflet.html">leaflet</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rdrr.io/pkg/leaflet/man/map-layers.html">addTiles</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/leaflet/man/map-layers.html">addPolygons</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">iso10min</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rdrr.io/pkg/leaflet/man/addAwesomeMarkers.html">addAwesomeMarkers</a></span><span class="op">(</span>data <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html">st_transform</a></span><span class="op">(</span><span class="va">iowa_methodist</span>, <span class="fl">4326</span><span class="op">)</span>,
+                    icon <span class="op">=</span> <span class="va">hospital_icon</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/pkg/leafsync/man/latticeView.html">sync</a></span><span class="op">(</span><span class="va">map1</span>, <span class="va">map2</span><span class="op">)</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:synced-map"></span>
+<img src="img/screenshots/synced-map.png" alt="Synced map showing buffer and isochrone-based catchment areas in Des Moines" width="100%"><p class="caption">
+Figure 7.10: Synced map showing buffer and isochrone-based catchment areas in Des Moines
+</p>
+</div>
+<p>The comparative maps illustrate the differences between the two methods quite clearly. Many areas of equal distance to the hospital do not have the same level of access; this is particularly true of areas to the south of the Raccoon/Des Moines River. Conversely, due to the location of highways, there are some areas outside the 5km buffer area that can reach the hospital within 10 minutes.</p>
+</div>
+<div id="computing-demographic-estimates-for-zones-with-areal-interpolation" class="section level3" number="7.3.4">
+<h3>
+<span class="header-section-number">7.3.4</span> Computing demographic estimates for zones with areal interpolation<a class="anchor" aria-label="anchor" href="#computing-demographic-estimates-for-zones-with-areal-interpolation"><i class="fas fa-link"></i></a>
+</h3>
+<p>Common to both methods, however, is a mis-alignment between their geometries and those of any Census geographies we may use to infer catchment area demographics. As opposed to the spatial overlay analysis matching Census tracts to metropolitan areas earlier in this chapter, Census tracts or block groups on the edge of the catchment area will only be partially included in the catchment. A common method for resolving this issue in geographic information science is <em>areal interpolation</em>. Areal interpolation refers to the allocation of data from one set of zones to a second overlapping set of zones that may or may not perfectly align spatially. In cases of mis-alignment, some type of weighting scheme needs to be specified to determine how to allocate partial data in areas of overlap.</p>
+<p>Let’s produce interpolated estimates of the percentage of population in poverty for both catchment area definitions. This will require obtaining block-group level poverty information from the ACS for Polk County, Iowa, which encompasses both the buffer and the isochrone. The variables requested from the ACS include the number of persons living below the poverty line, and the number of persons for whom poverty status is determined, which will serve as a denominator.</p>
+<div class="sourceCode" id="cb224"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">polk_poverty</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs</a></span><span class="op">(</span>
+  geography <span class="op">=</span> <span class="st">"tract"</span>,
+  variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>poverty_denom <span class="op">=</span> <span class="st">"B17001_001"</span>,
+                poverty_num <span class="op">=</span> <span class="st">"B17001_002"</span><span class="op">)</span>,
+  state <span class="op">=</span> <span class="st">"IA"</span>,
+  county <span class="op">=</span> <span class="st">"Polk"</span>,
+  geometry <span class="op">=</span> <span class="cn">TRUE</span>,
+  output <span class="op">=</span> <span class="st">"wide"</span>,
+  year <span class="op">=</span> <span class="fl">2019</span>
+<span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">poverty_denomE</span>, <span class="va">poverty_numE</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html">st_transform</a></span><span class="op">(</span><span class="fl">26975</span><span class="op">)</span></code></pre></div>
+<p><em>Area-weighted areal interpolation</em> is implemented in <strong>sf</strong> with the <code><a href="https://r-spatial.github.io/sf/reference/interpolate_aw.html">st_interpolate_aw()</a></code> function. This method uses the area of overlap of geometries as the interpolation weights. This means that, in this example, Census tracts that fall entirely within the 5km buffer polygon will receive a weight of 1. Census tracts that overlap the edge of the buffer area will receive a weight commensurate with the proportion of their area that falls within the buffer area. Those weights are applied to target variables (in this case, the poverty information) in accordance with the value of the <code>extensive</code> argument. If <code>extensive = TRUE</code>, as used below, weighted sums will be computed. Alternatively, if <code>extensive = FALSE</code>, the function returns weighted means.</p>
+<div class="sourceCode" id="cb225"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidyverse/glue">glue</a></span><span class="op">)</span>
+
+<span class="va">buffer_pov</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/interpolate_aw.html">st_interpolate_aw</a></span><span class="op">(</span>
+  <span class="va">polk_poverty</span>, 
+  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html">st_transform</a></span><span class="op">(</span><span class="va">buf5km</span>, <span class="fl">26975</span><span class="op">)</span>,
+  extensive <span class="op">=</span> <span class="cn">TRUE</span>
+<span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>pct_poverty <span class="op">=</span> <span class="fl">100</span> <span class="op">*</span> <span class="op">(</span><span class="va">poverty_numE</span> <span class="op">/</span> <span class="va">poverty_denomE</span><span class="op">)</span><span class="op">)</span>
+
+<span class="va">iso_pov</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/interpolate_aw.html">st_interpolate_aw</a></span><span class="op">(</span>
+  <span class="va">polk_poverty</span>, 
+  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html">st_transform</a></span><span class="op">(</span><span class="va">iso10min</span>, <span class="fl">26975</span><span class="op">)</span>,
+  extensive <span class="op">=</span> <span class="cn">TRUE</span>
+<span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>pct_poverty <span class="op">=</span> <span class="fl">100</span> <span class="op">*</span> <span class="op">(</span><span class="va">poverty_numE</span> <span class="op">/</span> <span class="va">poverty_denomE</span><span class="op">)</span><span class="op">)</span>
+
+
+<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Poverty (5km buffer method): {round(buffer_pov$pct_poverty, 1)}%"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<pre><code>## Poverty (5km buffer method): 18.8%</code></pre>
+<div class="sourceCode" id="cb227"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Poverty (10min isochrone method): {round(iso_pov$pct_poverty, 1)}%"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<pre><code>## Poverty (10min isochrone method): 17.8%</code></pre>
+<p>Following up on Section <a href="census-geographic-data-and-applications-in-r.html#understanding-yearly-differences-in-tigerline-files">5.3.3</a>, areal interpolation is also a common method used to adjust population data aggregated to inconsistent Census boundaries over time. However, it can introduce inaccuracies in sparsely populated areas, which can be improved with a population-weighted interpolation approach. While this approach is not covered here, <span class="citation"><a href="references.html#ref-schroeder2013" role="doc-biblioref">Schroeder and Van Riper</a> (<a href="references.html#ref-schroeder2013" role="doc-biblioref">2013</a>)</span> provide a good discussion of the method.</p>
+</div>
+</div>
+<div id="better-cartography-with-spatial-overlay" class="section level2" number="7.4">
+<h2>
+<span class="header-section-number">7.4</span> Better cartography with spatial overlay<a class="anchor" aria-label="anchor" href="#better-cartography-with-spatial-overlay"><i class="fas fa-link"></i></a>
+</h2>
+<p>As discussed in Section <a href="mapping-census-data-with-r.html#using-geometry-in-tidycensus">6.1</a>, one of the major benefits of working with the <strong>tidycensus</strong> package to get Census data in R is its ability to retrieve pre-joined feature geometry for Census geographies with the argument <code>geometry = TRUE</code>. tidycensus uses the <strong>tigris</strong> package to fetch these geometries, which default to the Census Bureau’s <a href="https://www.census.gov/geo/maps-data/data/tiger-cart-boundary.html">cartographic boundary shapefiles</a>. Cartographic boundary shapefiles are preferred to the core <a href="https://www.census.gov/geo/maps-data/data/tiger-line.html">TIGER/Line shapefiles</a> in <strong>tidycensus</strong> as their smaller size speeds up processing and because they are pre-clipped to the US coastline.</p>
+<p>However, there may be circumstances in which your mapping requires more detail. A good example of this would be maps of New York City, in which even the cartographic boundary shapefiles include water area. For example, take this example of median household income by Census tract in Manhattan (New York County), NY:</p>
+<div class="sourceCode" id="cb229"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://walker-data.com/tidycensus">tidycensus</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>tigris_use_cache <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+
+<span class="va">ny</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs</a></span><span class="op">(</span>
+  geography <span class="op">=</span> <span class="st">"tract"</span>, 
+  variables <span class="op">=</span> <span class="st">"B19013_001"</span>, 
+  state <span class="op">=</span> <span class="st">"NY"</span>, 
+  county <span class="op">=</span> <span class="st">"New York"</span>, 
+  year <span class="op">=</span> <span class="fl">2019</span>,
+  geometry <span class="op">=</span> <span class="cn">TRUE</span>
+<span class="op">)</span>
+
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">ny</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">estimate</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html">scale_fill_viridis_c</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org/reference/label_dollar.html">dollar</a></span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"Median household\nincome"</span><span class="op">)</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:manhattan"></span>
+<img src="07-spatial-analysis-census_files/figure-html/manhattan-1.png" alt="Map of Manhattan with default CB geometries" width="100%"><p class="caption">
+Figure 7.11: Map of Manhattan with default CB geometries
+</p>
+</div>
+<p>As illustrated in the graphic, the boundaries of Manhattan include water boundaries - stretching into the Hudson and East Rivers. In turn, a more accurate representation of Manhattan’s land area might be desired. To accomplish this, a <strong>tidycensus</strong> user can use the core TIGER/Line shapefiles instead, then erase water area from Manhattan’s geometry.</p>
+<div id="erasing-areas-from-census-polygons" class="section level3" number="7.4.1">
+<h3>
+<span class="header-section-number">7.4.1</span> “Erasing” areas from Census polygons<a class="anchor" aria-label="anchor" href="#erasing-areas-from-census-polygons"><i class="fas fa-link"></i></a>
+</h3>
+<p>tidycensus allows users to get TIGER/Line instead of cartographic boundary shapefiles with the keyword argument <code>cb = FALSE</code>. This argument will be familiar to users of the <strong>tigris</strong> package, as it is used by <strong>tigris</strong> to distinguish between cartographic boundary and TIGER/Line shapefiles in the package.</p>
+<div class="sourceCode" id="cb230"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># CRS: NAD83(2011) / New York Long Island</span>
+<span class="va">ny2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs</a></span><span class="op">(</span>
+  geography <span class="op">=</span> <span class="st">"tract"</span>,
+  variables <span class="op">=</span> <span class="st">"B19013_001"</span>, 
+  state <span class="op">=</span> <span class="st">"NY"</span>, 
+  county <span class="op">=</span> <span class="st">"New York"</span>, 
+  geometry <span class="op">=</span> <span class="cn">TRUE</span>, 
+  year <span class="op">=</span> <span class="fl">2019</span>,
+  cb <span class="op">=</span> <span class="cn">FALSE</span>
+<span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html">st_transform</a></span><span class="op">(</span><span class="fl">6538</span><span class="op">)</span></code></pre></div>
+<p>Next, tools in the <strong>tigris</strong> and <strong>sf</strong> package can be used to remove the water area from Manhattan’s Census tracts. <strong>sf</strong> allows users to “erase” one geometry from another, <a href="http://pro.arcgis.com/en/pro-app/tool-reference/analysis/erase.htm">akin to tools available in desktop GIS software</a>. The <code>st_erase()</code> function defined below is not exported by the package, but is defined in the documentation for <code><a href="https://r-spatial.github.io/sf/reference/geos_binary_ops.html">st_difference()</a></code>.</p>
+<p>The geometry used to “erase” water area from the tract polygons is obtained by the <code><a href="https://rdrr.io/pkg/tigris/man/area_water.html">area_water()</a></code> function in <strong>tigris</strong>.</p>
+<div class="sourceCode" id="cb231"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/walkerke/tigris">tigris</a></span><span class="op">)</span>
+
+<span class="va">st_erase</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_binary_ops.html">st_difference</a></span><span class="op">(</span><span class="va">x</span>, <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_combine.html">st_union</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">)</span>
+<span class="op">}</span>
+
+<span class="va">ny_water</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tigris/man/area_water.html">area_water</a></span><span class="op">(</span><span class="st">"NY"</span>, <span class="st">"New York"</span>, year <span class="op">=</span> <span class="fl">2019</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html">st_transform</a></span><span class="op">(</span><span class="fl">6538</span><span class="op">)</span>
+
+<span class="va">ny_erase</span> <span class="op">&lt;-</span> <span class="fu">st_erase</span><span class="op">(</span><span class="va">ny2</span>, <span class="va">ny_water</span><span class="op">)</span></code></pre></div>
+<p>After performing this operation, we can map the result:</p>
+<div class="sourceCode" id="cb232"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">ny_erase</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">estimate</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html">scale_fill_viridis_c</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org/reference/label_dollar.html">dollar</a></span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"Median household\nincome"</span><span class="op">)</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:plot-erase-manhattan"></span>
+<img src="07-spatial-analysis-census_files/figure-html/plot-erase-manhattan-1.png" alt="Map of Manhattan with water areas erased" width="100%"><p class="caption">
+Figure 7.12: Map of Manhattan with water areas erased
+</p>
+</div>
+<p>The map appears as before, but now with a more familiar representation of the extent of Manhattan.</p>
+</div>
+</div>
+<div id="spatial-neighborhoods-and-spatial-weights-matrices" class="section level2" number="7.5">
+<h2>
+<span class="header-section-number">7.5</span> Spatial neighborhoods and spatial weights matrices<a class="anchor" aria-label="anchor" href="#spatial-neighborhoods-and-spatial-weights-matrices"><i class="fas fa-link"></i></a>
+</h2>
+<p>The spatial capabilities of <strong>tidycensus</strong> also allow for exploratory spatial data analysis (ESDA) within R. ESDA refers to the use of datasets’ spatial properties in addition to their attributes to explore patterns and relationships. This may involve exploration of spatial patterns in datasets or identification of spatial clustering of a given demographic attribute.</p>
+<p>To illustrate how an analyst can apply ESDA to Census data, let’s acquire a dataset on median age by Census tract in the Dallas-Fort Worth, TX metropolitan area. Census tracts in the metro area will be identified using methods introduced earlier in this chapter.</p>
+<div class="sourceCode" id="cb233"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://walker-data.com/tidycensus">tidycensus</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/walkerke/tigris">tigris</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-spatial/spdep/">spdep</a></span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>tigris_use_cache <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+
+<span class="co"># CRS: NAD83 / Texas North Central</span>
+<span class="va">dfw</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tigris/man/core_based_statistical_areas.html">core_based_statistical_areas</a></span><span class="op">(</span>cb <span class="op">=</span> <span class="cn">TRUE</span>, year <span class="op">=</span> <span class="fl">2019</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu">str_detect</span><span class="op">(</span><span class="va">NAME</span>, <span class="st">"Dallas"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html">st_transform</a></span><span class="op">(</span><span class="fl">32138</span><span class="op">)</span>
+
+<span class="va">dfw_tracts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs</a></span><span class="op">(</span>
+  geography <span class="op">=</span> <span class="st">"tract"</span>,
+  variables <span class="op">=</span> <span class="st">"B01002_001"</span>,
+  state <span class="op">=</span> <span class="st">"TX"</span>,
+  year <span class="op">=</span> <span class="fl">2019</span>,
+  geometry <span class="op">=</span> <span class="cn">TRUE</span>
+<span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html">st_transform</a></span><span class="op">(</span><span class="fl">32138</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_join.html">st_filter</a></span><span class="op">(</span><span class="va">dfw</span>, .predicate <span class="op">=</span> <span class="va">st_within</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span><span class="op">(</span><span class="op">)</span>
+
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">dfw_tracts</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">estimate</span><span class="op">)</span>, color <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html">scale_fill_viridis_c</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="07-spatial-analysis-census_files/figure-html/get-dfw-tract-ch7-1.png" width="100%"></div>
+<div id="understanding-spatial-neighborhoods" class="section level3" number="7.5.1">
+<h3>
+<span class="header-section-number">7.5.1</span> Understanding spatial neighborhoods<a class="anchor" aria-label="anchor" href="#understanding-spatial-neighborhoods"><i class="fas fa-link"></i></a>
+</h3>
+<p>Exploratory spatial data analysis relies on the concept of a <em>neighborhood</em>, which is a representation of how a given geographic feature interrelates with other features nearby. The workhorse package for exploratory spatial data analysis in R is <strong>spdep</strong>, which includes a wide range of tools for exploring and modeling spatial data. As part of this framework, <strong>spdep</strong> supports a variety of neighborhood definitions. These definitions include:</p>
+<ul>
+<li>
+<em>Proximity-based neighbors</em>, where neighboring features are identified based on some measure of distance. Neighbors might be defined as those that fall within a given distance threshold (e.g. all features within 2km of a given feature) or as <em>k</em>-nearest neighbors (e.g. the nearest eight features to a given feature).</li>
+<li>
+<em>Graph-based neighbors</em>, where neighbors are defined through network relationships (e.g. along a street network).</li>
+<li>
+<em>Contiguity-based neighbors</em>, used when geographic features are polygons. Options for contiguity-based spatial relationships include <em>queen’s case neighbors</em>, where all polygons that share at least one vertex are considered neighbors; and <em>rook’s case neighbors</em>, where polygons must share at least one line segment to be considered neighbors.</li>
+</ul>
+<p>In this example, we’ll choose a queen’s case contiguity-based neighborhood definition for our Census tracts. We implement this with the function <code><a href="https://rdrr.io/pkg/spdep/man/poly2nb.html">poly2nb()</a></code>, which can take an <strong>sf</strong> object as an argument and produce a neighbors list object. We use the argument <code>queen = TRUE</code> to request queen’s case neighbors explicitly (though this is the function default).</p>
+<div class="sourceCode" id="cb234"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">neighbors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/spdep/man/poly2nb.html">poly2nb</a></span><span class="op">(</span><span class="va">dfw_tracts</span>, queen <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">neighbors</span><span class="op">)</span></code></pre></div>
+<pre><code>## Neighbour list object:
+## Number of regions: 1310 
+## Number of nonzero links: 8446 
+## Percentage nonzero weights: 0.4921625 
+## Average number of links: 6.447328 
+## Link number distribution:
+## 
+##   2   3   4   5   6   7   8   9  10  11  12  13  16 
+##   6  43 111 254 286 291 159  94  30  20  11   4   1 
+## 6 least connected regions:
+## 15 626 663 768 823 824 with 2 links
+## 1 most connected region:
+## 924 with 16 links</code></pre>
+<p>On average, the Census tracts in the Dallas-Fort Worth metropolitan area have 6.44 neighbors. The minimum number of neighbors in the dataset is 2 (there are six such tracts), and the maximum number of neighbors is 16 (the tract at row index 924). An important caveat to keep in mind here is that tracts with few neighbors may actually have more neighbors than listed here given that we have restricted the tract dataset to those tracts within the Dallas-Fort Worth metropolitan area. In turn, our analysis will be influenced by <em>edge effects</em> as neighborhoods on the edge of the metropolitan area are artificially restricted.</p>
+<p>Neighborhood relationships can be visualized using plotting functionality in <strong>spdep</strong>:</p>
+<div class="sourceCode" id="cb236"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dfw_coords</span> <span class="op">&lt;-</span> <span class="va">dfw_tracts</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_centroid</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_coordinates.html">st_coordinates</a></span><span class="op">(</span><span class="op">)</span>
+
+<span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">dfw_tracts</span><span class="op">$</span><span class="va">geometry</span><span class="op">)</span>
+<span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">neighbors</span>, 
+     coords <span class="op">=</span> <span class="va">dfw_coords</span>, 
+     add <span class="op">=</span> <span class="cn">TRUE</span>, 
+     col <span class="op">=</span> <span class="st">"blue"</span>, 
+     points <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:plot-neighbors"></span>
+<img src="07-spatial-analysis-census_files/figure-html/plot-neighbors-1.png" alt="Visualization of queens-case neighborhood relationships" width="100%"><p class="caption">
+Figure 7.13: Visualization of queens-case neighborhood relationships
+</p>
+</div>
+<p>Additionally, row indices for the neighbors of a given feature can be readily extracted from the neighbors list object.</p>
+<div class="sourceCode" id="cb237"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Get the row indices of the neighbors of the Census tract at row index 1</span>
+<span class="va">neighbors</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></code></pre></div>
+<pre><code>##  [1]   47  153  227  246  353  613  660  751  942 1025 1208</code></pre>
+</div>
+<div id="generating-the-spatial-weights-matrix" class="section level3" number="7.5.2">
+<h3>
+<span class="header-section-number">7.5.2</span> Generating the spatial weights matrix<a class="anchor" aria-label="anchor" href="#generating-the-spatial-weights-matrix"><i class="fas fa-link"></i></a>
+</h3>
+<p>To perform exploratory spatial data analysis, we can convert the neighbors list object into <em>spatial weights</em>. Spatial weights define how metrics associated with a feature’s neighbors should be weighted. Weight generation is implemented in the <code><a href="https://rdrr.io/pkg/spdep/man/nb2listw.html">nb2listw()</a></code> function, to which we pass the neighbors object and specify a style of weights. The default, <code>style = "W"</code>, produces a row-standardized weights object where the weights for all neighbors of a given feature sum to 1. This is the option you would choose when analyzing neighborhood means. An alternative option, <code>style = "B"</code>, produces binary weights where neighbors are given the weight of 1 and non-neighbors take the weight of 0. This style of weights is useful for producing neighborhood sums.</p>
+<p>In the example below, we create row-standardized spatial weights for the Dallas-Fort Worth Census tracts and check their values for the feature at row index 1.</p>
+<div class="sourceCode" id="cb239"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">weights</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/spdep/man/nb2listw.html">nb2listw</a></span><span class="op">(</span><span class="va">neighbors</span>, style <span class="op">=</span> <span class="st">"W"</span><span class="op">)</span>
+
+<span class="va">weights</span><span class="op">$</span><span class="va">weights</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></code></pre></div>
+<pre><code>##  [1] 0.09090909 0.09090909 0.09090909 0.09090909 0.09090909 0.09090909
+##  [7] 0.09090909 0.09090909 0.09090909 0.09090909 0.09090909</code></pre>
+<p>Given that the Census tract at row index 1 has eleven neighbors, each neighbor is assigned the weight 0.0909.</p>
+</div>
+</div>
+<div id="global-and-local-spatial-autocorrelation" class="section level2" number="7.6">
+<h2>
+<span class="header-section-number">7.6</span> Global and local spatial autocorrelation<a class="anchor" aria-label="anchor" href="#global-and-local-spatial-autocorrelation"><i class="fas fa-link"></i></a>
+</h2>
+<p>The row-standardized spatial weights object named <code>weights</code> provides the needed information to perform exploratory spatial data analysis of educational attainment in the Dallas-Fort Worth metropolitan area. In many cases, an analyst may be interested in understanding how the attributes of geographic features relate to those of their neighbors. Formally, this concept is called <em>spatial autocorrelation</em>. The concept of spatial autocorrelation relates to Waldo Tobler’s famous “first law of geography,” which reads <span class="citation">(<a href="references.html#ref-tobler1970" role="doc-biblioref">Tobler 1970</a>)</span>:</p>
+<blockquote>
+<p>Everything is related to everything else, but near things are more related than distant things.</p>
+</blockquote>
+<p>This formulation informs much of the theory behind spatial data science and geographical inquiry more broadly. With respect to the exploratory spatial analysis of Census data, we might be interested in the degree to which a given attribute clusters spatially, and subsequently where those clusters are found. One such way to assess clustering is to assess the degree to which attribute values are similar to or differ from those of their neighbors as defined by a weights matrix. Patterns can in turn be explained as follows:</p>
+<ul>
+<li>
+<em>Spatial clustering</em>: data values tend to be similar to neighboring data values;</li>
+<li>
+<em>Spatial uniformity</em>: data values tend to differ from neighboring data values;</li>
+<li>
+<em>Spatial randomness</em>: there is no apparent relationship between data values and those of their neighbors.</li>
+</ul>
+<p>Given Tobler’s first law of geography, we tend to expect that most geographic phenomena exhibit some degree of spatial clustering. This section introduces a variety of methods available in R to evaluate spatial clustering using ESDA and the <strong>spdep</strong> package <span class="citation">(<a href="references.html#ref-bivand2018" role="doc-biblioref">R. S. Bivand and Wong 2018</a>)</span>.</p>
+<div id="spatial-lags-and-morans-i" class="section level3" number="7.6.1">
+<h3>
+<span class="header-section-number">7.6.1</span> Spatial lags and Moran’s <em>I</em><a class="anchor" aria-label="anchor" href="#spatial-lags-and-morans-i"><i class="fas fa-link"></i></a>
+</h3>
+<p>Spatial weights matrices can be used to calculate the <em>spatial lag</em> of a given attribute for each observation in a dataset. The spatial lag refers to the neighboring values of an observation given a spatial weights matrix. As discussed above, row-standardized weights matrices will produce lagged means, and binary weights matrices will produce lagged sums. Spatial lag calculations are implemented in the function <code><a href="https://rdrr.io/pkg/spdep/man/lag.listw.html">lag.listw()</a></code>, which requires a spatial weights list object and a numeric vector from which to compute the lag.</p>
+<div class="sourceCode" id="cb241"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dfw_tracts</span><span class="op">$</span><span class="va">lag_estimate</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/spdep/man/lag.listw.html">lag.listw</a></span><span class="op">(</span><span class="va">weights</span>, <span class="va">dfw_tracts</span><span class="op">$</span><span class="va">estimate</span><span class="op">)</span></code></pre></div>
+<p>The code above creates a new column in <code>dfw_tracts</code>, <code>lag_estimate</code>, that represents the mean percentage of bachelor’s degree holders for the neighbors of each Census tract in the Dallas-Fort Worth metropolitan area. Using this information, we can draw a scatterplot of the ACS estimate vs. its lagged mean to do a preliminary assessment of spatial clustering in the data.</p>
+<div class="sourceCode" id="cb242"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">dfw_tracts</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">estimate</span>, y <span class="op">=</span> <span class="va">lag_estimate</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_abline</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Median age by Census tract, Dallas-Fort Worth TX"</span>,
+       x <span class="op">=</span> <span class="st">"Median age"</span>,
+       y <span class="op">=</span> <span class="st">"Spatial lag, median age"</span>, 
+       caption <span class="op">=</span> <span class="st">"Data source: 2015-2019 ACS via the tidycensus R package.\nSpatial relationships based on queens-case polygon contiguity."</span><span class="op">)</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:visualize-lag"></span>
+<img src="07-spatial-analysis-census_files/figure-html/visualize-lag-1.png" alt="Scatterplot of median age relative to its spatial lag" width="100%"><p class="caption">
+Figure 7.14: Scatterplot of median age relative to its spatial lag
+</p>
+</div>
+<p>The scatterplot suggests a positive correlation between the ACS estimate and its spatial lag, representative of spatial autocorrelation in the data. This relationship can be evaluated further by using a test of global spatial autocorrelation. The most common method used for spatial autocorrelation evaluation is Moran’s <span class="math inline">\(I\)</span>, which can be interpreted similar to a correlation coefficient but for the relationship between observations and their neighbors. The statistic is computed as:</p>
+<p><span class="math display">\[
+I = \frac{N}{W}\frac{\sum_i\sum_j w_{ij}(x_i - \bar{x})(x_j - \bar{x})}{\sum_i(x_i - \bar{x})^2}
+\]</span></p>
+<p>where <span class="math inline">\(w_{ij}\)</span> represents the spatial weights matrix, <span class="math inline">\(N\)</span> is the number of spatial units denoted by <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span>, and <span class="math inline">\(W\)</span> is the sum of the spatial weights.</p>
+<p>Moran’s <span class="math inline">\(I\)</span> is implemented in <strong>spdep</strong> with the <code><a href="https://rdrr.io/pkg/spdep/man/moran.test.html">moran.test()</a></code> function, which requires a numeric vector and a spatial weights list object.</p>
+<div class="sourceCode" id="cb243"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/spdep/man/moran.test.html">moran.test</a></span><span class="op">(</span><span class="va">dfw_tracts</span><span class="op">$</span><span class="va">estimate</span>, <span class="va">weights</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Moran I test under randomisation
+## 
+## data:  dfw_tracts$estimate  
+## weights: weights    
+## 
+## Moran I statistic standard deviate = 22.979, p-value &lt; 2.2e-16
+## alternative hypothesis: greater
+## sample estimates:
+## Moran I statistic       Expectation          Variance 
+##      0.3593580070     -0.0007639419      0.0002456130</code></pre>
+<p>The Moran’s <span class="math inline">\(I\)</span> statistic of 0.359 is positive, and the small <em>p</em>-value suggests that we reject the null hypothesis of spatial randomness in our dataset. (See Section <a href="modeling-us-census-data.html#a-first-regression-model">8.2.4</a> for additional discussion of <em>p-</em>values). In a practical sense, this means that Census tracts with older populations tend to be located near one another, and Census tracts with younger populations also tend to be found in the same areas.</p>
+</div>
+<div id="local-spatial-autocorrelation" class="section level3" number="7.6.2">
+<h3>
+<span class="header-section-number">7.6.2</span> Local spatial autocorrelation<a class="anchor" aria-label="anchor" href="#local-spatial-autocorrelation"><i class="fas fa-link"></i></a>
+</h3>
+<p>We can explore this further with <em>local spatial autocorrelation analysis</em>. Local measures of spatial autocorrelation disaggregate global results to identify “hot spots” of similar values within a given spatial dataset. One such example is the Getis-Ord local G statistic <span class="citation">(<a href="references.html#ref-getis2010" role="doc-biblioref">Getis and Ord 1992</a>)</span>, which is computed as follows:</p>
+<p><span class="math display">\[
+G_{i} = \dfrac{\sum\limits_{j}w_{ij}x_j}{\sum\limits_{j=1}^{n}x_j} \text{ for all }i \neq j
+\]</span></p>
+<p>In summary, the equation computes a ratio of the weighted average of the neighborhood values to the total sum of values for the dataset. While the default version of the local G (represented in the equation above) omits the location <span class="math inline">\(i\)</span> from its calculation, a variant of the local G statistic, <span class="math inline">\(G_i*\)</span>, includes this location. Results are returned as z-scores, and implemented in the <code><a href="https://rdrr.io/pkg/spdep/man/localG.html">localG()</a></code> function in <strong>spdep</strong>.</p>
+<p>The code below calculates the local G variant <span class="math inline">\(G_i*\)</span> by re-generating the weights matrix with <code><a href="https://rdrr.io/pkg/spdep/man/include.self.html">include.self()</a></code>, then passing this weights matrix to the <code><a href="https://rdrr.io/pkg/spdep/man/localG.html">localG()</a></code> function.</p>
+<div class="sourceCode" id="cb245"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># For Gi*, re-compute the weights with `include.self()`</span>
+<span class="va">localg_weights</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/spdep/man/nb2listw.html">nb2listw</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/spdep/man/include.self.html">include.self</a></span><span class="op">(</span><span class="va">neighbors</span><span class="op">)</span><span class="op">)</span>
+
+<span class="va">dfw_tracts</span><span class="op">$</span><span class="va">localG</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/spdep/man/localG.html">localG</a></span><span class="op">(</span><span class="va">dfw_tracts</span><span class="op">$</span><span class="va">estimate</span>, <span class="va">localg_weights</span><span class="op">)</span>
+
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">dfw_tracts</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">localG</span><span class="op">)</span>, color <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_fill_distiller</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"RdYlBu"</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"Local Gi* statistic"</span><span class="op">)</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:dfw-local-g"></span>
+<img src="07-spatial-analysis-census_files/figure-html/dfw-local-g-1.png" alt="Map of local Gi* scores" width="100%"><p class="caption">
+Figure 7.15: Map of local Gi* scores
+</p>
+</div>
+<p>Given that the returned results are z-scores, an analyst can choose hot spot thresholds in the statistic, calculate them with <code>case_when()</code>, then plot them accordingly.</p>
+<div class="sourceCode" id="cb246"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dfw_tracts</span> <span class="op">&lt;-</span> <span class="va">dfw_tracts</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>hotspot <span class="op">=</span> <span class="fu">case_when</span><span class="op">(</span>
+    <span class="va">localG</span> <span class="op">&gt;=</span> <span class="fl">2.56</span> <span class="op">~</span> <span class="st">"High cluster"</span>,
+    <span class="va">localG</span> <span class="op">&lt;=</span> <span class="op">-</span><span class="fl">2.56</span> <span class="op">~</span> <span class="st">"Low cluster"</span>,
+    <span class="cn">TRUE</span> <span class="op">~</span> <span class="st">"Not significant"</span>
+  <span class="op">)</span><span class="op">)</span>
+
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">dfw_tracts</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">hotspot</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"grey90"</span>, size <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"blue"</span>, <span class="st">"grey"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:local-g-z-scores"></span>
+<img src="07-spatial-analysis-census_files/figure-html/local-g-z-scores-1.png" alt="Map of local Gi* scores with significant clusters highlighted" width="100%"><p class="caption">
+Figure 7.16: Map of local Gi* scores with significant clusters highlighted
+</p>
+</div>
+</div>
+<div id="identifying-clusters-and-spatial-outliers-with-local-indicators-of-spatial-association-lisa" class="section level3" number="7.6.3">
+<h3>
+<span class="header-section-number">7.6.3</span> Identifying clusters and spatial outliers with local indicators of spatial association (LISA)<a class="anchor" aria-label="anchor" href="#identifying-clusters-and-spatial-outliers-with-local-indicators-of-spatial-association-lisa"><i class="fas fa-link"></i></a>
+</h3>
+<p>An alternative method for the calculation of local spatial autocorrelation is the local indicators of spatial association statistic, commonly referred to as LISA or the local form of Moran’s <span class="math inline">\(I\)</span> <span class="citation">(<a href="references.html#ref-anselin2010" role="doc-biblioref">Anselin 1995</a>)</span>. As an extension of the Global Moran’s <span class="math inline">\(I\)</span> statistic, the local statistic <span class="math inline">\(I_i\)</span> for a given local feature <span class="math inline">\(i\)</span> with neighbors <span class="math inline">\(j\)</span> is computed as follows:</p>
+<p><span class="math display">\[
+I_i = z_i \sum_j w_{ij} z_j,
+\]</span></p>
+<p>where <span class="math inline">\(z_i\)</span> and <span class="math inline">\(z_j\)</span> are expressed as deviations from the mean.</p>
+<p>LISA is a popular method for exploratory spatial data analysis in the spatial social sciences implemented in a variety of software packages. ArcGIS implements LISA in its <a href="https://pro.arcgis.com/en/pro-app/latest/tool-reference/spatial-statistics/cluster-and-outlier-analysis-anselin-local-moran-s.htm">Cluster and Outlier Analysis geoprocessing tool</a>; Anselin’s open-source <a href="https://geodacenter.github.io/">GeoDa</a> software has a graphical interface for calculating LISA statistics; and <a href="https://pysal.org/esda/generated/esda.Moran_Local.html">Python users can compute LISA using the PySAL library</a>.</p>
+<p>In R, LISA can be computed using the <code><a href="https://rdrr.io/pkg/spdep/man/localmoran.html">localmoran()</a></code> family of functions in the spdep package. For users familiar with using LISA in other software packages, the <code><a href="https://rdrr.io/pkg/spdep/man/localmoran.html">localmoran_perm()</a></code> function implements LISA where statistical significance is calculated based on a conditional permutation-based approach.</p>
+<p>The example below calculates local Moran’s <span class="math inline">\(I\)</span> statistics in a way that resembles the output from GeoDa, which returns a cluster map and a Moran scatterplot. One of the major benefits of using LISA for exploratory analysis is its ability to identify both <em>spatial clusters</em>, where observations are surrounded by similar values, and <em>spatial outliers</em>, where observations are surrounded by dissimilar values. We’ll use this method to explore clustering and the possible presence of spatial outliers with respect to Census tract median age in Dallas-Fort Worth.</p>
+<div class="sourceCode" id="cb247"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">1983</span><span class="op">)</span>
+
+<span class="va">dfw_tracts</span><span class="op">$</span><span class="va">scaled_estimate</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/scale.html">scale</a></span><span class="op">(</span><span class="va">dfw_tracts</span><span class="op">$</span><span class="va">estimate</span><span class="op">)</span><span class="op">)</span>
+
+<span class="va">dfw_lisa</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/spdep/man/localmoran.html">localmoran_perm</a></span><span class="op">(</span>
+  <span class="va">dfw_tracts</span><span class="op">$</span><span class="va">scaled_estimate</span>, 
+  <span class="va">weights</span>, 
+  nsim <span class="op">=</span> <span class="fl">999L</span>, 
+  alternative <span class="op">=</span> <span class="st">"two.sided"</span>
+<span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">as_tibble</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">set_names</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"local_i"</span>, <span class="st">"exp_i"</span>, <span class="st">"var_i"</span>, <span class="st">"z_i"</span>, <span class="st">"p_i"</span><span class="op">)</span><span class="op">)</span>
+
+<span class="va">dfw_lisa_df</span> <span class="op">&lt;-</span> <span class="va">dfw_tracts</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">GEOID</span>, <span class="va">scaled_estimate</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>lagged_estimate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/spdep/man/lag.listw.html">lag.listw</a></span><span class="op">(</span><span class="va">weights</span>, <span class="va">scaled_estimate</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">bind_cols</span><span class="op">(</span><span class="va">dfw_lisa</span><span class="op">)</span></code></pre></div>
+<p>The above code uses the following steps:</p>
+<ol style="list-style-type: decimal">
+<li>First, a random number seed is set given that we are using the conditional permutation approach to calculating statistical significance. This will ensure reproducibility of results when the process is re-run.</li>
+<li>The ACS estimate for median age is converted to a z-score using <code><a href="https://rdrr.io/r/base/scale.html">scale()</a></code>, which subtracts the mean from the estimate then divides by its standard deviation. This follows convention from GeoDa.</li>
+<li>LISA is computed with <code><a href="https://rdrr.io/pkg/spdep/man/localmoran.html">localmoran_perm()</a></code> for the scaled value for median age, using the contiguity-based spatial weights matrix. 999 conditional permutation simulations are used to calculate statistical significance, and the argument <code>alternative = "two.sided"</code> will identify both statistically significant clusters and statistically significant spatial outliers.</li>
+<li>The LISA data frame is attached to the Census tract shapes after computing the lagged value for median age.</li>
+</ol>
+<p>Our result appears as follows:</p>
+<div class="inline-table"><table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:show-dfw-lisa-df">Table 7.5: </span>Local Moran’s I results
+</caption>
+<thead><tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+GEOID
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+scaled_estimate
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+lagged_estimate
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+local_i
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+exp_i
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+var_i
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+z_i
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+p_i
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+geometry
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+48113019204
+</td>
+<td style="text-align:right;">
+-0.9083914
+</td>
+<td style="text-align:right;">
+-0.3654568
+</td>
+<td style="text-align:right;">
+0.3322315
+</td>
+<td style="text-align:right;">
+-0.0019753
+</td>
+<td style="text-align:right;">
+0.0767748
+</td>
+<td style="text-align:right;">
+1.2061629
+</td>
+<td style="text-align:right;">
+0.2277547
+</td>
+<td style="text-align:left;">
+MULTIPOLYGON (((761835.4 21…
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+48113015500
+</td>
+<td style="text-align:right;">
+-1.0195775
+</td>
+<td style="text-align:right;">
+-0.7515397
+</td>
+<td style="text-align:right;">
+0.7668383
+</td>
+<td style="text-align:right;">
+-0.0115062
+</td>
+<td style="text-align:right;">
+0.1304586
+</td>
+<td style="text-align:right;">
+2.1549417
+</td>
+<td style="text-align:right;">
+0.0311664
+</td>
+<td style="text-align:left;">
+MULTIPOLYGON (((738672.9 21…
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+48439102000
+</td>
+<td style="text-align:right;">
+-0.3365773
+</td>
+<td style="text-align:right;">
+-0.1822783
+</td>
+<td style="text-align:right;">
+0.0613976
+</td>
+<td style="text-align:right;">
+0.0029962
+</td>
+<td style="text-align:right;">
+0.0163324
+</td>
+<td style="text-align:right;">
+0.4569814
+</td>
+<td style="text-align:right;">
+0.6476844
+</td>
+<td style="text-align:left;">
+MULTIPOLYGON (((705890.8 21…
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+48121020503
+</td>
+<td style="text-align:right;">
+-1.0195775
+</td>
+<td style="text-align:right;">
+0.3662775
+</td>
+<td style="text-align:right;">
+-0.3737336
+</td>
+<td style="text-align:right;">
+0.0185373
+</td>
+<td style="text-align:right;">
+0.2419147
+</td>
+<td style="text-align:right;">
+-0.7975446
+</td>
+<td style="text-align:right;">
+0.4251348
+</td>
+<td style="text-align:left;">
+MULTIPOLYGON (((727489.9 21…
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+48439113710
+</td>
+<td style="text-align:right;">
+-0.2730424
+</td>
+<td style="text-align:right;">
+0.6588028
+</td>
+<td style="text-align:right;">
+-0.1800185
+</td>
+<td style="text-align:right;">
+0.0004427
+</td>
+<td style="text-align:right;">
+0.0244266
+</td>
+<td style="text-align:right;">
+-1.1546556
+</td>
+<td style="text-align:right;">
+0.2482315
+</td>
+<td style="text-align:left;">
+MULTIPOLYGON (((730154.3 21…
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>The information returned by <code><a href="https://rdrr.io/pkg/spdep/man/localmoran.html">localmoran_perm()</a></code> can be used to compute both a GeoDa-style LISA quadrant plot as well as a cluster map. The LISA quadrant plot is similar to a Moran scatterplot, but also identifies “quadrants” of observations with respect to the spatial relationships identified by LISA. The code below uses <code>case_when()</code> to recode the data into appropriate categories for the LISA quadrant plot, using a significance level of <em>p</em> = 0.05.</p>
+<div class="sourceCode" id="cb248"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dfw_lisa_clusters</span> <span class="op">&lt;-</span> <span class="va">dfw_lisa_df</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>lisa_cluster <span class="op">=</span> <span class="fu">case_when</span><span class="op">(</span>
+    <span class="va">p_i</span> <span class="op">&gt;=</span> <span class="fl">0.05</span> <span class="op">~</span> <span class="st">"Not significant"</span>,
+    <span class="va">scaled_estimate</span> <span class="op">&gt;</span> <span class="fl">0</span> <span class="op">&amp;</span> <span class="va">local_i</span> <span class="op">&gt;</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"High-high"</span>,
+    <span class="va">scaled_estimate</span> <span class="op">&gt;</span> <span class="fl">0</span> <span class="op">&amp;</span> <span class="va">local_i</span> <span class="op">&lt;</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"High-low"</span>,
+    <span class="va">scaled_estimate</span> <span class="op">&lt;</span> <span class="fl">0</span> <span class="op">&amp;</span> <span class="va">local_i</span> <span class="op">&gt;</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"Low-low"</span>,
+    <span class="va">scaled_estimate</span> <span class="op">&lt;</span> <span class="fl">0</span> <span class="op">&amp;</span> <span class="va">local_i</span> <span class="op">&lt;</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"Low-high"</span>
+  <span class="op">)</span><span class="op">)</span></code></pre></div>
+<p>The LISA quadrant plot then appears as follow:</p>
+<div class="sourceCode" id="cb249"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">color_values</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>`High-high` <span class="op">=</span> <span class="st">"red"</span>, 
+                  `High-low` <span class="op">=</span> <span class="st">"pink"</span>, 
+                  `Low-low` <span class="op">=</span> <span class="st">"blue"</span>, 
+                  `Low-high` <span class="op">=</span> <span class="st">"lightblue"</span>, 
+                  `Not significant` <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span>
+
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">dfw_lisa_clusters</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">scaled_estimate</span>, 
+                              y <span class="op">=</span> <span class="va">lagged_estimate</span>,
+                              fill <span class="op">=</span> <span class="va">lisa_cluster</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"black"</span>, shape <span class="op">=</span> <span class="fl">21</span>, size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_hline</a></span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">0</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fl">0</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">color_values</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Median age (z-score)"</span>,
+       y <span class="op">=</span> <span class="st">"Spatial lag of median age (z-score)"</span>,
+       fill <span class="op">=</span> <span class="st">"Cluster type"</span><span class="op">)</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:dfw-quadrant-plot"></span>
+<img src="07-spatial-analysis-census_files/figure-html/dfw-quadrant-plot-1.png" alt="LISA quadrant scatterplot" width="100%"><p class="caption">
+Figure 7.17: LISA quadrant scatterplot
+</p>
+</div>
+<p>Observations falling in the top-right quadrant represent “high-high” clusters, where older Census tracts are also surrounded by older tracts in their spatial neighborhoods. Statistically significant clusters - those with a <em>p</em>-value less than or equal to 0.05 - are colored red on the chart. The bottom-left quadrant also represents spatial clusters, but instead includes younger tracts that are also surrounded by younger tracts. The top-left and bottom-right quadrants are home to the spatial outliers, where values are dissimilar from their neighbors.</p>
+<p>GeoDa also implements a “cluster map” where observations are visualized in relationship to their cluster membership and statistical significance. The code below reproduces the GeoDa cluster map using <strong>ggplot2</strong> and <code><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf()</a></code>.</p>
+<div class="sourceCode" id="cb250"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">dfw_lisa_clusters</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">lisa_cluster</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">color_values</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"Cluster type"</span><span class="op">)</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:dfw-lisa-map"></span>
+<img src="07-spatial-analysis-census_files/figure-html/dfw-lisa-map-1.png" alt="LISA cluster map" width="100%"><p class="caption">
+Figure 7.18: LISA cluster map
+</p>
+</div>
+<p>The map illustrates distinctive patterns of spatial clustering by age in the Dallas-Fort Worth region. Older clusters are colored red; this includes areas like the wealthy Highland Park community north of downtown Dallas. Younger clusters are colored dark blue, and found in areas like east Fort Worth, east Dallas, and Arlington in the center of the metropolitan area. Spatial outliers appear scattered throughout the map as well; in the Dallas area, low-high clusters are Census tracts with large quantities of multifamily housing that are adjacent to predominantly single-family neighborhoods.</p>
+<p>One very useful feature of GeoDa for exploratory spatial data analysis is the ability to perform linked brushing between the LISA quadrant plot and cluster map. This allows users to click and drag on either plot and highlight the corresponding observations on the other plot. Building on the chart linking example using ggiraph introduced in Section <a href="mapping-census-data-with-r.html#linking-maps-and-charts">6.6.2</a>, a linked brushing approach similar to GeoDa can be implemented in Shiny, and is represented in the image below and available at <a href="https://walkerke.shinyapps.io/linked-brushing/" class="uri">https://walkerke.shinyapps.io/linked-brushing/</a>.</p>
+<div class="figure">
+<span style="display:block;" id="fig:linked-brushing"></span>
+<img src="img/screenshots/linked-brushing.png" alt="View of LISA Shiny app with linked brushing enabled" width="100%"><p class="caption">
+Figure 7.19: View of LISA Shiny app with linked brushing enabled
+</p>
+</div>
+<p>Using the lasso select tool, you can click and drag on either the scatterplot or the map and view the corresponding observations highlighted on the other chart panel. Code to reproduce this Shiny app is available in <code>scripts/linked_brushing</code> in the book’s GitHub repository.</p>
+</div>
+</div>
+<div id="exercises-5" class="section level2" number="7.7">
+<h2>
+<span class="header-section-number">7.7</span> Exercises<a class="anchor" aria-label="anchor" href="#exercises-5"><i class="fas fa-link"></i></a>
+</h2>
+<ol style="list-style-type: decimal">
+<li>Identify a different core-based statistical area of interest and use the methods introduced in this chapter to extract Census tracts or block groups for that CBSA.</li>
+<li>Replicate the <code>st_erase()</code> cartographic workflow for a different county with significant water area; a good choice is King County, Washington. Be sure to transform your data to an appropriate projected coordinate system (selected with <code><a href="https://rdrr.io/pkg/crsuggest/man/suggest_crs.html">suggest_crs()</a></code>) first. If the operation creates too many “holes” for water areas, try filtering down the water dataset by its <code>AWATER</code> column and retaining only the largest water areas, then re-run and see what you get.</li>
+<li>Acquire a spatial dataset with <strong>tidycensus</strong> for a region of interest and a variable of interest to you. Follow the instructions in this chapter to generate a spatial weights matrix, then compute a hot-spot analysis with <code><a href="https://rdrr.io/pkg/spdep/man/localG.html">localG()</a></code>.</li>
+</ol>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="mapping-census-data-with-r.html"><span class="header-section-number">6</span> Mapping Census data with R</a></div>
+<div class="next"><a href="modeling-us-census-data.html"><span class="header-section-number">8</span> Modeling US Census data</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#spatial-analysis-with-us-census-data"><span class="header-section-number">7</span> Spatial analysis with US Census data</a></li>
+<li>
+<a class="nav-link" href="#spatial-overlay"><span class="header-section-number">7.1</span> Spatial overlay</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#note-aligning-coordinate-reference-systems"><span class="header-section-number">7.1.1</span> Note: aligning coordinate reference systems</a></li>
+<li><a class="nav-link" href="#identifying-geometries-within-a-metropolitan-area"><span class="header-section-number">7.1.2</span> Identifying geometries within a metropolitan area</a></li>
+<li><a class="nav-link" href="#spatial-subsets-and-spatial-predicates"><span class="header-section-number">7.1.3</span> Spatial subsets and spatial predicates</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#spatial-joins-and-group-wise-spatial-analysis"><span class="header-section-number">7.2</span> Spatial joins and group-wise spatial analysis</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#spatial-join-data-setup"><span class="header-section-number">7.2.1</span> Spatial join data setup</a></li>
+<li><a class="nav-link" href="#computing-and-visualizing-the-spatial-join"><span class="header-section-number">7.2.2</span> Computing and visualizing the spatial join</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#distance-and-proximity-analysis"><span class="header-section-number">7.3</span> Distance and proximity analysis</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#calculating-distances"><span class="header-section-number">7.3.1</span> Calculating distances</a></li>
+<li><a class="nav-link" href="#calculating-travel-times"><span class="header-section-number">7.3.2</span> Calculating travel times</a></li>
+<li><a class="nav-link" href="#catchment-areas-with-buffers-and-isochrones"><span class="header-section-number">7.3.3</span> Catchment areas with buffers and isochrones</a></li>
+<li><a class="nav-link" href="#computing-demographic-estimates-for-zones-with-areal-interpolation"><span class="header-section-number">7.3.4</span> Computing demographic estimates for zones with areal interpolation</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#better-cartography-with-spatial-overlay"><span class="header-section-number">7.4</span> Better cartography with spatial overlay</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#erasing-areas-from-census-polygons"><span class="header-section-number">7.4.1</span> “Erasing” areas from Census polygons</a></li></ul>
+</li>
+<li>
+<a class="nav-link" href="#spatial-neighborhoods-and-spatial-weights-matrices"><span class="header-section-number">7.5</span> Spatial neighborhoods and spatial weights matrices</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#understanding-spatial-neighborhoods"><span class="header-section-number">7.5.1</span> Understanding spatial neighborhoods</a></li>
+<li><a class="nav-link" href="#generating-the-spatial-weights-matrix"><span class="header-section-number">7.5.2</span> Generating the spatial weights matrix</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#global-and-local-spatial-autocorrelation"><span class="header-section-number">7.6</span> Global and local spatial autocorrelation</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#spatial-lags-and-morans-i"><span class="header-section-number">7.6.1</span> Spatial lags and Moran’s I</a></li>
+<li><a class="nav-link" href="#local-spatial-autocorrelation"><span class="header-section-number">7.6.2</span> Local spatial autocorrelation</a></li>
+<li><a class="nav-link" href="#identifying-clusters-and-spatial-outliers-with-local-indicators-of-spatial-association-lisa"><span class="header-section-number">7.6.3</span> Identifying clusters and spatial outliers with local indicators of spatial association (LISA)</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#exercises-5"><span class="header-section-number">7.7</span> Exercises</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Analyzing US Census Data</strong>: Methods, Maps, and Models in R" was written by Kyle E. Walker. It was last built on 2021-08-27.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 1 An introduction to R and the United States Census | Analyzing US Census Data with R</title>
+<meta name="author" content="Kyle E. Walker">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.2"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.6/header-attrs.js"></script><script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.5.3/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.5.3/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.4/tabs.js"></script><script src="libs/bs3compat-0.2.4/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script><script src="libs/plotly-binding-4.9.2.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet">
+<script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="libs/plotly-main-1.52.2/plotly-latest.min.js"></script><script src="libs/d3-5.7.0/d3.min.js"></script><script src="libs/d3-lasso-0.0.5/d3-lasso.min.js"></script><link href="libs/ggiraphjs-0.3.0/ggiraphjs.min.css" rel="stylesheet">
+<script src="libs/ggiraphjs-0.3.0/ggiraphjs.min.js"></script><script src="libs/girafe-binding-0.7.8/girafe.js"></script><script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/mark.min.js"></script><!-- CSS -->
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Analyzing US Census Data with R</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Overview</a></li>
+<li><a class="active" href="an-introduction-to-r-and-the-united-states-census.html"><span class="header-section-number">1</span> An introduction to R and the United States Census</a></li>
+<li><a class="" href="an-introduction-to-tidycensus.html"><span class="header-section-number">2</span> An introduction to tidycensus</a></li>
+<li><a class="" href="wrangling-census-data-with-tidyverse-tools.html"><span class="header-section-number">3</span> Wrangling Census data with tidyverse tools</a></li>
+<li><a class="" href="exploring-us-census-data-with-visualization.html"><span class="header-section-number">4</span> Exploring US Census data with visualization</a></li>
+<li><a class="" href="census-geographic-data-and-applications-in-r.html"><span class="header-section-number">5</span> Census geographic data and applications in R</a></li>
+<li><a class="" href="mapping-census-data-with-r.html"><span class="header-section-number">6</span> Mapping Census data with R</a></li>
+<li><a class="" href="spatial-analysis-with-us-census-data.html"><span class="header-section-number">7</span> Spatial analysis with US Census data</a></li>
+<li><a class="" href="modeling-us-census-data.html"><span class="header-section-number">8</span> Modeling US Census data</a></li>
+<li><a class="" href="introduction-to-census-microdata.html"><span class="header-section-number">9</span> Introduction to Census microdata</a></li>
+<li><a class="" href="analyzing-census-microdata.html"><span class="header-section-number">10</span> Analyzing Census microdata</a></li>
+<li><a class="" href="historical-census-data-analysis-with-nhgis-and-ipums.html"><span class="header-section-number">11</span> Historical Census data analysis with NHGIS and IPUMS</a></li>
+<li><a class="" href="working-with-census-data-outside-the-united-states.html"><span class="header-section-number">12</span> Working with Census data outside the United States</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="an-introduction-to-r-and-the-united-states-census" class="section level1" number="1">
+<h1>
+<span class="header-section-number">1</span> An introduction to R and the United States Census<a class="anchor" aria-label="anchor" href="#an-introduction-to-r-and-the-united-states-census"><i class="fas fa-link"></i></a>
+</h1>
+<p>This book is designed for practitioners interested in working efficiently with data from the United States Census Bureau. Census data are used widely in the United States across many research and applied fields, including education, business, journalism, and many others. Until recently, the process of working with US Census data has commonly required the use of a wide array of web interfaces and software platforms to prepare, map, and present the data products. The goal of this book is to illustrate the utility of the R programming language for handling these tasks, allowing Census data users to manage their projects in a single computing environment.</p>
+<p>The book focuses on two types of Census data products commonly used by practitioners:</p>
+<ul>
+<li>
+<strong>Aggregate data</strong>, which involve counts or estimates released by the Census Bureau that are aggregated to some geographic unit of interest, such as a state;</li>
+<li>
+<strong>Microdata</strong>, which are individual, anonymized Census records that commonly represent a sample of a given Census dataset.</li>
+</ul>
+<p>In turn, the book is organized into three general sections that cover key areas of interest for practitioners working with US Census data in R. <strong>Section I</strong> covers the process of working with Census data tables within R. After a brief introduction to US Census Bureau data and the R computing environment, readers will learn how to acquire, wrangle, and visualize aggregate US Census data. <strong>Section II</strong> focuses on spatial Census data analysis. Readers will learn about US Census Bureau spatial data, and then learn how to use this data to make maps, perform spatial analyses, and design spatial statistical and machine learning models. <strong>Section III</strong> covers Census datasets outside the decennial Census and American Community Survey. In Section III, readers will learn how to use the Census Bureau’s Public Use Microdata Series datasets and then model this data using specialized tools within R for working with complex survey samples. Section III also covers historical Census data analysis and explores Census data resources outside the United States.</p>
+<div id="census-data-an-overview" class="section level2" number="1.1">
+<h2>
+<span class="header-section-number">1.1</span> Census data: an overview<a class="anchor" aria-label="anchor" href="#census-data-an-overview"><i class="fas fa-link"></i></a>
+</h2>
+</div>
+<div id="census-hierarchies" class="section level2" number="1.2">
+<h2>
+<span class="header-section-number">1.2</span> Census hierarchies<a class="anchor" aria-label="anchor" href="#census-hierarchies"><i class="fas fa-link"></i></a>
+</h2>
+</div>
+<div id="applications-of-census-data-analysis" class="section level2" number="1.3">
+<h2>
+<span class="header-section-number">1.3</span> Applications of Census data analysis<a class="anchor" aria-label="anchor" href="#applications-of-census-data-analysis"><i class="fas fa-link"></i></a>
+</h2>
+</div>
+<div id="what-is-r" class="section level2" number="1.4">
+<h2>
+<span class="header-section-number">1.4</span> What is R?<a class="anchor" aria-label="anchor" href="#what-is-r"><i class="fas fa-link"></i></a>
+</h2>
+</div>
+<div id="r-packages-for-census-data-analysis" class="section level2" number="1.5">
+<h2>
+<span class="header-section-number">1.5</span> R packages for Census data analysis<a class="anchor" aria-label="anchor" href="#r-packages-for-census-data-analysis"><i class="fas fa-link"></i></a>
+</h2>
+<p>With over 73,000 downloads from the RStudio CRAN mirror as of October 2017, the <strong>acs</strong> package (Haber Glenn 2017) is one of the most widely-used tools for Census data access in R. The acs package allows for access to both decennial Census and American Community Survey data, and includes a suite of tools to manage data downloads and calculate margins of error. The <strong>choroplethr</strong> package (Lamstein and Johnson 2017) wraps acs and <strong>ggplot2</strong> to allow R users to rapidly create maps using Census and ACS data, and also provides access to the underlying data as well. More recently, the <strong>censusapi</strong> package (Recht 2017) helps R users access any of the US Census Bureau’s data APIs. While the censusapi package requires more knowledge of the underlying structure of the API to work, its breadth is unmatched among Census API packages in R.</p>
+<p>{give examples of each in this section}-</p>
+</div>
+<div id="focus-of-the-book-july-31" class="section level2" number="1.6">
+<h2>
+<span class="header-section-number">1.6</span> Focus of the book (July 31)<a class="anchor" aria-label="anchor" href="#focus-of-the-book-july-31"><i class="fas fa-link"></i></a>
+</h2>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="index.html">Overview</a></div>
+<div class="next"><a href="an-introduction-to-tidycensus.html"><span class="header-section-number">2</span> An introduction to tidycensus</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#an-introduction-to-r-and-the-united-states-census"><span class="header-section-number">1</span> An introduction to R and the United States Census</a></li>
+<li><a class="nav-link" href="#census-data-an-overview"><span class="header-section-number">1.1</span> Census data: an overview</a></li>
+<li><a class="nav-link" href="#census-hierarchies"><span class="header-section-number">1.2</span> Census hierarchies</a></li>
+<li><a class="nav-link" href="#applications-of-census-data-analysis"><span class="header-section-number">1.3</span> Applications of Census data analysis</a></li>
+<li><a class="nav-link" href="#what-is-r"><span class="header-section-number">1.4</span> What is R?</a></li>
+<li><a class="nav-link" href="#r-packages-for-census-data-analysis"><span class="header-section-number">1.5</span> R packages for Census data analysis</a></li>
+<li><a class="nav-link" href="#focus-of-the-book-july-31"><span class="header-section-number">1.6</span> Focus of the book (July 31)</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Analyzing US Census Data with R</strong>" was written by Kyle E. Walker. It was last built on 2021-04-23.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+</html>

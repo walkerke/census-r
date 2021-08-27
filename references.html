@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>References | Analyzing US Census Data</title>
+<meta name="author" content="Kyle E. Walker">
+<meta name="description" content="div#refs &gt; div.csl-entry {  margin-bottom: 10px }  Abowd, John M. 2018. “The u.s. Census Bureau Adopts Differential Privacy.” In KDD ’18: The 24th ACM SIGKDD International Conference on Knowledge...">
+<meta name="generator" content="bookdown 0.22.17 with bs4_book()">
+<meta property="og:title" content="References | Analyzing US Census Data">
+<meta property="og:type" content="book">
+<meta property="og:description" content="div#refs &gt; div.csl-entry {  margin-bottom: 10px }  Abowd, John M. 2018. “The u.s. Census Bureau Adopts Differential Privacy.” In KDD ’18: The 24th ACM SIGKDD International Conference on Knowledge...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="References | Analyzing US Census Data">
+<meta name="twitter:description" content="div#refs &gt; div.csl-entry {  margin-bottom: 10px }  Abowd, John M. 2018. “The u.s. Census Bureau Adopts Differential Privacy.” In KDD ’18: The 24th ACM SIGKDD International Conference on Knowledge...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.10.5/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.5.1/tabs.js"></script><script src="libs/bs3compat-0.2.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script><script src="libs/plotly-binding-4.9.3/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet">
+<script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="libs/plotly-main-1.57.1/plotly-latest.min.js"></script><script src="libs/d3-bundle-5.16.0/d3-bundle.min.js"></script><script src="libs/d3-lasso-0.0.5/d3-lasso.min.js"></script><script src="libs/save-svg-as-png-1.4.17/save-svg-as-png.min.js"></script><link href="libs/ggiraphjs-0.4.1/ggiraphjs.min.css" rel="stylesheet">
+<script src="libs/ggiraphjs-0.4.1/ggiraphjs.min.js"></script><script src="libs/girafe-binding-0.7.10/girafe.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-6KFYZ3W36Z"></script><script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-6KFYZ3W36Z');
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS -->
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="Methods, Maps, and Models in R">Analyzing US Census Data</a>:
+        <small class="text-muted">Methods, Maps, and Models in R</small>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Preface</a></li>
+<li><a class="" href="the-united-states-census-and-the-r-programming-language.html"><span class="header-section-number">1</span> The United States Census and the R programming language</a></li>
+<li><a class="" href="an-introduction-to-tidycensus.html"><span class="header-section-number">2</span> An introduction to tidycensus</a></li>
+<li><a class="" href="wrangling-census-data-with-tidyverse-tools.html"><span class="header-section-number">3</span> Wrangling Census data with tidyverse tools</a></li>
+<li><a class="" href="exploring-us-census-data-with-visualization.html"><span class="header-section-number">4</span> Exploring US Census data with visualization</a></li>
+<li><a class="" href="census-geographic-data-and-applications-in-r.html"><span class="header-section-number">5</span> Census geographic data and applications in R</a></li>
+<li><a class="" href="mapping-census-data-with-r.html"><span class="header-section-number">6</span> Mapping Census data with R</a></li>
+<li><a class="" href="spatial-analysis-with-us-census-data.html"><span class="header-section-number">7</span> Spatial analysis with US Census data</a></li>
+<li><a class="" href="modeling-us-census-data.html"><span class="header-section-number">8</span> Modeling US Census data</a></li>
+<li><a class="" href="introduction-to-census-microdata.html"><span class="header-section-number">9</span> Introduction to Census microdata</a></li>
+<li><a class="" href="analyzing-census-microdata.html"><span class="header-section-number">10</span> Analyzing Census microdata</a></li>
+<li><a class="" href="other-census-and-government-data-resources.html"><span class="header-section-number">11</span> Other Census and government data resources</a></li>
+<li><a class="" href="working-with-census-data-outside-the-united-states.html"><span class="header-section-number">12</span> Working with Census data outside the United States</a></li>
+<li><a class="" href="conclusion.html">Conclusion</a></li>
+<li><a class="active" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="references" class="section level1 unnumbered">
+<h1>References<a class="anchor" aria-label="anchor" href="#references"><i class="fas fa-link"></i></a>
+</h1>
+<style type="text/css">
+div#refs > div.csl-entry {
+  margin-bottom: 10px
+}
+</style>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-abowd2018" class="csl-entry">
+Abowd, John M. 2018. <span>“The u.s. Census Bureau Adopts Differential Privacy.”</span> In <em>KDD ’18: The 24th ACM SIGKDD International Conference on Knowledge Discovery and Data Mining</em>. ACM. <a href="https://doi.org/10.1145/3219819.3226070">https://doi.org/10.1145/3219819.3226070</a>.
+</div>
+<div id="ref-leaflet" class="csl-entry">
+Agafonkin, Vladimir. 2020. <span>“Leaflet.”</span> <a href="https://leafletjs.com/">https://leafletjs.com/</a>.
+</div>
+<div id="ref-acs_moe" class="csl-entry">
+American Community Survey Office, US Census Bureau. 2020. <em>Instructions for Applying Statistical Testing to American Community Survey Data</em>. <a href="https://www2.census.gov/programs-surveys/acs/tech_docs/statistical_testing/2019_Instructions_for_Stat_Testing_ACS.pdf?">https://www2.census.gov/programs-surveys/acs/tech_docs/statistical_testing/2019_Instructions_for_Stat_Testing_ACS.pdf?</a>
+</div>
+<div id="ref-pums_readme" class="csl-entry">
+———. 2021. <em>American Community Survey 2015-2019 ACS 5-Year PUMS Files ReadMe</em>. <a href="https://www2.census.gov/programs-surveys/acs/tech_docs/pums/ACS2015_2019_PUMS_README.pdf">https://www2.census.gov/programs-surveys/acs/tech_docs/pums/ACS2015_2019_PUMS_README.pdf</a>.
+</div>
+<div id="ref-anselin2010" class="csl-entry">
+Anselin, Luc. 1995. <span>“Local Indicators of Spatial Association-LISA.”</span> <em>Geographical Analysis</em> 27 (2): 93–115. <a href="https://doi.org/10.1111/j.1538-4632.1995.tb00338.x">https://doi.org/10.1111/j.1538-4632.1995.tb00338.x</a>.
+</div>
+<div id="ref-anselin1996" class="csl-entry">
+Anselin, Luc, Anil K. Bera, Raymond Florax, and Mann J. Yoon. 1996. <span>“Simple Diagnostic Tests for Spatial Dependence.”</span> <em>Regional Science and Urban Economics</em> 26 (1): 77–104. <a href="https://doi.org/10.1016/0166-0462(95)02111-6">https://doi.org/10.1016/0166-0462(95)02111-6</a>.
+</div>
+<div id="ref-appelhans2020" class="csl-entry">
+Appelhans, Tim, Florian Detsch, Christoph Reudenbach, and Stefan Woellauer. 2020. <em><span class="nocase">mapview</span>: Interactive Viewing of Spatial Data in r</em>. <a href="https://CRAN.R-project.org/package=mapview">https://CRAN.R-project.org/package=mapview</a>.
+</div>
+<div id="ref-assunção2006" class="csl-entry">
+Assunção, R. M., M. C. Neves, G. Câmara, and C. Da Costa Freitas. 2006. <span>“Efficient Regionalization Techniques for Socio<span>-</span>Economic Geographical Units Using Minimum Spanning Trees.”</span> <em>International Journal of Geographical Information Science</em> 20 (7): 797–811. <a href="https://doi.org/10.1080/13658810600665111">https://doi.org/10.1080/13658810600665111</a>.
+</div>
+<div id="ref-bache_2020" class="csl-entry">
+Bache, Stefan Milton, and Hadley Wickham. 2020. <em><span class="nocase">magrittr</span>: A Forward-Pipe Operator for <span>R</span></em>. <a href="https://CRAN.R-project.org/package=magrittr">https://CRAN.R-project.org/package=magrittr</a>.
+</div>
+<div id="ref-bahrampour2021" class="csl-entry">
+Bahrampour, Tara, Kate Rabinowitz, and Ted Mellnik. 2021. <span>“Lower-Than-Expected State Population Totals Stoke Concerns about the 2020 Census.”</span> <em>The Washington Post</em>, April. <a href="https://www.washingtonpost.com/dc-md-va/2021/04/27/2020-census-undercount/">https://www.washingtonpost.com/dc-md-va/2021/04/27/2020-census-undercount/</a>.
+</div>
+<div id="ref-battersby2014" class="csl-entry">
+Battersby, Sarah E., Michael P. Finn, E. Lynn Usery, and Kristina H. Yamamoto. 2014. <span>“Implications of Web Mercator and Its Use in Online Mapping.”</span> <em>Cartographica: The International Journal for Geographic Information and Geovisualization</em> 49 (2): 85–101. <a href="https://doi.org/10.3138/carto.49.2.2313">https://doi.org/10.3138/carto.49.2.2313</a>.
+</div>
+<div id="ref-applied2013" class="csl-entry">
+Bivand, Roger S., Edzer Pebesma, and Virgilio Gomez-Rubio. 2013. <em>Applied Spatial Data Analysis with <span>R</span>, Second Edition</em>. Springer, NY. <a href="https://asdar-book.org/">https://asdar-book.org/</a>.
+</div>
+<div id="ref-bivand2018" class="csl-entry">
+Bivand, Roger S., and David W. S. Wong. 2018. <span>“Comparing Implementations of Global and Local Indicators of Spatial Association.”</span> <em>TEST</em> 27 (3): 716–48. <a href="https://doi.org/10.1007/s11749-018-0599-x">https://doi.org/10.1007/s11749-018-0599-x</a>.
+</div>
+<div id="ref-bivand_gwr" class="csl-entry">
+Bivand, Roger, and Danlin Yu. 2020. <em><span class="nocase">spgwr</span>: Geographically Weighted Regression</em>. <a href="https://CRAN.R-project.org/package=spgwr">https://CRAN.R-project.org/package=spgwr</a>.
+</div>
+<div id="ref-boehmke2019j" class="csl-entry">
+Boehmke, Brad, and Brandon Greenwell. 2019. <em>Hands-on Machine Learning with r</em>. Chapman; Hall/CRC. <a href="https://doi.org/10.1201/9780367816377">https://doi.org/10.1201/9780367816377</a>.
+</div>
+<div id="ref-brewer2003" class="csl-entry">
+Brewer, Cynthia A., Geoffrey W. Hatchard, and Mark A. Harrower. 2003. <span>“ColorBrewer in Print: A Catalog of Color Schemes for Maps.”</span> <em>Cartography and Geographic Information Science</em> 30 (1): 5–32. <a href="https://doi.org/10.1559/152304003100010929">https://doi.org/10.1559/152304003100010929</a>.
+</div>
+<div id="ref-brunsdon1996" class="csl-entry">
+Brunsdon, Chris, A. Stewart Fotheringham, and Martin E. Charlton. 1996. <span>“Geographically Weighted Regression: A Method for Exploring Spatial Nonstationarity.”</span> <em>Geographical Analysis</em> 28 (4): 281–98. <a href="https://doi.org/10.1111/j.1538-4632.1996.tb00936.x">https://doi.org/10.1111/j.1538-4632.1996.tb00936.x</a>.
+</div>
+<div id="ref-chang2021" class="csl-entry">
+Chang, Winston, Joe Cheng, JJ Allaire, Carson Sievert, Barret Schloerke, Yihui Xie, Jeff Allen, Jonathan McPherson, Alan Dipert, and Barbara Borges. 2021. <em><span class="nocase">shiny</span>: Web Application Framework for r</em>. <a href="https://CRAN.R-project.org/package=shiny">https://CRAN.R-project.org/package=shiny</a>.
+</div>
+<div id="ref-cheng2021" class="csl-entry">
+Cheng, Joe, Bhaskar Karambelkar, and Yihui Xie. 2021. <em><span class="nocase">leaflet</span>: Create Interactive Web Maps with the JavaScript ’Leaflet’ Library</em>. <a href="https://CRAN.R-project.org/package=leaflet">https://CRAN.R-project.org/package=leaflet</a>.
+</div>
+<div id="ref-clarke2017" class="csl-entry">
+Clarke, Erik, and Scott Sherrill-Mix. 2017. <em><span class="nocase">ggbeeswarm</span>: Categorical Scatter (Violin Point) Plots</em>. <a href="https://CRAN.R-project.org/package=ggbeeswarm">https://CRAN.R-project.org/package=ggbeeswarm</a>.
+</div>
+<div id="ref-cooley2020" class="csl-entry">
+Cooley, David. 2020. <em><span class="nocase">mapdeck</span>: Interactive Maps Using ’Mapbox GL JS’ and ’Deck.gl’</em>. <a href="https://CRAN.R-project.org/package=mapdeck">https://CRAN.R-project.org/package=mapdeck</a>.
+</div>
+<div id="ref-cetinkaya2021" class="csl-entry">
+Çetinkaya-Rundel, Mine, and Johanna Hardin. 2021. <em>Introduction to Modern Statistics</em>. First. OpenIntro. <a href="https://openintro-ims.netlify.app/">https://openintro-ims.netlify.app/</a>.
+</div>
+<div id="ref-dowle2021" class="csl-entry">
+Dowle, Matt, and Arun Srinivasan. 2021. <em><span class="nocase">data.table</span>: Extension of ‘Data.frame‘</em>. <a href="https://CRAN.R-project.org/package=data.table">https://CRAN.R-project.org/package=data.table</a>.
+</div>
+<div id="ref-dunnington2021" class="csl-entry">
+Dunnington, Dewey, Edzer Pebesma, and Ege Rubak. 2021. <em><span class="nocase">s2</span>: Spherical Geometry Operators Using the S2 Geometry Library</em>. <a href="https://CRAN.R-project.org/package=s2">https://CRAN.R-project.org/package=s2</a>.
+</div>
+<div id="ref-eberwein2021" class="csl-entry">
+Eberwein, Kris. 2021. <em><span class="nocase">blscrapeR</span>: An API Wrapper for the Bureau of Labor Statistics (BLS)</em>. <a href="https://github.com/keberwein/blscrapeR">https://github.com/keberwein/blscrapeR</a>.
+</div>
+<div id="ref-elbers2021" class="csl-entry">
+Elbers, Benjamin. 2021. <span>“A Method for Studying Differences in Segregation Across Time and Space.”</span> <em>Sociological Methods and Research</em>. <a href="https://journals.sagepub.com/doi/full/10.1177/0049124121986204">https://journals.sagepub.com/doi/full/10.1177/0049124121986204</a>.
+</div>
+<div id="ref-ellis_and_burk2020" class="csl-entry">
+Ellis, Greg Freedman, and Derek Burk. 2020. <em><span class="nocase">ipumsr</span>: Read ’IPUMS’ Extract Files</em>. <a href="https://CRAN.R-project.org/package=ipumsr">https://CRAN.R-project.org/package=ipumsr</a>.
+</div>
+<div id="ref-flores2021" class="csl-entry">
+Flores, Eduardo. 2019. <em><span class="nocase">inegiR</span>: Integrate INEGI’s (Mexican Stats Office) API with <span>R</span></em>. <a href="https://CRAN.R-project.org/package=inegiR">https://CRAN.R-project.org/package=inegiR</a>.
+</div>
+<div id="ref-fox2019" class="csl-entry">
+Fox, John, and Sanford Weisberg. 2019. <em>An <span>R</span> Companion to Applied Regression</em>. Third. Thousand Oaks <span>CA</span>: Sage. <a href="https://socialsciences.mcmaster.ca/jfox/Books/Companion/">https://socialsciences.mcmaster.ca/jfox/Books/Companion/</a>.
+</div>
+<div id="ref-ellis2021" class="csl-entry">
+Freedman Ellis, Greg, and Ben Schneider. 2021. <em><span class="nocase">srvyr</span>: ’Dplyr’-Like Syntax for Summary Statistics of Survey Data</em>. <a href="https://CRAN.R-project.org/package=srvyr">https://CRAN.R-project.org/package=srvyr</a>.
+</div>
+<div id="ref-frey_2019" class="csl-entry">
+Frey, William H. 2019. <span>“America Wins as Trump Abandons the Citizenship Question from the 2020 Census.”</span> <em>The Avenue</em>. The Brookings Institution. <a href="https://www.brookings.edu/blog/the-avenue/2019/07/12/america-wins-trump-abandons-the-citizenship-question-from-2020-census/">https://www.brookings.edu/blog/the-avenue/2019/07/12/america-wins-trump-abandons-the-citizenship-question-from-2020-census/</a>.
+</div>
+<div id="ref-garnier2021" class="csl-entry">
+Garnier, Simon, Noam Ross, BoB Rudis, Antoine Filipovic-Pierucci, Tal Galili, Timelyportfolio, Brandon Greenwell, Carson Sievert, David J. Harris, and JJ Chen. 2021. <em><span class="nocase">sjmgarnier/viridis</span>: Viridis 0.6.0 (Pre-CRAN Release)</em>. Zenodo. <a href="https://doi.org/10.5281/ZENODO.4679424">https://doi.org/10.5281/ZENODO.4679424</a>.
+</div>
+<div id="ref-getis2010" class="csl-entry">
+Getis, Arthur, and J. K. Ord. 1992. <span>“The Analysis of Spatial Association by Use of Distance Statistics.”</span> <em>Geographical Analysis</em> 24 (3): 189–206. <a href="https://doi.org/10.1111/j.1538-4632.1992.tb00261.x">https://doi.org/10.1111/j.1538-4632.1992.tb00261.x</a>.
+</div>
+<div id="ref-haberglenn2019" class="csl-entry">
+Glenn, Ezra Haber. 2019. <em><span class="nocase">acs</span>: Download, Manipulate, and Present American Community Survey and Decennial Data from the US Census</em>. <a href="https://CRAN.R-project.org/package=acs">https://CRAN.R-project.org/package=acs</a>.
+</div>
+<div id="ref-gohel2021" class="csl-entry">
+Gohel, David, and Panagiotis Skintzos. 2021. <em><span class="nocase">ggiraph</span>: Make ’Ggplot2’ Graphics Interactive</em>. <a href="https://CRAN.R-project.org/package=ggiraph">https://CRAN.R-project.org/package=ggiraph</a>.
+</div>
+<div id="ref-gollini2015" class="csl-entry">
+Gollini, Isabella, Binbin Lu, Martin Charlton, Christopher Brunsdon, and Paul Harris. 2015. <span>“GWmodel: AnRPackage for Exploring Spatial Heterogeneity Using Geographically Weighted Models.”</span> <em>Journal of Statistical Software</em> 63 (17). <a href="https://doi.org/10.18637/jss.v063.i17">https://doi.org/10.18637/jss.v063.i17</a>.
+</div>
+<div id="ref-goss1995" class="csl-entry">
+Goss, Jon. 1995. <span>“<span>"</span>We Know Who You Are and We Know Where You Live<span>"</span>: The Instrumental Rationality of Geodemographic Systems.”</span> <em>Economic Geography</em> 71 (2): 171. <a href="https://doi.org/10.2307/144357">https://doi.org/10.2307/144357</a>.
+</div>
+<div id="ref-green2021" class="csl-entry">
+Green, Jamaal, Liming Wang, and Dillon Mahmoudi. 2021. <em><span class="nocase">lehdr</span>: Grab Longitudinal Employer-Household Dynamics (LEHD) Flat Files</em>. <a href="https://github.com/jamgreen/lehdr/">https://github.com/jamgreen/lehdr/</a>.
+</div>
+<div id="ref-hafen2020" class="csl-entry">
+Hafen, Ryan. 2020. <em><span class="nocase">geofacet</span>: ’Ggplot2’ Faceting Utilities for Geographical Data</em>. <a href="https://CRAN.R-project.org/package=geofacet">https://CRAN.R-project.org/package=geofacet</a>.
+</div>
+<div id="ref-hauer2021" class="csl-entry">
+Hauer, Mathew E., and Alexis R. Santos-Lozada. 2021. <span>“Differential Privacy in the 2020 Census Will Distort COVID-19 Rates.”</span> <em>Socius: Sociological Research for a Dynamic World</em> 7 (January): 237802312199401. <a href="https://doi.org/10.1177/2378023121994014">https://doi.org/10.1177/2378023121994014</a>.
+</div>
+<div id="ref-implemen2020" class="csl-entry">
+Hawes, Michael B. 2020. <span>“Implementing Differential Privacy: Seven Lessons From the 2020 United States Census.”</span> <em>Harvard Data Science Review</em>, April. <a href="https://doi.org/10.1162/99608f92.353c6f99">https://doi.org/10.1162/99608f92.353c6f99</a>.
+</div>
+<div id="ref-henry2020_purrr" class="csl-entry">
+Henry, Lionel, and Hadley Wickham. 2020. <em><span class="nocase">purrr</span>: Functional Programming Tools</em>. <a href="https://CRAN.R-project.org/package=purrr">https://CRAN.R-project.org/package=purrr</a>.
+</div>
+<div id="ref-hester2021_remotes" class="csl-entry">
+Hester, Jim, Gábor Csárdi, Hadley Wickham, Winston Chang, Martin Morgan, and Dan Tenenbaum. 2021. <em><span class="nocase">remotes</span>: R Package Installation from Remote Repositories, Including ’GitHub’</em>. <a href="https://CRAN.R-project.org/package=remotes">https://CRAN.R-project.org/package=remotes</a>.
+</div>
+<div id="ref-james2013c" class="csl-entry">
+James, Gareth, Daniela Witten, Trevor Hastie, and Robert Tibshirani. 2013. <em>An Introduction to Statistical Learning</em>. Springer New York. <a href="https://doi.org/10.1007/978-1-4614-7138-7">https://doi.org/10.1007/978-1-4614-7138-7</a>.
+</div>
+<div id="ref-jenks1967" class="csl-entry">
+Jenks, George. 1967. <span>“The Data Model Concept in Statistical Mapping.”</span> <em>International Yearbook of Cartography</em> 7: 186–90.
+</div>
+<div id="ref-kariuki2020" class="csl-entry">
+Kariuki, Shelmith. 2020. <em><span class="nocase">rKenyaCensus</span>: 2019 Kenya Population and Housing Census Results</em>.
+</div>
+<div id="ref-kenny2021" class="csl-entry">
+Kenny, Christopher T., Cory McCartan, Ben Fifield, and Kosuke Imai. 2021. <span>“<span class="nocase">redist</span>: Simulation Methods for Legislative Redistricting.”</span> Available at The Comprehensive R Archive Network (CRAN). <a href="https://CRAN.R-project.org/package=redist">https://CRAN.R-project.org/package=redist</a>.
+</div>
+<div id="ref-kuhn2020" class="csl-entry">
+Kuhn, Max, Simon Jackson, and Jorge Cimentada. 2020. <em><span class="nocase">corrr</span>: Correlations in <span>R</span></em>. <a href="https://CRAN.R-project.org/package=corrr">https://CRAN.R-project.org/package=corrr</a>.
+</div>
+<div id="ref-kuhn2021" class="csl-entry">
+Kuhn, Max, and Julia Silge. 2021. <span>“Tidy Modeling with <span>R</span>.”</span> <a href="https://www.tmwr.org/">https://www.tmwr.org/</a>.
+</div>
+<div id="ref-lamstein2020" class="csl-entry">
+Lamstein, Ari. 2020. <em><span class="nocase">choroplethr</span>: Simplify the Creation of Choropleth Maps in <span>R</span></em>. <a href="https://CRAN.R-project.org/package=choroplethr">https://CRAN.R-project.org/package=choroplethr</a>.
+</div>
+<div id="ref-lamstein2018" class="csl-entry">
+Lamstein, Ari, and Logan Powell. 2018. <span>“A Guide to Working with US Census Data in <span>R</span>.”</span> The R Consortium. <a href="https://rconsortium.github.io/censusguide/">https://rconsortium.github.io/censusguide/</a>.
+</div>
+<div id="ref-leclerc2021" class="csl-entry">
+Leclerc, Hadrien. 2021. <em><span class="nocase">insee</span>: Tools to Easily Download Data from INSEE BDM Database</em>. <a href="https://CRAN.R-project.org/package=insee">https://CRAN.R-project.org/package=insee</a>.
+</div>
+<div id="ref-li2021" class="csl-entry">
+Li, Guanglai. 2021. <em><span class="nocase">totalcensus</span>: Extract Decennial Census and American Community Survey Data</em>. <a href="https://CRAN.R-project.org/package=totalcensus">https://CRAN.R-project.org/package=totalcensus</a>.
+</div>
+<div id="ref-lindblad2021" class="csl-entry">
+Lindblad, Brad. 2021. <em><span class="nocase">tidyUSDA</span>: A Minimal Tool Set for Gathering USDA Quick Stat Data for Analysis and Visualization</em>. <a href="https://bradlindblad.github.io/tidyUSDA/">https://bradlindblad.github.io/tidyUSDA/</a>.
+</div>
+<div id="ref-lovelace_geocomputation_2019" class="csl-entry">
+Lovelace, Robin, Jakub Nowosad, and Jannes Muenchow. 2019. <em>Geocomputation with <span>R</span></em>. <span>CRC Press</span>.
+</div>
+<div id="ref-lu2014" class="csl-entry">
+Lu, Binbin, Paul Harris, Martin Charlton, and Chris Brunsdon. 2014. <span>“The GWmodel R Package: Further Topics for Exploring Spatial Heterogeneity Using Geographically Weighted Models.”</span> <em>Geo-Spatial Information Science</em> 17 (2): 85–101. <a href="https://doi.org/10.1080/10095020.2014.917453">https://doi.org/10.1080/10095020.2014.917453</a>.
+</div>
+<div id="ref-lucchesi2017" class="csl-entry">
+Lucchesi, Lydia R., and Christopher K. Wikle. 2017. <span>“Visualizing Uncertainty in Areal Data with Bivariate Choropleth Maps, Map Pixelation and Glyph Rotation.”</span> <em>Stat</em> 6 (1): 292–302. <a href="https://doi.org/10.1002/sta4.150">https://doi.org/10.1002/sta4.150</a>.
+</div>
+<div id="ref-lumley2010" class="csl-entry">
+Lumley, Thomas. 2010. <em>Complex Surveys: A Guide to Analysis Using r</em>. John Wiley; Sons.
+</div>
+<div id="ref-manson2021" class="csl-entry">
+Manson, Steven, Jonathan Schroeder, David Van Riper, Tracy Kugler, and Steven Ruggles. 2021. <span>“National Historical Geographic Information System: Version 16.0.”</span> Minneapolis, MN: IPUMS. <a href="https://doi.org/10.18128/D050.V16.0">https://doi.org/10.18128/D050.V16.0</a>.
+</div>
+<div id="ref-matloff2017a" class="csl-entry">
+Matloff, Norman. 2017. <em>Statistical Regression and Classification</em>. Chapman; Hall/CRC. <a href="https://doi.org/10.1201/9781315119588">https://doi.org/10.1201/9781315119588</a>.
+</div>
+<div id="ref-mccartan2021" class="csl-entry">
+McCartan, Cory, and Christopher T. Kenny. 2021. <em>Pl94171: Tabulate p.l. 94-171 Redistricting Data Summary Files</em>. <a href="https://CRAN.R-project.org/package=PL94171">https://CRAN.R-project.org/package=PL94171</a>.
+</div>
+<div id="ref-mora2011" class="csl-entry">
+Mora, Ricardo, and Javier Ruiz-Castillo. 2011. <span>“Entropy-Based Segregation Indices.”</span> <em>Sociological Methodology</em> 41 (1): 159–94. <a href="https://doi.org/10.1111/j.1467-9531.2011.01237.x">https://doi.org/10.1111/j.1467-9531.2011.01237.x</a>.
+</div>
+<div id="ref-muller2021_tibble" class="csl-entry">
+Müller, Kirill, and Hadley Wickham. 2021. <em><span class="nocase">tibble</span>: Simple Data Frames</em>. <a href="https://CRAN.R-project.org/package=tibble">https://CRAN.R-project.org/package=tibble</a>.
+</div>
+<div id="ref-odell2018" class="csl-entry">
+Odell, Evan. 2018. <span>“<span class="nocase">nomisr</span>: Access Nomis UK Labour Market Data with r.”</span> <em>The Journal of Open Source Software</em> 3 (27): 859. <a href="https://doi.org/10.21105/joss.00859">https://doi.org/10.21105/joss.00859</a>.
+</div>
+<div id="ref-ooms2014" class="csl-entry">
+Ooms, Jeroen. 2014. <span>“The Jsonlite Package: A Practical and Consistent Mapping Between JSON Data and r Objects.”</span> <em>arXiv:1403.2805 [Stat.CO]</em>. <a href="https://arxiv.org/abs/1403.2805">https://arxiv.org/abs/1403.2805</a>.
+</div>
+<div id="ref-pattani2021" class="csl-entry">
+Pattani, Aneri, Hannah Recht, and Jamie Grey. 2021. <span>“In Appalachia and the Mississippi Delta, Millions Face Long Drives to Stroke Care.”</span> <em>KHN</em>, May. <a href="https://khn.org/news/article/appalachia-mississippi-delta-stroke-treatment-advanced-care-rural-access/">https://khn.org/news/article/appalachia-mississippi-delta-stroke-treatment-advanced-care-rural-access/</a>.
+</div>
+<div id="ref-pebesma2018" class="csl-entry">
+Pebesma, Edzer. 2018. <span>“Simple Features for <span>R</span>: Standardized Support for Spatial Vector Data.”</span> <em>The R Journal</em> 10 (1): 439. <a href="https://doi.org/10.32614/rj-2018-009">https://doi.org/10.32614/rj-2018-009</a>.
+</div>
+<div id="ref-pedersen2020" class="csl-entry">
+Pedersen, Thomas Lin. 2020. <em><span class="nocase">patchwork</span>: The Composer of Plots</em>. <a href="https://CRAN.R-project.org/package=patchwork">https://CRAN.R-project.org/package=patchwork</a>.
+</div>
+<div id="ref-pederson2021_fonts" class="csl-entry">
+Pedersen, Thomas Lin, Jeroen Ooms, and Devon Govett. 2021. <em><span class="nocase">systemfonts</span>: System Native Font Finding</em>. <a href="https://CRAN.R-project.org/package=systemfonts">https://CRAN.R-project.org/package=systemfonts</a>.
+</div>
+<div id="ref-pedersen_gganimate" class="csl-entry">
+Pedersen, Thomas Lin, and David Robinson. 2020. <em><span class="nocase">gganimate</span>: A Grammar of Animated Graphics</em>. <a href="https://CRAN.R-project.org/package=gganimate">https://CRAN.R-project.org/package=gganimate</a>.
+</div>
+<div id="ref-pereira2021" class="csl-entry">
+Pereira, Rafael H. M., and Caio Nogueira Goncalves. 2021. <em><span class="nocase">geobr</span>: Download Official Spatial Data Sets of Brazil</em>. <a href="https://CRAN.R-project.org/package=geobr">https://CRAN.R-project.org/package=geobr</a>.
+</div>
+<div id="ref-rcore2021" class="csl-entry">
+R Core Team. 2021. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/">https://www.R-project.org/</a>.
+</div>
+<div id="ref-dbi2021" class="csl-entry">
+R Special Interest Group on Databases (R-SIG-DB), Hadley Wickham, and Kirill Müller. 2021. <em>DBI: R Database Interface</em>. <a href="https://CRAN.R-project.org/package=DBI">https://CRAN.R-project.org/package=DBI</a>.
+</div>
+<div id="ref-ratnakumar2021" class="csl-entry">
+Ratnakumar, Sridhar, Trent Mick, and Trevor Davis. 2021. <em><span class="nocase">rappdirs</span>: Application Directories: Determine Where to Save Data, Caches, and Logs</em>. <a href="https://CRAN.R-project.org/package=rappdirs">https://CRAN.R-project.org/package=rappdirs</a>.
+</div>
+<div id="ref-recht2021" class="csl-entry">
+Recht, Hannah. 2021. <em><span class="nocase">censusapi</span>: Retrieve Data from the Census APIs</em>. <a href="https://github.com/hrecht/censusapi">https://github.com/hrecht/censusapi</a>.
+</div>
+<div id="ref-rey2020" class="csl-entry">
+Rey, Sergio J., Dani Arribas-Bel, and Levi J. Wolf. 2020. <em>Geographic Data Science with Python</em>. <a href="https://geographicdata.science/book/intro.html">https://geographicdata.science/book/intro.html</a>.
+</div>
+<div id="ref-rstudio2021" class="csl-entry">
+RStudio Team. 2021. <em>RStudio: Integrated Development Environment for <span>R</span></em>. Boston, MA: RStudio, PBC. <a href="http://www.rstudio.com/">http://www.rstudio.com/</a>.
+</div>
+<div id="ref-ruggles2019" class="csl-entry">
+Ruggles, Steven, Catherine Fitch, Diana Magnuson, and Jonathan Schroeder. 2019. <span>“Differential Privacy and Census Data: Implications for Social and Economic Research.”</span> <em>AEA Papers and Proceedings</em> 109 (May): 403–8. <a href="https://doi.org/10.1257/pandp.20191107">https://doi.org/10.1257/pandp.20191107</a>.
+</div>
+<div id="ref-ruggles2020" class="csl-entry">
+Ruggles, Steven, Sarah Flood, Ronald Goeken, Josiah Grover, Erin Meyer, Jose Pacas, and Matthew Sobek. 2020. <span>“IPUMS USA: Version 10.0.”</span> Minneapolis, MN: IPUMS. <a href="https://doi.org/10.18128/D010.V10.0">https://doi.org/10.18128/D010.V10.0</a>.
+</div>
+<div id="ref-ruggles2021a" class="csl-entry">
+Ruggles, Steven, and David Van Riper. 2021. <span>“The Role of Chance in the Census Bureau Database Reconstruction Experiment.”</span> <em>Population Research and Policy Review</em>, August. <a href="https://doi.org/10.1007/s11113-021-09674-3">https://doi.org/10.1007/s11113-021-09674-3</a>.
+</div>
+<div id="ref-santos-lozada2020" class="csl-entry">
+Santos-Lozada, Alexis R., Jeffrey T. Howard, and Ashton M. Verdery. 2020. <span>“How Differential Privacy Will Affect Our Understanding of Health Disparities in the United States.”</span> <em>Proceedings of the National Academy of Sciences</em> 117 (24): 13405–12. <a href="https://doi.org/10.1073/pnas.2003714117">https://doi.org/10.1073/pnas.2003714117</a>.
+</div>
+<div id="ref-schroeder2013" class="csl-entry">
+Schroeder, Jonathan P., and David C. Van Riper. 2013. <span>“Because Muncie’s Densities Are Not Manhattan’s: Using Geographical Weighting in the Expectation-Maximization Algorithm for Areal Interpolation.”</span> <em>Geographical Analysis</em> 45 (3): 216–37. <a href="https://doi.org/10.1111/gean.12014">https://doi.org/10.1111/gean.12014</a>.
+</div>
+<div id="ref-shannon2020" class="csl-entry">
+Shannon, Jerry. 2020. <span>“Dollar Stores, Retailer Redlining, and the Metropolitan Geographies of Precarious Consumption.”</span> <em>Annals of the American Association of Geographers</em> 111 (4): 1200–1218. <a href="https://doi.org/10.1080/24694452.2020.1775544">https://doi.org/10.1080/24694452.2020.1775544</a>.
+</div>
+<div id="ref-sievert2020" class="csl-entry">
+Sievert, Carson. 2020. <em>Interactive Web-Based Data Visualization with r, Plotly, and Shiny</em>. Chapman; Hall/CRC. <a href="https://doi.org/10.1201/9780429447273">https://doi.org/10.1201/9780429447273</a>.
+</div>
+<div id="ref-silge2020" class="csl-entry">
+Silge, Julia. 2021. <span>“PCA and UMAP with Tidymodels and TidyTuesday Cocktail Recipes.”</span> <a href="https://juliasilge.com/blog/cocktail-recipes-umap/">https://juliasilge.com/blog/cocktail-recipes-umap/</a>.
+</div>
+<div id="ref-singleton2013" class="csl-entry">
+Singleton, Alexander D., and Seth E. Spielman. 2013. <span>“The Past, Present, and Future of Geodemographic Research in the United States and United Kingdom.”</span> <em>The Professional Geographer</em> 66 (4): 558–67. <a href="https://doi.org/10.1080/00330124.2013.848764">https://doi.org/10.1080/00330124.2013.848764</a>.
+</div>
+<div id="ref-spielman2015" class="csl-entry">
+Spielman, Seth E., and Alex Singleton. 2015. <span>“Studying Neighborhoods Using Uncertain Data from the American Community Survey: A Contextual Approach.”</span> <em>Annals of the Association of American Geographers</em> 105 (5): 1003–25. <a href="https://doi.org/10.1080/00045608.2015.1052335">https://doi.org/10.1080/00045608.2015.1052335</a>.
+</div>
+<div id="ref-steif2021" class="csl-entry">
+Steif, Ken. 2021. <em>Public Policy Analytics</em>. CRC Press. <a href="https://doi.org/10.1201/9781003054658">https://doi.org/10.1201/9781003054658</a>.
+</div>
+<div id="ref-tennekes2018" class="csl-entry">
+Tennekes, Martijn. 2018. <span>“<span>Tmap</span>: Thematic Maps in R.”</span> <em>Journal of Statistical Software</em> 84 (6). <a href="https://doi.org/10.18637/jss.v084.i06">https://doi.org/10.18637/jss.v084.i06</a>.
+</div>
+<div id="ref-tobler1970" class="csl-entry">
+Tobler, W. R. 1970. <span>“A Computer Movie Simulating Urban Growth in the Detroit Region.”</span> <em>Economic Geography</em> 46 (June): 234. <a href="https://doi.org/10.2307/143141">https://doi.org/10.2307/143141</a>.
+</div>
+<div id="ref-vaidyanathan2020" class="csl-entry">
+Vaidyanathan, Ramnath, Yihui Xie, JJ Allaire, Joe Cheng, Carson Sievert, and Kenton Russell. 2020. <em><span class="nocase">htmlwidgets</span>: HTML Widgets for r</em>. <a href="https://CRAN.R-project.org/package=htmlwidgets">https://CRAN.R-project.org/package=htmlwidgets</a>.
+</div>
+<div id="ref-vallejones2021" class="csl-entry">
+Valle-Jones, Diego. 2021. <em><span class="nocase">mxmaps</span>: Create Maps of Mexico</em>.
+</div>
+<div id="ref-vicino2011" class="csl-entry">
+Vicino, Thomas J., Bernadette Hanlon, and John Rennie Short. 2011. <span>“A Typology of Urban Immigrant Neighborhoods.”</span> <em>Urban Geography</em> 32 (3): 383–405. <a href="https://doi.org/10.2747/0272-3638.32.3.383">https://doi.org/10.2747/0272-3638.32.3.383</a>.
+</div>
+<div id="ref-vonbergmann2021" class="csl-entry">
+von Bergmann, Jens, Dmitry Shkolnik, and Aaron Jacobs. 2021. <em><span class="nocase">cancensus</span>: R Package to Access, Retrieve, and Work with Canadian Census Data and Geography</em>. <a href="https://mountainmath.github.io/cancensus/">https://mountainmath.github.io/cancensus/</a>.
+</div>
+<div id="ref-walker2016" class="csl-entry">
+Walker, Kyle. 2016a. <span>“<span>Tigris</span>: An <span>R</span> Package to Access and Work with Geographic Data from the US Census Bureau.”</span> <em>The R Journal</em> 8 (2): 231. <a href="https://doi.org/10.32614/rj-2016-043">https://doi.org/10.32614/rj-2016-043</a>.
+</div>
+<div id="ref-walker2016b" class="csl-entry">
+———. 2016b. <span>“Locating Neighbourhood Diversity in the American Metropolis.”</span> <em>Urban Studies</em> 55 (1): 116–32. <a href="https://doi.org/10.1177/0042098016643481">https://doi.org/10.1177/0042098016643481</a>.
+</div>
+<div id="ref-walker_crsuggest_2021" class="csl-entry">
+———. 2021a. <em><span class="nocase">crsuggest</span>: Obtain Suggested Coordinate Reference System Information for Spatial Data</em>. <a href="https://CRAN.R-project.org/package=crsuggest">https://CRAN.R-project.org/package=crsuggest</a>.
+</div>
+<div id="ref-walker_idbr2021" class="csl-entry">
+———. 2021b. <em><span class="nocase">idbr</span>: R Interface to the US Census Bureau International Data Base API</em>. <a href="https://CRAN.R-project.org/package=idbr">https://CRAN.R-project.org/package=idbr</a>.
+</div>
+<div id="ref-walker_mapbox" class="csl-entry">
+———. 2021c. <em><span class="nocase">mapboxapi</span>: R Interface to ’Mapbox’ Web Services</em>.
+</div>
+<div id="ref-walker2018a" class="csl-entry">
+Walker, Kyle E. 2018. <span>“Scaling the Interactive Dot Map.”</span> <em>Cartographica: The International Journal for Geographic Information and Geovisualization</em> 53 (3): 171–84. <a href="https://doi.org/10.3138/cart.53.3.2017-0021">https://doi.org/10.3138/cart.53.3.2017-0021</a>.
+</div>
+<div id="ref-walker_and_herman2021" class="csl-entry">
+Walker, Kyle, and Matt Herman. 2021. <em><span class="nocase">tidycensus</span>: Load US Census Boundary and Attribute Data as ’Tidyverse’ and ’Sf’ -Ready Data Frames</em>. <a href="https://github.com/walkerke/tidycensus">https://github.com/walkerke/tidycensus</a>.
+</div>
+<div id="ref-wickham2011" class="csl-entry">
+Wickham, Hadley. 2011. <span>“The Split-Apply-Combine Strategy for Data Analysis.”</span> <em>Journal of Statistical Software</em> 40 (1). <a href="https://doi.org/10.18637/jss.v040.i01">https://doi.org/10.18637/jss.v040.i01</a>.
+</div>
+<div id="ref-wickham2014" class="csl-entry">
+———. 2014. <span>“Tidy Data.”</span> <em>Journal of Statistical Software</em> 59 (10). <a href="https://doi.org/10.18637/jss.v059.i10">https://doi.org/10.18637/jss.v059.i10</a>.
+</div>
+<div id="ref-wickham2016" class="csl-entry">
+———. 2016. <em>Ggplot2: Elegant Graphics for Data Analysis</em>. Springer-Verlag New York. <a href="https://ggplot2.tidyverse.org">https://ggplot2.tidyverse.org</a>.
+</div>
+<div id="ref-wickham2019_stringr" class="csl-entry">
+———. 2019a. <em><span class="nocase">stringr</span>: Simple, Consistent Wrappers for Common String Operations</em>. <a href="https://CRAN.R-project.org/package=stringr">https://CRAN.R-project.org/package=stringr</a>.
+</div>
+<div id="ref-wickham2019a" class="csl-entry">
+———. 2019b. <em>Advanced r</em>. Chapman; Hall/CRC. <a href="https://doi.org/10.1201/9781351201315">https://doi.org/10.1201/9781351201315</a>.
+</div>
+<div id="ref-wickham_httr" class="csl-entry">
+———. 2020. <em><span class="nocase">httr</span>: Tools for Working with URLs and HTTP</em>. <a href="https://CRAN.R-project.org/package=httr">https://CRAN.R-project.org/package=httr</a>.
+</div>
+<div id="ref-wickham2021_forcats" class="csl-entry">
+———. 2021a. <em><span class="nocase">forcats</span>: Tools for Working with Categorical Variables (Factors)</em>. <a href="https://CRAN.R-project.org/package=forcats">https://CRAN.R-project.org/package=forcats</a>.
+</div>
+<div id="ref-wickham2021_tidyr" class="csl-entry">
+———. 2021b. <em><span class="nocase">tidyr</span>: Tidy Messy Data</em>. <a href="https://CRAN.R-project.org/package=tidyr">https://CRAN.R-project.org/package=tidyr</a>.
+</div>
+<div id="ref-wickham2019" class="csl-entry">
+Wickham, Hadley, Mara Averick, Jennifer Bryan, Winston Chang, Lucy McGowan, Romain François, Garrett Grolemund, et al. 2019. <span>“Welcome to the Tidyverse.”</span> <em>Journal of Open Source Software</em> 4 (43): 1686. <a href="https://doi.org/10.21105/joss.01686">https://doi.org/10.21105/joss.01686</a>.
+</div>
+<div id="ref-wickham_and_bryan2021" class="csl-entry">
+Wickham, Hadley, and Jennifer Bryan. 2021. <em><span class="nocase">usethis</span>: Automate Package and Project Setup</em>. <a href="https://CRAN.R-project.org/package=usethis">https://CRAN.R-project.org/package=usethis</a>.
+</div>
+<div id="ref-wickham2021_dplyr" class="csl-entry">
+Wickham, Hadley, Romain François, Lionel Henry, and Kirill Müller. 2021. <em><span class="nocase">dplyr</span>: A Grammar of Data Manipulation</em>. <a href="https://CRAN.R-project.org/package=dplyr">https://CRAN.R-project.org/package=dplyr</a>.
+</div>
+<div id="ref-wickham2021_dbplyr" class="csl-entry">
+Wickham, Hadley, Maximilian Girlich, and Edgar Ruiz. 2021. <em><span class="nocase">dbplyr</span>: A ’Dplyr’ Back End for Databases</em>. <a href="https://CRAN.R-project.org/package=dbplyr">https://CRAN.R-project.org/package=dbplyr</a>.
+</div>
+<div id="ref-r4ds" class="csl-entry">
+Wickham, Hadley, and Garrett Grolemund. 2017. <em>R for Data Science</em>. Sebastopol <span>CA</span>: O’Reilly. <a href="https://r4ds.had.co.nz/">https://r4ds.had.co.nz/</a>.
+</div>
+<div id="ref-wickham2021_readr" class="csl-entry">
+Wickham, Hadley, and Jim Hester. 2021. <em><span class="nocase">readr</span>: Read Rectangular Text Data</em>. <a href="https://CRAN.R-project.org/package=readr">https://CRAN.R-project.org/package=readr</a>.
+</div>
+<div id="ref-wickham2021_rpostgres" class="csl-entry">
+Wickham, Hadley, Jeroen Ooms, and Kirill Müller. 2021. <em>RPostgres: ’Rcpp’ Interface to ’PostgreSQL’</em>. <a href="https://CRAN.R-project.org/package=RPostgres">https://CRAN.R-project.org/package=RPostgres</a>.
+</div>
+<div id="ref-wilke2021" class="csl-entry">
+Wilke, Claus O. 2021. <em><span class="nocase">ggridges</span>: Ridgeline Plots in ’Ggplot2’</em>. <a href="https://CRAN.R-project.org/package=ggridges">https://CRAN.R-project.org/package=ggridges</a>.
+</div>
+<div id="ref-wong2013" class="csl-entry">
+Wong, David W., and Min Sun. 2013. <span>“Handling Data Quality Information of Survey Data in GIS: A Case of Using the American Community Survey Data.”</span> <em>Spatial Demography</em> 1 (1): 3–16. <a href="https://doi.org/10.1007/bf03354884">https://doi.org/10.1007/bf03354884</a>.
+</div>
+<div id="ref-xie2016" class="csl-entry">
+Xie, Yihui. 2016. <em><span class="nocase">bookdown</span>: Authoring Books and Technical Documents with <span>R</span> Markdown</em>. Boca Raton, Florida: Chapman; Hall/CRC. <a href="https://bookdown.org/yihui/bookdown">https://bookdown.org/yihui/bookdown</a>.
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="conclusion.html">Conclusion</a></div>
+<div class="empty"></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#references">References</a></li></ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Analyzing US Census Data</strong>: Methods, Maps, and Models in R" was written by Kyle E. Walker. It was last built on 2021-08-27.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

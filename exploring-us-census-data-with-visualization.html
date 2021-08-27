@@ -1,0 +1,2423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 4 Exploring US Census data with visualization | Analyzing US Census Data</title>
+<meta name="author" content="Kyle E. Walker">
+<meta name="description" content="The core visualization package within the tidyverse suite of packages is ggplot2 (Wickham 2016). Originally developed by RStudio chief scientist Hadley Wickham, ggplot2 is a widely-used...">
+<meta name="generator" content="bookdown 0.22.17 with bs4_book()">
+<meta property="og:title" content="Chapter 4 Exploring US Census data with visualization | Analyzing US Census Data">
+<meta property="og:type" content="book">
+<meta property="og:description" content="The core visualization package within the tidyverse suite of packages is ggplot2 (Wickham 2016). Originally developed by RStudio chief scientist Hadley Wickham, ggplot2 is a widely-used...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 4 Exploring US Census data with visualization | Analyzing US Census Data">
+<meta name="twitter:description" content="The core visualization package within the tidyverse suite of packages is ggplot2 (Wickham 2016). Originally developed by RStudio chief scientist Hadley Wickham, ggplot2 is a widely-used...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.10.5/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.5.1/tabs.js"></script><script src="libs/bs3compat-0.2.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script><script src="libs/plotly-binding-4.9.3/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet">
+<script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="libs/plotly-main-1.57.1/plotly-latest.min.js"></script><script src="libs/d3-bundle-5.16.0/d3-bundle.min.js"></script><script src="libs/d3-lasso-0.0.5/d3-lasso.min.js"></script><script src="libs/save-svg-as-png-1.4.17/save-svg-as-png.min.js"></script><link href="libs/ggiraphjs-0.4.1/ggiraphjs.min.css" rel="stylesheet">
+<script src="libs/ggiraphjs-0.4.1/ggiraphjs.min.js"></script><script src="libs/girafe-binding-0.7.10/girafe.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-6KFYZ3W36Z"></script><script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-6KFYZ3W36Z');
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS -->
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="Methods, Maps, and Models in R">Analyzing US Census Data</a>:
+        <small class="text-muted">Methods, Maps, and Models in R</small>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Preface</a></li>
+<li><a class="" href="the-united-states-census-and-the-r-programming-language.html"><span class="header-section-number">1</span> The United States Census and the R programming language</a></li>
+<li><a class="" href="an-introduction-to-tidycensus.html"><span class="header-section-number">2</span> An introduction to tidycensus</a></li>
+<li><a class="" href="wrangling-census-data-with-tidyverse-tools.html"><span class="header-section-number">3</span> Wrangling Census data with tidyverse tools</a></li>
+<li><a class="active" href="exploring-us-census-data-with-visualization.html"><span class="header-section-number">4</span> Exploring US Census data with visualization</a></li>
+<li><a class="" href="census-geographic-data-and-applications-in-r.html"><span class="header-section-number">5</span> Census geographic data and applications in R</a></li>
+<li><a class="" href="mapping-census-data-with-r.html"><span class="header-section-number">6</span> Mapping Census data with R</a></li>
+<li><a class="" href="spatial-analysis-with-us-census-data.html"><span class="header-section-number">7</span> Spatial analysis with US Census data</a></li>
+<li><a class="" href="modeling-us-census-data.html"><span class="header-section-number">8</span> Modeling US Census data</a></li>
+<li><a class="" href="introduction-to-census-microdata.html"><span class="header-section-number">9</span> Introduction to Census microdata</a></li>
+<li><a class="" href="analyzing-census-microdata.html"><span class="header-section-number">10</span> Analyzing Census microdata</a></li>
+<li><a class="" href="other-census-and-government-data-resources.html"><span class="header-section-number">11</span> Other Census and government data resources</a></li>
+<li><a class="" href="working-with-census-data-outside-the-united-states.html"><span class="header-section-number">12</span> Working with Census data outside the United States</a></li>
+<li><a class="" href="conclusion.html">Conclusion</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="exploring-us-census-data-with-visualization" class="section level1" number="4">
+<h1>
+<span class="header-section-number">4</span> Exploring US Census data with visualization<a class="anchor" aria-label="anchor" href="#exploring-us-census-data-with-visualization"><i class="fas fa-link"></i></a>
+</h1>
+<p>The core visualization package within the <strong>tidyverse</strong> suite of packages is <strong>ggplot2</strong> <span class="citation">(<a href="references.html#ref-wickham2016" role="doc-biblioref">Wickham 2016</a>)</span>. Originally developed by RStudio chief scientist Hadley Wickham, <strong>ggplot2</strong> is a widely-used visualization framework by R developers, accounting for 70,000 downloads per day in June 2021 from the RStudio CRAN mirror. <strong>ggplot2</strong> allows R users to visualize data using a <em>layered grammar of graphics</em> approach, in which plot objects are initialized upon which the R user layers plot elements.</p>
+<p><strong>ggplot2</strong> is an ideal package for visualization of US Census data, especially when obtained in tidy format by the <strong>tidycensus</strong> package. It has powerful capacity for basic charts, group-wise comparisons, and advanced chart types such as maps.</p>
+<p>This chapter includes several examples of how R users can visualize data from the US Census Bureau using <strong>ggplot2</strong>. Chart types explored in this chapter include basic chart types; faceted, or “small multiples” plots; population pyramids; margin of error plots for ACS data; and advanced visualizations using extensions to <strong>ggplot2</strong>. Finally, the chapter introduces the <strong>plotly</strong> package for interactive visualization, which can be used to convert <strong>ggplot2</strong> objects to interactive web graphics.</p>
+<div id="basic-census-visualization-with-ggplot2" class="section level2" number="4.1">
+<h2>
+<span class="header-section-number">4.1</span> Basic Census visualization with ggplot2<a class="anchor" aria-label="anchor" href="#basic-census-visualization-with-ggplot2"><i class="fas fa-link"></i></a>
+</h2>
+<p>In this example, we will create a visualization that illustrates the percent of commuters that take public transportation to work for the largest metropolitan areas in the United States. The data come from the 2019 1-year American Community Survey Data Profile, variable <code>DP03_0021P</code>. To determine this information, we can use <strong>tidyverse</strong> tools to sort our data by descending order of a summary variable representing total population and then retaining the 20 largest metropolitan areas by population using the <code>slice_max()</code> function.</p>
+<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://walker-data.com/tidycensus">tidycensus</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
+
+<span class="va">metros</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs</a></span><span class="op">(</span>
+  geography <span class="op">=</span> <span class="st">"cbsa"</span>,
+  variables <span class="op">=</span> <span class="st">"DP03_0021P"</span>,
+  summary_var <span class="op">=</span> <span class="st">"B01003_001"</span>,
+  survey <span class="op">=</span> <span class="st">"acs1"</span>,
+  year <span class="op">=</span> <span class="fl">2019</span>
+<span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">slice_max</span><span class="op">(</span><span class="va">summary_est</span>, n <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></code></pre></div>
+<div class="inline-table"><table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:get-metro-data-show">Table 4.1: </span>Large metro areas by public transit commuting share
+</caption>
+<thead><tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+GEOID
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+NAME
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+variable
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+estimate
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+moe
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+summary_est
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+summary_moe
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+35620
+</td>
+<td style="text-align:left;">
+New York-Newark-Jersey City, NY-NJ-PA Metro Area
+</td>
+<td style="text-align:left;">
+DP03_0021P
+</td>
+<td style="text-align:right;">
+31.6
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:right;">
+19216182
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+31080
+</td>
+<td style="text-align:left;">
+Los Angeles-Long Beach-Anaheim, CA Metro Area
+</td>
+<td style="text-align:left;">
+DP03_0021P
+</td>
+<td style="text-align:right;">
+4.8
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+13214799
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+16980
+</td>
+<td style="text-align:left;">
+Chicago-Naperville-Elgin, IL-IN-WI Metro Area
+</td>
+<td style="text-align:left;">
+DP03_0021P
+</td>
+<td style="text-align:right;">
+12.4
+</td>
+<td style="text-align:right;">
+0.3
+</td>
+<td style="text-align:right;">
+9457867
+</td>
+<td style="text-align:right;">
+1469
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+19100
+</td>
+<td style="text-align:left;">
+Dallas-Fort Worth-Arlington, TX Metro Area
+</td>
+<td style="text-align:left;">
+DP03_0021P
+</td>
+<td style="text-align:right;">
+1.3
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+7573136
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+26420
+</td>
+<td style="text-align:left;">
+Houston-The Woodlands-Sugar Land, TX Metro Area
+</td>
+<td style="text-align:left;">
+DP03_0021P
+</td>
+<td style="text-align:right;">
+2.0
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:right;">
+7066140
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>The returned data frame has 7 columns, as is standard for <code><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs()</a></code> with a summary variable, but has 20 rows as specified by the <code>slice_max()</code> command. While the data can be filtered and sorted further to facilitate comparative analysis, it also can be represented succinctly with a visualization. The tidy format returned by <code><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs()</a></code> is well-suited for visualization with <strong>ggplot2</strong>.</p>
+<div id="getting-started-with-ggplot2" class="section level3" number="4.1.1">
+<h3>
+<span class="header-section-number">4.1.1</span> Getting started with ggplot2<a class="anchor" aria-label="anchor" href="#getting-started-with-ggplot2"><i class="fas fa-link"></i></a>
+</h3>
+<p><strong>ggplot2</strong> visualizations are initialized with the <code>ggplot()</code> function, to which a user commonly supplies a dataset and an <em>aesthetic</em>, defined with the <code>aes()</code> function. Within the <code>aes()</code> function, a user can specify a series of mappings onto either the data axes or other characteristics of the plot, such as element fill or color.</p>
+<p>After initializing the ggplot object, users can layer plot elements onto the plot object. Essential to the plot is a <code>geom</code>, which specifies one of many chart types available in ggplot2. For example, <code>geom_bar()</code> will create a bar chart, <code>geom_line()</code> a line chart, <code>geom_point()</code> a point plot, and so forth. Layers are linked to the ggplot object by using the <code><a href="https://rdrr.io/r/base/Arithmetic.html">+</a></code> operator.</p>
+<p>In the basic example below, we can create a dot plot comparing public transportation as commute share for the most populous metropolitan areas in the United States with a minimum of code. The first argument to <code>ggplot()</code> in the example below is the name of our dataset; the second argument is an aesthetic mapping of columns to plot elements, specified inside the <code>aes()</code> function. This plot initialization is then linked with the <code><a href="https://rdrr.io/r/base/Arithmetic.html">+</a></code> operator to the <code>geom_col()</code> function to create a bar chart.</p>
+<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">metros</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">NAME</span>, y <span class="op">=</span> <span class="va">estimate</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">geom_col</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:first-plot"></span>
+<img src="04-visualizing-census-data_files/figure-html/first-plot-1.png" alt="A first bar chart with ggplot2" width="100%"><p class="caption">
+Figure 4.1: A first bar chart with ggplot2
+</p>
+</div>
+<p>While the above chart is a visualization of the <code>metros</code> dataset, it tells us little about the data given the lack of necessary formatting. The x-axis labels are so lengthy that they overlap and are impossible to read; the axis titles are not intuitive; and the data are not sorted, making it difficult to compare similar observations.</p>
+</div>
+<div id="improving-plot-legibility" class="section level3" number="4.1.2">
+<h3>
+<span class="header-section-number">4.1.2</span> Improving plot legibility<a class="anchor" aria-label="anchor" href="#improving-plot-legibility"><i class="fas fa-link"></i></a>
+</h3>
+<p>Fortunately, the plot can be made more legible by cleaning up the metropolitan area name, re-ordering the data in descending order, then adding layers to the plot definition. Additionally, <strong>ggplot2</strong> visualization can be used in combination with <strong>magrittr</strong> piping and <strong>tidyverse</strong> functions, allowing analysts to string together data manipulation and visualization processes.</p>
+<p>Our first step will be to format the <code>NAME</code> column in a more intuitive way. The <code>NAME</code> column by default provides a description of each geography as formatted by the US Census Bureau. However, a detailed description like <code>"Atlanta-Sandy Springs-Roswell, GA Metro Area"</code> is likely unnecessary for our chart, as the same metropolitan area can be represented on the chart by the name of its first principal city, which in this case would be <code>"Atlanta"</code>. To accomplish this, we can overwrite the <code>NAME</code> column by using the tidyverse function <code>str_remove()</code>, found in the <strong>stringr</strong> package. The example uses <em>regular expressions</em> to first remove all the text after the first dash, then remove the text after the first comma if no dash was originally present. These two subsequent calls to <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> will account for the various ways that metropolitan area names are specified.</p>
+<p>On the chart, the legibility can be further improved by mapping the metro name to the y-axis and the ACS estimate to the x-axis, and plotting the points in descending order of their estimate values. The ordering of points in this way is accomplished with the <code><a href="https://rdrr.io/r/stats/reorder.factor.html">reorder()</a></code> function, used inside the call to <code>aes()</code>. As the result of the <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> operations is piped to the <code>ggplot()</code> function in this example with the <code><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></code> operator, the dataset argument to <code>ggplot()</code> is inferred by the function.</p>
+<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">metros</span> <span class="op">%&gt;%</span>
+  <span class="fu">mutate</span><span class="op">(</span>NAME <span class="op">=</span> <span class="fu">str_remove</span><span class="op">(</span><span class="va">NAME</span>, <span class="st">"-.*$"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">mutate</span><span class="op">(</span>NAME <span class="op">=</span> <span class="fu">str_remove</span><span class="op">(</span><span class="va">NAME</span>, <span class="st">",.*$"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html">reorder</a></span><span class="op">(</span><span class="va">NAME</span>, <span class="va">estimate</span><span class="op">)</span>, x <span class="op">=</span> <span class="va">estimate</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">geom_col</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:second-plot"></span>
+<img src="04-visualizing-census-data_files/figure-html/second-plot-1.png" alt="An improved bar chart with ggplot2" width="100%"><p class="caption">
+Figure 4.2: An improved bar chart with ggplot2
+</p>
+</div>
+<p>The plot is much more legible after our modifications. Metropolitan areas can be directly compared with one another, and the metro area labels convey enough information about the different places without overwhelming the plot with long axis labels. However, the plot still lacks information to inform the viewer about the plot’s content. This can be accomplished by specifying <em>labels</em> inside the <code>labs()</code> function. In the example below, we’ll specify a title and subtitle, and modify the X and Y axis labels from their defaults.</p>
+<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">metros</span> <span class="op">%&gt;%</span>
+  <span class="fu">mutate</span><span class="op">(</span>NAME <span class="op">=</span> <span class="fu">str_remove</span><span class="op">(</span><span class="va">NAME</span>, <span class="st">"-.*$"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">mutate</span><span class="op">(</span>NAME <span class="op">=</span> <span class="fu">str_remove</span><span class="op">(</span><span class="va">NAME</span>, <span class="st">",.*$"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html">reorder</a></span><span class="op">(</span><span class="va">NAME</span>, <span class="va">estimate</span><span class="op">)</span>, x <span class="op">=</span> <span class="va">estimate</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">geom_col</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>  
+  <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">labs</span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Public transit commute share"</span>, 
+       subtitle <span class="op">=</span> <span class="st">"2019 1-year ACS estimates"</span>, 
+       y <span class="op">=</span> <span class="st">""</span>, 
+       x <span class="op">=</span> <span class="st">"ACS estimate"</span>, 
+       caption <span class="op">=</span> <span class="st">"Source: ACS Data Profile variable DP03_0021P via the tidycensus R package"</span><span class="op">)</span> </code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:polished-plot"></span>
+<img src="04-visualizing-census-data_files/figure-html/polished-plot-1.png" alt="A cleaned-up bar chart with ggplot2" width="100%"><p class="caption">
+Figure 4.3: A cleaned-up bar chart with ggplot2
+</p>
+</div>
+<p>The inclusion of labels provides key information about the contents of the plot and also gives it a more polished look for presentation.</p>
+</div>
+<div id="custom-styling-of-ggplot2-charts" class="section level3" number="4.1.3">
+<h3>
+<span class="header-section-number">4.1.3</span> Custom styling of ggplot2 charts<a class="anchor" aria-label="anchor" href="#custom-styling-of-ggplot2-charts"><i class="fas fa-link"></i></a>
+</h3>
+<p>While an analyst may be comfortable with the plot as-is, <strong>ggplot2</strong> allows for significant customization with respect to stylistic presentation. The example below makes a few such modifications. This includes styling the bars on the plot with a different color and internal transparency; changing the font; and customizing the axis tick labels.</p>
+<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">metros</span> <span class="op">%&gt;%</span>
+  <span class="fu">mutate</span><span class="op">(</span>NAME <span class="op">=</span> <span class="fu">str_remove</span><span class="op">(</span><span class="va">NAME</span>, <span class="st">"-.*$"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">mutate</span><span class="op">(</span>NAME <span class="op">=</span> <span class="fu">str_remove</span><span class="op">(</span><span class="va">NAME</span>, <span class="st">",.*$"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html">reorder</a></span><span class="op">(</span><span class="va">NAME</span>, <span class="va">estimate</span><span class="op">)</span>, x <span class="op">=</span> <span class="va">estimate</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">geom_col</span><span class="op">(</span>color <span class="op">=</span> <span class="st">"navy"</span>, fill <span class="op">=</span> <span class="st">"navy"</span>, 
+           alpha <span class="op">=</span> <span class="fl">0.5</span>, width <span class="op">=</span> <span class="fl">0.85</span><span class="op">)</span> <span class="op">+</span>  
+  <span class="fu">theme_minimal</span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">12</span>, base_family <span class="op">=</span> <span class="st">"Verdana"</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">scale_x_continuous</span><span class="op">(</span>labels <span class="op">=</span> <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">.x</span>, <span class="st">"%"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">labs</span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Public transit commute share"</span>, 
+       subtitle <span class="op">=</span> <span class="st">"2019 1-year ACS estimates"</span>, 
+       y <span class="op">=</span> <span class="st">""</span>, 
+       x <span class="op">=</span> <span class="st">"ACS estimate"</span>, 
+       caption <span class="op">=</span> <span class="st">"Source: ACS Data Profile variable DP03_0021P via the tidycensus R package"</span><span class="op">)</span> </code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:customized-plot"></span>
+<img src="04-visualizing-census-data_files/figure-html/customized-plot-1.png" alt="A ggplot2 bar chart with custom styling" width="100%"><p class="caption">
+Figure 4.4: A ggplot2 bar chart with custom styling
+</p>
+</div>
+<p>The code used to produced the styled graphic uses the following modifications:</p>
+<ul>
+<li><p>While aesthetic mappings relative to a column in the input dataset will be specified in a call to <code>aes()</code>, <strong>ggplot2</strong> geoms can be styled directly in their corresponding functions. Bars in <strong>ggplot2</strong> are characterized by both a <em>color</em>, which is the outline of the bar, and a <em>fill</em>. The above code sets both to <code>"navy"</code> then modifies the internal transparency of the bar with the <code>alpha</code> argument. Finally, <code>width = 0.85</code> slightly increases the spacing between bars.</p></li>
+<li><p>In the call to <code>theme_minimal()</code>, <code>base_size</code> and <code>base_family</code> parameters are available. <code>base_size</code> specifies the base font size to which plot text elements will be drawn; this defaults to 11. <code>base_family</code> allows you to change the font family used on your plot. In this example, <code>base_family</code> is set to <code>"Verdana"</code>, but you can use any font families accessible to R from your operating system. To check this information, use the <code>system_fonts()</code> function in the <strong>systemfonts</strong> package <span class="citation">(<a href="references.html#ref-pederson2021_fonts" role="doc-biblioref">Pedersen, Ooms, and Govett 2021</a>)</span>.</p></li>
+<li><p>The <code>scale_x_continuous()</code> function is used to customize the X-axis of the plot. The <code>labels</code> parameter can accept a range of values including a function or formula (used here) that operates over the tick labels. The notation <code>~paste0(.x, "%")</code> can be read as "concatenate a percentage sign to all X-axis tick labels, represented by <code>.x</code>).</p></li>
+</ul>
+</div>
+</div>
+<div id="visualizing-margins-of-error" class="section level2" number="4.2">
+<h2>
+<span class="header-section-number">4.2</span> Visualizing margins of error<a class="anchor" aria-label="anchor" href="#visualizing-margins-of-error"><i class="fas fa-link"></i></a>
+</h2>
+<p>As discussed in Chapter 3, handling margins of error appropriately is of significant importance for analysts working with ACS data. While <strong>tidycensus</strong> has tools available for working with margins of error in a data wrangling workflow, it is also often useful to visualize those margins of error to illustrate the degree of uncertainty around estimates, especially when making comparisons between those estimates.</p>
+<p>In the above example visualization of public transportation mode share by metropolitan area for the largest metros in the United States, estimates are associated with margins of error; however, these margins of error are relatively small given the large population size of the geographic units represented in the plot. However, if studying demographic trends for geographies of smaller population size - like counties, Census tracts, or block groups - comparisons can be subject to a considerable degree of uncertainty.</p>
+<div id="data-setup" class="section level3" number="4.2.1">
+<h3>
+<span class="header-section-number">4.2.1</span> Data setup<a class="anchor" aria-label="anchor" href="#data-setup"><i class="fas fa-link"></i></a>
+</h3>
+<p>In the example below, we will compare the median household incomes of counties in the US state of Maine from the 2015-2019 ACS. Before doing so, it is helpful to understand some basic information about counties in Maine, such as the number of counties and their total population. We can retrieve this information with <strong>tidycensus</strong>.</p>
+<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">maine</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs</a></span><span class="op">(</span>
+  state <span class="op">=</span> <span class="st">"Maine"</span>,
+  geography <span class="op">=</span> <span class="st">"county"</span>,
+  variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>totalpop <span class="op">=</span> <span class="st">"B01003_001"</span><span class="op">)</span>,
+  year <span class="op">=</span> <span class="fl">2019</span>
+<span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">arrange</span><span class="op">(</span><span class="fu">desc</span><span class="op">(</span><span class="va">estimate</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="inline-table"><table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:style-maine-info">Table 4.2: </span>Population sizes of counties in Maine
+</caption>
+<thead><tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+GEOID
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+NAME
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+variable
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+estimate
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+moe
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+23005
+</td>
+<td style="text-align:left;">
+Cumberland County, Maine
+</td>
+<td style="text-align:left;">
+totalpop
+</td>
+<td style="text-align:right;">
+292307
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+23031
+</td>
+<td style="text-align:left;">
+York County, Maine
+</td>
+<td style="text-align:left;">
+totalpop
+</td>
+<td style="text-align:right;">
+204316
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+23019
+</td>
+<td style="text-align:left;">
+Penobscot County, Maine
+</td>
+<td style="text-align:left;">
+totalpop
+</td>
+<td style="text-align:right;">
+151774
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+23011
+</td>
+<td style="text-align:left;">
+Kennebec County, Maine
+</td>
+<td style="text-align:left;">
+totalpop
+</td>
+<td style="text-align:right;">
+121753
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+23001
+</td>
+<td style="text-align:left;">
+Androscoggin County, Maine
+</td>
+<td style="text-align:left;">
+totalpop
+</td>
+<td style="text-align:right;">
+107602
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+23003
+</td>
+<td style="text-align:left;">
+Aroostook County, Maine
+</td>
+<td style="text-align:left;">
+totalpop
+</td>
+<td style="text-align:right;">
+67809
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+23017
+</td>
+<td style="text-align:left;">
+Oxford County, Maine
+</td>
+<td style="text-align:left;">
+totalpop
+</td>
+<td style="text-align:right;">
+57550
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+23009
+</td>
+<td style="text-align:left;">
+Hancock County, Maine
+</td>
+<td style="text-align:left;">
+totalpop
+</td>
+<td style="text-align:right;">
+54601
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+23025
+</td>
+<td style="text-align:left;">
+Somerset County, Maine
+</td>
+<td style="text-align:left;">
+totalpop
+</td>
+<td style="text-align:right;">
+50520
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+23013
+</td>
+<td style="text-align:left;">
+Knox County, Maine
+</td>
+<td style="text-align:left;">
+totalpop
+</td>
+<td style="text-align:right;">
+39759
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+23027
+</td>
+<td style="text-align:left;">
+Waldo County, Maine
+</td>
+<td style="text-align:left;">
+totalpop
+</td>
+<td style="text-align:right;">
+39539
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+23023
+</td>
+<td style="text-align:left;">
+Sagadahoc County, Maine
+</td>
+<td style="text-align:left;">
+totalpop
+</td>
+<td style="text-align:right;">
+35452
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+23015
+</td>
+<td style="text-align:left;">
+Lincoln County, Maine
+</td>
+<td style="text-align:left;">
+totalpop
+</td>
+<td style="text-align:right;">
+34201
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+23029
+</td>
+<td style="text-align:left;">
+Washington County, Maine
+</td>
+<td style="text-align:left;">
+totalpop
+</td>
+<td style="text-align:right;">
+31491
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+23007
+</td>
+<td style="text-align:left;">
+Franklin County, Maine
+</td>
+<td style="text-align:left;">
+totalpop
+</td>
+<td style="text-align:right;">
+29982
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+23021
+</td>
+<td style="text-align:left;">
+Piscataquis County, Maine
+</td>
+<td style="text-align:left;">
+totalpop
+</td>
+<td style="text-align:right;">
+16836
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>There are sixteen counties in Maine, ranging in population from a maximum of 292,307 to a minimum of 16,836. In turn, estimates for the counties with smaller population sizes are likely to be subject to a larger margin of error than those with larger baseline populations.</p>
+<p>Comparing median household incomes of these sixteen counties illustrates this point. Let’s first obtain this data with <strong>tidycensus</strong> then clean up the <code>NAME</code> column with <code>str_remove()</code> to remove redundant information.</p>
+<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">maine_income</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs</a></span><span class="op">(</span>
+  state <span class="op">=</span> <span class="st">"Maine"</span>,
+  geography <span class="op">=</span> <span class="st">"county"</span>,
+  variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>hhincome <span class="op">=</span> <span class="st">"B19013_001"</span><span class="op">)</span>,
+  year <span class="op">=</span> <span class="fl">2019</span>
+<span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">mutate</span><span class="op">(</span>NAME <span class="op">=</span> <span class="fu">str_remove</span><span class="op">(</span><span class="va">NAME</span>, <span class="st">" County, Maine"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p>Using some of the tips covered in the previous visualization section, we can produce a plot with appropriate styling and formatting to rank the counties.</p>
+<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">maine_income</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">estimate</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html">reorder</a></span><span class="op">(</span><span class="va">NAME</span>, <span class="va">estimate</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">geom_point</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">3</span>, color <span class="op">=</span> <span class="st">"darkgreen"</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">labs</span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Median household income"</span>, 
+       subtitle <span class="op">=</span> <span class="st">"Counties in Maine"</span>, 
+       x <span class="op">=</span> <span class="st">""</span>, 
+       y <span class="op">=</span> <span class="st">"ACS estimate"</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">scale_x_continuous</span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org/reference/label_dollar.html">dollar</a></span><span class="op">)</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:maine-income-ggplot-1"></span>
+<img src="04-visualizing-census-data_files/figure-html/maine-income-ggplot-1-1.png" alt="A dot plot of median household income by county in Maine" width="100%"><p class="caption">
+Figure 4.5: A dot plot of median household income by county in Maine
+</p>
+</div>
+<p>The above visualization suggests a ranking of counties from the wealthiest (Cumberland) to the poorest (Piscataquis). However, the data used to generate this chart is significantly different from the metropolitan area data used in the previous example. In our first example, ACS estimates covered the top 20 US metros by population - areas that all have populations exceeding 2.8 million. For these areas, margins of error are small enough that they do not meaningfully change the interpretation of the estimates given the large sample sizes used to generate them. However, as discussed in Section <a href="wrangling-census-data-with-tidyverse-tools.html#handling-margins-of-error-in-the-american-community-survey-with-tidycensus">3.5</a>, smaller geographies may have much larger margins of error relative to their ACS estimates.</p>
+</div>
+<div id="using-error-bars-for-margins-of-error" class="section level3" number="4.2.2">
+<h3>
+<span class="header-section-number">4.2.2</span> Using error bars for margins of error<a class="anchor" aria-label="anchor" href="#using-error-bars-for-margins-of-error"><i class="fas fa-link"></i></a>
+</h3>
+<p>Several county estimates on the chart are quite close to one another, which may mean that the ranking of counties is misleading given the margin of error around those estimates. We can explore this by looking directly at the data.</p>
+<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">maine_income</span> <span class="op">%&gt;%</span> 
+  <span class="fu">arrange</span><span class="op">(</span><span class="fu">desc</span><span class="op">(</span><span class="va">moe</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="inline-table"><table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:show-maine-style">Table 4.3: </span>Margins of error in Maine
+</caption>
+<thead><tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+GEOID
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+NAME
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+variable
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+estimate
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+moe
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+23015
+</td>
+<td style="text-align:left;">
+Lincoln
+</td>
+<td style="text-align:left;">
+hhincome
+</td>
+<td style="text-align:right;">
+57720
+</td>
+<td style="text-align:right;">
+3240
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+23007
+</td>
+<td style="text-align:left;">
+Franklin
+</td>
+<td style="text-align:left;">
+hhincome
+</td>
+<td style="text-align:right;">
+51422
+</td>
+<td style="text-align:right;">
+2966
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+23013
+</td>
+<td style="text-align:left;">
+Knox
+</td>
+<td style="text-align:left;">
+hhincome
+</td>
+<td style="text-align:right;">
+57751
+</td>
+<td style="text-align:right;">
+2820
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+23021
+</td>
+<td style="text-align:left;">
+Piscataquis
+</td>
+<td style="text-align:left;">
+hhincome
+</td>
+<td style="text-align:right;">
+40890
+</td>
+<td style="text-align:right;">
+2613
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+23025
+</td>
+<td style="text-align:left;">
+Somerset
+</td>
+<td style="text-align:left;">
+hhincome
+</td>
+<td style="text-align:right;">
+44256
+</td>
+<td style="text-align:right;">
+2591
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+23023
+</td>
+<td style="text-align:left;">
+Sagadahoc
+</td>
+<td style="text-align:left;">
+hhincome
+</td>
+<td style="text-align:right;">
+63694
+</td>
+<td style="text-align:right;">
+2309
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+23027
+</td>
+<td style="text-align:left;">
+Waldo
+</td>
+<td style="text-align:left;">
+hhincome
+</td>
+<td style="text-align:right;">
+51931
+</td>
+<td style="text-align:right;">
+2170
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+23009
+</td>
+<td style="text-align:left;">
+Hancock
+</td>
+<td style="text-align:left;">
+hhincome
+</td>
+<td style="text-align:right;">
+57178
+</td>
+<td style="text-align:right;">
+2057
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+23011
+</td>
+<td style="text-align:left;">
+Kennebec
+</td>
+<td style="text-align:left;">
+hhincome
+</td>
+<td style="text-align:right;">
+55365
+</td>
+<td style="text-align:right;">
+1948
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+23017
+</td>
+<td style="text-align:left;">
+Oxford
+</td>
+<td style="text-align:left;">
+hhincome
+</td>
+<td style="text-align:right;">
+49204
+</td>
+<td style="text-align:right;">
+1879
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+23001
+</td>
+<td style="text-align:left;">
+Androscoggin
+</td>
+<td style="text-align:left;">
+hhincome
+</td>
+<td style="text-align:right;">
+53509
+</td>
+<td style="text-align:right;">
+1770
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+23029
+</td>
+<td style="text-align:left;">
+Washington
+</td>
+<td style="text-align:left;">
+hhincome
+</td>
+<td style="text-align:right;">
+41347
+</td>
+<td style="text-align:right;">
+1565
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+23031
+</td>
+<td style="text-align:left;">
+York
+</td>
+<td style="text-align:left;">
+hhincome
+</td>
+<td style="text-align:right;">
+67830
+</td>
+<td style="text-align:right;">
+1450
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+23005
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+hhincome
+</td>
+<td style="text-align:right;">
+73072
+</td>
+<td style="text-align:right;">
+1427
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+23003
+</td>
+<td style="text-align:left;">
+Aroostook
+</td>
+<td style="text-align:left;">
+hhincome
+</td>
+<td style="text-align:right;">
+41123
+</td>
+<td style="text-align:right;">
+1381
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+23019
+</td>
+<td style="text-align:left;">
+Penobscot
+</td>
+<td style="text-align:left;">
+hhincome
+</td>
+<td style="text-align:right;">
+50808
+</td>
+<td style="text-align:right;">
+1326
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>Specifically, margins of error around the estimated median household incomes vary from a low of $1326 (Penobscot County) to a high of $3240 (Sagadahoc County). In many cases, the margins of error around estimated county household income exceed the differences between counties of neighboring ranks, suggesting uncertainty in the ranks themselves.</p>
+<p>In turn, a dot plot like the one above intended to visualize a ranking of county household incomes in Maine may be misleading. However, using visualization tools in <strong>ggplot2</strong>, we can visualize the uncertainty around each estimate, giving chart readers a sense of the uncertainty in the ranking. This is accomplished with the <code>geom_errorbarh()</code> function, which will plot horizontal error bars around each dot that stretch to a given value around each estimate. In this instance, we will use the <code>moe</code> column to determine the lengths of the error bars.</p>
+<div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">maine_income</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">estimate</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html">reorder</a></span><span class="op">(</span><span class="va">NAME</span>, <span class="va">estimate</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">geom_errorbarh</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>xmin <span class="op">=</span> <span class="va">estimate</span> <span class="op">-</span> <span class="va">moe</span>, xmax <span class="op">=</span> <span class="va">estimate</span> <span class="op">+</span> <span class="va">moe</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">geom_point</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">3</span>, color <span class="op">=</span> <span class="st">"darkgreen"</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">labs</span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Median household income"</span>, 
+       subtitle <span class="op">=</span> <span class="st">"Counties in Maine"</span>, 
+       x <span class="op">=</span> <span class="st">"2015-2019 ACS estimate"</span>, 
+       y <span class="op">=</span> <span class="st">""</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">scale_x_continuous</span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org/reference/label_dollar.html">dollar</a></span><span class="op">)</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:visualize-error-bars"></span>
+<img src="04-visualizing-census-data_files/figure-html/visualize-error-bars-1.png" alt="Median household income by county in Maine with error bars shown" width="100%"><p class="caption">
+Figure 4.6: Median household income by county in Maine with error bars shown
+</p>
+</div>
+<p>Adding the horizontal error bars around each point gives us critical information to help us understand how our ranking of Maine counties by median household income. For example, while the ACS estimate suggests that Piscataquis County has the lowest median household income in Maine, the large margin of error around the estimate for Piscataquis County suggests that either Aroostook or Washington Counties <em>could</em> conceivably have lower median household incomes. Additionally, while Waldo County has a higher estimated median household income than Androscoggin and Kennebec Counties, the margin of error plot shows us that this ranking is subject to considerable uncertainty.</p>
+</div>
+</div>
+<div id="visualizing-acs-estimates-over-time" class="section level2" number="4.3">
+<h2>
+<span class="header-section-number">4.3</span> Visualizing ACS estimates over time<a class="anchor" aria-label="anchor" href="#visualizing-acs-estimates-over-time"><i class="fas fa-link"></i></a>
+</h2>
+<p>Section <a href="wrangling-census-data-with-tidyverse-tools.html#preparing-time-series-acs-estimates">3.4.2</a> covered how to obtain a time series of ACS estimates to explore temporal demographic shifts. While the output table usefully represented the time series of educational attainment in Colorado counties, data visualization is also commonly used to illustrate change over time. Arguably the most common chart type chosen for time-series visualization is the line chart, which <strong>ggplot2</strong> handles capably with the <code>geom_line()</code> function.</p>
+<p>For an illustrative example, we’ll obtain 1-year ACS data back to 2005 on median home value for Deschutes County, Oregon, home to the city of Bend and large numbers of in-migrants in recent years from the Bay Area in California. As in Chapter 3, <code>map_dfr()</code> is used to iterate over a named vector of years, creating a time-series dataset of median home value in Deschutes County since 2005.</p>
+<div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">years</span> <span class="op">&lt;-</span> <span class="fl">2005</span><span class="op">:</span><span class="fl">2019</span>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">years</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">years</span>
+
+<span class="va">deschutes_value</span> <span class="op">&lt;-</span> <span class="fu">map_dfr</span><span class="op">(</span><span class="va">years</span>, <span class="op">~</span><span class="op">{</span>
+  <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs</a></span><span class="op">(</span>
+    geography <span class="op">=</span> <span class="st">"county"</span>,
+    variables <span class="op">=</span> <span class="st">"B25077_001"</span>,
+    state <span class="op">=</span> <span class="st">"OR"</span>,
+    county <span class="op">=</span> <span class="st">"Deschutes"</span>,
+    year <span class="op">=</span> <span class="va">.x</span>,
+    survey <span class="op">=</span> <span class="st">"acs1"</span>
+  <span class="op">)</span>
+<span class="op">}</span>, .id <span class="op">=</span> <span class="st">"year"</span><span class="op">)</span></code></pre></div>
+<div class="inline-table"><table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:get-deschutes-value-show">Table 4.4: </span>Time series of median home values in Deschutes County, OR
+</caption>
+<thead><tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+year
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+GEOID
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+NAME
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+variable
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+estimate
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+moe
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+2005
+</td>
+<td style="text-align:left;">
+41017
+</td>
+<td style="text-align:left;">
+Deschutes County, Oregon
+</td>
+<td style="text-align:left;">
+B25077_001
+</td>
+<td style="text-align:right;">
+236100
+</td>
+<td style="text-align:right;">
+13444
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2006
+</td>
+<td style="text-align:left;">
+41017
+</td>
+<td style="text-align:left;">
+Deschutes County, Oregon
+</td>
+<td style="text-align:left;">
+B25077_001
+</td>
+<td style="text-align:right;">
+336600
+</td>
+<td style="text-align:right;">
+11101
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2007
+</td>
+<td style="text-align:left;">
+41017
+</td>
+<td style="text-align:left;">
+Deschutes County, Oregon
+</td>
+<td style="text-align:left;">
+B25077_001
+</td>
+<td style="text-align:right;">
+356700
+</td>
+<td style="text-align:right;">
+16765
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2008
+</td>
+<td style="text-align:left;">
+41017
+</td>
+<td style="text-align:left;">
+Deschutes County, Oregon
+</td>
+<td style="text-align:left;">
+B25077_001
+</td>
+<td style="text-align:right;">
+331600
+</td>
+<td style="text-align:right;">
+17104
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2009
+</td>
+<td style="text-align:left;">
+41017
+</td>
+<td style="text-align:left;">
+Deschutes County, Oregon
+</td>
+<td style="text-align:left;">
+B25077_001
+</td>
+<td style="text-align:right;">
+284300
+</td>
+<td style="text-align:right;">
+12652
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2010
+</td>
+<td style="text-align:left;">
+41017
+</td>
+<td style="text-align:left;">
+Deschutes County, Oregon
+</td>
+<td style="text-align:left;">
+B25077_001
+</td>
+<td style="text-align:right;">
+260700
+</td>
+<td style="text-align:right;">
+18197
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2011
+</td>
+<td style="text-align:left;">
+41017
+</td>
+<td style="text-align:left;">
+Deschutes County, Oregon
+</td>
+<td style="text-align:left;">
+B25077_001
+</td>
+<td style="text-align:right;">
+216200
+</td>
+<td style="text-align:right;">
+18065
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2012
+</td>
+<td style="text-align:left;">
+41017
+</td>
+<td style="text-align:left;">
+Deschutes County, Oregon
+</td>
+<td style="text-align:left;">
+B25077_001
+</td>
+<td style="text-align:right;">
+235300
+</td>
+<td style="text-align:right;">
+19016
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2013
+</td>
+<td style="text-align:left;">
+41017
+</td>
+<td style="text-align:left;">
+Deschutes County, Oregon
+</td>
+<td style="text-align:left;">
+B25077_001
+</td>
+<td style="text-align:right;">
+240000
+</td>
+<td style="text-align:right;">
+16955
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2014
+</td>
+<td style="text-align:left;">
+41017
+</td>
+<td style="text-align:left;">
+Deschutes County, Oregon
+</td>
+<td style="text-align:left;">
+B25077_001
+</td>
+<td style="text-align:right;">
+257200
+</td>
+<td style="text-align:right;">
+18488
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>This information can be visualized with familiar <strong>ggplot2</strong> syntax. <code>deschutes_value</code> is specified as the input dataset, with <code>year</code> mapped to the X-axis and <code>estimate</code> mapped to the y-axis. The argument <code>group = 1</code> is used to help <strong>ggplot2</strong> understand how to connect the yearly data points with lines given that only one county is being visualized. <code>geom_line()</code> then draws the lines, and we layer points on top of the lines as well to highlight the actual ACS estimates.</p>
+<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">deschutes_value</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">year</span>, y <span class="op">=</span> <span class="va">estimate</span>, group <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">geom_line</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:plot-deschutes-value"></span>
+<img src="04-visualizing-census-data_files/figure-html/plot-deschutes-value-1.png" alt="A time series chart of median home values in Deschutes County, OR" width="100%"><p class="caption">
+Figure 4.7: A time series chart of median home values in Deschutes County, OR
+</p>
+</div>
+<p>The chart shows rising home values prior to the 2008 recession; a notable drop after the housing market crash; and rising values since 2011, reflecting increased demand from wealthy in-migrants from locations like the Bay Area. Given what we have learned in previous sections, there are also several opportunities for chart cleanup. This can include more intuitive tick and axis labels; a re-designed visual scheme; and a title and caption. We can also build the margin of error information into the line chart like we did in the previous section. We’ll use the <strong>ggplot2</strong> function <code>geom_ribbon()</code> to draw the margin of error interval around the line, helping represent uncertainty in the ACS estimates.</p>
+<div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">deschutes_value</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">year</span>, y <span class="op">=</span> <span class="va">estimate</span>, group <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">geom_ribbon</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>ymax <span class="op">=</span> <span class="va">estimate</span> <span class="op">+</span> <span class="va">moe</span>, ymin <span class="op">=</span> <span class="va">estimate</span> <span class="op">-</span> <span class="va">moe</span><span class="op">)</span>, 
+              fill <span class="op">=</span> <span class="st">"navy"</span>,
+              alpha <span class="op">=</span> <span class="fl">0.4</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">geom_line</span><span class="op">(</span>color <span class="op">=</span> <span class="st">"navy"</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">geom_point</span><span class="op">(</span>color <span class="op">=</span> <span class="st">"navy"</span>, size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">scale_y_continuous</span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org/reference/label_dollar.html">dollar</a></span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">labs</span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Median home value in Deschutes County, OR"</span>,
+       x <span class="op">=</span> <span class="st">"Year"</span>,
+       y <span class="op">=</span> <span class="st">"ACS estimate"</span>,
+       caption <span class="op">=</span> <span class="st">"Shaded area represents margin of error around the ACS estimate"</span><span class="op">)</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:final-deschutes-value-plot"></span>
+<img src="04-visualizing-census-data_files/figure-html/final-deschutes-value-plot-1.png" alt="The Deschutes County home value line chart with error ranges shown" width="100%"><p class="caption">
+Figure 4.8: The Deschutes County home value line chart with error ranges shown
+</p>
+</div>
+</div>
+<div id="exploring-age-and-sex-structure-with-population-pyramids" class="section level2" number="4.4">
+<h2>
+<span class="header-section-number">4.4</span> Exploring age and sex structure with population pyramids<a class="anchor" aria-label="anchor" href="#exploring-age-and-sex-structure-with-population-pyramids"><i class="fas fa-link"></i></a>
+</h2>
+<p>A common method for visualizing the demographic structure of a particular area is the <em>population pyramid</em>. Population pyramids are typically constructed by visualizing population size or proportion on the x-axis; age cohort on the y-axis; and sex is represented categorically with male and female bars mirrored around a central axis.</p>
+<div id="preparing-data-from-the-population-estimates-api" class="section level3" number="4.4.1">
+<h3>
+<span class="header-section-number">4.4.1</span> Preparing data from the Population Estimates API<a class="anchor" aria-label="anchor" href="#preparing-data-from-the-population-estimates-api"><i class="fas fa-link"></i></a>
+</h3>
+<p>We can illustrate this type of visualization using data from the Population Estimates API for the state of Utah. We first obtain data using the <code><a href="https://walker-data.com/tidycensus/reference/get_estimates.html">get_estimates()</a></code> function in <strong>tidycensus</strong> for 2019 population estimates from the Census Bureau’s Population Estimates API.</p>
+<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">utah</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_estimates.html">get_estimates</a></span><span class="op">(</span>
+  geography <span class="op">=</span> <span class="st">"state"</span>,
+  state <span class="op">=</span> <span class="st">"UT"</span>,
+  product <span class="op">=</span> <span class="st">"characteristics"</span>,
+  breakdown <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"SEX"</span>, <span class="st">"AGEGROUP"</span><span class="op">)</span>,
+  breakdown_labels <span class="op">=</span> <span class="cn">TRUE</span>,
+  year <span class="op">=</span> <span class="fl">2019</span>
+<span class="op">)</span> </code></pre></div>
+<div class="inline-table"><table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:get-utah-data-style">Table 4.5: </span>Age and sex data for Utah from the PEP API
+</caption>
+<thead><tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+GEOID
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+NAME
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+value
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+SEX
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+AGEGROUP
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+49
+</td>
+<td style="text-align:left;">
+Utah
+</td>
+<td style="text-align:right;">
+3205958.0
+</td>
+<td style="text-align:left;">
+Both sexes
+</td>
+<td style="text-align:left;">
+All ages
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+49
+</td>
+<td style="text-align:left;">
+Utah
+</td>
+<td style="text-align:right;">
+247803.0
+</td>
+<td style="text-align:left;">
+Both sexes
+</td>
+<td style="text-align:left;">
+Age 0 to 4 years
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+49
+</td>
+<td style="text-align:left;">
+Utah
+</td>
+<td style="text-align:right;">
+258976.0
+</td>
+<td style="text-align:left;">
+Both sexes
+</td>
+<td style="text-align:left;">
+Age 5 to 9 years
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+49
+</td>
+<td style="text-align:left;">
+Utah
+</td>
+<td style="text-align:right;">
+31.3
+</td>
+<td style="text-align:left;">
+Both sexes
+</td>
+<td style="text-align:left;">
+Median age
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+49
+</td>
+<td style="text-align:left;">
+Utah
+</td>
+<td style="text-align:right;">
+1614917.0
+</td>
+<td style="text-align:left;">
+Male
+</td>
+<td style="text-align:left;">
+All ages
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+49
+</td>
+<td style="text-align:left;">
+Utah
+</td>
+<td style="text-align:right;">
+132868.0
+</td>
+<td style="text-align:left;">
+Male
+</td>
+<td style="text-align:left;">
+Age 5 to 9 years
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+49
+</td>
+<td style="text-align:left;">
+Utah
+</td>
+<td style="text-align:right;">
+30.6
+</td>
+<td style="text-align:left;">
+Male
+</td>
+<td style="text-align:left;">
+Median age
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+49
+</td>
+<td style="text-align:left;">
+Utah
+</td>
+<td style="text-align:right;">
+1591041.0
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+All ages
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+49
+</td>
+<td style="text-align:left;">
+Utah
+</td>
+<td style="text-align:right;">
+126108.0
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Age 5 to 9 years
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+49
+</td>
+<td style="text-align:left;">
+Utah
+</td>
+<td style="text-align:right;">
+23039.0
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Age 80 to 84 years
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>The function returns a long-form dataset in which each row represents population values broken down by age and sex for the state of Utah. However, there are some key issues with this dataset that must be addressed before constructing a population pyramid. First, several rows represent values that we don’t need for our population pyramid visualization. For example, the first few rows in the dataset represent population values for <code>"Both sexes"</code> or for <code>"All ages"</code>. In turn, it will be necessary to isolate those rows that represent five-year age bands by sex, anmd remove the rows that do not. This can be resolved with some data wrangling using tidyverse tools.</p>
+<p>In the dataset returned by <code><a href="https://walker-data.com/tidycensus/reference/get_estimates.html">get_estimates()</a></code>, five-year age bands are identified in the <code>AGEGROUP</code> column beginning with the word <code>"Age"</code>. We can filter this dataset for rows that match this pattern, and remove those rows that represent both sexes. This leaves us with rows that represent five-year age bands by sex. However, to achieve the desired visual effect, data for one sex must mirror another, split by a central vertical axis. To accomplish this, we can set the values for all <code>Male</code> values to negative.</p>
+<div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">utah_filtered</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">utah</span>, <span class="fu">str_detect</span><span class="op">(</span><span class="va">AGEGROUP</span>, <span class="st">"^Age"</span><span class="op">)</span>, 
+                  <span class="va">SEX</span> <span class="op">!=</span> <span class="st">"Both sexes"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">mutate</span><span class="op">(</span>value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">SEX</span> <span class="op">==</span> <span class="st">"Male"</span>, <span class="op">-</span><span class="va">value</span>, <span class="va">value</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="inline-table"><table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:show-filter-utah">Table 4.6: </span>Filtered and transformed Utah population data
+</caption>
+<thead><tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+GEOID
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+NAME
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+value
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+SEX
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+AGEGROUP
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+49
+</td>
+<td style="text-align:left;">
+Utah
+</td>
+<td style="text-align:right;">
+-132868
+</td>
+<td style="text-align:left;">
+Male
+</td>
+<td style="text-align:left;">
+Age 5 to 9 years
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+49
+</td>
+<td style="text-align:left;">
+Utah
+</td>
+<td style="text-align:right;">
+126108
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Age 5 to 9 years
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+49
+</td>
+<td style="text-align:left;">
+Utah
+</td>
+<td style="text-align:right;">
+23039
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Age 80 to 84 years
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+49
+</td>
+<td style="text-align:left;">
+Utah
+</td>
+<td style="text-align:right;">
+-137940
+</td>
+<td style="text-align:left;">
+Male
+</td>
+<td style="text-align:left;">
+Age 10 to 14 years
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+49
+</td>
+<td style="text-align:left;">
+Utah
+</td>
+<td style="text-align:right;">
+-129312
+</td>
+<td style="text-align:left;">
+Male
+</td>
+<td style="text-align:left;">
+Age 15 to 19 years
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+49
+</td>
+<td style="text-align:left;">
+Utah
+</td>
+<td style="text-align:right;">
+130045
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Age 10 to 14 years
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+49
+</td>
+<td style="text-align:left;">
+Utah
+</td>
+<td style="text-align:right;">
+124535
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Age 15 to 19 years
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+49
+</td>
+<td style="text-align:left;">
+Utah
+</td>
+<td style="text-align:right;">
+-135806
+</td>
+<td style="text-align:left;">
+Male
+</td>
+<td style="text-align:left;">
+Age 20 to 24 years
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+49
+</td>
+<td style="text-align:left;">
+Utah
+</td>
+<td style="text-align:right;">
+128846
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Age 20 to 24 years
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+49
+</td>
+<td style="text-align:left;">
+Utah
+</td>
+<td style="text-align:right;">
+-111776
+</td>
+<td style="text-align:left;">
+Male
+</td>
+<td style="text-align:left;">
+Age 30 to 34 years
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div id="designing-and-styling-the-population-pyramid" class="section level3" number="4.4.2">
+<h3>
+<span class="header-section-number">4.4.2</span> Designing and styling the population pyramid<a class="anchor" aria-label="anchor" href="#designing-and-styling-the-population-pyramid"><i class="fas fa-link"></i></a>
+</h3>
+<p>The data are now ready for visualization. The core components of the pyramid visualization require mapping the population value and the age group to the chart axes. Sex can be mapped to the <code>fill</code> aesthetic allowing for the plotting of these categories by color. Importantly, to get the visualization to work correctly, <code>value</code> must be mapped to the <code>y</code> aesthetic and <code>AGEGROUP</code> to the <code>x</code> aesthetic, with the <code>coord_flip()</code> function then used to plot the bars horizontally instead of vertically.</p>
+<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">utah_filtered</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">value</span>, y <span class="op">=</span> <span class="va">AGEGROUP</span>, fill <span class="op">=</span> <span class="va">SEX</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">geom_col</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:first-pyramid-utah"></span>
+<img src="04-visualizing-census-data_files/figure-html/first-pyramid-utah-1.png" alt="A first population pyramid" width="100%"><p class="caption">
+Figure 4.9: A first population pyramid
+</p>
+</div>
+<p>The visualization represents a functional population pyramid that is nonetheless in need of some cleanup. In particular, the axis labels are not informative; the y-axis tick labels have redundant information (“Age” and “years”); and the x-axis tick labels are difficult to parse. Cleaning up the plot allows us to use some additional visualization options in <strong>ggplot2</strong>. In addition to specifying appropriate chart labels, we can format the axis tick labels by using appropriate <code>scale_*</code> functions in <strong>ggplot2</strong> along with custom label formatters we define. In particular, this involves the use of custom absolute values to represent population sizes, and the removal of redundant age group information. We’ll also make use of an alternative <strong>ggplot2</strong> theme, <code>theme_minimal()</code>, which uses a white background with muted gridlines.</p>
+<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">utah_pyramid</span> <span class="op">&lt;-</span> <span class="fu">ggplot</span><span class="op">(</span><span class="va">utah_filtered</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">value</span>, y <span class="op">=</span> <span class="va">AGEGROUP</span>, fill <span class="op">=</span> <span class="va">SEX</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">geom_col</span><span class="op">(</span>width <span class="op">=</span> <span class="fl">0.95</span>, alpha <span class="op">=</span> <span class="fl">0.75</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">theme_minimal</span><span class="op">(</span>base_family <span class="op">=</span> <span class="st">"Verdana"</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">scale_x_continuous</span><span class="op">(</span>labels <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">y</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">y</span> <span class="op">/</span> <span class="fl">1000</span><span class="op">)</span>, <span class="st">"k"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">scale_y_discrete</span><span class="op">(</span>labels <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">"Age | years"</span>, <span class="st">""</span>, <span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">scale_fill_manual</span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"darkred"</span>, <span class="st">"navy"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="st">""</span>, 
+       y <span class="op">=</span> <span class="st">"2019 Census Bureau population estimate"</span>, 
+       title <span class="op">=</span> <span class="st">"Population structure in Utah"</span>, 
+       fill <span class="op">=</span> <span class="st">""</span>, 
+       caption <span class="op">=</span> <span class="st">"Data source: US Census Bureau population estimates &amp; tidycensus R package"</span><span class="op">)</span>
+
+<span class="va">utah_pyramid</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:formatted-pyramid-utah"></span>
+<img src="04-visualizing-census-data_files/figure-html/formatted-pyramid-utah-1.png" alt="A formatted population pyramid of Utah" width="100%"><p class="caption">
+Figure 4.10: A formatted population pyramid of Utah
+</p>
+</div>
+</div>
+</div>
+<div id="visualizing-group-wise-comparisons" class="section level2" number="4.5">
+<h2>
+<span class="header-section-number">4.5</span> Visualizing group-wise comparisons<a class="anchor" aria-label="anchor" href="#visualizing-group-wise-comparisons"><i class="fas fa-link"></i></a>
+</h2>
+<p>One of the most powerful features of <strong>ggplot2</strong> is its ability to generate <em>faceted plots</em>, which are also commonly referred to as <em>small multiples</em>. Faceted plots allow for the sub-division of a dataset into groups, which are then plotted side-by-side to facilitate comparisons between those groups. This is particularly useful when examining how distributions of values vary across different geographies. An example shown below involves a comparison of median home values by Census tract for three counties in the Portland, Oregon area: Multnomah, which contains the city of Portland, and the suburban counties of Clackamas and Washington.</p>
+<div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">housing_val</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs</a></span><span class="op">(</span>
+  geography <span class="op">=</span> <span class="st">"tract"</span>, 
+  variables <span class="op">=</span> <span class="st">"B25077_001"</span>, 
+  state <span class="op">=</span> <span class="st">"OR"</span>, 
+  county <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
+    <span class="st">"Multnomah"</span>, 
+    <span class="st">"Clackamas"</span>, 
+    <span class="st">"Washington"</span>,
+    <span class="st">"Yamhill"</span>, 
+    <span class="st">"Marion"</span>, 
+    <span class="st">"Columbia"</span>
+  <span class="op">)</span>
+<span class="op">)</span></code></pre></div>
+<div class="inline-table"><table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:show-housing-val">Table 4.7: </span>Median home values by Census tract in the Portland, OR area
+</caption>
+<thead><tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+GEOID
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+NAME
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+variable
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+estimate
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+moe
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+41005020100
+</td>
+<td style="text-align:left;">
+Census Tract 201, Clackamas County, Oregon
+</td>
+<td style="text-align:left;">
+B25077_001
+</td>
+<td style="text-align:right;">
+800400
+</td>
+<td style="text-align:right;">
+83602
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+41005020200
+</td>
+<td style="text-align:left;">
+Census Tract 202, Clackamas County, Oregon
+</td>
+<td style="text-align:left;">
+B25077_001
+</td>
+<td style="text-align:right;">
+821800
+</td>
+<td style="text-align:right;">
+79926
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+41005020302
+</td>
+<td style="text-align:left;">
+Census Tract 203.02, Clackamas County, Oregon
+</td>
+<td style="text-align:left;">
+B25077_001
+</td>
+<td style="text-align:right;">
+523700
+</td>
+<td style="text-align:right;">
+40705
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+41005020303
+</td>
+<td style="text-align:left;">
+Census Tract 203.03, Clackamas County, Oregon
+</td>
+<td style="text-align:left;">
+B25077_001
+</td>
+<td style="text-align:right;">
+533000
+</td>
+<td style="text-align:right;">
+34841
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+41005020304
+</td>
+<td style="text-align:left;">
+Census Tract 203.04, Clackamas County, Oregon
+</td>
+<td style="text-align:left;">
+B25077_001
+</td>
+<td style="text-align:right;">
+630400
+</td>
+<td style="text-align:right;">
+65801
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>As with other datasets obtained with <strong>tidycensus</strong>, the <code>NAME</code> column contains descriptive information that can be parsed to make comparisons. In this case, Census tract ID, county, and state are separated with commas; in turn the tidyverse <code>separate()</code> function can split this column into three columns accordingly.</p>
+<div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">housing_val2</span> <span class="op">&lt;-</span> <span class="fu">separate</span><span class="op">(</span>
+  <span class="va">housing_val</span>, 
+  <span class="va">NAME</span>, 
+  into <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"tract"</span>, <span class="st">"county"</span>, <span class="st">"state"</span><span class="op">)</span>, 
+  sep <span class="op">=</span> <span class="st">", "</span>
+<span class="op">)</span></code></pre></div>
+<div class="inline-table"><table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:separate-housing-val-show">Table 4.8: </span>Data with NAME column split by comma
+</caption>
+<thead><tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+GEOID
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+tract
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+county
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+state
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+variable
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+estimate
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+moe
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+41005020100
+</td>
+<td style="text-align:left;">
+Census Tract 201
+</td>
+<td style="text-align:left;">
+Clackamas County
+</td>
+<td style="text-align:left;">
+Oregon
+</td>
+<td style="text-align:left;">
+B25077_001
+</td>
+<td style="text-align:right;">
+800400
+</td>
+<td style="text-align:right;">
+83602
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+41005020200
+</td>
+<td style="text-align:left;">
+Census Tract 202
+</td>
+<td style="text-align:left;">
+Clackamas County
+</td>
+<td style="text-align:left;">
+Oregon
+</td>
+<td style="text-align:left;">
+B25077_001
+</td>
+<td style="text-align:right;">
+821800
+</td>
+<td style="text-align:right;">
+79926
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+41005020302
+</td>
+<td style="text-align:left;">
+Census Tract 203.02
+</td>
+<td style="text-align:left;">
+Clackamas County
+</td>
+<td style="text-align:left;">
+Oregon
+</td>
+<td style="text-align:left;">
+B25077_001
+</td>
+<td style="text-align:right;">
+523700
+</td>
+<td style="text-align:right;">
+40705
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+41005020303
+</td>
+<td style="text-align:left;">
+Census Tract 203.03
+</td>
+<td style="text-align:left;">
+Clackamas County
+</td>
+<td style="text-align:left;">
+Oregon
+</td>
+<td style="text-align:left;">
+B25077_001
+</td>
+<td style="text-align:right;">
+533000
+</td>
+<td style="text-align:right;">
+34841
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+41005020304
+</td>
+<td style="text-align:left;">
+Census Tract 203.04
+</td>
+<td style="text-align:left;">
+Clackamas County
+</td>
+<td style="text-align:left;">
+Oregon
+</td>
+<td style="text-align:left;">
+B25077_001
+</td>
+<td style="text-align:right;">
+630400
+</td>
+<td style="text-align:right;">
+65801
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>As explored in previous chapters, a major strength of the tidyverse is its ability to perform group-wise data analysis. The dimensions of median home values by Census tract in each of the three counties can be explored in this way. For example, a call to <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code> followed by <code>summarize()</code> facilitates the calculation of county minimums, means, medians, and maximums.</p>
+<div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">housing_val2</span> <span class="op">%&gt;%</span>
+  <span class="fu">group_by</span><span class="op">(</span><span class="va">county</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">summarize</span><span class="op">(</span>min <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">estimate</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, 
+            mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">estimate</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, 
+            median <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">estimate</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, 
+            max <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">estimate</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="inline-table"><table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:or-summary-table-show">Table 4.9: </span>Summary statistics for Census tracts in Portland-area counties
+</caption>
+<thead><tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+county
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+min
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+mean
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+median
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+max
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Clackamas County
+</td>
+<td style="text-align:right;">
+51800
+</td>
+<td style="text-align:right;">
+413362.0
+</td>
+<td style="text-align:right;">
+386300
+</td>
+<td style="text-align:right;">
+821800
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Columbia County
+</td>
+<td style="text-align:right;">
+203800
+</td>
+<td style="text-align:right;">
+264570.0
+</td>
+<td style="text-align:right;">
+257650
+</td>
+<td style="text-align:right;">
+331800
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Marion County
+</td>
+<td style="text-align:right;">
+45000
+</td>
+<td style="text-align:right;">
+248117.2
+</td>
+<td style="text-align:right;">
+238650
+</td>
+<td style="text-align:right;">
+446400
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Multnomah County
+</td>
+<td style="text-align:right;">
+193500
+</td>
+<td style="text-align:right;">
+428579.4
+</td>
+<td style="text-align:right;">
+403200
+</td>
+<td style="text-align:right;">
+943000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Washington County
+</td>
+<td style="text-align:right;">
+207900
+</td>
+<td style="text-align:right;">
+391476.5
+</td>
+<td style="text-align:right;">
+379400
+</td>
+<td style="text-align:right;">
+689900
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Yamhill County
+</td>
+<td style="text-align:right;">
+192600
+</td>
+<td style="text-align:right;">
+304588.2
+</td>
+<td style="text-align:right;">
+269600
+</td>
+<td style="text-align:right;">
+562000
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>While these basic summary statistics offer some insights into comparisons between the three counties, they are limited in their ability to help us understand the dynamics of the overall distribution of values. This task can in turn be augmented through visualization, which allows for quick visual comparison of these distributions. Group-wise visualization in <strong>ggplot2</strong> can be accomplished with the <code>facet_wrap()</code> function added onto any existing <strong>ggplot2</strong> code that has salient groups to visualize. For example, a kernel density plot can show the overall shape of the distribution of median home values in our dataset:</p>
+<div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">housing_val2</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">estimate</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">geom_density</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:first-density-plot"></span>
+<img src="04-visualizing-census-data_files/figure-html/first-density-plot-1.png" alt="A density plot using all values in the dataset" width="100%"><p class="caption">
+Figure 4.11: A density plot using all values in the dataset
+</p>
+</div>
+<p>Mapping the <code>county</code> column onto the <code>fill</code> aesthetic will then draw superimposed density plots by county on the chart:</p>
+<div class="sourceCode" id="cb103"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">housing_val2</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">estimate</span>, fill <span class="op">=</span> <span class="va">county</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">geom_density</span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:second-density-plot"></span>
+<img src="04-visualizing-census-data_files/figure-html/second-density-plot-1.png" alt="A density plot with separate curves for each county" width="100%"><p class="caption">
+Figure 4.12: A density plot with separate curves for each county
+</p>
+</div>
+<p>Alternatively, adding the <code>facet_wrap()</code> function, and specifying <code>county</code> as the column used to group the data, splits this visualization into side-by-side graphics based on the counties to which each Census tract belongs.</p>
+<div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">housing_val2</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">estimate</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">geom_density</span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"darkgreen"</span>, color <span class="op">=</span> <span class="st">"darkgreen"</span>, alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">facet_wrap</span><span class="op">(</span><span class="op">~</span><span class="va">county</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">scale_x_continuous</span><span class="op">(</span>labels <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"$"</span>, <span class="va">x</span> <span class="op">/</span> <span class="fl">1000</span>, <span class="st">"k"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">theme</span><span class="op">(</span>axis.text.y <span class="op">=</span> <span class="fu">element_blank</span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="st">"ACS estimate"</span>,
+       y <span class="op">=</span> <span class="st">""</span>,
+       title <span class="op">=</span> <span class="st">"Median home values by Census tract, 2015-2019 ACS"</span><span class="op">)</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:faceted-housing"></span>
+<img src="04-visualizing-census-data_files/figure-html/faceted-housing-1.png" alt="An example faceted density plot" width="100%"><p class="caption">
+Figure 4.13: An example faceted density plot
+</p>
+</div>
+<p>The side-by-side comparative graphics show how the value distributions vary between the three counties. Home values in all three counties are common around $250,000, but Multnomah County has some Census tracts that represent the highest values in the dataset.</p>
+</div>
+<div id="advanced-visualization-with-ggplot2-extensions" class="section level2" number="4.6">
+<h2>
+<span class="header-section-number">4.6</span> Advanced visualization with ggplot2 extensions<a class="anchor" aria-label="anchor" href="#advanced-visualization-with-ggplot2-extensions"><i class="fas fa-link"></i></a>
+</h2>
+<p>While the core functionality of <strong>ggplot2</strong> is very powerful, a notable advantage of using <strong>ggplot2</strong> for visualization is the contributions made by its user community in the form of <em>extensions</em>. <strong>ggplot2</strong> extensions are packages developed by practitioners outside the core <strong>ggplot2</strong> development team that add functionality to the package. I encourage you to <a href="https://exts.ggplot2.tidyverse.org/">review the gallery of <strong>ggplot2</strong> extensions from the extensions website</a>; I highlight some notable examples below.</p>
+<div id="ggridges" class="section level3" number="4.6.1">
+<h3>
+<span class="header-section-number">4.6.1</span> ggridges<a class="anchor" aria-label="anchor" href="#ggridges"><i class="fas fa-link"></i></a>
+</h3>
+<p>The <strong>ggridges</strong> package <span class="citation">(<a href="references.html#ref-wilke2021" role="doc-biblioref">Wilke 2021</a>)</span> adapts the concept of the faceted density plot to generate <em>ridgeline plots</em>, in which the densities overlap one another. The example below creates a ridgeline plot using the Portland-area home value data; <code><a href="https://wilkelab.org/ggridges/reference/geom_density_ridges.html">geom_density_ridges()</a></code> generates the ridgelines, and <code><a href="https://wilkelab.org/ggridges/reference/theme_ridges.html">theme_ridges()</a></code> styles the plot in an appropriate manner.</p>
+<div class="sourceCode" id="cb105"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://wilkelab.org/ggridges/">ggridges</a></span><span class="op">)</span>
+
+<span class="fu">ggplot</span><span class="op">(</span><span class="va">housing_val2</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">estimate</span>, y <span class="op">=</span> <span class="va">county</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://wilkelab.org/ggridges/reference/geom_density_ridges.html">geom_density_ridges</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://wilkelab.org/ggridges/reference/theme_ridges.html">theme_ridges</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Median home value: 2015-2019 ACS estimate"</span>, 
+       y <span class="op">=</span> <span class="st">""</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">scale_x_continuous</span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org/reference/label_dollar.html">dollar</a></span><span class="op">)</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:ggridges"></span>
+<img src="04-visualizing-census-data_files/figure-html/ggridges-1.png" alt="Median home values in Portland-area counties visualized with ggridges" width="100%"><p class="caption">
+Figure 4.14: Median home values in Portland-area counties visualized with ggridges
+</p>
+</div>
+<p>The overlapping density “ridges” offer both a pleasing aesthetic but also a practical way to compare the different data distributions. As <strong>ggridges</strong> extends <strong>ggplot2</strong>, analysts can style the different chart components to their liking using the methods introduced earlier in this chapter.</p>
+</div>
+<div id="ggbeeswarm" class="section level3" number="4.6.2">
+<h3>
+<span class="header-section-number">4.6.2</span> ggbeeswarm<a class="anchor" aria-label="anchor" href="#ggbeeswarm"><i class="fas fa-link"></i></a>
+</h3>
+<p>The <strong>ggbeeswarm</strong> package <span class="citation">(<a href="references.html#ref-clarke2017" role="doc-biblioref">Clarke and Sherrill-Mix 2017</a>)</span> extends ggplot2 by allowing users to generate <em>beeswarm plots</em>, in which clouds of points are jittered to show the overall density of a distribution of data values. Beeswarm plots can be compelling ways to visualize multiple data variables on a chart, such as the distributions of median household income by the racial and ethnic composition of neighborhoods. This is the motivating example for the chart below, which looks at household income by race/ethnicity in New York City. The data wrangling in the first part of the code chunk takes advantage of some of the skills covered in Chapters 2 and 3, allowing for visualization of household income distributions by the largest group in each Census tract.</p>
+<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/eclarke/ggbeeswarm">ggbeeswarm</a></span><span class="op">)</span>
+
+<span class="va">ny_race_income</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs</a></span><span class="op">(</span>
+  geography <span class="op">=</span> <span class="st">"tract"</span>, 
+  state <span class="op">=</span> <span class="st">"NY"</span>,  
+  county <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"New York"</span>, <span class="st">"Bronx"</span>, <span class="st">"Queens"</span>, <span class="st">"Richmond"</span>, <span class="st">"Kings"</span><span class="op">)</span>,
+  variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>White <span class="op">=</span> <span class="st">"B03002_003"</span>, 
+                Black <span class="op">=</span> <span class="st">"B03002_004"</span>, 
+                Asian <span class="op">=</span> <span class="st">"B03002_006"</span>,
+                Hispanic <span class="op">=</span> <span class="st">"B03002_012"</span><span class="op">)</span>, 
+  summary_var <span class="op">=</span> <span class="st">"B19013_001"</span>
+<span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">group_by</span><span class="op">(</span><span class="va">GEOID</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">estimate</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">estimate</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">estimate</span> <span class="op">!=</span> <span class="fl">0</span><span class="op">)</span>
+
+<span class="fu">ggplot</span><span class="op">(</span><span class="va">ny_race_income</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">variable</span>, y <span class="op">=</span> <span class="va">summary_est</span>, color <span class="op">=</span> <span class="va">summary_est</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/ggbeeswarm/man/geom_quasirandom.html">geom_quasirandom</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">coord_flip</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">scale_color_viridis_c</span><span class="op">(</span>guide <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">scale_y_continuous</span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org/reference/label_dollar.html">dollar</a></span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Largest group in Census tract"</span>, 
+       y <span class="op">=</span> <span class="st">"Median household income"</span>, 
+       title <span class="op">=</span> <span class="st">"Household income distribution by largest racial/ethnic group"</span>, 
+       subtitle <span class="op">=</span> <span class="st">"Census tracts, New York City"</span>, 
+       caption <span class="op">=</span> <span class="st">"Data source: 2015-2019 ACS"</span><span class="op">)</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:beeswarm"></span>
+<img src="04-visualizing-census-data_files/figure-html/beeswarm-1.png" alt="A beeswarm plot of median household income by most common racial or ethnic group, NYC Census tracts" width="100%"><p class="caption">
+Figure 4.15: A beeswarm plot of median household income by most common racial or ethnic group, NYC Census tracts
+</p>
+</div>
+<p>The plot shows that the wealthiest neighborhoods in New York City - those with median household incomes exceeding $150,000 - are all plurality or majority non-Hispanic white. However, the chart also illustrates that there are a range of values among neighborhoods with pluralities of the different racial and ethnic groups, suggesting a nuanced portrait of the intersections between race and income inequality in the city.</p>
+</div>
+<div id="geofaceted-plots" class="section level3" number="4.6.3">
+<h3>
+<span class="header-section-number">4.6.3</span> Geofaceted plots<a class="anchor" aria-label="anchor" href="#geofaceted-plots"><i class="fas fa-link"></i></a>
+</h3>
+<p>The next four chapters of the book, Chapters 5 through 8, are all about spatial data, mapping, and spatial analysis. Geographic location can be incorporated into Census data visualizations without using geographic information explicitly by way of the <strong>geofacet</strong> package <span class="citation">(<a href="references.html#ref-hafen2020" role="doc-biblioref">Hafen 2020</a>)</span>. Geofaceted plots are enhanced versions of faceted visualizations that arrange subplots in relationship to their relative geographic location. The geofacet package has <a href="https://hafen.github.io/geofacet/articles/geofacet.html#list-available-grids">over 100 available grids to choose from</a> allowing for faceted plots for US states, counties, and regions around the world. The key is to use a column that can map correctly to information in the geofaceted grid that you are using.</p>
+<p>In the example below, we replicate the population pyramid code above to generate population pyramids for each state in the US. However, we also modify the output data so that the population information reflects the proportion of the overall population for each state so that all states are on consistent scales. The population pyramid code is similar, though the axis information is unnecessary as it will be stripped from the final plot.</p>
+<div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/hafen/geofacet">geofacet</a></span><span class="op">)</span>
+
+<span class="va">us_pyramid_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_estimates.html">get_estimates</a></span><span class="op">(</span>
+  geography <span class="op">=</span> <span class="st">"state"</span>,
+  product <span class="op">=</span> <span class="st">"characteristics"</span>,
+  breakdown <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"SEX"</span>, <span class="st">"AGEGROUP"</span><span class="op">)</span>,
+  breakdown_labels <span class="op">=</span> <span class="cn">TRUE</span>,
+  year <span class="op">=</span> <span class="fl">2019</span>
+<span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="fu">str_detect</span><span class="op">(</span><span class="va">AGEGROUP</span>, <span class="st">"^Age"</span><span class="op">)</span>,
+         <span class="va">SEX</span> <span class="op">!=</span> <span class="st">"Both sexes"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">group_by</span><span class="op">(</span><span class="va">NAME</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">mutate</span><span class="op">(</span>prop <span class="op">=</span> <span class="va">value</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">value</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">mutate</span><span class="op">(</span>prop <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">SEX</span> <span class="op">==</span> <span class="st">"Male"</span>, <span class="op">-</span><span class="va">prop</span>, <span class="va">prop</span><span class="op">)</span><span class="op">)</span>
+
+<span class="fu">ggplot</span><span class="op">(</span><span class="va">us_pyramid_data</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">prop</span>, y <span class="op">=</span> <span class="va">AGEGROUP</span>, fill <span class="op">=</span> <span class="va">SEX</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">geom_col</span><span class="op">(</span>width <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">scale_fill_manual</span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"darkred"</span>, <span class="st">"navy"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://rdrr.io/pkg/geofacet/man/facet_geo.html">facet_geo</a></span><span class="op">(</span><span class="op">~</span><span class="va">NAME</span>, grid <span class="op">=</span> <span class="st">"us_state_with_DC_PR_grid2"</span>,
+            label <span class="op">=</span> <span class="st">"code"</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">theme</span><span class="op">(</span>axis.text <span class="op">=</span> <span class="fu">element_blank</span><span class="op">(</span><span class="op">)</span>,
+        strip.text.x <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">8</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="st">""</span>, 
+       y <span class="op">=</span> <span class="st">""</span>, 
+       title <span class="op">=</span> <span class="st">"Population structure by age and sex"</span>, 
+       fill <span class="op">=</span> <span class="st">""</span>, 
+       caption <span class="op">=</span> <span class="st">"Data source: US Census Bureau population estimates &amp; tidycensus R package"</span><span class="op">)</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:geofacet"></span>
+<img src="04-visualizing-census-data_files/figure-html/geofacet-1.png" alt="Geofaceted population pyramids of US states" width="100%"><p class="caption">
+Figure 4.16: Geofaceted population pyramids of US states
+</p>
+</div>
+<p>The result is a compelling visualization that expresses general geographic relationships and patterns in the data while showing comparative population pyramids for all states. The unique nature of Washington, DC stands out with its large population in their 20s and 30s; we can also compare Utah, the youngest state in the country, with older states in the Northeast.</p>
+<p>If this specific grid arrangement is not to your liking (e.g. Minnesotans may take issue with Wisconsin to the north!), try out some of the other built-in grid options in the package. Also, you can use the <code><a href="https://rdrr.io/pkg/geofacet/man/grid_design.html">grid_design()</a></code> function in the <strong>geofacet</strong> package to pull up an interactive app in which you can design your own grid for use in geofaceted plots!</p>
+</div>
+</div>
+<div id="interactive-visualization-with-plotly" class="section level2" number="4.7">
+<h2>
+<span class="header-section-number">4.7</span> Interactive visualization with plotly<a class="anchor" aria-label="anchor" href="#interactive-visualization-with-plotly"><i class="fas fa-link"></i></a>
+</h2>
+<p>The <strong>htmlwidgets</strong> package <span class="citation">(<a href="references.html#ref-vaidyanathan2020" role="doc-biblioref">Vaidyanathan et al. 2020</a>)</span> provides a bridge between JavaScript libraries for interactive web-based data visualization and the R language. Since 2015, the R community has released hundreds of packages that depend on htmlwidgets and bring interactive data visualization to R. One of the most popular packages for interactive visualization is the <strong>plotly</strong> package <span class="citation">(<a href="references.html#ref-sievert2020" role="doc-biblioref">Sievert 2020</a>)</span>, an interface to the Plotly visualization library.</p>
+<p><strong>plotly</strong> is a well-developed library that allows for many different types of custom visualizations. However, one of the most useful functions in the <strong>plotly</strong> package is arguably the simplest. The <code><a href="https://docs.ropensci.org/plotly/reference/ggplotly.html">ggplotly()</a></code> function can convert an existing <strong>ggplot2</strong> graphic into an interactive web visualization in a single line of code! Let’s try it out here with the <code>utah_pyramid</code> population pyramid:</p>
+<div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://plotly-r.com">plotly</a></span><span class="op">)</span>
+
+<span class="fu"><a href="https://docs.ropensci.org/plotly/reference/ggplotly.html">ggplotly</a></span><span class="op">(</span><span class="va">utah_pyramid</span><span class="op">)</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:plotly-pyramid"></span>
+<div id="htmlwidget-d117d85d9e93845d1d56" style="width:100%;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d117d85d9e93845d1d56">{"x":{"data":[{"orientation":"v","width":[126108,23039,130045,124535,128846,108654,113907,104121,86950,78972,75578,64309,49913,120743,122197,75046,35411,22667],"base":[1.525,16.525,2.525,3.525,4.525,6.525,7.525,8.525,9.525,11.525,12.525,13.525,14.525,0.525,5.525,10.525,15.525,17.525],"x":[63054,11519.5,65022.5,62267.5,64423,54327,56953.5,52060.5,43475,39486,37789,32154.5,24956.5,60371.5,61098.5,37523,17705.5,11333.5],"y":[0.95,0.950000000000003,0.95,0.95,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.95,0.949999999999999,0.949999999999999,0.950000000000001,0.950000000000003],"text":["value:  126108<br />AGEGROUP: Age 5 to 9 years<br />SEX: Female","value:   23039<br />AGEGROUP: Age 80 to 84 years<br />SEX: Female","value:  130045<br />AGEGROUP: Age 10 to 14 years<br />SEX: Female","value:  124535<br />AGEGROUP: Age 15 to 19 years<br />SEX: Female","value:  128846<br />AGEGROUP: Age 20 to 24 years<br />SEX: Female","value:  108654<br />AGEGROUP: Age 30 to 34 years<br />SEX: Female","value:  113907<br />AGEGROUP: Age 35 to 39 years<br />SEX: Female","value:  104121<br />AGEGROUP: Age 40 to 44 years<br />SEX: Female","value:   86950<br />AGEGROUP: Age 45 to 49 years<br />SEX: Female","value:   78972<br />AGEGROUP: Age 55 to 59 years<br />SEX: Female","value:   75578<br />AGEGROUP: Age 60 to 64 years<br />SEX: Female","value:   64309<br />AGEGROUP: Age 65 to 69 years<br />SEX: Female","value:   49913<br />AGEGROUP: Age 70 to 74 years<br />SEX: Female","value:  120743<br />AGEGROUP: Age 0 to 4 years<br />SEX: Female","value:  122197<br />AGEGROUP: Age 25 to 29 years<br />SEX: Female","value:   75046<br />AGEGROUP: Age 50 to 54 years<br />SEX: Female","value:   35411<br />AGEGROUP: Age 75 to 79 years<br />SEX: Female","value:   22667<br />AGEGROUP: Age 85 years and older<br />SEX: Female"],"type":"bar","marker":{"autocolorscale":false,"color":"rgba(139,0,0,0.75)","line":{"width":1.88976377952756,"color":"transparent"}},"name":"Female","legendgroup":"Female","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[132868,137940,129312,135806,111776,117335,108090,89984,76536,72048,59874,45370,19148,15907,127060,129179,76450,30234],"base":[1.525,2.525,3.525,4.525,6.525,7.525,8.525,9.525,11.525,12.525,13.525,14.525,16.525,17.525,0.525,5.525,10.525,15.525],"x":[-66434,-68970,-64656,-67903,-55888,-58667.5,-54045,-44992,-38268,-36024,-29937,-22685,-9574,-7953.5,-63530,-64589.5,-38225,-15117],"y":[0.95,0.95,0.95,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.950000000000003,0.950000000000003,0.95,0.949999999999999,0.949999999999999,0.950000000000001],"text":["value: -132868<br />AGEGROUP: Age 5 to 9 years<br />SEX: Male","value: -137940<br />AGEGROUP: Age 10 to 14 years<br />SEX: Male","value: -129312<br />AGEGROUP: Age 15 to 19 years<br />SEX: Male","value: -135806<br />AGEGROUP: Age 20 to 24 years<br />SEX: Male","value: -111776<br />AGEGROUP: Age 30 to 34 years<br />SEX: Male","value: -117335<br />AGEGROUP: Age 35 to 39 years<br />SEX: Male","value: -108090<br />AGEGROUP: Age 40 to 44 years<br />SEX: Male","value:  -89984<br />AGEGROUP: Age 45 to 49 years<br />SEX: Male","value:  -76536<br />AGEGROUP: Age 55 to 59 years<br />SEX: Male","value:  -72048<br />AGEGROUP: Age 60 to 64 years<br />SEX: Male","value:  -59874<br />AGEGROUP: Age 65 to 69 years<br />SEX: Male","value:  -45370<br />AGEGROUP: Age 70 to 74 years<br />SEX: Male","value:  -19148<br />AGEGROUP: Age 80 to 84 years<br />SEX: Male","value:  -15907<br />AGEGROUP: Age 85 years and older<br />SEX: Male","value: -127060<br />AGEGROUP: Age 0 to 4 years<br />SEX: Male","value: -129179<br />AGEGROUP: Age 25 to 29 years<br />SEX: Male","value:  -76450<br />AGEGROUP: Age 50 to 54 years<br />SEX: Male","value:  -30234<br />AGEGROUP: Age 75 to 79 years<br />SEX: Male"],"type":"bar","marker":{"autocolorscale":false,"color":"rgba(0,0,128,0.75)","line":{"width":1.88976377952756,"color":"transparent"}},"name":"Male","legendgroup":"Male","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":43.7625570776256,"r":7.30593607305936,"b":25.5707762557078,"l":95.7077625570777},"font":{"color":"rgba(0,0,0,1)","family":"Verdana","size":14.6118721461187},"title":{"text":"Population structure in Utah","font":{"color":"rgba(0,0,0,1)","family":"Verdana","size":17.5342465753425},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-151339.25,143444.25],"tickmode":"array","ticktext":["150k","100k","50k","0k","50k","100k"],"tickvals":[-150000,-100000,-50000,0,50000,100000],"categoryorder":"array","categoryarray":["150k","100k","50k","0k","50k","100k"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"Verdana","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"","font":{"color":"rgba(0,0,0,1)","family":"Verdana","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.4,18.6],"tickmode":"array","ticktext":["0 to 4","5 to 9","10 to 14","15 to 19","20 to 24","25 to 29","30 to 34","35 to 39","40 to 44","45 to 49","50 to 54","55 to 59","60 to 64","65 to 69","70 to 74","75 to 79","80 to 84","85 and older"],"tickvals":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18],"categoryorder":"array","categoryarray":["0 to 4","5 to 9","10 to 14","15 to 19","20 to 24","25 to 29","30 to 34","35 to 39","40 to 44","45 to 49","50 to 54","55 to 59","60 to 64","65 to 69","70 to 74","75 to 79","80 to 84","85 and older"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"Verdana","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"2019 Census Bureau population estimate","font":{"color":"rgba(0,0,0,1)","family":"Verdana","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"Verdana","size":11.689497716895},"y":0.96751968503937},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","showSendToCloud":false},"source":"A","attrs":{"375650681efa":{"x":{},"y":{},"fill":{},"type":"bar"}},"cur_data":"375650681efa","visdat":{"375650681efa":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script><p class="caption">
+Figure 4.17: An interactive population pyramid rendered with ggplotly
+</p>
+</div>
+<p>Try hovering your cursor over the different bars; this reveals a tooltip that shares information about the data. The legend is interactive, as data series can be clicked on and off; viewers can also pan and zoom on the plot using the toolbar that appears in the upper right corner of the visualization. Interactive graphics like this are an excellent way to facilitate additional data exploration, and can be polished further for presentation on the web.</p>
+</div>
+<div id="exercises-2" class="section level2" number="4.8">
+<h2>
+<span class="header-section-number">4.8</span> Exercises<a class="anchor" aria-label="anchor" href="#exercises-2"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li><p>Choose a different variable in the ACS and/or a different location and create a margin of error visualization of your own.</p></li>
+<li><p>Modify the population pyramid code to create a different, customized population pyramid. You can choose a different location (state or county), different colors/plot design, or some combination!</p></li>
+</ul>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="wrangling-census-data-with-tidyverse-tools.html"><span class="header-section-number">3</span> Wrangling Census data with tidyverse tools</a></div>
+<div class="next"><a href="census-geographic-data-and-applications-in-r.html"><span class="header-section-number">5</span> Census geographic data and applications in R</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#exploring-us-census-data-with-visualization"><span class="header-section-number">4</span> Exploring US Census data with visualization</a></li>
+<li>
+<a class="nav-link" href="#basic-census-visualization-with-ggplot2"><span class="header-section-number">4.1</span> Basic Census visualization with ggplot2</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#getting-started-with-ggplot2"><span class="header-section-number">4.1.1</span> Getting started with ggplot2</a></li>
+<li><a class="nav-link" href="#improving-plot-legibility"><span class="header-section-number">4.1.2</span> Improving plot legibility</a></li>
+<li><a class="nav-link" href="#custom-styling-of-ggplot2-charts"><span class="header-section-number">4.1.3</span> Custom styling of ggplot2 charts</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#visualizing-margins-of-error"><span class="header-section-number">4.2</span> Visualizing margins of error</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#data-setup"><span class="header-section-number">4.2.1</span> Data setup</a></li>
+<li><a class="nav-link" href="#using-error-bars-for-margins-of-error"><span class="header-section-number">4.2.2</span> Using error bars for margins of error</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#visualizing-acs-estimates-over-time"><span class="header-section-number">4.3</span> Visualizing ACS estimates over time</a></li>
+<li>
+<a class="nav-link" href="#exploring-age-and-sex-structure-with-population-pyramids"><span class="header-section-number">4.4</span> Exploring age and sex structure with population pyramids</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#preparing-data-from-the-population-estimates-api"><span class="header-section-number">4.4.1</span> Preparing data from the Population Estimates API</a></li>
+<li><a class="nav-link" href="#designing-and-styling-the-population-pyramid"><span class="header-section-number">4.4.2</span> Designing and styling the population pyramid</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#visualizing-group-wise-comparisons"><span class="header-section-number">4.5</span> Visualizing group-wise comparisons</a></li>
+<li>
+<a class="nav-link" href="#advanced-visualization-with-ggplot2-extensions"><span class="header-section-number">4.6</span> Advanced visualization with ggplot2 extensions</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#ggridges"><span class="header-section-number">4.6.1</span> ggridges</a></li>
+<li><a class="nav-link" href="#ggbeeswarm"><span class="header-section-number">4.6.2</span> ggbeeswarm</a></li>
+<li><a class="nav-link" href="#geofaceted-plots"><span class="header-section-number">4.6.3</span> Geofaceted plots</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#interactive-visualization-with-plotly"><span class="header-section-number">4.7</span> Interactive visualization with plotly</a></li>
+<li><a class="nav-link" href="#exercises-2"><span class="header-section-number">4.8</span> Exercises</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Analyzing US Census Data</strong>: Methods, Maps, and Models in R" was written by Kyle E. Walker. It was last built on 2021-08-27.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

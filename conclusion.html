@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Conclusion | Analyzing US Census Data</title>
+<meta name="author" content="Kyle E. Walker">
+<meta name="description" content="As its title suggests, this book is an overview of methods, maps, and models that can be used to complete applied social research projects with R and Census data. As the breadth of approaches and...">
+<meta name="generator" content="bookdown 0.22.17 with bs4_book()">
+<meta property="og:title" content="Conclusion | Analyzing US Census Data">
+<meta property="og:type" content="book">
+<meta property="og:description" content="As its title suggests, this book is an overview of methods, maps, and models that can be used to complete applied social research projects with R and Census data. As the breadth of approaches and...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Conclusion | Analyzing US Census Data">
+<meta name="twitter:description" content="As its title suggests, this book is an overview of methods, maps, and models that can be used to complete applied social research projects with R and Census data. As the breadth of approaches and...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.10.5/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.5.1/tabs.js"></script><script src="libs/bs3compat-0.2.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script><script src="libs/plotly-binding-4.9.3/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet">
+<script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="libs/plotly-main-1.57.1/plotly-latest.min.js"></script><script src="libs/d3-bundle-5.16.0/d3-bundle.min.js"></script><script src="libs/d3-lasso-0.0.5/d3-lasso.min.js"></script><script src="libs/save-svg-as-png-1.4.17/save-svg-as-png.min.js"></script><link href="libs/ggiraphjs-0.4.1/ggiraphjs.min.css" rel="stylesheet">
+<script src="libs/ggiraphjs-0.4.1/ggiraphjs.min.js"></script><script src="libs/girafe-binding-0.7.10/girafe.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-6KFYZ3W36Z"></script><script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-6KFYZ3W36Z');
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS -->
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="Methods, Maps, and Models in R">Analyzing US Census Data</a>:
+        <small class="text-muted">Methods, Maps, and Models in R</small>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Preface</a></li>
+<li><a class="" href="the-united-states-census-and-the-r-programming-language.html"><span class="header-section-number">1</span> The United States Census and the R programming language</a></li>
+<li><a class="" href="an-introduction-to-tidycensus.html"><span class="header-section-number">2</span> An introduction to tidycensus</a></li>
+<li><a class="" href="wrangling-census-data-with-tidyverse-tools.html"><span class="header-section-number">3</span> Wrangling Census data with tidyverse tools</a></li>
+<li><a class="" href="exploring-us-census-data-with-visualization.html"><span class="header-section-number">4</span> Exploring US Census data with visualization</a></li>
+<li><a class="" href="census-geographic-data-and-applications-in-r.html"><span class="header-section-number">5</span> Census geographic data and applications in R</a></li>
+<li><a class="" href="mapping-census-data-with-r.html"><span class="header-section-number">6</span> Mapping Census data with R</a></li>
+<li><a class="" href="spatial-analysis-with-us-census-data.html"><span class="header-section-number">7</span> Spatial analysis with US Census data</a></li>
+<li><a class="" href="modeling-us-census-data.html"><span class="header-section-number">8</span> Modeling US Census data</a></li>
+<li><a class="" href="introduction-to-census-microdata.html"><span class="header-section-number">9</span> Introduction to Census microdata</a></li>
+<li><a class="" href="analyzing-census-microdata.html"><span class="header-section-number">10</span> Analyzing Census microdata</a></li>
+<li><a class="" href="other-census-and-government-data-resources.html"><span class="header-section-number">11</span> Other Census and government data resources</a></li>
+<li><a class="" href="working-with-census-data-outside-the-united-states.html"><span class="header-section-number">12</span> Working with Census data outside the United States</a></li>
+<li><a class="active" href="conclusion.html">Conclusion</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="conclusion" class="section level1 unnumbered">
+<h1>Conclusion<a class="anchor" aria-label="anchor" href="#conclusion"><i class="fas fa-link"></i></a>
+</h1>
+<p>As its title suggests, this book is an overview of methods, maps, and models that can be used to complete applied social research projects with R and Census data. As the breadth of approaches and packages covered in the book suggests, R’s ecosystems for working on these topics are large and constantly changing. While I have chosen to focus on packages that I have developed (<strong>tidycensus</strong>, <strong>tigris</strong>, <strong>mapboxapi</strong>, <strong>crsuggest</strong>, and <strong>idbr</strong>) and frameworks like <strong>tidyverse</strong> and <strong>sf</strong> that integrate with those packages, there are many other directions you could go to learn more.</p>
+<p>Census data analysts may be interested in delving deeper into the packages introduced in Chapter <a href="other-census-and-government-data-resources.html#other-census-and-government-data-resources">11</a>, such as <strong>censusapi</strong>, <strong>ipumsr</strong>, and <strong>lehdr</strong>. Geospatial analysts will want to read <em>Geocomputation with R</em> <span class="citation">(<a href="references.html#ref-lovelace_geocomputation_2019" role="doc-biblioref">Lovelace, Nowosad, and Muenchow 2019</a>)</span> to gain a strong command of R’s capabilities for spatial data. Those interested in machine learning and prediction, which is not a major focus of this book, should read Ken Steif’s <em>Public Policy Analytics</em> <span class="citation">(<a href="references.html#ref-steif2021" role="doc-biblioref">Steif 2021</a>)</span>, which uses some of the skills learned in this book in applied machine learning workflows for public policy. Readers who want to learn more about modeling, especially within a tidyverse framework, should keep an eye on <em>Tidy Modeling with R</em> <span class="citation">(<a href="references.html#ref-kuhn2021" role="doc-biblioref">Kuhn and Silge 2021</a>)</span>, which is not yet complete at the time of this writing but when finished will offer a comprehensive overview of how to model data in a tidyverse-friendly way.</p>
+<p>My own packages outlined in this book will also be updated as new data are made available. The top development priority for <strong>tidycensus</strong> is making access to 2020 Census data seamless once they are released to data.census.gov and the Census API, allowing users to work with 2020 Census data in the exact same way they’ve been working with other datasets in the package. The Census Bureau also recently released <a href="https://www.census.gov/data/developers/guidance/microdata-api-user-guide.html">official documentation for the Microdata API</a>, which includes support for the <a href="https://www.census.gov/programs-surveys/cps.html">Current Population Survey</a>; a <code>get_cps()</code> function is likely to be the next major new feature in <strong>tidycensus</strong>. Other feature suggestions are welcome on the <a href="https://github.com/walkerke/tidycensus/issues"><strong>tidycensus</strong> GitHub issues page</a>, as are user contributions!</p>
+<p>My future development work on these packages will certainly be done with recent threats to Census data quality in mind. While we are very fortunate in the R community to have such a breadth of data resources at our fingertips, it is important to be aware of how ephemeral that can be. The Census Bureau will not be releasing 2020 1-year ACS estimates due to data collection problems during the COVID-19 pandemic, breaking time series workflows that use 1-year ACS data. While the 5-year 2016-2020 ACS dataset will still be released, COVID-19 data collection problems will be present in ACS samples for the next several years.</p>
+<p>The Census data community has also been grappling with the tension between preserving respondent privacy and maintaining data quality. The 2020 decennial Census data are released using <em>differential privacy</em>, an algorithmic approach that infuses noise into datasets in an attempt to preserve overall population characteristics while limiting the possibility of re-identifying individuals in the data <span class="citation">(<a href="references.html#ref-abowd2018" role="doc-biblioref">Abowd 2018</a>)</span>. Advocates for differential privacy argue that disclosure avoidance algorithms are necessary to prevent re-identification attacks which are important for the Census Bureau given modern database reconstruction technologies <span class="citation">(<a href="references.html#ref-implemen2020" role="doc-biblioref">Hawes 2020</a>)</span>. Critics of this approach, however, have argued that differential privacy will have a disastrous impact on Census data quality <span class="citation">(<a href="references.html#ref-ruggles2019" role="doc-biblioref">Ruggles et al. 2019</a>)</span>, potentially making microdata and block-level aggregate data unusable. The loss in data quality also threatens to disproportionately impact rural populations and racial &amp; ethnic minorities. This will make it difficult to evaluate racial health disparities <span class="citation">(<a href="references.html#ref-santos-lozada2020" role="doc-biblioref">Santos-Lozada, Howard, and Verdery 2020</a>)</span>, accurately estimate COVID-19 mortality rates <span class="citation">(<a href="references.html#ref-hauer2021" role="doc-biblioref">Hauer and Santos-Lozada 2021</a>)</span>, and complete countless other analyses that require access to high-quality small-area Census data. More broadly, <span class="citation"><a href="references.html#ref-ruggles2021a" role="doc-biblioref">Ruggles and Van Riper</a> (<a href="references.html#ref-ruggles2021a" role="doc-biblioref">2021</a>)</span> argue that re-identification attacks with database reconstruction are little different than what is produced with a random number generator, and that the actual threats to the population from Census data re-identification are already publicly available on the internet.</p>
+<p>Census data have also faced threats from higher levels of authority. A major initiative of the Trump Administration was to introduce a citizenship question on the decennial Census, which is currently only asked on the American Community Survey. This move, which was ultimately rejected by the United States Supreme Court, was widely interpreted as an effort to suppress responses in nonwhite and immigrant communities <span class="citation">(<a href="references.html#ref-frey_2019" role="doc-biblioref">Frey 2019</a>)</span>. It also may have been a precursor to an effort to make Congressional apportionment contingent only on the <em>citizen</em> population rather than the entire population as is mandated in the US Constitution. Although this effort did not succeed, the Trump Administration engaged in other efforts to underfund and undermine the success of the Census, which was exacerbated by data collection difficulties during the COVID-19 pandemic <span class="citation">(<a href="references.html#ref-bahrampour2021" role="doc-biblioref">Bahrampour, Rabinowitz, and Mellnik 2021</a>)</span>.</p>
+<p>This discussion is not intended to conclude the book on a cynical note. Rather, it is to reinforce one of the book’s central take-aways: the critical importance of <strong>high-quality, open data</strong> and <strong>free and open source software</strong> to analyze that data. Census data are a democratizing force in many ways. They allow communities to analyze their own characteristics and use that information to solve problems that may otherwise be overlooked by higher levels of government. They allow analysts to independently evaluate re-districting scenarios and call them out if they are disenfranchising local residents. They help us “see” latent inequalities that manifest themselves within societies and propose solutions to rectify them.</p>
+<p>These initiatives are facilitated not only by open data, but by open tools to analyze them. As discussed earlier in this book, even open government datasets have traditionally been hard to work with. They may have been stored in bulky datasets that require navigation of complex file systems, and required expensive commercial software platforms to process and analyze them. In contrast, resources like R and the Census API put Census data queries at the fingertips of the user, and integrate with data analysis tools in ways that help analysts get to insights faster. This is not to dismiss the learning curve of R and the methods and skills necessary to generate and understand those insights. Rather, it is to stress that open data and open source software reduce financial and logistical barriers to access, creating a larger and more diverse user community that can generate unique insights and help solve problems. Contributing to this effort is one of my main reasons for writing this book and publishing it as an open website, and I very much appreciate all of you who have taken the time to read through it.</p>
+
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="working-with-census-data-outside-the-united-states.html"><span class="header-section-number">12</span> Working with Census data outside the United States</a></div>
+<div class="next"><a href="references.html">References</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#conclusion">Conclusion</a></li></ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Analyzing US Census Data</strong>: Methods, Maps, and Models in R" was written by Kyle E. Walker. It was last built on 2021-08-27.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>
