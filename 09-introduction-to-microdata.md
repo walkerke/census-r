@@ -933,92 +933,92 @@ style_data(twostate_puma_subset, caption = "Data for PUMA 00500 in Wyoming and P
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:left;"> 2015000003167 </td>
+   <td style="text-align:left;"> 2015000000582 </td>
    <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 22 </td>
-   <td style="text-align:right;"> 22 </td>
+   <td style="text-align:right;"> 17 </td>
+   <td style="text-align:right;"> 17 </td>
    <td style="text-align:right;"> 55 </td>
    <td style="text-align:left;"> 05001 </td>
    <td style="text-align:left;"> 49 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2015000003167 </td>
+   <td style="text-align:left;"> 2015000000582 </td>
    <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 22 </td>
-   <td style="text-align:right;"> 28 </td>
-   <td style="text-align:right;"> 50 </td>
-   <td style="text-align:left;"> 05001 </td>
-   <td style="text-align:left;"> 49 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2015000003167 </td>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 22 </td>
+   <td style="text-align:right;"> 17 </td>
    <td style="text-align:right;"> 14 </td>
-   <td style="text-align:right;"> 15 </td>
+   <td style="text-align:right;"> 51 </td>
    <td style="text-align:left;"> 05001 </td>
    <td style="text-align:left;"> 49 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2015000003167 </td>
-   <td style="text-align:right;"> 4 </td>
-   <td style="text-align:right;"> 22 </td>
+   <td style="text-align:left;"> 2015000000582 </td>
+   <td style="text-align:right;"> 3 </td>
    <td style="text-align:right;"> 17 </td>
-   <td style="text-align:right;"> 12 </td>
-   <td style="text-align:left;"> 05001 </td>
-   <td style="text-align:left;"> 49 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2015000003167 </td>
-   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 23 </td>
    <td style="text-align:right;"> 22 </td>
-   <td style="text-align:right;"> 17 </td>
-   <td style="text-align:right;"> 9 </td>
    <td style="text-align:left;"> 05001 </td>
    <td style="text-align:left;"> 49 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2015000006810 </td>
+   <td style="text-align:left;"> 2015000007011 </td>
    <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 9 </td>
-   <td style="text-align:right;"> 23 </td>
+   <td style="text-align:right;"> 71 </td>
+   <td style="text-align:right;"> 71 </td>
+   <td style="text-align:right;"> 26 </td>
    <td style="text-align:left;"> 05001 </td>
    <td style="text-align:left;"> 49 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2015000008464 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 24 </td>
-   <td style="text-align:right;"> 24 </td>
-   <td style="text-align:right;"> 23 </td>
-   <td style="text-align:left;"> 05001 </td>
-   <td style="text-align:left;"> 49 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2015000008464 </td>
+   <td style="text-align:left;"> 2015000007011 </td>
    <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 24 </td>
-   <td style="text-align:right;"> 23 </td>
-   <td style="text-align:right;"> 22 </td>
+   <td style="text-align:right;"> 71 </td>
+   <td style="text-align:right;"> 25 </td>
+   <td style="text-align:right;"> 49 </td>
    <td style="text-align:left;"> 05001 </td>
    <td style="text-align:left;"> 49 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2015000010667 </td>
+   <td style="text-align:left;"> 2015000007011 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 71 </td>
+   <td style="text-align:right;"> 32 </td>
+   <td style="text-align:right;"> 26 </td>
+   <td style="text-align:left;"> 05001 </td>
+   <td style="text-align:left;"> 49 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2015000007382 </td>
    <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 11 </td>
-   <td style="text-align:right;"> 12 </td>
-   <td style="text-align:right;"> 38 </td>
+   <td style="text-align:right;"> 17 </td>
+   <td style="text-align:right;"> 17 </td>
+   <td style="text-align:right;"> 33 </td>
    <td style="text-align:left;"> 00500 </td>
    <td style="text-align:left;"> 56 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2015000010667 </td>
+   <td style="text-align:left;"> 2015000014560 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 56 </td>
+   <td style="text-align:left;"> 00500 </td>
+   <td style="text-align:left;"> 56 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2015000017683 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 17 </td>
+   <td style="text-align:right;"> 16 </td>
+   <td style="text-align:right;"> 54 </td>
+   <td style="text-align:left;"> 00500 </td>
+   <td style="text-align:left;"> 56 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2015000017683 </td>
    <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 11 </td>
-   <td style="text-align:right;"> 14 </td>
-   <td style="text-align:right;"> 36 </td>
+   <td style="text-align:right;"> 17 </td>
+   <td style="text-align:right;"> 7 </td>
+   <td style="text-align:right;"> 54 </td>
    <td style="text-align:left;"> 00500 </td>
    <td style="text-align:left;"> 56 </td>
   </tr>
