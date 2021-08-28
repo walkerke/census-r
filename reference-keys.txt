@@ -162,6 +162,7 @@ tab:inspect-dfw
 fig:network-plot
 tab:pca-tibble-show
 fig:pca-tibble-plot
+fig:pca-model
 fig:residuals
 fig:residual-scatterplot
 fig:map-local-r2

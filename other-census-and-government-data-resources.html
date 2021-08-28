@@ -10,10 +10,13 @@
 <meta name="generator" content="bookdown 0.22.17 with bs4_book()">
 <meta property="og:title" content="Chapter 11 Other Census and government data resources | Analyzing US Census Data">
 <meta property="og:type" content="book">
+<meta property="og:url" content="https://walker-data.com/census-r/other-census-and-government-data-resources.html">
+<meta property="og:image" content="https://walker-data.com/census-r/04-visualizing-census-data_files/figure-html/visualize-error-bars-1.png">
 <meta property="og:description" content="Most of the examples covered in the book to this point use data from recent US Census Bureau datasets such as the Decennial Census since 2000 and the American Community Survey. These datasets are...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 11 Other Census and government data resources | Analyzing US Census Data">
 <meta name="twitter:description" content="Most of the examples covered in the book to this point use data from recent US Census Bureau datasets such as the Decennial Census since 2000 and the American Community Survey. These datasets are...">
+<meta name="twitter:image" content="https://walker-data.com/census-r/04-visualizing-census-data_files/figure-html/visualize-error-bars-1.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.10.5/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.5.1/tabs.js"></script><script src="libs/bs3compat-0.2.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -137,7 +140,7 @@ Figure 11.2: NHGIS Select Data screen
 ## Reading geography...
 ## options:        ENCODING=latin1 
 ## Reading layer `US_tract_1910' from data source 
-##   `/tmp/Rtmpmb1ikL/file431626c2dcbb/US_tract_1910.shp' using driver `ESRI Shapefile'
+##   `/tmp/RtmpZPuwCU/file6ebf417c57fa/US_tract_1910.shp' using driver `ESRI Shapefile'
 ## Simple feature collection with 1989 features and 6 fields
 ## Geometry type: MULTIPOLYGON
 ## Dimension:     XY
@@ -788,66 +791,6 @@ NAICS2017
 48
 </td>
 <td style="text-align:left;">
-035
-</td>
-<td style="text-align:left;">
-261
-</td>
-<td style="text-align:left;">
-4186
-</td>
-<td style="text-align:left;">
-0500000US48035
-</td>
-<td style="text-align:left;">
-72
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-48
-</td>
-<td style="text-align:left;">
-229
-</td>
-<td style="text-align:left;">
-37
-</td>
-<td style="text-align:left;">
-742
-</td>
-<td style="text-align:left;">
-0500000US48229
-</td>
-<td style="text-align:left;">
-72
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-48
-</td>
-<td style="text-align:left;">
-311
-</td>
-<td style="text-align:left;">
-26
-</td>
-<td style="text-align:left;">
-646
-</td>
-<td style="text-align:left;">
-0500000US48311
-</td>
-<td style="text-align:left;">
-72
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-48
-</td>
-<td style="text-align:left;">
 055
 </td>
 <td style="text-align:left;">
@@ -918,6 +861,66 @@ NAICS2017
 </td>
 <td style="text-align:left;">
 0500000US48383
+</td>
+<td style="text-align:left;">
+72
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+48
+</td>
+<td style="text-align:left;">
+501
+</td>
+<td style="text-align:left;">
+147
+</td>
+<td style="text-align:left;">
+1867
+</td>
+<td style="text-align:left;">
+0500000US48501
+</td>
+<td style="text-align:left;">
+72
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+48
+</td>
+<td style="text-align:left;">
+189
+</td>
+<td style="text-align:left;">
+1187
+</td>
+<td style="text-align:left;">
+15947
+</td>
+<td style="text-align:left;">
+0500000US48189
+</td>
+<td style="text-align:left;">
+72
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+48
+</td>
+<td style="text-align:left;">
+419
+</td>
+<td style="text-align:left;">
+505
+</td>
+<td style="text-align:left;">
+9836
+</td>
+<td style="text-align:left;">
+0500000US48419
 </td>
 <td style="text-align:left;">
 72
@@ -3481,7 +3484,7 @@ A10
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Analyzing US Census Data</strong>: Methods, Maps, and Models in R" was written by Kyle E. Walker. It was last built on 2021-08-27.</p>
+    <p>"<strong>Analyzing US Census Data</strong>: Methods, Maps, and Models in R" was written by Kyle E. Walker. It was last built on 2021-08-28.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

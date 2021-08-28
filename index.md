@@ -2,7 +2,7 @@
 title: "Analyzing US Census Data"
 subtitle: "Methods, Maps, and Models in R"
 author: "Kyle E. Walker"
-date: "2021-08-27"
+date: "2021-08-28"
 site: bookdown::bookdown_site
 knit: bookdown::render_book
 output: bookdown::bs4_book
@@ -11,6 +11,8 @@ bibliography: [references.bib]
 biblio-style: apalike
 link-citations: yes
 github-repo: walkerke/census-with-r-book
+url: "https://walker-data.com/census-r"
+cover-image: "04-visualizing-census-data_files/figure-html/visualize-error-bars-1.png"
 description: "This book is an overview of how practitioners can acquire, wrangle, visualize, and model US Census data with the R programming language."
 ---
 
