@@ -49,110 +49,110 @@ Let's take a quick look at our data:
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:left;"> 2015000000232 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 18 </td>
-   <td style="text-align:right;"> 18 </td>
-   <td style="text-align:right;"> 36 </td>
-   <td style="text-align:left;"> 28 </td>
-   <td style="text-align:left;"> 2 </td>
-   <td style="text-align:left;"> Mississippi/MS </td>
-   <td style="text-align:left;"> Female </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2015000000232 </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 18 </td>
-   <td style="text-align:right;"> 18 </td>
-   <td style="text-align:right;"> 38 </td>
-   <td style="text-align:left;"> 28 </td>
-   <td style="text-align:left;"> 1 </td>
-   <td style="text-align:left;"> Mississippi/MS </td>
-   <td style="text-align:left;"> Male </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2015000000232 </td>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 18 </td>
-   <td style="text-align:right;"> 17 </td>
-   <td style="text-align:right;"> 4 </td>
-   <td style="text-align:left;"> 28 </td>
-   <td style="text-align:left;"> 1 </td>
-   <td style="text-align:left;"> Mississippi/MS </td>
-   <td style="text-align:left;"> Male </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2015000000274 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 13 </td>
-   <td style="text-align:right;"> 13 </td>
-   <td style="text-align:right;"> 54 </td>
-   <td style="text-align:left;"> 28 </td>
-   <td style="text-align:left;"> 2 </td>
-   <td style="text-align:left;"> Mississippi/MS </td>
-   <td style="text-align:left;"> Female </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2015000000821 </td>
+   <td style="text-align:left;"> 2015000000200 </td>
    <td style="text-align:right;"> 1 </td>
    <td style="text-align:right;"> 9 </td>
    <td style="text-align:right;"> 10 </td>
-   <td style="text-align:right;"> 67 </td>
-   <td style="text-align:left;"> 28 </td>
-   <td style="text-align:left;"> 1 </td>
-   <td style="text-align:left;"> Mississippi/MS </td>
-   <td style="text-align:left;"> Male </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2015000000821 </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 9 </td>
-   <td style="text-align:right;"> 9 </td>
-   <td style="text-align:right;"> 56 </td>
-   <td style="text-align:left;"> 28 </td>
-   <td style="text-align:left;"> 2 </td>
-   <td style="text-align:left;"> Mississippi/MS </td>
-   <td style="text-align:left;"> Female </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2015000001424 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 30 </td>
-   <td style="text-align:right;"> 31 </td>
-   <td style="text-align:right;"> 52 </td>
-   <td style="text-align:left;"> 28 </td>
-   <td style="text-align:left;"> 2 </td>
-   <td style="text-align:left;"> Mississippi/MS </td>
-   <td style="text-align:left;"> Female </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2015000001424 </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 30 </td>
-   <td style="text-align:right;"> 26 </td>
    <td style="text-align:right;"> 53 </td>
    <td style="text-align:left;"> 28 </td>
+   <td style="text-align:left;"> 2 </td>
+   <td style="text-align:left;"> Mississippi/MS </td>
+   <td style="text-align:left;"> Female </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2015000000200 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 9 </td>
+   <td style="text-align:right;"> 16 </td>
+   <td style="text-align:right;"> 33 </td>
+   <td style="text-align:left;"> 28 </td>
    <td style="text-align:left;"> 1 </td>
    <td style="text-align:left;"> Mississippi/MS </td>
    <td style="text-align:left;"> Male </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2015000001424 </td>
+   <td style="text-align:left;"> 2015000000200 </td>
    <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 30 </td>
-   <td style="text-align:right;"> 27 </td>
-   <td style="text-align:right;"> 12 </td>
+   <td style="text-align:right;"> 9 </td>
+   <td style="text-align:right;"> 17 </td>
+   <td style="text-align:right;"> 32 </td>
+   <td style="text-align:left;"> 28 </td>
+   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:left;"> Mississippi/MS </td>
+   <td style="text-align:left;"> Male </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2015000000379 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 23 </td>
+   <td style="text-align:right;"> 23 </td>
+   <td style="text-align:right;"> 42 </td>
+   <td style="text-align:left;"> 28 </td>
+   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:left;"> Mississippi/MS </td>
+   <td style="text-align:left;"> Male </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2015000000379 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 23 </td>
+   <td style="text-align:right;"> 22 </td>
+   <td style="text-align:right;"> 37 </td>
    <td style="text-align:left;"> 28 </td>
    <td style="text-align:left;"> 2 </td>
    <td style="text-align:left;"> Mississippi/MS </td>
    <td style="text-align:left;"> Female </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2015000001621 </td>
+   <td style="text-align:left;"> 2015000000379 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 23 </td>
+   <td style="text-align:right;"> 30 </td>
+   <td style="text-align:right;"> 8 </td>
+   <td style="text-align:left;"> 28 </td>
+   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:left;"> Mississippi/MS </td>
+   <td style="text-align:left;"> Male </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2015000000379 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 23 </td>
+   <td style="text-align:right;"> 30 </td>
+   <td style="text-align:right;"> 7 </td>
+   <td style="text-align:left;"> 28 </td>
+   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:left;"> Mississippi/MS </td>
+   <td style="text-align:left;"> Male </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2015000000530 </td>
    <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 66 </td>
+   <td style="text-align:right;"> 65 </td>
+   <td style="text-align:right;"> 33 </td>
+   <td style="text-align:left;"> 28 </td>
+   <td style="text-align:left;"> 2 </td>
+   <td style="text-align:left;"> Mississippi/MS </td>
+   <td style="text-align:left;"> Female </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2015000000530 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 66 </td>
+   <td style="text-align:right;"> 67 </td>
+   <td style="text-align:right;"> 15 </td>
+   <td style="text-align:left;"> 28 </td>
+   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:left;"> Mississippi/MS </td>
+   <td style="text-align:left;"> Male </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2015000000530 </td>
    <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 66 </td>
    <td style="text-align:right;"> 55 </td>
+   <td style="text-align:right;"> 5 </td>
    <td style="text-align:left;"> 28 </td>
    <td style="text-align:left;"> 2 </td>
    <td style="text-align:left;"> Mississippi/MS </td>
@@ -398,9 +398,9 @@ To analyze rent burdens with respect to the marital status and race/ethnicity of
 ms_hh_recoded <- ms_hh_data %>%
   mutate(
     race_ethnicity = case_when(
-      RAC1P == "1" ~ "White",
-      RAC1P == "2" ~ "Black",
-      HISP == "01" ~ "Hispanic",
+      HISP != "01" ~ "Hispanic",
+      HISP == "01" & RAC1P == "1" ~ "White",
+      HISP == "01" & RAC1P == "2" ~ "Black",
       TRUE ~ "Other"
     ),
     married = case_when(
@@ -437,32 +437,32 @@ We can now check our result:
   <tr>
    <td style="text-align:left;"> Black </td>
    <td style="text-align:left;"> Married </td>
-   <td style="text-align:right;"> 0.1822724 </td>
+   <td style="text-align:right;"> 0.1821176 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Black </td>
    <td style="text-align:left;"> Not married </td>
-   <td style="text-align:right;"> 0.4172115 </td>
+   <td style="text-align:right;"> 0.4167467 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Hispanic </td>
    <td style="text-align:left;"> Married </td>
-   <td style="text-align:right;"> 0.1999197 </td>
+   <td style="text-align:right;"> 0.1723502 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Hispanic </td>
    <td style="text-align:left;"> Not married </td>
-   <td style="text-align:right;"> 0.2924286 </td>
+   <td style="text-align:right;"> 0.3006062 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> White </td>
    <td style="text-align:left;"> Married </td>
-   <td style="text-align:right;"> 0.1375126 </td>
+   <td style="text-align:right;"> 0.1349339 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> White </td>
    <td style="text-align:left;"> Not married </td>
-   <td style="text-align:right;"> 0.3269690 </td>
+   <td style="text-align:right;"> 0.3299732 </td>
   </tr>
 </tbody>
 </table>
@@ -681,9 +681,9 @@ The `survey_count()` function returns tabulations for each household type by PUM
 ms_svy_summary <- ms_hh_svy %>%
   mutate(
     race_ethnicity = case_when(
-      RAC1P == "1" ~ "White",
-      RAC1P == "2" ~ "Black",
-      HISP == "01" ~ "Hispanic",
+      HISP != "01" ~ "Hispanic",
+      HISP == "01" & RAC1P == "1" ~ "White",
+      HISP == "01" & RAC1P == "2" ~ "Black",
       TRUE ~ "Other"
     ),
     married = case_when(
@@ -713,38 +713,38 @@ ms_svy_summary <- ms_hh_svy %>%
   <tr>
    <td style="text-align:left;"> Black </td>
    <td style="text-align:left;"> Married </td>
-   <td style="text-align:right;"> 0.1822724 </td>
-   <td style="text-align:right;"> 0.0133620 </td>
+   <td style="text-align:right;"> 0.1821176 </td>
+   <td style="text-align:right;"> 0.0133532 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Black </td>
    <td style="text-align:left;"> Not married </td>
-   <td style="text-align:right;"> 0.4172115 </td>
-   <td style="text-align:right;"> 0.0065800 </td>
+   <td style="text-align:right;"> 0.4167467 </td>
+   <td style="text-align:right;"> 0.0065519 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Hispanic </td>
    <td style="text-align:left;"> Married </td>
-   <td style="text-align:right;"> 0.1999197 </td>
-   <td style="text-align:right;"> 0.0414072 </td>
+   <td style="text-align:right;"> 0.1723502 </td>
+   <td style="text-align:right;"> 0.0323387 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Hispanic </td>
    <td style="text-align:left;"> Not married </td>
-   <td style="text-align:right;"> 0.2924286 </td>
-   <td style="text-align:right;"> 0.0384703 </td>
+   <td style="text-align:right;"> 0.3006062 </td>
+   <td style="text-align:right;"> 0.0292211 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> White </td>
    <td style="text-align:left;"> Married </td>
-   <td style="text-align:right;"> 0.1375126 </td>
-   <td style="text-align:right;"> 0.0095143 </td>
+   <td style="text-align:right;"> 0.1349339 </td>
+   <td style="text-align:right;"> 0.0100294 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> White </td>
    <td style="text-align:left;"> Not married </td>
-   <td style="text-align:right;"> 0.3269690 </td>
-   <td style="text-align:right;"> 0.0077582 </td>
+   <td style="text-align:right;"> 0.3299732 </td>
+   <td style="text-align:right;"> 0.0078680 </td>
   </tr>
 </tbody>
 </table>
