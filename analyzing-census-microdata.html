@@ -80,7 +80,7 @@
 <span class="header-section-number">10</span> Analyzing Census microdata<a class="anchor" aria-label="anchor" href="#analyzing-census-microdata"><i class="fas fa-link"></i></a>
 </h1>
 <p>A major benefit of using the individual-level microdata returned by <code><a href="https://walker-data.com/tidycensus/reference/get_pums.html">get_pums()</a></code> is the ability to create detailed, granular estimates of ACS data. While the aggregate ACS data available with <code><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs()</a></code> includes tens of thousands of indicators to choose from, researchers and analysts still may be interested in cross-tabulations not available in the aggregate files. Additionally, microdata helps researchers design statistical models to assess demographic relationships at the individual level in a way not possible with aggregate data.</p>
-<p>Analysts must pay careful attention to the structure of the PUMS datasets in order to produce accurate estimates and handle errors appropriately. PUMS datasets are <em>weighted</em> samples, in which each person or household is not considered unique or individual, but rather representative of multiple other persons or households. In turn, analyses and tabulations using PUMS data must use appropriate tools for handling weighting variables to accurately produce estimates. Fortunately, tidyverse tools like <strong>dplyr</strong>, covered elsewhere in this book, are excellent for producing these tabulations and handling survey weights.</p>
+<p>Analysts must pay careful attention to the structure of the PUMS datasets in order to produce accurate estimates and handle errors appropriately. PUMS datasets are <em>weighted</em> samples, in which each person or household is not considered unique or individual, but rather representative of multiple other persons or households. In turn, analyses and tabulations using PUMS data must use appropriate tools for handling weighting variables to accurately produce estimates. Fortunately, tidyverse tools like <strong>dplyr</strong>, covered elsewhere in this book, are excellent for producing these tabulations and handling survey weights</p>
 <p>As covered in Chapter 3, data from the American Community Survey are based on a sample and in turn characterized by error. This means that ACS data acquired with <code><a href="https://walker-data.com/tidycensus/reference/get_pums.html">get_pums()</a></code> are similarly characterized by error, which can be substantial when cross-tabulations are highly specific. Fortunately, the US Census Bureau provides <em>replicate weights</em> to help analysts generate standard errors around tabulated estimates with PUMS data as they take into account the complex structure of the survey sample. While working with replicate weights has traditionally been cumbersome for analysts, tidycensus with help from the <strong>survey</strong> <span class="citation">(<a href="references.html#ref-lumley2010" role="doc-biblioref">Lumley 2010</a>)</span> and <strong>srvyr</strong> <span class="citation">(<a href="references.html#ref-ellis2021" role="doc-biblioref">Freedman Ellis and Schneider 2021</a>)</span> R packages has integrated tools for handling replicate weights and correctly estimating standard errors when tabulating and modeling data. These workflows will be covered later in this chapter.</p>
 <div id="pums-data-and-the-tidyverse" class="section level2" number="10.1">
 <h2>
@@ -140,19 +140,106 @@ SEX_label
 <tbody>
 <tr>
 <td style="text-align:left;">
-2015000000200
+2015000000079
 </td>
 <td style="text-align:right;">
 1
 </td>
 <td style="text-align:right;">
-9
+19
 </td>
 <td style="text-align:right;">
-10
+20
 </td>
 <td style="text-align:right;">
 53
+</td>
+<td style="text-align:left;">
+28
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Mississippi/MS
+</td>
+<td style="text-align:left;">
+Male
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2015000000245
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+27
+</td>
+<td style="text-align:right;">
+28
+</td>
+<td style="text-align:right;">
+30
+</td>
+<td style="text-align:left;">
+28
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Mississippi/MS
+</td>
+<td style="text-align:left;">
+Male
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2015000000245
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+27
+</td>
+<td style="text-align:right;">
+30
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+28
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Mississippi/MS
+</td>
+<td style="text-align:left;">
+Male
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2015000000245
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+27
+</td>
+<td style="text-align:right;">
+23
+</td>
+<td style="text-align:right;">
+24
 </td>
 <td style="text-align:left;">
 28
@@ -169,19 +256,48 @@ Female
 </tr>
 <tr>
 <td style="text-align:left;">
-2015000000200
+2015000000339
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+13
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+64
+</td>
+<td style="text-align:left;">
+28
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+Mississippi/MS
+</td>
+<td style="text-align:left;">
+Female
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2015000000339
 </td>
 <td style="text-align:right;">
 2
 </td>
 <td style="text-align:right;">
-9
+13
 </td>
 <td style="text-align:right;">
-16
+15
 </td>
 <td style="text-align:right;">
-33
+61
 </td>
 <td style="text-align:left;">
 28
@@ -198,74 +314,16 @@ Male
 </tr>
 <tr>
 <td style="text-align:left;">
-2015000000200
+2015000000339
 </td>
 <td style="text-align:right;">
 3
 </td>
 <td style="text-align:right;">
-9
+13
 </td>
 <td style="text-align:right;">
-17
-</td>
-<td style="text-align:right;">
-32
-</td>
-<td style="text-align:left;">
 28
-</td>
-<td style="text-align:left;">
-1
-</td>
-<td style="text-align:left;">
-Mississippi/MS
-</td>
-<td style="text-align:left;">
-Male
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2015000000379
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-23
-</td>
-<td style="text-align:right;">
-23
-</td>
-<td style="text-align:right;">
-42
-</td>
-<td style="text-align:left;">
-28
-</td>
-<td style="text-align:left;">
-1
-</td>
-<td style="text-align:left;">
-Mississippi/MS
-</td>
-<td style="text-align:left;">
-Male
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2015000000379
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-23
-</td>
-<td style="text-align:right;">
-22
 </td>
 <td style="text-align:right;">
 37
@@ -285,48 +343,48 @@ Female
 </tr>
 <tr>
 <td style="text-align:left;">
-2015000000379
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-23
-</td>
-<td style="text-align:right;">
-30
-</td>
-<td style="text-align:right;">
-8
-</td>
-<td style="text-align:left;">
-28
-</td>
-<td style="text-align:left;">
-1
-</td>
-<td style="text-align:left;">
-Mississippi/MS
-</td>
-<td style="text-align:left;">
-Male
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2015000000379
+2015000000339
 </td>
 <td style="text-align:right;">
 4
 </td>
 <td style="text-align:right;">
-23
+13
+</td>
+<td style="text-align:right;">
+24
 </td>
 <td style="text-align:right;">
 30
 </td>
+<td style="text-align:left;">
+28
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+Mississippi/MS
+</td>
+<td style="text-align:left;">
+Female
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2015000001282
+</td>
 <td style="text-align:right;">
-7
+1
+</td>
+<td style="text-align:right;">
+46
+</td>
+<td style="text-align:right;">
+46
+</td>
+<td style="text-align:right;">
+78
 </td>
 <td style="text-align:left;">
 28
@@ -343,48 +401,19 @@ Male
 </tr>
 <tr>
 <td style="text-align:left;">
-2015000000530
+2015000001365
 </td>
 <td style="text-align:right;">
 1
 </td>
 <td style="text-align:right;">
-66
+8
 </td>
 <td style="text-align:right;">
-65
+8
 </td>
 <td style="text-align:right;">
-33
-</td>
-<td style="text-align:left;">
-28
-</td>
-<td style="text-align:left;">
-2
-</td>
-<td style="text-align:left;">
-Mississippi/MS
-</td>
-<td style="text-align:left;">
-Female
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2015000000530
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-66
-</td>
-<td style="text-align:right;">
-67
-</td>
-<td style="text-align:right;">
-15
+63
 </td>
 <td style="text-align:left;">
 28
@@ -397,35 +426,6 @@ Mississippi/MS
 </td>
 <td style="text-align:left;">
 Male
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2015000000530
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-66
-</td>
-<td style="text-align:right;">
-55
-</td>
-<td style="text-align:right;">
-5
-</td>
-<td style="text-align:left;">
-28
-</td>
-<td style="text-align:left;">
-2
-</td>
-<td style="text-align:left;">
-Mississippi/MS
-</td>
-<td style="text-align:left;">
-Female
 </td>
 </tr>
 </tbody>
@@ -562,22 +562,172 @@ RAC1P_label
 <tbody>
 <tr>
 <td style="text-align:left;">
-2015000000530
+2015000004656
 </td>
 <td style="text-align:right;">
 1
 </td>
 <td style="text-align:right;">
-66
+64
 </td>
 <td style="text-align:right;">
-65
+64
 </td>
 <td style="text-align:right;">
-48
+46
 </td>
 <td style="text-align:left;">
-01300
+01500
+</td>
+<td style="text-align:left;">
+28
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+01
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+Mississippi/MS
+</td>
+<td style="text-align:left;">
+Rented
+</td>
+<td style="text-align:left;">
+Nonfamily household: Male householder: Living alone
+</td>
+<td style="text-align:left;">
+Not Spanish/Hispanic/Latino
+</td>
+<td style="text-align:left;">
+Black or African American alone
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2015000005252
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+38
+</td>
+<td style="text-align:left;">
+00400
+</td>
+<td style="text-align:left;">
+28
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+7
+</td>
+<td style="text-align:left;">
+01
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Mississippi/MS
+</td>
+<td style="text-align:left;">
+Rented
+</td>
+<td style="text-align:left;">
+Nonfamily household: Female householder: Not living alone
+</td>
+<td style="text-align:left;">
+Not Spanish/Hispanic/Latino
+</td>
+<td style="text-align:left;">
+White alone
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2015000006468
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+47
+</td>
+<td style="text-align:left;">
+00500
+</td>
+<td style="text-align:left;">
+28
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+01
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+Mississippi/MS
+</td>
+<td style="text-align:left;">
+Rented
+</td>
+<td style="text-align:left;">
+Married couple household
+</td>
+<td style="text-align:left;">
+Not Spanish/Hispanic/Latino
+</td>
+<td style="text-align:left;">
+Black or African American alone
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2015000006891
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+33
+</td>
+<td style="text-align:right;">
+32
+</td>
+<td style="text-align:right;">
+80
+</td>
+<td style="text-align:left;">
+02000
 </td>
 <td style="text-align:left;">
 28
@@ -612,22 +762,22 @@ Black or African American alone
 </tr>
 <tr>
 <td style="text-align:left;">
-2015000008312
+2015000007641
 </td>
 <td style="text-align:right;">
 1
 </td>
 <td style="text-align:right;">
-32
+11
 </td>
 <td style="text-align:right;">
-33
+11
 </td>
 <td style="text-align:right;">
-68
+36
 </td>
 <td style="text-align:left;">
-01500
+01100
 </td>
 <td style="text-align:left;">
 28
@@ -636,163 +786,13 @@ Black or African American alone
 3
 </td>
 <td style="text-align:left;">
-3
-</td>
-<td style="text-align:left;">
-01
-</td>
-<td style="text-align:left;">
-3
-</td>
-<td style="text-align:left;">
-Mississippi/MS
-</td>
-<td style="text-align:left;">
-Rented
-</td>
-<td style="text-align:left;">
-Other family household: Female householder, no spouse present
-</td>
-<td style="text-align:left;">
-Not Spanish/Hispanic/Latino
-</td>
-<td style="text-align:left;">
-American Indian alone
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2015000008617
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-8
-</td>
-<td style="text-align:right;">
-8
-</td>
-<td style="text-align:right;">
-14
-</td>
-<td style="text-align:left;">
-01500
-</td>
-<td style="text-align:left;">
-28
-</td>
-<td style="text-align:left;">
-3
-</td>
-<td style="text-align:left;">
-7
-</td>
-<td style="text-align:left;">
-02
-</td>
-<td style="text-align:left;">
-1
-</td>
-<td style="text-align:left;">
-Mississippi/MS
-</td>
-<td style="text-align:left;">
-Rented
-</td>
-<td style="text-align:left;">
-Nonfamily household: Female householder: Not living alone
-</td>
-<td style="text-align:left;">
-Mexican
-</td>
-<td style="text-align:left;">
-White alone
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2015000009259
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-32
-</td>
-<td style="text-align:right;">
-32
-</td>
-<td style="text-align:right;">
-59
-</td>
-<td style="text-align:left;">
-01400
-</td>
-<td style="text-align:left;">
-28
-</td>
-<td style="text-align:left;">
-3
-</td>
-<td style="text-align:left;">
-1
-</td>
-<td style="text-align:left;">
-01
-</td>
-<td style="text-align:left;">
-1
-</td>
-<td style="text-align:left;">
-Mississippi/MS
-</td>
-<td style="text-align:left;">
-Rented
-</td>
-<td style="text-align:left;">
-Married couple household
-</td>
-<td style="text-align:left;">
-Not Spanish/Hispanic/Latino
-</td>
-<td style="text-align:left;">
-White alone
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2015000009659
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-4
-</td>
-<td style="text-align:right;">
 5
 </td>
-<td style="text-align:right;">
-39
-</td>
-<td style="text-align:left;">
-00600
-</td>
-<td style="text-align:left;">
-28
-</td>
-<td style="text-align:left;">
-3
-</td>
-<td style="text-align:left;">
-4
-</td>
 <td style="text-align:left;">
 01
 </td>
 <td style="text-align:left;">
-1
+2
 </td>
 <td style="text-align:left;">
 Mississippi/MS
@@ -801,13 +801,13 @@ Mississippi/MS
 Rented
 </td>
 <td style="text-align:left;">
-Nonfamily household: Male householder: Living alone
+Nonfamily household: Male householder: Not living alone
 </td>
 <td style="text-align:left;">
 Not Spanish/Hispanic/Latino
 </td>
 <td style="text-align:left;">
-White alone
+Black or African American alone
 </td>
 </tr>
 </tbody>
@@ -1472,7 +1472,7 @@ Figure 10.3: Margin of error plot for derived PUMS estimates
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Analyzing US Census Data</strong>: Methods, Maps, and Models in R" was written by Kyle E. Walker. It was last built on 2021-08-29.</p>
+    <p>"<strong>Analyzing US Census Data</strong>: Methods, Maps, and Models in R" was written by Kyle E. Walker. It was last built on 2021-08-30.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

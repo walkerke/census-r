@@ -307,6 +307,7 @@ ggridges
 ggbeeswarm
 geofaceted-plots
 interactive-visualization-with-plotly
+learning-more-about-visualization
 exercises-2
 census-geographic-data-and-applications-in-r
 basic-usage-of-tigris

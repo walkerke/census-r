@@ -2,7 +2,7 @@
 title: "Analyzing US Census Data"
 subtitle: "Methods, Maps, and Models in R"
 author: "Kyle E. Walker"
-date: "2021-08-29"
+date: "2021-08-30"
 site: bookdown::bookdown_site
 knit: bookdown::render_book
 output: bookdown::bs4_book
@@ -117,6 +117,11 @@ The examples in this book were created with the following R package versions:
    <td style="text-align:left;"> CRAN (R 4.1.0) </td>
   </tr>
   <tr>
+   <td style="text-align:left;"> dplyr </td>
+   <td style="text-align:left;"> 1.0.7 </td>
+   <td style="text-align:left;"> CRAN (R 4.1.0) </td>
+  </tr>
+  <tr>
    <td style="text-align:left;"> geobr </td>
    <td style="text-align:left;"> 1.6.1 </td>
    <td style="text-align:left;"> CRAN (R 4.1.0) </td>
@@ -134,6 +139,11 @@ The examples in this book were created with the following R package versions:
   <tr>
    <td style="text-align:left;"> ggiraph </td>
    <td style="text-align:left;"> 0.7.10 </td>
+   <td style="text-align:left;"> CRAN (R 4.1.0) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> ggplot2 </td>
+   <td style="text-align:left;"> 3.3.5 </td>
    <td style="text-align:left;"> CRAN (R 4.1.0) </td>
   </tr>
   <tr>
@@ -177,6 +187,11 @@ The examples in this book were created with the following R package versions:
    <td style="text-align:left;"> CRAN (R 4.1.0) </td>
   </tr>
   <tr>
+   <td style="text-align:left;"> leafsync </td>
+   <td style="text-align:left;"> 0.1.0 </td>
+   <td style="text-align:left;"> CRAN (R 4.1.0) </td>
+  </tr>
+  <tr>
    <td style="text-align:left;"> lehdr </td>
    <td style="text-align:left;"> 0.2.4 </td>
    <td style="text-align:left;"> Github (jamgreen/lehdr\@8e2fe25) </td>
@@ -200,6 +215,16 @@ The examples in this book were created with the following R package versions:
    <td style="text-align:left;"> plotly </td>
    <td style="text-align:left;"> 4.9.3 </td>
    <td style="text-align:left;"> CRAN (R 4.1.0) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> purrr </td>
+   <td style="text-align:left;"> 0.3.4 </td>
+   <td style="text-align:left;"> CRAN (R 4.1.0) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> readr </td>
+   <td style="text-align:left;"> 2.0.1 </td>
+   <td style="text-align:left;"> CRAN (R 4.1.1) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> rKenyaCensus </td>
@@ -232,14 +257,29 @@ The examples in this book were created with the following R package versions:
    <td style="text-align:left;"> CRAN (R 4.1.0) </td>
   </tr>
   <tr>
+   <td style="text-align:left;"> stringr </td>
+   <td style="text-align:left;"> 1.4.0 </td>
+   <td style="text-align:left;"> CRAN (R 4.1.0) </td>
+  </tr>
+  <tr>
    <td style="text-align:left;"> survey </td>
    <td style="text-align:left;"> 4.0 </td>
    <td style="text-align:left;"> CRAN (R 4.1.0) </td>
   </tr>
   <tr>
+   <td style="text-align:left;"> tibble </td>
+   <td style="text-align:left;"> 3.1.4 </td>
+   <td style="text-align:left;"> CRAN (R 4.1.1) </td>
+  </tr>
+  <tr>
    <td style="text-align:left;"> tidycensus </td>
    <td style="text-align:left;"> 1.0.0.9000 </td>
-   <td style="text-align:left;"> local </td>
+   <td style="text-align:left;"> Github (walkerke/tidycensus\@966e8cf) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> tidyr </td>
+   <td style="text-align:left;"> 1.1.3 </td>
+   <td style="text-align:left;"> CRAN (R 4.1.0) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> tidyUSDA </td>
