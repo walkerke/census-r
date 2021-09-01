@@ -251,7 +251,7 @@ The above examples have provided a sampling of some of the datasets available in
 
 Note from the guide that many datasets are available as both **TIGER/Line** and **cartographic boundary** versions, and can be downloaded for multiple years; these distinctions are covered in Section \@ref(tigris-workflows) below.
 
-## Plottng geographic data
+## Ploting geographic data
 
 Geographic information science is an inherently visual discipline. For analysts coming to R from a desktop GIS background (e.g. ArcGIS, QGIS), they will be used to having a visual display of their geographic data as central to their interactions with it. This may make the transition to R unfamiliar for geospatial analysts as geographic data will be first and foremost represented as a tabular data frame.
 

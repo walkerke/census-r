@@ -72,7 +72,7 @@ nyc_1910 <- read_nhgis_sf(
 ## Reading geography...
 ## options:        ENCODING=latin1 
 ## Reading layer `US_tract_1910' from data source 
-##   `/tmp/RtmpVmhiTV/file30fe1ddb3072/US_tract_1910.shp' using driver `ESRI Shapefile'
+##   `/tmp/RtmpCn936Z/file114f9075576/US_tract_1910.shp' using driver `ESRI Shapefile'
 ## Simple feature collection with 1989 features and 6 fields
 ## Geometry type: MULTIPOLYGON
 ## Dimension:     XY
@@ -129,7 +129,6 @@ suggest_crs(nyc_1910)
    <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"> crs_type </th>
    <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"> crs_gcs </th>
    <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"> crs_units </th>
-   <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"> crs_proj4 </th>
   </tr>
  </thead>
 <tbody>
@@ -139,7 +138,6 @@ suggest_crs(nyc_1910)
    <td style="text-align:left;"> projected </td>
    <td style="text-align:right;"> 6318 </td>
    <td style="text-align:left;"> us-ft </td>
-   <td style="text-align:left;"> +proj=lcc +lat_0=40.1666666666667 +lon_0=-74 +lat_1=41.0333333333333 +lat_2=40.6666666666667 +x_0=300000 +y_0=0 +ellps=GRS80 +units=us-ft +no_defs </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 6538 </td>
@@ -147,7 +145,6 @@ suggest_crs(nyc_1910)
    <td style="text-align:left;"> projected </td>
    <td style="text-align:right;"> 6318 </td>
    <td style="text-align:left;"> m </td>
-   <td style="text-align:left;"> +proj=lcc +lat_0=40.1666666666667 +lon_0=-74 +lat_1=41.0333333333333 +lat_2=40.6666666666667 +x_0=300000 +y_0=0 +ellps=GRS80 +units=m +no_defs </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 4456 </td>
@@ -155,7 +152,6 @@ suggest_crs(nyc_1910)
    <td style="text-align:left;"> projected </td>
    <td style="text-align:right;"> 4267 </td>
    <td style="text-align:left;"> us-ft </td>
-   <td style="text-align:left;"> +proj=lcc +lat_0=40.5 +lon_0=-74 +lat_1=41.0333333333333 +lat_2=40.6666666666667 +x_0=609601.219202438 +y_0=30480.0609601219 +datum=NAD27 +units=us-ft +no_defs </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 3628 </td>
@@ -163,7 +159,6 @@ suggest_crs(nyc_1910)
    <td style="text-align:left;"> projected </td>
    <td style="text-align:right;"> 4759 </td>
    <td style="text-align:left;"> us-ft </td>
-   <td style="text-align:left;"> +proj=lcc +lat_0=40.1666666666667 +lon_0=-74 +lat_1=41.0333333333333 +lat_2=40.6666666666667 +x_0=300000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=us-ft +no_defs </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 3627 </td>
@@ -171,7 +166,6 @@ suggest_crs(nyc_1910)
    <td style="text-align:left;"> projected </td>
    <td style="text-align:right;"> 4759 </td>
    <td style="text-align:left;"> m </td>
-   <td style="text-align:left;"> +proj=lcc +lat_0=40.1666666666667 +lon_0=-74 +lat_1=41.0333333333333 +lat_2=40.6666666666667 +x_0=300000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 32118 </td>
@@ -179,7 +173,6 @@ suggest_crs(nyc_1910)
    <td style="text-align:left;"> projected </td>
    <td style="text-align:right;"> 4269 </td>
    <td style="text-align:left;"> m </td>
-   <td style="text-align:left;"> +proj=lcc +lat_0=40.1666666666667 +lon_0=-74 +lat_1=41.0333333333333 +lat_2=40.6666666666667 +x_0=300000 +y_0=0 +datum=NAD83 +units=m +no_defs </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 2908 </td>
@@ -187,7 +180,6 @@ suggest_crs(nyc_1910)
    <td style="text-align:left;"> projected </td>
    <td style="text-align:right;"> 4152 </td>
    <td style="text-align:left;"> us-ft </td>
-   <td style="text-align:left;"> +proj=lcc +lat_0=40.1666666666667 +lon_0=-74 +lat_1=41.0333333333333 +lat_2=40.6666666666667 +x_0=300000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=us-ft +no_defs </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 2831 </td>
@@ -195,7 +187,6 @@ suggest_crs(nyc_1910)
    <td style="text-align:left;"> projected </td>
    <td style="text-align:right;"> 4152 </td>
    <td style="text-align:left;"> m </td>
-   <td style="text-align:left;"> +proj=lcc +lat_0=40.1666666666667 +lon_0=-74 +lat_1=41.0333333333333 +lat_2=40.6666666666667 +x_0=300000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 2263 </td>
@@ -203,7 +194,6 @@ suggest_crs(nyc_1910)
    <td style="text-align:left;"> projected </td>
    <td style="text-align:right;"> 4269 </td>
    <td style="text-align:left;"> us-ft </td>
-   <td style="text-align:left;"> +proj=lcc +lat_0=40.1666666666667 +lon_0=-74 +lat_1=41.0333333333333 +lat_2=40.6666666666667 +x_0=300000 +y_0=0 +datum=NAD83 +units=us-ft +no_defs </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 3748 </td>
@@ -211,7 +201,6 @@ suggest_crs(nyc_1910)
    <td style="text-align:left;"> projected </td>
    <td style="text-align:right;"> 4152 </td>
    <td style="text-align:left;"> m </td>
-   <td style="text-align:left;"> +proj=utm +zone=18 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs </td>
   </tr>
 </tbody>
 </table>
@@ -612,38 +601,6 @@ tx_econ17 <- getCensus(
   </tr>
   <tr>
    <td style="text-align:left;"> 48 </td>
-   <td style="text-align:left;"> 467 </td>
-   <td style="text-align:left;"> 1254 </td>
-   <td style="text-align:left;"> 19187 </td>
-   <td style="text-align:left;"> 0500000US48467 </td>
-   <td style="text-align:left;"> 72 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 48 </td>
-   <td style="text-align:left;"> 435 </td>
-   <td style="text-align:left;"> 195 </td>
-   <td style="text-align:left;"> 4063 </td>
-   <td style="text-align:left;"> 0500000US48435 </td>
-   <td style="text-align:left;"> 72 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 48 </td>
-   <td style="text-align:left;"> 153 </td>
-   <td style="text-align:left;"> 0 </td>
-   <td style="text-align:left;"> 0 </td>
-   <td style="text-align:left;"> 0500000US48153 </td>
-   <td style="text-align:left;"> 72 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 48 </td>
-   <td style="text-align:left;"> 207 </td>
-   <td style="text-align:left;"> 109 </td>
-   <td style="text-align:left;"> 1282 </td>
-   <td style="text-align:left;"> 0500000US48207 </td>
-   <td style="text-align:left;"> 72 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 48 </td>
    <td style="text-align:left;"> 389 </td>
    <td style="text-align:left;"> 664 </td>
    <td style="text-align:left;"> 14641 </td>
@@ -652,26 +609,58 @@ tx_econ17 <- getCensus(
   </tr>
   <tr>
    <td style="text-align:left;"> 48 </td>
-   <td style="text-align:left;"> 437 </td>
-   <td style="text-align:left;"> 0 </td>
-   <td style="text-align:left;"> 0 </td>
-   <td style="text-align:left;"> 0500000US48437 </td>
+   <td style="text-align:left;"> 083 </td>
+   <td style="text-align:left;"> 181 </td>
+   <td style="text-align:left;"> 2366 </td>
+   <td style="text-align:left;"> 0500000US48083 </td>
    <td style="text-align:left;"> 72 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 48 </td>
-   <td style="text-align:left;"> 003 </td>
-   <td style="text-align:left;"> 399 </td>
-   <td style="text-align:left;"> 6230 </td>
-   <td style="text-align:left;"> 0500000US48003 </td>
+   <td style="text-align:left;"> 213 </td>
+   <td style="text-align:left;"> 2082 </td>
+   <td style="text-align:left;"> 29094 </td>
+   <td style="text-align:left;"> 0500000US48213 </td>
    <td style="text-align:left;"> 72 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 48 </td>
-   <td style="text-align:left;"> 505 </td>
-   <td style="text-align:left;"> 0 </td>
-   <td style="text-align:left;"> 0 </td>
-   <td style="text-align:left;"> 0500000US48505 </td>
+   <td style="text-align:left;"> 305 </td>
+   <td style="text-align:left;"> 17 </td>
+   <td style="text-align:left;"> 142 </td>
+   <td style="text-align:left;"> 0500000US48305 </td>
+   <td style="text-align:left;"> 72 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 48 </td>
+   <td style="text-align:left;"> 251 </td>
+   <td style="text-align:left;"> 4512 </td>
+   <td style="text-align:left;"> 60929 </td>
+   <td style="text-align:left;"> 0500000US48251 </td>
+   <td style="text-align:left;"> 72 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 48 </td>
+   <td style="text-align:left;"> 467 </td>
+   <td style="text-align:left;"> 1254 </td>
+   <td style="text-align:left;"> 19187 </td>
+   <td style="text-align:left;"> 0500000US48467 </td>
+   <td style="text-align:left;"> 72 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 48 </td>
+   <td style="text-align:left;"> 055 </td>
+   <td style="text-align:left;"> 910 </td>
+   <td style="text-align:left;"> 15247 </td>
+   <td style="text-align:left;"> 0500000US48055 </td>
+   <td style="text-align:left;"> 72 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 48 </td>
+   <td style="text-align:left;"> 487 </td>
+   <td style="text-align:left;"> 394 </td>
+   <td style="text-align:left;"> 5233 </td>
+   <td style="text-align:left;"> 0500000US48487 </td>
    <td style="text-align:left;"> 72 </td>
   </tr>
 </tbody>

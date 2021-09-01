@@ -316,7 +316,7 @@ points
 lines
 polygons
 data-availability-in-tigris
-plottng-geographic-data
+ploting-geographic-data
 ggplot2-and-geom_sf
 interactive-viewing-with-mapview
 tigris-workflows
