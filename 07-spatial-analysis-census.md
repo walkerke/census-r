@@ -837,7 +837,7 @@ print(glue("Poverty (10min isochrone method): {round(iso_pov$pct_poverty, 1)}%")
 ```
 
 ```
-## Poverty (10min isochrone method): 17.8%
+## Poverty (10min isochrone method): 18.4%
 ```
 
 Following up on Section \@ref(understanding-yearly-differences-in-tigerline-files), areal interpolation is also a common method used to adjust population data aggregated to inconsistent Census boundaries over time. However, it can introduce inaccuracies in sparsely populated areas, which can be improved with a population-weighted interpolation approach. While this approach is not covered here, @schroeder2013 provide a good discussion of the method.

@@ -72,7 +72,7 @@ nyc_1910 <- read_nhgis_sf(
 ## Reading geography...
 ## options:        ENCODING=latin1 
 ## Reading layer `US_tract_1910' from data source 
-##   `/tmp/RtmpCn936Z/file114f9075576/US_tract_1910.shp' using driver `ESRI Shapefile'
+##   `/tmp/RtmpMOsjh1/file3d9511d87890/US_tract_1910.shp' using driver `ESRI Shapefile'
 ## Simple feature collection with 1989 features and 6 fields
 ## Geometry type: MULTIPOLYGON
 ## Dimension:     XY
@@ -601,6 +601,14 @@ tx_econ17 <- getCensus(
   </tr>
   <tr>
    <td style="text-align:left;"> 48 </td>
+   <td style="text-align:left;"> 199 </td>
+   <td style="text-align:left;"> 1476 </td>
+   <td style="text-align:left;"> 19126 </td>
+   <td style="text-align:left;"> 0500000US48199 </td>
+   <td style="text-align:left;"> 72 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 48 </td>
    <td style="text-align:left;"> 389 </td>
    <td style="text-align:left;"> 664 </td>
    <td style="text-align:left;"> 14641 </td>
@@ -609,18 +617,10 @@ tx_econ17 <- getCensus(
   </tr>
   <tr>
    <td style="text-align:left;"> 48 </td>
-   <td style="text-align:left;"> 083 </td>
-   <td style="text-align:left;"> 181 </td>
-   <td style="text-align:left;"> 2366 </td>
-   <td style="text-align:left;"> 0500000US48083 </td>
-   <td style="text-align:left;"> 72 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 48 </td>
-   <td style="text-align:left;"> 213 </td>
-   <td style="text-align:left;"> 2082 </td>
-   <td style="text-align:left;"> 29094 </td>
-   <td style="text-align:left;"> 0500000US48213 </td>
+   <td style="text-align:left;"> 185 </td>
+   <td style="text-align:left;"> 394 </td>
+   <td style="text-align:left;"> 5841 </td>
+   <td style="text-align:left;"> 0500000US48185 </td>
    <td style="text-align:left;"> 72 </td>
   </tr>
   <tr>
@@ -1204,11 +1204,20 @@ maui_accom <- bls_api(seriesid = "SMU15279807072100001",
 <tbody>
   <tr>
    <td style="text-align:right;"> 2021 </td>
+   <td style="text-align:left;"> M08 </td>
+   <td style="text-align:left;"> August </td>
+   <td style="text-align:left;"> true </td>
+   <td style="text-align:right;"> 9.8 </td>
+   <td style="text-align:left;"> P Preliminary </td>
+   <td style="text-align:left;"> SMU15279807072100001 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 2021 </td>
    <td style="text-align:left;"> M07 </td>
    <td style="text-align:left;"> July </td>
-   <td style="text-align:left;"> true </td>
-   <td style="text-align:right;"> 9.4 </td>
-   <td style="text-align:left;"> P Preliminary </td>
+   <td style="text-align:left;"> NA </td>
+   <td style="text-align:right;"> 9.6 </td>
+   <td style="text-align:left;">  </td>
    <td style="text-align:left;"> SMU15279807072100001 </td>
   </tr>
   <tr>
@@ -1244,15 +1253,6 @@ maui_accom <- bls_api(seriesid = "SMU15279807072100001",
    <td style="text-align:left;"> March </td>
    <td style="text-align:left;"> NA </td>
    <td style="text-align:right;"> 7.2 </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> SMU15279807072100001 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 2021 </td>
-   <td style="text-align:left;"> M02 </td>
-   <td style="text-align:left;"> February </td>
-   <td style="text-align:left;"> NA </td>
-   <td style="text-align:right;"> 6.7 </td>
    <td style="text-align:left;">  </td>
    <td style="text-align:left;"> SMU15279807072100001 </td>
   </tr>

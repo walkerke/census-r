@@ -9,6 +9,7 @@ fig:worthington-vaccines
 fig:iowa-redist-map
 fig:mb-immigrants-show
 tab:total-population-10-show
+tab:census-2020-aian-show
 tab:acs-5-year-show
 tab:acs-1yr-show
 tab:state-age-table-show
@@ -263,6 +264,7 @@ census-data-visualization
 an-introduction-to-tidycensus
 getting-started-with-tidycensus
 decennial-census
+summary-files-in-the-decennial-census
 american-community-survey
 geography-and-variables-in-tidycensus
 geographic-subsets
@@ -316,7 +318,7 @@ points
 lines
 polygons
 data-availability-in-tigris
-ploting-geographic-data
+plotting-geographic-data
 ggplot2-and-geom_sf
 interactive-viewing-with-mapview
 tigris-workflows

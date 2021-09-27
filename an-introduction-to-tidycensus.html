@@ -19,9 +19,9 @@
 <meta name="twitter:image" content="https://walker-data.com/census-r/04-visualizing-census-data_files/figure-html/visualize-error-bars-1.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.10.5/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.5.1/tabs.js"></script><script src="libs/bs3compat-0.2.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.0/transition.js"></script><script src="libs/bs3compat-0.3.0/tabs.js"></script><script src="libs/bs3compat-0.3.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script><script src="libs/plotly-binding-4.9.3/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet">
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><script src="libs/plotly-binding-4.9.3/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet">
 <script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet">
 <script src="libs/plotly-main-1.57.1/plotly-latest.min.js"></script><script src="libs/d3-bundle-5.16.0/d3-bundle.min.js"></script><script src="libs/d3-lasso-0.0.5/d3-lasso.min.js"></script><script src="libs/save-svg-as-png-1.4.17/save-svg-as-png.min.js"></script><link href="libs/ggiraphjs-0.4.1/ggiraphjs.min.css" rel="stylesheet">
 <script src="libs/ggiraphjs-0.4.1/ggiraphjs.min.js"></script><script src="libs/girafe-binding-0.7.10/girafe.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-6KFYZ3W36Z"></script><script>
@@ -92,18 +92,15 @@
 <h2>
 <span class="header-section-number">2.1</span> Getting started with tidycensus<a class="anchor" aria-label="anchor" href="#getting-started-with-tidycensus"><i class="fas fa-link"></i></a>
 </h2>
-<p>To get started with <strong>tidycensus</strong>, users should install the package with <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages("tidycensus")</a></code> if not yet installed; load the package with <code><a href="https://walker-data.com/tidycensus">library("tidycensus")</a></code>; and set their Census API key with the <code><a href="https://walker-data.com/tidycensus/reference/census_api_key.html">census_api_key()</a></code> function. API keys can be obtained at <a href="https://api.census.gov/data/key_signup.html" class="uri">https://api.census.gov/data/key_signup.html</a>. After you’ve signed up for an API key, be sure to activate the key from the email you receive from the Census Bureau so it works correctly. Declaring <code>install = TRUE</code> when calling <code><a href="https://walker-data.com/tidycensus/reference/census_api_key.html">census_api_key()</a></code> will install the key for use in future R sessions, which may be convenient for many users.</p>
+<p>To get started with <strong>tidycensus</strong>, users should install the package with <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages("tidycensus")</a></code> if not yet installed; load the package with <code><a href="https://walker-data.com/tidycensus/">library("tidycensus")</a></code>; and set their Census API key with the <code><a href="https://walker-data.com/tidycensus/reference/census_api_key.html">census_api_key()</a></code> function. API keys can be obtained at <a href="https://api.census.gov/data/key_signup.html" class="uri">https://api.census.gov/data/key_signup.html</a>. After you’ve signed up for an API key, be sure to activate the key from the email you receive from the Census Bureau so it works correctly. Declaring <code>install = TRUE</code> when calling <code><a href="https://walker-data.com/tidycensus/reference/census_api_key.html">census_api_key()</a></code> will install the key for use in future R sessions, which may be convenient for many users.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://walker-data.com/tidycensus">tidycensus</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://walker-data.com/tidycensus/">tidycensus</a></span><span class="op">)</span>
 <span class="co"># census_api_key("YOUR KEY GOES HERE", install = TRUE)</span></code></pre></div>
 <div id="decennial-census" class="section level3" number="2.1.1">
 <h3>
 <span class="header-section-number">2.1.1</span> Decennial Census<a class="anchor" aria-label="anchor" href="#decennial-census"><i class="fas fa-link"></i></a>
 </h3>
-<p>Once an API key is installed, users can obtain decennial Census or ACS data with a single function call. Let’s start with <code><a href="https://walker-data.com/tidycensus/reference/get_decennial.html">get_decennial()</a></code>, which is used to access decennial Census data from the 2000 and 2010 Censuses.</p>
-<div class="rmdnote">
-<p>At the time of this writing, 2020 decennial Census data are not yet available from the Census API. When the 2020 redistricting files are released to the API (currently scheduled for September 30), <strong>tidycensus</strong> will support them and this section of the book will be updated. Until then, the <a href="https://corymccartan.github.io/PL94171/">PL94171 package</a> is the best way to work with the raw 2020 redistricting files from the Census Bureau.</p>
-</div>
+<p>Once an API key is installed, users can obtain decennial Census or ACS data with a single function call. Let’s start with <code><a href="https://walker-data.com/tidycensus/reference/get_decennial.html">get_decennial()</a></code>, which is used to access decennial Census data from the 2000, 2010, and 2020 decennial US Censuses.</p>
 <p>To get data from the decennial US Census, users must specify a string representing the requested <code>geography</code>; a vector of Census variable IDs, represented by <code>variable</code>; or optionally a Census table ID, passed to <code>table</code>. The code below gets data on total population by state from the 2010 decennial Census.</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">total_population_10</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_decennial.html">get_decennial</a></span><span class="op">(</span>
@@ -272,14 +269,142 @@ P001001
 </tr>
 </tbody>
 </table></div>
-<p>The function returns a tibble of data from the 2010 US Census (the function default year) with information on total population by state, and assigns it to the object <code>total_population_10</code>. Data for 2000 can also be obtained by supplying the appropriate year to the <code>year</code> parameter.</p>
+<p>The function returns a tibble of data from the 2010 US Census (the function default year) with information on total population by state, and assigns it to the object <code>total_population_10</code>. Data for 2000 or 2020 can also be obtained by supplying the appropriate year to the <code>year</code> parameter.</p>
+<div id="summary-files-in-the-decennial-census" class="section level4" number="2.1.1.1">
+<h4>
+<span class="header-section-number">2.1.1.1</span> Summary files in the decennial Census<a class="anchor" aria-label="anchor" href="#summary-files-in-the-decennial-census"><i class="fas fa-link"></i></a>
+</h4>
+<p>By default, <code><a href="https://walker-data.com/tidycensus/reference/get_decennial.html">get_decennial()</a></code> uses the argument <code>sumfile = "sf1"</code>, which fetches data from the decennial Census Summary File 1. This summary file exists for the 2000 and 2010 decennial US Censuses, and includes core demographic characteristics for Census geographies. The 2000 and 2010 decennial Census data also include Summary File 2, which contains information on a range of population and housing unit characteristics and is specified as <code>"sf2"</code>. Detailed demographic information in the 2000 decennial Census such as income and occupation can be found in Summary Files 3 (<code>"sf3"</code>) and 4 (<code>"sf4"</code>). Data from the 2000 and 2010 Decennial Censuses for island territories other than Puerto Rico must be accessed at their corresponding summary files: <code>"as"</code> for American Samoa, <code>"mp"</code> for the Northern Mariana Islands, <code>"gu"</code> for Guam, and <code>"vi"</code> for the US Virgin Islands.</p>
+<p>2020 Decennial Census data are available from the PL-94171 Redistricting Summary File, which is specified with <code>sumfile = "pl"</code> and is also available for 2010. The Redistricting summary files include a limited subset of variables from the decennial US Census to be used for legislative redistricting. These variables include total population and housing units; race and ethnicity; voting-age population; and group quarters population. For example, the code below retrieves information on the American Indian &amp; Alaska Native population by state from the 2020 decennial Census.</p>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">aian_2020</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_decennial.html">get_decennial</a></span><span class="op">(</span>
+  geography <span class="op">=</span> <span class="st">"state"</span>,
+  variables <span class="op">=</span> <span class="st">"P1_005N"</span>,
+  year <span class="op">=</span> <span class="fl">2020</span>,
+  sumfile <span class="op">=</span> <span class="st">"pl"</span>
+<span class="op">)</span></code></pre></div>
+<div class="inline-table"><table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:census-2020-aian-show">Table 2.2: </span>American Indian or Alaska Native alone population by state from the 2020 decennial Census
+</caption>
+<thead><tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+GEOID
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+NAME
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+variable
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+value
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+01
+</td>
+<td style="text-align:left;">
+Alabama
+</td>
+<td style="text-align:left;">
+P1_005N
+</td>
+<td style="text-align:right;">
+33625
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+02
+</td>
+<td style="text-align:left;">
+Alaska
+</td>
+<td style="text-align:left;">
+P1_005N
+</td>
+<td style="text-align:right;">
+111575
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+04
+</td>
+<td style="text-align:left;">
+Arizona
+</td>
+<td style="text-align:left;">
+P1_005N
+</td>
+<td style="text-align:right;">
+319512
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+05
+</td>
+<td style="text-align:left;">
+Arkansas
+</td>
+<td style="text-align:left;">
+P1_005N
+</td>
+<td style="text-align:right;">
+27177
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+06
+</td>
+<td style="text-align:left;">
+California
+</td>
+<td style="text-align:left;">
+P1_005N
+</td>
+<td style="text-align:right;">
+631016
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+08
+</td>
+<td style="text-align:left;">
+Colorado
+</td>
+<td style="text-align:left;">
+P1_005N
+</td>
+<td style="text-align:right;">
+74129
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>The argument <code>sumfile = "pl"</code> is assumed (and in turn not required) when users request data for 2020 and will remain so until the main Demographic and Housing Characteristics File is released in mid-to-late 2022.</p>
+<div class="rmdnote">
+<p>When users request data from the 2020 decennial Census for the first time in a given R session, <code><a href="https://walker-data.com/tidycensus/reference/get_decennial.html">get_decennial()</a></code> prints out the following message:</p>
+<pre><code>Note: 2020 decennial Census data use differential privacy, a technique that
+introduces errors into data to preserve respondent confidentiality.
+ℹ Small counts should be interpreted with caution.
+ℹ See https://www.census.gov/library/fact-sheets/2021/protecting-the-confidentiality-of-the-2020-census-redistricting-data.html for additional guidance.</code></pre>
+<p>This message alerts users that 2020 decennial Census data use <em>differential privacy</em> as a method to preserve confidentiality of individuals who responded to the Census. This can lead to inaccuracies in small area analyses using 2020 Census data and also can make comparisons of small counts across years difficult. A more in-depth discussion of differential privacy and the 2020 Census is found in the conclusion of this book.</p>
+</div>
+</div>
 </div>
 <div id="american-community-survey" class="section level3" number="2.1.2">
 <h3>
 <span class="header-section-number">2.1.2</span> American Community Survey<a class="anchor" aria-label="anchor" href="#american-community-survey"><i class="fas fa-link"></i></a>
 </h3>
 <p>Similarly, <code><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs()</a></code> retrieves data from the American Community Survey. As discussed in the previous chapter, the ACS includes a wide variety of variables detailing characteristics of the US population not found in the decennial Census. The example below fetches data on the number of residents born in Mexico by state.</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">born_in_mexico</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs</a></span><span class="op">(</span>
   geography <span class="op">=</span> <span class="st">"state"</span>, 
   variables <span class="op">=</span> <span class="st">"B05006_150"</span>,
@@ -287,7 +412,7 @@ P001001
 <span class="op">)</span></code></pre></div>
 <div class="inline-table"><table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:acs-5-year-show">Table 2.2: </span>Mexican-born population by state, 2015-2019 5-year ACS
+<span id="tab:acs-5-year-show">Table 2.3: </span>Mexican-born population by state, 2015-2019 5-year ACS
 </caption>
 <thead><tr>
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
@@ -480,7 +605,7 @@ B05006_150
 </tbody>
 </table></div>
 <p>If the year is not specified, <code><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs()</a></code> defaults to the most recent five-year ACS sample, which at the time of this writing is 2015-2019. The data returned is similar in structure to that returned by <code><a href="https://walker-data.com/tidycensus/reference/get_decennial.html">get_decennial()</a></code>, but includes an <code>estimate</code> column (for the ACS estimate) and <code>moe</code> column (for the margin of error around that estimate) instead of a <code>value</code> column. Different years and different surveys are available by adjusting the <code>year</code> and <code>survey</code> parameters. <code>survey</code> defaults to the 5-year ACS; however this can be changed to the 1-year ACS by using the argument <code>survey = "acs1"</code>. For example, the following code will fetch data from the 1-year ACS for 2019:</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">born_in_mexico_1yr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs</a></span><span class="op">(</span>
   geography <span class="op">=</span> <span class="st">"state"</span>, 
   variables <span class="op">=</span> <span class="st">"B05006_150"</span>, 
@@ -489,7 +614,7 @@ B05006_150
 <span class="op">)</span></code></pre></div>
 <div class="inline-table"><table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:acs-1yr-show">Table 2.3: </span>Mexican-born population by state, 2019 1-year ACS
+<span id="tab:acs-1yr-show">Table 2.4: </span>Mexican-born population by state, 2019 1-year ACS
 </caption>
 <thead><tr>
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
@@ -683,7 +808,7 @@ B05006_150
 </table></div>
 <p>Note the differences between the 5-year ACS estimates and the 1-year ACS estimates shown. For states with larger Mexican-born populations like Arizona, California, and Colorado, the 1-year ACS data will represent the most up-to-date estimates, albeit characterized by larger margins of error relative to their estimates. For states with smaller Mexican-born populations like Alabama, Alaska, and Arkansas, however, the estimate returns <code>NA</code>, R’s notation representing missing data. If you encounter this in your data’s <code>estimate</code> column, it will generally mean that the estimate is too small for a given geography to be deemed reliable by the Census Bureau. In this case, only the states with the largest Mexican-born populations have data available for that variable in the 1-year ACS, meaning that the 5-year ACS should be used to make full state-wise comparisons if desired.</p>
 <p>Variables from the ACS detailed tables, data profiles, summary tables, and supplemental estimates are available through <strong>tidycensus</strong>’s <code><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs()</a></code> function; the function will auto-detect from which dataset to look for variables based on their names. Alternatively, users can supply a table name to the <code>table</code> parameter in <code><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs()</a></code>; this will return data for every variable in that table. For example, to get all variables associated with table B01001, which covers sex broken down by age, from the 2015-2019 5-year ACS:</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">age_table</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs</a></span><span class="op">(</span>
   geography <span class="op">=</span> <span class="st">"state"</span>, 
   table <span class="op">=</span> <span class="st">"B01001"</span>,
@@ -691,7 +816,7 @@ B05006_150
 <span class="op">)</span></code></pre></div>
 <div class="inline-table"><table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:state-age-table-show">Table 2.4: </span>Table B01001 by state from the 2015-2019 5-year ACS
+<span id="tab:state-age-table-show">Table 2.5: </span>Table B01001 by state from the 2015-2019 5-year ACS
 </caption>
 <thead><tr>
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
@@ -896,7 +1021,7 @@ B01001_010
 <colgroup>
 <col width="33%">
 <col width="32%">
-<col width="8%">
+<col width="9%">
 <col width="25%">
 </colgroup>
 <thead><tr class="header">
@@ -1126,10 +1251,16 @@ B01001_010
 <code><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs()</a></code>, <code><a href="https://walker-data.com/tidycensus/reference/get_decennial.html">get_decennial()</a></code>
 </td>
 </tr>
+<tr class="even">
+<td><code>"voting district"</code></td>
+<td>Voting districts (2020 only)</td>
+<td><strong>state</strong></td>
+<td><code><a href="https://walker-data.com/tidycensus/reference/get_decennial.html">get_decennial()</a></code></td>
+</tr>
 </tbody>
 </table></div>
 <p>The geography parameter must be typed exactly as specified in the table above to request data correctly from the Census API; use the guide above as a reference and copy-paste for longer strings. For core-based statistical areas and zip code tabulation areas, two heavily-requested geographies, the aliases <code>"cbsa"</code> and <code>"zcta"</code> can be used, respectively, to fetch data for those geographies.</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cbsa_population</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs</a></span><span class="op">(</span>
   geography <span class="op">=</span> <span class="st">"cbsa"</span>,
   variables <span class="op">=</span> <span class="st">"B01003_001"</span>,
@@ -1137,7 +1268,7 @@ B01001_010
 <span class="op">)</span></code></pre></div>
 <div class="inline-table"><table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:cbsa-alias-show">Table 2.5: </span>Population by CBSA
+<span id="tab:cbsa-alias-show">Table 2.6: </span>Population by CBSA
 </caption>
 <thead><tr>
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
@@ -1335,7 +1466,7 @@ NA
 </h3>
 <p>For many geographies, <strong>tidycensus</strong> supports more granular requests that are subsetted by state or even by county, if supported by the API. This information is found in the “Available by” column in the guide above. If a geographic subset is in bold, it is required; if not, it is optional.</p>
 <p>For example, an analyst might be interested in studying variations in household income in the state of Wisconsin. Although the analyst <em>can</em> request all counties in the United States, this is not necessary for this specific task. In turn, they can use the <code>state</code> parameter to subset the request for a specific state.</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">wi_income</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs</a></span><span class="op">(</span>
   geography <span class="op">=</span> <span class="st">"county"</span>, 
   variables <span class="op">=</span> <span class="st">"B19013_001"</span>, 
@@ -1344,7 +1475,7 @@ NA
 <span class="op">)</span></code></pre></div>
 <div class="inline-table"><table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:wi-income-county-show">Table 2.6: </span>Median household income by county in Wisconsin
+<span id="tab:wi-income-county-show">Table 2.7: </span>Median household income by county in Wisconsin
 </caption>
 <thead><tr>
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
@@ -1538,7 +1669,7 @@ B19013_001
 </table></div>
 <p><strong>tidycensus</strong> accepts state names (e.g. <code>"Wisconsin"</code>), state postal codes (e.g. <code>"WI"</code>), and state FIPS codes (e.g. <code>"55"</code>), so an analyst can use what they are most comfortable with.</p>
 <p>Smaller geographies like Census tracts can also be subsetted by county. Given that Census tracts nest neatly within counties (and do not cross county boundaries), we can request all Census tracts for a given county by using the optional <code>county</code> parameter. Dane County, home to Wisconsin’s capital city of Madison, is shown below. Note that the name of the county can be supplied as well as the FIPS code. If a state has two counties with similar names (e.g. “Collin” and “Collingsworth” in Texas) you’ll need to spell out the full county string and type <code>"Collin County"</code>.</p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dane_income</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs</a></span><span class="op">(</span>
   geography <span class="op">=</span> <span class="st">"tract"</span>, 
   variables <span class="op">=</span> <span class="st">"B19013_001"</span>, 
@@ -1547,7 +1678,7 @@ B19013_001
 <span class="op">)</span></code></pre></div>
 <div class="inline-table"><table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:dane-income-show">Table 2.7: </span>Median household income in Dane County by Census tract
+<span id="tab:dane-income-show">Table 2.8: </span>Median household income in Dane County by Census tract
 </caption>
 <thead><tr>
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
@@ -1740,11 +1871,11 @@ B19013_001
 </tbody>
 </table></div>
 <p>With respect to geography and the American Community Survey, users should be aware that whereas the 5-year ACS covers geographies down to the block group, the 1-year ACS only returns data for geographies of population 65,000 and greater. This means that some geographies (e.g. Census tracts) will never be available in the 1-year ACS, and that other geographies such as counties are only partially available. To illustrate this, we can check the number of rows in the object <code>wi_income</code>:</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">wi_income</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 72</code></pre>
 <p>There are 72 rows in this dataset, one for each county in Wisconsin. However, if the same data were requested from the 2019 1-year ACS:</p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">wi_income_1yr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs</a></span><span class="op">(</span>
   geography <span class="op">=</span> <span class="st">"county"</span>, 
   variables <span class="op">=</span> <span class="st">"B19013_001"</span>, 
@@ -1763,13 +1894,13 @@ B19013_001
 <span class="header-section-number">2.3</span> Searching for variables in tidycensus<a class="anchor" aria-label="anchor" href="#searching-for-variables-in-tidycensus"><i class="fas fa-link"></i></a>
 </h2>
 <p>One additional challenge when searching for Census variables is understanding variable IDs, which are required to fetch data from the Census and ACS APIs. There are thousands of variables available across the different datasets and summary files. To make searching easier for R users, <strong>tidycensus</strong> offers the <code><a href="https://walker-data.com/tidycensus/reference/load_variables.html">load_variables()</a></code> function. This function obtains a dataset of variables from the Census Bureau website and formats it for fast searching, ideally in RStudio.</p>
-<p>The function takes two required arguments: <code>year</code>, which takes the year or endyear of the Census dataset or ACS sample, and the dataset name - one of <code>sf1</code>, <code>sf3</code>, <code>acs1</code>, or <code>acs5</code>. For the ACS datasets, append <code>/profile</code> for the Data Profile, and <code>/summary</code> for the Summary Tables. As this function requires processing thousands of variables from the Census Bureau which may take a few moments depending on the user’s internet connection, the user can specify <code>cache = TRUE</code> in the function call to store the data in the user’s cache directory for future access. On subsequent calls of the <code><a href="https://walker-data.com/tidycensus/reference/load_variables.html">load_variables()</a></code> function, <code>cache = TRUE</code> will direct the function to look in the cache directory for the variables rather than the Census website.</p>
+<p>The function takes two required arguments: <code>year</code>, which takes the year or endyear of the Census dataset or ACS sample, and the dataset name - one of <code>sf1</code>, <code>sf3</code>, <code>pl</code>, <code>acs1</code>, or <code>acs5</code>. For the ACS datasets, append <code>/profile</code> for the Data Profile, and <code>/summary</code> for the Summary Tables. As this function requires processing thousands of variables from the Census Bureau which may take a few moments depending on the user’s internet connection, the user can specify <code>cache = TRUE</code> in the function call to store the data in the user’s cache directory for future access. On subsequent calls of the <code><a href="https://walker-data.com/tidycensus/reference/load_variables.html">load_variables()</a></code> function, <code>cache = TRUE</code> will direct the function to look in the cache directory for the variables rather than the Census website.</p>
 <p><code><a href="https://walker-data.com/tidycensus/reference/load_variables.html">load_variables()</a></code> works as follows:</p>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">v16</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/load_variables.html">load_variables</a></span><span class="op">(</span><span class="fl">2016</span>, <span class="st">"acs5"</span>, cache <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <div class="inline-table"><table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:v16-show">Table 2.8: </span>Variables in the 2012-2016 5-year ACS
+<span id="tab:v16-show">Table 2.9: </span>Variables in the 2012-2016 5-year ACS
 </caption>
 <thead><tr>
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
@@ -1896,7 +2027,7 @@ SEX BY AGE
 </tbody>
 </table></div>
 <p>The returned data frame has three columns: <code>name</code>, which refers to the Census variable ID; <code>label</code>, which is a descriptive data label for the variable; and <code>concept</code>, which refers to the topic of the data and often corresponds to a table of Census data. As illustrated above, the data frame can be filtered using tidyverse tools for variable exploration. However, the RStudio integrated development environment includes an interactive data viewer which is ideal for browsing this dataset, and allows for interactive sorting and filtering. The data viewer can be accessed with the <code><a href="https://rdrr.io/r/utils/View.html">View()</a></code> function:</p>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/View.html">View</a></span><span class="op">(</span><span class="va">v16</span><span class="op">)</span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:view-variables-img"></span>
@@ -1924,7 +2055,7 @@ Figure 2.1: Variable viewer in RStudio
 <li><p><code>value</code>, which contains the data values for each unit-variable combination. For ACS data, two columns replace the <code>value</code> column: <code>estimate</code>, which represents the ACS estimate, and <code>moe</code>, representing the margin of error around that estimate.</p></li>
 </ul>
 <p>Given the terminology used by the Census Bureau to distinguish data, it is important to provide some clarifications of nomenclature here. Census or ACS <em>variables</em>, which are specific series of data available by enumeration unit, are interpreted in tidycensus as <em>characteristics</em> of those enumeration units. In turn, rows in datasets returned when <code>output = "tidy"</code>, which is the default setting in the <code><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs()</a></code> and <code><a href="https://walker-data.com/tidycensus/reference/get_decennial.html">get_decennial()</a></code> functions, represent data for unique unit-variable combinations. An example of this is illustrated below with income groups by state for the 2016 1-year American Community Survey.</p>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">hhinc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs</a></span><span class="op">(</span>
   geography <span class="op">=</span> <span class="st">"state"</span>, 
   table <span class="op">=</span> <span class="st">"B19001"</span>, 
@@ -1933,7 +2064,7 @@ Figure 2.1: Variable viewer in RStudio
 <span class="op">)</span></code></pre></div>
 <div class="inline-table"><table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:state-income-table-show">Table 2.9: </span>Household income groups by state, 2016 1-year ACS
+<span id="tab:state-income-table-show">Table 2.10: </span>Household income groups by state, 2016 1-year ACS
 </caption>
 <thead><tr>
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
@@ -2126,7 +2257,7 @@ B19001_010
 </tbody>
 </table></div>
 <p>In this example, each row represents state-characteristic combinations, consistent with the tidy data model. Alternatively, if a user desires the variables spread across the columns of the dataset, the setting <code>output = "wide"</code> will enable this. For ACS data, estimates and margins of error for each ACS variable will be found in their own columns. For example:</p>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">hhinc_wide</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs</a></span><span class="op">(</span>
   geography <span class="op">=</span> <span class="st">"state"</span>, 
   table <span class="op">=</span> <span class="st">"B19001"</span>, 
@@ -2136,7 +2267,7 @@ B19001_010
 <span class="op">)</span></code></pre></div>
 <div class="inline-table"><table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:state-income-table-wide-show">Table 2.10: </span>Income table in wide form
+<span id="tab:state-income-table-wide-show">Table 2.11: </span>Income table in wide form
 </caption>
 <thead><tr>
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
@@ -3357,7 +3488,7 @@ North Carolina
 <span class="header-section-number">2.4.1</span> Renaming variable IDs<a class="anchor" aria-label="anchor" href="#renaming-variable-ids"><i class="fas fa-link"></i></a>
 </h3>
 <p>Census variables IDs can be cumbersome to type and remember in the course of an R session. As such, <strong>tidycensus</strong> has built-in tools to automatically rename the variable IDs if requested by a user. For example, let’s say that a user is requesting data on median household income (variable ID <code>B19013_001</code>) and median age (variable ID <code>B01002_001</code>). By passing a <em>named</em> vector to the <code>variables</code> parameter in <code><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs()</a></code> or <code><a href="https://walker-data.com/tidycensus/reference/get_decennial.html">get_decennial()</a></code>, the functions will return the desired names rather than the Census variable IDs. Let’s examine this for counties in Georgia from the 2015-2019 five-year ACS.</p>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ga</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs</a></span><span class="op">(</span>
   geography <span class="op">=</span> <span class="st">"county"</span>,
   state <span class="op">=</span> <span class="st">"Georgia"</span>,
@@ -3367,7 +3498,7 @@ North Carolina
 <span class="op">)</span></code></pre></div>
 <div class="inline-table"><table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:georgia-data-show">Table 2.11: </span>Multi-variable dataset for Georgia counties
+<span id="tab:georgia-data-show">Table 2.12: </span>Multi-variable dataset for Georgia counties
 </caption>
 <thead><tr>
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
@@ -3560,7 +3691,7 @@ medinc
 </tbody>
 </table></div>
 <p>ACS variable IDs, which would be found in the <code>variable</code> column, are replaced by <code>medage</code> and <code>medinc</code>, as requested. When a wide-form dataset is requested, <strong>tidycensus</strong> will still append <code>E</code> and <code>M</code> to the specified column names, as illustrated below.</p>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ga_wide</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs</a></span><span class="op">(</span>
   geography <span class="op">=</span> <span class="st">"county"</span>,
   state <span class="op">=</span> <span class="st">"Georgia"</span>,
@@ -3570,7 +3701,7 @@ medinc
 <span class="op">)</span></code></pre></div>
 <div class="inline-table"><table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:georgia-data-wide-show">Table 2.12: </span>Georgia dataset in wide form
+<span id="tab:georgia-data-wide-show">Table 2.13: </span>Georgia dataset in wide form
 </caption>
 <thead><tr>
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
@@ -3809,8 +3940,8 @@ Floyd County, Georgia
 </h3>
 <p>The <a href="https://www.census.gov/programs-surveys/popest.html">Population Estimates Program</a>, or PEP, provides yearly estimates of the US population and its components between decennial Censuses. It differs from the ACS in that it is not directly based on a dedicated survey, but rather projects forward data from the most recent decennial Census based on birth, death, and migration rates.</p>
 <p>One advantage of using the PEP to retrieve data is that allows you to access the indicators used to produce the intercensal population estimates. These indicators can be specified as variables direction in the <code><a href="https://walker-data.com/tidycensus/reference/get_estimates.html">get_estimates()</a></code> function in <strong>tidycensus</strong>, or requested in bulk by using the <code>product</code> argument. The products available include <code>"population"</code>, <code>"components"</code>, <code>"housing"</code>, and <code>"characteristics"</code>. For example, we can request all components of change population estimates for 2019 for a specific county:</p>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://walker-data.com/tidycensus">tidycensus</a></span><span class="op">)</span>
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://walker-data.com/tidycensus/">tidycensus</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
 
 <span class="va">queens_components</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_estimates.html">get_estimates</a></span><span class="op">(</span>
@@ -3822,7 +3953,7 @@ Floyd County, Georgia
 <span class="op">)</span></code></pre></div>
 <div class="inline-table"><table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:queens-components-show">Table 2.13: </span>Components of change estimates for Queens County, NY
+<span id="tab:queens-components-show">Table 2.14: </span>Components of change estimates for Queens County, NY
 </caption>
 <thead><tr>
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
@@ -3983,7 +4114,7 @@ RINTERNATIONALMIG
 </table></div>
 <p>Alternatively, a single variable or vector of variables can be requested with the <code>variable</code> argument, and the <code>output = "wide"</code> argument can also be used to spread the variable names across the columns.</p>
 <p>The <code>product = "characteristics"</code> argument also has some unique options. The argument <code>breakdown</code> lets users get breakdowns of population estimates for the US, states, and counties by <code>"AGEGROUP"</code>, <code>"RACE"</code>, <code>"SEX"</code>, or <code>"HISP"</code> (Hispanic origin). If set to <code>TRUE</code>, the <code>breakdown_labels</code> argument will return informative labels for the population estimates. For example, to get population estimates by sex and Hispanic origin for metropolitan areas, we can use the following code:</p>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">louisiana_age_hisp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_estimates.html">get_estimates</a></span><span class="op">(</span>
   geography <span class="op">=</span> <span class="st">"state"</span>,
   product <span class="op">=</span> <span class="st">"characteristics"</span>,
@@ -3994,7 +4125,7 @@ RINTERNATIONALMIG
 <span class="op">)</span></code></pre></div>
 <div class="inline-table"><table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:louisiana-estimates-show">Table 2.14: </span>Population characteristics for Louisiana
+<span id="tab:louisiana-estimates-show">Table 2.15: </span>Population characteristics for Louisiana
 </caption>
 <thead><tr>
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
@@ -4175,7 +4306,7 @@ Hispanic
 <span class="header-section-number">2.5.2</span> Using <code>get_flows()</code><a class="anchor" aria-label="anchor" href="#using-get_flows"><i class="fas fa-link"></i></a>
 </h3>
 <p>As of version 1.0, <strong>tidycensus</strong> also includes support for the ACS Migration Flows API. The flows API returns information on both in- and out-migration for states, counties, and metropolitan areas. By default, the function allows for analysis of in-migrants, emigrants, and net migration for a given geography using data from a given 5-year ACS sample. In the example below, we request migration data for Honolulu County, Hawaii. In-migration for world regions is available along with out-migration and net migration for US locations.</p>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">honolulu_migration</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_flows.html">get_flows</a></span><span class="op">(</span>
   geography <span class="op">=</span> <span class="st">"county"</span>,
   state <span class="op">=</span> <span class="st">"HI"</span>,
@@ -4185,7 +4316,7 @@ Hispanic
 <span class="op">)</span></code></pre></div>
 <div class="inline-table"><table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:honolulu-migration-show">Table 2.15: </span>Migration flows data for Honolulu, HI
+<span id="tab:honolulu-migration-show">Table 2.16: </span>Migration flows data for Honolulu, HI
 </caption>
 <thead><tr>
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
@@ -4451,7 +4582,7 @@ MOVEDIN
 <span class="header-section-number">2.6</span> Debugging tidycensus errors<a class="anchor" aria-label="anchor" href="#debugging-tidycensus-errors"><i class="fas fa-link"></i></a>
 </h2>
 <p>At times, you may think that you’ve formatted your use of a <strong>tidycensus</strong> function correctly but the Census API doesn’t return the data you expected. Whenever possible, <strong>tidycensus</strong> carries through the error message from the Census API or translates common errors for the user. In the example below, a user has mis-typed the variable ID:</p>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">state_pop</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_decennial.html">get_decennial</a></span><span class="op">(</span>
   geography <span class="op">=</span> <span class="st">"state"</span>,
   variables <span class="op">=</span> <span class="st">"P01001"</span>,
@@ -4460,7 +4591,7 @@ MOVEDIN
 <pre><code>## Error : Your API call has errors.  The API message returned is error: error: unknown variable 'P01001'.</code></pre>
 <pre><code>## Error in UseMethod("gather"): no applicable method for 'gather' applied to an object of class "character"</code></pre>
 <p>The “unknown variable” error message from the Census API is carried through to the user. In other instances, users might request geographies that are not available in a given dataset:</p>
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cbsa_ohio</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs</a></span><span class="op">(</span>
   geography <span class="op">=</span> <span class="st">"cbsa"</span>,
   variables <span class="op">=</span> <span class="st">"DP02_0068P"</span>,
@@ -4470,7 +4601,7 @@ MOVEDIN
 <pre><code>## Error: Your API call has errors.  The API message returned is error: unknown/unsupported geography heirarchy.</code></pre>
 <p>The user above has attempted to get bachelor’s degree attainment by CBSA in Ohio from the ACS Data Profile. However, CBSA geographies are not available by state given that many CBSAs cross state boundaries. In response, the API returns an “unsupported geography hierarchy” error.</p>
 <p>To assist with debugging errors, or more generally to help users understand how <strong>tidycensus</strong> functions are being translated to Census API calls, <strong>tidycensus</strong> offers a parameter <code>show_call</code> that when set to <code>TRUE</code> prints out the actual API call that <strong>tidycensus</strong> is making to the Census API.</p>
-<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cbsa_bachelors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs</a></span><span class="op">(</span>
   geography <span class="op">=</span> <span class="st">"cbsa"</span>,
   variables <span class="op">=</span> <span class="st">"DP02_0068P"</span>,
@@ -4481,18 +4612,18 @@ MOVEDIN
 <pre><code>## Using the ACS Data Profile</code></pre>
 <pre><code>## Census API call: https://api.census.gov/data/2019/acs/acs5/profile?get=DP02_0068PE%2CDP02_0068PM%2CNAME&amp;for=metropolitan%20statistical%20area%2Fmicropolitan%20statistical%20area%3A%2A</code></pre>
 <p>The printed URL <a href="https://api.census.gov/data/2019/acs/acs5/profile?get=DP02_0068PE%2CDP02_0068PM%2CNAME&amp;for=metropolitan%20statistical%20area%2Fmicropolitan%20statistical%20area%3A%2A"><code>https://api.census.gov/data/2019/acs/acs5/profile?get=DP02_0068PE%2CDP02_0068PM%2CNAME&amp;for=metropolitan%20statistical%20area%2Fmicropolitan%20statistical%20area%3A%2A</code></a> can be copy-pasted into a web browser where users can see the raw JSON returned by the Census API and inspect the results.</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb48-1"><a href="an-introduction-to-tidycensus.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="ot">[[</span><span class="st">"DP02_0068PE"</span><span class="ot">,</span><span class="st">"DP02_0068PM"</span><span class="ot">,</span><span class="st">"NAME"</span><span class="ot">,</span><span class="st">"metropolitan statistical area/micropolitan statistical area"</span><span class="ot">],</span></span>
-<span id="cb48-2"><a href="an-introduction-to-tidycensus.html#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span><span class="st">"15.7"</span><span class="ot">,</span><span class="st">"1.5"</span><span class="ot">,</span><span class="st">"Big Stone Gap, VA Micro Area"</span><span class="ot">,</span><span class="st">"13720"</span><span class="ot">],</span></span>
-<span id="cb48-3"><a href="an-introduction-to-tidycensus.html#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span><span class="st">"31.6"</span><span class="ot">,</span><span class="st">"1.0"</span><span class="ot">,</span><span class="st">"Billings, MT Metro Area"</span><span class="ot">,</span><span class="st">"13740"</span><span class="ot">],</span></span>
-<span id="cb48-4"><a href="an-introduction-to-tidycensus.html#cb48-4" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span><span class="st">"27.9"</span><span class="ot">,</span><span class="st">"0.7"</span><span class="ot">,</span><span class="st">"Binghamton, NY Metro Area"</span><span class="ot">,</span><span class="st">"13780"</span><span class="ot">],</span></span>
-<span id="cb48-5"><a href="an-introduction-to-tidycensus.html#cb48-5" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span><span class="st">"31.4"</span><span class="ot">,</span><span class="st">"0.4"</span><span class="ot">,</span><span class="st">"Birmingham-Hoover, AL Metro Area"</span><span class="ot">,</span><span class="st">"13820"</span><span class="ot">],</span></span>
-<span id="cb48-6"><a href="an-introduction-to-tidycensus.html#cb48-6" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span><span class="st">"33.3"</span><span class="ot">,</span><span class="st">"1.0"</span><span class="ot">,</span><span class="st">"Bismarck, ND Metro Area"</span><span class="ot">,</span><span class="st">"13900"</span><span class="ot">],</span></span>
-<span id="cb48-7"><a href="an-introduction-to-tidycensus.html#cb48-7" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span><span class="st">"21.2"</span><span class="ot">,</span><span class="st">"2.0"</span><span class="ot">,</span><span class="st">"Blackfoot, ID Micro Area"</span><span class="ot">,</span><span class="st">"13940"</span><span class="ot">],</span></span>
-<span id="cb48-8"><a href="an-introduction-to-tidycensus.html#cb48-8" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span><span class="st">"35.2"</span><span class="ot">,</span><span class="st">"1.1"</span><span class="ot">,</span><span class="st">"Blacksburg-Christiansburg, VA Metro Area"</span><span class="ot">,</span><span class="st">"13980"</span><span class="ot">],</span></span>
-<span id="cb48-9"><a href="an-introduction-to-tidycensus.html#cb48-9" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span><span class="st">"44.8"</span><span class="ot">,</span><span class="st">"1.1"</span><span class="ot">,</span><span class="st">"Bloomington, IL Metro Area"</span><span class="ot">,</span><span class="st">"14010"</span><span class="ot">],</span></span>
-<span id="cb48-10"><a href="an-introduction-to-tidycensus.html#cb48-10" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span><span class="st">"40.8"</span><span class="ot">,</span><span class="st">"1.2"</span><span class="ot">,</span><span class="st">"Bloomington, IN Metro Area"</span><span class="ot">,</span><span class="st">"14020"</span><span class="ot">],</span></span>
-<span id="cb48-11"><a href="an-introduction-to-tidycensus.html#cb48-11" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span><span class="st">"24.9"</span><span class="ot">,</span><span class="st">"1.0"</span><span class="ot">,</span><span class="st">"Bloomsburg-Berwick, PA Metro Area"</span><span class="ot">,</span><span class="st">"14100"</span><span class="ot">],</span></span>
-<span id="cb48-12"><a href="an-introduction-to-tidycensus.html#cb48-12" aria-hidden="true" tabindex="-1"></a><span class="er">...</span></span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb50-1"><a href="an-introduction-to-tidycensus.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="ot">[[</span><span class="st">"DP02_0068PE"</span><span class="ot">,</span><span class="st">"DP02_0068PM"</span><span class="ot">,</span><span class="st">"NAME"</span><span class="ot">,</span><span class="st">"metropolitan statistical area/micropolitan statistical area"</span><span class="ot">],</span></span>
+<span id="cb50-2"><a href="an-introduction-to-tidycensus.html#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span><span class="st">"15.7"</span><span class="ot">,</span><span class="st">"1.5"</span><span class="ot">,</span><span class="st">"Big Stone Gap, VA Micro Area"</span><span class="ot">,</span><span class="st">"13720"</span><span class="ot">],</span></span>
+<span id="cb50-3"><a href="an-introduction-to-tidycensus.html#cb50-3" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span><span class="st">"31.6"</span><span class="ot">,</span><span class="st">"1.0"</span><span class="ot">,</span><span class="st">"Billings, MT Metro Area"</span><span class="ot">,</span><span class="st">"13740"</span><span class="ot">],</span></span>
+<span id="cb50-4"><a href="an-introduction-to-tidycensus.html#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span><span class="st">"27.9"</span><span class="ot">,</span><span class="st">"0.7"</span><span class="ot">,</span><span class="st">"Binghamton, NY Metro Area"</span><span class="ot">,</span><span class="st">"13780"</span><span class="ot">],</span></span>
+<span id="cb50-5"><a href="an-introduction-to-tidycensus.html#cb50-5" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span><span class="st">"31.4"</span><span class="ot">,</span><span class="st">"0.4"</span><span class="ot">,</span><span class="st">"Birmingham-Hoover, AL Metro Area"</span><span class="ot">,</span><span class="st">"13820"</span><span class="ot">],</span></span>
+<span id="cb50-6"><a href="an-introduction-to-tidycensus.html#cb50-6" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span><span class="st">"33.3"</span><span class="ot">,</span><span class="st">"1.0"</span><span class="ot">,</span><span class="st">"Bismarck, ND Metro Area"</span><span class="ot">,</span><span class="st">"13900"</span><span class="ot">],</span></span>
+<span id="cb50-7"><a href="an-introduction-to-tidycensus.html#cb50-7" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span><span class="st">"21.2"</span><span class="ot">,</span><span class="st">"2.0"</span><span class="ot">,</span><span class="st">"Blackfoot, ID Micro Area"</span><span class="ot">,</span><span class="st">"13940"</span><span class="ot">],</span></span>
+<span id="cb50-8"><a href="an-introduction-to-tidycensus.html#cb50-8" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span><span class="st">"35.2"</span><span class="ot">,</span><span class="st">"1.1"</span><span class="ot">,</span><span class="st">"Blacksburg-Christiansburg, VA Metro Area"</span><span class="ot">,</span><span class="st">"13980"</span><span class="ot">],</span></span>
+<span id="cb50-9"><a href="an-introduction-to-tidycensus.html#cb50-9" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span><span class="st">"44.8"</span><span class="ot">,</span><span class="st">"1.1"</span><span class="ot">,</span><span class="st">"Bloomington, IL Metro Area"</span><span class="ot">,</span><span class="st">"14010"</span><span class="ot">],</span></span>
+<span id="cb50-10"><a href="an-introduction-to-tidycensus.html#cb50-10" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span><span class="st">"40.8"</span><span class="ot">,</span><span class="st">"1.2"</span><span class="ot">,</span><span class="st">"Bloomington, IN Metro Area"</span><span class="ot">,</span><span class="st">"14020"</span><span class="ot">],</span></span>
+<span id="cb50-11"><a href="an-introduction-to-tidycensus.html#cb50-11" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span><span class="st">"24.9"</span><span class="ot">,</span><span class="st">"1.0"</span><span class="ot">,</span><span class="st">"Bloomsburg-Berwick, PA Metro Area"</span><span class="ot">,</span><span class="st">"14100"</span><span class="ot">],</span></span>
+<span id="cb50-12"><a href="an-introduction-to-tidycensus.html#cb50-12" aria-hidden="true" tabindex="-1"></a><span class="er">...</span></span></code></pre></div>
 </div>
 <div id="exercises" class="section level2" number="2.7">
 <h2>
@@ -4548,7 +4679,7 @@ MOVEDIN
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Analyzing US Census Data</strong>: Methods, Maps, and Models in R" was written by Kyle E. Walker. It was last built on 2021-09-01.</p>
+    <p>"<strong>Analyzing US Census Data</strong>: Methods, Maps, and Models in R" was written by Kyle E. Walker. It was last built on 2021-09-27.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

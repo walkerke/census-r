@@ -2,7 +2,7 @@
 title: "Analyzing US Census Data"
 subtitle: "Methods, Maps, and Models in R"
 author: "Kyle E. Walker"
-date: "2021-09-01"
+date: "2021-09-27"
 site: bookdown::bookdown_site
 knit: bookdown::render_book
 output: bookdown::bs4_book
@@ -273,8 +273,8 @@ The examples in this book were created with the following R package versions:
   </tr>
   <tr>
    <td style="text-align:left;"> tidycensus </td>
-   <td style="text-align:left;"> 1.0.0.9000 </td>
-   <td style="text-align:left;"> Github (walkerke/tidycensus\@966e8cf) </td>
+   <td style="text-align:left;"> 1.1.0.9000 </td>
+   <td style="text-align:left;"> local </td>
   </tr>
   <tr>
    <td style="text-align:left;"> tidyr </td>
@@ -293,8 +293,8 @@ The examples in this book were created with the following R package versions:
   </tr>
   <tr>
    <td style="text-align:left;"> tigris </td>
-   <td style="text-align:left;"> 1.4.1.9000 </td>
-   <td style="text-align:left;"> Github (walkerke/tigris\@cb4dee8) </td>
+   <td style="text-align:left;"> 1.5.0.9000 </td>
+   <td style="text-align:left;"> local </td>
   </tr>
   <tr>
    <td style="text-align:left;"> tmap </td>
