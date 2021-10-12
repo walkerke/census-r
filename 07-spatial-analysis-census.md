@@ -119,19 +119,280 @@ ggplot() +
 <p class="caption">(\#fig:kc-tracts-within)Census tracts that are within the Kansas City CBSA</p>
 </div>
 
-## Spatial joins and group-wise spatial analysis
+## Spatial joins
 
-Spatial data operations can also be embedded in workflows where analysts are interested in understanding how characteristics vary by group. For example, while demographic data for metropolitan areas can be readily acquired using **tidycensus** functions, we might also be interested in learning about how demographic characteristics of *neighborhoods within metropolitan areas* vary across the United States. We can accomplish this using a *spatial join*, which transfers attributes between spatial layers based on a relationship defined by a spatial predicate, as discussed above. Spatial joins in R are implemented in **sf**'s `st_join()` function.
+*Spatial joins* extend the aforementioned concepts in spatial overlay by transferring attributes between spatial layers. Conceptually, spatial joins can be thought of like the table joins covered in Section \@ref(national-election-mapping-with-tigris-shapes) where the equivalent of a "key field" used to match rows is a spatial relationship defined by a spatial predicate. Spatial joins in R are implemented in **sf**'s `st_join()` function. This section covers two common use cases for spatial joins with Census data. The first topic is the *point-in-polygon spatial join*, where a table of coordinates is matched to Census polygons to determine demographic characteristics around those locations. The second topic covers *polygon-in-polygon spatial joins*, where smaller Census shapes are matched to larger shapes.
 
-### Spatial join data setup
+### Point-in-polygon spatial joins
 
-Let's say that we are interested in analyzing the distributions of neighborhoods (defined here as Census tracts) by Hispanic population for the four largest metropolitan areas in Texas. We'll use the variable `B01003_001` from the 2019 1-year ACS to acquire population data by core-based statistical area (CBSA) along with simple feature geometry, and filter the data to retain the four target metro areas (Dallas-Fort Worth, Houston, Austin, and San Antonio) by GEOID.
+Analysts are commonly tasked with matching point-level data to Census shapes in order to study demographic differences. For example, a marketing analyst may have a dataset of customers and needs to understand the characteristics of those customers' neighborhoods in order to target products efficiently. Similarly, a health data analyst may need to match neighborhood demographic data to patient information to understand inequalities in patient outcomes. This scenario is explored in this section.
+
+Let's consider a hypothetical task where a health data analyst in Gainesville, Florida needs to determine the percentage of residents age 65 and up who lack health insurance in patients' neighborhoods. The analyst has a dataset of patients with patient ID along with longitude and latitude information.
+
+
+```r
+library(tidyverse)
+library(sf)
+library(tidycensus)
+library(mapview)
+
+gainesville_patients <- tibble(
+  patient_id = 1:10,
+  longitude = c(-82.308131, -82.311972, -82.361748, -82.374377, 
+                -82.38177, -82.259461, -82.367436, -82.404031, 
+                -82.43289, -82.461844),
+  latitude = c(29.645933, 29.655195, 29.621759, 29.653576, 
+               29.677201, 29.674923, 29.71099, 29.711587, 
+               29.648227, 29.624037)
+)
+```
+
+<table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<caption>(\#tab:gainesville-patients-show)Hypothetical dataset of patients in Gainesville, Florida</caption>
+ <thead>
+  <tr>
+   <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"> patient_id </th>
+   <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"> longitude </th>
+   <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"> latitude </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> -82.30813 </td>
+   <td style="text-align:right;"> 29.64593 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> -82.31197 </td>
+   <td style="text-align:right;"> 29.65519 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> -82.36175 </td>
+   <td style="text-align:right;"> 29.62176 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> -82.37438 </td>
+   <td style="text-align:right;"> 29.65358 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> -82.38177 </td>
+   <td style="text-align:right;"> 29.67720 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> -82.25946 </td>
+   <td style="text-align:right;"> 29.67492 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 7 </td>
+   <td style="text-align:right;"> -82.36744 </td>
+   <td style="text-align:right;"> 29.71099 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 8 </td>
+   <td style="text-align:right;"> -82.40403 </td>
+   <td style="text-align:right;"> 29.71159 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 9 </td>
+   <td style="text-align:right;"> -82.43289 </td>
+   <td style="text-align:right;"> 29.64823 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 10 </td>
+   <td style="text-align:right;"> -82.46184 </td>
+   <td style="text-align:right;"> 29.62404 </td>
+  </tr>
+</tbody>
+</table>
+
+Whereas the spatial overlay example in the previous section used spatial datasets from **tigris** that already include geographic information, this dataset needs to be converted to a simple features object. The `st_as_sf()` function in the **sf** package can take an R data frame or tibble with longitude and latitude columns like this and create a dataset of geometry type `POINT`. By convention, the coordinate reference system used for longitude / latitude data is WGS 1984, represented with the EPSG code `4326`. We'll need to specify this CRS in `st_as_sf()` so that **sf** can locate the points correctly before we transform to an appropriate projected coordinate reference system with `st_transform()`.
+
+
+```r
+# CRS: NAD83(2011) / Florida North
+gainesville_sf <- gainesville_patients %>%
+  st_as_sf(coords = c("longitude", "latitude"),
+           crs = 4326) %>%
+  st_transform(6440)
+```
+
+Once prepared as a spatial dataset, the patient information can be mapped.
+
+
+```r
+mapview(
+  gainesville_sf, 
+  col.regions = "red",
+  legend = FALSE
+)
+```
+
+<div class="figure">
+<iframe src="img/leaflet/gainesville_pts.html" width="100%" height="500px"></iframe>
+<p class="caption">(\#fig:map-gainesville-pts-show)Map of hypothetical patient locations in Gainesville, Florida</p>
+</div>
+
+As the patient data are now formatted as a simple features object, the next step is to acquire data on health insurance from the American Community Survey. A pre-computed percentage from the ACS Data Profile is available at the Census tract level, which will be used in the example below. Users who require a more granular geography can construct this information from the ACS Detailed Tables at the block group level using table B27001 and techniques learned in Section \@ref(tabulating-new-groups). As Gainesville is contained within Alachua County, Florida, we can obtain data from the 2015-2019 5-year ACS accordingly.
+
+
+```r
+alachua_insurance <- get_acs(
+  geography = "tract",
+  variables = "DP03_0096P",
+  state = "FL",
+  county = "Alachua",
+  year = 2019,
+  geometry = TRUE
+) %>%
+  select(GEOID, pct_insured = estimate, 
+         pct_insured_moe = moe) %>%
+  st_transform(6440)
+```
+
+After obtaining the spatial & demographic data with `get_acs()` and the `geometry = TRUE` argument, two additional commands help pre-process the data for the spatial join. The call to `select()` retains three non-geometry columns in the simple features object: `GEOID`, which is the Census tract ID, and the ACS estimate and MOE renamed to `pct_insured` and `pct_insured_moe`, respectively. This formats the information that will be appended to the patient data in the spatial join. The `st_transform()` command then aligns the coordinate reference system of the Census tracts with the CRS used by the patient dataset.
+
+Before computing the spatial join, the spatial relationships between patient points and Census tract demographics can be visualized interactively with `mapview()`, layering two interactive views with the `+` operator.
+
+
+```r
+mapview(
+  alachua_insurance,
+  zcol = "pct_insured", 
+  layer.name = "% with health<br/>insurance"
+) + 
+  mapview(
+    gainesville_sf,
+    col.regions = "red",
+    legend = FALSE
+  )
+```
+
+<div class="figure">
+<iframe src="img/leaflet/gainesville_relationship.html" width="100%" height="500px"></iframe>
+<p class="caption">(\#fig:mapview-gainesville-relationship-show)Layered interactive view of patients and Census tracts in Gainesville</p>
+</div>
+
+The interrelationships between patient points and tract neighborhoods can be explored on the map. These relationships can be formalized with a *spatial join*, implemented with the `st_join()` function in the **sf** package. `st_join()` returns a new simple features object that inherits geometry and attributes from a first dataset `x` with attributes from a second dataset `y` appended. Rows in `x` are matched to rows in `y` based on a spatial relationship defined by a spatial predicate, which defaults in `st_join()` to `st_intersects()`. For point-in-polygon spatial joins, this default will be sufficient in most cases unless a point falls directly on the boundary between polygons (which is not true in this example).
+
+
+```r
+patients_joined <- st_join(
+  gainesville_sf,
+  alachua_insurance
+)
+```
+
+<table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<caption>(\#tab:compute-alachua-join-show)Patients dataset after spatial join to Census tracts</caption>
+ <thead>
+  <tr>
+   <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"> patient_id </th>
+   <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"> geometry </th>
+   <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"> GEOID </th>
+   <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"> pct_insured </th>
+   <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"> pct_insured_moe </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> POINT (812216.5 73640.54) </td>
+   <td style="text-align:left;"> 12001000700 </td>
+   <td style="text-align:right;"> 81.6 </td>
+   <td style="text-align:right;"> 7.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:left;"> POINT (811825 74659.85) </td>
+   <td style="text-align:left;"> 12001000500 </td>
+   <td style="text-align:right;"> 91.0 </td>
+   <td style="text-align:right;"> 5.1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:left;"> POINT (807076.2 70862.84) </td>
+   <td style="text-align:left;"> 12001001515 </td>
+   <td style="text-align:right;"> 85.2 </td>
+   <td style="text-align:right;"> 6.2 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:left;"> POINT (805787.6 74366.12) </td>
+   <td style="text-align:left;"> 12001001603 </td>
+   <td style="text-align:right;"> 88.3 </td>
+   <td style="text-align:right;"> 5.1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:left;"> POINT (805023.3 76971.06) </td>
+   <td style="text-align:left;"> 12001001100 </td>
+   <td style="text-align:right;"> 96.2 </td>
+   <td style="text-align:right;"> 2.7 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:left;"> POINT (816865 76944.93) </td>
+   <td style="text-align:left;"> 12001001902 </td>
+   <td style="text-align:right;"> 86.0 </td>
+   <td style="text-align:right;"> 5.9 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 7 </td>
+   <td style="text-align:left;"> POINT (806340.4 80741.63) </td>
+   <td style="text-align:left;"> 12001001803 </td>
+   <td style="text-align:right;"> 92.3 </td>
+   <td style="text-align:right;"> 4.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 8 </td>
+   <td style="text-align:left;"> POINT (802798.8 80742.12) </td>
+   <td style="text-align:left;"> 12001001813 </td>
+   <td style="text-align:right;"> 97.9 </td>
+   <td style="text-align:right;"> 1.4 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 9 </td>
+   <td style="text-align:left;"> POINT (800134.1 73669.13) </td>
+   <td style="text-align:left;"> 12001002207 </td>
+   <td style="text-align:right;"> 95.7 </td>
+   <td style="text-align:right;"> 2.4 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 10 </td>
+   <td style="text-align:left;"> POINT (797379.1 70937.74) </td>
+   <td style="text-align:left;"> 12001002205 </td>
+   <td style="text-align:right;"> 96.5 </td>
+   <td style="text-align:right;"> 1.6 </td>
+  </tr>
+</tbody>
+</table>
+
+The output dataset includes the patient ID and the original `POINT` feature geometry, but also now includes GEOID information from the Census tract dataset along with neighborhood demographic information from the ACS. This workflow can be used for analyses of neighborhood characteristics in a wide variety of applications and to generate data suitable for hierarchical modeling.
+
+::: .rmdnote
+An issue to avoid when interpreting the results of point-in-polygon spatial joins is the *ecological fallacy*, where individual-level characteristics are inferred from that of the neighborhood. While neighborhood demographics are useful for inferring the characteristics of the environment in which an observation is located, they do not necessarily provide information about the demographics of the observation itself - particularly important when the observations represent people.
+:::
+
+### Spatial joins and group-wise spatial analysis
+
+Spatial data operations can also be embedded in workflows where analysts are interested in understanding how characteristics vary by group. For example, while demographic data for metropolitan areas can be readily acquired using **tidycensus** functions, we might also be interested in learning about how demographic characteristics of *neighborhoods within metropolitan areas* vary across the United States. The example below illustrates this with some important new concepts for spatial data analysts. It involves a *polygon-on-polygon spatial join* in which attention to the spatial predicate used will be very important. Additionally, as all polygons involved are acquired with tidycensus and `get_acs()`, the section will show how `st_join()` handles column names that are duplicated between datasets.
+
+#### Spatial join data setup
+
+Let's say that we are interested in analyzing the distributions of neighborhoods (defined here as Census tracts) by Hispanic population for the four largest metropolitan areas in Texas. We'll use the variable `B01003_001` from the 2019 1-year ACS to acquire population data by core-based statistical area (CBSA) along with simple feature geometry which will eventually be used for the spatial join.
 
 
 ```r
 library(tidycensus)
+library(tidyverse)
+library(sf)
 
-# CRS: NAD83(2011) / Texas North Central
+# CRS: NAD83(2011) / Texas Centric Albers Equal Area
 tx_cbsa <- get_acs(
   geography = "cbsa",
   variables = "B01003_001",
@@ -139,8 +400,9 @@ tx_cbsa <- get_acs(
   survey = "acs1",
   geometry = TRUE
 ) %>%
-  filter(GEOID %in% c("19100", "26420", "41700", "12420")) %>%
-  st_transform(6583)
+  filter(str_detect(NAME, "TX")) %>%
+  slice_max(estimate, n = 4) %>%
+  st_transform(6579)
 ```
 
 <table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
@@ -157,28 +419,20 @@ tx_cbsa <- get_acs(
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:left;"> 26420 </td>
-   <td style="text-align:left;"> Houston-The Woodlands-Sugar Land, TX Metro Area </td>
-   <td style="text-align:left;"> B01003_001 </td>
-   <td style="text-align:right;"> 7066140 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:left;"> MULTIPOLYGON (((966350.1 17... </td>
-  </tr>
-  <tr>
    <td style="text-align:left;"> 19100 </td>
    <td style="text-align:left;"> Dallas-Fort Worth-Arlington, TX Metro Area </td>
    <td style="text-align:left;"> B01003_001 </td>
    <td style="text-align:right;"> 7573136 </td>
    <td style="text-align:right;"> NA </td>
-   <td style="text-align:left;"> MULTIPOLYGON (((640777 2103... </td>
+   <td style="text-align:left;"> MULTIPOLYGON (((1681247 760... </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 12420 </td>
-   <td style="text-align:left;"> Austin-Round Rock-Georgetown, TX Metro Area </td>
+   <td style="text-align:left;"> 26420 </td>
+   <td style="text-align:left;"> Houston-The Woodlands-Sugar Land, TX Metro Area </td>
    <td style="text-align:left;"> B01003_001 </td>
-   <td style="text-align:right;"> 2227083 </td>
+   <td style="text-align:right;"> 7066140 </td>
    <td style="text-align:right;"> NA </td>
-   <td style="text-align:left;"> MULTIPOLYGON (((619874.4 18... </td>
+   <td style="text-align:left;"> MULTIPOLYGON (((2009903 730... </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 41700 </td>
@@ -186,10 +440,20 @@ tx_cbsa <- get_acs(
    <td style="text-align:left;"> B01003_001 </td>
    <td style="text-align:right;"> 2550960 </td>
    <td style="text-align:right;"> NA </td>
-   <td style="text-align:left;"> MULTIPOLYGON (((493109 1786... </td>
+   <td style="text-align:left;"> MULTIPOLYGON (((1538306 729... </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 12420 </td>
+   <td style="text-align:left;"> Austin-Round Rock-Georgetown, TX Metro Area </td>
+   <td style="text-align:left;"> B01003_001 </td>
+   <td style="text-align:right;"> 2227083 </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:left;"> MULTIPOLYGON (((1664195 732... </td>
   </tr>
 </tbody>
 </table>
+
+The filtering steps used merit some additional explanation. The expression `filter(str_detect(NAME, "TX"))` first subsets the core-based statistical area data for only those metropolitan or micropolitan areas in (or partially in) Texas. Given that string matching in `str_detect()` is case-sensitive, using `"TX"` as the search string will match rows correctly. `slice_max()`, introduced in Section \@ref(basic-census-visualization-with-ggplot2), then retains the four rows with the largest population values, found in the `estimate` column. Finally, the spatial dataset is transformed to an appropriate projected coordinate reference system for the state of Texas.
 
 Given that all four of these metropolitan areas are completely contained within the state of Texas, we can obtain data on percent Hispanic by tract from the ACS Data Profile for 2015-2019.
 
@@ -202,7 +466,7 @@ pct_hispanic <- get_acs(
   year = 2019,
   geometry = TRUE
 ) %>%
-  st_transform(6583)
+  st_transform(6579)
 ```
 
 <table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
@@ -224,7 +488,7 @@ pct_hispanic <- get_acs(
    <td style="text-align:left;"> DP05_0071P </td>
    <td style="text-align:right;"> 58.1 </td>
    <td style="text-align:right;"> 5.7 </td>
-   <td style="text-align:left;"> MULTIPOLYGON (((761835.4 21... </td>
+   <td style="text-align:left;"> MULTIPOLYGON (((1801563 765... </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 48377950200 </td>
@@ -232,7 +496,7 @@ pct_hispanic <- get_acs(
    <td style="text-align:left;"> DP05_0071P </td>
    <td style="text-align:right;"> 95.6 </td>
    <td style="text-align:right;"> 3.7 </td>
-   <td style="text-align:left;"> MULTIPOLYGON (((14228.99 18... </td>
+   <td style="text-align:left;"> MULTIPOLYGON (((1060841 729... </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 48029190601 </td>
@@ -240,7 +504,7 @@ pct_hispanic <- get_acs(
    <td style="text-align:left;"> DP05_0071P </td>
    <td style="text-align:right;"> 86.2 </td>
    <td style="text-align:right;"> 6.7 </td>
-   <td style="text-align:left;"> MULTIPOLYGON (((597472 1756... </td>
+   <td style="text-align:left;"> MULTIPOLYGON (((1642736 726... </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 48355002301 </td>
@@ -248,7 +512,7 @@ pct_hispanic <- get_acs(
    <td style="text-align:left;"> DP05_0071P </td>
    <td style="text-align:right;"> 80.6 </td>
    <td style="text-align:right;"> 3.9 </td>
-   <td style="text-align:left;"> MULTIPOLYGON (((707829.4 15... </td>
+   <td style="text-align:left;"> MULTIPOLYGON (((1755212 707... </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 48441012300 </td>
@@ -256,7 +520,7 @@ pct_hispanic <- get_acs(
    <td style="text-align:left;"> DP05_0071P </td>
    <td style="text-align:right;"> 26.4 </td>
    <td style="text-align:right;"> 6.3 </td>
-   <td style="text-align:left;"> MULTIPOLYGON (((481547.9 20... </td>
+   <td style="text-align:left;"> MULTIPOLYGON (((1522575 758... </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 48051970500 </td>
@@ -264,7 +528,7 @@ pct_hispanic <- get_acs(
    <td style="text-align:left;"> DP05_0071P </td>
    <td style="text-align:right;"> 20.4 </td>
    <td style="text-align:right;"> 6.1 </td>
-   <td style="text-align:left;"> MULTIPOLYGON (((769306.1 18... </td>
+   <td style="text-align:left;"> MULTIPOLYGON (((1812744 736... </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 48441010400 </td>
@@ -272,7 +536,7 @@ pct_hispanic <- get_acs(
    <td style="text-align:left;"> DP05_0071P </td>
    <td style="text-align:right;"> 64.4 </td>
    <td style="text-align:right;"> 7.7 </td>
-   <td style="text-align:left;"> MULTIPOLYGON (((481778.2 20... </td>
+   <td style="text-align:left;"> MULTIPOLYGON (((1522727 759... </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 48201311900 </td>
@@ -280,7 +544,7 @@ pct_hispanic <- get_acs(
    <td style="text-align:left;"> DP05_0071P </td>
    <td style="text-align:right;"> 84.9 </td>
    <td style="text-align:right;"> 5.8 </td>
-   <td style="text-align:left;"> MULTIPOLYGON (((906812.7 17... </td>
+   <td style="text-align:left;"> MULTIPOLYGON (((1950592 729... </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 48113015500 </td>
@@ -288,7 +552,7 @@ pct_hispanic <- get_acs(
    <td style="text-align:left;"> DP05_0071P </td>
    <td style="text-align:right;"> 56.6 </td>
    <td style="text-align:right;"> 7.5 </td>
-   <td style="text-align:left;"> MULTIPOLYGON (((738672.9 21... </td>
+   <td style="text-align:left;"> MULTIPOLYGON (((1778712 763... </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 48217960500 </td>
@@ -296,16 +560,16 @@ pct_hispanic <- get_acs(
    <td style="text-align:left;"> DP05_0071P </td>
    <td style="text-align:right;"> 9.3 </td>
    <td style="text-align:right;"> 4.8 </td>
-   <td style="text-align:left;"> MULTIPOLYGON (((700273.8 20... </td>
+   <td style="text-align:left;"> MULTIPOLYGON (((1741591 753... </td>
   </tr>
 </tbody>
 </table>
 
 The returned dataset covers Census tracts in the entirety of the state of Texas; however we only need to retain those tracts that fall within our four metropolitan areas of interest. We can accomplish this with a spatial join using `st_join()`.
 
-### Computing and visualizing the spatial join
+#### Computing and visualizing the spatial join
 
-In a call to `st_join()`, we request that a given spatial dataset `x`, for which geometry will be retained, gains attributes from a second spatial dataset `y` based on their spatial relationship. This spatial relationship, as in the above examples, will be defined by a spatial predicate passed to the `join` parameter. The argument `suffix` defines the suffixes to be used for columns that share the same names, which will be important given that both datasets came from **tidycensus**. The argument `left = FALSE` requests an inner spatial join, returning only those tracts that fall within the four metropolitan areas.
+We know that in `st_join()`, we request that a given spatial dataset `x`, for which geometry will be retained, gains attributes from a second spatial dataset `y` based on their spatial relationship. This spatial relationship, as in the above examples, will be defined by a spatial predicate passed to the `join` parameter. The argument `suffix` defines the suffixes to be used for columns that share the same names, which will be important given that both datasets came from **tidycensus**. The argument `left = FALSE` requests an inner spatial join, returning only those tracts that fall within the four metropolitan areas.
 
 
 ```r
@@ -349,7 +613,7 @@ hispanic_by_metro <- st_join(
    <td style="text-align:left;"> B01003_001 </td>
    <td style="text-align:right;"> 7573136 </td>
    <td style="text-align:right;"> NA </td>
-   <td style="text-align:left;"> MULTIPOLYGON (((761835.4 21... </td>
+   <td style="text-align:left;"> MULTIPOLYGON (((1801563 765... </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 3 </td>
@@ -363,7 +627,7 @@ hispanic_by_metro <- st_join(
    <td style="text-align:left;"> B01003_001 </td>
    <td style="text-align:right;"> 2550960 </td>
    <td style="text-align:right;"> NA </td>
-   <td style="text-align:left;"> MULTIPOLYGON (((597472 1756... </td>
+   <td style="text-align:left;"> MULTIPOLYGON (((1642736 726... </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 8 </td>
@@ -377,7 +641,7 @@ hispanic_by_metro <- st_join(
    <td style="text-align:left;"> B01003_001 </td>
    <td style="text-align:right;"> 7066140 </td>
    <td style="text-align:right;"> NA </td>
-   <td style="text-align:left;"> MULTIPOLYGON (((906812.7 17... </td>
+   <td style="text-align:left;"> MULTIPOLYGON (((1950592 729... </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 9 </td>
@@ -391,7 +655,7 @@ hispanic_by_metro <- st_join(
    <td style="text-align:left;"> B01003_001 </td>
    <td style="text-align:right;"> 7573136 </td>
    <td style="text-align:right;"> NA </td>
-   <td style="text-align:left;"> MULTIPOLYGON (((738672.9 21... </td>
+   <td style="text-align:left;"> MULTIPOLYGON (((1778712 763... </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 11 </td>
@@ -405,7 +669,7 @@ hispanic_by_metro <- st_join(
    <td style="text-align:left;"> B01003_001 </td>
    <td style="text-align:right;"> 7573136 </td>
    <td style="text-align:right;"> NA </td>
-   <td style="text-align:left;"> MULTIPOLYGON (((705890.8 21... </td>
+   <td style="text-align:left;"> MULTIPOLYGON (((1746016 762... </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 13 </td>
@@ -419,7 +683,7 @@ hispanic_by_metro <- st_join(
    <td style="text-align:left;"> B01003_001 </td>
    <td style="text-align:right;"> 7066140 </td>
    <td style="text-align:right;"> NA </td>
-   <td style="text-align:left;"> MULTIPOLYGON (((881728.9 17... </td>
+   <td style="text-align:left;"> MULTIPOLYGON (((1925521 730... </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 14 </td>
@@ -433,7 +697,7 @@ hispanic_by_metro <- st_join(
    <td style="text-align:left;"> B01003_001 </td>
    <td style="text-align:right;"> 7066140 </td>
    <td style="text-align:right;"> NA </td>
-   <td style="text-align:left;"> MULTIPOLYGON (((878488.5 17... </td>
+   <td style="text-align:left;"> MULTIPOLYGON (((1922292 730... </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 22 </td>
@@ -447,7 +711,7 @@ hispanic_by_metro <- st_join(
    <td style="text-align:left;"> B01003_001 </td>
    <td style="text-align:right;"> 7066140 </td>
    <td style="text-align:right;"> NA </td>
-   <td style="text-align:left;"> MULTIPOLYGON (((891606.1 17... </td>
+   <td style="text-align:left;"> MULTIPOLYGON (((1935603 728... </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 25 </td>
@@ -461,7 +725,7 @@ hispanic_by_metro <- st_join(
    <td style="text-align:left;"> B01003_001 </td>
    <td style="text-align:right;"> 7066140 </td>
    <td style="text-align:right;"> NA </td>
-   <td style="text-align:left;"> MULTIPOLYGON (((875016 1817... </td>
+   <td style="text-align:left;"> MULTIPOLYGON (((1918552 732... </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 27 </td>
@@ -475,7 +739,7 @@ hispanic_by_metro <- st_join(
    <td style="text-align:left;"> B01003_001 </td>
    <td style="text-align:right;"> 7573136 </td>
    <td style="text-align:right;"> NA </td>
-   <td style="text-align:left;"> MULTIPOLYGON (((727489.9 21... </td>
+   <td style="text-align:left;"> MULTIPOLYGON (((1766859 768... </td>
   </tr>
 </tbody>
 </table>
@@ -524,22 +788,22 @@ median_by_metro <- hispanic_by_metro %>%
   <tr>
    <td style="text-align:left;"> Austin-Round Rock-Georgetown, TX Metro Area </td>
    <td style="text-align:right;"> 25.9 </td>
-   <td style="text-align:left;"> POLYGON ((687521.6 1774488,... </td>
+   <td style="text-align:left;"> POLYGON ((1732228 7281497, ... </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Dallas-Fort Worth-Arlington, TX Metro Area </td>
    <td style="text-align:right;"> 22.6 </td>
-   <td style="text-align:left;"> POLYGON ((827821.1 2092787,... </td>
+   <td style="text-align:left;"> POLYGON ((1868068 7602006, ... </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Houston-The Woodlands-Sugar Land, TX Metro Area </td>
    <td style="text-align:right;"> 32.4 </td>
-   <td style="text-align:left;"> MULTIPOLYGON (((912978.5 17... </td>
+   <td style="text-align:left;"> MULTIPOLYGON (((1957796 721... </td>
   </tr>
   <tr>
    <td style="text-align:left;"> San Antonio-New Braunfels, TX Metro Area </td>
    <td style="text-align:right;"> 53.5 </td>
-   <td style="text-align:left;"> POLYGON ((654106.1 1711157,... </td>
+   <td style="text-align:left;"> POLYGON ((1699769 7217758, ... </td>
   </tr>
 </tbody>
 </table>
@@ -573,20 +837,22 @@ options(tigris_use_cache = TRUE)
 ia_tracts <- tracts("IA", cb = TRUE, year = 2019) %>%
   st_transform(26975)
 
-trauma <- st_read("data/Hospitals.shp") %>%
+hospital_url <- "https://opendata.arcgis.com/api/v3/datasets/6ac5e325468c4cb9b905f1728d6fbf0f_0/downloads/data?format=geojson&spatialRefId=4326"
+
+trauma <- st_read(hospital_url) %>%
   filter(str_detect(TRAUMA, "LEVEL I\\b|LEVEL II\\b|RTH|RTC")) %>%
   st_transform(26975)
 ```
 
 ```
 ## Reading layer `Hospitals' from data source 
-##   `/home/kyle/Dropbox/Research/census-with-r-book/data/Hospitals.shp' 
-##   using driver `ESRI Shapefile'
+##   `https://opendata.arcgis.com/api/v3/datasets/6ac5e325468c4cb9b905f1728d6fbf0f_0/downloads/data?format=geojson&spatialRefId=4326' 
+##   using driver `GeoJSON'
 ## Simple feature collection with 7596 features and 32 fields
 ## Geometry type: POINT
 ## Dimension:     XY
-## Bounding box:  xmin: -19663500 ymin: -1607536 xmax: 16221970 ymax: 11504850
-## Projected CRS: WGS 84 / Pseudo-Mercator
+## Bounding box:  xmin: -176.6403 ymin: -14.29024 xmax: 145.7245 ymax: 71.29773
+## Geodetic CRS:  WGS 84
 ```
 
 ```r
@@ -594,7 +860,7 @@ names(trauma)
 ```
 
 ```
-##  [1] "FID"        "ID"         "NAME"       "ADDRESS"    "CITY"      
+##  [1] "OBJECTID"   "ID"         "NAME"       "ADDRESS"    "CITY"      
 ##  [6] "STATE"      "ZIP"        "ZIP4"       "TELEPHONE"  "TYPE"      
 ## [11] "STATUS"     "POPULATION" "COUNTY"     "COUNTYFIPS" "COUNTRY"   
 ## [16] "LATITUDE"   "LONGITUDE"  "NAICS_CODE" "NAICS_DESC" "SOURCE"    
@@ -722,7 +988,7 @@ ggplot(ia_tracts, aes(fill = time)) +
 
 The map illustrates considerable accessibility gaps to trauma centers across the state. Whereas urban residents typically live within 20 minutes of a trauma center, travel times in rural Iowa can exceed two hours.
 
-::: {.rmdnote}
+::: rmdnote
 An advantage to using a package like **mapboxapi** for routing and travel times is that users can connect directly to a hosted routing engine using an API. Due to rate limitations, however, web APIs are likely inadequate for more advanced users who need to compute travel times at scale. There are several R packages that can connect to user-hosted routing engines which may be better-suited to such tasks. These packages include [osrm](https://github.com/rCarto/osrm) for the Open Source Routing Machine; [opentripplanner](https://docs.ropensci.org/opentripplanner/) for OpenTripPlanner; and [r5r](https://ipeagit.github.io/r5r/) for R5.
 :::
 
@@ -786,14 +1052,14 @@ The comparative maps illustrate the differences between the two methods quite cl
 
 Common to both methods, however, is a mis-alignment between their geometries and those of any Census geographies we may use to infer catchment area demographics. As opposed to the spatial overlay analysis matching Census tracts to metropolitan areas earlier in this chapter, Census tracts or block groups on the edge of the catchment area will only be partially included in the catchment. A common method for resolving this issue in geographic information science is *areal interpolation*. Areal interpolation refers to the allocation of data from one set of zones to a second overlapping set of zones that may or may not perfectly align spatially. In cases of mis-alignment, some type of weighting scheme needs to be specified to determine how to allocate partial data in areas of overlap.
 
-Let's produce interpolated estimates of the percentage of population in poverty for both catchment area definitions. This will require obtaining block-group level poverty information from the ACS for Polk County, Iowa, which encompasses both the buffer and the isochrone. The variables requested from the ACS include the number of persons living below the poverty line, and the number of persons for whom poverty status is determined, which will serve as a denominator.
+Let's produce interpolated estimates of the percentage of population in poverty for both catchment area definitions. This will require obtaining block-group level poverty information from the ACS for Polk County, Iowa, which encompasses both the buffer and the isochrone. The variables requested from the ACS include the number of family households with incomes below the poverty line along with total number of family households to serve as a denominator.
 
 
 ```r
 polk_poverty <- get_acs(
-  geography = "tract",
-  variables = c(poverty_denom = "B17001_001",
-                poverty_num = "B17001_002"),
+  geography = "block group",
+  variables = c(poverty_denom = "B17010_001",
+                poverty_num = "B17010_002"),
   state = "IA",
   county = "Polk",
   geometry = TRUE,
@@ -825,20 +1091,22 @@ iso_pov <- st_interpolate_aw(
   mutate(pct_poverty = 100 * (poverty_numE / poverty_denomE))
 
 
-print(glue("Poverty (5km buffer method): {round(buffer_pov$pct_poverty, 1)}%"))
+print(glue("Family poverty (5km buffer method): {round(buffer_pov$pct_poverty, 1)}%"))
 ```
 
 ```
-## Poverty (5km buffer method): 18.8%
+## Family poverty (5km buffer method): 13.5%
 ```
 
 ```r
-print(glue("Poverty (10min isochrone method): {round(iso_pov$pct_poverty, 1)}%"))
+print(glue("Family poverty (10min isochrone method): {round(iso_pov$pct_poverty, 1)}%"))
 ```
 
 ```
-## Poverty (10min isochrone method): 18.4%
+## Family poverty (10min isochrone method): 14.2%
 ```
+
+The two methods return slightly different results, illustrating how the definition of catchment area impacts downstream analyses.
 
 Following up on Section \@ref(understanding-yearly-differences-in-tigerline-files), areal interpolation is also a common method used to adjust population data aggregated to inconsistent Census boundaries over time. However, it can introduce inaccuracies in sparsely populated areas, which can be improved with a population-weighted interpolation approach. While this approach is not covered here, @schroeder2013 provide a good discussion of the method.
 

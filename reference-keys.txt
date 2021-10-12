@@ -131,6 +131,10 @@ fig:layers-view
 fig:kc-metro
 fig:kc-tracts-intersect
 fig:kc-tracts-within
+tab:gainesville-patients-show
+fig:map-gainesville-pts-show
+fig:mapview-gainesville-relationship-show
+tab:compute-alachua-join-show
 tab:tx-cbsa-show
 tab:tx-hispanic-show
 tab:hispanic-by-metro-show
@@ -363,6 +367,8 @@ spatial-overlay
 note-aligning-coordinate-reference-systems
 identifying-geometries-within-a-metropolitan-area
 spatial-subsets-and-spatial-predicates
+spatial-joins
+point-in-polygon-spatial-joins
 spatial-joins-and-group-wise-spatial-analysis
 spatial-join-data-setup
 computing-and-visualizing-the-spatial-join
