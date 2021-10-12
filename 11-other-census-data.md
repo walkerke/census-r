@@ -72,7 +72,7 @@ nyc_1910 <- read_nhgis_sf(
 ## Reading geography...
 ## options:        ENCODING=latin1 
 ## Reading layer `US_tract_1910' from data source 
-##   `/tmp/RtmprnBBxD/file405e2ab7bbfd/US_tract_1910.shp' using driver `ESRI Shapefile'
+##   `/tmp/RtmphQqlKI/file749e342d7d8e/US_tract_1910.shp' using driver `ESRI Shapefile'
 ## Simple feature collection with 1989 features and 6 fields
 ## Geometry type: MULTIPOLYGON
 ## Dimension:     XY
@@ -633,14 +633,6 @@ tx_econ17 <- getCensus(
   </tr>
   <tr>
    <td style="text-align:left;"> 48 </td>
-   <td style="text-align:left;"> 315 </td>
-   <td style="text-align:left;"> 396 </td>
-   <td style="text-align:left;"> 4953 </td>
-   <td style="text-align:left;"> 0500000US48315 </td>
-   <td style="text-align:left;"> 72 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 48 </td>
    <td style="text-align:left;"> 383 </td>
    <td style="text-align:left;"> 140 </td>
    <td style="text-align:left;"> 2178 </td>
@@ -649,18 +641,26 @@ tx_econ17 <- getCensus(
   </tr>
   <tr>
    <td style="text-align:left;"> 48 </td>
-   <td style="text-align:left;"> 387 </td>
-   <td style="text-align:left;"> 0 </td>
-   <td style="text-align:left;"> 0 </td>
-   <td style="text-align:left;"> 0500000US48387 </td>
-   <td style="text-align:left;"> 72 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 48 </td>
    <td style="text-align:left;"> 501 </td>
    <td style="text-align:left;"> 147 </td>
    <td style="text-align:left;"> 1867 </td>
    <td style="text-align:left;"> 0500000US48501 </td>
+   <td style="text-align:left;"> 72 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 48 </td>
+   <td style="text-align:left;"> 189 </td>
+   <td style="text-align:left;"> 1187 </td>
+   <td style="text-align:left;"> 15947 </td>
+   <td style="text-align:left;"> 0500000US48189 </td>
+   <td style="text-align:left;"> 72 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 48 </td>
+   <td style="text-align:left;"> 419 </td>
+   <td style="text-align:left;"> 505 </td>
+   <td style="text-align:left;"> 9836 </td>
+   <td style="text-align:left;"> 0500000US48419 </td>
    <td style="text-align:left;"> 72 </td>
   </tr>
 </tbody>

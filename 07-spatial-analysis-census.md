@@ -374,7 +374,7 @@ patients_joined <- st_join(
 
 The output dataset includes the patient ID and the original `POINT` feature geometry, but also now includes GEOID information from the Census tract dataset along with neighborhood demographic information from the ACS. This workflow can be used for analyses of neighborhood characteristics in a wide variety of applications and to generate data suitable for hierarchical modeling.
 
-::: .rmdnote
+::: rmdnote
 An issue to avoid when interpreting the results of point-in-polygon spatial joins is the *ecological fallacy*, where individual-level characteristics are inferred from that of the neighborhood. While neighborhood demographics are useful for inferring the characteristics of the environment in which an observation is located, they do not necessarily provide information about the demographics of the observation itself - particularly important when the observations represent people.
 :::
 

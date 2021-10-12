@@ -275,7 +275,7 @@ P001001
 <span class="header-section-number">2.1.1.1</span> Summary files in the decennial Census<a class="anchor" aria-label="anchor" href="#summary-files-in-the-decennial-census"><i class="fas fa-link"></i></a>
 </h4>
 <p>By default, <code><a href="https://walker-data.com/tidycensus/reference/get_decennial.html">get_decennial()</a></code> uses the argument <code>sumfile = "sf1"</code>, which fetches data from the decennial Census Summary File 1. This summary file exists for the 2000 and 2010 decennial US Censuses, and includes core demographic characteristics for Census geographies. The 2000 and 2010 decennial Census data also include Summary File 2, which contains information on a range of population and housing unit characteristics and is specified as <code>"sf2"</code>. Detailed demographic information in the 2000 decennial Census such as income and occupation can be found in Summary Files 3 (<code>"sf3"</code>) and 4 (<code>"sf4"</code>). Data from the 2000 and 2010 Decennial Censuses for island territories other than Puerto Rico must be accessed at their corresponding summary files: <code>"as"</code> for American Samoa, <code>"mp"</code> for the Northern Mariana Islands, <code>"gu"</code> for Guam, and <code>"vi"</code> for the US Virgin Islands.</p>
-<p>2020 Decennial Census data are available from the <span class="math display">\[PL-94171 Redistricting Summary File\]</span>(<a href="https://www.census.gov/programs-surveys/decennial-census/about/rdo/summary-files.html#:~:text=P.L.-,94%2D171%20Redistricting%20Data,order%20to%20conduct%20legislative%20redistricting.">&lt;https://www.census.gov/programs-surveys/decennial-census/about/rdo/summary-files.html#:~:text=P.L.-,94%2D171%20Redistricting%20Data,order%20to%20conduct%20legislative%20redistricting&gt;.</a>), which is specified with <code>sumfile = "pl"</code> and is also available for 2010. The Redistricting summary files include a limited subset of variables from the decennial US Census to be used for legislative redistricting. These variables include total population and housing units; race and ethnicity; voting-age population; and group quarters population. For example, the code below retrieves information on the American Indian &amp; Alaska Native population by state from the 2020 decennial Census.</p>
+<p>2020 Decennial Census data are available from the PL 94-171 Redistricting summary file, which is specified with <code>sumfile = "pl"</code> and is also available for 2010. The Redistricting summary files include a limited subset of variables from the decennial US Census to be used for legislative redistricting. These variables include total population and housing units; race and ethnicity; voting-age population; and group quarters population. For example, the code below retrieves information on the American Indian &amp; Alaska Native population by state from the 2020 decennial Census.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">aian_2020</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_decennial.html">get_decennial</a></span><span class="op">(</span>
   geography <span class="op">=</span> <span class="st">"state"</span>,
@@ -1021,7 +1021,7 @@ B01001_010
 <colgroup>
 <col width="33%">
 <col width="32%">
-<col width="8%">
+<col width="9%">
 <col width="25%">
 </colgroup>
 <thead><tr class="header">
