@@ -2,7 +2,7 @@
 title: "Analyzing US Census Data"
 subtitle: "Methods, Maps, and Models in R"
 author: "Kyle E. Walker"
-date: "2021-10-12"
+date: "2021-10-15"
 site: bookdown::bookdown_site
 knit: bookdown::render_book
 output: bookdown::bs4_book

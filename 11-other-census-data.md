@@ -72,7 +72,7 @@ nyc_1910 <- read_nhgis_sf(
 ## Reading geography...
 ## options:        ENCODING=latin1 
 ## Reading layer `US_tract_1910' from data source 
-##   `/tmp/RtmphQqlKI/file749e342d7d8e/US_tract_1910.shp' using driver `ESRI Shapefile'
+##   `/tmp/RtmpeTlSHP/file36862e06f09e/US_tract_1910.shp' using driver `ESRI Shapefile'
 ## Simple feature collection with 1989 features and 6 fields
 ## Geometry type: MULTIPOLYGON
 ## Dimension:     XY
@@ -601,6 +601,38 @@ tx_econ17 <- getCensus(
   </tr>
   <tr>
    <td style="text-align:left;"> 48 </td>
+   <td style="text-align:left;"> 389 </td>
+   <td style="text-align:left;"> 664 </td>
+   <td style="text-align:left;"> 14641 </td>
+   <td style="text-align:left;"> 0500000US48389 </td>
+   <td style="text-align:left;"> 72 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 48 </td>
+   <td style="text-align:left;"> 035 </td>
+   <td style="text-align:left;"> 261 </td>
+   <td style="text-align:left;"> 4186 </td>
+   <td style="text-align:left;"> 0500000US48035 </td>
+   <td style="text-align:left;"> 72 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 48 </td>
+   <td style="text-align:left;"> 113 </td>
+   <td style="text-align:left;"> 134426 </td>
+   <td style="text-align:left;"> 2677179 </td>
+   <td style="text-align:left;"> 0500000US48113 </td>
+   <td style="text-align:left;"> 72 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 48 </td>
+   <td style="text-align:left;"> 251 </td>
+   <td style="text-align:left;"> 4512 </td>
+   <td style="text-align:left;"> 60929 </td>
+   <td style="text-align:left;"> 0500000US48251 </td>
+   <td style="text-align:left;"> 72 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 48 </td>
    <td style="text-align:left;"> 467 </td>
    <td style="text-align:left;"> 1254 </td>
    <td style="text-align:left;"> 19187 </td>
@@ -629,38 +661,6 @@ tx_econ17 <- getCensus(
    <td style="text-align:left;"> 0 </td>
    <td style="text-align:left;"> 0 </td>
    <td style="text-align:left;"> 0500000US48317 </td>
-   <td style="text-align:left;"> 72 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 48 </td>
-   <td style="text-align:left;"> 383 </td>
-   <td style="text-align:left;"> 140 </td>
-   <td style="text-align:left;"> 2178 </td>
-   <td style="text-align:left;"> 0500000US48383 </td>
-   <td style="text-align:left;"> 72 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 48 </td>
-   <td style="text-align:left;"> 501 </td>
-   <td style="text-align:left;"> 147 </td>
-   <td style="text-align:left;"> 1867 </td>
-   <td style="text-align:left;"> 0500000US48501 </td>
-   <td style="text-align:left;"> 72 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 48 </td>
-   <td style="text-align:left;"> 189 </td>
-   <td style="text-align:left;"> 1187 </td>
-   <td style="text-align:left;"> 15947 </td>
-   <td style="text-align:left;"> 0500000US48189 </td>
-   <td style="text-align:left;"> 72 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 48 </td>
-   <td style="text-align:left;"> 419 </td>
-   <td style="text-align:left;"> 505 </td>
-   <td style="text-align:left;"> 9836 </td>
-   <td style="text-align:left;"> 0500000US48419 </td>
    <td style="text-align:left;"> 72 </td>
   </tr>
 </tbody>

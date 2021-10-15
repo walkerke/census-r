@@ -756,44 +756,44 @@ utah <- get_estimates(
   <tr>
    <td style="text-align:left;"> 49 </td>
    <td style="text-align:left;"> Utah </td>
-   <td style="text-align:right;"> 253847 </td>
-   <td style="text-align:left;"> Both sexes </td>
-   <td style="text-align:left;"> Age 15 to 19 years </td>
+   <td style="text-align:right;"> 1614917 </td>
+   <td style="text-align:left;"> Male </td>
+   <td style="text-align:left;"> All ages </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 49 </td>
    <td style="text-align:left;"> Utah </td>
-   <td style="text-align:right;"> 264652 </td>
-   <td style="text-align:left;"> Both sexes </td>
-   <td style="text-align:left;"> Age 20 to 24 years </td>
+   <td style="text-align:right;"> 132868 </td>
+   <td style="text-align:left;"> Male </td>
+   <td style="text-align:left;"> Age 5 to 9 years </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 49 </td>
    <td style="text-align:left;"> Utah </td>
-   <td style="text-align:right;"> 251376 </td>
-   <td style="text-align:left;"> Both sexes </td>
-   <td style="text-align:left;"> Age 25 to 29 years </td>
+   <td style="text-align:right;"> 137940 </td>
+   <td style="text-align:left;"> Male </td>
+   <td style="text-align:left;"> Age 10 to 14 years </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 49 </td>
    <td style="text-align:left;"> Utah </td>
-   <td style="text-align:right;"> 220430 </td>
-   <td style="text-align:left;"> Both sexes </td>
-   <td style="text-align:left;"> Age 30 to 34 years </td>
+   <td style="text-align:right;"> 1591041 </td>
+   <td style="text-align:left;"> Female </td>
+   <td style="text-align:left;"> All ages </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 49 </td>
    <td style="text-align:left;"> Utah </td>
-   <td style="text-align:right;"> 231242 </td>
-   <td style="text-align:left;"> Both sexes </td>
-   <td style="text-align:left;"> Age 35 to 39 years </td>
+   <td style="text-align:right;"> 126108 </td>
+   <td style="text-align:left;"> Female </td>
+   <td style="text-align:left;"> Age 5 to 9 years </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 49 </td>
    <td style="text-align:left;"> Utah </td>
-   <td style="text-align:right;"> 212211 </td>
-   <td style="text-align:left;"> Both sexes </td>
-   <td style="text-align:left;"> Age 40 to 44 years </td>
+   <td style="text-align:right;"> 23039 </td>
+   <td style="text-align:left;"> Female </td>
+   <td style="text-align:left;"> Age 80 to 84 years </td>
   </tr>
 </tbody>
 </table>
@@ -824,13 +824,6 @@ utah_filtered <- filter(utah, str_detect(AGEGROUP, "^Age"),
   <tr>
    <td style="text-align:left;"> 49 </td>
    <td style="text-align:left;"> Utah </td>
-   <td style="text-align:right;"> -127060 </td>
-   <td style="text-align:left;"> Male </td>
-   <td style="text-align:left;"> Age 0 to 4 years </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 49 </td>
-   <td style="text-align:left;"> Utah </td>
    <td style="text-align:right;"> -132868 </td>
    <td style="text-align:left;"> Male </td>
    <td style="text-align:left;"> Age 5 to 9 years </td>
@@ -845,8 +838,36 @@ utah_filtered <- filter(utah, str_detect(AGEGROUP, "^Age"),
   <tr>
    <td style="text-align:left;"> 49 </td>
    <td style="text-align:left;"> Utah </td>
+   <td style="text-align:right;"> 126108 </td>
+   <td style="text-align:left;"> Female </td>
+   <td style="text-align:left;"> Age 5 to 9 years </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 49 </td>
+   <td style="text-align:left;"> Utah </td>
+   <td style="text-align:right;"> 23039 </td>
+   <td style="text-align:left;"> Female </td>
+   <td style="text-align:left;"> Age 80 to 84 years </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 49 </td>
+   <td style="text-align:left;"> Utah </td>
    <td style="text-align:right;"> -129312 </td>
    <td style="text-align:left;"> Male </td>
+   <td style="text-align:left;"> Age 15 to 19 years </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 49 </td>
+   <td style="text-align:left;"> Utah </td>
+   <td style="text-align:right;"> 130045 </td>
+   <td style="text-align:left;"> Female </td>
+   <td style="text-align:left;"> Age 10 to 14 years </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 49 </td>
+   <td style="text-align:left;"> Utah </td>
+   <td style="text-align:right;"> 124535 </td>
+   <td style="text-align:left;"> Female </td>
    <td style="text-align:left;"> Age 15 to 19 years </td>
   </tr>
   <tr>
@@ -859,37 +880,16 @@ utah_filtered <- filter(utah, str_detect(AGEGROUP, "^Age"),
   <tr>
    <td style="text-align:left;"> 49 </td>
    <td style="text-align:left;"> Utah </td>
+   <td style="text-align:right;"> 128846 </td>
+   <td style="text-align:left;"> Female </td>
+   <td style="text-align:left;"> Age 20 to 24 years </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 49 </td>
+   <td style="text-align:left;"> Utah </td>
    <td style="text-align:right;"> -111776 </td>
    <td style="text-align:left;"> Male </td>
    <td style="text-align:left;"> Age 30 to 34 years </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 49 </td>
-   <td style="text-align:left;"> Utah </td>
-   <td style="text-align:right;"> -117335 </td>
-   <td style="text-align:left;"> Male </td>
-   <td style="text-align:left;"> Age 35 to 39 years </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 49 </td>
-   <td style="text-align:left;"> Utah </td>
-   <td style="text-align:right;"> -108090 </td>
-   <td style="text-align:left;"> Male </td>
-   <td style="text-align:left;"> Age 40 to 44 years </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 49 </td>
-   <td style="text-align:left;"> Utah </td>
-   <td style="text-align:right;"> -89984 </td>
-   <td style="text-align:left;"> Male </td>
-   <td style="text-align:left;"> Age 45 to 49 years </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 49 </td>
-   <td style="text-align:left;"> Utah </td>
-   <td style="text-align:right;"> -76450 </td>
-   <td style="text-align:left;"> Male </td>
-   <td style="text-align:left;"> Age 50 to 54 years </td>
   </tr>
 </tbody>
 </table>
@@ -1333,8 +1333,8 @@ ggplotly(utah_pyramid)
 <div class="figure">
 
 ```{=html}
-<div id="htmlwidget-020e1ce6748f02b4315f" style="width:100%;height:480px;" class="plotly html-widget"></div>
-<script type="application/json" data-for="htmlwidget-020e1ce6748f02b4315f">{"x":{"data":[{"orientation":"v","width":[120743,126108,130045,124535,128846,108654,113907,104121,86950,75046,78972,75578,64309,49913,35411,23039,22667,122197],"base":[0.525,1.525,2.525,3.525,4.525,6.525,7.525,8.525,9.525,10.525,11.525,12.525,13.525,14.525,15.525,16.525,17.525,5.525],"x":[60371.5,63054,65022.5,62267.5,64423,54327,56953.5,52060.5,43475,37523,39486,37789,32154.5,24956.5,17705.5,11519.5,11333.5,61098.5],"y":[0.95,0.95,0.95,0.95,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.950000000000001,0.950000000000003,0.950000000000003,0.949999999999999],"text":["value:  120743<br />AGEGROUP: Age 0 to 4 years<br />SEX: Female","value:  126108<br />AGEGROUP: Age 5 to 9 years<br />SEX: Female","value:  130045<br />AGEGROUP: Age 10 to 14 years<br />SEX: Female","value:  124535<br />AGEGROUP: Age 15 to 19 years<br />SEX: Female","value:  128846<br />AGEGROUP: Age 20 to 24 years<br />SEX: Female","value:  108654<br />AGEGROUP: Age 30 to 34 years<br />SEX: Female","value:  113907<br />AGEGROUP: Age 35 to 39 years<br />SEX: Female","value:  104121<br />AGEGROUP: Age 40 to 44 years<br />SEX: Female","value:   86950<br />AGEGROUP: Age 45 to 49 years<br />SEX: Female","value:   75046<br />AGEGROUP: Age 50 to 54 years<br />SEX: Female","value:   78972<br />AGEGROUP: Age 55 to 59 years<br />SEX: Female","value:   75578<br />AGEGROUP: Age 60 to 64 years<br />SEX: Female","value:   64309<br />AGEGROUP: Age 65 to 69 years<br />SEX: Female","value:   49913<br />AGEGROUP: Age 70 to 74 years<br />SEX: Female","value:   35411<br />AGEGROUP: Age 75 to 79 years<br />SEX: Female","value:   23039<br />AGEGROUP: Age 80 to 84 years<br />SEX: Female","value:   22667<br />AGEGROUP: Age 85 years and older<br />SEX: Female","value:  122197<br />AGEGROUP: Age 25 to 29 years<br />SEX: Female"],"type":"bar","marker":{"autocolorscale":false,"color":"rgba(139,0,0,0.75)","line":{"width":1.88976377952756,"color":"transparent"}},"name":"Female","legendgroup":"Female","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[127060,132868,137940,129312,135806,111776,117335,108090,89984,76450,76536,72048,59874,45370,30234,19148,15907,129179],"base":[0.525,1.525,2.525,3.525,4.525,6.525,7.525,8.525,9.525,10.525,11.525,12.525,13.525,14.525,15.525,16.525,17.525,5.525],"x":[-63530,-66434,-68970,-64656,-67903,-55888,-58667.5,-54045,-44992,-38225,-38268,-36024,-29937,-22685,-15117,-9574,-7953.5,-64589.5],"y":[0.95,0.95,0.95,0.95,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.950000000000001,0.950000000000003,0.950000000000003,0.949999999999999],"text":["value: -127060<br />AGEGROUP: Age 0 to 4 years<br />SEX: Male","value: -132868<br />AGEGROUP: Age 5 to 9 years<br />SEX: Male","value: -137940<br />AGEGROUP: Age 10 to 14 years<br />SEX: Male","value: -129312<br />AGEGROUP: Age 15 to 19 years<br />SEX: Male","value: -135806<br />AGEGROUP: Age 20 to 24 years<br />SEX: Male","value: -111776<br />AGEGROUP: Age 30 to 34 years<br />SEX: Male","value: -117335<br />AGEGROUP: Age 35 to 39 years<br />SEX: Male","value: -108090<br />AGEGROUP: Age 40 to 44 years<br />SEX: Male","value:  -89984<br />AGEGROUP: Age 45 to 49 years<br />SEX: Male","value:  -76450<br />AGEGROUP: Age 50 to 54 years<br />SEX: Male","value:  -76536<br />AGEGROUP: Age 55 to 59 years<br />SEX: Male","value:  -72048<br />AGEGROUP: Age 60 to 64 years<br />SEX: Male","value:  -59874<br />AGEGROUP: Age 65 to 69 years<br />SEX: Male","value:  -45370<br />AGEGROUP: Age 70 to 74 years<br />SEX: Male","value:  -30234<br />AGEGROUP: Age 75 to 79 years<br />SEX: Male","value:  -19148<br />AGEGROUP: Age 80 to 84 years<br />SEX: Male","value:  -15907<br />AGEGROUP: Age 85 years and older<br />SEX: Male","value: -129179<br />AGEGROUP: Age 25 to 29 years<br />SEX: Male"],"type":"bar","marker":{"autocolorscale":false,"color":"rgba(0,0,128,0.75)","line":{"width":1.88976377952756,"color":"transparent"}},"name":"Male","legendgroup":"Male","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":46.2864259028643,"r":7.97011207970112,"b":27.8953922789539,"l":104.408468244085},"font":{"color":"rgba(0,0,0,1)","family":"Verdana","size":15.9402241594022},"title":{"text":"Population structure in Utah","font":{"color":"rgba(0,0,0,1)","family":"Verdana","size":19.1282689912827},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-151339.25,143444.25],"tickmode":"array","ticktext":["150k","100k","50k","0k","50k","100k"],"tickvals":[-150000,-100000,-50000,0,50000,100000],"categoryorder":"array","categoryarray":["150k","100k","50k","0k","50k","100k"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.98505603985056,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"Verdana","size":12.7521793275218},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.724555643609193,"zeroline":false,"anchor":"y","title":{"text":"","font":{"color":"rgba(0,0,0,1)","family":"Verdana","size":15.9402241594022}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.4,18.6],"tickmode":"array","ticktext":["0 to 4","5 to 9","10 to 14","15 to 19","20 to 24","25 to 29","30 to 34","35 to 39","40 to 44","45 to 49","50 to 54","55 to 59","60 to 64","65 to 69","70 to 74","75 to 79","80 to 84","85 and older"],"tickvals":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18],"categoryorder":"array","categoryarray":["0 to 4","5 to 9","10 to 14","15 to 19","20 to 24","25 to 29","30 to 34","35 to 39","40 to 44","45 to 49","50 to 54","55 to 59","60 to 64","65 to 69","70 to 74","75 to 79","80 to 84","85 and older"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.98505603985056,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"Verdana","size":12.7521793275218},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.724555643609193,"zeroline":false,"anchor":"x","title":{"text":"2019 Census Bureau population estimate","font":{"color":"rgba(0,0,0,1)","family":"Verdana","size":15.9402241594022}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"Verdana","size":12.7521793275218},"y":0.964566929133858},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","showSendToCloud":false},"source":"A","attrs":{"51581f63e7d6":{"x":{},"y":{},"fill":{},"type":"bar"}},"cur_data":"51581f63e7d6","visdat":{"51581f63e7d6":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-bd2793f6a2275ed857de" style="width:100%;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-bd2793f6a2275ed857de">{"x":{"data":[{"orientation":"v","width":[126108,23039,130045,124535,128846,108654,113907,104121,86950,78972,75578,64309,49913,120743,122197,75046,35411,22667],"base":[1.525,16.525,2.525,3.525,4.525,6.525,7.525,8.525,9.525,11.525,12.525,13.525,14.525,0.525,5.525,10.525,15.525,17.525],"x":[63054,11519.5,65022.5,62267.5,64423,54327,56953.5,52060.5,43475,39486,37789,32154.5,24956.5,60371.5,61098.5,37523,17705.5,11333.5],"y":[0.95,0.950000000000003,0.95,0.95,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.95,0.949999999999999,0.949999999999999,0.950000000000001,0.950000000000003],"text":["value:  126108<br />AGEGROUP: Age 5 to 9 years<br />SEX: Female","value:   23039<br />AGEGROUP: Age 80 to 84 years<br />SEX: Female","value:  130045<br />AGEGROUP: Age 10 to 14 years<br />SEX: Female","value:  124535<br />AGEGROUP: Age 15 to 19 years<br />SEX: Female","value:  128846<br />AGEGROUP: Age 20 to 24 years<br />SEX: Female","value:  108654<br />AGEGROUP: Age 30 to 34 years<br />SEX: Female","value:  113907<br />AGEGROUP: Age 35 to 39 years<br />SEX: Female","value:  104121<br />AGEGROUP: Age 40 to 44 years<br />SEX: Female","value:   86950<br />AGEGROUP: Age 45 to 49 years<br />SEX: Female","value:   78972<br />AGEGROUP: Age 55 to 59 years<br />SEX: Female","value:   75578<br />AGEGROUP: Age 60 to 64 years<br />SEX: Female","value:   64309<br />AGEGROUP: Age 65 to 69 years<br />SEX: Female","value:   49913<br />AGEGROUP: Age 70 to 74 years<br />SEX: Female","value:  120743<br />AGEGROUP: Age 0 to 4 years<br />SEX: Female","value:  122197<br />AGEGROUP: Age 25 to 29 years<br />SEX: Female","value:   75046<br />AGEGROUP: Age 50 to 54 years<br />SEX: Female","value:   35411<br />AGEGROUP: Age 75 to 79 years<br />SEX: Female","value:   22667<br />AGEGROUP: Age 85 years and older<br />SEX: Female"],"type":"bar","marker":{"autocolorscale":false,"color":"rgba(139,0,0,0.75)","line":{"width":1.88976377952756,"color":"transparent"}},"name":"Female","legendgroup":"Female","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[132868,137940,129312,135806,111776,117335,108090,89984,76536,72048,59874,45370,19148,15907,127060,129179,76450,30234],"base":[1.525,2.525,3.525,4.525,6.525,7.525,8.525,9.525,11.525,12.525,13.525,14.525,16.525,17.525,0.525,5.525,10.525,15.525],"x":[-66434,-68970,-64656,-67903,-55888,-58667.5,-54045,-44992,-38268,-36024,-29937,-22685,-9574,-7953.5,-63530,-64589.5,-38225,-15117],"y":[0.95,0.95,0.95,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.950000000000003,0.950000000000003,0.95,0.949999999999999,0.949999999999999,0.950000000000001],"text":["value: -132868<br />AGEGROUP: Age 5 to 9 years<br />SEX: Male","value: -137940<br />AGEGROUP: Age 10 to 14 years<br />SEX: Male","value: -129312<br />AGEGROUP: Age 15 to 19 years<br />SEX: Male","value: -135806<br />AGEGROUP: Age 20 to 24 years<br />SEX: Male","value: -111776<br />AGEGROUP: Age 30 to 34 years<br />SEX: Male","value: -117335<br />AGEGROUP: Age 35 to 39 years<br />SEX: Male","value: -108090<br />AGEGROUP: Age 40 to 44 years<br />SEX: Male","value:  -89984<br />AGEGROUP: Age 45 to 49 years<br />SEX: Male","value:  -76536<br />AGEGROUP: Age 55 to 59 years<br />SEX: Male","value:  -72048<br />AGEGROUP: Age 60 to 64 years<br />SEX: Male","value:  -59874<br />AGEGROUP: Age 65 to 69 years<br />SEX: Male","value:  -45370<br />AGEGROUP: Age 70 to 74 years<br />SEX: Male","value:  -19148<br />AGEGROUP: Age 80 to 84 years<br />SEX: Male","value:  -15907<br />AGEGROUP: Age 85 years and older<br />SEX: Male","value: -127060<br />AGEGROUP: Age 0 to 4 years<br />SEX: Male","value: -129179<br />AGEGROUP: Age 25 to 29 years<br />SEX: Male","value:  -76450<br />AGEGROUP: Age 50 to 54 years<br />SEX: Male","value:  -30234<br />AGEGROUP: Age 75 to 79 years<br />SEX: Male"],"type":"bar","marker":{"autocolorscale":false,"color":"rgba(0,0,128,0.75)","line":{"width":1.88976377952756,"color":"transparent"}},"name":"Male","legendgroup":"Male","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":46.2864259028643,"r":7.97011207970112,"b":27.8953922789539,"l":104.408468244085},"font":{"color":"rgba(0,0,0,1)","family":"Verdana","size":15.9402241594022},"title":{"text":"Population structure in Utah","font":{"color":"rgba(0,0,0,1)","family":"Verdana","size":19.1282689912827},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-151339.25,143444.25],"tickmode":"array","ticktext":["150k","100k","50k","0k","50k","100k"],"tickvals":[-150000,-100000,-50000,0,50000,100000],"categoryorder":"array","categoryarray":["150k","100k","50k","0k","50k","100k"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.98505603985056,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"Verdana","size":12.7521793275218},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.724555643609193,"zeroline":false,"anchor":"y","title":{"text":"","font":{"color":"rgba(0,0,0,1)","family":"Verdana","size":15.9402241594022}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.4,18.6],"tickmode":"array","ticktext":["0 to 4","5 to 9","10 to 14","15 to 19","20 to 24","25 to 29","30 to 34","35 to 39","40 to 44","45 to 49","50 to 54","55 to 59","60 to 64","65 to 69","70 to 74","75 to 79","80 to 84","85 and older"],"tickvals":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18],"categoryorder":"array","categoryarray":["0 to 4","5 to 9","10 to 14","15 to 19","20 to 24","25 to 29","30 to 34","35 to 39","40 to 44","45 to 49","50 to 54","55 to 59","60 to 64","65 to 69","70 to 74","75 to 79","80 to 84","85 and older"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.98505603985056,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"Verdana","size":12.7521793275218},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.724555643609193,"zeroline":false,"anchor":"x","title":{"text":"2019 Census Bureau population estimate","font":{"color":"rgba(0,0,0,1)","family":"Verdana","size":15.9402241594022}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"Verdana","size":12.7521793275218},"y":0.964566929133858},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","showSendToCloud":false},"source":"A","attrs":{"10941f9dc55e":{"x":{},"y":{},"fill":{},"type":"bar"}},"cur_data":"10941f9dc55e","visdat":{"10941f9dc55e":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 ```
 
 <p class="caption">(\#fig:plotly-pyramid)An interactive population pyramid rendered with ggplotly</p>
