@@ -329,7 +329,7 @@ mapview(la_tracts)
 ```
 
 <div class="figure">
-<iframe src="img/leaflet/la_tracts.html" width="100%" height="500px"></iframe>
+<iframe src="img/leaflet/la_tracts.html" width="100%" height="500px" data-external="1"></iframe>
 <p class="caption">(\#fig:la-tracts-mapview)Interactive view of Los Alamos, NM</p>
 </div>
 
@@ -870,7 +870,7 @@ mapview(lee)
 ```
 
 <div class="figure">
-<iframe src="img/leaflet/lee_county.html" width="100%" height="500px"></iframe>
+<iframe src="img/leaflet/lee_county.html" width="100%" height="500px" data-external="1"></iframe>
 <p class="caption">(\#fig:lee-mapview-show)Lee County, Florida</p>
 </div>
 
@@ -930,7 +930,7 @@ mapview(sanibel)
 ```
 
 <div class="figure">
-<iframe src="img/leaflet/sanibel.html" width="100%" height="500px"></iframe>
+<iframe src="img/leaflet/sanibel.html" width="100%" height="500px" data-external="1"></iframe>
 <p class="caption">(\#fig:show-sanibel)Sanibel Island, Florida</p>
 </div>
 

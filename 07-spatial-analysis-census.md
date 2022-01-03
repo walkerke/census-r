@@ -233,7 +233,7 @@ mapview(
 ```
 
 <div class="figure">
-<iframe src="img/leaflet/gainesville_pts.html" width="100%" height="500px"></iframe>
+<iframe src="img/leaflet/gainesville_pts.html" width="100%" height="500px" data-external="1"></iframe>
 <p class="caption">(\#fig:map-gainesville-pts-show)Map of hypothetical patient locations in Gainesville, Florida</p>
 </div>
 
@@ -273,7 +273,7 @@ mapview(
 ```
 
 <div class="figure">
-<iframe src="img/leaflet/gainesville_relationship.html" width="100%" height="500px"></iframe>
+<iframe src="img/leaflet/gainesville_relationship.html" width="100%" height="500px" data-external="1"></iframe>
 <p class="caption">(\#fig:mapview-gainesville-relationship-show)Layered interactive view of patients and Census tracts in Gainesville</p>
 </div>
 
@@ -1103,7 +1103,7 @@ print(glue("Family poverty (10min isochrone method): {round(iso_pov$pct_poverty,
 ```
 
 ```
-## Family poverty (10min isochrone method): 14.2%
+## Family poverty (10min isochrone method): 13.9%
 ```
 
 The two methods return slightly different results, illustrating how the definition of catchment area impacts downstream analyses.
@@ -1483,7 +1483,8 @@ dfw_lisa <- localmoran_perm(
   alternative = "two.sided"
 ) %>%
   as_tibble() %>%
-  set_names(c("local_i", "exp_i", "var_i", "z_i", "p_i"))
+  set_names(c("local_i", "exp_i", "var_i", "z_i", "p_i",
+              "p_i_sim", "pi_sim_folded", "skewness", "kurtosis"))
 
 dfw_lisa_df <- dfw_tracts %>%
   select(GEOID, scaled_estimate) %>%
@@ -1512,6 +1513,10 @@ Our result appears as follows:
    <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"> var_i </th>
    <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"> z_i </th>
    <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"> p_i </th>
+   <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"> p_i_sim </th>
+   <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"> pi_sim_folded </th>
+   <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"> skewness </th>
+   <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"> kurtosis </th>
    <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"> geometry </th>
   </tr>
  </thead>
@@ -1525,6 +1530,10 @@ Our result appears as follows:
    <td style="text-align:right;"> 0.0767748 </td>
    <td style="text-align:right;"> 1.2061629 </td>
    <td style="text-align:right;"> 0.2277547 </td>
+   <td style="text-align:right;"> 0.234 </td>
+   <td style="text-align:right;"> 0.117 </td>
+   <td style="text-align:right;"> -0.1346414 </td>
+   <td style="text-align:right;"> -0.0136394 </td>
    <td style="text-align:left;"> MULTIPOLYGON (((761835.4 21... </td>
   </tr>
   <tr>
@@ -1536,6 +1545,10 @@ Our result appears as follows:
    <td style="text-align:right;"> 0.1304586 </td>
    <td style="text-align:right;"> 2.1549417 </td>
    <td style="text-align:right;"> 0.0311664 </td>
+   <td style="text-align:right;"> 0.022 </td>
+   <td style="text-align:right;"> 0.011 </td>
+   <td style="text-align:right;"> -0.2059971 </td>
+   <td style="text-align:right;"> -0.0706536 </td>
    <td style="text-align:left;"> MULTIPOLYGON (((738672.9 21... </td>
   </tr>
   <tr>
@@ -1547,6 +1560,10 @@ Our result appears as follows:
    <td style="text-align:right;"> 0.0163324 </td>
    <td style="text-align:right;"> 0.4569814 </td>
    <td style="text-align:right;"> 0.6476844 </td>
+   <td style="text-align:right;"> 0.670 </td>
+   <td style="text-align:right;"> 0.335 </td>
+   <td style="text-align:right;"> -0.1938830 </td>
+   <td style="text-align:right;"> -0.0417957 </td>
    <td style="text-align:left;"> MULTIPOLYGON (((705890.8 21... </td>
   </tr>
   <tr>
@@ -1558,6 +1575,10 @@ Our result appears as follows:
    <td style="text-align:right;"> 0.2419147 </td>
    <td style="text-align:right;"> -0.7975446 </td>
    <td style="text-align:right;"> 0.4251348 </td>
+   <td style="text-align:right;"> 0.390 </td>
+   <td style="text-align:right;"> 0.195 </td>
+   <td style="text-align:right;"> -0.2628396 </td>
+   <td style="text-align:right;"> 0.1497801 </td>
    <td style="text-align:left;"> MULTIPOLYGON (((727489.9 21... </td>
   </tr>
   <tr>
@@ -1569,6 +1590,10 @@ Our result appears as follows:
    <td style="text-align:right;"> 0.0244266 </td>
    <td style="text-align:right;"> -1.1546556 </td>
    <td style="text-align:right;"> 0.2482315 </td>
+   <td style="text-align:right;"> 0.272 </td>
+   <td style="text-align:right;"> 0.136 </td>
+   <td style="text-align:right;"> -0.2869858 </td>
+   <td style="text-align:right;"> 0.0021632 </td>
    <td style="text-align:left;"> MULTIPOLYGON (((730154.3 21... </td>
   </tr>
 </tbody>

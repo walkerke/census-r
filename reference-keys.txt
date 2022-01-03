@@ -106,6 +106,7 @@ fig:tmap-plot-polygons
 fig:hist-black-data
 fig:update-hennepin-map
 fig:jenks
+fig:hennepin-map-with-basemap
 fig:sequential-palette
 fig:viridis-palette
 fig:diverging-palette
@@ -346,6 +347,7 @@ choropleth-mapping
 customizing-ggplot2-maps
 map-making-with-tmap
 choropleth-maps-with-tmap
+adding-reference-elements-to-a-map
 choosing-a-color-palette
 alternative-map-types-with-tmap
 graduated-symbols

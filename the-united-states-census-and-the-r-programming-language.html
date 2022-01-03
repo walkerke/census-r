@@ -7,7 +7,7 @@
 <title>Chapter 1 The United States Census and the R programming language | Analyzing US Census Data</title>
 <meta name="author" content="Kyle E. Walker">
 <meta name="description" content="The main focus of this book is applied social data analysis in the R programming language, with a focus on data from the United States Census Bureau. This chapter introduces both topics. The first...">
-<meta name="generator" content="bookdown 0.22.17 with bs4_book()">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
 <meta property="og:title" content="Chapter 1 The United States Census and the R programming language | Analyzing US Census Data">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://walker-data.com/census-r/the-united-states-census-and-the-r-programming-language.html">
@@ -17,14 +17,14 @@
 <meta name="twitter:title" content="Chapter 1 The United States Census and the R programming language | Analyzing US Census Data">
 <meta name="twitter:description" content="The main focus of this book is applied social data analysis in the R programming language, with a focus on data from the United States Census Bureau. This chapter introduces both topics. The first...">
 <meta name="twitter:image" content="https://walker-data.com/census-r/04-visualizing-census-data_files/figure-html/visualize-error-bars-1.png">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.10.5/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.5.3/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.5.3/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.4/tabs.js"></script><script src="libs/bs3compat-0.2.4/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><script src="libs/plotly-binding-4.9.3/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet">
-<script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet">
-<script src="libs/plotly-main-1.57.1/plotly-latest.min.js"></script><script src="libs/d3-bundle-5.16.0/d3-bundle.min.js"></script><script src="libs/d3-lasso-0.0.5/d3-lasso.min.js"></script><script src="libs/save-svg-as-png-1.4.17/save-svg-as-png.min.js"></script><link href="libs/ggiraphjs-0.4.1/ggiraphjs.min.css" rel="stylesheet">
-<script src="libs/ggiraphjs-0.4.1/ggiraphjs.min.js"></script><script src="libs/girafe-binding-0.7.10/girafe.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-6KFYZ3W36Z"></script><script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><script src="libs/plotly-binding-4.10.0/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script><script src="libs/d3-bundle-5.16.0/d3-bundle.min.js"></script><script src="libs/d3-lasso-0.0.5/d3-lasso.min.js"></script><script src="libs/save-svg-as-png-1.4.17/save-svg-as-png.min.js"></script><link href="libs/ggiraphjs-0.4.2/ggiraphjs.min.css" rel="stylesheet">
+<script src="libs/ggiraphjs-0.4.2/ggiraphjs.min.js"></script><script src="libs/girafe-binding-0.8.1/girafe.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-6KFYZ3W36Z"></script><script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
@@ -204,7 +204,7 @@ Figure 1.5: View of the Census FTP download site
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fl">2</span> <span class="op">+</span> <span class="fl">3</span></code></pre></div>
 <pre><code>## [1] 5</code></pre>
-<p>Often, you will want to <em>assign</em> analytic results like this to an <em>object</em> (also commonly called a <em>variable</em>). Objects in R are created with an <em>assignment operator</em> (either <code><a href="https://rdrr.io/r/base/assignOps.html">&lt;-</a></code> or <code><a href="https://rdrr.io/r/base/assignOps.html">=</a></code>) like this:</p>
+<p>Often, you will want to <em>assign</em> analytic results like this to an <em>object</em> (also commonly called a <em>variable</em>). Objects in R are created with an <em>assignment operator</em> (either <code>&lt;-</code> or <code>=</code>) like this:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">2</span> <span class="op">+</span> <span class="fl">3</span></code></pre></div>
 <p>Above, we have <em>assigned</em> the result of the mathematical operation <code>2 + 3</code> to the object <code>x</code>:</p>
@@ -341,7 +341,7 @@ Figure 1.9: Screenshot of the Mapping Immigrant America interactive map
 </p>
 </div>
 <p>While version 1 of the map used a variety of tools to process the data including ArcGIS and QGIS, the data processing for version 2 was completed entirely in R, with data then uploaded to the <a href="https://studio.mapbox.com/">Mapbox Studio</a> platform for hosting and visualization. The data preparation code can be viewed <a href="https://github.com/walkerke/mb-immigrants">in the map’s GitHub repository</a>.</p>
-<p>The map uses a <em>dasymetric dot-density</em> methodology <span class="citation">(<a href="references.html#ref-walker2018a" role="doc-biblioref">K. E. Walker 2018</a>)</span> implemented in R using a series of techniques covered in this book. ACS data and their corresponding Census tract boundaries were acquired using tools learned in Chapter <a href="an-introduction-to-tidycensus.html#an-introduction-to-tidycensus">2</a> and Section <a href="mapping-census-data-with-r.html#using-geometry-in-tidycensus">6.1</a>; areas with no population were removed from Census tracts using a spatial analysis technique covered in Section <a href="spatial-analysis-with-us-census-data.html#erasing-areas-from-census-polygons">7.4.1</a>; and dots were generated for mapping using a method introduced in Section <a href="mapping-census-data-with-r.html#dot-density-maps">6.3.3.3</a>.</p>
+<p>The map uses a <em>dasymetric dot-density</em> methodology <span class="citation">(<a href="references.html#ref-walker2018a" role="doc-biblioref">K. E. Walker 2018</a>)</span> implemented in R using a series of techniques covered in this book. ACS data and their corresponding Census tract boundaries were acquired using tools learned in Chapter <a href="an-introduction-to-tidycensus.html#an-introduction-to-tidycensus">2</a> and Section <a href="mapping-census-data-with-r.html#using-geometry-in-tidycensus">6.1</a>; areas with no population were removed from Census tracts using a spatial analysis technique covered in Section <a href="spatial-analysis-with-us-census-data.html#erasing-areas-from-census-polygons">7.4.1</a>; and dots were generated for mapping using a method introduced in Section <a href="mapping-census-data-with-r.html#dot-density-maps">6.3.4.3</a>.</p>
 <p>These examples are only a small sampling of the volumes of work completed by analysts using R and US Census Bureau data. In the next chapter, you will get started using R to access Census data for yourselves, with a focus on the <strong>tidycensus</strong> package.</p>
 
 </div>
@@ -397,7 +397,7 @@ Figure 1.9: Screenshot of the Mapping Immigrant America interactive map
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Analyzing US Census Data</strong>: Methods, Maps, and Models in R" was written by Kyle E. Walker. It was last built on 2021-10-15.</p>
+    <p>"<strong>Analyzing US Census Data</strong>: Methods, Maps, and Models in R" was written by Kyle E. Walker. It was last built on 2022-01-03.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

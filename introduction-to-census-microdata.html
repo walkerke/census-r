@@ -7,7 +7,7 @@
 <title>Chapter 9 Introduction to Census microdata | Analyzing US Census Data</title>
 <meta name="author" content="Kyle E. Walker">
 <meta name="description" content="The previous chapters in this book focus on aggregate-level analysis of US Census Bureau data. However, such analyses are limited to the pre-tabulated estimates provided by the Census Bureau....">
-<meta name="generator" content="bookdown 0.22.17 with bs4_book()">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
 <meta property="og:title" content="Chapter 9 Introduction to Census microdata | Analyzing US Census Data">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://walker-data.com/census-r/introduction-to-census-microdata.html">
@@ -17,14 +17,14 @@
 <meta name="twitter:title" content="Chapter 9 Introduction to Census microdata | Analyzing US Census Data">
 <meta name="twitter:description" content="The previous chapters in this book focus on aggregate-level analysis of US Census Bureau data. However, such analyses are limited to the pre-tabulated estimates provided by the Census Bureau....">
 <meta name="twitter:image" content="https://walker-data.com/census-r/04-visualizing-census-data_files/figure-html/visualize-error-bars-1.png">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.10.5/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.5.3/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.5.3/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.4/tabs.js"></script><script src="libs/bs3compat-0.2.4/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><script src="libs/plotly-binding-4.9.3/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet">
-<script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet">
-<script src="libs/plotly-main-1.57.1/plotly-latest.min.js"></script><script src="libs/d3-bundle-5.16.0/d3-bundle.min.js"></script><script src="libs/d3-lasso-0.0.5/d3-lasso.min.js"></script><script src="libs/save-svg-as-png-1.4.17/save-svg-as-png.min.js"></script><link href="libs/ggiraphjs-0.4.1/ggiraphjs.min.css" rel="stylesheet">
-<script src="libs/ggiraphjs-0.4.1/ggiraphjs.min.js"></script><script src="libs/girafe-binding-0.7.10/girafe.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-6KFYZ3W36Z"></script><script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><script src="libs/plotly-binding-4.10.0/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script><script src="libs/d3-bundle-5.16.0/d3-bundle.min.js"></script><script src="libs/d3-lasso-0.0.5/d3-lasso.min.js"></script><script src="libs/save-svg-as-png-1.4.17/save-svg-as-png.min.js"></script><link href="libs/ggiraphjs-0.4.2/ggiraphjs.min.css" rel="stylesheet">
+<script src="libs/ggiraphjs-0.4.2/ggiraphjs.min.js"></script><script src="libs/girafe-binding-0.8.1/girafe.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-6KFYZ3W36Z"></script><script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
@@ -126,7 +126,7 @@ Figure 9.2: MDAT tool from data.census.gov
 </h3>
 <p><code><a href="https://walker-data.com/tidycensus/reference/get_pums.html">get_pums()</a></code> requires specifying one or more variables and the state for which you’d like to request data. For national-level analyses, <code>state = 'all'</code> <em>can</em> get data for the entire USA by iterating over all US states, but the data can take some time to download depending on the user’s internet connection. The <code><a href="https://walker-data.com/tidycensus/reference/get_pums.html">get_pums()</a></code> function defaults to the 5-year ACS with <code>survey = "acs5"</code>; 1-year ACS data is available with <code>survey = "acs1"</code>. At the time of this writing, the default year is 2019; data are available back to 2006 for the 1-year ACS and 2005-2009 for the 5-year ACS.</p>
 <p>Let’s take a look at a first example using <code><a href="https://walker-data.com/tidycensus/reference/get_pums.html">get_pums()</a></code> to request microdata for Wyoming from the 1-year 2019 ACS with information on sex, age (<code>AGEP</code>), and household type (<code>HHT</code>).</p>
-<div class="sourceCode" id="cb320"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb322"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://walker-data.com/tidycensus/">tidycensus</a></span><span class="op">)</span>
 
 <span class="va">wy_pums</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_pums.html">get_pums</a></span><span class="op">(</span>
@@ -444,19 +444,19 @@ b
 </ul>
 <p>Given that PUMS data are a <em>sample</em> of the US population, the weights columns must be used for analysis. In general terms, we can interpret the weights as “the number of observations in the general population represented by this particular row in the dataset.” In turn, a row with a <code>PWGTP</code> value of 50 represents about 50 people in Wyoming with the same demographic characteristics of the “person” in that row.</p>
 <p>Inferences about population characteristics can be made by summing over the weights columns. For example, let’s say we want to get an estimate of the number of people in Wyoming who are 50 years old in 2019, and compare this with the total population in Wyoming. We can filter the dataset for rows that match the condition <code>AGEP == 50</code>, then sum over the <code>PWGTP</code> column.</p>
-<div class="sourceCode" id="cb321"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb323"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
 
 <span class="va">wy_age_50</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">wy_pums</span>, <span class="va">AGEP</span> <span class="op">==</span> <span class="fl">50</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">wy_pums</span><span class="op">$</span><span class="va">PWGTP</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 578759</code></pre>
-<div class="sourceCode" id="cb323"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb325"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">wy_age_50</span><span class="op">$</span><span class="va">PWGTP</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 4756</code></pre>
 <p>Our data suggest that of the 578,759 people in Wyoming in 2019, about 4,756 were 50 years old. Of course, this estimate will be subject to a margin of error; the topic of error calculations from PUMS data will be covered in the next chapter.</p>
 <p>It is important to note that <code><a href="https://walker-data.com/tidycensus/reference/get_pums.html">get_pums()</a></code> returns two separate weights columns: one for households and one for persons. Let’s take a look at a single household in the Wyoming dataset to examine this further.</p>
-<div class="sourceCode" id="cb325"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb327"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">wy_hh_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">wy_pums</span>, <span class="va">SERIALNO</span> <span class="op">==</span> <span class="st">"2019HU0456721"</span><span class="op">)</span>
 
 <span class="va">wy_hh_example</span></code></pre></div>
@@ -469,7 +469,7 @@ b
 ## 4 2019HU0456721       4   146   154     5 56    1     1</code></pre>
 <p>This household includes a woman aged 40, a man aged 45, and two children: a girl aged 8 and a boy aged 5. The <code>HHT</code> value is 1, which tells us that this is a married-couple household. Notably, the household weight value, <code>WGTP</code>, is identical for all household members, whereas the person weight value, <code>PWGTP</code>, is not.</p>
 <p>Microdata retrieved from the Census API are a hybrid of both household-level data and person-level data, which means that analysts need to take care to use appropriate weights and filters for household-level or person-level analyses. For example, to determine the number of households in Wyoming, the dataset should be filtered to records where the <code>SPORDER</code> column is equal to 1 then summed over the <code>WGTP</code> column. Persons living in group quarters will be excluded automatically as they have a household weight of 0.</p>
-<div class="sourceCode" id="cb327"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb329"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">wy_households</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">wy_pums</span>, <span class="va">SPORDER</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">wy_households</span><span class="op">$</span><span class="va">WGTP</span><span class="op">)</span></code></pre></div>
@@ -486,7 +486,7 @@ b
 <span class="header-section-number">9.3.1</span> Variables available in the ACS PUMS<a class="anchor" aria-label="anchor" href="#variables-available-in-the-acs-pums"><i class="fas fa-link"></i></a>
 </h3>
 <p>As with the data dictionaries for the decennial Census and aggregate ACS obtained with <code><a href="https://walker-data.com/tidycensus/reference/load_variables.html">load_variables()</a></code>, it is advisable to browse the PUMS data dictionary, <code>pums_variables</code>, with the <code><a href="https://rdrr.io/r/utils/View.html">View()</a></code> function in RStudio.</p>
-<div class="sourceCode" id="cb329"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb331"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/View.html">View</a></span><span class="op">(</span><span class="va">pums_variables</span><span class="op">)</span></code></pre></div>
 <p><code>pums_variables</code> is a long-form dataset that organizes specific <em>value codes</em> by variable so you know what you can get with <code><a href="https://walker-data.com/tidycensus/reference/get_pums.html">get_pums()</a></code>. You’ll use information in the <code>var_code</code> column to fetch variables, but pay close attention to the <code>var_label</code>, <code>val_min</code>, <code>val_max</code>, <code>val_label</code>, and <code>data_type</code> columns. These columns should be interpreted as follows:</p>
 <ul>
@@ -507,7 +507,7 @@ b
 <span class="header-section-number">9.3.2</span> Recoding PUMS variables<a class="anchor" aria-label="anchor" href="#recoding-pums-variables"><i class="fas fa-link"></i></a>
 </h3>
 <p>A typical <strong>tidycensus</strong> workflow covered earlier in this book involves browsing the appropriate data dictionary, choosing variable IDs, and using those IDs in your scripts and workflows. Analysts will likely follow this same process with <code><a href="https://walker-data.com/tidycensus/reference/get_pums.html">get_pums()</a></code>, but can also use the argument <code>recode = TRUE</code> to return additional contextual information with the requested data. <code>recode = TRUE</code> instructs <code><a href="https://walker-data.com/tidycensus/reference/get_pums.html">get_pums()</a></code> to append recoded columns to your returned dataset based on information available in <code>pums_variables</code>. Let’s take a look at the Wyoming example with <code>recode = TRUE</code>.</p>
-<div class="sourceCode" id="cb330"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb332"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">wy_pums_recoded</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_pums.html">get_pums</a></span><span class="op">(</span>
   variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"SEX"</span>, <span class="st">"AGEP"</span>, <span class="st">"HHT"</span><span class="op">)</span>,
   state <span class="op">=</span> <span class="st">"WY"</span>,
@@ -557,7 +557,7 @@ SEX_label
 <tbody>
 <tr>
 <td style="text-align:left;">
-2019GQ0009731
+2019GQ0000335
 </td>
 <td style="text-align:right;">
 1
@@ -566,45 +566,10 @@ SEX_label
 0
 </td>
 <td style="text-align:right;">
-47
+206
 </td>
 <td style="text-align:right;">
-28
-</td>
-<td style="text-align:left;">
-56
-</td>
-<td style="text-align:left;">
-b
-</td>
-<td style="text-align:left;">
-1
-</td>
-<td style="text-align:left;">
-Wyoming/WY
-</td>
-<td style="text-align:left;">
-N/A (GQ/vacant)
-</td>
-<td style="text-align:left;">
-Male
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2019GQ0010758
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-27
-</td>
-<td style="text-align:right;">
-54
+17
 </td>
 <td style="text-align:left;">
 56
@@ -627,7 +592,217 @@ Female
 </tr>
 <tr>
 <td style="text-align:left;">
-2019GQ0014986
+2019GQ0000958
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:right;">
+37
+</td>
+<td style="text-align:left;">
+56
+</td>
+<td style="text-align:left;">
+b
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Wyoming/WY
+</td>
+<td style="text-align:left;">
+N/A (GQ/vacant)
+</td>
+<td style="text-align:left;">
+Male
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2019GQ0009156
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+33
+</td>
+<td style="text-align:right;">
+75
+</td>
+<td style="text-align:left;">
+56
+</td>
+<td style="text-align:left;">
+b
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+Wyoming/WY
+</td>
+<td style="text-align:left;">
+N/A (GQ/vacant)
+</td>
+<td style="text-align:left;">
+Female
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2019GQ0012426
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+23
+</td>
+<td style="text-align:right;">
+21
+</td>
+<td style="text-align:left;">
+56
+</td>
+<td style="text-align:left;">
+b
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+Wyoming/WY
+</td>
+<td style="text-align:left;">
+N/A (GQ/vacant)
+</td>
+<td style="text-align:left;">
+Female
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2019GQ0015243
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+209
+</td>
+<td style="text-align:right;">
+94
+</td>
+<td style="text-align:left;">
+56
+</td>
+<td style="text-align:left;">
+b
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Wyoming/WY
+</td>
+<td style="text-align:left;">
+N/A (GQ/vacant)
+</td>
+<td style="text-align:left;">
+Male
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2019GQ0018773
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+273
+</td>
+<td style="text-align:right;">
+26
+</td>
+<td style="text-align:left;">
+56
+</td>
+<td style="text-align:left;">
+b
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Wyoming/WY
+</td>
+<td style="text-align:left;">
+N/A (GQ/vacant)
+</td>
+<td style="text-align:left;">
+Male
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2019GQ0019978
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:left;">
+56
+</td>
+<td style="text-align:left;">
+b
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Wyoming/WY
+</td>
+<td style="text-align:left;">
+N/A (GQ/vacant)
+</td>
+<td style="text-align:left;">
+Male
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2019GQ0022931
 </td>
 <td style="text-align:right;">
 1
@@ -639,77 +814,7 @@ Female
 67
 </td>
 <td style="text-align:right;">
-43
-</td>
-<td style="text-align:left;">
-56
-</td>
-<td style="text-align:left;">
-b
-</td>
-<td style="text-align:left;">
-1
-</td>
-<td style="text-align:left;">
-Wyoming/WY
-</td>
-<td style="text-align:left;">
-N/A (GQ/vacant)
-</td>
-<td style="text-align:left;">
-Male
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2019GQ0016090
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-57
-</td>
-<td style="text-align:right;">
-19
-</td>
-<td style="text-align:left;">
-56
-</td>
-<td style="text-align:left;">
-b
-</td>
-<td style="text-align:left;">
-1
-</td>
-<td style="text-align:left;">
-Wyoming/WY
-</td>
-<td style="text-align:left;">
-N/A (GQ/vacant)
-</td>
-<td style="text-align:left;">
-Male
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2019GQ0020825
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-24
-</td>
-<td style="text-align:right;">
-20
+18
 </td>
 <td style="text-align:left;">
 56
@@ -732,7 +837,7 @@ Female
 </tr>
 <tr>
 <td style="text-align:left;">
-2019GQ0022170
+2019GQ0032421
 </td>
 <td style="text-align:right;">
 1
@@ -741,112 +846,7 @@ Female
 0
 </td>
 <td style="text-align:right;">
-73
-</td>
-<td style="text-align:right;">
-18
-</td>
-<td style="text-align:left;">
-56
-</td>
-<td style="text-align:left;">
-b
-</td>
-<td style="text-align:left;">
-1
-</td>
-<td style="text-align:left;">
-Wyoming/WY
-</td>
-<td style="text-align:left;">
-N/A (GQ/vacant)
-</td>
-<td style="text-align:left;">
-Male
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2019GQ0022185
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-32
-</td>
-<td style="text-align:right;">
-14
-</td>
-<td style="text-align:left;">
-56
-</td>
-<td style="text-align:left;">
-b
-</td>
-<td style="text-align:left;">
-1
-</td>
-<td style="text-align:left;">
-Wyoming/WY
-</td>
-<td style="text-align:left;">
-N/A (GQ/vacant)
-</td>
-<td style="text-align:left;">
-Male
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2019GQ0023934
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-75
-</td>
-<td style="text-align:right;">
-51
-</td>
-<td style="text-align:left;">
-56
-</td>
-<td style="text-align:left;">
-b
-</td>
-<td style="text-align:left;">
-1
-</td>
-<td style="text-align:left;">
-Wyoming/WY
-</td>
-<td style="text-align:left;">
-N/A (GQ/vacant)
-</td>
-<td style="text-align:left;">
-Male
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2019GQ0026378
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-40
+113
 </td>
 <td style="text-align:right;">
 94
@@ -872,7 +872,7 @@ Female
 </tr>
 <tr>
 <td style="text-align:left;">
-2019GQ0027977
+2019GQ0033045
 </td>
 <td style="text-align:right;">
 1
@@ -881,10 +881,10 @@ Female
 0
 </td>
 <td style="text-align:right;">
-48
+10
 </td>
 <td style="text-align:right;">
-22
+44
 </td>
 <td style="text-align:left;">
 56
@@ -916,7 +916,7 @@ Male
 <p>PUMS datasets, especially those from the 5-year ACS, can get quite large. Even users with speedy internet connections will need to be patient when downloading what could be millions of records from the Census API and potentially risk internet hiccups. When only subsets of data are required for an analysis, the <code>variables_filter</code> argument can return a subset of data from the API, reducing long download times.</p>
 <p>The <code>variables_filter</code> argument should be supplied as a named list where variable names (which can be quoted or unquoted) are paired with a data value or vector of data values to be requested from the API. The “filter” works by passing a special query to the Census API which will only return a subset of data, meaning that the entire dataset does not need to be first downloaded then filtered on the R side. This leads to substantial time savings for targeted queries.</p>
 <p>In the example below, the Wyoming request is modified with <code>variables_filter</code> to return only women (<code>SEX = 2</code>) between the ages of 30 and 49, but this time from the 5-year ACS PUMS.</p>
-<div class="sourceCode" id="cb331"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb333"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">wy_pums_filtered</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_pums.html">get_pums</a></span><span class="op">(</span>
   variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"SEX"</span>, <span class="st">"AGEP"</span>, <span class="st">"HHT"</span><span class="op">)</span>,
   state <span class="op">=</span> <span class="st">"WY"</span>,
@@ -960,25 +960,25 @@ SEX
 <tbody>
 <tr>
 <td style="text-align:left;">
-2015000007045
+2015000002861
 </td>
 <td style="text-align:right;">
-3
+1
 </td>
 <td style="text-align:right;">
-23
+62
 </td>
 <td style="text-align:right;">
-34
+63
 </td>
 <td style="text-align:right;">
-35
+46
 </td>
 <td style="text-align:left;">
 56
 </td>
 <td style="text-align:left;">
-1
+6
 </td>
 <td style="text-align:left;">
 2
@@ -986,16 +986,16 @@ SEX
 </tr>
 <tr>
 <td style="text-align:left;">
-2015000007382
+2015000007968
 </td>
 <td style="text-align:right;">
-1
+5
 </td>
 <td style="text-align:right;">
-17
+3
 </td>
 <td style="text-align:right;">
-17
+3
 </td>
 <td style="text-align:right;">
 33
@@ -1004,7 +1004,7 @@ SEX
 56
 </td>
 <td style="text-align:left;">
-6
+2
 </td>
 <td style="text-align:left;">
 2
@@ -1012,16 +1012,68 @@ SEX
 </tr>
 <tr>
 <td style="text-align:left;">
-2015000024421
+2015000009972
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+22
+</td>
+<td style="text-align:right;">
+55
+</td>
+<td style="text-align:right;">
+32
+</td>
+<td style="text-align:left;">
+56
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2015000010667
 </td>
 <td style="text-align:right;">
 1
 </td>
 <td style="text-align:right;">
-6
+11
 </td>
 <td style="text-align:right;">
-7
+12
+</td>
+<td style="text-align:right;">
+38
+</td>
+<td style="text-align:left;">
+56
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2015000022223
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+31
+</td>
+<td style="text-align:right;">
+31
 </td>
 <td style="text-align:right;">
 47
@@ -1030,7 +1082,7 @@ SEX
 56
 </td>
 <td style="text-align:left;">
-6
+1
 </td>
 <td style="text-align:left;">
 2
@@ -1038,16 +1090,94 @@ SEX
 </tr>
 <tr>
 <td style="text-align:left;">
-2015000027456
+2015000025344
 </td>
 <td style="text-align:right;">
 1
 </td>
 <td style="text-align:right;">
-3
+35
 </td>
 <td style="text-align:right;">
+35
+</td>
+<td style="text-align:right;">
+38
+</td>
+<td style="text-align:left;">
+56
+</td>
+<td style="text-align:left;">
 3
+</td>
+<td style="text-align:left;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2015000027928
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+55
+</td>
+<td style="text-align:right;">
+54
+</td>
+<td style="text-align:right;">
+45
+</td>
+<td style="text-align:left;">
+56
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2015000037505
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+48
+</td>
+<td style="text-align:left;">
+56
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2015000054619
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+8
 </td>
 <td style="text-align:right;">
 41
@@ -1064,155 +1194,25 @@ SEX
 </tr>
 <tr>
 <td style="text-align:left;">
-2015000048090
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-5
-</td>
-<td style="text-align:right;">
-5
-</td>
-<td style="text-align:right;">
-31
-</td>
-<td style="text-align:left;">
-56
-</td>
-<td style="text-align:left;">
-1
-</td>
-<td style="text-align:left;">
-2
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2015000054269
+2015000065987
 </td>
 <td style="text-align:right;">
 1
 </td>
 <td style="text-align:right;">
-0
+14
 </td>
 <td style="text-align:right;">
-9
+14
 </td>
 <td style="text-align:right;">
-40
+47
 </td>
 <td style="text-align:left;">
 56
 </td>
 <td style="text-align:left;">
-b
-</td>
-<td style="text-align:left;">
-2
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2015000058303
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-52
-</td>
-<td style="text-align:right;">
-43
-</td>
-<td style="text-align:right;">
-43
-</td>
-<td style="text-align:left;">
-56
-</td>
-<td style="text-align:left;">
-1
-</td>
-<td style="text-align:left;">
-2
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2015000059057
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-10
-</td>
-<td style="text-align:right;">
-11
-</td>
-<td style="text-align:right;">
-44
-</td>
-<td style="text-align:left;">
-56
-</td>
-<td style="text-align:left;">
-3
-</td>
-<td style="text-align:left;">
-2
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2015000063271
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-34
-</td>
-<td style="text-align:right;">
-34
-</td>
-<td style="text-align:right;">
-35
-</td>
-<td style="text-align:left;">
-56
-</td>
-<td style="text-align:left;">
-3
-</td>
-<td style="text-align:left;">
-2
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2015000065484
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-18
-</td>
-<td style="text-align:right;">
-13
-</td>
-<td style="text-align:right;">
-45
-</td>
-<td style="text-align:left;">
-56
-</td>
-<td style="text-align:left;">
-1
+6
 </td>
 <td style="text-align:left;">
 2
@@ -1237,7 +1237,7 @@ b
 <p>At the time of this writing, PUMA geographies correspond to the 2010 Census definitions, even. While PUMAs are redrawn with each decennial US Census, their release lags the decennial Census by a couple of years. To determine appropriate PUMA geographies, the Census Bureau consults with State Data Centers (SDCs) and incorporates their suggested revisions to these geographies. For 2020 PUMAs, this process takes place through the 2021 calendar year. This means that the updated PUMA geographies, and their incorporation into PUMS datasets, are planned for public release in the summer of 2022. For more information, visit <a href="https://www.census.gov/programs-surveys/geography/guidance/geo-areas/pumas/2020pumas.html" class="uri">https://www.census.gov/programs-surveys/geography/guidance/geo-areas/pumas/2020pumas.html</a>.</p>
 </div>
 <p>PUMA geographies can be obtained and reviewed with the <code><a href="https://rdrr.io/pkg/tigris/man/pumas.html">pumas()</a></code> function in the <strong>tigris</strong> package. Let’s take a look at PUMA geographies for the state of Wyoming:</p>
-<div class="sourceCode" id="cb332"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb334"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/walkerke/tigris">tigris</a></span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>tigris_use_cache <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 
@@ -1253,7 +1253,7 @@ Figure 9.3: Basic map of PUMAs in Wyoming
 </p>
 </div>
 <p>There are five PUMAs in Wyoming, largely covering large rural areas of the state, although the smallest PUMA by area covers the more urban southeast corner of the state. The returned object includes a <code>NAME10</code> column with an informative description of the PUMAs:</p>
-<div class="sourceCode" id="cb333"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb335"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">wy_pumas</span><span class="op">$</span><span class="va">NAME10</span></code></pre></div>
 <pre><code>## [1] "Sheridan, Park, Teton, Lincoln &amp; Big Horn Counties"                                 
 ## [2] "Sweetwater, Fremont, Uinta, Sublette &amp; Hot Springs Counties--Wind River Reservation"
@@ -1261,9 +1261,9 @@ Figure 9.3: Basic map of PUMAs in Wyoming
 ## [4] "Natrona, Carbon &amp; Converse Counties"                                                
 ## [5] "Laramie &amp; Albany Counties"</code></pre>
 <p>In a denser urban area, PUMAs will reflect subsections of major cities and are drawn in attempts to reflect meaningful local areas. In New York City, for example, PUMAs are drawn to align with recognized community districts in the city.</p>
-<div class="sourceCode" id="cb335"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">nyc_pumas</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tigris/man/pumas.html">pumas</a></span><span class="op">(</span>state <span class="op">=</span> <span class="st">"NY"</span>, cb <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu">str_detect</span><span class="op">(</span><span class="va">NAME10</span>, <span class="st">"NYC"</span><span class="op">)</span><span class="op">)</span>
+<div class="sourceCode" id="cb337"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">nyc_pumas</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tigris/man/pumas.html">pumas</a></span><span class="op">(</span>state <span class="op">=</span> <span class="st">"NY"</span>, cb <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/tigris/man/tigris-exports.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html">str_detect</a></span><span class="op">(</span><span class="va">NAME10</span>, <span class="st">"NYC"</span><span class="op">)</span><span class="op">)</span>
 
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">nyc_pumas</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
@@ -1275,7 +1275,7 @@ Figure 9.4: Map of PUMAs in New York City
 </p>
 </div>
 <p>The names of NYC’s PUMAs themselves reflect the community districts in the geographic data returned by <strong>tigris</strong>.</p>
-<div class="sourceCode" id="cb336"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb338"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">nyc_pumas</span><span class="op">$</span><span class="va">NAME10</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span></code></pre></div>
 <pre><code>## [1] "NYC-Manhattan Community District 11--East Harlem"                                  
 ## [2] "NYC-Manhattan Community District 8--Upper East Side"                               
@@ -1288,7 +1288,7 @@ Figure 9.4: Map of PUMAs in New York City
 <span class="header-section-number">9.4.2</span> Working with PUMAs in PUMS data<a class="anchor" aria-label="anchor" href="#working-with-pumas-in-pums-data"><i class="fas fa-link"></i></a>
 </h3>
 <p>PUMA information is available with the variable code <code>PUMA</code> in <code><a href="https://walker-data.com/tidycensus/reference/get_pums.html">get_pums()</a></code>. Use <code>PUMA</code> like any other variable to return information about the PUMA of residence for the individual records.</p>
-<div class="sourceCode" id="cb338"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb340"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">wy_age_by_puma</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_pums.html">get_pums</a></span><span class="op">(</span>
   variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"PUMA"</span>, <span class="st">"AGEP"</span><span class="op">)</span>,
   state <span class="op">=</span> <span class="st">"WY"</span>,
@@ -1324,7 +1324,99 @@ ST
 <tbody>
 <tr>
 <td style="text-align:left;">
-2015000001990
+2015000004982
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+28
+</td>
+<td style="text-align:right;">
+29
+</td>
+<td style="text-align:right;">
+39
+</td>
+<td style="text-align:left;">
+00200
+</td>
+<td style="text-align:left;">
+56
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2015000004982
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+28
+</td>
+<td style="text-align:right;">
+25
+</td>
+<td style="text-align:right;">
+36
+</td>
+<td style="text-align:left;">
+00200
+</td>
+<td style="text-align:left;">
+56
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2015000004982
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+28
+</td>
+<td style="text-align:right;">
+29
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:left;">
+00200
+</td>
+<td style="text-align:left;">
+56
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2015000004982
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+28
+</td>
+<td style="text-align:right;">
+25
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:left;">
+00200
+</td>
+<td style="text-align:left;">
+56
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2015000005881
 </td>
 <td style="text-align:right;">
 1
@@ -1333,33 +1425,10 @@ ST
 27
 </td>
 <td style="text-align:right;">
-26
+28
 </td>
 <td style="text-align:right;">
-67
-</td>
-<td style="text-align:left;">
-00300
-</td>
-<td style="text-align:left;">
-56
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2015000006752
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-5
-</td>
-<td style="text-align:right;">
-5
-</td>
-<td style="text-align:right;">
-86
+74
 </td>
 <td style="text-align:left;">
 00100
@@ -1370,19 +1439,19 @@ ST
 </tr>
 <tr>
 <td style="text-align:left;">
-2015000006752
+2015000007222
 </td>
 <td style="text-align:right;">
-2
+1
 </td>
 <td style="text-align:right;">
-5
+0
 </td>
 <td style="text-align:right;">
-6
+8
 </td>
 <td style="text-align:right;">
-83
+61
 </td>
 <td style="text-align:left;">
 00100
@@ -1393,16 +1462,39 @@ ST
 </tr>
 <tr>
 <td style="text-align:left;">
-2015000006847
+2015000008820
 </td>
 <td style="text-align:right;">
 1
 </td>
 <td style="text-align:right;">
-29
+0
 </td>
 <td style="text-align:right;">
-29
+12
+</td>
+<td style="text-align:right;">
+28
+</td>
+<td style="text-align:left;">
+00400
+</td>
+<td style="text-align:left;">
+56
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2015000008875
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+18
+</td>
+<td style="text-align:right;">
+18
 </td>
 <td style="text-align:right;">
 61
@@ -1416,42 +1508,19 @@ ST
 </tr>
 <tr>
 <td style="text-align:left;">
-2015000007045
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-23
-</td>
-<td style="text-align:right;">
-23
-</td>
-<td style="text-align:right;">
-62
-</td>
-<td style="text-align:left;">
-00300
-</td>
-<td style="text-align:left;">
-56
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2015000007045
+2015000008875
 </td>
 <td style="text-align:right;">
 2
 </td>
 <td style="text-align:right;">
-23
+18
 </td>
 <td style="text-align:right;">
 19
 </td>
 <td style="text-align:right;">
-66
+58
 </td>
 <td style="text-align:left;">
 00300
@@ -1462,91 +1531,22 @@ ST
 </tr>
 <tr>
 <td style="text-align:left;">
-2015000007045
+2015000008875
 </td>
 <td style="text-align:right;">
 3
 </td>
 <td style="text-align:right;">
-23
+18
 </td>
 <td style="text-align:right;">
-34
+22
 </td>
 <td style="text-align:right;">
-35
+14
 </td>
 <td style="text-align:left;">
 00300
-</td>
-<td style="text-align:left;">
-56
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2015000007382
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-17
-</td>
-<td style="text-align:right;">
-17
-</td>
-<td style="text-align:right;">
-33
-</td>
-<td style="text-align:left;">
-00500
-</td>
-<td style="text-align:left;">
-56
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2015000010448
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-9
-</td>
-<td style="text-align:right;">
-9
-</td>
-<td style="text-align:right;">
-69
-</td>
-<td style="text-align:left;">
-00100
-</td>
-<td style="text-align:left;">
-56
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2015000010448
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-9
-</td>
-<td style="text-align:right;">
-9
-</td>
-<td style="text-align:right;">
-77
-</td>
-<td style="text-align:left;">
-00100
 </td>
 <td style="text-align:left;">
 56
@@ -1556,7 +1556,7 @@ ST
 </table></div>
 <p>PUMA IDs are replicated across states, so the <code>PUMA</code> column should be combined with the <code>ST</code> column to uniquely identify PUMAs when performing multi-state analyses.</p>
 <p>The <code>puma</code> argument in <code><a href="https://walker-data.com/tidycensus/reference/get_pums.html">get_pums()</a></code> can also be used to obtain data for a specific PUMA or multiple PUMAs. Like the <code>variables_filter</code> parameter, <code>puma</code> uses a query on the API side to reduce long download times for users only interested in a geographical subset of data.</p>
-<div class="sourceCode" id="cb339"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb341"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">wy_puma_subset</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_pums.html">get_pums</a></span><span class="op">(</span>
   variables <span class="op">=</span> <span class="st">"AGEP"</span>,
   state <span class="op">=</span> <span class="st">"WY"</span>,
@@ -1824,14 +1824,14 @@ ST
 </tbody>
 </table></div>
 <p>For multi-state geographical queries, the <code>puma</code> argument must be adapted slightly due to the aforementioned possibility that PUMA IDs will be replicated across states. To perform a multi-state query by PUMA, specify <code>state = "multiple"</code> and pass a named vector of state/PUMA pairs to the <code>puma</code> parameter.</p>
-<div class="sourceCode" id="cb340"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb342"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">twostate_puma_subset</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_pums.html">get_pums</a></span><span class="op">(</span>
   variables <span class="op">=</span> <span class="st">"AGEP"</span>,
   state <span class="op">=</span> <span class="st">"multiple"</span>,
   survey <span class="op">=</span> <span class="st">"acs5"</span>,
   puma <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"WY"</span> <span class="op">=</span> <span class="st">"00500"</span>, <span class="st">"UT"</span> <span class="op">=</span> <span class="st">"05001"</span><span class="op">)</span>
 <span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb341"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb343"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">style_data</span><span class="op">(</span><span class="va">twostate_puma_subset</span>, caption <span class="op">=</span> <span class="st">"Data for PUMA 00500 in Wyoming and PUMA 05001 in Utah"</span><span class="op">)</span></code></pre></div>
 <div class="inline-table"><table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
 <caption>
@@ -2155,7 +2155,7 @@ ST
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Analyzing US Census Data</strong>: Methods, Maps, and Models in R" was written by Kyle E. Walker. It was last built on 2021-10-15.</p>
+    <p>"<strong>Analyzing US Census Data</strong>: Methods, Maps, and Models in R" was written by Kyle E. Walker. It was last built on 2022-01-03.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

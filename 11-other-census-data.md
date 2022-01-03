@@ -72,7 +72,7 @@ nyc_1910 <- read_nhgis_sf(
 ## Reading geography...
 ## options:        ENCODING=latin1 
 ## Reading layer `US_tract_1910' from data source 
-##   `/tmp/RtmpeTlSHP/file36862e06f09e/US_tract_1910.shp' using driver `ESRI Shapefile'
+##   `/tmp/RtmpY88F8m/file14b734d79ba1/US_tract_1910.shp' using driver `ESRI Shapefile'
 ## Simple feature collection with 1989 features and 6 fields
 ## Geometry type: MULTIPOLYGON
 ## Dimension:     XY
@@ -601,6 +601,30 @@ tx_econ17 <- getCensus(
   </tr>
   <tr>
    <td style="text-align:left;"> 48 </td>
+   <td style="text-align:left;"> 467 </td>
+   <td style="text-align:left;"> 1254 </td>
+   <td style="text-align:left;"> 19187 </td>
+   <td style="text-align:left;"> 0500000US48467 </td>
+   <td style="text-align:left;"> 72 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 48 </td>
+   <td style="text-align:left;"> 419 </td>
+   <td style="text-align:left;"> 505 </td>
+   <td style="text-align:left;"> 9836 </td>
+   <td style="text-align:left;"> 0500000US48419 </td>
+   <td style="text-align:left;"> 72 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 48 </td>
+   <td style="text-align:left;"> 337 </td>
+   <td style="text-align:left;"> 452 </td>
+   <td style="text-align:left;"> 5602 </td>
+   <td style="text-align:left;"> 0500000US48337 </td>
+   <td style="text-align:left;"> 72 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 48 </td>
    <td style="text-align:left;"> 389 </td>
    <td style="text-align:left;"> 664 </td>
    <td style="text-align:left;"> 14641 </td>
@@ -609,18 +633,10 @@ tx_econ17 <- getCensus(
   </tr>
   <tr>
    <td style="text-align:left;"> 48 </td>
-   <td style="text-align:left;"> 035 </td>
-   <td style="text-align:left;"> 261 </td>
-   <td style="text-align:left;"> 4186 </td>
-   <td style="text-align:left;"> 0500000US48035 </td>
-   <td style="text-align:left;"> 72 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 48 </td>
-   <td style="text-align:left;"> 113 </td>
-   <td style="text-align:left;"> 134426 </td>
-   <td style="text-align:left;"> 2677179 </td>
-   <td style="text-align:left;"> 0500000US48113 </td>
+   <td style="text-align:left;"> 503 </td>
+   <td style="text-align:left;"> 506 </td>
+   <td style="text-align:left;"> 7077 </td>
+   <td style="text-align:left;"> 0500000US48503 </td>
    <td style="text-align:left;"> 72 </td>
   </tr>
   <tr>
@@ -629,14 +645,6 @@ tx_econ17 <- getCensus(
    <td style="text-align:left;"> 4512 </td>
    <td style="text-align:left;"> 60929 </td>
    <td style="text-align:left;"> 0500000US48251 </td>
-   <td style="text-align:left;"> 72 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 48 </td>
-   <td style="text-align:left;"> 467 </td>
-   <td style="text-align:left;"> 1254 </td>
-   <td style="text-align:left;"> 19187 </td>
-   <td style="text-align:left;"> 0500000US48467 </td>
    <td style="text-align:left;"> 72 </td>
   </tr>
   <tr>
@@ -653,14 +661,6 @@ tx_econ17 <- getCensus(
    <td style="text-align:left;"> 394 </td>
    <td style="text-align:left;"> 5233 </td>
    <td style="text-align:left;"> 0500000US48487 </td>
-   <td style="text-align:left;"> 72 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 48 </td>
-   <td style="text-align:left;"> 317 </td>
-   <td style="text-align:left;"> 0 </td>
-   <td style="text-align:left;"> 0 </td>
-   <td style="text-align:left;"> 0500000US48317 </td>
    <td style="text-align:left;"> 72 </td>
   </tr>
 </tbody>
@@ -1204,11 +1204,38 @@ maui_accom <- bls_api(seriesid = "SMU15279807072100001",
 <tbody>
   <tr>
    <td style="text-align:right;"> 2021 </td>
+   <td style="text-align:left;"> M11 </td>
+   <td style="text-align:left;"> November </td>
+   <td style="text-align:left;"> true </td>
+   <td style="text-align:right;"> 9.5 </td>
+   <td style="text-align:left;"> P Preliminary </td>
+   <td style="text-align:left;"> SMU15279807072100001 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 2021 </td>
+   <td style="text-align:left;"> M10 </td>
+   <td style="text-align:left;"> October </td>
+   <td style="text-align:left;"> NA </td>
+   <td style="text-align:right;"> 9.3 </td>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:left;"> SMU15279807072100001 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 2021 </td>
+   <td style="text-align:left;"> M09 </td>
+   <td style="text-align:left;"> September </td>
+   <td style="text-align:left;"> NA </td>
+   <td style="text-align:right;"> 9.5 </td>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:left;"> SMU15279807072100001 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 2021 </td>
    <td style="text-align:left;"> M08 </td>
    <td style="text-align:left;"> August </td>
-   <td style="text-align:left;"> true </td>
-   <td style="text-align:right;"> 9.8 </td>
-   <td style="text-align:left;"> P Preliminary </td>
+   <td style="text-align:left;"> NA </td>
+   <td style="text-align:right;"> 9.7 </td>
+   <td style="text-align:left;">  </td>
    <td style="text-align:left;"> SMU15279807072100001 </td>
   </tr>
   <tr>
@@ -1226,33 +1253,6 @@ maui_accom <- bls_api(seriesid = "SMU15279807072100001",
    <td style="text-align:left;"> June </td>
    <td style="text-align:left;"> NA </td>
    <td style="text-align:right;"> 8.9 </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> SMU15279807072100001 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 2021 </td>
-   <td style="text-align:left;"> M05 </td>
-   <td style="text-align:left;"> May </td>
-   <td style="text-align:left;"> NA </td>
-   <td style="text-align:right;"> 8.2 </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> SMU15279807072100001 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 2021 </td>
-   <td style="text-align:left;"> M04 </td>
-   <td style="text-align:left;"> April </td>
-   <td style="text-align:left;"> NA </td>
-   <td style="text-align:right;"> 8.0 </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> SMU15279807072100001 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 2021 </td>
-   <td style="text-align:left;"> M03 </td>
-   <td style="text-align:left;"> March </td>
-   <td style="text-align:left;"> NA </td>
-   <td style="text-align:right;"> 7.2 </td>
    <td style="text-align:left;">  </td>
    <td style="text-align:left;"> SMU15279807072100001 </td>
   </tr>

@@ -7,7 +7,7 @@
 <title>Chapter 5 Census geographic data and applications in R | Analyzing US Census Data</title>
 <meta name="author" content="Kyle E. Walker">
 <meta name="description" content="As discussed in previous chapters of this book, Census and ACS data are associated with geographies, which are units at which the data are aggregated. These defined geographies are represented in...">
-<meta name="generator" content="bookdown 0.22.17 with bs4_book()">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
 <meta property="og:title" content="Chapter 5 Census geographic data and applications in R | Analyzing US Census Data">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://walker-data.com/census-r/census-geographic-data-and-applications-in-r.html">
@@ -17,14 +17,14 @@
 <meta name="twitter:title" content="Chapter 5 Census geographic data and applications in R | Analyzing US Census Data">
 <meta name="twitter:description" content="As discussed in previous chapters of this book, Census and ACS data are associated with geographies, which are units at which the data are aggregated. These defined geographies are represented in...">
 <meta name="twitter:image" content="https://walker-data.com/census-r/04-visualizing-census-data_files/figure-html/visualize-error-bars-1.png">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.10.5/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.5.3/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.5.3/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.4/tabs.js"></script><script src="libs/bs3compat-0.2.4/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><script src="libs/plotly-binding-4.9.3/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet">
-<script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet">
-<script src="libs/plotly-main-1.57.1/plotly-latest.min.js"></script><script src="libs/d3-bundle-5.16.0/d3-bundle.min.js"></script><script src="libs/d3-lasso-0.0.5/d3-lasso.min.js"></script><script src="libs/save-svg-as-png-1.4.17/save-svg-as-png.min.js"></script><link href="libs/ggiraphjs-0.4.1/ggiraphjs.min.css" rel="stylesheet">
-<script src="libs/ggiraphjs-0.4.1/ggiraphjs.min.js"></script><script src="libs/girafe-binding-0.7.10/girafe.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-6KFYZ3W36Z"></script><script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><script src="libs/plotly-binding-4.10.0/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script><script src="libs/d3-bundle-5.16.0/d3-bundle.min.js"></script><script src="libs/d3-lasso-0.0.5/d3-lasso.min.js"></script><script src="libs/save-svg-as-png-1.4.17/save-svg-as-png.min.js"></script><link href="libs/ggiraphjs-0.4.2/ggiraphjs.min.css" rel="stylesheet">
+<script src="libs/ggiraphjs-0.4.2/ggiraphjs.min.js"></script><script src="libs/girafe-binding-0.8.1/girafe.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-6KFYZ3W36Z"></script><script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
@@ -475,7 +475,7 @@ Figure 5.7: Block groups in Washington, DC
 Figure 5.8: A ggplot2 map with a blank background
 </p>
 </div>
-<p>Section <a href="exploring-us-census-data-with-visualization.html#visualizing-group-wise-comparisons">4.5</a> introduced the concept of <em>faceted plots</em> to compare different views, which is also a very useful concept for geographic visualization. Faceted mapping will be addressed directly in the next chapter. For comparative spatial plots, the <strong>patchwork</strong> R package <span class="citation">(<a href="references.html#ref-pedersen2020" role="doc-biblioref">Pedersen 2020</a>)</span> works very well for arranging a multi-plot layout. Below, we’ll use patchwork to put two <strong>ggplot2</strong> spatial plots - one of Census tracts and one of block groups in Los Alamos County - side-by-side using the <code><a href="https://rdrr.io/r/base/Arithmetic.html">+</a></code> operator.</p>
+<p>Section <a href="exploring-us-census-data-with-visualization.html#visualizing-group-wise-comparisons">4.5</a> introduced the concept of <em>faceted plots</em> to compare different views, which is also a very useful concept for geographic visualization. Faceted mapping will be addressed directly in the next chapter. For comparative spatial plots, the <strong>patchwork</strong> R package <span class="citation">(<a href="references.html#ref-pedersen2020" role="doc-biblioref">Pedersen 2020</a>)</span> works very well for arranging a multi-plot layout. Below, we’ll use patchwork to put two <strong>ggplot2</strong> spatial plots - one of Census tracts and one of block groups in Los Alamos County - side-by-side using the <code>+</code> operator.</p>
 <div class="sourceCode" id="cb125"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op">)</span>
 
@@ -498,7 +498,7 @@ Figure 5.8: A ggplot2 map with a blank background
 Figure 5.9: Comparing Census tracts and block groups
 </p>
 </div>
-<p>Alternatively, <strong>patchwork</strong> allows R users to arrange plots vertically using the <code><a href="https://rdrr.io/r/base/Arithmetic.html">/</a></code> operator.</p>
+<p>Alternatively, <strong>patchwork</strong> allows R users to arrange plots vertically using the <code>/</code> operator.</p>
 </div>
 <div id="interactive-viewing-with-mapview" class="section level3" number="5.2.2">
 <h3>
@@ -512,7 +512,7 @@ Figure 5.9: Comparing Census tracts and block groups
 <span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html">mapview</a></span><span class="op">(</span><span class="va">la_tracts</span><span class="op">)</span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:la-tracts-mapview"></span>
-<iframe src="img/leaflet/la_tracts.html" width="100%" height="500px">
+<iframe src="img/leaflet/la_tracts.html" width="100%" height="500px" data-external="1">
 </iframe>
 <p class="caption">
 Figure 5.10: Interactive view of Los Alamos, NM
@@ -560,7 +560,7 @@ Figure 5.11: Comparison of TIGER/Line and cartographic boundary files for Michig
 <span class="header-section-number">5.3.2</span> Caching tigris data<a class="anchor" aria-label="anchor" href="#caching-tigris-data"><i class="fas fa-link"></i></a>
 </h3>
 <p>A common issue that can arise when working with <strong>tigris</strong> is waiting around for large file downloads, especially if the required geographic data is large or if your internet connection is spotty. For example, the Census block shapefile for Texas in 2019 is 441MB in size zipped, which can take a while to obtain without high-speed internet.</p>
-<p>tigris offers a solution in the way of <em>shapefile caching</em>. By specifying <code><a href="https://rdrr.io/r/base/options.html">options(tigris_use_cache = TRUE)</a></code>, users can instruct tigris to download shapefiles to a cache directory on their computers for future use rather than a temporary directory as <strong>tigris</strong> does by default. When shapefile caching is turned on, <strong>tigris</strong> will then look first in the cache directory to see if a requested shapefile is already there. If so, it will read it in without re-downloading. If not, it will download the file from the Census website and store it in the cache directory.</p>
+<p>tigris offers a solution in the way of <em>shapefile caching</em>. By specifying <code>options(tigris_use_cache = TRUE)</code>, users can instruct tigris to download shapefiles to a cache directory on their computers for future use rather than a temporary directory as <strong>tigris</strong> does by default. When shapefile caching is turned on, <strong>tigris</strong> will then look first in the cache directory to see if a requested shapefile is already there. If so, it will read it in without re-downloading. If not, it will download the file from the Census website and store it in the cache directory.</p>
 <p>The cache directory can be checked with the <code>user_cache_dir()</code> function available in the <strong>rappdirs</strong> package <span class="citation">(<a href="references.html#ref-ratnakumar2021" role="doc-biblioref">Ratnakumar, Mick, and Davis 2021</a>)</span>. The specific location of your cache directory will depend on your operating system.</p>
 <div class="sourceCode" id="cb128"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>tigris_use_cache <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
@@ -580,7 +580,7 @@ Figure 5.11: Comparison of TIGER/Line and cartographic boundary files for Michig
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidyverse/glue">glue</a></span><span class="op">)</span>
 
-<span class="va">yearly_plots</span> <span class="op">&lt;-</span> <span class="fu">map</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1990</span>, <span class="fl">2020</span>, <span class="fl">10</span><span class="op">)</span>, <span class="op">~</span><span class="op">{</span>
+<span class="va">yearly_plots</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1990</span>, <span class="fl">2020</span>, <span class="fl">10</span><span class="op">)</span>, <span class="op">~</span><span class="op">{</span>
   <span class="va">year_tracts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tigris/man/tracts.html">tracts</a></span><span class="op">(</span><span class="st">"TX"</span>, <span class="st">"Tarrant"</span>, year <span class="op">=</span> <span class="va">.x</span>,
                         cb <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 
@@ -589,7 +589,7 @@ Figure 5.11: Comparison of TIGER/Line and cartographic boundary files for Michig
     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"{.x}: {nrow(year_tracts)} tracts"</span><span class="op">)</span><span class="op">)</span>
 <span class="op">}</span><span class="op">)</span></code></pre></div>
-<p>Once the plots are generated, we can use <strong>patchwork</strong> to facet the plots as we did earlier in this chapter. The division operator <code><a href="https://rdrr.io/r/base/Arithmetic.html">/</a></code> places plots on top of one another allowing for the organization of plots in a grid.</p>
+<p>Once the plots are generated, we can use <strong>patchwork</strong> to facet the plots as we did earlier in this chapter. The division operator <code>/</code> places plots on top of one another allowing for the organization of plots in a grid.</p>
 <div class="sourceCode" id="cb131"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="op">(</span><span class="va">yearly_plots</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">+</span> <span class="va">yearly_plots</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="op">/</span> 
   <span class="op">(</span><span class="va">yearly_plots</span><span class="op">[[</span><span class="fl">3</span><span class="op">]</span><span class="op">]</span> <span class="op">+</span> <span class="va">yearly_plots</span><span class="op">[[</span><span class="fl">4</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></code></pre></div>
@@ -600,19 +600,19 @@ Figure 5.12: Tarrant County, TX Census tracts, 1990-2020
 </p>
 </div>
 <p>Tarrant County added 180 new Census tracts between 1990 and 2020. As the plot shows, many of these tracts are found in fast-growing parts of the county in the northeast and southeast. Notably, these changes in Census tract geography have downstream implications as well for time-series analysis, as covered in Section <a href="wrangling-census-data-with-tidyverse-tools.html#time-series-analysis-some-cautions">3.4.1</a>. Data at the Census tract level in 2010, for example, will be tabulated differently than in 2020 because the tract geographies are different. One common method for adjusting demographic data between disparate zonal configurations is <em>areal interpolation</em>, a topic covered in Section <a href="spatial-analysis-with-us-census-data.html#computing-demographic-estimates-for-zones-with-areal-interpolation">7.3.4</a>.</p>
-<p>The default year of shapefiles in <strong>tigris</strong> aligns with the most recently-released 5-year American Community Survey data. At the time of this writing, the default year is 2019. This will be changed to 2020 pending full data availability of the TIGER/Line shapefiles for that year and upon release of the 2016-2020 5-year ACS estimates in December 2021. If users need the 2020 boundaries in their projects and do not want to type <code>year = 2020</code> for each dataset, the command <code><a href="https://rdrr.io/r/base/options.html">options(tigris_year = 2020)</a></code> can be used. This will direct <strong>tigris</strong> to download the 2020 shapefiles when available without having to specify the year explicitly.</p>
+<p>The default year of shapefiles in <strong>tigris</strong> aligns with the most recently-released 5-year American Community Survey data. At the time of this writing, the default year is 2019. This will be changed to 2020 pending full data availability of the TIGER/Line shapefiles for that year and upon release of the 2016-2020 5-year ACS estimates in December 2021. If users need the 2020 boundaries in their projects and do not want to type <code>year = 2020</code> for each dataset, the command <code>options(tigris_year = 2020)</code> can be used. This will direct <strong>tigris</strong> to download the 2020 shapefiles when available without having to specify the year explicitly.</p>
 </div>
 <div id="combining-tigris-datasets" class="section level3" number="5.3.4">
 <h3>
 <span class="header-section-number">5.3.4</span> Combining tigris datasets<a class="anchor" aria-label="anchor" href="#combining-tigris-datasets"><i class="fas fa-link"></i></a>
 </h3>
 <p>For smaller geographies like Census tracts, block groups, and blocks, the Census Bureau stores shapefiles by state and does not provide a national file. For some geographic features, datasets are further subdivided by county. In these instances, <strong>tigris</strong> users must specify a state and/or county to appropriately make a request to the Census Bureau website for data.</p>
-<p>That said, a common request from <strong>tigris</strong> users is to obtain <em>all shapes</em> for the United States. For example, a national demographic study may require all 241,900 block groups in the United States. While this option is not directly available in <strong>tigris</strong>, national datasets are straightforward to create with <strong>tidyverse</strong> tools. As covered in several examples thus far in this book, the <code><a href="https://purrr.tidyverse.org/reference/map.html">purrr::map()</a></code> family of functions iterate over a sequence of values and combine function results as directed by a user. For tigris users, the <code>map_dfr()</code> function will prove especially useful as it row-binds datasets to create its output. The built-in <code>state.abb</code> vector in R gives us postal codes of all 50 US states; if Washington, DC or Puerto Rico are required in your analysis, add these to the vector with <code><a href="https://rdrr.io/r/base/c.html">c()</a></code> as shown below.</p>
-<p>Once the vector of state codes is prepared, a user can iterate over those codes with <code>map_dfr()</code> and produce a national block group dataset, shown for 2020 below.</p>
+<p>That said, a common request from <strong>tigris</strong> users is to obtain <em>all shapes</em> for the United States. For example, a national demographic study may require all 241,900 block groups in the United States. While this option is not directly available in <strong>tigris</strong>, national datasets are straightforward to create with <strong>tidyverse</strong> tools. As covered in several examples thus far in this book, the <code><a href="https://purrr.tidyverse.org/reference/map.html">purrr::map()</a></code> family of functions iterate over a sequence of values and combine function results as directed by a user. For tigris users, the <code><a href="https://purrr.tidyverse.org/reference/map.html">map_dfr()</a></code> function will prove especially useful as it row-binds datasets to create its output. The built-in <code>state.abb</code> vector in R gives us postal codes of all 50 US states; if Washington, DC or Puerto Rico are required in your analysis, add these to the vector with <code><a href="https://rdrr.io/r/base/c.html">c()</a></code> as shown below.</p>
+<p>Once the vector of state codes is prepared, a user can iterate over those codes with <code><a href="https://purrr.tidyverse.org/reference/map.html">map_dfr()</a></code> and produce a national block group dataset, shown for 2020 below.</p>
 <div class="sourceCode" id="cb132"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">state_codes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">state.abb</span>, <span class="st">"DC"</span>, <span class="st">"PR"</span><span class="op">)</span>
 
-<span class="va">us_bgs</span> <span class="op">&lt;-</span> <span class="fu">map_dfr</span><span class="op">(</span>
+<span class="va">us_bgs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_dfr</a></span><span class="op">(</span>
   <span class="va">state_codes</span>, 
   <span class="op">~</span><span class="fu"><a href="https://rdrr.io/pkg/tigris/man/block_groups.html">block_groups</a></span><span class="op">(</span>
     state <span class="op">=</span> <span class="va">.x</span>, 
@@ -1070,13 +1070,13 @@ Figure 5.18: US states with shifted geometry and consistent area
 <p>As discussed earlier in this chapter, most datasets obtained with tigris are returned with geometry type <code>POLYGON</code> or <code>MULTIPOLYGON</code>, reflecting the fact that Census geometries are generally areal units to which Census data are aggregated. While this makes sense for many applications, there are some instances in which the default geometry type of Census shapes is not necessary.</p>
 <p>For example, let’s say we are making a simple plot of the largest cities in the state of Texas. The <code><a href="https://rdrr.io/pkg/tigris/man/places.html">places()</a></code> function can obtain city geometries, and the <code><a href="https://rdrr.io/pkg/tigris/man/states.html">states()</a></code> function gives us the outline of the state of Texas. Two successive calls to <code><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf()</a></code> create a graphic that displays those cities on top of the state outline.</p>
 <div class="sourceCode" id="cb147"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tx_places</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tigris/man/places.html">places</a></span><span class="op">(</span><span class="st">"TX"</span>, cb <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">NAME</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Dallas"</span>, <span class="st">"Fort Worth"</span>, <span class="st">"Houston"</span>,
-                     <span class="st">"Austin"</span>, <span class="st">"San Antonio"</span>, <span class="st">"El Paso"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+<code class="sourceCode R"><span class="va">tx_places</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tigris/man/places.html">places</a></span><span class="op">(</span><span class="st">"TX"</span>, cb <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">NAME</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Dallas"</span>, <span class="st">"Fort Worth"</span>, <span class="st">"Houston"</span>,
+                     <span class="st">"Austin"</span>, <span class="st">"San Antonio"</span>, <span class="st">"El Paso"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html">st_transform</a></span><span class="op">(</span><span class="fl">6580</span><span class="op">)</span>
 
-<span class="va">tx_outline</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tigris/man/states.html">states</a></span><span class="op">(</span>cb <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">NAME</span> <span class="op">==</span> <span class="st">"Texas"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+<span class="va">tx_outline</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tigris/man/states.html">states</a></span><span class="op">(</span>cb <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">NAME</span> <span class="op">==</span> <span class="st">"Texas"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html">st_transform</a></span><span class="op">(</span><span class="fl">6580</span><span class="op">)</span>
 
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
@@ -1112,13 +1112,13 @@ Figure 5.20: Large cities in Texas represented as points
 </h3>
 <p>Generally speaking, areal Census features are returned with the geometry type <code>MULTIPOLYGON</code>. This makes sense as many Census shapes - including several states - include disconnected areas such as islands that belong to the same Census area. As this is particularly significant in Florida, let’s return to the Florida counties dataset used earlier in this chapter, and take the example of Lee County on Florida’s western coast.</p>
 <div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">lee</span> <span class="op">&lt;-</span> <span class="va">fl_projected</span> <span class="op">%&gt;%</span>
+<code class="sourceCode R"><span class="va">lee</span> <span class="op">&lt;-</span> <span class="va">fl_projected</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">NAME</span> <span class="op">==</span> <span class="st">"Lee"</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb150"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html">mapview</a></span><span class="op">(</span><span class="va">lee</span><span class="op">)</span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:lee-mapview-show"></span>
-<iframe src="img/leaflet/lee_county.html" width="100%" height="500px">
+<iframe src="img/leaflet/lee_county.html" width="100%" height="500px" data-external="1">
 </iframe>
 <p class="caption">
 Figure 5.21: Lee County, Florida
@@ -1163,7 +1163,7 @@ Figure 5.21: Lee County, Florida
 <span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html">mapview</a></span><span class="op">(</span><span class="va">sanibel</span><span class="op">)</span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:show-sanibel"></span>
-<iframe src="img/leaflet/sanibel.html" width="100%" height="500px">
+<iframe src="img/leaflet/sanibel.html" width="100%" height="500px" data-external="1">
 </iframe>
 <p class="caption">
 Figure 5.22: Sanibel Island, Florida
@@ -1239,7 +1239,7 @@ Figure 5.22: Sanibel Island, Florida
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Analyzing US Census Data</strong>: Methods, Maps, and Models in R" was written by Kyle E. Walker. It was last built on 2021-10-15.</p>
+    <p>"<strong>Analyzing US Census Data</strong>: Methods, Maps, and Models in R" was written by Kyle E. Walker. It was last built on 2022-01-03.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
