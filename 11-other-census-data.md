@@ -72,7 +72,7 @@ nyc_1910 <- read_nhgis_sf(
 ## Reading geography...
 ## options:        ENCODING=latin1 
 ## Reading layer `US_tract_1910' from data source 
-##   `/tmp/RtmpCNffu9/file596756f6430d/US_tract_1910.shp' using driver `ESRI Shapefile'
+##   `/tmp/RtmpJKST3w/file2dad1c138827/US_tract_1910.shp' using driver `ESRI Shapefile'
 ## Simple feature collection with 1989 features and 6 fields
 ## Geometry type: MULTIPOLYGON
 ## Dimension:     XY
@@ -601,14 +601,6 @@ tx_econ17 <- getCensus(
   </tr>
   <tr>
    <td style="text-align:left;"> 48 </td>
-   <td style="text-align:left;"> 113 </td>
-   <td style="text-align:left;"> 134426 </td>
-   <td style="text-align:left;"> 2677179 </td>
-   <td style="text-align:left;"> 0500000US48113 </td>
-   <td style="text-align:left;"> 72 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 48 </td>
    <td style="text-align:left;"> 467 </td>
    <td style="text-align:left;"> 1254 </td>
    <td style="text-align:left;"> 19187 </td>
@@ -617,10 +609,10 @@ tx_econ17 <- getCensus(
   </tr>
   <tr>
    <td style="text-align:left;"> 48 </td>
-   <td style="text-align:left;"> 419 </td>
-   <td style="text-align:left;"> 505 </td>
-   <td style="text-align:left;"> 9836 </td>
-   <td style="text-align:left;"> 0500000US48419 </td>
+   <td style="text-align:left;"> 199 </td>
+   <td style="text-align:left;"> 1476 </td>
+   <td style="text-align:left;"> 19126 </td>
+   <td style="text-align:left;"> 0500000US48199 </td>
    <td style="text-align:left;"> 72 </td>
   </tr>
   <tr>
@@ -633,18 +625,18 @@ tx_econ17 <- getCensus(
   </tr>
   <tr>
    <td style="text-align:left;"> 48 </td>
-   <td style="text-align:left;"> 267 </td>
-   <td style="text-align:left;"> 0 </td>
-   <td style="text-align:left;"> 0 </td>
-   <td style="text-align:left;"> 0500000US48267 </td>
+   <td style="text-align:left;"> 251 </td>
+   <td style="text-align:left;"> 4512 </td>
+   <td style="text-align:left;"> 60929 </td>
+   <td style="text-align:left;"> 0500000US48251 </td>
    <td style="text-align:left;"> 72 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 48 </td>
-   <td style="text-align:left;"> 505 </td>
-   <td style="text-align:left;"> 0 </td>
-   <td style="text-align:left;"> 0 </td>
-   <td style="text-align:left;"> 0500000US48505 </td>
+   <td style="text-align:left;"> 305 </td>
+   <td style="text-align:left;"> 17 </td>
+   <td style="text-align:left;"> 142 </td>
+   <td style="text-align:left;"> 0500000US48305 </td>
    <td style="text-align:left;"> 72 </td>
   </tr>
   <tr>
@@ -661,6 +653,14 @@ tx_econ17 <- getCensus(
    <td style="text-align:left;"> 910 </td>
    <td style="text-align:left;"> 15247 </td>
    <td style="text-align:left;"> 0500000US48055 </td>
+   <td style="text-align:left;"> 72 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 48 </td>
+   <td style="text-align:left;"> 487 </td>
+   <td style="text-align:left;"> 394 </td>
+   <td style="text-align:left;"> 5233 </td>
+   <td style="text-align:left;"> 0500000US48487 </td>
    <td style="text-align:left;"> 72 </td>
   </tr>
 </tbody>

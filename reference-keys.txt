@@ -128,6 +128,8 @@ tab:travis-inflow-show
 fig:mapdeck-flows
 fig:linked-map-chart
 fig:include-app
+fig:qgis-tool-dialog
+fig:qgis-example-view
 fig:layers-view
 fig:kc-metro
 fig:kc-tracts-intersect
@@ -243,10 +245,6 @@ tab:see-brazil-data
 fig:brasilia-income
 fig:map-brasilia-income
 fig:brasilia-lisa-map
-about-the-book
-who-this-book-is-for
-about-the-author
-technical-details
 the-united-states-census-and-the-r-programming-language
 census-data-an-overview
 census-hierarchies
@@ -301,6 +299,7 @@ basic-census-visualization-with-ggplot2
 getting-started-with-ggplot2
 improving-plot-legibility
 custom-styling-of-ggplot2-charts
+exporting-data-visualizations-from-r
 visualizing-margins-of-error
 data-setup
 using-error-bars-for-margins-of-error
@@ -363,6 +362,9 @@ advanced-examples
 mapping-migration-flows
 linking-maps-and-charts
 reactive-mapping-with-shiny
+working-with-software-outside-of-r-for-cartographic-projects
+exporting-maps-from-r
+interoperability-with-other-visualization-software
 exercises-4
 spatial-analysis-with-us-census-data
 spatial-overlay

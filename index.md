@@ -2,7 +2,7 @@
 title: "Analyzing US Census Data"
 subtitle: "Methods, Maps, and Models in R"
 author: "Kyle E. Walker"
-date: "2022-01-03"
+date: "2022-01-21"
 site: bookdown::bookdown_site
 knit: bookdown::render_book
 output: bookdown::bs4_book
@@ -37,7 +37,7 @@ To support the development of the book and help me maintain this free online ver
 
 -   [Chipping in some funds to support book maintenance via PayPal](https://paypal.me/walkerdata).
 
-## About the book
+## About the book {.unnumbered}
 
 Census data are widely used in the United States across numerous research and applied fields, including education, business, journalism, and many others. Until recently, the process of working with US Census data has required the use of a wide array of web interfaces and software platforms to prepare, map, and present data products. The goal of this book is to illustrate the utility of the R programming language for handling these tasks, allowing Census data users to manage their projects in a single computing environment.
 
@@ -62,7 +62,7 @@ Readers new to R and Census data should read the book in order, as each chapter 
 -   Chapter 11's focus is Census datasets beyond the decennial US Census and American Community Survey. The first part of the chapter focuses on historical mapping with the National Historical Geographic Information System (NHGIS) and historical microdata analysis with IPUMS-USA; readers learn how to use the **ipumsr** R package and R's database tools to assist with these tasks. The second part of the chapter covers the wide range of datasets available from the US Census Bureau, and R packages like **censusapi** and **lehdr** that help analysts access those datasets.
 -   Chapter 12 covers Census data resources for regions outside the United States. It covers global demographic analysis with the US Census Bureau's International Data Base as well as country-specific examples from Canada, Mexico, Brazil, and Kenya.
 
-## Who this book is for
+## Who this book is for {.unnumbered}
 
 This book is designed for practitioners interested in working efficiently with data from the United States Census Bureau. It defines "practitioners" quite broadly, and analysts at all levels of expertise should find topics within this book useful. While the book focuses on examples from the United States, the topics covered are designed to be more general and applicable to use-cases outside the United States and also outside the domain of working with Census data.
 
@@ -78,13 +78,13 @@ This book is designed for practitioners interested in working efficiently with d
 
 Of course, there are many other use cases for Census data that are not covered in this overview. If you are using the examples in this book for unique applications, please reach out!
 
-## About the author
+## About the author {.unnumbered}
 
 I (Kyle Walker) work as an associate professor of Geography at Texas Christian University and as a spatial data science consultant. I'm a proud graduate of the University of Oregon (Go Ducks!) and I hold a Ph.D. in Geography from the University of Minnesota. I do research in the field of population geography, focusing on metropolitan demographic trends, and I consult broadly in areas such as commercial real estate, the health sciences, and general R training/software development. For consulting inquiries, please reach out to [kyle\@walker-data.com](mailto:kyle@walker-data.com){.email}.
 
 I live in Fort Worth, Texas with my wife Molly and our three children Michaela, Landry, and Clara, to whom this book is dedicated. While I enjoy developing open source software, my true passions are exploring the country with my family and earnestly (though not always successfully) coaching my kids' sports teams.
 
-## Technical details
+## Technical details {.unnumbered}
 
 This book was written using RStudio's [Visual Editor for R Markdown](https://rstudio.github.io/visual-markdown-editing/), and published with the **bookdown** R package [@xie2016].
 
@@ -130,7 +130,7 @@ The examples in this book were created with the following R package versions:
   <tr>
    <td style="text-align:left;"> dplyr </td>
    <td style="text-align:left;"> 1.0.7 </td>
-   <td style="text-align:left;"> CRAN (R 4.1.0) </td>
+   <td style="text-align:left;"> CRAN (R 4.1.2) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> geobr </td>
@@ -231,6 +231,11 @@ The examples in this book were created with the following R package versions:
    <td style="text-align:left;"> purrr </td>
    <td style="text-align:left;"> 0.3.4 </td>
    <td style="text-align:left;"> CRAN (R 4.1.0) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> raster </td>
+   <td style="text-align:left;"> 3.5-11 </td>
+   <td style="text-align:left;"> CRAN (R 4.1.2) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> readr </td>

@@ -123,7 +123,7 @@ Figure 11.2: NHGIS Select Data screen
 <p>Once acquired, NHGIS spatial and attribute data can be integrated seamlessly into R-based data analysis workflows thanks to the <strong>ipumsr</strong> package. <strong>ipumsr</strong> includes a series of NHGIS-specific functions: <code><a href="https://rdrr.io/pkg/ipumsr/man/read_nhgis.html">read_nhgis()</a></code>, which reads in the tabular aggregate data; <code><a href="https://rdrr.io/pkg/ipumsr/man/read_nhgis.html">read_nhgis_sf()</a></code>, which reads in the spatial data as a simple features object; and <code><a href="https://rdrr.io/pkg/ipumsr/man/read_nhgis.html">read_nhgis_sp()</a></code>, which reads in the spatial data in legacy sp format.</p>
 <p><code><a href="https://rdrr.io/pkg/ipumsr/man/read_nhgis.html">read_nhgis_sf()</a></code> has built-in features to make working with spatial and demographic data simpler for R users. If the <code>data_file</code> argument is pointed to the CSV file with the demographic data, and the <code>shape_file</code> argument is pointed to the shapefile, <code><a href="https://rdrr.io/pkg/ipumsr/man/read_nhgis.html">read_nhgis_sf()</a></code> will read in both files simultaneously and join them correctly based on a common <code>GISJOIN</code> column found in both files. An additional perk is that <code><a href="https://rdrr.io/pkg/ipumsr/man/read_nhgis.html">read_nhgis_sf()</a></code> can handle the zipped folders, removing an additional step from the analyst’s data preparation workflow.</p>
 <p>The example below uses <code><a href="https://rdrr.io/pkg/ipumsr/man/read_nhgis.html">read_nhgis_sf()</a></code> to read in spatial and demographic data on immigrants in New York City in 1910. As the 1910 shapefile folder includes both NYC Census tracts and a separate dataset with US counties, the top-level folder should be unzipped, <code>shape_file</code> pointed to the second-level zipped folder, and the <code>shape_layer</code> argument used to exclusively read in the tracts. The <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code> call will drop Census tracts that do not have corresponding data (so, outside NYC).</p>
-<div class="sourceCode" id="cb374"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb381"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.ipums.org">ipumsr</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
 
@@ -141,7 +141,7 @@ Figure 11.2: NHGIS Select Data screen
 ## Reading geography...
 ## options:        ENCODING=latin1 
 ## Reading layer `US_tract_1910' from data source 
-##   `/tmp/RtmpCNffu9/file596756f6430d/US_tract_1910.shp' using driver `ESRI Shapefile'
+##   `/tmp/RtmpJKST3w/file2dad1c138827/US_tract_1910.shp' using driver `ESRI Shapefile'
 ## Simple feature collection with 1989 features and 6 fields
 ## Geometry type: MULTIPOLYGON
 ## Dimension:     XY
@@ -149,7 +149,7 @@ Figure 11.2: NHGIS Select Data screen
 ## Projected CRS: USA_Contiguous_Albers_Equal_Area_Conic</code></pre>
 <p><code><a href="https://rdrr.io/pkg/ipumsr/man/read_nhgis.html">read_nhgis_sf()</a></code> has read in the tracts shapefile as a simple features object then joined the corresponding CSV file to it <em>and</em> imported data labels from the data codebook. Note that if you are reproducing this example with data downloaded yourself, you will have a unique zipped folder &amp; file name based on your unique download ID. The “99” in the example above reflects the 99th extract from NHGIS for a given user, not a unique dataset name.</p>
 <p>The best way to review the variables and their labels is the <code><a href="https://rdrr.io/r/utils/View.html">View()</a></code> command in RStudio, which is most efficient on sf objects when the geometry is first dropped with <code><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">sf::st_drop_geometry()</a></code>.</p>
-<div class="sourceCode" id="cb376"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb383"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/View.html">View</a></span><span class="op">(</span><span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_drop_geometry</a></span><span class="op">(</span><span class="va">nyc_1910</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:nhgis-data-view"></span>
@@ -164,7 +164,7 @@ Figure 11.3: NHGIS data in the RStudio Viewer
 <span class="header-section-number">11.1.3</span> Mapping NHGIS data in R<a class="anchor" aria-label="anchor" href="#mapping-nhgis-data-in-r"><i class="fas fa-link"></i></a>
 </h3>
 <p>The message displayed when reading in the NHGIS shapefile above indicates that the Census tract data are in a projected coordinate reference system, <code>USA_Contiguous_Albers_Equal_Area_Conic</code>. The spatial data can be displayed with <code><a href="https://r-spatial.github.io/sf/reference/plot.html">plot()</a></code>:</p>
-<div class="sourceCode" id="cb377"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb384"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">nyc_1910</span><span class="op">$</span><span class="va">geometry</span><span class="op">)</span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:plot-nyc-tracts"></span>
@@ -173,7 +173,7 @@ Figure 11.4: Plot of NYC Census tracts in 1910 using an Albers Equal Area CRS
 </p>
 </div>
 <p>The data reflect Census tracts for New York City, but appear rotated counter-clockwise. This is because the coordinate reference system used, <code>ESRI:100023</code>, is appropriate for the entire United States (in fact, it is the base CRS used for <code><a href="https://rdrr.io/pkg/tigris/man/shift_geometry.html">tigris::shift_geometry()</a></code>), but will not be appropriate for any specific small area. As covered in Chapter 5, the <strong>crsuggest</strong> package helps identify more appropriate projected coordinate reference system options.</p>
-<div class="sourceCode" id="cb378"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb385"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">crsuggest</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span>
 
@@ -373,7 +373,7 @@ m
 </tbody>
 </table></div>
 <p>Based on these suggestions, we’ll select the CRS “NAD83(2011) / New York Long Island” which has an EPSG code of 6538.</p>
-<div class="sourceCode" id="cb379"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb386"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">nyc_1910_proj</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html">st_transform</a></span><span class="op">(</span><span class="va">nyc_1910</span>, <span class="fl">6538</span><span class="op">)</span>
 
 <span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">nyc_1910_proj</span><span class="op">$</span><span class="va">geometry</span><span class="op">)</span></code></pre></div>
@@ -384,7 +384,7 @@ Figure 11.5: NYC Census tracts with an area-appropriate CRS
 </p>
 </div>
 <p>Given the information in the two tables downloaded from NHGIS, there are multiple ways to visualize the demographics of New York City in 1910. The first example is a choropleth map of the percentage of the total population born outside the United States. As there is no “total population” column in the dataset, the code below uses <strong>dplyr</strong>’s <code><a href="https://dplyr.tidyverse.org/reference/rowwise.html">rowwise()</a></code> and <code><a href="https://dplyr.tidyverse.org/reference/c_across.html">c_across()</a></code> functions to perform row-wise calculations and sum across the columns <code>A60001</code> through <code>A60007</code>. The <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">transmute()</a></code> function then works like a combination of <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> and <code><a href="https://dplyr.tidyverse.org/reference/select.html">select()</a></code>: it calculates two new columns, then selects only those columns in the output dataset <code>nyc_pctfb</code>.</p>
-<div class="sourceCode" id="cb380"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb387"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">nyc_pctfb</span> <span class="op">&lt;-</span> <span class="va">nyc_1910_proj</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rowwise.html">rowwise</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>total <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/c_across.html">c_across</a></span><span class="op">(</span><span class="va">A60001</span><span class="op">:</span><span class="va">A60007</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
@@ -394,7 +394,7 @@ Figure 11.5: NYC Census tracts with an area-appropriate CRS
     pct_fb <span class="op">=</span> <span class="va">A60005</span> <span class="op">/</span> <span class="va">total</span>
   <span class="op">)</span> </code></pre></div>
 <p>The result can be visualized with any of the mapping packages covered in Chapter <a href="mapping-census-data-with-r.html#mapping-census-data-with-r">6</a>, such as ggplot2 and <code><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf()</a></code>.</p>
-<div class="sourceCode" id="cb381"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb388"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">nyc_pctfb</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">pct_fb</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span>color <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html">scale_fill_viridis_c</a></span><span class="op">(</span>option <span class="op">=</span> <span class="st">"magma"</span>, labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org/reference/label_percent.html">percent</a></span><span class="op">)</span> <span class="op">+</span> 
@@ -411,7 +411,7 @@ Figure 11.6: Percent foreign-born by Census tract in NYC in 1910, mapped with gg
 </div>
 <p>Manhattan’s Lower East Side stands out as the part of the city with the largest proportion of foreign-born residents in 1910, with percentages exceeding 60%.</p>
 <p>An alternative view could focus on one of the specific groups represented in the columns in the dataset. For example, the number of Italy-born residents by Census tract is represented in the column <code>A6G014</code>; this type of information could be represented by either a graduated symbol map or a dot-density map. Using techniques learned in Section <a href="mapping-census-data-with-r.html#dot-density-maps">6.3.4.3</a>, <code><a href="https://r-spatial.github.io/sf/reference/st_sample.html">st_sample()</a></code> in the code below generates one dot for approximately every 100 Italian immigrants. Next, the Census tracts are dissolved with the <code><a href="https://r-spatial.github.io/sf/reference/geos_combine.html">st_union()</a></code> function to generate a base layer on top of which the dots will be plotted.</p>
-<div class="sourceCode" id="cb382"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb389"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">italy_dots</span> <span class="op">&lt;-</span> <span class="va">nyc_1910_proj</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_sample.html">st_sample</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="va">.</span><span class="op">$</span><span class="va">A6G014</span> <span class="op">/</span> <span class="fl">100</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://r-spatial.github.io/sf/reference/sf.html">st_sf</a></span><span class="op">(</span><span class="op">)</span>
@@ -419,7 +419,7 @@ Figure 11.6: Percent foreign-born by Census tract in NYC in 1910, mapped with gg
 <span class="va">nyc_base</span> <span class="op">&lt;-</span> <span class="va">nyc_1910_proj</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_combine.html">st_union</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p>In Section <a href="mapping-census-data-with-r.html#dot-density-maps">6.3.4.3</a>, we used <code><a href="https://rdrr.io/pkg/tmap/man/tm_symbols.html">tmap::tm_dots()</a></code> to create a dot-density map. ggplot2 and <code><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf()</a></code> also work well for dot-density mapping; cartographers can either use <code><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf()</a></code> with a very small <code>size</code> argument, or set <code>shape = "."</code> where each data point will be represented by a single pixel on the screen.</p>
-<div class="sourceCode" id="cb383"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb390"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">nyc_base</span>, size <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">italy_dots</span>, shape <span class="op">=</span> <span class="st">"."</span>, color <span class="op">=</span> <span class="st">"darkgreen"</span><span class="op">)</span> <span class="op">+</span> 
@@ -512,7 +512,7 @@ Figure 11.12: DBeaver data view
 <p>In a typical R workflow with flat files, an analyst will read in a dataset (such as a CSV file) entirely in-memory into R then use their preferred toolset to interact with the data. The alternative discussed in this section involves connecting to the 1910 Census database from R then using R’s database interface toolkit through the tidyverse to analyze the data. A major benefit to this workflow is that it allows an analyst to perform tidyverse operations on datasets <em>in the database</em>. This means that tidyverse functions are translated to Structured Query Language (SQL) queries and passed to the database, with outputs displayed in R, allowing the analyst to interact with data without having to read it into memory.</p>
 <p>The first step requires making a database connection from R. <a href="https://www.r-dbi.org/">The DBI infrastructure for R</a> allows users to make connections to a wide range of databases using a consistent interface <span class="citation">(<a href="references.html#ref-dbi2021" role="doc-biblioref">R Special Interest Group on Databases (R-SIG-DB), Wickham, and Müller 2021</a>)</span>. The PostgreSQL interface is handled with the <strong>RPostgres</strong> package <span class="citation">(<a href="references.html#ref-wickham2021_rpostgres" role="doc-biblioref">Wickham, Ooms, and Müller 2021</a>)</span>.</p>
 <p>The <code>dbConnect()</code> function is used to make a database connection, which will be assigned to the object <code>conn</code>. Arguments include the database driver <code><a href="https://rpostgres.r-dbi.org/reference/Postgres.html">Postgres()</a></code> and the username, password, database name, host, and port, which are all familiar from the database setup process.</p>
-<div class="sourceCode" id="cb384"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb391"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rpostgres.r-dbi.org">RPostgres</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dbplyr.tidyverse.org/">dbplyr</a></span><span class="op">)</span>
@@ -527,7 +527,7 @@ Figure 11.12: DBeaver data view
 <span class="op">)</span></code></pre></div>
 <p>Once connected to the database, the database extension to <strong>dplyr</strong>, <strong>dbplyr</strong>, facilitates interaction with database tables <span class="citation">(<a href="references.html#ref-wickham2021_dbplyr" role="doc-biblioref">Wickham, Girlich, and Ruiz 2021</a>)</span>. <code><a href="https://dplyr.tidyverse.org/reference/tbl.html">tbl()</a></code> links to the connection object <code>conn</code> to retrieve data from the database; the <code><a href="https://dbplyr.tidyverse.org/reference/in_schema.html">in_schema()</a></code> function points <code><a href="https://dplyr.tidyverse.org/reference/tbl.html">tbl()</a></code> to the <code>census1910</code> table in the <code>ipums</code> schema.</p>
 <p>Printing the new object <code>census1910</code> shows the general structure of the 1910 Census microdata:</p>
-<div class="sourceCode" id="cb385"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb392"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">census1910</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/tbl.html">tbl</a></span><span class="op">(</span><span class="va">conn</span>, <span class="fu"><a href="https://dbplyr.tidyverse.org/reference/in_schema.html">in_schema</a></span><span class="op">(</span><span class="st">"ipums"</span>, <span class="st">"census1910"</span><span class="op">)</span><span class="op">)</span>
 
 <span class="va">census1910</span></code></pre></div>
@@ -553,7 +553,7 @@ Figure 11.12: DBeaver data view
 <span class="header-section-number">11.2.4</span> Analyzing big Census microdata in R<a class="anchor" aria-label="anchor" href="#analyzing-big-census-microdata-in-r"><i class="fas fa-link"></i></a>
 </h3>
 <p>While the default printing of the microdata shown above does not reveal the number of rows in the dataset, tidyverse tools can be used to request this information from the database. For example, the <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code> function will generate summary tabulations as shown earlier in this book; without a companion <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code>, it will do so over the whole dataset.</p>
-<div class="sourceCode" id="cb387"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb394"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">census1910</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## # Source:   lazy query [?? x 1]
 ## # Database: postgres [postgres@localhost:5432/postgres]
@@ -568,7 +568,7 @@ Figure 11.12: DBeaver data view
 <li><p>3: Cannot write, can read</p></li>
 <li><p>4: Yes, literate (reads and writes)</p></li>
 </ul>
-<div class="sourceCode" id="cb389"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb396"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">census1910</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">age</span> <span class="op">&gt;</span> <span class="fl">17</span>, <span class="va">statefip</span> <span class="op">==</span> <span class="st">"48"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">sex</span>, <span class="va">lit</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
@@ -587,7 +587,7 @@ Figure 11.12: DBeaver data view
 ## 7     2     3   14531
 ## 8     2     4  883636</code></pre>
 <p>dbplyr also includes some helper functions to better understand how it is working and to work with the derived results. For example, the <code><a href="https://dplyr.tidyverse.org/reference/explain.html">show_query()</a></code> function can be attached to the end of a tidyverse pipeline to show the SQL query that the R code is translated to in order to perform operations in-database:</p>
-<div class="sourceCode" id="cb391"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb398"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">census1910</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">age</span> <span class="op">&gt;</span> <span class="fl">17</span>, <span class="va">statefip</span> <span class="op">==</span> <span class="st">"48"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">sex</span>, <span class="va">lit</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
@@ -600,7 +600,7 @@ Figure 11.12: DBeaver data view
 ## GROUP BY "sex", "lit"</code></pre>
 <p>If an analyst wants the result of a database operation to be brought into R as an R object rather than as a database view, the <code><a href="https://dplyr.tidyverse.org/reference/compute.html">collect()</a></code> function can be used at the end of a pipeline to load data directly. A companion function from <strong>ipumsr</strong>, <code><a href="https://rdrr.io/pkg/ipumsr/man/ipums_collect.html">ipums_collect()</a></code>, will add variable and value labels to the collected data based on an IPUMS codebook.</p>
 <p>The aforementioned toolsets can now be used for robust analyses of historical microdata based on complete-count Census data. The example below illustrates how to extend the literacy by sex example above to visualize literacy gaps by sex by state in 1910.</p>
-<div class="sourceCode" id="cb393"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb400"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">literacy_props</span> <span class="op">&lt;-</span> <span class="va">census1910</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">age</span> <span class="op">&gt;</span> <span class="fl">18</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">statefip</span>, <span class="va">sex</span>, <span class="va">lit</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
@@ -651,14 +651,14 @@ Figure 11.13: Literacy gaps by sex and state in 1910
 <p><strong>censusapi</strong> <span class="citation">(<a href="references.html#ref-recht2021" role="doc-biblioref">Recht 2021</a>)</span> is an R package designed to give R users access to <em>all</em> of the US Census Bureau’s API endpoints. Unlike <strong>tidycensus</strong>, which only focuses on a select number of datasets, <strong>censusapi</strong>’s <code><a href="https://rdrr.io/pkg/censusapi/man/getCensus.html">getCensus()</a></code> function can be widely applied to the hundreds of possible datasets the Census Bureau makes available. <strong>censusapi</strong> requires some knowledge of how to structure Census Bureau API requests to work; however this makes the package more flexible than <strong>tidycensus</strong> and may be preferable for users who want to submit highly customized queries to the decennial Census or ACS APIs.</p>
 <p>censusapi uses the same Census API key as <strong>tidycensus</strong>, though references it with the R environment variable <code>CENSUS_KEY</code>. If this environment variable is set in a user’s <code>.Renviron</code> file, functions in <strong>censusapi</strong> will pick up the key without having to supply it directly.</p>
 <p>The <strong>usethis</strong> package <span class="citation">(<a href="references.html#ref-wickham_and_bryan2021" role="doc-biblioref">Wickham and Bryan 2021</a>)</span> is the most user-friendly way to work with the <code>.Renviron</code> file in R with its function <code><a href="https://usethis.r-lib.org/reference/edit.html">edit_r_environ()</a></code>. Calling this function will bring up the <code>.Renviron</code> file in a text editor, allowing users to set environment variables that will be made available to R when R starts up.</p>
-<div class="sourceCode" id="cb394"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb401"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://usethis.r-lib.org">usethis</a></span><span class="op">)</span>
 
 <span class="fu"><a href="https://usethis.r-lib.org/reference/edit.html">edit_r_environ</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p>Add the line <code>CENSUS_KEY='YOUR KEY HERE'</code> to your <code>.Renviron</code> file, replacing the <code>YOUR KEY HERE</code> text with your API key.</p>
 <p><strong>censusapi</strong>’s core function is <code><a href="https://rdrr.io/pkg/censusapi/man/getCensus.html">getCensus()</a></code>, which translates R code to Census API queries. The <code>name</code> argument references the API name; the <a href="https://www.hrecht.com/censusapi/articles/example-masterlist.html">censusapi documentation</a> or the function <code><a href="https://rdrr.io/pkg/censusapi/man/listCensusApis.html">listCensusApis()</a></code> helps you understand how to format this.</p>
 <p>The example below makes a request to the <a href="https://www.census.gov/programs-surveys/economic-census/data/api.html">Economic Census API</a>, getting data on employment and payroll for NAICS code 72 (accommodation and food services businesses) in counties in Texas in 2017.</p>
-<div class="sourceCode" id="cb395"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb402"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/hrecht/censusapi">censusapi</a></span><span class="op">)</span>
 
 <span class="va">tx_econ17</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/censusapi/man/getCensus.html">getCensus</a></span><span class="op">(</span>
@@ -739,26 +739,6 @@ NAICS2017
 48
 </td>
 <td style="text-align:left;">
-113
-</td>
-<td style="text-align:left;">
-134426
-</td>
-<td style="text-align:left;">
-2677179
-</td>
-<td style="text-align:left;">
-0500000US48113
-</td>
-<td style="text-align:left;">
-72
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-48
-</td>
-<td style="text-align:left;">
 467
 </td>
 <td style="text-align:left;">
@@ -779,16 +759,16 @@ NAICS2017
 48
 </td>
 <td style="text-align:left;">
-419
+199
 </td>
 <td style="text-align:left;">
-505
+1476
 </td>
 <td style="text-align:left;">
-9836
+19126
 </td>
 <td style="text-align:left;">
-0500000US48419
+0500000US48199
 </td>
 <td style="text-align:left;">
 72
@@ -819,16 +799,16 @@ NAICS2017
 48
 </td>
 <td style="text-align:left;">
-267
+251
 </td>
 <td style="text-align:left;">
-0
+4512
 </td>
 <td style="text-align:left;">
-0
+60929
 </td>
 <td style="text-align:left;">
-0500000US48267
+0500000US48251
 </td>
 <td style="text-align:left;">
 72
@@ -839,16 +819,16 @@ NAICS2017
 48
 </td>
 <td style="text-align:left;">
-505
+305
 </td>
 <td style="text-align:left;">
-0
+17
 </td>
 <td style="text-align:left;">
-0
+142
 </td>
 <td style="text-align:left;">
-0500000US48505
+0500000US48305
 </td>
 <td style="text-align:left;">
 72
@@ -894,10 +874,30 @@ NAICS2017
 72
 </td>
 </tr>
+<tr>
+<td style="text-align:left;">
+48
+</td>
+<td style="text-align:left;">
+487
+</td>
+<td style="text-align:left;">
+394
+</td>
+<td style="text-align:left;">
+5233
+</td>
+<td style="text-align:left;">
+0500000US48487
+</td>
+<td style="text-align:left;">
+72
+</td>
+</tr>
 </tbody>
 </table></div>
 <p><strong>censusapi</strong> can also be used in combination with other packages covered in this book such as <strong>tigris</strong> for mapping. The example below uses the <a href="https://www.census.gov/programs-surveys/sahie/data/api.html">Small Area Health Insurance Estimates API</a>, which delivers modeled estimates of health insurance coverage at the county level with various demographic breakdowns. Using <strong>censusapi</strong> and <strong>tigris</strong>, we can retrieve data on the percent of the population below age 19 without health insurance for all counties in the US. This information will be joined to a counties dataset from <strong>tigris</strong> with shifted geometry, then mapped with <strong>ggplot2</strong>.</p>
-<div class="sourceCode" id="cb396"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb403"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/walkerke/tigris">tigris</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
 
@@ -935,7 +935,7 @@ Figure 11.14: Map of youth without health insurance using censusapi and tigris
 </h3>
 <p>Another very useful package for working with Census Bureau data is the <strong>lehdr</strong> R package <span class="citation">(<a href="references.html#ref-green2021" role="doc-biblioref">Green, Wang, and Mahmoudi 2021</a>)</span>, which access the Longitudinal and Employer-Household Dynamics (LEHD) Origin-Destination Employment Statistics (LODES) data. LODES is not available from the Census API, meriting an alternative package and approach. LODES includes synthetic estimates of residential, workplace, and residential-workplace links at the Census block level, allowing for highly detailed geographic analysis of jobs and commuter patterns over time.</p>
 <p>The core function implemented in <strong>lehdr</strong> is <code><a href="https://rdrr.io/pkg/lehdr/man/grab_lodes.html">grab_lodes()</a></code>, which downloads a LODES file of a specified <code>lodes_type</code> (either <code>"rac"</code> for residential, <code>"wac"</code> for workplace, or <code>"od"</code> for origin-destination) for a given state and year. While the raw LODES data are available at the Census block level, the <code>agg_geo</code> parameter offers a convenient way to roll up estimates to higher levels of aggregation. For origin-destination data, the <code>state_part = "main"</code> argument below captures within-state commuters; use <code>state_part = "aux"</code> to get commuters from out-of-state.</p>
-<div class="sourceCode" id="cb397"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb404"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jamgreen/lehdr/">lehdr</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://walker-data.com/tidycensus/">tidycensus</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span>
@@ -1441,7 +1441,7 @@ WA
 </tbody>
 </table></div>
 <p><strong>lehdr</strong> can be used for a variety of purposes including transportation and economic development planning. For example, the workflow below illustrates how to use LODES data to understand the origins of commuters to the Microsoft campus (represented by its Census tract) in Redmond, Washington. Commuters from LODES will be normalized by the total population age 18 and up, acquired with tidycensus for 2018 Census tracts in Seattle-area counties. The dataset <code>ms_commuters</code> will include Census tract geometries (obtained with <code>geometry = TRUE</code> in tidycensus) and an estimate of the number of Microsoft-area commuters per 1000 adults in that Census tract.</p>
-<div class="sourceCode" id="cb398"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb405"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">seattle_adults</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs</a></span><span class="op">(</span>
   geography <span class="op">=</span> <span class="st">"tract"</span>,
   variables <span class="op">=</span> <span class="st">"S0101_C01_026"</span>,
@@ -1459,7 +1459,7 @@ WA
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>ms_per_1000 <span class="op">=</span> <span class="fl">1000</span> <span class="op">*</span> <span class="op">(</span><span class="va">S000</span> <span class="op">/</span> <span class="va">estimate</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html">st_transform</a></span><span class="op">(</span><span class="fl">6596</span><span class="op">)</span></code></pre></div>
 <p>The result can be visualized on a map with <strong>ggplot2</strong>, or alternatively with any of the mapping tools introduced in Chapter <a href="mapping-census-data-with-r.html#mapping-census-data-with-r">6</a>.</p>
-<div class="sourceCode" id="cb399"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb406"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">ms_commuters</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">ms_per_1000</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span>color <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
@@ -1479,13 +1479,13 @@ Figure 11.15: Map of commuter origins to the Microsoft Campus area, Seattle-area
 <span class="header-section-number">11.3.3</span> Bureau of Labor Statistics data with blscrapeR<a class="anchor" aria-label="anchor" href="#bureau-of-labor-statistics-data-with-blscraper"><i class="fas fa-link"></i></a>
 </h3>
 <p>Another essential resource for data on US labor market characteristics is the <a href="https://www.bls.gov/">Bureau of Labor Statistics</a>, which makes their data available to users via an API. BLS data can be accessed from R with the <strong>blscrapeR</strong> package <span class="citation">(<a href="references.html#ref-eberwein2021" role="doc-biblioref">Eberwein 2021</a>)</span>. Like other government APIs, the BLS API requires an API key, obtained from <a href="https://data.bls.gov/registrationEngine/" class="uri">https://data.bls.gov/registrationEngine/</a>. Sign up with an email address then validate the key using the link sent to your email, then return to R to get started with <strong>blscrapeR</strong>.</p>
-<div class="sourceCode" id="cb400"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb407"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># remotes::install_github("keberwein/blscrapeR")</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/keberwein/blscrapeR">blscrapeR</a></span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/pkg/blscrapeR/man/set_bls_key.html">set_bls_key</a></span><span class="op">(</span><span class="st">"YOUR KEY HERE"</span><span class="op">)</span></code></pre></div>
 <p><strong>blscrapeR</strong> includes a number of helper functions to assist users with some of the most commonly requested statistics. For example, the <code><a href="https://rdrr.io/pkg/blscrapeR/man/get_bls_county.html">get_bls_county()</a></code> function fetches employment data for all counties in the US for a given month.</p>
-<div class="sourceCode" id="cb401"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb408"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">latest_employment</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/blscrapeR/man/get_bls_county.html">get_bls_county</a></span><span class="op">(</span><span class="st">"May 2021"</span><span class="op">)</span></code></pre></div>
 <div class="inline-table"><table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
 <caption>
@@ -1847,7 +1847,7 @@ Cherokee County, AL
 </tbody>
 </table></div>
 <p>More complex queries are also possible with the <code><a href="https://rdrr.io/pkg/blscrapeR/man/bls_api.html">bls_api()</a></code> function; however, this requires knowing the BLS <em>series ID</em>. Series IDs are composite strings made up of several alphanumeric codes that can represent different datasets, geographies, and industries, among others. <strong>blscrapeR</strong> includes an internal dataset, <code>series_ids</code>, to help users view some of the most commonly requested IDs.</p>
-<div class="sourceCode" id="cb402"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb409"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">series_ids</span><span class="op">)</span></code></pre></div>
 <div class="inline-table"><table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
 <caption>
@@ -1964,7 +1964,7 @@ Q
 <li><p>Positions 19-20: The <a href="https://download.bls.gov/pub/time.series/sm/sm.data_type">data type code</a></p></li>
 </ul>
 <p>We’ll use this information to get unadjusted data on accommodation workers in Maui, Hawaii since the beginning of 2018. Note that the specific codes detailed above will vary from indicator to indicator, and that not all industries will be available for all geographies.</p>
-<div class="sourceCode" id="cb403"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb410"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">maui_accom</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/blscrapeR/man/bls_api.html">bls_api</a></span><span class="op">(</span>seriesid <span class="op">=</span> <span class="st">"SMU15279807072100001"</span>, 
                       startyear <span class="op">=</span> <span class="fl">2018</span><span class="op">)</span></code></pre></div>
 <div class="inline-table"><table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
@@ -2131,7 +2131,7 @@ SMU15279807072100001
 </tbody>
 </table></div>
 <p>This time series can be visualized with <strong>ggplot2</strong>:</p>
-<div class="sourceCode" id="cb404"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb411"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">maui_accom</span> <span class="op"><a href="https://rdrr.io/pkg/blscrapeR/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>period_order <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/blscrapeR/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">period_order</span>, y <span class="op">=</span> <span class="va">value</span>, group <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
@@ -2157,12 +2157,12 @@ Figure 11.16: Time-series of accommodations employment in Maui, Hawaii
 <span class="header-section-number">11.3.4</span> Working with agricultural data with tidyUSDA<a class="anchor" aria-label="anchor" href="#working-with-agricultural-data-with-tidyusda"><i class="fas fa-link"></i></a>
 </h3>
 <p>Agriculture can be a difficult sector on which to collect market statistics, as it is not available in many data sources such as LODES or the BLS Current Employment Statistics. Dedicated statistics on US agriculture can be acquired with the <strong>tidyUSDA</strong> R package <span class="citation">(<a href="references.html#ref-lindblad2021" role="doc-biblioref">Lindblad 2021</a>)</span>, which interacts with USDA data resources using tidyverse-centric workflows. Get an API key at <a href="https://quickstats.nass.usda.gov/api" class="uri">https://quickstats.nass.usda.gov/api</a> and use that to request data from the USDA QuickStats API. In this example, the API key is stored as a <code>"USDA_KEY"</code> environment variable.</p>
-<div class="sourceCode" id="cb405"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb412"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://bradlindblad.github.io/tidyUSDA/">tidyUSDA</a></span><span class="op">)</span>
 
 <span class="va">usda_key</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span><span class="op">(</span><span class="st">"USDA_KEY"</span><span class="op">)</span></code></pre></div>
 <p>Now, let’s see which US counties produce have the most acres devoted to cucumbers. To use the <code><a href="https://bradlindblad.github.io/tidyUSDA/reference/getQuickstat.html">getQuickstat()</a></code> function effectively, it is helpful to construct a query first at <a href="https://quickstats.nass.usda.gov/" class="uri">https://quickstats.nass.usda.gov/</a> and see what options are available, then bring those options as arguments into R.</p>
-<div class="sourceCode" id="cb406"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb413"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cucumbers</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://bradlindblad.github.io/tidyUSDA/reference/getQuickstat.html">getQuickstat</a></span><span class="op">(</span>
   key <span class="op">=</span> <span class="va">usda_key</span>,
   program <span class="op">=</span> <span class="st">"CENSUS"</span>,
@@ -2176,7 +2176,7 @@ Figure 11.16: Time-series of accommodations employment in Maui, Hawaii
   year <span class="op">=</span> <span class="st">"2017"</span>
 <span class="op">)</span></code></pre></div>
 <p>This information allows us to look at the top cucumber-growing counties in the US:</p>
-<div class="sourceCode" id="cb407"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb414"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cucumbers</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">state_name</span>, <span class="va">county_name</span>, <span class="va">Value</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">Value</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -2299,7 +2299,7 @@ GLOUCESTER
 </h3>
 <p>Most data API packages in R will rely on the <strong>httr</strong> R package <span class="citation">(<a href="references.html#ref-wickham_httr" role="doc-biblioref">Wickham 2020</a>)</span>, which provides R functions for common HTTP requests such as <code>GET</code>, <code>POST</code>, and <code>PUT</code>, among others. In this example, we’ll use the <code><a href="https://httr.r-lib.org/reference/GET.html">httr::GET()</a></code> function to make a request to the new <a href="https://www.huduser.gov/portal/dataset/chas-api.html">Department of Housing and Urban Development Comprehensive Affordable Housing Strategy (CHAS) API</a>. This will require getting a HUD API token and storing it as an environment variable as described earlier in this chapter.</p>
 <p>Every API will be structured differently with respect to how it accepts queries and authenticates with API tokens. In this example, the documentation instructs users to pass the API token in the HTTP request with the <code>Authentication: Bearer</code> header. The example URL in the documentation, <a href="https://www.huduser.gov/hudapi/public/chas?type=3&amp;year=2012-2016&amp;stateId=51&amp;entityId=59"><code>https://www.huduser.gov/hudapi/public/chas?type=3&amp;year=2012-2016&amp;stateId=51&amp;entityId=59</code></a>, is passed to <code><a href="https://httr.r-lib.org/reference/GET.html">GET()</a></code>, and the <code><a href="https://httr.r-lib.org/reference/add_headers.html">add_headers()</a></code> function in httr is used to assemble an appropriate string to send to the API.</p>
-<div class="sourceCode" id="cb408"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb415"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidyverse/glue">glue</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://httr.r-lib.org/">httr</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://arxiv.org/abs/1403.2805">jsonlite</a></span><span class="op">)</span>
@@ -2313,11 +2313,11 @@ GLOUCESTER
 <span class="va">hud_chas_request</span><span class="op">$</span><span class="va">status_code</span></code></pre></div>
 <pre><code>## [1] 200</code></pre>
 <p>As we got back the HTTP status code 200, we know that our request to the API succeeded. To view the returned data, we use the <code><a href="https://httr.r-lib.org/reference/content.html">content()</a></code> function and translate the result to text with the <code>as = "text"</code> argument.</p>
-<div class="sourceCode" id="cb410"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb417"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://httr.r-lib.org/reference/content.html">content</a></span><span class="op">(</span><span class="va">hud_chas_request</span>, as <span class="op">=</span> <span class="st">"text"</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "[{\"geoname\":\"Fairfax County, Virginia\",\"sumlevel\":\"County\",\"year\":\"2012-2016\",\"A1\":\"12895.0\",\"A2\":\"21805.0\",\"A3\":\"34700.0\",\"A4\":\"14165.0\",\"A5\":\"17535.0\",\"A6\":\"31700.0\",\"A7\":\"10690.0\",\"A8\":\"10350.0\",\"A9\":\"21040.0\",\"A10\":\"16890.0\",\"A11\":\"14325.0\",\"A12\":\"31215.0\",\"A13\":\"210710.0\",\"A14\":\"63990.0\",\"A15\":\"274700.0\",\"A16\":\"265350.0\",\"A17\":\"128005.0\",\"A18\":\"393360.0\",\"B1\":\"58925.0\",\"B2\":\"57735.0\",\"B3\":\"116660.0\",\"B4\":\"205390.0\",\"B5\":\"68400.0\",\"B6\":\"273790.0\",\"B7\":\"1035.0\",\"B8\":\"1875.0\",\"B9\":\"2910.0\",\"C1\":\"23945.0\",\"C2\":\"31650.0\",\"C3\":\"55595.0\",\"C4\":\"240370.0\",\"C5\":\"94480.0\",\"C6\":\"334850.0\",\"D1\":\"207915.0\",\"D2\":\"73630.0\",\"D3\":\"281545.0\",\"D4\":\"35735.0\",\"D5\":\"28910.0\",\"D6\":\"64645.0\",\"D7\":\"20670.0\",\"D8\":\"23405.0\",\"D9\":\"44075.0\",\"D10\":\"1035.0\",\"D11\":\"2060.0\",\"D12\":\"3095.0\",\"E1\":\"28030.0\",\"E2\":\"3760.0\",\"E3\":\"2910.0\",\"E5\":\"25945.0\",\"E6\":\"5755.0\",\"E7\":\"0.0\",\"E9\":\"14305.0\",\"E10\":\"6735.0\",\"E11\":\"0.0\",\"E13\":\"16085.0\",\"E14\":\"15135.0\",\"E15\":\"0.0\",\"E17\":\"32295.0\",\"E18\":\"242405.0\",\"E19\":\"0.0\",\"E21\":\"116660.0\",\"E22\":\"273790.0\",\"E23\":\"2910.0\",\"F1\":\"17265.0\",\"F2\":\"2665.0\",\"F3\":\"1875.0\",\"F5\":\"15720.0\",\"F6\":\"1815.0\",\"F7\":\"0.0\",\"F9\":\"8165.0\",\"F10\":\"2185.0\",\"F11\":\"0.0\",\"F13\":\"7900.0\",\"F14\":\"6430.0\",\"F15\":\"0.0\",\"F17\":\"8685.0\",\"F18\":\"55305.0\",\"F19\":\"0.0\",\"F21\":\"57735.0\",\"F22\":\"68400.0\",\"F23\":\"1875.0\",\"G1\":\"10765.0\",\"G2\":\"1095.0\",\"G3\":\"1035.0\",\"G5\":\"10225.0\",\"G6\":\"3940.0\",\"G7\":\"0.0\",\"G9\":\"6140.0\",\"G10\":\"4550.0\",\"G11\":\"0.0\",\"G13\":\"8185.0\",\"G14\":\"8705.0\",\"G15\":\"0.0\",\"G17\":\"23610.0\",\"G18\":\"187100.0\",\"G19\":\"0.0\",\"H1\":\"27605.0\",\"H2\":\"23420.0\",\"H4\":\"24970.0\",\"H5\":\"12660.0\",\"H7\":\"13465.0\",\"H8\":\"3470.0\",\"H10\":\"14930.0\",\"H11\":\"2060.0\",\"H13\":\"27750.0\",\"H14\":\"2460.0\",\"H16\":\"108720.0\",\"I1\":\"16895.0\",\"I2\":\"14490.0\",\"I4\":\"14970.0\",\"I5\":\"7115.0\",\"I7\":\"7550.0\",\"I8\":\"1180.0\",\"I10\":\"7000.0\",\"I11\":\"425.0\",\"I13\":\"5900.0\",\"I14\":\"195.0\",\"I16\":\"52315.0\",\"J1\":\"10705.0\",\"J2\":\"8930.0\",\"J4\":\"10005.0\",\"J5\":\"5550.0\",\"J7\":\"5915.0\",\"J8\":\"2290.0\",\"J10\":\"7930.0\",\"J11\":\"1635.0\",\"J13\":\"21850.0\",\"J14\":\"2265.0\",\"J16\":\"56405.0\"}]"</code></pre>
 <p>The data were returned as <a href="https://www.json.org/json-en.html">JavaScript Object Notation, or JSON</a>, a very common data format for returning data from APIs. While the data shown above is moderately interpretable, it will require some additional translation for use in R. The <strong>jsonlite</strong> package <span class="citation">(<a href="references.html#ref-ooms2014" role="doc-biblioref">Ooms 2014</a>)</span> includes a poewrful set of tools for working with JSON objects in R; here, we’ll use the <code><a href="https://rdrr.io/pkg/jsonlite/man/fromJSON.html">fromJSON()</a></code> function to convert JSON to a data frame.</p>
-<div class="sourceCode" id="cb412"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb419"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">hud_chas_request</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://httr.r-lib.org/reference/content.html">content</a></span><span class="op">(</span>as <span class="op">=</span> <span class="st">"text"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://rdrr.io/pkg/jsonlite/man/fromJSON.html">fromJSON</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
@@ -3139,7 +3139,7 @@ County
 <li><p>If the request succeeds, the function converts the result to text, then the JSON to a data frame which will be pivoted to long form using <strong>tidyr</strong>’s <code><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer()</a></code> function. Finally, the result is returned. I use the <code><a href="https://rdrr.io/r/base/function.html">return()</a></code> function here, which isn’t strictly necessary but I use it because it is helpful for me to see where the function exits in my code.</p></li>
 <li><p>You may notice a couple new notational differences from code used elsewhere in this book. Functions are referenced with the <code>packagename::function()</code> notation, and the new base R pipe <code>|&gt;</code> is used instead of the magrittr pipe <code>%&gt;%</code>. This allows the function to run without loading any external libraries with <code><a href="https://rdrr.io/r/base/library.html">library()</a></code>, which is generally a good idea when writing functions to avoid namespace conflicts.</p></li>
 </ul>
-<div class="sourceCode" id="cb413"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb420"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">get_hud_chas</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span>
   <span class="va">type</span>, 
   <span class="va">year</span> <span class="op">=</span> <span class="st">"2013-2017"</span>, 
@@ -3190,7 +3190,7 @@ County
   
 <span class="op">}</span></code></pre></div>
 <p>Now, let’s try out the function for a different locality in Virginia:</p>
-<div class="sourceCode" id="cb414"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb421"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">get_hud_chas</span><span class="op">(</span>type <span class="op">=</span> <span class="fl">3</span>, state_id <span class="op">=</span> <span class="fl">51</span>, entity_id <span class="op">=</span> <span class="fl">510</span><span class="op">)</span></code></pre></div>
 <div class="inline-table"><table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
 <caption>
@@ -3452,7 +3452,7 @@ A10
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Analyzing US Census Data</strong>: Methods, Maps, and Models in R" was written by Kyle E. Walker. It was last built on 2022-01-03.</p>
+    <p>"<strong>Analyzing US Census Data</strong>: Methods, Maps, and Models in R" was written by Kyle E. Walker. It was last built on 2022-01-21.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
