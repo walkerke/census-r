@@ -47,6 +47,11 @@ tab:default-moe-show
 tab:moe-level-99-show
 tab:salt-lake-example-show
 tab:summarize-moe-show
+fig:ga-income-histogram
+fig:ga-income-histogram-newbins
+fig:ga-income-boxplot
+fig:first-scatterplot-ga
+fig:scatterplot-geom-smooth
 tab:get-metro-data-show
 fig:first-plot
 fig:second-plot
@@ -297,6 +302,8 @@ exercises-1
 exploring-us-census-data-with-visualization
 basic-census-visualization-with-ggplot2
 getting-started-with-ggplot2
+visualizing-multivariate-relationships-with-scatter-plots
+customizing-ggplot2-visualizations
 improving-plot-legibility
 custom-styling-of-ggplot2-charts
 exporting-data-visualizations-from-r

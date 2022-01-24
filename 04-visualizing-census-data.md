@@ -10,6 +10,111 @@ This chapter includes several examples of how R users can visualize data from th
 
 ## Basic Census visualization with ggplot2
 
+A critical part of the Census data analysis process is *data visualization*, where an analyst examines patterns and trends found in their data graphically. In many cases, the exploratory analyses outlined in the previous two chapters would be augmented significantly with accompanying graphics. This first section illustrates some examples for getting started with exploratory Census data visualization with **ggplot2**.
+
+To get started, we'll return to a dataset used in Section \@ref(renaming-variable-ids), which includes data on median household income and median age by county in the state of Georgia from the 2015-2019 ACS. We are requesting the data in wide format, which will spread the estimate and margin of error information across the columns.
+
+
+```r
+library(tidycensus)
+
+ga_wide <- get_acs(
+  geography = "county",
+  state = "Georgia",
+  variables = c(medinc = "B19013_001",
+                medage = "B01002_001"),
+  output = "wide",
+  year = 2019
+)
+```
+
+### Getting started with ggplot2
+
+**ggplot2** visualizations are initialized with the `ggplot()` function, to which a user commonly supplies a dataset and an *aesthetic*, defined with the `aes()` function. Within the `aes()` function, a user can specify a series of mappings onto either the data axes or other characteristics of the plot, such as element fill or color.
+
+After initializing the ggplot object, users can layer plot elements onto the plot object. Essential to the plot is a `geom`, which specifies one of many chart types available in **ggplot2**. For example, `geom_bar()` will create a bar chart, `geom_line()` a line chart, `geom_point()` a point plot, and so forth. Layers are linked to the ggplot object by using the `+` operator.
+
+One of the first exploratory graphics an analyst will want to produce when examining a new dataset is a *histogram*, which characterizes the distribution of values in a column through varying lengths of bars. This first example uses **ggplot2** and its `geom_histogram()` function to generate such a histogram of median household income by county in Georgia. The optional call to `options(scipen = 999)` instructs R to avoid using scientific notation in its output, including on the **ggplot2** tick labels.
+
+
+```r
+library(tidyverse)
+options(scipen = 999)
+
+ggplot(ga_wide, aes(x = medincE)) + 
+  geom_histogram()
+```
+
+<div class="figure">
+<img src="04-visualizing-census-data_files/figure-html/ga-income-histogram-1.png" alt="Histogram of median household income, Georgia counties" width="100%" />
+<p class="caption">(\#fig:ga-income-histogram)Histogram of median household income, Georgia counties</p>
+</div>
+
+The histogram shows that the modal median household income of Georgia counties is around \$40,000 per year, with a longer tail of wealthier counties on the right-hand side of the plot. In the histogram, counties are organized into "bins", which are groups of equal width along the X-axis. The Y-axis then represents the number of counties that fall within each bin. By default, **ggplot2** organizes the data into 30 bins; this option can be changed with the `bins` parameter. For example, we can re-make the visualization with half the previous number of bins by including the argument `bins = 15` in our call to `geom_histogram()`.
+
+
+```r
+ggplot(ga_wide, aes(x = medincE)) + 
+  geom_histogram(bins = 15)
+```
+
+<div class="figure">
+<img src="04-visualizing-census-data_files/figure-html/ga-income-histogram-newbins-1.png" alt="Histogram with the number of bins reduced to 15" width="100%" />
+<p class="caption">(\#fig:ga-income-histogram-newbins)Histogram with the number of bins reduced to 15</p>
+</div>
+
+Histograms are not the only options for visualizing univariate data distributions. A popular alternative is the *box-and-whisker plot*, which is implemented in **ggplot2** with `geom_boxplot()`. In this example, the column `medincE` is passed to the `y` parameter instead of `x`; this creates a vertical rather than horizontal box plot.
+
+
+```r
+ggplot(ga_wide, aes(y = medincE)) + 
+  geom_boxplot()
+```
+
+<div class="figure">
+<img src="04-visualizing-census-data_files/figure-html/ga-income-boxplot-1.png" alt="Box plot of median household income, Georgia counties" width="100%" />
+<p class="caption">(\#fig:ga-income-boxplot)Box plot of median household income, Georgia counties</p>
+</div>
+
+The graphic visualizes the distribution of median household incomes by county in Georgia with a number of different components. The central *box* covers the interquartile range (the IQR, representing the 25th to 75th percentile of values in the distribution) with a central line representing the value of the distribution's median. The *whiskers* then extend to either the minimum and maximum values of the distribution *or* 1.5 times the IQR. In this example, the lower whisker extends to the minimum value, and the upper whisker extends to 1.5 times the IQR. Values beyond the whiskers are represented as *outliers* on the plot with points.
+
+### Visualizing multivariate relationships with scatter plots
+
+As part of the exploratory data analysis process, analysts will often want to visualize *interrelationships between Census variables* along with the univariate data distributions discussed above. For two numeric variables, a common exploratory chart is a *scatter plot*, which maps values in one column to the X-axis and values in another column to the Y-axis. The resulting plot then gives the analyst a sense of the nature of the relationship between the two variables.
+
+Scatter plots are implemented in **ggplot2** with the `geom_point()` function, which plots points on a chart relative to X and Y values for observations in a dataset. This requires specification of two columns in the call to `aes()` as opposed to the single column used in the univariate distribution visualization examples. The example that follows generates a scatter plot to visualize the relationship between county median age and county median household income in Georgia.
+
+
+```r
+ggplot(ga_wide, aes(x = medageE, y = medincE)) + 
+  geom_point()
+```
+
+<div class="figure">
+<img src="04-visualizing-census-data_files/figure-html/first-scatterplot-ga-1.png" alt="Scatter plot of median age and median household income, counties in Georgia" width="100%" />
+<p class="caption">(\#fig:first-scatterplot-ga)Scatter plot of median age and median household income, counties in Georgia</p>
+</div>
+
+The graphic shows a cloud of points that in some cases can suggest the nature of the correlation between the two columns. In this example, however, the correlation is not immediately clear from the distribution of points. Fortunately, **ggplot2** includes the ability to "layer on" additional chart elements to help clarify the nature of the relationship between the two columns. The `geom_smooth()` function draws a fitted line representing the relationship between the two columns on the plot. The argument `method = "lm"` draws a straight line based on a linear model fit; smoothed relationships can be visualized as well with `method = "loess"`.
+
+
+```r
+ggplot(ga_wide, aes(x = medageE, y = medincE)) + 
+  geom_point() + 
+  geom_smooth(method = "lm")
+```
+
+<div class="figure">
+<img src="04-visualizing-census-data_files/figure-html/scatterplot-geom-smooth-1.png" alt="Scatter plot with linear relationship superimposed on the graphic" width="100%" />
+<p class="caption">(\#fig:scatterplot-geom-smooth)Scatter plot with linear relationship superimposed on the graphic</p>
+</div>
+
+The regression line suggests a modest negative relationship between the two columns, showing that county median household income in Georgia tends to decline slightly as median age increases.
+
+## Customizing ggplot2 visualizations
+
+The attractive defaults of **ggplot2** visualizations allow for the creation of legible graphics with little to no customization. This helps greatly with exploratory data analysis tasks where the primary audience is the analyst exploring the dataset. Analysts planning to present their work to an external audience, however, will want to customize the appearance of their plots beyond the defaults to maximize interpretability. This section covers how to take a Census data visualization that is relatively illegible by default and polish it up for eventual presentation and export from R.
+
 In this example, we will create a visualization that illustrates the percent of commuters that take public transportation to work for the largest metropolitan areas in the United States. The data come from the 2019 1-year American Community Survey Data Profile, variable `DP03_0021P`. To determine this information, we can use **tidyverse** tools to sort our data by descending order of a summary variable representing total population and then retaining the 20 largest metropolitan areas by population using the `slice_max()` function.
 
 
@@ -91,13 +196,7 @@ metros <-  get_acs(
 
 The returned data frame has 7 columns, as is standard for `get_acs()` with a summary variable, but has 20 rows as specified by the `slice_max()` command. While the data can be filtered and sorted further to facilitate comparative analysis, it also can be represented succinctly with a visualization. The tidy format returned by `get_acs()` is well-suited for visualization with **ggplot2**.
 
-### Getting started with ggplot2
-
-**ggplot2** visualizations are initialized with the `ggplot()` function, to which a user commonly supplies a dataset and an *aesthetic*, defined with the `aes()` function. Within the `aes()` function, a user can specify a series of mappings onto either the data axes or other characteristics of the plot, such as element fill or color.
-
-After initializing the ggplot object, users can layer plot elements onto the plot object. Essential to the plot is a `geom`, which specifies one of many chart types available in ggplot2. For example, `geom_bar()` will create a bar chart, `geom_line()` a line chart, `geom_point()` a point plot, and so forth. Layers are linked to the ggplot object by using the `+` operator.
-
-In the basic example below, we can create a dot plot comparing public transportation as commute share for the most populous metropolitan areas in the United States with a minimum of code. The first argument to `ggplot()` in the example below is the name of our dataset; the second argument is an aesthetic mapping of columns to plot elements, specified inside the `aes()` function. This plot initialization is then linked with the `+` operator to the `geom_col()` function to create a bar chart.
+In the basic example below, we can create a bar chart comparing public transportation as commute share for the most populous metropolitan areas in the United States with a minimum of code. The first argument to `ggplot()` in the example below is the name of our dataset; the second argument is an aesthetic mapping of columns to plot elements, specified inside the `aes()` function. This plot initialization is then linked with the `+` operator to the `geom_col()` function to create a bar chart.
 
 
 ```r
@@ -772,41 +871,6 @@ utah <- get_estimates(
   <tr>
    <td style="text-align:left;"> 49 </td>
    <td style="text-align:left;"> Utah </td>
-   <td style="text-align:right;"> 1614917 </td>
-   <td style="text-align:left;"> Male </td>
-   <td style="text-align:left;"> All ages </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 49 </td>
-   <td style="text-align:left;"> Utah </td>
-   <td style="text-align:right;"> 132868 </td>
-   <td style="text-align:left;"> Male </td>
-   <td style="text-align:left;"> Age 5 to 9 years </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 49 </td>
-   <td style="text-align:left;"> Utah </td>
-   <td style="text-align:right;"> 1591041 </td>
-   <td style="text-align:left;"> Female </td>
-   <td style="text-align:left;"> All ages </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 49 </td>
-   <td style="text-align:left;"> Utah </td>
-   <td style="text-align:right;"> 126108 </td>
-   <td style="text-align:left;"> Female </td>
-   <td style="text-align:left;"> Age 5 to 9 years </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 49 </td>
-   <td style="text-align:left;"> Utah </td>
-   <td style="text-align:right;"> 23039 </td>
-   <td style="text-align:left;"> Female </td>
-   <td style="text-align:left;"> Age 80 to 84 years </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 49 </td>
-   <td style="text-align:left;"> Utah </td>
    <td style="text-align:right;"> 267985 </td>
    <td style="text-align:left;"> Both sexes </td>
    <td style="text-align:left;"> Age 10 to 14 years </td>
@@ -814,9 +878,44 @@ utah <- get_estimates(
   <tr>
    <td style="text-align:left;"> 49 </td>
    <td style="text-align:left;"> Utah </td>
-   <td style="text-align:right;"> 137940 </td>
-   <td style="text-align:left;"> Male </td>
-   <td style="text-align:left;"> Age 10 to 14 years </td>
+   <td style="text-align:right;"> 253847 </td>
+   <td style="text-align:left;"> Both sexes </td>
+   <td style="text-align:left;"> Age 15 to 19 years </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 49 </td>
+   <td style="text-align:left;"> Utah </td>
+   <td style="text-align:right;"> 264652 </td>
+   <td style="text-align:left;"> Both sexes </td>
+   <td style="text-align:left;"> Age 20 to 24 years </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 49 </td>
+   <td style="text-align:left;"> Utah </td>
+   <td style="text-align:right;"> 251376 </td>
+   <td style="text-align:left;"> Both sexes </td>
+   <td style="text-align:left;"> Age 25 to 29 years </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 49 </td>
+   <td style="text-align:left;"> Utah </td>
+   <td style="text-align:right;"> 220430 </td>
+   <td style="text-align:left;"> Both sexes </td>
+   <td style="text-align:left;"> Age 30 to 34 years </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 49 </td>
+   <td style="text-align:left;"> Utah </td>
+   <td style="text-align:right;"> 231242 </td>
+   <td style="text-align:left;"> Both sexes </td>
+   <td style="text-align:left;"> Age 35 to 39 years </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 49 </td>
+   <td style="text-align:left;"> Utah </td>
+   <td style="text-align:right;"> 212211 </td>
+   <td style="text-align:left;"> Both sexes </td>
+   <td style="text-align:left;"> Age 40 to 44 years </td>
   </tr>
 </tbody>
 </table>
@@ -854,20 +953,6 @@ utah_filtered <- filter(utah, str_detect(AGEGROUP, "^Age"),
   <tr>
    <td style="text-align:left;"> 49 </td>
    <td style="text-align:left;"> Utah </td>
-   <td style="text-align:right;"> 126108 </td>
-   <td style="text-align:left;"> Female </td>
-   <td style="text-align:left;"> Age 5 to 9 years </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 49 </td>
-   <td style="text-align:left;"> Utah </td>
-   <td style="text-align:right;"> 23039 </td>
-   <td style="text-align:left;"> Female </td>
-   <td style="text-align:left;"> Age 80 to 84 years </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 49 </td>
-   <td style="text-align:left;"> Utah </td>
    <td style="text-align:right;"> -137940 </td>
    <td style="text-align:left;"> Male </td>
    <td style="text-align:left;"> Age 10 to 14 years </td>
@@ -882,29 +967,8 @@ utah_filtered <- filter(utah, str_detect(AGEGROUP, "^Age"),
   <tr>
    <td style="text-align:left;"> 49 </td>
    <td style="text-align:left;"> Utah </td>
-   <td style="text-align:right;"> 130045 </td>
-   <td style="text-align:left;"> Female </td>
-   <td style="text-align:left;"> Age 10 to 14 years </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 49 </td>
-   <td style="text-align:left;"> Utah </td>
-   <td style="text-align:right;"> 124535 </td>
-   <td style="text-align:left;"> Female </td>
-   <td style="text-align:left;"> Age 15 to 19 years </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 49 </td>
-   <td style="text-align:left;"> Utah </td>
    <td style="text-align:right;"> -135806 </td>
    <td style="text-align:left;"> Male </td>
-   <td style="text-align:left;"> Age 20 to 24 years </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 49 </td>
-   <td style="text-align:left;"> Utah </td>
-   <td style="text-align:right;"> 128846 </td>
-   <td style="text-align:left;"> Female </td>
    <td style="text-align:left;"> Age 20 to 24 years </td>
   </tr>
   <tr>
@@ -913,6 +977,41 @@ utah_filtered <- filter(utah, str_detect(AGEGROUP, "^Age"),
    <td style="text-align:right;"> -111776 </td>
    <td style="text-align:left;"> Male </td>
    <td style="text-align:left;"> Age 30 to 34 years </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 49 </td>
+   <td style="text-align:left;"> Utah </td>
+   <td style="text-align:right;"> -117335 </td>
+   <td style="text-align:left;"> Male </td>
+   <td style="text-align:left;"> Age 35 to 39 years </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 49 </td>
+   <td style="text-align:left;"> Utah </td>
+   <td style="text-align:right;"> -108090 </td>
+   <td style="text-align:left;"> Male </td>
+   <td style="text-align:left;"> Age 40 to 44 years </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 49 </td>
+   <td style="text-align:left;"> Utah </td>
+   <td style="text-align:right;"> -30234 </td>
+   <td style="text-align:left;"> Male </td>
+   <td style="text-align:left;"> Age 75 to 79 years </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 49 </td>
+   <td style="text-align:left;"> Utah </td>
+   <td style="text-align:right;"> -19148 </td>
+   <td style="text-align:left;"> Male </td>
+   <td style="text-align:left;"> Age 80 to 84 years </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 49 </td>
+   <td style="text-align:left;"> Utah </td>
+   <td style="text-align:right;"> 126108 </td>
+   <td style="text-align:left;"> Female </td>
+   <td style="text-align:left;"> Age 5 to 9 years </td>
   </tr>
 </tbody>
 </table>
@@ -1356,8 +1455,8 @@ ggplotly(utah_pyramid)
 <div class="figure">
 
 ```{=html}
-<div id="htmlwidget-8c5016cbcd9643efc3c9" style="width:100%;height:480px;" class="plotly html-widget"></div>
-<script type="application/json" data-for="htmlwidget-8c5016cbcd9643efc3c9">{"x":{"data":[{"orientation":"v","width":[126108,23039,130045,124535,128846,108654,113907,104121,86950,78972,75578,64309,49913,120743,122197,75046,35411,22667],"base":[1.525,16.525,2.525,3.525,4.525,6.525,7.525,8.525,9.525,11.525,12.525,13.525,14.525,0.525,5.525,10.525,15.525,17.525],"x":[63054,11519.5,65022.5,62267.5,64423,54327,56953.5,52060.5,43475,39486,37789,32154.5,24956.5,60371.5,61098.5,37523,17705.5,11333.5],"y":[0.95,0.950000000000003,0.95,0.95,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.95,0.949999999999999,0.949999999999999,0.950000000000001,0.950000000000003],"text":["value:  126108<br />AGEGROUP: Age 5 to 9 years<br />SEX: Female","value:   23039<br />AGEGROUP: Age 80 to 84 years<br />SEX: Female","value:  130045<br />AGEGROUP: Age 10 to 14 years<br />SEX: Female","value:  124535<br />AGEGROUP: Age 15 to 19 years<br />SEX: Female","value:  128846<br />AGEGROUP: Age 20 to 24 years<br />SEX: Female","value:  108654<br />AGEGROUP: Age 30 to 34 years<br />SEX: Female","value:  113907<br />AGEGROUP: Age 35 to 39 years<br />SEX: Female","value:  104121<br />AGEGROUP: Age 40 to 44 years<br />SEX: Female","value:   86950<br />AGEGROUP: Age 45 to 49 years<br />SEX: Female","value:   78972<br />AGEGROUP: Age 55 to 59 years<br />SEX: Female","value:   75578<br />AGEGROUP: Age 60 to 64 years<br />SEX: Female","value:   64309<br />AGEGROUP: Age 65 to 69 years<br />SEX: Female","value:   49913<br />AGEGROUP: Age 70 to 74 years<br />SEX: Female","value:  120743<br />AGEGROUP: Age 0 to 4 years<br />SEX: Female","value:  122197<br />AGEGROUP: Age 25 to 29 years<br />SEX: Female","value:   75046<br />AGEGROUP: Age 50 to 54 years<br />SEX: Female","value:   35411<br />AGEGROUP: Age 75 to 79 years<br />SEX: Female","value:   22667<br />AGEGROUP: Age 85 years and older<br />SEX: Female"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(139,0,0,0.75)","line":{"width":1.88976377952756,"color":"transparent"}},"name":"Female","legendgroup":"Female","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[132868,137940,129312,135806,111776,117335,108090,89984,76536,72048,59874,45370,19148,15907,127060,129179,76450,30234],"base":[1.525,2.525,3.525,4.525,6.525,7.525,8.525,9.525,11.525,12.525,13.525,14.525,16.525,17.525,0.525,5.525,10.525,15.525],"x":[-66434,-68970,-64656,-67903,-55888,-58667.5,-54045,-44992,-38268,-36024,-29937,-22685,-9574,-7953.5,-63530,-64589.5,-38225,-15117],"y":[0.95,0.95,0.95,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.950000000000003,0.950000000000003,0.95,0.949999999999999,0.949999999999999,0.950000000000001],"text":["value: -132868<br />AGEGROUP: Age 5 to 9 years<br />SEX: Male","value: -137940<br />AGEGROUP: Age 10 to 14 years<br />SEX: Male","value: -129312<br />AGEGROUP: Age 15 to 19 years<br />SEX: Male","value: -135806<br />AGEGROUP: Age 20 to 24 years<br />SEX: Male","value: -111776<br />AGEGROUP: Age 30 to 34 years<br />SEX: Male","value: -117335<br />AGEGROUP: Age 35 to 39 years<br />SEX: Male","value: -108090<br />AGEGROUP: Age 40 to 44 years<br />SEX: Male","value:  -89984<br />AGEGROUP: Age 45 to 49 years<br />SEX: Male","value:  -76536<br />AGEGROUP: Age 55 to 59 years<br />SEX: Male","value:  -72048<br />AGEGROUP: Age 60 to 64 years<br />SEX: Male","value:  -59874<br />AGEGROUP: Age 65 to 69 years<br />SEX: Male","value:  -45370<br />AGEGROUP: Age 70 to 74 years<br />SEX: Male","value:  -19148<br />AGEGROUP: Age 80 to 84 years<br />SEX: Male","value:  -15907<br />AGEGROUP: Age 85 years and older<br />SEX: Male","value: -127060<br />AGEGROUP: Age 0 to 4 years<br />SEX: Male","value: -129179<br />AGEGROUP: Age 25 to 29 years<br />SEX: Male","value:  -76450<br />AGEGROUP: Age 50 to 54 years<br />SEX: Male","value:  -30234<br />AGEGROUP: Age 75 to 79 years<br />SEX: Male"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(0,0,128,0.75)","line":{"width":1.88976377952756,"color":"transparent"}},"name":"Male","legendgroup":"Male","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":46.2864259028643,"r":7.97011207970112,"b":27.8953922789539,"l":104.408468244085},"font":{"color":"rgba(0,0,0,1)","family":"Verdana","size":15.9402241594022},"title":{"text":"Population structure in Utah","font":{"color":"rgba(0,0,0,1)","family":"Verdana","size":19.1282689912827},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-151339.25,143444.25],"tickmode":"array","ticktext":["150k","100k","50k","0k","50k","100k"],"tickvals":[-150000,-100000,-50000,0,50000,100000],"categoryorder":"array","categoryarray":["150k","100k","50k","0k","50k","100k"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.98505603985056,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"Verdana","size":12.7521793275218},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.724555643609193,"zeroline":false,"anchor":"y","title":{"text":"","font":{"color":"rgba(0,0,0,1)","family":"Verdana","size":15.9402241594022}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.4,18.6],"tickmode":"array","ticktext":["0 to 4","5 to 9","10 to 14","15 to 19","20 to 24","25 to 29","30 to 34","35 to 39","40 to 44","45 to 49","50 to 54","55 to 59","60 to 64","65 to 69","70 to 74","75 to 79","80 to 84","85 and older"],"tickvals":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18],"categoryorder":"array","categoryarray":["0 to 4","5 to 9","10 to 14","15 to 19","20 to 24","25 to 29","30 to 34","35 to 39","40 to 44","45 to 49","50 to 54","55 to 59","60 to 64","65 to 69","70 to 74","75 to 79","80 to 84","85 and older"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.98505603985056,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"Verdana","size":12.7521793275218},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.724555643609193,"zeroline":false,"anchor":"x","title":{"text":"2019 Census Bureau population estimate","font":{"color":"rgba(0,0,0,1)","family":"Verdana","size":15.9402241594022}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"Verdana","size":12.7521793275218},"title":{"text":"","font":{"color":"rgba(0,0,0,1)","family":"Verdana","size":15.9402241594022}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"7fa859890adc":{"x":{},"y":{},"fill":{},"type":"bar"}},"cur_data":"7fa859890adc","visdat":{"7fa859890adc":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-d9c002ed3ecf9562a338" style="width:100%;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d9c002ed3ecf9562a338">{"x":{"data":[{"orientation":"v","width":[126108,130045,124535,128846,108654,113907,35411,23039,104121,86950,78972,75578,64309,49913,22667,120743,122197,75046],"base":[1.525,2.525,3.525,4.525,6.525,7.525,15.525,16.525,8.525,9.525,11.525,12.525,13.525,14.525,17.525,0.525,5.525,10.525],"x":[63054,65022.5,62267.5,64423,54327,56953.5,17705.5,11519.5,52060.5,43475,39486,37789,32154.5,24956.5,11333.5,60371.5,61098.5,37523],"y":[0.95,0.95,0.95,0.949999999999999,0.949999999999999,0.949999999999999,0.950000000000001,0.950000000000003,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.950000000000003,0.95,0.949999999999999,0.949999999999999],"text":["value:  126108<br />AGEGROUP: Age 5 to 9 years<br />SEX: Female","value:  130045<br />AGEGROUP: Age 10 to 14 years<br />SEX: Female","value:  124535<br />AGEGROUP: Age 15 to 19 years<br />SEX: Female","value:  128846<br />AGEGROUP: Age 20 to 24 years<br />SEX: Female","value:  108654<br />AGEGROUP: Age 30 to 34 years<br />SEX: Female","value:  113907<br />AGEGROUP: Age 35 to 39 years<br />SEX: Female","value:   35411<br />AGEGROUP: Age 75 to 79 years<br />SEX: Female","value:   23039<br />AGEGROUP: Age 80 to 84 years<br />SEX: Female","value:  104121<br />AGEGROUP: Age 40 to 44 years<br />SEX: Female","value:   86950<br />AGEGROUP: Age 45 to 49 years<br />SEX: Female","value:   78972<br />AGEGROUP: Age 55 to 59 years<br />SEX: Female","value:   75578<br />AGEGROUP: Age 60 to 64 years<br />SEX: Female","value:   64309<br />AGEGROUP: Age 65 to 69 years<br />SEX: Female","value:   49913<br />AGEGROUP: Age 70 to 74 years<br />SEX: Female","value:   22667<br />AGEGROUP: Age 85 years and older<br />SEX: Female","value:  120743<br />AGEGROUP: Age 0 to 4 years<br />SEX: Female","value:  122197<br />AGEGROUP: Age 25 to 29 years<br />SEX: Female","value:   75046<br />AGEGROUP: Age 50 to 54 years<br />SEX: Female"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(139,0,0,0.75)","line":{"width":1.88976377952756,"color":"transparent"}},"name":"Female","legendgroup":"Female","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[132868,137940,129312,135806,111776,117335,108090,30234,19148,89984,76536,72048,59874,45370,15907,127060,129179,76450],"base":[1.525,2.525,3.525,4.525,6.525,7.525,8.525,15.525,16.525,9.525,11.525,12.525,13.525,14.525,17.525,0.525,5.525,10.525],"x":[-66434,-68970,-64656,-67903,-55888,-58667.5,-54045,-15117,-9574,-44992,-38268,-36024,-29937,-22685,-7953.5,-63530,-64589.5,-38225],"y":[0.95,0.95,0.95,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.950000000000001,0.950000000000003,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.950000000000003,0.95,0.949999999999999,0.949999999999999],"text":["value: -132868<br />AGEGROUP: Age 5 to 9 years<br />SEX: Male","value: -137940<br />AGEGROUP: Age 10 to 14 years<br />SEX: Male","value: -129312<br />AGEGROUP: Age 15 to 19 years<br />SEX: Male","value: -135806<br />AGEGROUP: Age 20 to 24 years<br />SEX: Male","value: -111776<br />AGEGROUP: Age 30 to 34 years<br />SEX: Male","value: -117335<br />AGEGROUP: Age 35 to 39 years<br />SEX: Male","value: -108090<br />AGEGROUP: Age 40 to 44 years<br />SEX: Male","value:  -30234<br />AGEGROUP: Age 75 to 79 years<br />SEX: Male","value:  -19148<br />AGEGROUP: Age 80 to 84 years<br />SEX: Male","value:  -89984<br />AGEGROUP: Age 45 to 49 years<br />SEX: Male","value:  -76536<br />AGEGROUP: Age 55 to 59 years<br />SEX: Male","value:  -72048<br />AGEGROUP: Age 60 to 64 years<br />SEX: Male","value:  -59874<br />AGEGROUP: Age 65 to 69 years<br />SEX: Male","value:  -45370<br />AGEGROUP: Age 70 to 74 years<br />SEX: Male","value:  -15907<br />AGEGROUP: Age 85 years and older<br />SEX: Male","value: -127060<br />AGEGROUP: Age 0 to 4 years<br />SEX: Male","value: -129179<br />AGEGROUP: Age 25 to 29 years<br />SEX: Male","value:  -76450<br />AGEGROUP: Age 50 to 54 years<br />SEX: Male"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(0,0,128,0.75)","line":{"width":1.88976377952756,"color":"transparent"}},"name":"Male","legendgroup":"Male","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":46.2864259028643,"r":7.97011207970112,"b":27.8953922789539,"l":104.408468244085},"font":{"color":"rgba(0,0,0,1)","family":"Verdana","size":15.9402241594022},"title":{"text":"Population structure in Utah","font":{"color":"rgba(0,0,0,1)","family":"Verdana","size":19.1282689912827},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-151339.25,143444.25],"tickmode":"array","ticktext":["150k","100k","50k","0k","50k","100k"],"tickvals":[-150000,-100000,-50000,0,50000,100000],"categoryorder":"array","categoryarray":["150k","100k","50k","0k","50k","100k"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.98505603985056,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"Verdana","size":12.7521793275218},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.724555643609193,"zeroline":false,"anchor":"y","title":{"text":"","font":{"color":"rgba(0,0,0,1)","family":"Verdana","size":15.9402241594022}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.4,18.6],"tickmode":"array","ticktext":["0 to 4","5 to 9","10 to 14","15 to 19","20 to 24","25 to 29","30 to 34","35 to 39","40 to 44","45 to 49","50 to 54","55 to 59","60 to 64","65 to 69","70 to 74","75 to 79","80 to 84","85 and older"],"tickvals":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18],"categoryorder":"array","categoryarray":["0 to 4","5 to 9","10 to 14","15 to 19","20 to 24","25 to 29","30 to 34","35 to 39","40 to 44","45 to 49","50 to 54","55 to 59","60 to 64","65 to 69","70 to 74","75 to 79","80 to 84","85 and older"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.98505603985056,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"Verdana","size":12.7521793275218},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.724555643609193,"zeroline":false,"anchor":"x","title":{"text":"2019 Census Bureau population estimate","font":{"color":"rgba(0,0,0,1)","family":"Verdana","size":15.9402241594022}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"Verdana","size":12.7521793275218},"title":{"text":"","font":{"color":"rgba(0,0,0,1)","family":"Verdana","size":15.9402241594022}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"4a916e3f449":{"x":{},"y":{},"fill":{},"type":"bar"}},"cur_data":"4a916e3f449","visdat":{"4a916e3f449":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 ```
 
 <p class="caption">(\#fig:plotly-pyramid)An interactive population pyramid rendered with ggplotly</p>
