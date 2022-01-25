@@ -72,7 +72,7 @@ nyc_1910 <- read_nhgis_sf(
 ## Reading geography...
 ## options:        ENCODING=latin1 
 ## Reading layer `US_tract_1910' from data source 
-##   `/tmp/RtmpDxU9d6/file75b16ece7a3f/US_tract_1910.shp' using driver `ESRI Shapefile'
+##   `/tmp/RtmpKzmENo/file612c1f281f29/US_tract_1910.shp' using driver `ESRI Shapefile'
 ## Simple feature collection with 1989 features and 6 fields
 ## Geometry type: MULTIPOLYGON
 ## Dimension:     XY
@@ -609,58 +609,58 @@ tx_econ17 <- getCensus(
   </tr>
   <tr>
    <td style="text-align:left;"> 48 </td>
-   <td style="text-align:left;"> 055 </td>
-   <td style="text-align:left;"> 910 </td>
-   <td style="text-align:left;"> 15247 </td>
-   <td style="text-align:left;"> 0500000US48055 </td>
-   <td style="text-align:left;"> 72 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 48 </td>
-   <td style="text-align:left;"> 487 </td>
-   <td style="text-align:left;"> 394 </td>
-   <td style="text-align:left;"> 5233 </td>
-   <td style="text-align:left;"> 0500000US48487 </td>
-   <td style="text-align:left;"> 72 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 48 </td>
-   <td style="text-align:left;"> 317 </td>
-   <td style="text-align:left;"> 0 </td>
-   <td style="text-align:left;"> 0 </td>
-   <td style="text-align:left;"> 0500000US48317 </td>
-   <td style="text-align:left;"> 72 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 48 </td>
-   <td style="text-align:left;"> 315 </td>
-   <td style="text-align:left;"> 396 </td>
-   <td style="text-align:left;"> 4953 </td>
-   <td style="text-align:left;"> 0500000US48315 </td>
-   <td style="text-align:left;"> 72 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 48 </td>
-   <td style="text-align:left;"> 383 </td>
-   <td style="text-align:left;"> 140 </td>
-   <td style="text-align:left;"> 2178 </td>
-   <td style="text-align:left;"> 0500000US48383 </td>
-   <td style="text-align:left;"> 72 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 48 </td>
-   <td style="text-align:left;"> 387 </td>
-   <td style="text-align:left;"> 0 </td>
-   <td style="text-align:left;"> 0 </td>
-   <td style="text-align:left;"> 0500000US48387 </td>
-   <td style="text-align:left;"> 72 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 48 </td>
-   <td style="text-align:left;"> 501 </td>
    <td style="text-align:left;"> 147 </td>
-   <td style="text-align:left;"> 1867 </td>
-   <td style="text-align:left;"> 0500000US48501 </td>
+   <td style="text-align:left;"> 482 </td>
+   <td style="text-align:left;"> 6360 </td>
+   <td style="text-align:left;"> 0500000US48147 </td>
+   <td style="text-align:left;"> 72 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 48 </td>
+   <td style="text-align:left;"> 255 </td>
+   <td style="text-align:left;"> 476 </td>
+   <td style="text-align:left;"> 8163 </td>
+   <td style="text-align:left;"> 0500000US48255 </td>
+   <td style="text-align:left;"> 72 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 48 </td>
+   <td style="text-align:left;"> 077 </td>
+   <td style="text-align:left;"> 0 </td>
+   <td style="text-align:left;"> 0 </td>
+   <td style="text-align:left;"> 0500000US48077 </td>
+   <td style="text-align:left;"> 72 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 48 </td>
+   <td style="text-align:left;"> 169 </td>
+   <td style="text-align:left;"> 113 </td>
+   <td style="text-align:left;"> 1519 </td>
+   <td style="text-align:left;"> 0500000US48169 </td>
+   <td style="text-align:left;"> 72 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 48 </td>
+   <td style="text-align:left;"> 185 </td>
+   <td style="text-align:left;"> 394 </td>
+   <td style="text-align:left;"> 5841 </td>
+   <td style="text-align:left;"> 0500000US48185 </td>
+   <td style="text-align:left;"> 72 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 48 </td>
+   <td style="text-align:left;"> 311 </td>
+   <td style="text-align:left;"> 26 </td>
+   <td style="text-align:left;"> 646 </td>
+   <td style="text-align:left;"> 0500000US48311 </td>
+   <td style="text-align:left;"> 72 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 48 </td>
+   <td style="text-align:left;"> 505 </td>
+   <td style="text-align:left;"> 0 </td>
+   <td style="text-align:left;"> 0 </td>
+   <td style="text-align:left;"> 0500000US48505 </td>
    <td style="text-align:left;"> 72 </td>
   </tr>
 </tbody>
@@ -1204,11 +1204,20 @@ maui_accom <- bls_api(seriesid = "SMU15279807072100001",
 <tbody>
   <tr>
    <td style="text-align:right;"> 2021 </td>
+   <td style="text-align:left;"> M12 </td>
+   <td style="text-align:left;"> December </td>
+   <td style="text-align:left;"> true </td>
+   <td style="text-align:right;"> 9.7 </td>
+   <td style="text-align:left;"> P Preliminary </td>
+   <td style="text-align:left;"> SMU15279807072100001 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 2021 </td>
    <td style="text-align:left;"> M11 </td>
    <td style="text-align:left;"> November </td>
-   <td style="text-align:left;"> true </td>
+   <td style="text-align:left;"> NA </td>
    <td style="text-align:right;"> 9.5 </td>
-   <td style="text-align:left;"> P Preliminary </td>
+   <td style="text-align:left;">  </td>
    <td style="text-align:left;"> SMU15279807072100001 </td>
   </tr>
   <tr>
@@ -1244,15 +1253,6 @@ maui_accom <- bls_api(seriesid = "SMU15279807072100001",
    <td style="text-align:left;"> July </td>
    <td style="text-align:left;"> NA </td>
    <td style="text-align:right;"> 9.6 </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> SMU15279807072100001 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 2021 </td>
-   <td style="text-align:left;"> M06 </td>
-   <td style="text-align:left;"> June </td>
-   <td style="text-align:left;"> NA </td>
-   <td style="text-align:right;"> 8.9 </td>
    <td style="text-align:left;">  </td>
    <td style="text-align:left;"> SMU15279807072100001 </td>
   </tr>
