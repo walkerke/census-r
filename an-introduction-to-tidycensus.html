@@ -1022,7 +1022,7 @@ B01001_010
 <colgroup>
 <col width="33%">
 <col width="32%">
-<col width="8%">
+<col width="9%">
 <col width="25%">
 </colgroup>
 <thead><tr class="header">
@@ -3484,12 +3484,197 @@ North Carolina
 </tbody>
 </table></div>
 <p>The wide-form dataset includes <code>GEOID</code> and <code>NAME</code> columns, as in the tidy dataset, but is also characterized by estimate/margin of error pairs across the columns for each Census variable in the table.</p>
-<div id="renaming-variable-ids" class="section level3" number="2.4.1">
+<div id="understanding-geoids" class="section level3" number="2.4.1">
 <h3>
-<span class="header-section-number">2.4.1</span> Renaming variable IDs<a class="anchor" aria-label="anchor" href="#renaming-variable-ids"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.4.1</span> Understanding GEOIDs<a class="anchor" aria-label="anchor" href="#understanding-geoids"><i class="fas fa-link"></i></a>
+</h3>
+<p>The <code>GEOID</code> column returned by default in <strong>tidycensus</strong> can be used to uniquely identify geographic units in a given dataset. For geographies within the core Census hierarchy (Census block through state, as discussed in Section <a href="the-united-states-census-and-the-r-programming-language.html#census-hierarchies">1.2</a>), GEOIDs can be used to uniquely identify specific units as well as units’ parent geographies. Let’s take the example of households by Census block from the 2020 Census in Cimarron County, Oklahoma.</p>
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">cimarron_blocks</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_decennial.html">get_decennial</a></span><span class="op">(</span>
+  geography <span class="op">=</span> <span class="st">"block"</span>,
+  variables <span class="op">=</span> <span class="st">"H1_001N"</span>,
+  state <span class="op">=</span> <span class="st">"OK"</span>,
+  county <span class="op">=</span> <span class="st">"Cimarron"</span>,
+  year <span class="op">=</span> <span class="fl">2020</span>,
+  sumfile <span class="op">=</span> <span class="st">"pl"</span>
+<span class="op">)</span></code></pre></div>
+<div class="inline-table"><table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:cimarron-blocks-show">Table 2.12: </span>Households by block in Cimarron County, Oklahoma
+</caption>
+<thead><tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+GEOID
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+NAME
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+variable
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+value
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+400259503001110
+</td>
+<td style="text-align:left;">
+Block 1110, Block Group 1, Census Tract 9503, Cimarron County, Oklahoma
+</td>
+<td style="text-align:left;">
+H1_001N
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+400259503001157
+</td>
+<td style="text-align:left;">
+Block 1157, Block Group 1, Census Tract 9503, Cimarron County, Oklahoma
+</td>
+<td style="text-align:left;">
+H1_001N
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+400259501001837
+</td>
+<td style="text-align:left;">
+Block 1837, Block Group 1, Census Tract 9501, Cimarron County, Oklahoma
+</td>
+<td style="text-align:left;">
+H1_001N
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+400259501001751
+</td>
+<td style="text-align:left;">
+Block 1751, Block Group 1, Census Tract 9501, Cimarron County, Oklahoma
+</td>
+<td style="text-align:left;">
+H1_001N
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+400259501001906
+</td>
+<td style="text-align:left;">
+Block 1906, Block Group 1, Census Tract 9501, Cimarron County, Oklahoma
+</td>
+<td style="text-align:left;">
+H1_001N
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+400259501001996
+</td>
+<td style="text-align:left;">
+Block 1996, Block Group 1, Census Tract 9501, Cimarron County, Oklahoma
+</td>
+<td style="text-align:left;">
+H1_001N
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+400259503001208
+</td>
+<td style="text-align:left;">
+Block 1208, Block Group 1, Census Tract 9503, Cimarron County, Oklahoma
+</td>
+<td style="text-align:left;">
+H1_001N
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+400259501001888
+</td>
+<td style="text-align:left;">
+Block 1888, Block Group 1, Census Tract 9501, Cimarron County, Oklahoma
+</td>
+<td style="text-align:left;">
+H1_001N
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+400259503001047
+</td>
+<td style="text-align:left;">
+Block 1047, Block Group 1, Census Tract 9503, Cimarron County, Oklahoma
+</td>
+<td style="text-align:left;">
+H1_001N
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+400259501001313
+</td>
+<td style="text-align:left;">
+Block 1313, Block Group 1, Census Tract 9501, Cimarron County, Oklahoma
+</td>
+<td style="text-align:left;">
+H1_001N
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>The mapping between the <code>GEOID</code> and <code>NAME</code> columns in the returned 2020 Census block data offers some insight into how GEOIDs work for geographies within the core Census hierarchy. Take the first block in the table, Block 1110, which has a GEOID of <strong>400259503001110</strong>. The GEOID value breaks down as follows:</p>
+<ul>
+<li><p>The first two digits, <strong>40</strong>, correspond to the <a href="https://www.census.gov/library/reference/code-lists/ansi.html">Federal Information Processing Series (FIPS) code</a> for the state of Oklahoma. All states and US territories, along with other geographies at which the Census Bureau tabulates data, will have a FIPS code that can uniquely identify that geography.</p></li>
+<li><p>Digits 3 through 5, <strong>025</strong>, are representative of Cimarron County. These three digits will uniquely identify Cimarron County within Oklahoma. County codes are generally combined with their corresponding state codes to uniquely identify a county within the United States, as three-digit codes will be repeated across states. Cimarron County’s code in this example would be <strong>40025</strong>.</p></li>
+<li><p>The next six digits, <strong>950300</strong>, represent the block’s Census tract. The tract name in the <code>NAME</code> column is Census Tract 9503; the six-digit tract ID is right-padded with zeroes.</p></li>
+<li><p>The twelfth digit, <strong>1</strong>, represents the parent block group of the Census block. As there are no more than nine block groups in any Census tract, the block group name will not exceed 9.</p></li>
+<li><p>The last three digits, <strong>110</strong>, represent the individual Census block, though these digits are combined with the parent block group digit to form the block’s name.</p></li>
+</ul>
+<p>For geographies outside the core Census hierarchy, GEOIDs will uniquely identify geographic units but will only include IDs of parent geographies to the degree to which they nest within them. For example, a geography that nests within states but may cross county boundaries like school districts will include the state GEOID in its GEOID but unique digits after that. Geographies like core-based statistical areas that do not nest within states will have fully unique GEOIDs, independent of any other geographic level of aggregation such as states.</p>
+</div>
+<div id="renaming-variable-ids" class="section level3" number="2.4.2">
+<h3>
+<span class="header-section-number">2.4.2</span> Renaming variable IDs<a class="anchor" aria-label="anchor" href="#renaming-variable-ids"><i class="fas fa-link"></i></a>
 </h3>
 <p>Census variables IDs can be cumbersome to type and remember in the course of an R session. As such, <strong>tidycensus</strong> has built-in tools to automatically rename the variable IDs if requested by a user. For example, let’s say that a user is requesting data on median household income (variable ID <code>B19013_001</code>) and median age (variable ID <code>B01002_001</code>). By passing a <em>named</em> vector to the <code>variables</code> parameter in <code><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs()</a></code> or <code><a href="https://walker-data.com/tidycensus/reference/get_decennial.html">get_decennial()</a></code>, the functions will return the desired names rather than the Census variable IDs. Let’s examine this for counties in Georgia from the 2015-2019 five-year ACS.</p>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ga</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs</a></span><span class="op">(</span>
   geography <span class="op">=</span> <span class="st">"county"</span>,
   state <span class="op">=</span> <span class="st">"Georgia"</span>,
@@ -3499,7 +3684,7 @@ North Carolina
 <span class="op">)</span></code></pre></div>
 <div class="inline-table"><table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:georgia-data-show">Table 2.12: </span>Multi-variable dataset for Georgia counties
+<span id="tab:georgia-data-show">Table 2.13: </span>Multi-variable dataset for Georgia counties
 </caption>
 <thead><tr>
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
@@ -3692,7 +3877,7 @@ medinc
 </tbody>
 </table></div>
 <p>ACS variable IDs, which would be found in the <code>variable</code> column, are replaced by <code>medage</code> and <code>medinc</code>, as requested. When a wide-form dataset is requested, <strong>tidycensus</strong> will still append <code>E</code> and <code>M</code> to the specified column names, as illustrated below.</p>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ga_wide</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs</a></span><span class="op">(</span>
   geography <span class="op">=</span> <span class="st">"county"</span>,
   state <span class="op">=</span> <span class="st">"Georgia"</span>,
@@ -3702,7 +3887,7 @@ medinc
 <span class="op">)</span></code></pre></div>
 <div class="inline-table"><table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:georgia-data-wide-show">Table 2.13: </span>Georgia dataset in wide form
+<span id="tab:georgia-data-wide-show">Table 2.14: </span>Georgia dataset in wide form
 </caption>
 <thead><tr>
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
@@ -3941,7 +4126,7 @@ Floyd County, Georgia
 </h3>
 <p>The <a href="https://www.census.gov/programs-surveys/popest.html">Population Estimates Program</a>, or PEP, provides yearly estimates of the US population and its components between decennial Censuses. It differs from the ACS in that it is not directly based on a dedicated survey, but rather projects forward data from the most recent decennial Census based on birth, death, and migration rates.</p>
 <p>One advantage of using the PEP to retrieve data is that allows you to access the indicators used to produce the intercensal population estimates. These indicators can be specified as variables direction in the <code><a href="https://walker-data.com/tidycensus/reference/get_estimates.html">get_estimates()</a></code> function in <strong>tidycensus</strong>, or requested in bulk by using the <code>product</code> argument. The products available include <code>"population"</code>, <code>"components"</code>, <code>"housing"</code>, and <code>"characteristics"</code>. For example, we can request all components of change population estimates for 2019 for a specific county:</p>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://walker-data.com/tidycensus/">tidycensus</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
 
@@ -3954,7 +4139,7 @@ Floyd County, Georgia
 <span class="op">)</span></code></pre></div>
 <div class="inline-table"><table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:queens-components-show">Table 2.14: </span>Components of change estimates for Queens County, NY
+<span id="tab:queens-components-show">Table 2.15: </span>Components of change estimates for Queens County, NY
 </caption>
 <thead><tr>
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
@@ -4115,7 +4300,7 @@ RINTERNATIONALMIG
 </table></div>
 <p>Alternatively, a single variable or vector of variables can be requested with the <code>variable</code> argument, and the <code>output = "wide"</code> argument can also be used to spread the variable names across the columns.</p>
 <p>The <code>product = "characteristics"</code> argument also has some unique options. The argument <code>breakdown</code> lets users get breakdowns of population estimates for the US, states, and counties by <code>"AGEGROUP"</code>, <code>"RACE"</code>, <code>"SEX"</code>, or <code>"HISP"</code> (Hispanic origin). If set to <code>TRUE</code>, the <code>breakdown_labels</code> argument will return informative labels for the population estimates. For example, to get population estimates by sex and Hispanic origin for metropolitan areas, we can use the following code:</p>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">louisiana_age_hisp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_estimates.html">get_estimates</a></span><span class="op">(</span>
   geography <span class="op">=</span> <span class="st">"state"</span>,
   product <span class="op">=</span> <span class="st">"characteristics"</span>,
@@ -4126,7 +4311,7 @@ RINTERNATIONALMIG
 <span class="op">)</span></code></pre></div>
 <div class="inline-table"><table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:louisiana-estimates-show">Table 2.15: </span>Population characteristics for Louisiana
+<span id="tab:louisiana-estimates-show">Table 2.16: </span>Population characteristics for Louisiana
 </caption>
 <thead><tr>
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
@@ -4307,7 +4492,7 @@ Hispanic
 <span class="header-section-number">2.5.2</span> Using <code>get_flows()</code><a class="anchor" aria-label="anchor" href="#using-get_flows"><i class="fas fa-link"></i></a>
 </h3>
 <p>As of version 1.0, <strong>tidycensus</strong> also includes support for the ACS Migration Flows API. The flows API returns information on both in- and out-migration for states, counties, and metropolitan areas. By default, the function allows for analysis of in-migrants, emigrants, and net migration for a given geography using data from a given 5-year ACS sample. In the example below, we request migration data for Honolulu County, Hawaii. In-migration for world regions is available along with out-migration and net migration for US locations.</p>
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">honolulu_migration</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_flows.html">get_flows</a></span><span class="op">(</span>
   geography <span class="op">=</span> <span class="st">"county"</span>,
   state <span class="op">=</span> <span class="st">"HI"</span>,
@@ -4317,7 +4502,7 @@ Hispanic
 <span class="op">)</span></code></pre></div>
 <div class="inline-table"><table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:honolulu-migration-show">Table 2.16: </span>Migration flows data for Honolulu, HI
+<span id="tab:honolulu-migration-show">Table 2.17: </span>Migration flows data for Honolulu, HI
 </caption>
 <thead><tr>
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
@@ -4583,7 +4768,7 @@ MOVEDIN
 <span class="header-section-number">2.6</span> Debugging tidycensus errors<a class="anchor" aria-label="anchor" href="#debugging-tidycensus-errors"><i class="fas fa-link"></i></a>
 </h2>
 <p>At times, you may think that you’ve formatted your use of a <strong>tidycensus</strong> function correctly but the Census API doesn’t return the data you expected. Whenever possible, <strong>tidycensus</strong> carries through the error message from the Census API or translates common errors for the user. In the example below, a user has mis-typed the variable ID:</p>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">state_pop</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_decennial.html">get_decennial</a></span><span class="op">(</span>
   geography <span class="op">=</span> <span class="st">"state"</span>,
   variables <span class="op">=</span> <span class="st">"P01001"</span>,
@@ -4592,7 +4777,7 @@ MOVEDIN
 <pre><code>## Error : Your API call has errors.  The API message returned is error: error: unknown variable 'P01001'.</code></pre>
 <pre><code>## Error in UseMethod("gather"): no applicable method for 'gather' applied to an object of class "character"</code></pre>
 <p>The “unknown variable” error message from the Census API is carried through to the user. In other instances, users might request geographies that are not available in a given dataset:</p>
-<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cbsa_ohio</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs</a></span><span class="op">(</span>
   geography <span class="op">=</span> <span class="st">"cbsa"</span>,
   variables <span class="op">=</span> <span class="st">"DP02_0068P"</span>,
@@ -4602,7 +4787,7 @@ MOVEDIN
 <pre><code>## Error: Your API call has errors.  The API message returned is error: unknown/unsupported geography heirarchy.</code></pre>
 <p>The user above has attempted to get bachelor’s degree attainment by CBSA in Ohio from the ACS Data Profile. However, CBSA geographies are not available by state given that many CBSAs cross state boundaries. In response, the API returns an “unsupported geography hierarchy” error.</p>
 <p>To assist with debugging errors, or more generally to help users understand how <strong>tidycensus</strong> functions are being translated to Census API calls, <strong>tidycensus</strong> offers a parameter <code>show_call</code> that when set to <code>TRUE</code> prints out the actual API call that <strong>tidycensus</strong> is making to the Census API.</p>
-<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cbsa_bachelors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs</a></span><span class="op">(</span>
   geography <span class="op">=</span> <span class="st">"cbsa"</span>,
   variables <span class="op">=</span> <span class="st">"DP02_0068P"</span>,
@@ -4613,18 +4798,18 @@ MOVEDIN
 <pre><code>## Using the ACS Data Profile</code></pre>
 <pre><code>## Census API call: https://api.census.gov/data/2019/acs/acs5/profile?get=DP02_0068PE%2CDP02_0068PM%2CNAME&amp;for=metropolitan%20statistical%20area%2Fmicropolitan%20statistical%20area%3A%2A</code></pre>
 <p>The printed URL <a href="https://api.census.gov/data/2019/acs/acs5/profile?get=DP02_0068PE%2CDP02_0068PM%2CNAME&amp;for=metropolitan%20statistical%20area%2Fmicropolitan%20statistical%20area%3A%2A"><code>https://api.census.gov/data/2019/acs/acs5/profile?get=DP02_0068PE%2CDP02_0068PM%2CNAME&amp;for=metropolitan%20statistical%20area%2Fmicropolitan%20statistical%20area%3A%2A</code></a> can be copy-pasted into a web browser where users can see the raw JSON returned by the Census API and inspect the results.</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb50-1"><a href="an-introduction-to-tidycensus.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="ot">[[</span><span class="st">"DP02_0068PE"</span><span class="ot">,</span><span class="st">"DP02_0068PM"</span><span class="ot">,</span><span class="st">"NAME"</span><span class="ot">,</span><span class="st">"metropolitan statistical area/micropolitan statistical area"</span><span class="ot">],</span></span>
-<span id="cb50-2"><a href="an-introduction-to-tidycensus.html#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span><span class="st">"15.7"</span><span class="ot">,</span><span class="st">"1.5"</span><span class="ot">,</span><span class="st">"Big Stone Gap, VA Micro Area"</span><span class="ot">,</span><span class="st">"13720"</span><span class="ot">],</span></span>
-<span id="cb50-3"><a href="an-introduction-to-tidycensus.html#cb50-3" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span><span class="st">"31.6"</span><span class="ot">,</span><span class="st">"1.0"</span><span class="ot">,</span><span class="st">"Billings, MT Metro Area"</span><span class="ot">,</span><span class="st">"13740"</span><span class="ot">],</span></span>
-<span id="cb50-4"><a href="an-introduction-to-tidycensus.html#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span><span class="st">"27.9"</span><span class="ot">,</span><span class="st">"0.7"</span><span class="ot">,</span><span class="st">"Binghamton, NY Metro Area"</span><span class="ot">,</span><span class="st">"13780"</span><span class="ot">],</span></span>
-<span id="cb50-5"><a href="an-introduction-to-tidycensus.html#cb50-5" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span><span class="st">"31.4"</span><span class="ot">,</span><span class="st">"0.4"</span><span class="ot">,</span><span class="st">"Birmingham-Hoover, AL Metro Area"</span><span class="ot">,</span><span class="st">"13820"</span><span class="ot">],</span></span>
-<span id="cb50-6"><a href="an-introduction-to-tidycensus.html#cb50-6" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span><span class="st">"33.3"</span><span class="ot">,</span><span class="st">"1.0"</span><span class="ot">,</span><span class="st">"Bismarck, ND Metro Area"</span><span class="ot">,</span><span class="st">"13900"</span><span class="ot">],</span></span>
-<span id="cb50-7"><a href="an-introduction-to-tidycensus.html#cb50-7" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span><span class="st">"21.2"</span><span class="ot">,</span><span class="st">"2.0"</span><span class="ot">,</span><span class="st">"Blackfoot, ID Micro Area"</span><span class="ot">,</span><span class="st">"13940"</span><span class="ot">],</span></span>
-<span id="cb50-8"><a href="an-introduction-to-tidycensus.html#cb50-8" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span><span class="st">"35.2"</span><span class="ot">,</span><span class="st">"1.1"</span><span class="ot">,</span><span class="st">"Blacksburg-Christiansburg, VA Metro Area"</span><span class="ot">,</span><span class="st">"13980"</span><span class="ot">],</span></span>
-<span id="cb50-9"><a href="an-introduction-to-tidycensus.html#cb50-9" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span><span class="st">"44.8"</span><span class="ot">,</span><span class="st">"1.1"</span><span class="ot">,</span><span class="st">"Bloomington, IL Metro Area"</span><span class="ot">,</span><span class="st">"14010"</span><span class="ot">],</span></span>
-<span id="cb50-10"><a href="an-introduction-to-tidycensus.html#cb50-10" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span><span class="st">"40.8"</span><span class="ot">,</span><span class="st">"1.2"</span><span class="ot">,</span><span class="st">"Bloomington, IN Metro Area"</span><span class="ot">,</span><span class="st">"14020"</span><span class="ot">],</span></span>
-<span id="cb50-11"><a href="an-introduction-to-tidycensus.html#cb50-11" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span><span class="st">"24.9"</span><span class="ot">,</span><span class="st">"1.0"</span><span class="ot">,</span><span class="st">"Bloomsburg-Berwick, PA Metro Area"</span><span class="ot">,</span><span class="st">"14100"</span><span class="ot">],</span></span>
-<span id="cb50-12"><a href="an-introduction-to-tidycensus.html#cb50-12" aria-hidden="true" tabindex="-1"></a><span class="er">...</span></span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb51-1"><a href="an-introduction-to-tidycensus.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="ot">[[</span><span class="st">"DP02_0068PE"</span><span class="ot">,</span><span class="st">"DP02_0068PM"</span><span class="ot">,</span><span class="st">"NAME"</span><span class="ot">,</span><span class="st">"metropolitan statistical area/micropolitan statistical area"</span><span class="ot">],</span></span>
+<span id="cb51-2"><a href="an-introduction-to-tidycensus.html#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span><span class="st">"15.7"</span><span class="ot">,</span><span class="st">"1.5"</span><span class="ot">,</span><span class="st">"Big Stone Gap, VA Micro Area"</span><span class="ot">,</span><span class="st">"13720"</span><span class="ot">],</span></span>
+<span id="cb51-3"><a href="an-introduction-to-tidycensus.html#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span><span class="st">"31.6"</span><span class="ot">,</span><span class="st">"1.0"</span><span class="ot">,</span><span class="st">"Billings, MT Metro Area"</span><span class="ot">,</span><span class="st">"13740"</span><span class="ot">],</span></span>
+<span id="cb51-4"><a href="an-introduction-to-tidycensus.html#cb51-4" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span><span class="st">"27.9"</span><span class="ot">,</span><span class="st">"0.7"</span><span class="ot">,</span><span class="st">"Binghamton, NY Metro Area"</span><span class="ot">,</span><span class="st">"13780"</span><span class="ot">],</span></span>
+<span id="cb51-5"><a href="an-introduction-to-tidycensus.html#cb51-5" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span><span class="st">"31.4"</span><span class="ot">,</span><span class="st">"0.4"</span><span class="ot">,</span><span class="st">"Birmingham-Hoover, AL Metro Area"</span><span class="ot">,</span><span class="st">"13820"</span><span class="ot">],</span></span>
+<span id="cb51-6"><a href="an-introduction-to-tidycensus.html#cb51-6" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span><span class="st">"33.3"</span><span class="ot">,</span><span class="st">"1.0"</span><span class="ot">,</span><span class="st">"Bismarck, ND Metro Area"</span><span class="ot">,</span><span class="st">"13900"</span><span class="ot">],</span></span>
+<span id="cb51-7"><a href="an-introduction-to-tidycensus.html#cb51-7" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span><span class="st">"21.2"</span><span class="ot">,</span><span class="st">"2.0"</span><span class="ot">,</span><span class="st">"Blackfoot, ID Micro Area"</span><span class="ot">,</span><span class="st">"13940"</span><span class="ot">],</span></span>
+<span id="cb51-8"><a href="an-introduction-to-tidycensus.html#cb51-8" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span><span class="st">"35.2"</span><span class="ot">,</span><span class="st">"1.1"</span><span class="ot">,</span><span class="st">"Blacksburg-Christiansburg, VA Metro Area"</span><span class="ot">,</span><span class="st">"13980"</span><span class="ot">],</span></span>
+<span id="cb51-9"><a href="an-introduction-to-tidycensus.html#cb51-9" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span><span class="st">"44.8"</span><span class="ot">,</span><span class="st">"1.1"</span><span class="ot">,</span><span class="st">"Bloomington, IL Metro Area"</span><span class="ot">,</span><span class="st">"14010"</span><span class="ot">],</span></span>
+<span id="cb51-10"><a href="an-introduction-to-tidycensus.html#cb51-10" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span><span class="st">"40.8"</span><span class="ot">,</span><span class="st">"1.2"</span><span class="ot">,</span><span class="st">"Bloomington, IN Metro Area"</span><span class="ot">,</span><span class="st">"14020"</span><span class="ot">],</span></span>
+<span id="cb51-11"><a href="an-introduction-to-tidycensus.html#cb51-11" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span><span class="st">"24.9"</span><span class="ot">,</span><span class="st">"1.0"</span><span class="ot">,</span><span class="st">"Bloomsburg-Berwick, PA Metro Area"</span><span class="ot">,</span><span class="st">"14100"</span><span class="ot">],</span></span>
+<span id="cb51-12"><a href="an-introduction-to-tidycensus.html#cb51-12" aria-hidden="true" tabindex="-1"></a><span class="er">...</span></span></code></pre></div>
 </div>
 <div id="exercises" class="section level2" number="2.7">
 <h2>
@@ -4654,7 +4839,10 @@ MOVEDIN
 </li>
 <li><a class="nav-link" href="#searching-for-variables-in-tidycensus"><span class="header-section-number">2.3</span> Searching for variables in tidycensus</a></li>
 <li>
-<a class="nav-link" href="#data-structure-in-tidycensus"><span class="header-section-number">2.4</span> Data structure in tidycensus</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#renaming-variable-ids"><span class="header-section-number">2.4.1</span> Renaming variable IDs</a></li></ul>
+<a class="nav-link" href="#data-structure-in-tidycensus"><span class="header-section-number">2.4</span> Data structure in tidycensus</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#understanding-geoids"><span class="header-section-number">2.4.1</span> Understanding GEOIDs</a></li>
+<li><a class="nav-link" href="#renaming-variable-ids"><span class="header-section-number">2.4.2</span> Renaming variable IDs</a></li>
+</ul>
 </li>
 <li>
 <a class="nav-link" href="#other-census-bureau-datasets-in-tidycensus"><span class="header-section-number">2.5</span> Other Census Bureau datasets in tidycensus</a><ul class="nav navbar-nav">
@@ -4680,7 +4868,7 @@ MOVEDIN
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Analyzing US Census Data</strong>: Methods, Maps, and Models in R" was written by Kyle E. Walker. It was last built on 2022-01-25.</p>
+    <p>"<strong>Analyzing US Census Data</strong>: Methods, Maps, and Models in R" was written by Kyle E. Walker. It was last built on 2022-01-31.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

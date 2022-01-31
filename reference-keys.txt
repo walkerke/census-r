@@ -20,6 +20,7 @@ tab:v16-show
 fig:view-variables-img
 tab:state-income-table-show
 tab:state-income-table-wide-show
+tab:cimarron-blocks-show
 tab:georgia-data-show
 tab:georgia-data-wide-show
 tab:queens-components-show
@@ -278,6 +279,7 @@ geography-and-variables-in-tidycensus
 geographic-subsets
 searching-for-variables-in-tidycensus
 data-structure-in-tidycensus
+understanding-geoids
 renaming-variable-ids
 other-census-bureau-datasets-in-tidycensus
 using-get_estimates
