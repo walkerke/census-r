@@ -40,7 +40,7 @@ American Community Survey microdata are available in **tidycensus** by using the
 
 ### Basic usage of `get_pums()`
 
-`get_pums()` requires specifying one or more variables and the state for which you'd like to request data. For national-level analyses, `state = 'all'` *can* get data for the entire USA by iterating over all US states, but the data can take some time to download depending on the user's internet connection. The `get_pums()` function defaults to the 5-year ACS with `survey = "acs5"`; 1-year ACS data is available with `survey = "acs1"`. At the time of this writing, the default year is 2019; data are available back to 2006 for the 1-year ACS and 2005-2009 for the 5-year ACS.
+`get_pums()` requires specifying one or more variables and the state for which you'd like to request data. For national-level analyses, `state = 'all'` *can* get data for the entire USA by iterating over all US states, but the data can take some time to download depending on the user's internet connection. The `get_pums()` function defaults to the 5-year ACS with `survey = "acs5"`; 1-year ACS data is available with `survey = "acs1"`. At the time of this writing, data are available from 2006 through 2019 for the 1-year ACS and 2005-2009 through 2016-2020 for the 5-year ACS.
 
 Let's take a look at a first example using `get_pums()` to request microdata for Wyoming from the 1-year 2019 ACS with information on sex, age (`AGEP`), and household type (`HHT`).
 
@@ -72,101 +72,101 @@ wy_pums <- get_pums(
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:left;"> 2019GQ0009731 </td>
+   <td style="text-align:left;"> 2019GQ0000335 </td>
    <td style="text-align:right;"> 1 </td>
    <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 47 </td>
-   <td style="text-align:right;"> 28 </td>
-   <td style="text-align:left;"> 56 </td>
-   <td style="text-align:left;"> b </td>
-   <td style="text-align:left;"> 1 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2019GQ0010758 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 27 </td>
-   <td style="text-align:right;"> 54 </td>
+   <td style="text-align:right;"> 206 </td>
+   <td style="text-align:right;"> 17 </td>
    <td style="text-align:left;"> 56 </td>
    <td style="text-align:left;"> b </td>
    <td style="text-align:left;"> 2 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2019GQ0014986 </td>
+   <td style="text-align:left;"> 2019GQ0000958 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 50 </td>
+   <td style="text-align:right;"> 37 </td>
+   <td style="text-align:left;"> 56 </td>
+   <td style="text-align:left;"> b </td>
+   <td style="text-align:left;"> 1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2019GQ0009156 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 33 </td>
+   <td style="text-align:right;"> 75 </td>
+   <td style="text-align:left;"> 56 </td>
+   <td style="text-align:left;"> b </td>
+   <td style="text-align:left;"> 2 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2019GQ0012426 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 23 </td>
+   <td style="text-align:right;"> 21 </td>
+   <td style="text-align:left;"> 56 </td>
+   <td style="text-align:left;"> b </td>
+   <td style="text-align:left;"> 2 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2019GQ0015243 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 209 </td>
+   <td style="text-align:right;"> 94 </td>
+   <td style="text-align:left;"> 56 </td>
+   <td style="text-align:left;"> b </td>
+   <td style="text-align:left;"> 1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2019GQ0018773 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 273 </td>
+   <td style="text-align:right;"> 26 </td>
+   <td style="text-align:left;"> 56 </td>
+   <td style="text-align:left;"> b </td>
+   <td style="text-align:left;"> 1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2019GQ0019978 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 16 </td>
+   <td style="text-align:left;"> 56 </td>
+   <td style="text-align:left;"> b </td>
+   <td style="text-align:left;"> 1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2019GQ0022931 </td>
    <td style="text-align:right;"> 1 </td>
    <td style="text-align:right;"> 0 </td>
    <td style="text-align:right;"> 67 </td>
-   <td style="text-align:right;"> 43 </td>
-   <td style="text-align:left;"> 56 </td>
-   <td style="text-align:left;"> b </td>
-   <td style="text-align:left;"> 1 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2019GQ0016090 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 57 </td>
-   <td style="text-align:right;"> 19 </td>
-   <td style="text-align:left;"> 56 </td>
-   <td style="text-align:left;"> b </td>
-   <td style="text-align:left;"> 1 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2019GQ0020825 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 24 </td>
-   <td style="text-align:right;"> 20 </td>
+   <td style="text-align:right;"> 18 </td>
    <td style="text-align:left;"> 56 </td>
    <td style="text-align:left;"> b </td>
    <td style="text-align:left;"> 2 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2019GQ0022170 </td>
+   <td style="text-align:left;"> 2019GQ0032421 </td>
    <td style="text-align:right;"> 1 </td>
    <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 73 </td>
-   <td style="text-align:right;"> 18 </td>
-   <td style="text-align:left;"> 56 </td>
-   <td style="text-align:left;"> b </td>
-   <td style="text-align:left;"> 1 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2019GQ0022185 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 32 </td>
-   <td style="text-align:right;"> 14 </td>
-   <td style="text-align:left;"> 56 </td>
-   <td style="text-align:left;"> b </td>
-   <td style="text-align:left;"> 1 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2019GQ0023934 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 75 </td>
-   <td style="text-align:right;"> 51 </td>
-   <td style="text-align:left;"> 56 </td>
-   <td style="text-align:left;"> b </td>
-   <td style="text-align:left;"> 1 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2019GQ0026378 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 40 </td>
+   <td style="text-align:right;"> 113 </td>
    <td style="text-align:right;"> 94 </td>
    <td style="text-align:left;"> 56 </td>
    <td style="text-align:left;"> b </td>
    <td style="text-align:left;"> 2 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2019GQ0027977 </td>
+   <td style="text-align:left;"> 2019GQ0033045 </td>
    <td style="text-align:right;"> 1 </td>
    <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 48 </td>
-   <td style="text-align:right;"> 22 </td>
+   <td style="text-align:right;"> 10 </td>
+   <td style="text-align:right;"> 44 </td>
    <td style="text-align:left;"> 56 </td>
    <td style="text-align:left;"> b </td>
    <td style="text-align:left;"> 1 </td>
@@ -251,6 +251,155 @@ sum(wy_households$WGTP)
 ## [1] 233126
 ```
 
+*Housing unit* rather than simply household-level analyses introduce an additional level of complexity, as housing units can be both occupied and vacant. Vacant housing units are returned in a different format from the Census API which makes them a special case in **tidycensus**. To return vacant housing units along with person and household records, use the argument `return_vacant = TRUE`.
+
+
+```r
+wy_with_vacant <- get_pums(
+  variables = c("SEX", "AGEP", "HHT"),
+  state = "WY",
+  survey = "acs1",
+  year = 2019,
+  return_vacant = TRUE
+) %>%
+  arrange(VACS)
+```
+
+```
+## Downloading: 8.6 kB     Downloading: 8.6 kB     Downloading: 25 kB     Downloading: 25 kB     Downloading: 25 kB     Downloading: 25 kB     Downloading: 27 kB     Downloading: 27 kB     Downloading: 27 kB     Downloading: 27 kB     Downloading: 27 kB     Downloading: 27 kB     Downloading: 27 kB     Downloading: 27 kB     Downloading: 35 kB     Downloading: 35 kB     Downloading: 35 kB     Downloading: 35 kB     Downloading: 45 kB     Downloading: 45 kB     Downloading: 54 kB     Downloading: 54 kB     Downloading: 54 kB     Downloading: 54 kB     Downloading: 54 kB     Downloading: 54 kB     Downloading: 64 kB     Downloading: 64 kB     Downloading: 72 kB     Downloading: 72 kB     Downloading: 72 kB     Downloading: 72 kB     Downloading: 72 kB     Downloading: 72 kB     Downloading: 81 kB     Downloading: 81 kB     Downloading: 81 kB     Downloading: 81 kB     Downloading: 90 kB     Downloading: 90 kB     Downloading: 90 kB     Downloading: 90 kB     Downloading: 90 kB     Downloading: 90 kB     Downloading: 90 kB     Downloading: 90 kB     Downloading: 99 kB     Downloading: 99 kB     Downloading: 99 kB     Downloading: 99 kB     Downloading: 99 kB     Downloading: 99 kB     Downloading: 110 kB     Downloading: 110 kB     Downloading: 120 kB     Downloading: 120 kB     Downloading: 120 kB     Downloading: 120 kB     Downloading: 130 kB     Downloading: 130 kB     Downloading: 130 kB     Downloading: 130 kB     Downloading: 130 kB     Downloading: 130 kB     Downloading: 130 kB     Downloading: 130 kB     Downloading: 130 kB     Downloading: 130 kB     Downloading: 130 kB     Downloading: 130 kB     Downloading: 140 kB     Downloading: 140 kB     Downloading: 140 kB     Downloading: 140 kB     Downloading: 140 kB     Downloading: 140 kB     Downloading: 140 kB     Downloading: 140 kB     Downloading: 140 kB     Downloading: 140 kB     Downloading: 140 kB     Downloading: 140 kB     Downloading: 140 kB     Downloading: 140 kB     Downloading: 140 kB     Downloading: 140 kB     Downloading: 160 kB     Downloading: 160 kB     Downloading: 160 kB     Downloading: 160 kB     Downloading: 160 kB     Downloading: 160 kB     Downloading: 160 kB     Downloading: 160 kB     Downloading: 160 kB     Downloading: 160 kB     Downloading: 170 kB     Downloading: 170 kB     Downloading: 170 kB     Downloading: 170 kB     Downloading: 170 kB     Downloading: 170 kB     Downloading: 170 kB     Downloading: 170 kB     Downloading: 180 kB     Downloading: 180 kB     Downloading: 180 kB     Downloading: 180 kB     Downloading: 180 kB     Downloading: 180 kB     Downloading: 200 kB     Downloading: 200 kB     Downloading: 200 kB     Downloading: 200 kB     Downloading: 200 kB     Downloading: 200 kB     Downloading: 200 kB     Downloading: 200 kB     Downloading: 200 kB     Downloading: 200 kB     Downloading: 200 kB     Downloading: 200 kB     Downloading: 210 kB     Downloading: 210 kB     Downloading: 210 kB     Downloading: 210 kB     Downloading: 210 kB     Downloading: 210 kB     Downloading: 210 kB     Downloading: 210 kB     Downloading: 220 kB     Downloading: 220 kB     Downloading: 220 kB     Downloading: 220 kB     Downloading: 220 kB     Downloading: 220 kB     Downloading: 220 kB     Downloading: 220 kB     Downloading: 220 kB     Downloading: 220 kB     Downloading: 240 kB     Downloading: 240 kB     Downloading: 240 kB     Downloading: 240 kB     Downloading: 240 kB     Downloading: 240 kB     Downloading: 240 kB     Downloading: 240 kB     Downloading: 240 kB     Downloading: 240 kB     Downloading: 240 kB     Downloading: 240 kB     Downloading: 240 kB     Downloading: 240 kB     Downloading: 260 kB     Downloading: 260 kB     Downloading: 260 kB     Downloading: 260 kB     Downloading: 260 kB     Downloading: 260 kB     Downloading: 260 kB     Downloading: 260 kB     Downloading: 270 kB     Downloading: 270 kB     Downloading: 270 kB     Downloading: 270 kB     Downloading: 270 kB     Downloading: 270 kB     Downloading: 270 kB     Downloading: 270 kB     Downloading: 270 kB     Downloading: 270 kB     Downloading: 270 kB     Downloading: 270 kB     Downloading: 270 kB     Downloading: 270 kB     Downloading: 290 kB     Downloading: 290 kB     Downloading: 290 kB     Downloading: 290 kB     Downloading: 290 kB     Downloading: 290 kB     Downloading: 290 kB     Downloading: 290 kB     Downloading: 290 kB     Downloading: 290 kB     Downloading: 310 kB     Downloading: 310 kB     Downloading: 310 kB     Downloading: 310 kB     Downloading: 310 kB     Downloading: 310 kB     Downloading: 310 kB     Downloading: 310 kB     Downloading: 310 kB     Downloading: 310 kB     Downloading: 310 kB     Downloading: 310 kB     Downloading: 310 kB     Downloading: 310 kB     Downloading: 320 kB     Downloading: 320 kB     Downloading: 330 kB     Downloading: 330 kB     Downloading: 330 kB     Downloading: 330 kB     Downloading: 330 kB     Downloading: 330 kB     Downloading: 8.6 kB     Downloading: 8.6 kB     Downloading: 13 kB     Downloading: 13 kB     Downloading: 13 kB     Downloading: 13 kB     Downloading: 13 kB     Downloading: 13 kB
+```
+
+<table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<caption>(\#tab:return-vacant-show)1-year ACS PUMS data with vacant housing units</caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"> SERIALNO </th>
+   <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"> SPORDER </th>
+   <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"> WGTP </th>
+   <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"> PWGTP </th>
+   <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"> AGEP </th>
+   <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"> ST </th>
+   <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"> VACS </th>
+   <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"> HHT </th>
+   <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"> SEX </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> 2019HU0094511 </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> 157 </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:left;"> 56 </td>
+   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:left;"> b </td>
+   <td style="text-align:left;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2019HU0271067 </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> 268 </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:left;"> 56 </td>
+   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:left;"> b </td>
+   <td style="text-align:left;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2019HU0466134 </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> 158 </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:left;"> 56 </td>
+   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:left;"> b </td>
+   <td style="text-align:left;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2019HU0650356 </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> 243 </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:left;"> 56 </td>
+   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:left;"> b </td>
+   <td style="text-align:left;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2019HU0707994 </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> 30 </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:left;"> 56 </td>
+   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:left;"> b </td>
+   <td style="text-align:left;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2019HU0720346 </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> 100 </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:left;"> 56 </td>
+   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:left;"> b </td>
+   <td style="text-align:left;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2019HU0885957 </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> 170 </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:left;"> 56 </td>
+   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:left;"> b </td>
+   <td style="text-align:left;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2019HU0905994 </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> 45 </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:left;"> 56 </td>
+   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:left;"> b </td>
+   <td style="text-align:left;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2019HU0928583 </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> 25 </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:left;"> 56 </td>
+   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:left;"> b </td>
+   <td style="text-align:left;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2019HU0929765 </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> 57 </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:left;"> 56 </td>
+   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:left;"> b </td>
+   <td style="text-align:left;"> NA </td>
+  </tr>
+</tbody>
+</table>
+
+Vacant housing units are included in the dataset, but as they do not have person-level characteristics (due to their lack of occupancy) all person-level variables like age and sex have values of `NA`.
+
 ## Working with PUMS variables
 
 While the ACS PUMS dataset does not include tens of thousands of variables choices like its aggregate counterpart, it nonetheless includes variables and variable codes that can be difficult to understand without a data dictionary. In the Wyoming example above, only interpretation of the `AGEP` column for age is straightforward. `HHT`, for household type, and `SEX`, for sex, are coded as integers represented as character strings. To help users understand the meanings of these codes, **tidycensus** includes a built-in dataset, `pums_variables`, that can be viewed, filtered, and browsed.
@@ -306,88 +455,10 @@ wy_pums_recoded <- get_pums(
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:left;"> 2019GQ0000335 </td>
+   <td style="text-align:left;"> 2019GQ0000523 </td>
    <td style="text-align:right;"> 1 </td>
    <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 206 </td>
-   <td style="text-align:right;"> 17 </td>
-   <td style="text-align:left;"> 56 </td>
-   <td style="text-align:left;"> b </td>
-   <td style="text-align:left;"> 2 </td>
-   <td style="text-align:left;"> Wyoming/WY </td>
-   <td style="text-align:left;"> N/A (GQ/vacant) </td>
-   <td style="text-align:left;"> Female </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2019GQ0000958 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 50 </td>
-   <td style="text-align:right;"> 37 </td>
-   <td style="text-align:left;"> 56 </td>
-   <td style="text-align:left;"> b </td>
-   <td style="text-align:left;"> 1 </td>
-   <td style="text-align:left;"> Wyoming/WY </td>
-   <td style="text-align:left;"> N/A (GQ/vacant) </td>
-   <td style="text-align:left;"> Male </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2019GQ0009156 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 33 </td>
-   <td style="text-align:right;"> 75 </td>
-   <td style="text-align:left;"> 56 </td>
-   <td style="text-align:left;"> b </td>
-   <td style="text-align:left;"> 2 </td>
-   <td style="text-align:left;"> Wyoming/WY </td>
-   <td style="text-align:left;"> N/A (GQ/vacant) </td>
-   <td style="text-align:left;"> Female </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2019GQ0012426 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 23 </td>
-   <td style="text-align:right;"> 21 </td>
-   <td style="text-align:left;"> 56 </td>
-   <td style="text-align:left;"> b </td>
-   <td style="text-align:left;"> 2 </td>
-   <td style="text-align:left;"> Wyoming/WY </td>
-   <td style="text-align:left;"> N/A (GQ/vacant) </td>
-   <td style="text-align:left;"> Female </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2019GQ0015243 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 209 </td>
-   <td style="text-align:right;"> 94 </td>
-   <td style="text-align:left;"> 56 </td>
-   <td style="text-align:left;"> b </td>
-   <td style="text-align:left;"> 1 </td>
-   <td style="text-align:left;"> Wyoming/WY </td>
-   <td style="text-align:left;"> N/A (GQ/vacant) </td>
-   <td style="text-align:left;"> Male </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2019GQ0018773 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 273 </td>
-   <td style="text-align:right;"> 26 </td>
-   <td style="text-align:left;"> 56 </td>
-   <td style="text-align:left;"> b </td>
-   <td style="text-align:left;"> 1 </td>
-   <td style="text-align:left;"> Wyoming/WY </td>
-   <td style="text-align:left;"> N/A (GQ/vacant) </td>
-   <td style="text-align:left;"> Male </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2019GQ0019978 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 14 </td>
    <td style="text-align:right;"> 16 </td>
    <td style="text-align:left;"> 56 </td>
    <td style="text-align:left;"> b </td>
@@ -397,10 +468,36 @@ wy_pums_recoded <- get_pums(
    <td style="text-align:left;"> Male </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2019GQ0022931 </td>
+   <td style="text-align:left;"> 2019GQ0002701 </td>
    <td style="text-align:right;"> 1 </td>
    <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 67 </td>
+   <td style="text-align:right;"> 58 </td>
+   <td style="text-align:right;"> 36 </td>
+   <td style="text-align:left;"> 56 </td>
+   <td style="text-align:left;"> b </td>
+   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:left;"> Wyoming/WY </td>
+   <td style="text-align:left;"> N/A (GQ/vacant) </td>
+   <td style="text-align:left;"> Male </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2019GQ0002909 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 72 </td>
+   <td style="text-align:right;"> 82 </td>
+   <td style="text-align:left;"> 56 </td>
+   <td style="text-align:left;"> b </td>
+   <td style="text-align:left;"> 2 </td>
+   <td style="text-align:left;"> Wyoming/WY </td>
+   <td style="text-align:left;"> N/A (GQ/vacant) </td>
+   <td style="text-align:left;"> Female </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2019GQ0010377 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 68 </td>
    <td style="text-align:right;"> 18 </td>
    <td style="text-align:left;"> 56 </td>
    <td style="text-align:left;"> b </td>
@@ -410,11 +507,24 @@ wy_pums_recoded <- get_pums(
    <td style="text-align:left;"> Female </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2019GQ0032421 </td>
+   <td style="text-align:left;"> 2019GQ0016100 </td>
    <td style="text-align:right;"> 1 </td>
    <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 113 </td>
-   <td style="text-align:right;"> 94 </td>
+   <td style="text-align:right;"> 68 </td>
+   <td style="text-align:right;"> 35 </td>
+   <td style="text-align:left;"> 56 </td>
+   <td style="text-align:left;"> b </td>
+   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:left;"> Wyoming/WY </td>
+   <td style="text-align:left;"> N/A (GQ/vacant) </td>
+   <td style="text-align:left;"> Male </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2019GQ0018538 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 11 </td>
+   <td style="text-align:right;"> 54 </td>
    <td style="text-align:left;"> 56 </td>
    <td style="text-align:left;"> b </td>
    <td style="text-align:left;"> 2 </td>
@@ -423,11 +533,50 @@ wy_pums_recoded <- get_pums(
    <td style="text-align:left;"> Female </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2019GQ0033045 </td>
+   <td style="text-align:left;"> 2019GQ0019066 </td>
    <td style="text-align:right;"> 1 </td>
    <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 10 </td>
-   <td style="text-align:right;"> 44 </td>
+   <td style="text-align:right;"> 49 </td>
+   <td style="text-align:right;"> 26 </td>
+   <td style="text-align:left;"> 56 </td>
+   <td style="text-align:left;"> b </td>
+   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:left;"> Wyoming/WY </td>
+   <td style="text-align:left;"> N/A (GQ/vacant) </td>
+   <td style="text-align:left;"> Male </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2019GQ0019370 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 61 </td>
+   <td style="text-align:right;"> 18 </td>
+   <td style="text-align:left;"> 56 </td>
+   <td style="text-align:left;"> b </td>
+   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:left;"> Wyoming/WY </td>
+   <td style="text-align:left;"> N/A (GQ/vacant) </td>
+   <td style="text-align:left;"> Male </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2019GQ0020847 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 140 </td>
+   <td style="text-align:right;"> 35 </td>
+   <td style="text-align:left;"> 56 </td>
+   <td style="text-align:left;"> b </td>
+   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:left;"> Wyoming/WY </td>
+   <td style="text-align:left;"> N/A (GQ/vacant) </td>
+   <td style="text-align:left;"> Male </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2019GQ0020895 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 75 </td>
+   <td style="text-align:right;"> 18 </td>
    <td style="text-align:left;"> 56 </td>
    <td style="text-align:left;"> b </td>
    <td style="text-align:left;"> 1 </td>
@@ -478,103 +627,103 @@ wy_pums_filtered <- get_pums(
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:left;"> 2015000004982 </td>
+   <td style="text-align:left;"> 2015000002861 </td>
    <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 28 </td>
-   <td style="text-align:right;"> 29 </td>
-   <td style="text-align:right;"> 39 </td>
+   <td style="text-align:right;"> 62 </td>
+   <td style="text-align:right;"> 63 </td>
+   <td style="text-align:right;"> 46 </td>
+   <td style="text-align:left;"> 56 </td>
+   <td style="text-align:left;"> 6 </td>
+   <td style="text-align:left;"> 2 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2015000007968 </td>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 33 </td>
+   <td style="text-align:left;"> 56 </td>
+   <td style="text-align:left;"> 2 </td>
+   <td style="text-align:left;"> 2 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2015000009972 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 22 </td>
+   <td style="text-align:right;"> 55 </td>
+   <td style="text-align:right;"> 32 </td>
+   <td style="text-align:left;"> 56 </td>
+   <td style="text-align:left;"> 2 </td>
+   <td style="text-align:left;"> 2 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2015000010667 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 11 </td>
+   <td style="text-align:right;"> 12 </td>
+   <td style="text-align:right;"> 38 </td>
    <td style="text-align:left;"> 56 </td>
    <td style="text-align:left;"> 1 </td>
    <td style="text-align:left;"> 2 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2015000014993 </td>
+   <td style="text-align:left;"> 2015000022223 </td>
    <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 18 </td>
-   <td style="text-align:right;"> 19 </td>
-   <td style="text-align:right;"> 44 </td>
+   <td style="text-align:right;"> 31 </td>
+   <td style="text-align:right;"> 31 </td>
+   <td style="text-align:right;"> 47 </td>
+   <td style="text-align:left;"> 56 </td>
+   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:left;"> 2 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2015000025344 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 35 </td>
+   <td style="text-align:right;"> 35 </td>
+   <td style="text-align:right;"> 38 </td>
    <td style="text-align:left;"> 56 </td>
    <td style="text-align:left;"> 3 </td>
    <td style="text-align:left;"> 2 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2015000016130 </td>
+   <td style="text-align:left;"> 2015000027928 </td>
    <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 22 </td>
-   <td style="text-align:right;"> 23 </td>
+   <td style="text-align:right;"> 55 </td>
+   <td style="text-align:right;"> 54 </td>
+   <td style="text-align:right;"> 45 </td>
+   <td style="text-align:left;"> 56 </td>
+   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:left;"> 2 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2015000037505 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 10 </td>
+   <td style="text-align:right;"> 10 </td>
    <td style="text-align:right;"> 48 </td>
    <td style="text-align:left;"> 56 </td>
    <td style="text-align:left;"> 1 </td>
    <td style="text-align:left;"> 2 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2015000025094 </td>
+   <td style="text-align:left;"> 2015000054619 </td>
    <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 16 </td>
-   <td style="text-align:right;"> 16 </td>
-   <td style="text-align:right;"> 31 </td>
+   <td style="text-align:right;"> 8 </td>
+   <td style="text-align:right;"> 8 </td>
+   <td style="text-align:right;"> 41 </td>
    <td style="text-align:left;"> 56 </td>
    <td style="text-align:left;"> 1 </td>
    <td style="text-align:left;"> 2 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2015000032486 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 65 </td>
-   <td style="text-align:right;"> 65 </td>
-   <td style="text-align:right;"> 36 </td>
-   <td style="text-align:left;"> 56 </td>
-   <td style="text-align:left;"> 3 </td>
-   <td style="text-align:left;"> 2 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2015000044674 </td>
+   <td style="text-align:left;"> 2015000065987 </td>
    <td style="text-align:right;"> 1 </td>
    <td style="text-align:right;"> 14 </td>
-   <td style="text-align:right;"> 13 </td>
-   <td style="text-align:right;"> 40 </td>
-   <td style="text-align:left;"> 56 </td>
-   <td style="text-align:left;"> 1 </td>
-   <td style="text-align:left;"> 2 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2015000045979 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 18 </td>
-   <td style="text-align:right;"> 17 </td>
-   <td style="text-align:right;"> 49 </td>
-   <td style="text-align:left;"> 56 </td>
-   <td style="text-align:left;"> 3 </td>
-   <td style="text-align:left;"> 2 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2015000052006 </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 13 </td>
    <td style="text-align:right;"> 14 </td>
-   <td style="text-align:right;"> 37 </td>
+   <td style="text-align:right;"> 47 </td>
    <td style="text-align:left;"> 56 </td>
-   <td style="text-align:left;"> 1 </td>
-   <td style="text-align:left;"> 2 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2015000053688 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 21 </td>
-   <td style="text-align:right;"> 22 </td>
-   <td style="text-align:right;"> 40 </td>
-   <td style="text-align:left;"> 56 </td>
-   <td style="text-align:left;"> 1 </td>
-   <td style="text-align:left;"> 2 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2015000067452 </td>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 11 </td>
-   <td style="text-align:right;"> 10 </td>
-   <td style="text-align:right;"> 43 </td>
-   <td style="text-align:left;"> 56 </td>
-   <td style="text-align:left;"> 2 </td>
+   <td style="text-align:left;"> 6 </td>
    <td style="text-align:left;"> 2 </td>
   </tr>
 </tbody>
@@ -590,7 +739,7 @@ One of the steps the Census Bureau takes to preserve anonymity in the PUMS datas
 
 Public Use Microdata Areas (PUMAs) are the smallest available geographies at which records are identifiable in the PUMS datasets. PUMAs are redrawn with each decennial US Census, and typically are home to between 100,000 - 200,000 people when drawn, although some may be much larger by the end of a Census cycle. In large cities, a PUMA will represent a collection of nearby neighborhoods; in rural areas, it might represent several counties across a large area of a state.
 
-::: {.rmdtip}
+::: rmdtip
 At the time of this writing, PUMA geographies correspond to the 2010 Census definitions, even. While PUMAs are redrawn with each decennial US Census, their release lags the decennial Census by a couple of years. To determine appropriate PUMA geographies, the Census Bureau consults with State Data Centers (SDCs) and incorporates their suggested revisions to these geographies. For 2020 PUMAs, this process takes place through the 2021 calendar year. This means that the updated PUMA geographies, and their incorporation into PUMS datasets, are planned for public release in the summer of 2022. For more information, visit <https://www.census.gov/programs-surveys/geography/guidance/geo-areas/pumas/2020pumas.html>.
 :::
 
@@ -601,7 +750,7 @@ PUMA geographies can be obtained and reviewed with the `pumas()` function in the
 library(tigris)
 options(tigris_use_cache = TRUE)
 
-wy_pumas <- pumas(state = "WY", cb = TRUE)
+wy_pumas <- pumas(state = "WY", cb = TRUE, year = 2019)
 
 ggplot(wy_pumas) + 
   geom_sf() + 
@@ -632,7 +781,7 @@ In a denser urban area, PUMAs will reflect subsections of major cities and are d
 
 
 ```r
-nyc_pumas <- pumas(state = "NY", cb = TRUE) %>%
+nyc_pumas <- pumas(state = "NY", cb = TRUE, year = 2019) %>%
   filter(str_detect(NAME10, "NYC"))
 
 ggplot(nyc_pumas) + 
@@ -669,7 +818,8 @@ PUMA information is available with the variable code `PUMA` in `get_pums()`. Use
 wy_age_by_puma <- get_pums(
   variables = c("PUMA", "AGEP"),
   state = "WY",
-  survey = "acs5"
+  survey = "acs5",
+  year = 2019
 )
 ```
 
@@ -688,93 +838,93 @@ wy_age_by_puma <- get_pums(
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:left;"> 2015000004982 </td>
+   <td style="text-align:left;"> 2015000002253 </td>
    <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 28 </td>
-   <td style="text-align:right;"> 29 </td>
-   <td style="text-align:right;"> 39 </td>
-   <td style="text-align:left;"> 00200 </td>
+   <td style="text-align:right;"> 69 </td>
+   <td style="text-align:right;"> 68 </td>
+   <td style="text-align:right;"> 93 </td>
+   <td style="text-align:left;"> 00300 </td>
    <td style="text-align:left;"> 56 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2015000004982 </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 28 </td>
-   <td style="text-align:right;"> 25 </td>
-   <td style="text-align:right;"> 36 </td>
-   <td style="text-align:left;"> 00200 </td>
-   <td style="text-align:left;"> 56 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2015000004982 </td>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 28 </td>
-   <td style="text-align:right;"> 29 </td>
-   <td style="text-align:right;"> 10 </td>
-   <td style="text-align:left;"> 00200 </td>
-   <td style="text-align:left;"> 56 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2015000004982 </td>
-   <td style="text-align:right;"> 4 </td>
-   <td style="text-align:right;"> 28 </td>
-   <td style="text-align:right;"> 25 </td>
-   <td style="text-align:right;"> 8 </td>
-   <td style="text-align:left;"> 00200 </td>
-   <td style="text-align:left;"> 56 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2015000005881 </td>
+   <td style="text-align:left;"> 2015000002861 </td>
    <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 27 </td>
-   <td style="text-align:right;"> 28 </td>
-   <td style="text-align:right;"> 74 </td>
-   <td style="text-align:left;"> 00100 </td>
+   <td style="text-align:right;"> 62 </td>
+   <td style="text-align:right;"> 63 </td>
+   <td style="text-align:right;"> 46 </td>
+   <td style="text-align:left;"> 00300 </td>
    <td style="text-align:left;"> 56 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2015000007222 </td>
+   <td style="text-align:left;"> 2015000004537 </td>
    <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 8 </td>
-   <td style="text-align:right;"> 61 </td>
-   <td style="text-align:left;"> 00100 </td>
-   <td style="text-align:left;"> 56 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2015000008820 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0 </td>
    <td style="text-align:right;"> 12 </td>
-   <td style="text-align:right;"> 28 </td>
-   <td style="text-align:left;"> 00400 </td>
+   <td style="text-align:right;"> 13 </td>
+   <td style="text-align:right;"> 59 </td>
+   <td style="text-align:left;"> 00300 </td>
    <td style="text-align:left;"> 56 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2015000008875 </td>
+   <td style="text-align:left;"> 2015000004797 </td>
    <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 18 </td>
-   <td style="text-align:right;"> 18 </td>
-   <td style="text-align:right;"> 61 </td>
+   <td style="text-align:right;"> 24 </td>
+   <td style="text-align:right;"> 24 </td>
+   <td style="text-align:right;"> 70 </td>
    <td style="text-align:left;"> 00300 </td>
    <td style="text-align:left;"> 56 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2015000008875 </td>
+   <td style="text-align:left;"> 2015000004797 </td>
    <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 18 </td>
-   <td style="text-align:right;"> 19 </td>
-   <td style="text-align:right;"> 58 </td>
+   <td style="text-align:right;"> 24 </td>
+   <td style="text-align:right;"> 33 </td>
+   <td style="text-align:right;"> 70 </td>
    <td style="text-align:left;"> 00300 </td>
    <td style="text-align:left;"> 56 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2015000008875 </td>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 18 </td>
-   <td style="text-align:right;"> 22 </td>
-   <td style="text-align:right;"> 14 </td>
-   <td style="text-align:left;"> 00300 </td>
+   <td style="text-align:left;"> 2015000005194 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 9 </td>
+   <td style="text-align:right;"> 8 </td>
+   <td style="text-align:right;"> 80 </td>
+   <td style="text-align:left;"> 00200 </td>
+   <td style="text-align:left;"> 56 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2015000005194 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 9 </td>
+   <td style="text-align:right;"> 10 </td>
+   <td style="text-align:right;"> 79 </td>
+   <td style="text-align:left;"> 00200 </td>
+   <td style="text-align:left;"> 56 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2015000005681 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 7 </td>
+   <td style="text-align:right;"> 19 </td>
+   <td style="text-align:left;"> 00100 </td>
+   <td style="text-align:left;"> 56 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2015000005681 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 19 </td>
+   <td style="text-align:left;"> 00100 </td>
+   <td style="text-align:left;"> 56 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2015000006671 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 65 </td>
+   <td style="text-align:right;"> 64 </td>
+   <td style="text-align:right;"> 43 </td>
+   <td style="text-align:left;"> 00100 </td>
    <td style="text-align:left;"> 56 </td>
   </tr>
 </tbody>
@@ -790,7 +940,8 @@ wy_puma_subset <- get_pums(
   variables = "AGEP",
   state = "WY",
   survey = "acs5",
-  puma = "00500"
+  puma = "00500",
+  year = 2019
 )
 ```
 
@@ -809,92 +960,92 @@ wy_puma_subset <- get_pums(
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:left;"> 2015000008887 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 32 </td>
-   <td style="text-align:left;"> 00500 </td>
-   <td style="text-align:left;"> 56 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2015000011835 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 18 </td>
-   <td style="text-align:right;"> 18 </td>
-   <td style="text-align:right;"> 73 </td>
-   <td style="text-align:left;"> 00500 </td>
-   <td style="text-align:left;"> 56 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2015000020297 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 11 </td>
-   <td style="text-align:right;"> 11 </td>
-   <td style="text-align:right;"> 71 </td>
-   <td style="text-align:left;"> 00500 </td>
-   <td style="text-align:left;"> 56 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2015000020297 </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 11 </td>
-   <td style="text-align:right;"> 12 </td>
-   <td style="text-align:right;"> 66 </td>
-   <td style="text-align:left;"> 00500 </td>
-   <td style="text-align:left;"> 56 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2015000026229 </td>
+   <td style="text-align:left;"> 2015000007382 </td>
    <td style="text-align:right;"> 1 </td>
    <td style="text-align:right;"> 17 </td>
    <td style="text-align:right;"> 17 </td>
-   <td style="text-align:right;"> 28 </td>
+   <td style="text-align:right;"> 33 </td>
    <td style="text-align:left;"> 00500 </td>
    <td style="text-align:left;"> 56 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2015000026229 </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 17 </td>
-   <td style="text-align:right;"> 13 </td>
-   <td style="text-align:right;"> 19 </td>
-   <td style="text-align:left;"> 00500 </td>
-   <td style="text-align:left;"> 56 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2015000033620 </td>
+   <td style="text-align:left;"> 2015000014560 </td>
    <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 7 </td>
-   <td style="text-align:right;"> 6 </td>
-   <td style="text-align:right;"> 78 </td>
-   <td style="text-align:left;"> 00500 </td>
-   <td style="text-align:left;"> 56 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2015000044674 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 14 </td>
-   <td style="text-align:right;"> 13 </td>
-   <td style="text-align:right;"> 40 </td>
-   <td style="text-align:left;"> 00500 </td>
-   <td style="text-align:left;"> 56 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2015000044674 </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 14 </td>
-   <td style="text-align:right;"> 14 </td>
-   <td style="text-align:right;"> 50 </td>
-   <td style="text-align:left;"> 00500 </td>
-   <td style="text-align:left;"> 56 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2015000044674 </td>
    <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 14 </td>
-   <td style="text-align:right;"> 10 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 56 </td>
+   <td style="text-align:left;"> 00500 </td>
+   <td style="text-align:left;"> 56 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2015000017683 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 17 </td>
    <td style="text-align:right;"> 16 </td>
+   <td style="text-align:right;"> 54 </td>
+   <td style="text-align:left;"> 00500 </td>
+   <td style="text-align:left;"> 56 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2015000017683 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 17 </td>
+   <td style="text-align:right;"> 7 </td>
+   <td style="text-align:right;"> 54 </td>
+   <td style="text-align:left;"> 00500 </td>
+   <td style="text-align:left;"> 56 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2015000024415 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 13 </td>
+   <td style="text-align:right;"> 13 </td>
+   <td style="text-align:right;"> 74 </td>
+   <td style="text-align:left;"> 00500 </td>
+   <td style="text-align:left;"> 56 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2015000024415 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 13 </td>
+   <td style="text-align:right;"> 15 </td>
+   <td style="text-align:right;"> 68 </td>
+   <td style="text-align:left;"> 00500 </td>
+   <td style="text-align:left;"> 56 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2015000024421 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 7 </td>
+   <td style="text-align:right;"> 47 </td>
+   <td style="text-align:left;"> 00500 </td>
+   <td style="text-align:left;"> 56 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2015000035380 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 53 </td>
+   <td style="text-align:left;"> 00500 </td>
+   <td style="text-align:left;"> 56 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2015000035380 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 62 </td>
+   <td style="text-align:left;"> 00500 </td>
+   <td style="text-align:left;"> 56 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2015000035380 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 29 </td>
    <td style="text-align:left;"> 00500 </td>
    <td style="text-align:left;"> 56 </td>
   </tr>
@@ -909,13 +1060,9 @@ twostate_puma_subset <- get_pums(
   variables = "AGEP",
   state = "multiple",
   survey = "acs5",
-  puma = c("WY" = "00500", "UT" = "05001")
+  puma = c("WY" = "00500", "UT" = "05001"),
+  year = 2019
 )
-```
-
-
-```r
-style_data(twostate_puma_subset, caption = "Data for PUMA 00500 in Wyoming and PUMA 05001 in Utah")
 ```
 
 <table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">

@@ -82,18 +82,18 @@
 </h1>
 <p>A major benefit of using the individual-level microdata returned by <code><a href="https://walker-data.com/tidycensus/reference/get_pums.html">get_pums()</a></code> is the ability to create detailed, granular estimates of ACS data. While the aggregate ACS data available with <code><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs()</a></code> includes tens of thousands of indicators to choose from, researchers and analysts still may be interested in cross-tabulations not available in the aggregate files. Additionally, microdata helps researchers design statistical models to assess demographic relationships at the individual level in a way not possible with aggregate data.</p>
 <p>Analysts must pay careful attention to the structure of the PUMS datasets in order to produce accurate estimates and handle errors appropriately. PUMS datasets are <em>weighted</em> samples, in which each person or household is not considered unique or individual, but rather representative of multiple other persons or households. In turn, analyses and tabulations using PUMS data must use appropriate tools for handling weighting variables to accurately produce estimates. Fortunately, tidyverse tools like <strong>dplyr</strong>, covered elsewhere in this book, are excellent for producing these tabulations and handling survey weights</p>
-<p>As covered in Chapter 3, data from the American Community Survey are based on a sample and in turn characterized by error. This means that ACS data acquired with <code><a href="https://walker-data.com/tidycensus/reference/get_pums.html">get_pums()</a></code> are similarly characterized by error, which can be substantial when cross-tabulations are highly specific. Fortunately, the US Census Bureau provides <em>replicate weights</em> to help analysts generate standard errors around tabulated estimates with PUMS data as they take into account the complex structure of the survey sample. While working with replicate weights has traditionally been cumbersome for analysts, tidycensus with help from the <strong>survey</strong> <span class="citation">(<a href="references.html#ref-lumley2010" role="doc-biblioref">Lumley 2010</a>)</span> and <strong>srvyr</strong> <span class="citation">(<a href="references.html#ref-ellis2021" role="doc-biblioref">Freedman Ellis and Schneider 2021</a>)</span> R packages has integrated tools for handling replicate weights and correctly estimating standard errors when tabulating and modeling data. These workflows will be covered later in this chapter.</p>
+<p>As covered in Chapter 3, data from the American Community Survey are based on a sample and in turn characterized by error. This means that ACS data acquired with <code><a href="https://walker-data.com/tidycensus/reference/get_pums.html">get_pums()</a></code> are similarly characterized by error, which can be substantial when cross-tabulations are highly specific. Fortunately, the US Census Bureau provides <em>replicate weights</em> to help analysts generate standard errors around tabulated estimates with PUMS data as they take into account the complex structure of the survey sample. While working with replicate weights has traditionally been cumbersome for analysts, <strong>tidycensus</strong> with help from the <strong>survey</strong> <span class="citation">(<a href="references.html#ref-lumley2010" role="doc-biblioref">Lumley 2010</a>)</span> and <strong>srvyr</strong> <span class="citation">(<a href="references.html#ref-ellis2021" role="doc-biblioref">Freedman Ellis and Schneider 2021</a>)</span> R packages has integrated tools for handling replicate weights and correctly estimating standard errors when tabulating and modeling data. These workflows will be covered later in this chapter.</p>
 <div id="pums-data-and-the-tidyverse" class="section level2" number="10.1">
 <h2>
 <span class="header-section-number">10.1</span> PUMS data and the tidyverse<a class="anchor" aria-label="anchor" href="#pums-data-and-the-tidyverse"><i class="fas fa-link"></i></a>
 </h2>
-<p>As discussed in Chapter <a href="introduction-to-census-microdata.html#introduction-to-census-microdata">9</a>, <code><a href="https://walker-data.com/tidycensus/reference/get_pums.html">get_pums()</a></code> automatically returns data with both household (<code>WGTP</code>) and person (<code>PWGTP</code>) weights. These weights can loosely be interpreted as the number of households - or persons - represented by each individual row in the PUMS data. Appropriate use of these weights columns is essential for tabulating accurate estimates of population characteristics with PUMS data. Fortunately, weighted tabulations work quite well within familiar tidyverse workflows, such as those covered in Chapter <a href="wrangling-census-data-with-tidyverse-tools.html#wrangling-census-data-with-tidyverse-tools">3</a>.</p>
+<p>As discussed in Chapter <a href="introduction-to-census-microdata.html#introduction-to-census-microdata">9</a>, <code><a href="https://walker-data.com/tidycensus/reference/get_pums.html">get_pums()</a></code> automatically returns data with both household (<code>WGTP</code>) and person (<code>PWGTP</code>) weights. These weights can loosely be interpreted as the number of households or persons represented by each individual row in the PUMS data. Appropriate use of these weights columns is essential for tabulating accurate estimates of population characteristics with PUMS data. Fortunately, weighted tabulations work quite well within familiar tidyverse workflows, such as those covered in Chapter <a href="wrangling-census-data-with-tidyverse-tools.html#wrangling-census-data-with-tidyverse-tools">3</a>.</p>
 <div id="basic-tabulation-of-weights-with-tidyverse-tools" class="section level3" number="10.1.1">
 <h3>
 <span class="header-section-number">10.1.1</span> Basic tabulation of weights with tidyverse tools<a class="anchor" aria-label="anchor" href="#basic-tabulation-of-weights-with-tidyverse-tools"><i class="fas fa-link"></i></a>
 </h3>
-<p>Let’s get some basic sample PUMS data from the 2015-2019 ACS for Mississippi with information on sex and age.</p>
-<div class="sourceCode" id="cb358"><pre class="downlit sourceCode r">
+<p>Let’s get some basic sample PUMS data from the 2016-2020 ACS for Mississippi with information on sex and age.</p>
+<div class="sourceCode" id="cb368"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://walker-data.com/tidycensus/">tidycensus</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
 
@@ -101,7 +101,7 @@
   variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"SEX"</span>, <span class="st">"AGEP"</span><span class="op">)</span>,
   state <span class="op">=</span> <span class="st">"MS"</span>,
   survey <span class="op">=</span> <span class="st">"acs5"</span>,
-  year <span class="op">=</span> <span class="fl">2019</span>,
+  year <span class="op">=</span> <span class="fl">2020</span>,
   recode <span class="op">=</span> <span class="cn">TRUE</span>
 <span class="op">)</span></code></pre></div>
 <p>Let’s take a quick look at our data:</p>
@@ -141,48 +141,19 @@ SEX_label
 <tbody>
 <tr>
 <td style="text-align:left;">
-2015000000200
+2016000000411
 </td>
 <td style="text-align:right;">
 1
 </td>
 <td style="text-align:right;">
-9
+54
 </td>
 <td style="text-align:right;">
-10
+54
 </td>
 <td style="text-align:right;">
-53
-</td>
-<td style="text-align:left;">
-28
-</td>
-<td style="text-align:left;">
-2
-</td>
-<td style="text-align:left;">
-Mississippi/MS
-</td>
-<td style="text-align:left;">
-Female
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2015000000200
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-9
-</td>
-<td style="text-align:right;">
-16
-</td>
-<td style="text-align:right;">
-33
+30
 </td>
 <td style="text-align:left;">
 28
@@ -199,77 +170,77 @@ Male
 </tr>
 <tr>
 <td style="text-align:left;">
-2015000000200
+2016000000411
 </td>
 <td style="text-align:right;">
-3
+2
 </td>
 <td style="text-align:right;">
-9
+54
+</td>
+<td style="text-align:right;">
+95
+</td>
+<td style="text-align:right;">
+22
+</td>
+<td style="text-align:left;">
+28
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+Mississippi/MS
+</td>
+<td style="text-align:left;">
+Female
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2016000000739
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+27
+</td>
+<td style="text-align:right;">
+26
+</td>
+<td style="text-align:right;">
+51
+</td>
+<td style="text-align:left;">
+28
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Mississippi/MS
+</td>
+<td style="text-align:left;">
+Male
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2016000000739
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+27
 </td>
 <td style="text-align:right;">
 17
 </td>
 <td style="text-align:right;">
-32
-</td>
-<td style="text-align:left;">
-28
-</td>
-<td style="text-align:left;">
-1
-</td>
-<td style="text-align:left;">
-Mississippi/MS
-</td>
-<td style="text-align:left;">
-Male
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2015000000379
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-23
-</td>
-<td style="text-align:right;">
-23
-</td>
-<td style="text-align:right;">
-42
-</td>
-<td style="text-align:left;">
-28
-</td>
-<td style="text-align:left;">
-1
-</td>
-<td style="text-align:left;">
-Mississippi/MS
-</td>
-<td style="text-align:left;">
-Male
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2015000000379
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-23
-</td>
-<td style="text-align:right;">
-22
-</td>
-<td style="text-align:right;">
-37
+17
 </td>
 <td style="text-align:left;">
 28
@@ -286,16 +257,45 @@ Female
 </tr>
 <tr>
 <td style="text-align:left;">
-2015000000379
+2016000000803
+</td>
+<td style="text-align:right;">
+1
 </td>
 <td style="text-align:right;">
 3
 </td>
 <td style="text-align:right;">
-23
+3
 </td>
 <td style="text-align:right;">
 30
+</td>
+<td style="text-align:left;">
+28
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+Mississippi/MS
+</td>
+<td style="text-align:left;">
+Female
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2016000000803
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+4
 </td>
 <td style="text-align:right;">
 8
@@ -315,19 +315,19 @@ Male
 </tr>
 <tr>
 <td style="text-align:left;">
-2015000000379
+2016000000858
 </td>
 <td style="text-align:right;">
-4
+1
 </td>
 <td style="text-align:right;">
-23
+9
 </td>
 <td style="text-align:right;">
-30
+9
 </td>
 <td style="text-align:right;">
-7
+90
 </td>
 <td style="text-align:left;">
 28
@@ -344,77 +344,77 @@ Male
 </tr>
 <tr>
 <td style="text-align:left;">
-2015000000530
+2016000000858
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+24
+</td>
+<td style="text-align:right;">
+63
+</td>
+<td style="text-align:left;">
+28
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Mississippi/MS
+</td>
+<td style="text-align:left;">
+Male
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2016000000901
 </td>
 <td style="text-align:right;">
 1
 </td>
 <td style="text-align:right;">
-66
+16
+</td>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:right;">
+70
+</td>
+<td style="text-align:left;">
+28
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Mississippi/MS
+</td>
+<td style="text-align:left;">
+Male
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2016000000901
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:right;">
+24
 </td>
 <td style="text-align:right;">
 65
-</td>
-<td style="text-align:right;">
-33
-</td>
-<td style="text-align:left;">
-28
-</td>
-<td style="text-align:left;">
-2
-</td>
-<td style="text-align:left;">
-Mississippi/MS
-</td>
-<td style="text-align:left;">
-Female
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2015000000530
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-66
-</td>
-<td style="text-align:right;">
-67
-</td>
-<td style="text-align:right;">
-15
-</td>
-<td style="text-align:left;">
-28
-</td>
-<td style="text-align:left;">
-1
-</td>
-<td style="text-align:left;">
-Mississippi/MS
-</td>
-<td style="text-align:left;">
-Male
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2015000000530
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-66
-</td>
-<td style="text-align:right;">
-55
-</td>
-<td style="text-align:right;">
-5
 </td>
 <td style="text-align:left;">
 28
@@ -432,54 +432,55 @@ Female
 </tbody>
 </table></div>
 <p>As we learned in Chapter <a href="analyzing-census-microdata.html#analyzing-census-microdata">10</a>, the number of people in Mississippi can be tabulated by summing over the person-weight column:</p>
-<div class="sourceCode" id="cb359"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb369"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">ms_pums</span><span class="op">$</span><span class="va">PWGTP</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] 2984418</code></pre>
+<pre><code>## [1] 2981835</code></pre>
 <p>We can perform similar calculations with tidyverse tools. The <code><a href="https://dplyr.tidyverse.org/reference/count.html">count()</a></code> function in the dplyr package performs a simple tabulation of your data. The optional <code>wt</code> argument in <code><a href="https://dplyr.tidyverse.org/reference/count.html">count()</a></code> allows you to specify a weight column, which in this case will be our person-weight.</p>
-<div class="sourceCode" id="cb361"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb371"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ms_pums</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span>wt <span class="op">=</span> <span class="va">PWGTP</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 1
 ##         n
 ##     &lt;dbl&gt;
-## 1 2984418</code></pre>
-<p><code><a href="https://dplyr.tidyverse.org/reference/count.html">count()</a></code> has the additional benefit of allowing for the specification of one our more columns that will be grouped and tabulated. For example, we could tabulate data by unique values of age and sex in Mississippi:</p>
-<div class="sourceCode" id="cb363"><pre class="downlit sourceCode r">
+## 1 2981835</code></pre>
+<p><code><a href="https://dplyr.tidyverse.org/reference/count.html">count()</a></code> has the additional benefit of allowing for the specification of one our more columns that will be grouped and tabulated. For example, we could tabulate data by unique values of age and sex in Mississippi. The <code>wt</code> argument in <code><a href="https://dplyr.tidyverse.org/reference/count.html">count()</a></code> specifies the <code>PWGTP</code> column as the appropriate weight for data tabulation.</p>
+<div class="sourceCode" id="cb373"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ms_pums</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">SEX_label</span>, <span class="va">AGEP</span>, wt <span class="op">=</span> <span class="va">PWGTP</span><span class="op">)</span> </code></pre></div>
 <pre><code>## # A tibble: 186 × 3
 ##    SEX_label  AGEP     n
 ##    &lt;ord&gt;     &lt;dbl&gt; &lt;dbl&gt;
-##  1 Male          0 18232
-##  2 Male          1 19104
-##  3 Male          2 18399
-##  4 Male          3 18810
-##  5 Male          4 20597
-##  6 Male          5 18066
-##  7 Male          6 20756
-##  8 Male          7 20989
-##  9 Male          8 20548
-## 10 Male          9 21852
+##  1 Male          0 18111
+##  2 Male          1 19206
+##  3 Male          2 18507
+##  4 Male          3 18558
+##  5 Male          4 20054
+##  6 Male          5 17884
+##  7 Male          6 18875
+##  8 Male          7 18775
+##  9 Male          8 19316
+## 10 Male          9 20866
 ## # … with 176 more rows</code></pre>
 <p>We can also perform more custom analyses, such as tabulating the number of people over age 65 by sex in Mississippi. This involves specifying a filter condition to retain rows for records with an age of 65 and up, then tabulating by sex.</p>
-<div class="sourceCode" id="cb365"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb375"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ms_pums</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">AGEP</span> <span class="op">&gt;=</span> <span class="fl">65</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">SEX</span>, wt <span class="op">=</span> <span class="va">PWGTP</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 2
 ##   SEX        n
 ##   &lt;chr&gt;  &lt;dbl&gt;
-## 1 1     200306
-## 2 2     260737</code></pre>
+## 1 1     206504
+## 2 2     267707</code></pre>
 <p>We can then use <code><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs()</a></code> to check our answer:</p>
-<div class="sourceCode" id="cb367"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb377"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs</a></span><span class="op">(</span>geography <span class="op">=</span> <span class="st">"state"</span>,
         state <span class="op">=</span> <span class="st">"MS"</span>,
-        variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"DP05_0030"</span>, <span class="st">"DP05_0031"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+        variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"DP05_0030"</span>, <span class="st">"DP05_0031"</span><span class="op">)</span>,
+        year <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 5
 ##   GEOID NAME        variable  estimate   moe
 ##   &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt;
-## 1 28    Mississippi DP05_0030   200258   413
-## 2 28    Mississippi DP05_0031   260764   468</code></pre>
+## 1 28    Mississippi DP05_0030   206518   547
+## 2 28    Mississippi DP05_0031   267752   466</code></pre>
 <p>We notice that our tabulations are very close to the ACS estimates available in <code><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs()</a></code>, and well within the margin of error. When we are doing tabulations with microdata, it is important to remember that we are tabulating data based on a smaller subsample of information than is available to the aggregate ACS estimates. In turn, as the US Census Bureau reminds us <span class="citation">(<a href="references.html#ref-pums_readme" role="doc-biblioref">American Community Survey Office 2021</a>)</span>:</p>
 <blockquote>
 <p>Because PUMS data consist of a subset of the full ACS sample, tabulations from the ACS PUMS will not match those from published tables of ACS data.</p>
@@ -492,13 +493,14 @@ Female
 </h3>
 <p>When combined with tidyverse tools as introduced in Chapter <a href="wrangling-census-data-with-tidyverse-tools.html#wrangling-census-data-with-tidyverse-tools">3</a>, PUMS data can produce highly detailed estimates not available in the regular aggregate ACS. The example below acquires data on rent burden, family type, and race/ethnicity to examine intersections between these variables for households in Mississippi. The <code>PUMA</code> variable is also included for use later in this chapter.</p>
 <p>Our guiding research question is as follows: how does rent burden vary by race/ethnicity and household type for Mississippi households? This requires obtaining data on rent burden (gross rent as percentage of household income) with variable <code>GRPIP</code>; race and ethnicity with variables <code>RAC1P</code> and <code>HISP</code>; and household type with variable <code>HHT</code>. The <code>variables_filter</code> argument is used to filter the sample to only renter-occupied households paying cash rent, speeding download times.</p>
-<div class="sourceCode" id="cb369"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb379"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">hh_variables</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"PUMA"</span>, <span class="st">"GRPIP"</span>, <span class="st">"RAC1P"</span>, 
                   <span class="st">"HISP"</span>, <span class="st">"HHT"</span><span class="op">)</span>
 
 <span class="va">ms_hh_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_pums.html">get_pums</a></span><span class="op">(</span>
   variables <span class="op">=</span> <span class="va">hh_variables</span>, 
   state <span class="op">=</span> <span class="st">"MS"</span>,
+  year <span class="op">=</span> <span class="fl">2020</span>,
   variables_filter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
     SPORDER <span class="op">=</span> <span class="fl">1</span>,
     TEN <span class="op">=</span> <span class="fl">3</span>
@@ -563,19 +565,19 @@ RAC1P_label
 <tbody>
 <tr>
 <td style="text-align:left;">
-2015000000530
+2017000908503
 </td>
 <td style="text-align:right;">
 1
 </td>
 <td style="text-align:right;">
-66
+65
 </td>
 <td style="text-align:right;">
 65
 </td>
 <td style="text-align:right;">
-48
+18
 </td>
 <td style="text-align:left;">
 01300
@@ -613,22 +615,22 @@ Black or African American alone
 </tr>
 <tr>
 <td style="text-align:left;">
-2015000008312
+2017000909310
 </td>
 <td style="text-align:right;">
 1
 </td>
 <td style="text-align:right;">
-32
+11
 </td>
 <td style="text-align:right;">
-33
+12
 </td>
 <td style="text-align:right;">
-68
+63
 </td>
 <td style="text-align:left;">
-01500
+00600
 </td>
 <td style="text-align:left;">
 28
@@ -643,7 +645,7 @@ Black or African American alone
 01
 </td>
 <td style="text-align:left;">
-3
+2
 </td>
 <td style="text-align:left;">
 Mississippi/MS
@@ -658,27 +660,27 @@ Other family household: Female householder, no spouse present
 Not Spanish/Hispanic/Latino
 </td>
 <td style="text-align:left;">
-American Indian alone
+Black or African American alone
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2015000008617
+2017000909754
 </td>
 <td style="text-align:right;">
 1
 </td>
 <td style="text-align:right;">
-8
+41
+</td>
+<td style="text-align:right;">
+40
 </td>
 <td style="text-align:right;">
 8
-</td>
-<td style="text-align:right;">
-14
 </td>
 <td style="text-align:left;">
-01500
+02000
 </td>
 <td style="text-align:left;">
 28
@@ -687,13 +689,13 @@ American Indian alone
 3
 </td>
 <td style="text-align:left;">
-7
+5
 </td>
 <td style="text-align:left;">
-02
+01
 </td>
 <td style="text-align:left;">
-1
+9
 </td>
 <td style="text-align:left;">
 Mississippi/MS
@@ -702,30 +704,30 @@ Mississippi/MS
 Rented
 </td>
 <td style="text-align:left;">
-Nonfamily household: Female householder: Not living alone
+Nonfamily household: Male householder: Not living alone
 </td>
 <td style="text-align:left;">
-Mexican
+Not Spanish/Hispanic/Latino
 </td>
 <td style="text-align:left;">
-White alone
+Two or More Races
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2015000009259
+2017000910334
 </td>
 <td style="text-align:right;">
 1
 </td>
 <td style="text-align:right;">
-32
+25
 </td>
 <td style="text-align:right;">
-32
+25
 </td>
 <td style="text-align:right;">
-59
+8
 </td>
 <td style="text-align:left;">
 01400
@@ -763,22 +765,22 @@ White alone
 </tr>
 <tr>
 <td style="text-align:left;">
-2015000009659
+2017000910561
 </td>
 <td style="text-align:right;">
 1
 </td>
 <td style="text-align:right;">
-4
+10
 </td>
 <td style="text-align:right;">
-5
+11
 </td>
 <td style="text-align:right;">
-39
+31
 </td>
 <td style="text-align:left;">
-00600
+01100
 </td>
 <td style="text-align:left;">
 28
@@ -787,13 +789,13 @@ White alone
 3
 </td>
 <td style="text-align:left;">
-4
+3
 </td>
 <td style="text-align:left;">
 01
 </td>
 <td style="text-align:left;">
-1
+2
 </td>
 <td style="text-align:left;">
 Mississippi/MS
@@ -802,19 +804,19 @@ Mississippi/MS
 Rented
 </td>
 <td style="text-align:left;">
-Nonfamily household: Male householder: Living alone
+Other family household: Female householder, no spouse present
 </td>
 <td style="text-align:left;">
 Not Spanish/Hispanic/Latino
 </td>
 <td style="text-align:left;">
-White alone
+Black or African American alone
 </td>
 </tr>
 </tbody>
 </table></div>
 <p>To analyze rent burdens with respect to the marital status and race/ethnicity of the householder, it will be useful to do some additional recoding using <strong>dplyr</strong>’s <code><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when()</a></code> function. A new <code>race_ethnicity</code> column will identify householders by general categories, and a <code>married</code> column will identify whether or not the household is a married-couple household.</p>
-<div class="sourceCode" id="cb370"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb380"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ms_hh_recoded</span> <span class="op">&lt;-</span> <span class="va">ms_hh_data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>
     race_ethnicity <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span><span class="op">(</span>
@@ -829,7 +831,7 @@ White alone
     <span class="op">)</span>
   <span class="op">)</span></code></pre></div>
 <p>This information can then be summarized with respect to the household weight variable <code>WGTP</code> and the rent burden variable <code>GRPIP</code> within a <code>group_by() %&gt;% summarize()</code> workflow. The dataset is filtered to only non-Hispanic white, non-Hispanic Black, and Hispanic householders to focus on those groups, then grouped by race/ethnicity and marital status. Within the <code><a href="http://gdfe.co/srvyr/reference/summarise.html">summarize()</a></code> call, the percentage of each subgroup paying 40 percent or more of their household incomes in rent is calculated by summing over the household weight column <code>WGTP</code>, but filtering for households with rent burdens of 40 percent or more in the numerator.</p>
-<div class="sourceCode" id="cb371"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb381"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ms_hh_summary</span> <span class="op">&lt;-</span> <span class="va">ms_hh_recoded</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">race_ethnicity</span> <span class="op">!=</span> <span class="st">"Other"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">race_ethnicity</span>, <span class="va">married</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
@@ -861,7 +863,7 @@ Black
 Married
 </td>
 <td style="text-align:right;">
-0.1821176
+0.1625791
 </td>
 </tr>
 <tr>
@@ -872,7 +874,7 @@ Black
 Not married
 </td>
 <td style="text-align:right;">
-0.4167467
+0.4080033
 </td>
 </tr>
 <tr>
@@ -883,7 +885,7 @@ Hispanic
 Married
 </td>
 <td style="text-align:right;">
-0.1723502
+0.1716087
 </td>
 </tr>
 <tr>
@@ -894,7 +896,7 @@ Hispanic
 Not married
 </td>
 <td style="text-align:right;">
-0.3006062
+0.3569935
 </td>
 </tr>
 <tr>
@@ -905,7 +907,7 @@ White
 Married
 </td>
 <td style="text-align:right;">
-0.1349339
+0.1266644
 </td>
 </tr>
 <tr>
@@ -916,12 +918,12 @@ White
 Not married
 </td>
 <td style="text-align:right;">
-0.3299732
+0.3356546
 </td>
 </tr>
 </tbody>
 </table></div>
-<p>The demographic group in this example with the largest rent burden is Black, Not married; nearly 42 percent of households in this group pay over 40 percent of their incomes in gross rent. The least rent-burdened group is White, Married, with a value under 14 percent. For each of the three racial/ethnic groups, there is a distinctive financial advantage for married-couple households over non-married households; this is particularly pronounced for Black householders.</p>
+<p>The demographic group in this example with the largest rent burden is Black, Not married; nearly 41 percent of households in this group pay over 40 percent of their incomes in gross rent. The least rent-burdened group is White, Married, with a value under 13 percent. For each of the three racial/ethnic groups, there is a distinctive financial advantage for married-couple households over non-married households; this is particularly pronounced for Black householders.</p>
 </div>
 </div>
 <div id="mapping-pums-data" class="section level2" number="10.2">
@@ -929,12 +931,12 @@ Not married
 <span class="header-section-number">10.2</span> Mapping PUMS data<a class="anchor" aria-label="anchor" href="#mapping-pums-data"><i class="fas fa-link"></i></a>
 </h2>
 <p>In the previous example, we see that rent burdens for Black, unmarried households are particularly acute in Mississippi. A follow-up question may involve an examination of how this trend varies geographically. As discussed in the previous chapter, the most granular geography available in the PUMS data is the PUMA, which generally includes 100,000-200,000 people. PUMA geographies are available in the <strong>tigris</strong> package with the function <code><a href="https://rdrr.io/pkg/tigris/man/pumas.html">pumas()</a></code>.</p>
-<div class="sourceCode" id="cb372"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb382"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/walkerke/tigris">tigris</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/mtennekes/tmap">tmap</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-tmap/tmap">tmap</a></span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>tigris_use_cache <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 
-<span class="va">ms_pumas</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tigris/man/pumas.html">pumas</a></span><span class="op">(</span><span class="st">"MS"</span>, cb <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="va">ms_pumas</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tigris/man/pumas.html">pumas</a></span><span class="op">(</span><span class="st">"MS"</span>, year <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span>
 
 <span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">ms_pumas</span><span class="op">$</span><span class="va">geometry</span><span class="op">)</span></code></pre></div>
 <div class="figure">
@@ -944,7 +946,7 @@ Figure 10.1: Basic plot of PUMAs in Mississippi
 </p>
 </div>
 <p>A geographical visualization of rent burdens in Mississippi requires a slight adaptation of the above code. Instead of returning a comparative table, the dataset should also be grouped by the <code>PUMA</code> column then filtered for the combination of variables that represent the group the analyst wants to visualize. In this case, the focus is on unmarried Black households by PUMA.</p>
-<div class="sourceCode" id="cb373"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb383"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ms_data_for_map</span> <span class="op">&lt;-</span> <span class="va">ms_hh_recoded</span> <span class="op"><a href="https://rdrr.io/pkg/tigris/man/tigris-exports.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">race_ethnicity</span>, <span class="va">married</span>, <span class="va">PUMA</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/tigris/man/tigris-exports.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>
@@ -953,8 +955,8 @@ Figure 10.1: Basic plot of PUMAs in Mississippi
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">race_ethnicity</span> <span class="op">==</span> <span class="st">"Black"</span>,
          <span class="va">married</span> <span class="op">==</span> <span class="st">"Not married"</span><span class="op">)</span></code></pre></div>
 <p>The output dataset has one row per PUMA and is suitable for joining to the spatial dataset for visualization.</p>
-<div class="sourceCode" id="cb374"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/mtennekes/tmap">tmap</a></span><span class="op">)</span>
+<div class="sourceCode" id="cb384"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-tmap/tmap">tmap</a></span><span class="op">)</span>
 
 <span class="va">joined_pumas</span> <span class="op">&lt;-</span> <span class="va">ms_pumas</span> <span class="op"><a href="https://rdrr.io/pkg/tigris/man/tigris-exports.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">ms_data_for_map</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"PUMACE10"</span> <span class="op">=</span> <span class="st">"PUMA"</span><span class="op">)</span><span class="op">)</span>
@@ -989,21 +991,22 @@ SE(x) = \sqrt{\frac{4}{80}\sum\limits_{r=1}^{80}(x_r-x)^2 }
 <p>where <span class="math inline">\(x\)</span> is the PUMS estimate and <span class="math inline">\(x_r\)</span> is the rth weighted estimate.</p>
 <p>With respect to SDR standard errors, the PUMS documentation acknowledges (p. 12),</p>
 <blockquote>
-<p>Successive Difference Replication (SDR) standard errors and margins of error are expected to be more accurate than generalized variance formulas (GVF) standard errorsand margins of error, although they may be more inconvenient for some users to calculate.</p>
+<p>Successive Difference Replication (SDR) standard errors and margins of error are expected to be more accurate than generalized variance formulas (GVF) standard errors and margins of error, although they may be more inconvenient for some users to calculate.</p>
 </blockquote>
 <p>The “inconvenience” is generally due to the need to download 80 additional weighting variables and prepare the equation written above. The <code>rep_weights</code> parameter in <code><a href="https://walker-data.com/tidycensus/reference/get_pums.html">get_pums()</a></code> makes it easier for users to retrieve the replicate weights variables without having to request all 80 directly. In a call to <code><a href="https://walker-data.com/tidycensus/reference/get_pums.html">get_pums()</a></code>, an analyst can use <code>rep_weights = "person"</code> for person-weights, <code>"housing"</code> for household weights, or <code>"both"</code> to get both sets.</p>
 <p>The code below re-downloads the Mississippi rent burden dataset used above, but with household replicate weights included.</p>
-<div class="sourceCode" id="cb375"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb385"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ms_hh_replicate</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_pums.html">get_pums</a></span><span class="op">(</span>
   variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"TEN"</span>, <span class="va">hh_variables</span><span class="op">)</span>, 
   state <span class="op">=</span> <span class="st">"MS"</span>,
   recode <span class="op">=</span> <span class="cn">TRUE</span>,
+  year <span class="op">=</span> <span class="fl">2020</span>,
   variables_filter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
     SPORDER <span class="op">=</span> <span class="fl">1</span>
   <span class="op">)</span>,
   rep_weights <span class="op">=</span> <span class="st">"housing"</span>
 <span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb376"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb386"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">ms_hh_replicate</span><span class="op">)</span></code></pre></div>
 <pre><code>##  [1] "SERIALNO"    "SPORDER"     "GRPIP"       "PUMA"        "ST"         
 ##  [6] "TEN"         "HHT"         "HISP"        "RAC1P"       "ST_label"   
@@ -1032,7 +1035,7 @@ SE(x) = \sqrt{\frac{4}{80}\sum\limits_{r=1}^{80}(x_r-x)^2 }
 <span class="header-section-number">10.3.2</span> Creating a survey object<a class="anchor" aria-label="anchor" href="#creating-a-survey-object"><i class="fas fa-link"></i></a>
 </h3>
 <p>With replicate weights in hand, analysts can turn to a suite of tools in R for handling complex survey samples. The <strong>survey</strong> package <span class="citation">(<a href="references.html#ref-lumley2010" role="doc-biblioref">Lumley 2010</a>)</span> is the standard for handling these types of datasets in R. The more recent <strong>srvyr</strong> package <span class="citation">(<a href="references.html#ref-ellis2021" role="doc-biblioref">Freedman Ellis and Schneider 2021</a>)</span> wraps <strong>survey</strong> to allow the use of tidyverse functions on survey objects. Both packages return a <code>survey</code> class object that intelligently calculates standard errors when data are tabulated with appropriate functions. <strong>tidycensus</strong> includes a function, <code><a href="https://walker-data.com/tidycensus/reference/to_survey.html">to_survey()</a></code>, to convert ACS microdata to <strong>survey</strong> or <strong>srvyr</strong> objects in a way that incorporates the recommended formula for SDR standard error calculation with replicate weights.</p>
-<div class="sourceCode" id="cb378"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb388"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://r-survey.r-forge.r-project.org/survey/">survey</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://gdfe.co/srvyr/">srvyr</a></span><span class="op">)</span>
 
@@ -1052,7 +1055,7 @@ SE(x) = \sqrt{\frac{4}{80}\sum\limits_{r=1}^{80}(x_r-x)^2 }
 <span class="header-section-number">10.3.3</span> Calculating estimates and errors with srvyr<a class="anchor" aria-label="anchor" href="#calculating-estimates-and-errors-with-srvyr"><i class="fas fa-link"></i></a>
 </h3>
 <p>srvyr’s <code>survey_*()</code> family of functions automatically calculates standard errors around tabulated estimates using tidyverse-equivalent functions. For example, analogous to the use of <code><a href="https://dplyr.tidyverse.org/reference/count.html">count()</a></code> to tabulate weighted data, <code><a href="http://gdfe.co/srvyr/reference/survey_tally.html">survey_count()</a></code> will do the same for a survey object but will also return appropriately-calculated standard errors.</p>
-<div class="sourceCode" id="cb380"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb390"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ms_hh_svy</span> <span class="op"><a href="http://gdfe.co/srvyr/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="http://gdfe.co/srvyr/reference/survey_tally.html">survey_count</a></span><span class="op">(</span><span class="va">PUMA</span>, <span class="va">HHT_label</span><span class="op">)</span></code></pre></div>
 <div class="inline-table"><table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
@@ -1082,10 +1085,10 @@ n_se
 Married couple household
 </td>
 <td style="text-align:right;">
-5067
+5579
 </td>
 <td style="text-align:right;">
-406.0426
+494.9350
 </td>
 </tr>
 <tr>
@@ -1096,10 +1099,10 @@ Married couple household
 Other family household: Male householder, no spouse present
 </td>
 <td style="text-align:right;">
-1342
+1474
 </td>
 <td style="text-align:right;">
-207.5266
+236.1260
 </td>
 </tr>
 <tr>
@@ -1110,10 +1113,10 @@ Other family household: Male householder, no spouse present
 Other family household: Female householder, no spouse present
 </td>
 <td style="text-align:right;">
-3657
+3684
 </td>
 <td style="text-align:right;">
-321.1575
+312.6579
 </td>
 </tr>
 <tr>
@@ -1124,10 +1127,10 @@ Other family household: Female householder, no spouse present
 Nonfamily household: Male householder: Living alone
 </td>
 <td style="text-align:right;">
-2042
+1814
 </td>
 <td style="text-align:right;">
-236.2904
+251.1036
 </td>
 </tr>
 <tr>
@@ -1138,16 +1141,16 @@ Nonfamily household: Male householder: Living alone
 Nonfamily household: Male householder: Not living alone
 </td>
 <td style="text-align:right;">
-796
+710
 </td>
 <td style="text-align:right;">
-157.2994
+162.1937
 </td>
 </tr>
 </tbody>
 </table></div>
 <p>The <code><a href="http://gdfe.co/srvyr/reference/survey_tally.html">survey_count()</a></code> function returns tabulations for each household type by PUMA in Mississippi along with the estimate’s standard error. The <strong>srvyr</strong> package can also accommodate more complex workflows. Below is an adaptation of the rent burden analysis computed above, but using the <strong>srvyr</strong> function <code><a href="http://gdfe.co/srvyr/reference/survey_mean.html">survey_mean()</a></code>.</p>
-<div class="sourceCode" id="cb381"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb391"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ms_svy_summary</span> <span class="op">&lt;-</span> <span class="va">ms_hh_svy</span> <span class="op"><a href="http://gdfe.co/srvyr/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="http://gdfe.co/srvyr/reference/dplyr_single.html">mutate</a></span><span class="op">(</span>
     race_ethnicity <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span><span class="op">(</span>
@@ -1194,10 +1197,10 @@ Black
 Married
 </td>
 <td style="text-align:right;">
-0.1821176
+0.1625791
 </td>
 <td style="text-align:right;">
-0.0133532
+0.0135852
 </td>
 </tr>
 <tr>
@@ -1208,10 +1211,10 @@ Black
 Not married
 </td>
 <td style="text-align:right;">
-0.4167467
+0.4080033
 </td>
 <td style="text-align:right;">
-0.0065519
+0.0081999
 </td>
 </tr>
 <tr>
@@ -1222,10 +1225,10 @@ Hispanic
 Married
 </td>
 <td style="text-align:right;">
-0.1723502
+0.1716087
 </td>
 <td style="text-align:right;">
-0.0323387
+0.0339661
 </td>
 </tr>
 <tr>
@@ -1236,10 +1239,10 @@ Hispanic
 Not married
 </td>
 <td style="text-align:right;">
-0.3006062
+0.3569935
 </td>
 <td style="text-align:right;">
-0.0292211
+0.0418501
 </td>
 </tr>
 <tr>
@@ -1250,10 +1253,10 @@ White
 Married
 </td>
 <td style="text-align:right;">
-0.1349339
+0.1266644
 </td>
 <td style="text-align:right;">
-0.0100294
+0.0118274
 </td>
 </tr>
 <tr>
@@ -1264,10 +1267,10 @@ White
 Not married
 </td>
 <td style="text-align:right;">
-0.3299732
+0.3356546
 </td>
 <td style="text-align:right;">
-0.0078680
+0.0078927
 </td>
 </tr>
 </tbody>
@@ -1285,7 +1288,7 @@ Not married
 <li><p>99 percent confidence level: 2.56</p></li>
 </ul>
 <p>Computing margins of error around derived ACS estimates from PUMS data allows for familiar visualization of uncertainty in the ACS as shown earlier in this book. The example below calculates margins of error at a 90 percent confidence level for the rent burden estimates for Mississippi, then draws a margin of error plot as illustrated in Section <a href="exploring-us-census-data-with-visualization.html#visualizing-margins-of-error">4.3</a>.</p>
-<div class="sourceCode" id="cb382"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb392"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ms_svy_summary_moe</span> <span class="op">&lt;-</span> <span class="va">ms_svy_summary</span> <span class="op"><a href="http://gdfe.co/srvyr/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="http://gdfe.co/srvyr/reference/dplyr_single.html">mutate</a></span><span class="op">(</span>prop_above_40_moe <span class="op">=</span> <span class="va">prop_above_40_se</span> <span class="op">*</span> <span class="fl">1.645</span>,
          label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">race_ethnicity</span>, <span class="va">married</span>, sep <span class="op">=</span> <span class="st">", "</span><span class="op">)</span><span class="op">)</span> 
@@ -1293,11 +1296,11 @@ Not married
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">ms_svy_summary_moe</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">prop_above_40</span>, 
                                y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html">reorder</a></span><span class="op">(</span><span class="va">label</span>, 
                                            <span class="va">prop_above_40</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_errorbarh.html">geom_errorbarh</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>xmin <span class="op">=</span> <span class="va">prop_above_40</span> <span class="op">-</span> <span class="va">prop_above_40_moe</span>, 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html">geom_errorbar</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>xmin <span class="op">=</span> <span class="va">prop_above_40</span> <span class="op">-</span> <span class="va">prop_above_40_moe</span>, 
                      xmax <span class="op">=</span> <span class="va">prop_above_40</span> <span class="op">+</span> <span class="va">prop_above_40_moe</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">3</span>, color <span class="op">=</span> <span class="st">"navy"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Rent burdened-households in Mississippi"</span>,
-       x <span class="op">=</span> <span class="st">"2015-2019 ACS estimate (from PUMS data)"</span>,
+       x <span class="op">=</span> <span class="st">"2016-2020 ACS estimate (from PUMS data)"</span>,
        y <span class="op">=</span> <span class="st">""</span>,
        caption <span class="op">=</span> <span class="st">"Rent-burdened defined when gross rent is 40 percent or more\nof household income. Error bars represent a 90 percent confidence level."</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org/reference/label_percent.html">percent</a></span><span class="op">)</span> <span class="op">+</span> 
@@ -1317,13 +1320,23 @@ Figure 10.3: Margin of error plot for derived PUMS estimates
 </h2>
 <p>The rich complexity of demographic data available in the PUMS samples allow for the estimation of statistical models to study a wide range of social processes. Like the tabulation of summary statistics with PUMS data, however, statistical models that use complex survey samples require special methods. Fortunately, these methods are incorporated into the <strong>srvyr</strong> and <strong>survey</strong> packages.</p>
 <p>Before estimating the model, data should be acquired with <code><a href="https://walker-data.com/tidycensus/reference/get_pums.html">get_pums()</a></code> along with appropriate replicate weights. The example below will model whether or not an individual in the labor force aged between 25 and 49 changed residences in the past year as a function of educational attainment, wages, age, class of worker, and family status in Rhode Island.</p>
+<div class="sourceCode" id="cb393"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">ri_pums_to_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_pums.html">get_pums</a></span><span class="op">(</span>
+  variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"PUMA"</span>, <span class="st">"SEX"</span>, <span class="st">"MIG"</span>,
+                <span class="st">"AGEP"</span>, <span class="st">"SCHL"</span>, <span class="st">"WAGP"</span>, 
+                <span class="st">"COW"</span>, <span class="st">"ESR"</span>, <span class="st">"MAR"</span>, <span class="st">"NOC"</span><span class="op">)</span>,
+  state <span class="op">=</span> <span class="st">"RI"</span>,
+  survey <span class="op">=</span> <span class="st">"acs5"</span>,
+  year <span class="op">=</span> <span class="fl">2020</span>,
+  rep_weights <span class="op">=</span> <span class="st">"person"</span>
+<span class="op">)</span></code></pre></div>
 <p>Even though our model will focus on the population in the labor force aged 25 to 49, <code>variables_filter</code> should not be used here as the full dataset is needed for appropriate model estimation. This will be addressed in the next section.</p>
 <div id="data-preparation" class="section level3" number="10.4.1">
 <h3>
 <span class="header-section-number">10.4.1</span> Data preparation<a class="anchor" aria-label="anchor" href="#data-preparation"><i class="fas fa-link"></i></a>
 </h3>
 <p>Similar to Section <a href="modeling-us-census-data.html#feature-engineering">8.2.3</a>, we will perform some feature engineering before fitting the model. This largely involves recoding both the outcome variable and the predictors to more general categories to assist with ease of interpretation. As with other recoding workflows in this book, <code><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when()</a></code> collapses the categories.</p>
-<div class="sourceCode" id="cb383"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb394"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ri_pums_recoded</span> <span class="op">&lt;-</span> <span class="va">ri_pums_to_model</span> <span class="op"><a href="http://gdfe.co/srvyr/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="http://gdfe.co/srvyr/reference/dplyr_single.html">mutate</a></span><span class="op">(</span>
     emp_type <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span><span class="op">(</span>
@@ -1354,7 +1367,7 @@ Figure 10.3: Margin of error plot for derived PUMS estimates
   <span class="op">)</span></code></pre></div>
 <p>Given that we will be estimating a logistic regression model with a binary outcome (whether or not an individual is a migrant, <code>migrated</code> is coded as either 0 or 1. The other recoded variables will be used as <em>categorical predictors</em>, in which parameter estimates refer to probabilities of having migrated relative to a reference category (e.g. college graduates relative to individuals who have not graduated college).</p>
 <p>In the next step, the subpopulation for which the model will be estimated is identified using <code><a href="http://gdfe.co/srvyr/reference/dplyr_single.html">filter()</a></code>. We will focus on individuals aged 25 to 49 who are employed and earned wages in the past year.</p>
-<div class="sourceCode" id="cb384"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb395"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ri_model_svy</span> <span class="op">&lt;-</span> <span class="va">ri_pums_recoded</span> <span class="op"><a href="http://gdfe.co/srvyr/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://walker-data.com/tidycensus/reference/to_survey.html">to_survey</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="http://gdfe.co/srvyr/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="http://gdfe.co/srvyr/reference/dplyr_single.html">filter</a></span><span class="op">(</span>
@@ -1370,7 +1383,7 @@ Figure 10.3: Margin of error plot for derived PUMS estimates
 <span class="header-section-number">10.4.2</span> Fitting and evaluating the model<a class="anchor" aria-label="anchor" href="#fitting-and-evaluating-the-model"><i class="fas fa-link"></i></a>
 </h3>
 <p>The family of modeling functions in the <strong>survey</strong> package should be used for modeling data in survey design objects, as they will take into account the replicate weights, survey design, and subpopulation structure. In the example below, we use the <code><a href="https://rdrr.io/pkg/survey/man/svyglm.html">svyglm()</a></code> function for this purpose. The formula is written using standard R formula notation, the survey design object is passed to the <code>design</code> parameter, and <code>family = quasibinomial()</code> is used to fit a logistic regression model.</p>
-<div class="sourceCode" id="cb385"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb396"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://r-survey.r-forge.r-project.org/survey/">survey</a></span><span class="op">)</span>
 
 <span class="va">migration_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survey/man/svyglm.html">svyglm</a></span><span class="op">(</span>
@@ -1380,7 +1393,7 @@ Figure 10.3: Margin of error plot for derived PUMS estimates
   family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html">quasibinomial</a></span><span class="op">(</span><span class="op">)</span>
 <span class="op">)</span> </code></pre></div>
 <p>Once fit, we can examine the results:</p>
-<div class="sourceCode" id="cb386"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb397"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">migration_model</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ## Call:
@@ -1393,28 +1406,28 @@ Figure 10.3: Margin of error plot for derived PUMS estimates
 ## 
 ## Coefficients:
 ##                 Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)     1.359008   0.422778   3.214 0.002036 ** 
-## log(wages)     -0.084403   0.041105  -2.053 0.044066 *  
-## sexmale         0.213784   0.045971   4.650 1.67e-05 ***
-## age            -0.066995   0.006814  -9.832 1.74e-14 ***
-## emp_typepublic -0.164864   0.101945  -1.617 0.110683    
-## emp_typeself   -0.280710   0.174457  -1.609 0.112453    
-## childyes       -0.071226   0.106742  -0.667 0.506960    
-## marriedyes     -0.251970   0.099971  -2.520 0.014185 *  
-## collegeyes      0.255534   0.073107   3.495 0.000858 ***
-## PUMA00102       0.025984   0.154107   0.169 0.866627    
-## PUMA00103       0.205204   0.136145   1.507 0.136594    
-## PUMA00104       0.148371   0.162379   0.914 0.364233    
-## PUMA00201       0.121383   0.135285   0.897 0.372902    
-## PUMA00300       0.390764   0.149024   2.622 0.010872 *  
-## PUMA00400      -0.211051   0.177898  -1.186 0.239799    
+## (Intercept)     1.489784   0.496118   3.003  0.00379 ** 
+## log(wages)     -0.098089   0.047027  -2.086  0.04093 *  
+## sexmale         0.249331   0.056123   4.443 3.53e-05 ***
+## age            -0.068431   0.008195  -8.350 6.98e-12 ***
+## emp_typepublic -0.057571   0.099477  -0.579  0.56477    
+## emp_typeself   -0.243479   0.196835  -1.237  0.22055    
+## childyes       -0.192214   0.105508  -1.822  0.07309 .  
+## marriedyes     -0.141021   0.115814  -1.218  0.22776    
+## collegeyes      0.256121   0.094649   2.706  0.00869 ** 
+## PUMA00102       0.098035   0.150894   0.650  0.51818    
+## PUMA00103       0.102302   0.162798   0.628  0.53195    
+## PUMA00104       0.187429   0.184095   1.018  0.31240    
+## PUMA00201       0.190723   0.135870   1.404  0.16516    
+## PUMA00300       0.288592   0.179487   1.608  0.11271    
+## PUMA00400      -0.329335   0.202088  -1.630  0.10801    
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## (Dispersion parameter for quasibinomial family taken to be 10979.98)
+## (Dispersion parameter for quasibinomial family taken to be 10453.18)
 ## 
 ## Number of Fisher Scoring iterations: 5</code></pre>
-<p>The model identifies some notable differences in recent migrants relative to non-migrants, controlling for other demographic factors. Males are more likely to have moved than females, as are younger people relative to older people in the subpopulation. Married individuals are more stationary, whereas college-educated individuals in the sample are much more likely to have moved. The PUMAs are included as a categorical predictor largely to control for geographic differences in the state; however the model suggests that current residents in the Newport PUMA are slightly more likely to have moved than residents of northwest Rhode Island, the reference PUMA.</p>
+<p>The model identifies some notable differences in recent migrants relative to non-migrants, controlling for other demographic factors. Males are more likely to have moved than females, as are younger people relative to older people in the subpopulation. Individuals with children are slightly more stationary, whereas college-educated individuals in the sample are more likely to have moved. The PUMAs are included as a categorical predictor largely to control for geographic differences in the state; the model does not identify any substantive differences among Rhode Island PUMAs in this analysis.</p>
 </div>
 </div>
 <div id="exercises-8" class="section level2" number="10.5">
@@ -1473,7 +1486,7 @@ Figure 10.3: Margin of error plot for derived PUMS estimates
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Analyzing US Census Data</strong>: Methods, Maps, and Models in R" was written by Kyle E. Walker. It was last built on 2022-01-31.</p>
+    <p>"<strong>Analyzing US Census Data</strong>: Methods, Maps, and Models in R" was written by Kyle E. Walker. It was last built on 2022-04-12.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

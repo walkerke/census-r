@@ -2,7 +2,7 @@
 title: "Analyzing US Census Data"
 subtitle: "Methods, Maps, and Models in R"
 author: "Kyle E. Walker"
-date: "2022-01-31"
+date: "2022-04-12"
 site: bookdown::bookdown_site
 knit: bookdown::render_book
 output: bookdown::bs4_book
@@ -92,7 +92,7 @@ At the time of the most recent book build, the following R version was used:
 
 
 ```
-## R version 4.1.2 (2021-11-01) -- "Bird Hippie"
+## R version 4.1.3 (2022-03-10) -- "One Push-Up"
 ```
 
 The examples in this book were created with the following R package versions:
@@ -129,7 +129,7 @@ The examples in this book were created with the following R package versions:
   </tr>
   <tr>
    <td style="text-align:left;"> dplyr </td>
-   <td style="text-align:left;"> 1.0.7 </td>
+   <td style="text-align:left;"> 1.0.8 </td>
    <td style="text-align:left;"> CRAN (R 4.1.2) </td>
   </tr>
   <tr>
@@ -189,33 +189,33 @@ The examples in this book were created with the following R package versions:
   </tr>
   <tr>
    <td style="text-align:left;"> jsonlite </td>
-   <td style="text-align:left;"> 1.7.2 </td>
-   <td style="text-align:left;"> CRAN (R 4.1.0) </td>
+   <td style="text-align:left;"> 1.8.0 </td>
+   <td style="text-align:left;"> CRAN (R 4.1.2) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> leaflet </td>
-   <td style="text-align:left;"> 2.0.4.1 </td>
-   <td style="text-align:left;"> CRAN (R 4.1.0) </td>
+   <td style="text-align:left;"> 2.1.1 </td>
+   <td style="text-align:left;"> CRAN (R 4.1.3) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> leafsync </td>
-   <td style="text-align:left;"> 0.1.0 </td>
-   <td style="text-align:left;"> CRAN (R 4.1.0) </td>
+   <td style="text-align:left;"> 0.1.1.9002 </td>
+   <td style="text-align:left;"> Github (r-spatial/leafsync\@e4c25d9cfbf3da2ec1ee4e1048944d81450e70d3) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> lehdr </td>
-   <td style="text-align:left;"> 0.2.4 </td>
-   <td style="text-align:left;"> Github (jamgreen/lehdr\@8e2fe252024c53f30fa8296ec15d9122a33162ab) </td>
+   <td style="text-align:left;"> 1.0.1 </td>
+   <td style="text-align:left;"> CRAN (R 4.1.3) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> mapboxapi </td>
-   <td style="text-align:left;"> 0.3.1.9000 </td>
+   <td style="text-align:left;"> 0.3.2.9000 </td>
    <td style="text-align:left;"> local </td>
   </tr>
   <tr>
    <td style="text-align:left;"> mapview </td>
-   <td style="text-align:left;"> 2.10.1 </td>
-   <td style="text-align:left;"> Github (r-spatial/mapview\@50908103a754ba9c511cb7c5fccb413de0c6adfd) </td>
+   <td style="text-align:left;"> 2.10.0 </td>
+   <td style="text-align:left;"> CRAN (R 4.1.2) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> mxmaps </td>
@@ -234,12 +234,12 @@ The examples in this book were created with the following R package versions:
   </tr>
   <tr>
    <td style="text-align:left;"> raster </td>
-   <td style="text-align:left;"> 3.5-11 </td>
+   <td style="text-align:left;"> 3.5-15 </td>
    <td style="text-align:left;"> CRAN (R 4.1.2) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> readr </td>
-   <td style="text-align:left;"> 2.1.1 </td>
+   <td style="text-align:left;"> 2.1.2 </td>
    <td style="text-align:left;"> CRAN (R 4.1.2) </td>
   </tr>
   <tr>
@@ -254,7 +254,7 @@ The examples in this book were created with the following R package versions:
   </tr>
   <tr>
    <td style="text-align:left;"> sf </td>
-   <td style="text-align:left;"> 1.0-5 </td>
+   <td style="text-align:left;"> 1.0-7 </td>
    <td style="text-align:left;"> CRAN (R 4.1.2) </td>
   </tr>
   <tr>
@@ -289,12 +289,12 @@ The examples in this book were created with the following R package versions:
   </tr>
   <tr>
    <td style="text-align:left;"> tidycensus </td>
-   <td style="text-align:left;"> 1.1.0.9000 </td>
-   <td style="text-align:left;"> Github (walkerke/tidycensus\@8b8e38adda0f43c6d1d0bd73676ea05bba58b4eb) </td>
+   <td style="text-align:left;"> 1.1.9.9000 </td>
+   <td style="text-align:left;"> local </td>
   </tr>
   <tr>
    <td style="text-align:left;"> tidyr </td>
-   <td style="text-align:left;"> 1.1.4 </td>
+   <td style="text-align:left;"> 1.2.0 </td>
    <td style="text-align:left;"> CRAN (R 4.1.2) </td>
   </tr>
   <tr>
@@ -305,16 +305,16 @@ The examples in this book were created with the following R package versions:
   <tr>
    <td style="text-align:left;"> tidyverse </td>
    <td style="text-align:left;"> 1.3.1 </td>
-   <td style="text-align:left;"> CRAN (R 4.1.0) </td>
+   <td style="text-align:left;"> CRAN (R 4.1.2) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> tigris </td>
-   <td style="text-align:left;"> 1.5.0.9000 </td>
-   <td style="text-align:left;"> Github (walkerke/tigris\@33a0555359c1bcbf9bcf03ac1cd8be663d6bd833) </td>
+   <td style="text-align:left;"> 1.6.0.9000 </td>
+   <td style="text-align:left;"> local </td>
   </tr>
   <tr>
    <td style="text-align:left;"> tmap </td>
-   <td style="text-align:left;"> 3.3-2 </td>
+   <td style="text-align:left;"> 3.3-3 </td>
    <td style="text-align:left;"> CRAN (R 4.1.2) </td>
   </tr>
 </tbody>

@@ -42,6 +42,7 @@ tab:oglala-lakota-show
 tab:shannon-county-age-show
 tab:co-college-19-show
 tab:co-college-18-show
+tab:alaska-cp-data-show
 tab:college-by-year-show
 tab:pct-college-by-year-show
 tab:default-moe-show
@@ -119,7 +120,6 @@ fig:diverging-palette
 fig:categorical-palette
 fig:symbol-map
 fig:faceted-map
-fig:show-hennepin-dots
 fig:election-map
 fig:show-boston-zctas
 tab:boston-se-data-show
@@ -150,6 +150,10 @@ tab:hispanic-by-metro-show
 fig:plot-hispanic-by-metro
 tab:median-by-metro-show
 fig:plot-metro-geometry
+fig:gilbert-area-weights
+fig:gilbert-pop-weights
+fig:wfh-estimate-map
+fig:map-maricopa-change
 fig:identify-iowa-hospitals
 fig:get-min-dist
 fig:show-min-times
@@ -188,6 +192,7 @@ fig:map-skater
 fig:ipums-home
 fig:mdat-tool
 tab:show-first-call
+tab:return-vacant-show
 tab:show-recode
 tab:show-filter
 fig:plot-pumas
@@ -297,6 +302,7 @@ tabulating-new-groups
 comparing-acs-estimates-over-time
 time-series-analysis-some-cautions
 preparing-time-series-acs-estimates
+iterating-over-acs-years-with-tidyverse-tools
 handling-margins-of-error-in-the-american-community-survey-with-tidycensus
 calculating-derived-margins-of-error-in-tidycensus
 calculating-group-wise-margins-of-error
@@ -338,7 +344,7 @@ tigris-workflows
 tigerline-and-cartographic-boundary-shapefiles
 caching-tigris-data
 understanding-yearly-differences-in-tigerline-files
-combining-tigris-datasets
+combining-tigris-datasets-need-to-update
 coordinate-reference-systems
 using-the-crsuggest-package
 plotting-with-coord_sf
@@ -385,6 +391,10 @@ point-in-polygon-spatial-joins
 spatial-joins-and-group-wise-spatial-analysis
 spatial-join-data-setup
 computing-and-visualizing-the-spatial-join
+small-area-time-series-analysis
+area-weighted-areal-interpolation
+population-weighted-areal-interpolation
+making-small-area-comparisons
 distance-and-proximity-analysis
 calculating-distances
 calculating-travel-times

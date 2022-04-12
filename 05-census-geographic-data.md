@@ -29,7 +29,13 @@ library(tigris)
 st <- states()
 ```
 
-Let's take a look at what we get back:
+```
+## Retrieving data for the year 2020
+```
+
+We get a message letting us know that data for the year 2020 are returned; **tigris** typically defaults to the most recent year for which a complete set of Census shapefiles are available, which at the time of this writing is 2020.
+
+Let's take a look at what we got back:
 
 
 ```r
@@ -66,19 +72,19 @@ st
 ## 9       3        5      37 01027616    37     NC North Carolina   00 G4000
 ## 10      1        1      50 01779802    50     VT        Vermont   00 G4000
 ##    FUNCSTAT        ALAND      AWATER    INTPTLAT     INTPTLON
-## 1         A  62266231560   489271086 +38.6472854 -080.6183274
-## 2         A 138947364717 31362872853 +28.4574302 -082.4091477
-## 3         A 143779863817  6215723896 +40.1028754 -089.1526108
-## 4         A 206230065476 18942261495 +46.3159573 -094.1996043
-## 5         A  25151726296  6979340970 +38.9466584 -076.6744939
-## 6         A   2677787140  1323663210 +41.5974187 -071.5272723
-## 7         A 214049897859  2391604238 +44.3484222 -114.5588538
-## 8         A  23189198255  1026903434 +43.6726907 -071.5843145
-## 9         A 125925929633 13463401534 +35.5397100 -079.1308636
-## 10        A  23874197924  1030383955 +44.0685773 -072.6691839
+## 1         A  62266296765   489206049 +38.6472854 -080.6183274
+## 2         A 138958484319 45975808217 +28.3989775 -082.5143005
+## 3         A 143778461053  6216594318 +40.1028754 -089.1526108
+## 4         A 206232157570 18949864226 +46.3159573 -094.1996043
+## 5         A  25151895765  6979171386 +38.9466584 -076.6744939
+## 6         A   2677759219  1323691129 +41.5964850 -071.5264901
+## 7         A 214049923496  2391577745 +44.3484222 -114.5588538
+## 8         A  23190113978  1025973001 +43.6726907 -071.5843145
+## 9         A 125933025759 13456395178 +35.5397100 -079.1308636
+## 10        A  23873081385  1030243281 +44.0589536 -072.6710173
 ##                          geometry
 ## 1  MULTIPOLYGON (((-81.74725 3...
-## 2  MULTIPOLYGON (((-86.38865 3...
+## 2  MULTIPOLYGON (((-86.39964 3...
 ## 3  MULTIPOLYGON (((-91.18529 4...
 ## 4  MULTIPOLYGON (((-96.78438 4...
 ## 5  MULTIPOLYGON (((-77.45881 3...
@@ -429,9 +435,9 @@ Once the plots are generated, we can use **patchwork** to facet the plots as we 
 
 Tarrant County added 180 new Census tracts between 1990 and 2020. As the plot shows, many of these tracts are found in fast-growing parts of the county in the northeast and southeast. Notably, these changes in Census tract geography have downstream implications as well for time-series analysis, as covered in Section \@ref(time-series-analysis-some-cautions). Data at the Census tract level in 2010, for example, will be tabulated differently than in 2020 because the tract geographies are different. One common method for adjusting demographic data between disparate zonal configurations is *areal interpolation*, a topic covered in Section \@ref(computing-demographic-estimates-for-zones-with-areal-interpolation).
 
-The default year of shapefiles in **tigris** aligns with the most recently-released 5-year American Community Survey data. At the time of this writing, the default year is 2019. This will be changed to 2020 pending full data availability of the TIGER/Line shapefiles for that year and upon release of the 2016-2020 5-year ACS estimates in December 2021. If users need the 2020 boundaries in their projects and do not want to type `year = 2020` for each dataset, the command `options(tigris_year = 2020)` can be used. This will direct **tigris** to download the 2020 shapefiles when available without having to specify the year explicitly.
+The default year of shapefiles in **tigris** is typically updated when cartographic boundary shapefiles for that year become fully available. At the time of this writing, the default year is 2020. This will be changed to 2021 pending full data availability of the cartographic boundary shapefiles for that year later in 2022. If users need the 2021 boundaries in their projects and do not want to type `year = 2021` for each dataset, the command `options(tigris_year = 2021)` can be used. This will direct **tigris** to download the 2021 shapefiles when available without having to specify the year explicitly.
 
-### Combining tigris datasets
+### Combining tigris datasets (need to update)
 
 For smaller geographies like Census tracts, block groups, and blocks, the Census Bureau stores shapefiles by state and does not provide a national file. For some geographic features, datasets are further subdivided by county. In these instances, **tigris** users must specify a state and/or county to appropriately make a request to the Census Bureau website for data.
 
@@ -619,25 +625,32 @@ head(fl_projected)
 ```
 
 ```
-## Simple feature collection with 6 features and 9 fields
+## Simple feature collection with 6 features and 12 fields
 ## Geometry type: MULTIPOLYGON
 ## Dimension:     XY
-## Bounding box:  xmin: 83061.55 ymin: 130374.4 xmax: 788415.4 ymax: 780618.4
+## Bounding box:  xmin: 281876.9 ymin: 397330.2 xmax: 669346.5 ymax: 715363.4
 ## Projected CRS: NAD83(HARN) / Florida GDL Albers
-##     STATEFP COUNTYFP COUNTYNS       AFFGEOID GEOID         NAME LSAD      ALAND
-## 24       12      075 00295724 0500000US12075 12075         Levy   06 2896183010
-## 96       12      086 00295755 0500000US12086 12086   Miami-Dade   06 4920565755
-## 97       12      073 00306916 0500000US12073 12073         Leon   06 1727237331
-## 98       12      057 00295757 0500000US12057 12057 Hillsborough   06 2646772012
-## 99       12      083 00306922 0500000US12083 12083       Marion   06 4113978836
-## 100      12      113 00306914 0500000US12113 12113   Santa Rosa   06 2622050628
-##         AWATER                       geometry
-## 24   762935040 MULTIPOLYGON (((493790.5 56...
-## 96  1376144237 MULTIPOLYGON (((783767.2 17...
-## 97    90397079 MULTIPOLYGON (((331309.5 70...
-## 98   631505816 MULTIPOLYGON (((555139.5 42...
-## 99   192297049 MULTIPOLYGON (((542215.5 56...
-## 100  418020790 MULTIPOLYGON (((83268.02 76...
+##    STATEFP COUNTYFP COUNTYNS       AFFGEOID GEOID         NAME
+## 11      12      121 00295729 0500000US12121 12121     Suwannee
+## 15      12      007 00303634 0500000US12007 12007     Bradford
+## 91      12      037 00306911 0500000US12037 12037     Franklin
+## 92      12      123 00295728 0500000US12123 12123       Taylor
+## 93      12      057 00295757 0500000US12057 12057 Hillsborough
+## 94      12      109 00308371 0500000US12109 12109    St. Johns
+##               NAMELSAD STUSPS STATE_NAME LSAD      ALAND     AWATER
+## 11     Suwannee County     FL    Florida   06 1783430092    9505389
+## 15     Bradford County     FL    Florida   06  761362121   16905200
+## 91     Franklin County     FL    Florida   06 1411498965 2270440522
+## 92       Taylor County     FL    Florida   06 2702224058 1213576997
+## 93 Hillsborough County     FL    Florida   06 2646680847  803027226
+## 94    St. Johns County     FL    Florida   06 1555661651  572103225
+##                          geometry
+## 11 MULTIPOLYGON (((471781.3 69...
+## 15 MULTIPOLYGON (((552464 6583...
+## 91 MULTIPOLYGON (((334863.7 64...
+## 92 MULTIPOLYGON (((416379.5 66...
+## 93 MULTIPOLYGON (((555139.5 42...
+## 94 MULTIPOLYGON (((622427 6727...
 ```
 
 Note that the coordinates for the bounding box and the feature geometry have changed to much larger numbers; they are expressed in meters rather than the decimal degrees used by the NAD83 geographic coordinate system. Let's take a closer look at our selected CRS:
@@ -882,15 +895,15 @@ lee
 ```
 
 ```
-## Simple feature collection with 1 feature and 9 fields
+## Simple feature collection with 1 feature and 12 fields
 ## Geometry type: MULTIPOLYGON
 ## Dimension:     XY
-## Bounding box:  xmin: 571477.3 ymin: 258768.2 xmax: 642721.3 ymax: 310584
+## Bounding box:  xmin: 571477.3 ymin: 258768.2 xmax: 642726 ymax: 310584
 ## Projected CRS: NAD83(HARN) / Florida GDL Albers
-##   STATEFP COUNTYFP COUNTYNS       AFFGEOID GEOID NAME LSAD      ALAND
-## 1      12      071 00295758 0500000US12071 12071  Lee   06 2023963480
-##       AWATER                       geometry
-## 1 1116067200 MULTIPOLYGON (((580415.7 30...
+##   STATEFP COUNTYFP COUNTYNS       AFFGEOID GEOID NAME   NAMELSAD STUSPS
+## 1      12      071 00295758 0500000US12071 12071  Lee Lee County     FL
+##   STATE_NAME LSAD      ALAND     AWATER                       geometry
+## 1    Florida   06 2022803068 1900583561 MULTIPOLYGON (((580415.7 30...
 ```
 
 Specific parts of the multipolygon Lee County object can be extracted by *exploding* the multipart geometry into single parts. This is accomplished with sf's function `st_cast()`, which can convert spatial objects from one geometry type to another. In this example, we will "cast" Lee County as a `POLYGON` object which will create a separate row for each non-contiguous area. For analysts coming from a desktop GIS background, this will perform a similar operation to "Multipart to Singlepart" geoprocessing tools.
@@ -903,21 +916,21 @@ lee_singlepart
 ```
 
 ```
-## Simple feature collection with 4 features and 9 fields
+## Simple feature collection with 4 features and 12 fields
 ## Geometry type: POLYGON
 ## Dimension:     XY
-## Bounding box:  xmin: 571477.3 ymin: 258768.2 xmax: 642721.3 ymax: 310584
+## Bounding box:  xmin: 571477.3 ymin: 258768.2 xmax: 642726 ymax: 310584
 ## Projected CRS: NAD83(HARN) / Florida GDL Albers
-##     STATEFP COUNTYFP COUNTYNS       AFFGEOID GEOID NAME LSAD      ALAND
-## 1        12      071 00295758 0500000US12071 12071  Lee   06 2023963480
-## 1.1      12      071 00295758 0500000US12071 12071  Lee   06 2023963480
-## 1.2      12      071 00295758 0500000US12071 12071  Lee   06 2023963480
-## 1.3      12      071 00295758 0500000US12071 12071  Lee   06 2023963480
-##         AWATER                       geometry
-## 1   1116067200 POLYGON ((580415.7 300219.6...
-## 1.1 1116067200 POLYGON ((576540.8 289935.7...
-## 1.2 1116067200 POLYGON ((572595.8 298881, ...
-## 1.3 1116067200 POLYGON ((571477.3 310583.5...
+##     STATEFP COUNTYFP COUNTYNS       AFFGEOID GEOID NAME   NAMELSAD STUSPS
+## 1        12      071 00295758 0500000US12071 12071  Lee Lee County     FL
+## 1.1      12      071 00295758 0500000US12071 12071  Lee Lee County     FL
+## 1.2      12      071 00295758 0500000US12071 12071  Lee Lee County     FL
+## 1.3      12      071 00295758 0500000US12071 12071  Lee Lee County     FL
+##     STATE_NAME LSAD      ALAND     AWATER                       geometry
+## 1      Florida   06 2022803068 1900583561 POLYGON ((580415.7 300219.6...
+## 1.1    Florida   06 2022803068 1900583561 POLYGON ((576540.8 289935.7...
+## 1.2    Florida   06 2022803068 1900583561 POLYGON ((572595.8 298881, ...
+## 1.3    Florida   06 2022803068 1900583561 POLYGON ((571477.3 310583.5...
 ```
 
 The resulting spatial object now has four rows. Using row indexing, we can extract any of these rows as an individual object, such as the area representing Sanibel Island.

@@ -102,14 +102,14 @@
 </h2>
 <p>Census data queries using <strong>tidycensus</strong>, combined with core tidyverse functions, are excellent ways to explore downloaded Census data. Chapter <a href="an-introduction-to-tidycensus.html#an-introduction-to-tidycensus">2</a> covered how to download data from various Census datasets using <strong>tidycensus</strong> and return the data in a desired format. A common next step in an analytic process will involve data exploration, which is handled by a wide range of tools in the tidyverse.</p>
 <p>To get started, the <strong>tidycensus</strong> and <strong>tidyverse</strong> packages are loaded. “tidyverse” is not specifically a package itself, but rather loads several core packages within the tidyverse. The package load message gives you more information:</p>
-<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://walker-data.com/tidycensus/">tidycensus</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></code></pre></div>
 <pre><code>## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──</code></pre>
 <pre><code>## ✓ ggplot2 3.3.5     ✓ purrr   0.3.4
-## ✓ tibble  3.1.6     ✓ dplyr   1.0.7
-## ✓ tidyr   1.1.4     ✓ stringr 1.4.0
-## ✓ readr   2.1.1     ✓ forcats 0.5.1</code></pre>
+## ✓ tibble  3.1.6     ✓ dplyr   1.0.8
+## ✓ tidyr   1.2.0     ✓ stringr 1.4.0
+## ✓ readr   2.1.2     ✓ forcats 0.5.1</code></pre>
 <pre><code>## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()</code></pre>
@@ -118,12 +118,12 @@
 <h3>
 <span class="header-section-number">3.2.1</span> Sorting and filtering data<a class="anchor" aria-label="anchor" href="#sorting-and-filtering-data"><i class="fas fa-link"></i></a>
 </h3>
-<p>For a first example, let’s request data on median age from the 2015-2019 ACS with <code><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs()</a></code> for all counties in the United States. This requires specifying <code>geography = "county"</code> and leaving state set to <code>NULL</code>, the default.</p>
-<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
+<p>For a first example, let’s request data on median age from the 2016-2020 ACS with <code><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs()</a></code> for all counties in the United States. This requires specifying <code>geography = "county"</code> and leaving state set to <code>NULL</code>, the default.</p>
+<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">median_age</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs</a></span><span class="op">(</span>
   geography <span class="op">=</span> <span class="st">"county"</span>,
   variables <span class="op">=</span> <span class="st">"B01002_001"</span>,
-  year <span class="op">=</span> <span class="fl">2019</span>
+  year <span class="op">=</span> <span class="fl">2020</span>
 <span class="op">)</span></code></pre></div>
 <div class="inline-table"><table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
 <caption>
@@ -158,7 +158,7 @@ Autauga County, Alabama
 B01002_001
 </td>
 <td style="text-align:right;">
-38.2
+38.6
 </td>
 <td style="text-align:right;">
 0.6
@@ -175,10 +175,10 @@ Baldwin County, Alabama
 B01002_001
 </td>
 <td style="text-align:right;">
-43.0
+43.2
 </td>
 <td style="text-align:right;">
-0.3
+0.4
 </td>
 </tr>
 <tr>
@@ -192,10 +192,10 @@ Barbour County, Alabama
 B01002_001
 </td>
 <td style="text-align:right;">
-40.4
+40.1
 </td>
 <td style="text-align:right;">
-0.5
+0.6
 </td>
 </tr>
 <tr>
@@ -209,10 +209,10 @@ Bibb County, Alabama
 B01002_001
 </td>
 <td style="text-align:right;">
-40.9
+39.9
 </td>
 <td style="text-align:right;">
-1.3
+1.2
 </td>
 </tr>
 <tr>
@@ -226,10 +226,10 @@ Blount County, Alabama
 B01002_001
 </td>
 <td style="text-align:right;">
-40.7
+41.0
 </td>
 <td style="text-align:right;">
-0.3
+0.5
 </td>
 </tr>
 <tr>
@@ -243,10 +243,10 @@ Bullock County, Alabama
 B01002_001
 </td>
 <td style="text-align:right;">
-40.2
+39.7
 </td>
 <td style="text-align:right;">
-2.3
+1.9
 </td>
 </tr>
 <tr>
@@ -260,10 +260,10 @@ Butler County, Alabama
 B01002_001
 </td>
 <td style="text-align:right;">
-40.8
+41.2
 </td>
 <td style="text-align:right;">
-0.7
+0.6
 </td>
 </tr>
 <tr>
@@ -277,10 +277,10 @@ Calhoun County, Alabama
 B01002_001
 </td>
 <td style="text-align:right;">
-39.6
+39.5
 </td>
 <td style="text-align:right;">
-0.3
+0.4
 </td>
 </tr>
 <tr>
@@ -294,7 +294,7 @@ Chambers County, Alabama
 B01002_001
 </td>
 <td style="text-align:right;">
-42.0
+41.9
 </td>
 <td style="text-align:right;">
 0.7
@@ -311,7 +311,7 @@ Cherokee County, Alabama
 B01002_001
 </td>
 <td style="text-align:right;">
-46.5
+46.8
 </td>
 <td style="text-align:right;">
 0.5
@@ -320,7 +320,7 @@ B01002_001
 </tbody>
 </table></div>
 <p>The default method for printing data used by the <strong>tibble</strong> package shows the first 10 rows of the dataset, which in this case prints counties in Alabama. A first exploratory data analysis question might involve understanding which counties are the <em>youngest</em> and <em>oldest</em> in the United States as measured by median age. This task can be accomplished with the <code><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange()</a></code> function found in the <strong>dplyr</strong> package. <code><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange()</a></code> sorts a dataset by values in one or more columns and returns the sorted result. To view the dataset in ascending order of a given column, supply the data object and a column name to the <code><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange()</a></code> function.</p>
-<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">median_age</span>, <span class="va">estimate</span><span class="op">)</span></code></pre></div>
 <div class="inline-table"><table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
 <caption>
@@ -346,6 +346,23 @@ moe
 <tbody>
 <tr>
 <td style="text-align:left;">
+35011
+</td>
+<td style="text-align:left;">
+De Baca County, New Mexico
+</td>
+<td style="text-align:left;">
+B01002_001
+</td>
+<td style="text-align:right;">
+22.2
+</td>
+<td style="text-align:right;">
+6.9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 51678
 </td>
 <td style="text-align:left;">
@@ -355,27 +372,10 @@ Lexington city, Virginia
 B01002_001
 </td>
 <td style="text-align:right;">
-22.3
+22.2
 </td>
 <td style="text-align:right;">
-0.7
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-51750
-</td>
-<td style="text-align:left;">
-Radford city, Virginia
-</td>
-<td style="text-align:left;">
-B01002_001
-</td>
-<td style="text-align:right;">
-23.4
-</td>
-<td style="text-align:right;">
-0.5
+0.8
 </td>
 </tr>
 <tr>
@@ -406,10 +406,44 @@ Todd County, South Dakota
 B01002_001
 </td>
 <td style="text-align:right;">
-23.8
+23.6
 </td>
 <td style="text-align:right;">
-0.4
+0.6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+51750
+</td>
+<td style="text-align:left;">
+Radford city, Virginia
+</td>
+<td style="text-align:left;">
+B01002_001
+</td>
+<td style="text-align:right;">
+23.7
+</td>
+<td style="text-align:right;">
+0.6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+13053
+</td>
+<td style="text-align:left;">
+Chattahoochee County, Georgia
+</td>
+<td style="text-align:left;">
+B01002_001
+</td>
+<td style="text-align:right;">
+24.0
+</td>
+<td style="text-align:right;">
+0.7
 </td>
 </tr>
 <tr>
@@ -431,40 +465,6 @@ B01002_001
 </tr>
 <tr>
 <td style="text-align:left;">
-13053
-</td>
-<td style="text-align:left;">
-Chattahoochee County, Georgia
-</td>
-<td style="text-align:left;">
-B01002_001
-</td>
-<td style="text-align:right;">
-24.5
-</td>
-<td style="text-align:right;">
-0.5
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-53075
-</td>
-<td style="text-align:left;">
-Whitman County, Washington
-</td>
-<td style="text-align:left;">
-B01002_001
-</td>
-<td style="text-align:right;">
-24.7
-</td>
-<td style="text-align:right;">
-0.3
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 49049
 </td>
 <td style="text-align:left;">
@@ -474,7 +474,7 @@ Utah County, Utah
 B01002_001
 </td>
 <td style="text-align:right;">
-24.8
+25.0
 </td>
 <td style="text-align:right;">
 0.1
@@ -491,34 +491,34 @@ Clay County, South Dakota
 B01002_001
 </td>
 <td style="text-align:right;">
-24.9
+25.2
 </td>
 <td style="text-align:right;">
-0.4
+0.5
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-51830
+53075
 </td>
 <td style="text-align:left;">
-Williamsburg city, Virginia
+Whitman County, Washington
 </td>
 <td style="text-align:left;">
 B01002_001
 </td>
 <td style="text-align:right;">
-24.9
+25.2
 </td>
 <td style="text-align:right;">
-0.7
+0.2
 </td>
 </tr>
 </tbody>
 </table></div>
-<p>Per the 2015-2019 ACS, the two youngest “counties” in the United States are independent cities in Virginia, which are treated as county-equivalents. Both Lexington and Radford are college towns; Lexington is home to both Washington &amp; Lee University and the Virginia Military Institute, and Radford houses Radford University. The youngest <em>county</em> then by median age is Madison County, Idaho.</p>
+<p>Per the 2016-2020 ACS, the youngest county is De Baca County, New Mexico. Two of the five youngest “counties” in the United States are independent cities in Virginia, which are treated as county-equivalents. Both Lexington and Radford are college towns; Lexington is home to both Washington &amp; Lee University and the Virginia Military Institute, and Radford houses Radford University.</p>
 <p>To retrieve the <em>oldest</em> counties in the United States by median age, an analyst can use the <code><a href="https://dplyr.tidyverse.org/reference/desc.html">desc()</a></code> function available in <strong>dplyr</strong> to sort the <code>estimate</code> column in descending order.</p>
-<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">median_age</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">estimate</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="inline-table"><table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
 <caption>
@@ -553,7 +553,75 @@ Sumter County, Florida
 B01002_001
 </td>
 <td style="text-align:right;">
-67.4
+68.0
+</td>
+<td style="text-align:right;">
+0.3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+48301
+</td>
+<td style="text-align:left;">
+Loving County, Texas
+</td>
+<td style="text-align:left;">
+B01002_001
+</td>
+<td style="text-align:right;">
+62.2
+</td>
+<td style="text-align:right;">
+37.8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+48243
+</td>
+<td style="text-align:left;">
+Jeff Davis County, Texas
+</td>
+<td style="text-align:left;">
+B01002_001
+</td>
+<td style="text-align:right;">
+61.3
+</td>
+<td style="text-align:right;">
+36.8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+08027
+</td>
+<td style="text-align:left;">
+Custer County, Colorado
+</td>
+<td style="text-align:left;">
+B01002_001
+</td>
+<td style="text-align:right;">
+60.1
+</td>
+<td style="text-align:right;">
+3.4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+12015
+</td>
+<td style="text-align:left;">
+Charlotte County, Florida
+</td>
+<td style="text-align:left;">
+B01002_001
+</td>
+<td style="text-align:right;">
+59.5
 </td>
 <td style="text-align:right;">
 0.2
@@ -570,61 +638,27 @@ Highland County, Virginia
 B01002_001
 </td>
 <td style="text-align:right;">
-60.9
+59.5
 </td>
 <td style="text-align:right;">
-3.5
+4.8
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-08027
+35003
 </td>
 <td style="text-align:left;">
-Custer County, Colorado
+Catron County, New Mexico
 </td>
 <td style="text-align:left;">
 B01002_001
 </td>
 <td style="text-align:right;">
-59.7
+59.4
 </td>
 <td style="text-align:right;">
 2.6
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-12015
-</td>
-<td style="text-align:left;">
-Charlotte County, Florida
-</td>
-<td style="text-align:left;">
-B01002_001
-</td>
-<td style="text-align:right;">
-59.1
-</td>
-<td style="text-align:right;">
-0.2
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-41069
-</td>
-<td style="text-align:left;">
-Wheeler County, Oregon
-</td>
-<td style="text-align:left;">
-B01002_001
-</td>
-<td style="text-align:right;">
-59.0
-</td>
-<td style="text-align:right;">
-3.3
 </td>
 </tr>
 <tr>
@@ -638,7 +672,7 @@ Northumberland County, Virginia
 B01002_001
 </td>
 <td style="text-align:right;">
-58.9
+59.3
 </td>
 <td style="text-align:right;">
 0.7
@@ -655,68 +689,34 @@ Ontonagon County, Michigan
 B01002_001
 </td>
 <td style="text-align:right;">
-58.6
+59.1
 </td>
 <td style="text-align:right;">
-0.4
+0.5
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-35021
+48443
 </td>
 <td style="text-align:left;">
-Harding County, New Mexico
+Terrell County, Texas
 </td>
 <td style="text-align:left;">
 B01002_001
 </td>
 <td style="text-align:right;">
-58.5
+59.1
 </td>
 <td style="text-align:right;">
-5.5
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-53031
-</td>
-<td style="text-align:left;">
-Jefferson County, Washington
-</td>
-<td style="text-align:left;">
-B01002_001
-</td>
-<td style="text-align:right;">
-58.3
-</td>
-<td style="text-align:right;">
-0.7
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-26001
-</td>
-<td style="text-align:left;">
-Alcona County, Michigan
-</td>
-<td style="text-align:left;">
-B01002_001
-</td>
-<td style="text-align:right;">
-58.2
-</td>
-<td style="text-align:right;">
-0.3
+9.4
 </td>
 </tr>
 </tbody>
 </table></div>
-<p>The oldest county in the United States by almost 7 years over the second-oldest is Sumter County, Florida. Sumter County is home to The Villages, a Census-designated place that includes a large age-restricted community <a href="https://www.thevillages.com/">also called The Villages</a>.</p>
+<p>The oldest county in the United States is Sumter County, Florida. Sumter County is home to The Villages, a Census-designated place that includes a large age-restricted community <a href="https://www.thevillages.com/">also called The Villages</a>.</p>
 <p>The tidyverse includes several tools for parsing datasets that allow for exploration beyond sorting and browsing data. The <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code> function in <strong>dplyr</strong> queries a dataset for rows where a given condition evaluates to <code>TRUE</code>, and retains those rows only. For analysts who are familiar with databases and SQL, this is equivalent to a <code>WHERE</code> clause. This helps analysts subset their data for specific areas by their characteristics, and answer questions like “how many counties in the US have a median age of 50 or older?”</p>
-<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">median_age</span>, <span class="va">estimate</span> <span class="op">&gt;=</span> <span class="fl">50</span><span class="op">)</span></code></pre></div>
 <div class="inline-table"><table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
 <caption>
@@ -742,6 +742,23 @@ moe
 <tbody>
 <tr>
 <td style="text-align:left;">
+02105
+</td>
+<td style="text-align:left;">
+Hoonah-Angoon Census Area, Alaska
+</td>
+<td style="text-align:left;">
+B01002_001
+</td>
+<td style="text-align:right;">
+52.1
+</td>
+<td style="text-align:right;">
+2.9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 04007
 </td>
 <td style="text-align:left;">
@@ -751,7 +768,7 @@ Gila County, Arizona
 B01002_001
 </td>
 <td style="text-align:right;">
-50.2
+50.4
 </td>
 <td style="text-align:right;">
 0.2
@@ -768,10 +785,10 @@ La Paz County, Arizona
 B01002_001
 </td>
 <td style="text-align:right;">
-56.5
+57.4
 </td>
 <td style="text-align:right;">
-0.5
+0.6
 </td>
 </tr>
 <tr>
@@ -785,10 +802,10 @@ Mohave County, Arizona
 B01002_001
 </td>
 <td style="text-align:right;">
-51.6
+52.3
 </td>
 <td style="text-align:right;">
-0.3
+0.2
 </td>
 </tr>
 <tr>
@@ -802,10 +819,10 @@ Yavapai County, Arizona
 B01002_001
 </td>
 <td style="text-align:right;">
-53.4
+54.1
 </td>
 <td style="text-align:right;">
-0.1
+0.2
 </td>
 </tr>
 <tr>
@@ -819,10 +836,10 @@ Baxter County, Arkansas
 B01002_001
 </td>
 <td style="text-align:right;">
-52.2
+52.3
 </td>
 <td style="text-align:right;">
-0.3
+0.5
 </td>
 </tr>
 <tr>
@@ -836,10 +853,10 @@ Marion County, Arkansas
 B01002_001
 </td>
 <td style="text-align:right;">
-52.2
+52.1
 </td>
 <td style="text-align:right;">
-0.5
+0.8
 </td>
 </tr>
 <tr>
@@ -853,7 +870,7 @@ Montgomery County, Arkansas
 B01002_001
 </td>
 <td style="text-align:right;">
-50.4
+50.6
 </td>
 <td style="text-align:right;">
 0.8
@@ -870,50 +887,33 @@ Stone County, Arkansas
 B01002_001
 </td>
 <td style="text-align:right;">
-50.1
+50.0
 </td>
 <td style="text-align:right;">
-0.7
+0.5
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-06003
+06009
 </td>
 <td style="text-align:left;">
-Alpine County, California
+Calaveras County, California
 </td>
 <td style="text-align:left;">
 B01002_001
 </td>
 <td style="text-align:right;">
-52.2
+52.8
 </td>
 <td style="text-align:right;">
-8.8
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-06005
-</td>
-<td style="text-align:left;">
-Amador County, California
-</td>
-<td style="text-align:left;">
-B01002_001
-</td>
-<td style="text-align:right;">
-50.5
-</td>
-<td style="text-align:right;">
-0.4
+0.6
 </td>
 </tr>
 </tbody>
 </table></div>
-<p>Functions like <code><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange()</a></code> and <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code> operate on row values and organize data by row. Other tidyverse functions, like <strong>tidyr</strong>’s <code><a href="https://tidyr.tidyverse.org/reference/separate.html">separate()</a></code>, operate on columns. The <code>NAME</code> column, returned by default by most <strong>tidycensus</strong> functions, contains a basic description of the location that can be more intuitive than the <code>GEOID</code>. For the 2015-2019 ACS, <code>NAME</code> is formatted as “X County, Y,” where X is the county name and Y is the state name. <code><a href="https://tidyr.tidyverse.org/reference/separate.html">separate()</a></code> can split this column into two columns where one retains the county name and the other retains the state; this can be useful for analysts who need to complete a comparative analysis by state.</p>
-<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
+<p>Functions like <code><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange()</a></code> and <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code> operate on row values and organize data by row. Other tidyverse functions, like <strong>tidyr</strong>’s <code><a href="https://tidyr.tidyverse.org/reference/separate.html">separate()</a></code>, operate on columns. The <code>NAME</code> column, returned by default by most <strong>tidycensus</strong> functions, contains a basic description of the location that can be more intuitive than the <code>GEOID</code>. For the 2016-2020 ACS, <code>NAME</code> is formatted as “X County, Y”, where X is the county name and Y is the state name. <code><a href="https://tidyr.tidyverse.org/reference/separate.html">separate()</a></code> can split this column into two columns where one retains the county name and the other retains the state; this can be useful for analysts who need to complete a comparative analysis by state.</p>
+<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://tidyr.tidyverse.org/reference/separate.html">separate</a></span><span class="op">(</span>
   <span class="va">median_age</span>,
   <span class="va">NAME</span>,
@@ -959,7 +959,7 @@ Alabama
 B01002_001
 </td>
 <td style="text-align:right;">
-38.2
+38.6
 </td>
 <td style="text-align:right;">
 0.6
@@ -979,10 +979,10 @@ Alabama
 B01002_001
 </td>
 <td style="text-align:right;">
-43.0
+43.2
 </td>
 <td style="text-align:right;">
-0.3
+0.4
 </td>
 </tr>
 <tr>
@@ -999,10 +999,10 @@ Alabama
 B01002_001
 </td>
 <td style="text-align:right;">
-40.4
+40.1
 </td>
 <td style="text-align:right;">
-0.5
+0.6
 </td>
 </tr>
 <tr>
@@ -1019,10 +1019,10 @@ Alabama
 B01002_001
 </td>
 <td style="text-align:right;">
-40.9
+39.9
 </td>
 <td style="text-align:right;">
-1.3
+1.2
 </td>
 </tr>
 <tr>
@@ -1039,10 +1039,10 @@ Alabama
 B01002_001
 </td>
 <td style="text-align:right;">
-40.7
+41.0
 </td>
 <td style="text-align:right;">
-0.3
+0.5
 </td>
 </tr>
 <tr>
@@ -1059,10 +1059,10 @@ Alabama
 B01002_001
 </td>
 <td style="text-align:right;">
-40.2
+39.7
 </td>
 <td style="text-align:right;">
-2.3
+1.9
 </td>
 </tr>
 <tr>
@@ -1079,10 +1079,10 @@ Alabama
 B01002_001
 </td>
 <td style="text-align:right;">
-40.8
+41.2
 </td>
 <td style="text-align:right;">
-0.7
+0.6
 </td>
 </tr>
 <tr>
@@ -1099,10 +1099,10 @@ Alabama
 B01002_001
 </td>
 <td style="text-align:right;">
-39.6
+39.5
 </td>
 <td style="text-align:right;">
-0.3
+0.4
 </td>
 </tr>
 <tr>
@@ -1119,7 +1119,7 @@ Alabama
 B01002_001
 </td>
 <td style="text-align:right;">
-42.0
+41.9
 </td>
 <td style="text-align:right;">
 0.7
@@ -1139,7 +1139,7 @@ Alabama
 B01002_001
 </td>
 <td style="text-align:right;">
-46.5
+46.8
 </td>
 <td style="text-align:right;">
 0.5
@@ -1155,11 +1155,11 @@ B01002_001
 <h3>
 <span class="header-section-number">3.2.2</span> Using summary variables and calculating new columns<a class="anchor" aria-label="anchor" href="#using-summary-variables-and-calculating-new-columns"><i class="fas fa-link"></i></a>
 </h3>
-<p>Data in Census and ACS tables, as in the example above, are frequently comprised of variables that individually constitute sub-categories such as the numbers of households in different household income bands. One limitation of the approach above, however, is that the data - and the resulting analysis - return estimated counts, which are difficult to compare across geographies. For example, Maricopa County in Arizona is the state’s most populous county with 4.3 million residents; the second-largest county, Pima, only has just over 1 million residents and six of the state’s 15 counties have fewer than 100,000 residents. In turn, comparing Maricopa’s estimates with those of smaller counties in the state would often be inappropriate.</p>
+<p>Data in Census and ACS tables, as in the example above, are frequently comprised of variables that individually constitute sub-categories such as the numbers of households in different household income bands. One limitation of the approach above, however, is that the data and the resulting analysis return estimated counts, which are difficult to compare across geographies. For example, Maricopa County in Arizona is the state’s most populous county with 4.3 million residents; the second-largest county, Pima, only has just over 1 million residents and six of the state’s 15 counties have fewer than 100,000 residents. In turn, comparing Maricopa’s estimates with those of smaller counties in the state would often be inappropriate.</p>
 <p>A solution to this issue might involve <strong>normalizing</strong> the estimated count data by dividing it by the overall population from which the sub-group is derived. Appropriate denominators for ACS tables are frequently found in the tables themselves as variables. In ACS table B19001, which covers the number of households by income bands, the variable <code>B19001_001</code> represents the total number of households in a given enumeration unit, which we removed from our analysis earlier. Given that this variable is an appropriate denominator for the other variables in the table, it merits its own column to facilitate the calculation of proportions or percentages.</p>
-<p>In <strong>tidycensus</strong>, this can be accomplished by supplying a variable ID to the <code>summary_var</code> parameter in both the <code><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs()</a></code> and <code><a href="https://walker-data.com/tidycensus/reference/get_decennial.html">get_decennial()</a></code> functions. Doing so will create two new columns for the decennial Census datasets - <code>summary_var</code> and <code>summary_value</code>, representing the summary variable ID and the summary variable’s value - and three new columns for the ACS datasets, <code>summary_var</code>, <code>summary_est</code>, and <code>summary_moe</code>, which includes the ACS estimate and margin of error for the summary variable.</p>
-<p>With this information in hand, normalizing data is straightforward. The following example uses the <code>summary_var</code> parameter to compare the population of counties in Arizona by race &amp; Hispanic origin with their baseline populations, using data from the 2015-2019 ACS.</p>
-<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
+<p>In <strong>tidycensus</strong>, this can be accomplished by supplying a variable ID to the <code>summary_var</code> parameter in both the <code><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs()</a></code> and <code><a href="https://walker-data.com/tidycensus/reference/get_decennial.html">get_decennial()</a></code> functions. When using <code><a href="https://walker-data.com/tidycensus/reference/get_decennial.html">get_decennial()</a></code>, doing so will create two new columns for the decennial Census datasets, <code>summary_var</code> and <code>summary_value</code>, representing the summary variable ID and the summary variable’s value. When using <code><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs()</a></code>, using <code>summary_var</code> creates three new columns for the ACS datasets, <code>summary_var</code>, <code>summary_est</code>, and <code>summary_moe</code>, which include the ACS estimate and margin of error for the summary variable.</p>
+<p>With this information in hand, normalizing data is straightforward. The following example uses the <code>summary_var</code> parameter to compare the population of counties in Arizona by race &amp; Hispanic origin with their baseline populations, using data from the 2016-2020 ACS.</p>
+<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">race_vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
   White <span class="op">=</span> <span class="st">"B03002_003"</span>,
   Black <span class="op">=</span> <span class="st">"B03002_004"</span>,
@@ -1173,7 +1173,8 @@ B01002_001
   geography <span class="op">=</span> <span class="st">"county"</span>,
   state <span class="op">=</span> <span class="st">"AZ"</span>,
   variables <span class="op">=</span> <span class="va">race_vars</span>,
-  summary_var <span class="op">=</span> <span class="st">"B03002_001"</span>
+  summary_var <span class="op">=</span> <span class="st">"B03002_001"</span>,
+  year <span class="op">=</span> <span class="fl">2020</span>
 <span class="op">)</span> </code></pre></div>
 <div class="inline-table"><table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
 <caption>
@@ -1214,13 +1215,13 @@ Apache County, Arizona
 White
 </td>
 <td style="text-align:right;">
-13022
+12993
 </td>
 <td style="text-align:right;">
-4
+56
 </td>
 <td style="text-align:right;">
-71511
+71714
 </td>
 <td style="text-align:right;">
 NA
@@ -1237,13 +1238,13 @@ Apache County, Arizona
 Black
 </td>
 <td style="text-align:right;">
-373
+544
 </td>
 <td style="text-align:right;">
-138
+56
 </td>
 <td style="text-align:right;">
-71511
+71714
 </td>
 <td style="text-align:right;">
 NA
@@ -1260,13 +1261,13 @@ Apache County, Arizona
 Native
 </td>
 <td style="text-align:right;">
-52285
+51979
 </td>
 <td style="text-align:right;">
-234
+327
 </td>
 <td style="text-align:right;">
-71511
+71714
 </td>
 <td style="text-align:right;">
 NA
@@ -1283,13 +1284,13 @@ Apache County, Arizona
 Asian
 </td>
 <td style="text-align:right;">
-246
+262
 </td>
 <td style="text-align:right;">
-78
+76
 </td>
 <td style="text-align:right;">
-71511
+71714
 </td>
 <td style="text-align:right;">
 NA
@@ -1306,13 +1307,13 @@ Apache County, Arizona
 HIPI
 </td>
 <td style="text-align:right;">
-16
+49
 </td>
 <td style="text-align:right;">
-16
+14
 </td>
 <td style="text-align:right;">
-71511
+71714
 </td>
 <td style="text-align:right;">
 NA
@@ -1329,13 +1330,13 @@ Apache County, Arizona
 Hispanic
 </td>
 <td style="text-align:right;">
-4531
+4751
 </td>
 <td style="text-align:right;">
 NA
 </td>
 <td style="text-align:right;">
-71511
+71714
 </td>
 <td style="text-align:right;">
 NA
@@ -1352,13 +1353,13 @@ Cochise County, Arizona
 White
 </td>
 <td style="text-align:right;">
-69216
+69095
 </td>
 <td style="text-align:right;">
-235
+350
 </td>
 <td style="text-align:right;">
-125867
+126442
 </td>
 <td style="text-align:right;">
 NA
@@ -1375,13 +1376,13 @@ Cochise County, Arizona
 Black
 </td>
 <td style="text-align:right;">
-4620
+4512
 </td>
 <td style="text-align:right;">
-247
+378
 </td>
 <td style="text-align:right;">
-125867
+126442
 </td>
 <td style="text-align:right;">
 NA
@@ -1398,13 +1399,13 @@ Cochise County, Arizona
 Native
 </td>
 <td style="text-align:right;">
-1142
+1058
 </td>
 <td style="text-align:right;">
-191
+176
 </td>
 <td style="text-align:right;">
-125867
+126442
 </td>
 <td style="text-align:right;">
 NA
@@ -1421,13 +1422,13 @@ Cochise County, Arizona
 Asian
 </td>
 <td style="text-align:right;">
-2431
+2371
 </td>
 <td style="text-align:right;">
-162
+241
 </td>
 <td style="text-align:right;">
-125867
+126442
 </td>
 <td style="text-align:right;">
 NA
@@ -1435,8 +1436,8 @@ NA
 </tr>
 </tbody>
 </table></div>
-<p>By using dplyr’s <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> function, we calculate a new column, <code>percent</code>, representing the percentage of each Census tract’s population that corresponds to each racial/ethnic group in 2015-2019. The <code><a href="https://dplyr.tidyverse.org/reference/select.html">select()</a></code> function, also in dplyr, retains only those columns that we need to view.</p>
-<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
+<p>By using dplyr’s <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> function, we calculate a new column, <code>percent</code>, representing the percentage of each Census tract’s population that corresponds to each racial/ethnic group in 2016-2020. The <code><a href="https://dplyr.tidyverse.org/reference/select.html">select()</a></code> function, also in dplyr, retains only those columns that we need to view.</p>
+<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">az_race_percent</span> <span class="op">&lt;-</span> <span class="va">az_race</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>percent <span class="op">=</span> <span class="fl">100</span> <span class="op">*</span> <span class="op">(</span><span class="va">estimate</span> <span class="op">/</span> <span class="va">summary_est</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">NAME</span>, <span class="va">variable</span>, <span class="va">percent</span><span class="op">)</span></code></pre></div>
@@ -1464,7 +1465,7 @@ Apache County, Arizona
 White
 </td>
 <td style="text-align:right;">
-18.2097859
+18.1178013
 </td>
 </tr>
 <tr>
@@ -1475,7 +1476,7 @@ Apache County, Arizona
 Black
 </td>
 <td style="text-align:right;">
-0.5215981
+0.7585688
 </td>
 </tr>
 <tr>
@@ -1486,7 +1487,7 @@ Apache County, Arizona
 Native
 </td>
 <td style="text-align:right;">
-73.1146257
+72.4809661
 </td>
 </tr>
 <tr>
@@ -1497,7 +1498,7 @@ Apache County, Arizona
 Asian
 </td>
 <td style="text-align:right;">
-0.3440030
+0.3653401
 </td>
 </tr>
 <tr>
@@ -1508,7 +1509,7 @@ Apache County, Arizona
 HIPI
 </td>
 <td style="text-align:right;">
-0.0223742
+0.0683270
 </td>
 </tr>
 <tr>
@@ -1519,7 +1520,7 @@ Apache County, Arizona
 Hispanic
 </td>
 <td style="text-align:right;">
-6.3360882
+6.6249268
 </td>
 </tr>
 <tr>
@@ -1530,7 +1531,7 @@ Cochise County, Arizona
 White
 </td>
 <td style="text-align:right;">
-54.9913798
+54.6456083
 </td>
 </tr>
 <tr>
@@ -1541,7 +1542,7 @@ Cochise County, Arizona
 Black
 </td>
 <td style="text-align:right;">
-3.6705411
+3.5684345
 </td>
 </tr>
 <tr>
@@ -1552,7 +1553,7 @@ Cochise County, Arizona
 Native
 </td>
 <td style="text-align:right;">
-0.9073069
+0.8367473
 </td>
 </tr>
 <tr>
@@ -1563,13 +1564,13 @@ Cochise County, Arizona
 Asian
 </td>
 <td style="text-align:right;">
-1.9314038
+1.8751681
 </td>
 </tr>
 </tbody>
 </table></div>
 <p>The above example introduces some additional syntax common to tidyverse data analyses. The <code>%&gt;%</code> operator from the <strong>magrittr</strong> R package <span class="citation">(<a href="references.html#ref-bache_2020" role="doc-biblioref">Bache and Wickham 2020</a>)</span> is a <em>pipe</em> operator that allows for analysts to develop <em>analytic pipelines</em>, which are deeply embedded in tidyverse-centric data analytic workflows. The pipe operator passes the result of a given line of code as the first argument of the code on the next line. In turn, analysts can develop data analysis pipelines of related operations that fit together in a coherent way.</p>
-<p>tidyverse developers recommend that the pipe operator be read as “then.” The above code can in turn be interpreted as “Create a new data object <code>az_race_percent</code> by using the existing data object <code>az_race</code> THEN creating a new <code>percent</code> column THEN selecting the <code>NAME</code>, <code>variable</code>, and <code>percent</code> columns.”</p>
+<p>tidyverse developers recommend that the pipe operator be read as “then”. The above code can in turn be interpreted as “Create a new data object <code>az_race_percent</code> by using the existing data object <code>az_race</code> THEN creating a new <code>percent</code> column THEN selecting the <code>NAME</code>, <code>variable</code>, and <code>percent</code> columns.”</p>
 <p>Since R version 4.1, the base installation of R also includes a pipe operator, <code>|&gt;</code>. It works much the same way as the <strong>magrittr</strong> pipe <code>%&gt;%</code>, though <code>%&gt;%</code> has some small additional features that make it work well within tidyverse analysis pipelines. In turn, <code>%&gt;%</code> will be used in the examples throughout this book.</p>
 </div>
 </div>
@@ -1577,7 +1578,7 @@ Asian
 <h2>
 <span class="header-section-number">3.3</span> Group-wise Census data analysis<a class="anchor" aria-label="anchor" href="#group-wise-census-data-analysis"><i class="fas fa-link"></i></a>
 </h2>
-<p>The split-apply-combine model of data analysis, as discussed in <span class="citation"><a href="references.html#ref-wickham2011" role="doc-biblioref">Wickham</a> (<a href="references.html#ref-wickham2011" role="doc-biblioref">2011</a>)</span>, is a powerful framework for analyzing demographic data. In general terms, an analyst will apply this framework as follows:</p>
+<p>The split-apply-combine model of data analysis, as discussed in <span class="citation">Wickham (<a href="references.html#ref-wickham2011" role="doc-biblioref">2011</a>)</span>, is a powerful framework for analyzing demographic data. In general terms, an analyst will apply this framework as follows:</p>
 <ul>
 <li><p>The analyst identifies salient groups in a dataset between which they want to make comparisons. The dataset is then <strong>split</strong> into multiple pieces, one for each group.</p></li>
 <li><p>A function is then <strong>applied</strong> to each group in turn. This might be a simple summary function, such as taking the maximum or calculating the mean, or a custom function defined by the analyst.</p></li>
@@ -1591,7 +1592,7 @@ Asian
 </h3>
 <p>The <code>az_race_percent</code> dataset created above is an example of a dataset suitable for group-wise data analysis. It includes two columns that could be used as group definitions: <code>NAME</code>, representing the county, and <code>variable</code>, representing the racial or ethnic group. Split-apply-combine could be used for either group definition to make comparisons for data in Arizona across these categories.</p>
 <p>In a first example, we can deploy group-wise data analysis to identify the largest racial or ethnic group in each county in Arizona. This involves setting up a data analysis pipeline with the <strong>magrittr</strong> pipe and calculating a <em>grouped filter</em> where the <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code> operation will be applied specific to each group. In this example, the filter condition will be specified as <code>percent == max(percent)</code>. We can read the analytic pipeline then as “Create a new dataset, <code>largest_group</code>, by using the <code>az_race_dataset</code> THEN grouping the dataset by the <code>NAME</code> column THEN filtering for rows that are equal to the maximum value of <code>percent</code> for each group.”</p>
-<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">largest_group</span> <span class="op">&lt;-</span> <span class="va">az_race_percent</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">NAME</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">percent</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">percent</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -1619,7 +1620,7 @@ Apache County, Arizona
 Native
 </td>
 <td style="text-align:right;">
-73.11463
+72.48097
 </td>
 </tr>
 <tr>
@@ -1630,7 +1631,7 @@ Cochise County, Arizona
 White
 </td>
 <td style="text-align:right;">
-54.99138
+54.64561
 </td>
 </tr>
 <tr>
@@ -1641,7 +1642,7 @@ Coconino County, Arizona
 White
 </td>
 <td style="text-align:right;">
-54.05170
+53.80798
 </td>
 </tr>
 <tr>
@@ -1652,7 +1653,7 @@ Gila County, Arizona
 White
 </td>
 <td style="text-align:right;">
-62.25302
+61.85232
 </td>
 </tr>
 <tr>
@@ -1663,7 +1664,7 @@ Graham County, Arizona
 White
 </td>
 <td style="text-align:right;">
-50.85799
+50.88764
 </td>
 </tr>
 <tr>
@@ -1674,7 +1675,7 @@ Greenlee County, Arizona
 Hispanic
 </td>
 <td style="text-align:right;">
-46.79689
+47.26889
 </td>
 </tr>
 <tr>
@@ -1685,7 +1686,7 @@ La Paz County, Arizona
 White
 </td>
 <td style="text-align:right;">
-57.39912
+57.18089
 </td>
 </tr>
 <tr>
@@ -1696,7 +1697,7 @@ Maricopa County, Arizona
 White
 </td>
 <td style="text-align:right;">
-55.24102
+54.55515
 </td>
 </tr>
 <tr>
@@ -1707,7 +1708,7 @@ Mohave County, Arizona
 White
 </td>
 <td style="text-align:right;">
-77.29074
+76.69694
 </td>
 </tr>
 <tr>
@@ -1718,14 +1719,14 @@ Navajo County, Arizona
 Native
 </td>
 <td style="text-align:right;">
-43.52613
+42.71386
 </td>
 </tr>
 </tbody>
 </table></div>
 <p>The result of the grouped filter allows us to review the most common racial or ethnic group in each Arizona County along with how their percentages vary. For example, in two Arizona counties (Greenlee and Navajo), none of the racial or ethnic groups form a majority of the population.</p>
 <p><code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code> is commonly paired with the <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code> function in data analysis pipelines. <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code> generates a new, condensed dataset that by default returns a column for the grouping variable(s) and columns representing the results of one or more functions applied to those groups. In the example below, the <code><a href="https://rdrr.io/r/stats/median.html">median()</a></code> function is used to identify the median percentage for each of the racial &amp; ethnic groups in the dataset across counties in Arizona. In turn, <code>variable</code> is passed to <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code> as the grouping variable.</p>
-<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">az_race_percent</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">variable</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>median_pct <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">percent</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -1747,7 +1748,7 @@ median_pct
 Asian
 </td>
 <td style="text-align:right;">
-0.9238513
+0.9918415
 </td>
 </tr>
 <tr>
@@ -1755,7 +1756,7 @@ Asian
 Black
 </td>
 <td style="text-align:right;">
-1.1155627
+1.2857283
 </td>
 </tr>
 <tr>
@@ -1763,7 +1764,7 @@ Black
 HIPI
 </td>
 <td style="text-align:right;">
-0.1210654
+0.1070384
 </td>
 </tr>
 <tr>
@@ -1771,7 +1772,7 @@ HIPI
 Hispanic
 </td>
 <td style="text-align:right;">
-30.1555247
+30.4721836
 </td>
 </tr>
 <tr>
@@ -1779,7 +1780,7 @@ Hispanic
 Native
 </td>
 <td style="text-align:right;">
-3.5811804
+3.6344427
 </td>
 </tr>
 <tr>
@@ -1787,7 +1788,7 @@ Native
 White
 </td>
 <td style="text-align:right;">
-54.0517009
+53.8079773
 </td>
 </tr>
 </tbody>
@@ -1800,7 +1801,7 @@ White
 </h3>
 <p>In the examples above, suitable groups in the <code>NAME</code> and <code>variable</code> columns were already found in the data retrieved with <code><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs()</a></code>. Commonly, analysts will also need to calculate new custom groups to address specific analytic questions. For example, variables in ACS table B19001 represent groups of households whose household incomes fall into a variety of categories: less than $10,000/year, between $10,000/year and $19,999/year, and so forth. These categories may be more granular than needed by an analyst. As such, an analyst might take the following steps: 1) recode the ACS variables into wider income bands; 2) group the data by the wider income bands; 3) calculate grouped sums to generate new estimates.</p>
 <p>Consider the following example, using household income data for Minnesota counties from the 2012-2016 ACS:</p>
-<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mn_hh_income</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs</a></span><span class="op">(</span>
   geography <span class="op">=</span> <span class="st">"county"</span>,
   table <span class="op">=</span> <span class="st">"B19001"</span>,
@@ -1809,7 +1810,7 @@ White
 <span class="op">)</span></code></pre></div>
 <div class="inline-table"><table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:mn-hh-income-show">Table 3.10: </span>Table B19001 for counties in Minnesota
+<span id="tab:mn-hh-income-show">Table 3.10: </span>Table B19001 for counties in Minnesota, 2012-2016 ACS
 </caption>
 <thead><tr>
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
@@ -2004,7 +2005,7 @@ B19001_010
 <p>Our data include household income categories for each county in the rows. However, let’s say we only need three income categories for purposes of analysis: below $35,000/year, between $35,000/year and $75,000/year, and $75,000/year and up.</p>
 <p>We first need to do some transformation of our data to recode the variables appropriately. First, we will remove variable <code>B19001_001</code>, which represents the total number of households for each county. Second, we use the <code><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when()</a></code> function from the <strong>dplyr</strong> package to identify groups of variables that correspond to our desired groupings. Given that the variables are ordered in the ACS table in relationship to the household income values, the less than operator can be used to identify groups.</p>
 <p>The syntax of <code><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when()</a></code> can appear complex to beginners, so it is worth stepping through how the function works. Inside the <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> function, which is used to create a new variable named <code>incgroup</code>, <code><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when()</a></code> steps through a series of logical conditions that are evaluated in order similar to a series of if/else statements. The first condition is evaluated, telling the function to assign the value of <code>below35k</code> to all rows with a <code>variable</code> value that comes before <code>"B19001_008"</code> - which in this case will be <code>B19001_002</code> (income less than $10,000) through <code>B19001_007</code> (income between $30,000 and $34,999). The second condition is then evaluated <em>for all those rows not accounted for by the first condition</em>. This means that <code><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when()</a></code> knows not to assign <code>"bw35kand75k"</code> to the income group of $10,000 and below even though its variable comes before <code>B19001_013</code>. The final condition in <code><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when()</a></code> can be set to <code>TRUE</code> which in this scenario translates as “all other values.”</p>
-<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mn_hh_income_recode</span> <span class="op">&lt;-</span> <span class="va">mn_hh_income</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">variable</span> <span class="op">!=</span> <span class="st">"B19001_001"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>incgroup <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span><span class="op">(</span>
@@ -2240,7 +2241,7 @@ bw35kand75k
 </tbody>
 </table></div>
 <p>Our result illustrates how the different variable IDs are mapped to the new, recoded categories that we specified in <code><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when()</a></code>. The <code>group_by() %&gt;% summarize()</code> workflow can now be applied to the recoded categories by county to tabulate the data into a smaller number of groups.</p>
-<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mn_group_sums</span> <span class="op">&lt;-</span> <span class="va">mn_hh_income_recode</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">GEOID</span>, <span class="va">incgroup</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>estimate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">estimate</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -2385,17 +2386,17 @@ above75k
 <span class="header-section-number">3.4.1</span> Time-series analysis: some cautions<a class="anchor" aria-label="anchor" href="#time-series-analysis-some-cautions"><i class="fas fa-link"></i></a>
 </h3>
 <p>Before engaging in any sort of time series analysis of Census data, analysts need to account for potential problems that can emerge when using Census data longitudinally. One major issue that can emerge is <em>geography changes</em> over time. For example, let’s say we are interested in analyzing data on Oglala Lakota County, South Dakota. We can get recent data from the ACS using tools learned in Chapter <a href="an-introduction-to-tidycensus.html#an-introduction-to-tidycensus">2</a>:</p>
-<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">oglala_lakota_age</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs</a></span><span class="op">(</span>
   geography <span class="op">=</span> <span class="st">"county"</span>,
   state <span class="op">=</span> <span class="st">"SD"</span>,
   county <span class="op">=</span> <span class="st">"Oglala Lakota"</span>,
   table <span class="op">=</span> <span class="st">"B01001"</span>,
-  year <span class="op">=</span> <span class="fl">2019</span>
+  year <span class="op">=</span> <span class="fl">2020</span>
 <span class="op">)</span></code></pre></div>
 <div class="inline-table"><table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:oglala-lakota-show">Table 3.13: </span>2015-2019 age table for Oglala Lakota County, SD
+<span id="tab:oglala-lakota-show">Table 3.13: </span>2016-2020 age table for Oglala Lakota County, SD
 </caption>
 <thead><tr>
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
@@ -2426,7 +2427,7 @@ Oglala Lakota County, South Dakota
 B01001_001
 </td>
 <td style="text-align:right;">
-14335
+14277
 </td>
 <td style="text-align:right;">
 NA
@@ -2443,10 +2444,10 @@ Oglala Lakota County, South Dakota
 B01001_002
 </td>
 <td style="text-align:right;">
-7024
+6930
 </td>
 <td style="text-align:right;">
-126
+132
 </td>
 </tr>
 <tr>
@@ -2460,10 +2461,10 @@ Oglala Lakota County, South Dakota
 B01001_003
 </td>
 <td style="text-align:right;">
-771
+761
 </td>
 <td style="text-align:right;">
-58
+66
 </td>
 </tr>
 <tr>
@@ -2477,10 +2478,10 @@ Oglala Lakota County, South Dakota
 B01001_004
 </td>
 <td style="text-align:right;">
-697
+794
 </td>
 <td style="text-align:right;">
-97
+128
 </td>
 </tr>
 <tr>
@@ -2494,10 +2495,10 @@ Oglala Lakota County, South Dakota
 B01001_005
 </td>
 <td style="text-align:right;">
-829
+707
 </td>
 <td style="text-align:right;">
-88
+123
 </td>
 </tr>
 <tr>
@@ -2511,10 +2512,10 @@ Oglala Lakota County, South Dakota
 B01001_006
 </td>
 <td style="text-align:right;">
-393
+394
 </td>
 <td style="text-align:right;">
-14
+20
 </td>
 </tr>
 <tr>
@@ -2528,10 +2529,10 @@ Oglala Lakota County, South Dakota
 B01001_007
 </td>
 <td style="text-align:right;">
-263
+227
 </td>
 <td style="text-align:right;">
-41
+15
 </td>
 </tr>
 <tr>
@@ -2545,10 +2546,10 @@ Oglala Lakota County, South Dakota
 B01001_008
 </td>
 <td style="text-align:right;">
-98
+85
 </td>
 <td style="text-align:right;">
-59
+53
 </td>
 </tr>
 <tr>
@@ -2562,10 +2563,10 @@ Oglala Lakota County, South Dakota
 B01001_009
 </td>
 <td style="text-align:right;">
-158
+165
 </td>
 <td style="text-align:right;">
-59
+70
 </td>
 </tr>
 <tr>
@@ -2579,36 +2580,36 @@ Oglala Lakota County, South Dakota
 B01001_010
 </td>
 <td style="text-align:right;">
-375
+356
 </td>
 <td style="text-align:right;">
-88
+101
 </td>
 </tr>
 </tbody>
 </table></div>
-<p>To understand how the age composition of the county has changed over the past 10 years, we may want to look at the 2005-2009 ACS for the county. Normally, we would just change the year argument to <code>2009</code>:</p>
-<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">oglala_lakota_age_09</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs</a></span><span class="op">(</span>
+<p>To understand how the age composition of the county has changed over the past 10 years, we may want to look at the 2006-2010 ACS for the county. Normally, we would just change the year argument to <code>2010</code>:</p>
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">oglala_lakota_age_10</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs</a></span><span class="op">(</span>
   geography <span class="op">=</span> <span class="st">"county"</span>,
   state <span class="op">=</span> <span class="st">"SD"</span>,
   county <span class="op">=</span> <span class="st">"Oglala Lakota"</span>,
   table <span class="op">=</span> <span class="st">"B01001"</span>,
-  year <span class="op">=</span> <span class="fl">2009</span>
+  year <span class="op">=</span> <span class="fl">2010</span>
 <span class="op">)</span></code></pre></div>
 <pre><code>## Error: Your API call has errors.  The API message returned is .</code></pre>
-<p>The request errors, and we don’t get an informative error message back from the API as was discussed in Section <a href="an-introduction-to-tidycensus.html#debugging-tidycensus-errors">2.6</a>. The problem here is that Oglala Lakota County had a different name in 2009, Shannon County, meaning that the <code>county = "Oglala Lakota"</code> argument will not return any data. In turn, the equivalent code for the 2005-2009 ACS would use <code>county = "Shannon"</code>.</p>
-<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">oglala_lakota_age_09</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs</a></span><span class="op">(</span>
+<p>The request errors, and we don’t get an informative error message back from the API as was discussed in Section <a href="an-introduction-to-tidycensus.html#debugging-tidycensus-errors">2.6</a>. The problem here is that Oglala Lakota County had a different name in 2010, Shannon County, meaning that the <code>county = "Oglala Lakota"</code> argument will not return any data. In turn, the equivalent code for the 2006-2010 ACS would use <code>county = "Shannon"</code>.</p>
+<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">oglala_lakota_age_10</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs</a></span><span class="op">(</span>
   geography <span class="op">=</span> <span class="st">"county"</span>,
   state <span class="op">=</span> <span class="st">"SD"</span>,
   county <span class="op">=</span> <span class="st">"Shannon"</span>,
   table <span class="op">=</span> <span class="st">"B01001"</span>,
-  year <span class="op">=</span> <span class="fl">2009</span>
+  year <span class="op">=</span> <span class="fl">2010</span>
 <span class="op">)</span></code></pre></div>
 <div class="inline-table"><table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:shannon-county-age-show">Table 3.14: </span>2005-2009 age table for Oglala Lakota County, SD (then named Shannon County)
+<span id="tab:shannon-county-age-show">Table 3.14: </span>200-2010 age table for Oglala Lakota County, SD (then named Shannon County)
 </caption>
 <thead><tr>
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
@@ -2639,10 +2640,10 @@ Shannon County, South Dakota
 B01001_001
 </td>
 <td style="text-align:right;">
-13593
+13437
 </td>
 <td style="text-align:right;">
-0
+NA
 </td>
 </tr>
 <tr>
@@ -2656,10 +2657,10 @@ Shannon County, South Dakota
 B01001_002
 </td>
 <td style="text-align:right;">
-6469
+6553
 </td>
 <td style="text-align:right;">
-238
+47
 </td>
 </tr>
 <tr>
@@ -2673,7 +2674,7 @@ Shannon County, South Dakota
 B01001_003
 </td>
 <td style="text-align:right;">
-739
+770
 </td>
 <td style="text-align:right;">
 99
@@ -2690,10 +2691,10 @@ Shannon County, South Dakota
 B01001_004
 </td>
 <td style="text-align:right;">
-574
+565
 </td>
 <td style="text-align:right;">
-144
+151
 </td>
 </tr>
 <tr>
@@ -2707,10 +2708,10 @@ Shannon County, South Dakota
 B01001_005
 </td>
 <td style="text-align:right;">
-823
+833
 </td>
 <td style="text-align:right;">
-122
+151
 </td>
 </tr>
 <tr>
@@ -2724,10 +2725,10 @@ Shannon County, South Dakota
 B01001_006
 </td>
 <td style="text-align:right;">
-498
+541
 </td>
 <td style="text-align:right;">
-129
+47
 </td>
 </tr>
 <tr>
@@ -2741,10 +2742,10 @@ Shannon County, South Dakota
 B01001_007
 </td>
 <td style="text-align:right;">
-291
+275
 </td>
 <td style="text-align:right;">
-39
+99
 </td>
 </tr>
 <tr>
@@ -2758,10 +2759,10 @@ Shannon County, South Dakota
 B01001_008
 </td>
 <td style="text-align:right;">
-213
+164
 </td>
 <td style="text-align:right;">
-98
+89
 </td>
 </tr>
 <tr>
@@ -2775,10 +2776,10 @@ Shannon County, South Dakota
 B01001_009
 </td>
 <td style="text-align:right;">
-147
+143
 </td>
 <td style="text-align:right;">
-74
+54
 </td>
 </tr>
 <tr>
@@ -2792,17 +2793,17 @@ Shannon County, South Dakota
 B01001_010
 </td>
 <td style="text-align:right;">
-341
+342
 </td>
 <td style="text-align:right;">
-110
+83
 </td>
 </tr>
 </tbody>
 </table></div>
 <p>Note the differences in the <code>GEOID</code> column between the two tables of data. When a county or geographic entity changes its name, the Census Bureau assigns it a new <code>GEOID</code>, meaning that analysts need to take care when dealing with those changes. A full listing of geography changes <a href="https://www.census.gov/programs-surveys/acs/technical-documentation/table-and-geography-changes.2019.html">is available on the Census website for each year</a>.</p>
 <p>In addition to changes in geographic identifiers, variable IDs can change over time as well. For example, the ACS Data Profile is commonly used for pre-computed normalized ACS estimates. Let’s say that we are interested in analyzing the percentage of residents age 25 and up with a 4-year college degree for counties in Colorado from the 2019 1-year ACS. We’d first look up the appropriate variable ID with <code>load_variables(2019, "acs1/profile")</code> then use <code><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs()</a></code>:</p>
-<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">co_college19</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs</a></span><span class="op">(</span>
   geography <span class="op">=</span> <span class="st">"county"</span>,
   variables <span class="op">=</span> <span class="st">"DP02_0068P"</span>,
@@ -2920,7 +2921,7 @@ DP02_0068P
 </tbody>
 </table></div>
 <p>We get back data for counties of population 65,000 and greater as these are the geographies available in the 1-year ACS. The data make sense: Boulder County, home to the University of Colorado, has a very high percentage of its population with a 4-year degree or higher. However, when we run the exact same query for the 2018 1-year ACS:</p>
-<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">co_college18</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs</a></span><span class="op">(</span>
   geography <span class="op">=</span> <span class="st">"county"</span>,
   variables <span class="op">=</span> <span class="st">"DP02_0068P"</span>,
@@ -3043,9 +3044,159 @@ NA
 <h3>
 <span class="header-section-number">3.4.2</span> Preparing time-series ACS estimates<a class="anchor" aria-label="anchor" href="#preparing-time-series-acs-estimates"><i class="fas fa-link"></i></a>
 </h3>
-<p>A safer way to perform time-series analysis of the ACS, then, is to use the Detailed Tables. While this option lacks the convenience of the pre-computed estimates in the Data Profile, it ensures that variable IDs will remain consistent across years allowing for consistent and correct analysis. That said, there still are some potential pitfalls to account for when using the Detailed Tables. The Census Bureau will add and remove variables from survey to survey depending on data needs and data availability. For example, questions are sometimes added and removed from the ACS survey meaning that you won’t always be able to get every data point for every year and geography combination. In turn, it is still important to check on data availability using <code><a href="https://walker-data.com/tidycensus/reference/load_variables.html">load_variables()</a></code> for the years you plan to analyze before carrying out your time-series analysis.</p>
+<p>The safest option for time-series analysis in the ACS is to use the Comparison Profile Tables. These tables are available for both the 1-year and 5-year ACS, and allow for comparison of demographic indicators over the past five years for a given year. Using the Comparison Profile tables also brings the benefit of additional variable harmonization, such as inflation-adjusted income estimates.</p>
+<p>Data from the Comparison Profile are accessed just like other ACS variables using <code><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs()</a></code>. The example below illustrates how to get data from the ACS Comparison Profile on inflation-adjusted median household income for counties and county-equivalents in Alaska.</p>
+<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">ak_income_compare</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs</a></span><span class="op">(</span>
+  geography <span class="op">=</span> <span class="st">"county"</span>,
+  variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
+    income15 <span class="op">=</span> <span class="st">"CP03_2015_062"</span>,
+    income20 <span class="op">=</span> <span class="st">"CP03_2020_062"</span>
+  <span class="op">)</span>,
+  state <span class="op">=</span> <span class="st">"AK"</span>,
+  year <span class="op">=</span> <span class="fl">2020</span>
+<span class="op">)</span></code></pre></div>
+<p>For the 2016-2020 ACS, the “comparison year” is 2015, representing the closest non-overlapping 5-year dataset, which in this case is 2011-2015. We can examine the results, which are inflation-adjusted for appropriate comparison:</p>
+<div class="inline-table"><table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:alaska-cp-data-show">Table 3.17: </span>Comparative income data from the ACS CP tables
+</caption>
+<thead><tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+GEOID
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+NAME
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+variable
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+estimate
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+02016
+</td>
+<td style="text-align:left;">
+Aleutians West Census Area, Alaska
+</td>
+<td style="text-align:left;">
+income15
+</td>
+<td style="text-align:right;">
+92500
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+02016
+</td>
+<td style="text-align:left;">
+Aleutians West Census Area, Alaska
+</td>
+<td style="text-align:left;">
+income20
+</td>
+<td style="text-align:right;">
+87443
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+02020
+</td>
+<td style="text-align:left;">
+Anchorage Municipality, Alaska
+</td>
+<td style="text-align:left;">
+income15
+</td>
+<td style="text-align:right;">
+85534
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+02020
+</td>
+<td style="text-align:left;">
+Anchorage Municipality, Alaska
+</td>
+<td style="text-align:left;">
+income20
+</td>
+<td style="text-align:right;">
+84813
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+02050
+</td>
+<td style="text-align:left;">
+Bethel Census Area, Alaska
+</td>
+<td style="text-align:left;">
+income15
+</td>
+<td style="text-align:right;">
+55692
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+02050
+</td>
+<td style="text-align:left;">
+Bethel Census Area, Alaska
+</td>
+<td style="text-align:left;">
+income20
+</td>
+<td style="text-align:right;">
+54400
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+02090
+</td>
+<td style="text-align:left;">
+Fairbanks North Star Borough, Alaska
+</td>
+<td style="text-align:left;">
+income15
+</td>
+<td style="text-align:right;">
+77590
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+02090
+</td>
+<td style="text-align:left;">
+Fairbanks North Star Borough, Alaska
+</td>
+<td style="text-align:left;">
+income20
+</td>
+<td style="text-align:right;">
+76464
+</td>
+</tr>
+</tbody>
+</table></div>
+<div id="iterating-over-acs-years-with-tidyverse-tools" class="section level4" number="3.4.2.1">
+<h4>
+<span class="header-section-number">3.4.2.1</span> Iterating over ACS years with tidyverse tools<a class="anchor" aria-label="anchor" href="#iterating-over-acs-years-with-tidyverse-tools"><i class="fas fa-link"></i></a>
+</h4>
+<p>Using the Detailed Tables also represents a safer option than the Data Profile, as it ensures that variable IDs will remain consistent across years allowing for consistent and correct analysis. That said, there still are some potential pitfalls to account for when using the Detailed Tables. The Census Bureau will add and remove variables from survey to survey depending on data needs and data availability. For example, questions are sometimes added and removed from the ACS survey meaning that you won’t always be able to get every data point for every year and geography combination. In turn, it is still important to check on data availability using <code><a href="https://walker-data.com/tidycensus/reference/load_variables.html">load_variables()</a></code> for the years you plan to analyze before carrying out your time-series analysis.</p>
 <p>Let’s re-engineer the analysis above on educational attainment in Colorado counties, which below will be computed for a time series from 2010 to 2019. Information on “bachelor’s degree or higher” is split by sex and across different tiers of educational attainment in the detailed tables, found in ACS table 15002. Given that we only need a few variables (representing estimates of populations age 25+ who have finished a 4-year degree or graduate degrees, by sex), we’ll request those variables directly rather than the entire B15002 table.</p>
-<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">college_vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"B15002_015"</span>,
                   <span class="st">"B15002_016"</span>,
                   <span class="st">"B15002_017"</span>,
@@ -3056,7 +3207,7 @@ NA
                   <span class="st">"B15002_035"</span><span class="op">)</span></code></pre></div>
 <p>We’ll now use these variables to request data on college degree holders from the ACS for counties in Colorado for each of the 1-year ACS surveys from 2010 to 2019. In most cases, this process should be streamlined with <em>iteration</em>. Thus far, we are familiar with using the <code>year</code> argument in <code><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs()</a></code> to request data for a specific year. Writing out ten different calls to <code><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs()</a></code>, however - one for each year - would be tedious and would require a fair amount of repetitive code! Iteration helps us avoid repetitive coding as it allows us to carry out the same process over a sequence of values. Programmers familiar with iteration will likely know of “loop” operators like <code>for</code> and <code>while</code>, which are available in base R and most other programming languages in some variety. Base R also includes the <code>*apply()</code> family of functions (e.g. <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code>, <code><a href="https://rdrr.io/r/base/mapply.html">mapply()</a></code>, <code><a href="https://rdrr.io/r/base/lapply.html">sapply()</a></code>), which iterates over a sequence of values and applies a given function to each value.</p>
 <p>The tidyverse approach to iteration is found in the <strong>purrr</strong> package. <strong>purrr</strong> includes a variety of functions that are designed to integrate well in workflows that require iteration and use other tidyverse tools. The <code>map_*()</code> family of functions iterate over values and try to return a desired result; <code><a href="https://purrr.tidyverse.org/reference/map.html">map()</a></code> returns a list, <code><a href="https://purrr.tidyverse.org/reference/map.html">map_int()</a></code> returns an integer vector, and <code><a href="https://purrr.tidyverse.org/reference/map.html">map_chr()</a></code> returns a character vector, for example. With tidycensus, the <code><a href="https://purrr.tidyverse.org/reference/map.html">map_dfr()</a></code> function is particularly useful. <code><a href="https://purrr.tidyverse.org/reference/map.html">map_dfr()</a></code> iterates over an input and applies it to a function or process defined by the user, then row-binds the result into a single data frame. The example below illustrates how this works for the years 2010 through 2019.</p>
-<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">years</span> <span class="op">&lt;-</span> <span class="fl">2010</span><span class="op">:</span><span class="fl">2019</span>
 <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">years</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">years</span>
 
@@ -3083,12 +3234,12 @@ NA
 </li>
 </ul>
 <p>Let’s review the result:</p>
-<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">college_by_year</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">NAME</span>, <span class="va">variable</span>, <span class="va">year</span><span class="op">)</span></code></pre></div>
 <div class="inline-table"><table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:college-by-year-show">Table 3.17: </span>Educational attainment over time
+<span id="tab:college-by-year-show">Table 3.18: </span>Educational attainment over time
 </caption>
 <thead><tr>
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
@@ -3380,7 +3531,7 @@ B15002_015
 </tbody>
 </table></div>
 <p>The result is a long-form dataset that contains a time series of each requested ACS variable for each county in Colorado that is available in the 1-year ACS. The code below outlines a <code>group_by() %&gt;% summarize()</code> workflow for calculating the percentage of the population age 25 and up with a 4-year college degree, then uses the <code><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider()</a></code> function from the tidyr package to spread the years across the columns for tabular data display.</p>
-<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">percent_college_by_year</span> <span class="op">&lt;-</span> <span class="va">college_by_year</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">NAME</span>, <span class="va">year</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>numerator <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">estimate</span><span class="op">)</span>,
@@ -3391,7 +3542,7 @@ B15002_015
               values_from <span class="op">=</span> <span class="va">pct_college</span><span class="op">)</span></code></pre></div>
 <div class="inline-table"><table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:pct-college-by-year-show">Table 3.18: </span>Percent college by year
+<span id="tab:pct-college-by-year-show">Table 3.19: </span>Percent college by year
 </caption>
 <thead><tr>
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
@@ -3784,6 +3935,7 @@ Mesa County, Colorado
 <p>This particular format is suitable for data display or writing to an Excel spreadsheet for colleagues who are not R-based. Methods for visualization of time-series estimates from the ACS will be covered in Section <a href="exploring-us-census-data-with-visualization.html#visualizing-acs-estimates-over-time">4.4</a>.</p>
 </div>
 </div>
+</div>
 <div id="handling-margins-of-error-in-the-american-community-survey-with-tidycensus" class="section level2" number="3.5">
 <h2>
 <span class="header-section-number">3.5</span> Handling margins of error in the American Community Survey with tidycensus<a class="anchor" aria-label="anchor" href="#handling-margins-of-error-in-the-american-community-survey-with-tidycensus"><i class="fas fa-link"></i></a>
@@ -3791,15 +3943,16 @@ Mesa County, Colorado
 <p>A topic of critical importance when working with data from the American Community Survey is the <em>margin of error</em>. As opposed to the decennial US Census, which is based on a complete enumeration of the US population, the ACS is based on a sample with estimates characterized by margins of error. By default, MOEs are returned at a 90 percent confidence level. This can be translated roughtly as “we are 90 percent sure that the true value falls within a range defined by the estimate plus or minus the margin of error.”</p>
 <p>As discussed in Chapter 2, <strong>tidycensus</strong> takes an opinionated approach to margins of error. When applicable, <strong>tidycensus</strong> will always return the margin of error associated with an estimate, and does not have an option available to return estimates only. For “tidy” or long-form data, these margins of error will be found in the <code>moe</code> column; for wide-form data, margins of error will be found in columns with an <code>M</code> suffix.</p>
 <p>The confidence level of the MOE can be controlled with the <code>moe_level</code> argument in <code><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs()</a></code>. The default <code>moe_level</code> is 90, which is what the Census Bureau returns by default. tidycensus can also return MOEs at a confidence level of <code>95</code> or <code>99</code> which uses Census Bureau-recommended formulas to adjust the MOE. For example, we might look at data on median household income by county in Rhode Island using the default <code>moe_level</code> of 90:</p>
-<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs</a></span><span class="op">(</span>
   geography <span class="op">=</span> <span class="st">"county"</span>,
   state <span class="op">=</span> <span class="st">"Rhode Island"</span>,
-  variables <span class="op">=</span> <span class="st">"B19013_001"</span>
+  variables <span class="op">=</span> <span class="st">"B19013_001"</span>,
+  year <span class="op">=</span> <span class="fl">2020</span>
 <span class="op">)</span></code></pre></div>
 <div class="inline-table"><table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:default-moe-show">Table 3.19: </span>Default MOE at 90 percent confidence level
+<span id="tab:default-moe-show">Table 3.20: </span>Default MOE at 90 percent confidence level
 </caption>
 <thead><tr>
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
@@ -3830,10 +3983,10 @@ Bristol County, Rhode Island
 B19013_001
 </td>
 <td style="text-align:right;">
-83092
+85413
 </td>
 <td style="text-align:right;">
-4339
+6122
 </td>
 </tr>
 <tr>
@@ -3847,10 +4000,10 @@ Kent County, Rhode Island
 B19013_001
 </td>
 <td style="text-align:right;">
-73521
+75857
 </td>
 <td style="text-align:right;">
-1703
+2022
 </td>
 </tr>
 <tr>
@@ -3864,10 +4017,10 @@ Newport County, Rhode Island
 B19013_001
 </td>
 <td style="text-align:right;">
-79454
+84282
 </td>
 <td style="text-align:right;">
-2611
+2629
 </td>
 </tr>
 <tr>
@@ -3881,10 +4034,10 @@ Providence County, Rhode Island
 B19013_001
 </td>
 <td style="text-align:right;">
-58974
+62323
 </td>
 <td style="text-align:right;">
-1051
+1270
 </td>
 </tr>
 <tr>
@@ -3898,25 +4051,26 @@ Washington County, Rhode Island
 B19013_001
 </td>
 <td style="text-align:right;">
-85531
+86970
 </td>
 <td style="text-align:right;">
-2042
+3651
 </td>
 </tr>
 </tbody>
 </table></div>
 <p>A stricter margin of error will increase the size of the MOE relative to its estimate.</p>
-<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs</a></span><span class="op">(</span>
   geography <span class="op">=</span> <span class="st">"county"</span>,
   state <span class="op">=</span> <span class="st">"Rhode Island"</span>,
   variables <span class="op">=</span> <span class="st">"B19013_001"</span>,
+  year <span class="op">=</span> <span class="fl">2020</span>,
   moe_level <span class="op">=</span> <span class="fl">99</span>
 <span class="op">)</span></code></pre></div>
 <div class="inline-table"><table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:moe-level-99-show">Table 3.20: </span>MOE at 99 percent confidence level
+<span id="tab:moe-level-99-show">Table 3.21: </span>MOE at 99 percent confidence level
 </caption>
 <thead><tr>
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
@@ -3947,10 +4101,10 @@ Bristol County, Rhode Island
 B19013_001
 </td>
 <td style="text-align:right;">
-83092
+85413
 </td>
 <td style="text-align:right;">
-6752.486
+9527.246
 </td>
 </tr>
 <tr>
@@ -3964,10 +4118,10 @@ Kent County, Rhode Island
 B19013_001
 </td>
 <td style="text-align:right;">
-73521
+75857
 </td>
 <td style="text-align:right;">
-2650.261
+3146.699
 </td>
 </tr>
 <tr>
@@ -3981,10 +4135,10 @@ Newport County, Rhode Island
 B19013_001
 </td>
 <td style="text-align:right;">
-79454
+84282
 </td>
 <td style="text-align:right;">
-4063.319
+4091.331
 </td>
 </tr>
 <tr>
@@ -3998,10 +4152,10 @@ Providence County, Rhode Island
 B19013_001
 </td>
 <td style="text-align:right;">
-58974
+62323
 </td>
 <td style="text-align:right;">
-1635.599
+1976.413
 </td>
 </tr>
 <tr>
@@ -4015,10 +4169,10 @@ Washington County, Rhode Island
 B19013_001
 </td>
 <td style="text-align:right;">
-85531
+86970
 </td>
 <td style="text-align:right;">
-3177.824
+5681.799
 </td>
 </tr>
 </tbody>
@@ -4027,19 +4181,32 @@ B19013_001
 <h3>
 <span class="header-section-number">3.5.1</span> Calculating derived margins of error in tidycensus<a class="anchor" aria-label="anchor" href="#calculating-derived-margins-of-error-in-tidycensus"><i class="fas fa-link"></i></a>
 </h3>
-<p>For small geographies or small populations, margins of error can get quite large, in some cases exceeding their corresponding estimates. In the example below, we can examine data on age groups by sex for the population age 65 and older for Census tracts in Salt Lake County, Utah.</p>
-<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
+<p>For small geographies or small populations, margins of error can get quite large, in some cases exceeding their corresponding estimates. In the example below, we can examine data on age groups by sex for the population age 65 and older for Census tracts in Salt Lake County, Utah. We will first generate a vector of variable IDs for which we want to request data from the ACS using some base R functionality.</p>
+<p>In this workflow, an analyst has used <code><a href="https://walker-data.com/tidycensus/reference/load_variables.html">load_variables()</a></code> to look up the variables that represent estimates for populations age 65 and up; this includes <code>B01001_020</code> through <code>B01001_025</code> for males, and <code>B01001_044</code> through <code>B01001_049</code> for females. Typing out each variable individually would be tedious, so an analyst can use string concatenation to generate the required vector of variable IDs as follows:</p>
+<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"B01001_0"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">20</span><span class="op">:</span><span class="fl">25</span>, <span class="fl">44</span><span class="op">:</span><span class="fl">49</span><span class="op">)</span><span class="op">)</span>
 
-<span class="va">salt_lake</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs</a></span><span class="op">(</span>
+<span class="va">vars</span></code></pre></div>
+<pre><code>##  [1] "B01001_020" "B01001_021" "B01001_022" "B01001_023" "B01001_024"
+##  [6] "B01001_025" "B01001_044" "B01001_045" "B01001_046" "B01001_047"
+## [11] "B01001_048" "B01001_049"</code></pre>
+<p>When R evaluates nested expressions like this, it starts with the inner-most expressions then evaluates them from the inside out. The steps taken to assemble the correct vector of variable IDs are as follows:</p>
+<ul>
+<li><p>First, the expressions <code>20:25</code> and <code>44:49</code> are evaluated. The colon operator <code>:</code> in base R, when used between two numbers, will generate a vector of numbers from the first to the second at intervals of 1. This creates vectors of the integers 20 through 25 and 44 through 49, which will serve as the suffixes for the variable IDs.</p></li>
+<li><p>Second, the <code><a href="https://rdrr.io/r/base/c.html">c()</a></code> function is used to combine the two vectors of integers into a single vector.</p></li>
+<li><p>Third, the <code><a href="https://rdrr.io/r/base/paste.html">paste0()</a></code> function concatenates the string prefix <code>"B01001_0"</code> with each of the integers in the vector created with <code><a href="https://rdrr.io/r/base/c.html">c()</a></code> and returns a vector of variable IDs. <code><a href="https://rdrr.io/r/base/paste.html">paste0()</a></code> is a convenient extension of the more flexible <code><a href="https://rdrr.io/r/base/paste.html">paste()</a></code> function that concatenates strings with no spaces in between them by default.</p></li>
+</ul>
+<p>The resulting variables object, named <code>vars</code>, can now be used to request variables in a call to <code><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs()</a></code>.</p>
+<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">salt_lake</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs</a></span><span class="op">(</span>
   geography <span class="op">=</span> <span class="st">"tract"</span>,
   variables <span class="op">=</span> <span class="va">vars</span>,
   state <span class="op">=</span> <span class="st">"Utah"</span>,
   county <span class="op">=</span> <span class="st">"Salt Lake"</span>,
-  year <span class="op">=</span> <span class="fl">2019</span>
+  year <span class="op">=</span> <span class="fl">2020</span>
 <span class="op">)</span></code></pre></div>
-<p>Let’s focus on a specific Census tract in Salt Lake County using <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code>:</p>
-<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
+<p>We will now want to examine the margins of error around the estimates in the returned data. Let’s focus on a specific Census tract in Salt Lake County using <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code>:</p>
+<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">example_tract</span> <span class="op">&lt;-</span> <span class="va">salt_lake</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">GEOID</span> <span class="op">==</span> <span class="st">"49035100100"</span><span class="op">)</span>
 
@@ -4047,7 +4214,7 @@ B19013_001
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">NAME</span><span class="op">)</span></code></pre></div>
 <div class="inline-table"><table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:salt-lake-example-show">Table 3.21: </span>Example Census tract in Salt Lake City
+<span id="tab:salt-lake-example-show">Table 3.22: </span>Example Census tract in Salt Lake City
 </caption>
 <thead><tr>
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
@@ -4072,7 +4239,7 @@ moe
 B01001_020
 </td>
 <td style="text-align:right;">
-12
+11
 </td>
 <td style="text-align:right;">
 13
@@ -4086,10 +4253,10 @@ B01001_020
 B01001_021
 </td>
 <td style="text-align:right;">
-36
+25
 </td>
 <td style="text-align:right;">
-23
+18
 </td>
 </tr>
 <tr>
@@ -4100,10 +4267,10 @@ B01001_021
 B01001_022
 </td>
 <td style="text-align:right;">
-8
+7
 </td>
 <td style="text-align:right;">
-11
+10
 </td>
 </tr>
 <tr>
@@ -4114,10 +4281,10 @@ B01001_022
 B01001_023
 </td>
 <td style="text-align:right;">
-5
+4
 </td>
 <td style="text-align:right;">
-8
+7
 </td>
 </tr>
 <tr>
@@ -4131,7 +4298,7 @@ B01001_024
 0
 </td>
 <td style="text-align:right;">
-11
+12
 </td>
 </tr>
 <tr>
@@ -4142,10 +4309,10 @@ B01001_024
 B01001_025
 </td>
 <td style="text-align:right;">
-22
+17
 </td>
 <td style="text-align:right;">
-23
+20
 </td>
 </tr>
 <tr>
@@ -4159,7 +4326,7 @@ B01001_044
 0
 </td>
 <td style="text-align:right;">
-11
+12
 </td>
 </tr>
 <tr>
@@ -4170,10 +4337,10 @@ B01001_044
 B01001_045
 </td>
 <td style="text-align:right;">
-11
+4
 </td>
 <td style="text-align:right;">
-13
+7
 </td>
 </tr>
 <tr>
@@ -4184,10 +4351,10 @@ B01001_045
 B01001_046
 </td>
 <td style="text-align:right;">
-27
+21
 </td>
 <td style="text-align:right;">
-20
+17
 </td>
 </tr>
 <tr>
@@ -4198,10 +4365,10 @@ B01001_046
 B01001_047
 </td>
 <td style="text-align:right;">
-10
+123
 </td>
 <td style="text-align:right;">
-12
+168
 </td>
 </tr>
 </tbody>
@@ -4219,7 +4386,7 @@ B01001_047
 <code><a href="https://walker-data.com/tidycensus/reference/moe_prop.html">moe_prop()</a></code>: calculates a margin of error for a derived proportion.</li>
 </ul>
 <p>In their most basic form, these functions can be used with constants. For example, let’s say we had an ACS estimate of 25 with a margin of error of 5 around that estimate. The appropriate denominator for this estimate is 100 with a margin of error of 3. To determine the margin of error around the derived proportion of 0.25, we can use <code><a href="https://walker-data.com/tidycensus/reference/moe_prop.html">moe_prop()</a></code>:</p>
-<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://walker-data.com/tidycensus/reference/moe_prop.html">moe_prop</a></span><span class="op">(</span><span class="fl">25</span>, <span class="fl">100</span>, <span class="fl">5</span>, <span class="fl">3</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 0.0494343</code></pre>
 <p>Our margin of error around the derived estimate of 0.25 is approximately 0.049.</p>
@@ -4230,7 +4397,7 @@ B01001_047
 </h3>
 <p>These margin of error functions in <strong>tidycensus</strong> can in turn be integrated into tidyverse-centric analytic pipelines to handle large margins of error around estimates. Given that the smaller age bands in the Salt Lake City dataset are characterized by too much uncertainty for our analysis, we decide in this scenario to aggregate our data upwards to represent populations aged 65 and older by sex.</p>
 <p>In the code below, we use the <code><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when()</a></code> function to create a new column, <code>sex</code>, that represents a mapping of the variables we pulled from the ACS to their sex categories. We then employ a familiar <code>group_by() %&gt;% summarize()</code> method to aggregate our data by Census tract and sex. Notably, the call to <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code> includes a call to tidycensus’s <code><a href="https://walker-data.com/tidycensus/reference/moe_sum.html">moe_sum()</a></code> function, which will generate a new column that represents the margin of error around the derived sum.</p>
-<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">salt_lake_grouped</span> <span class="op">&lt;-</span> <span class="va">salt_lake</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>sex <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span><span class="op">(</span>
     <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_sub.html">str_sub</a></span><span class="op">(</span><span class="va">variable</span>, start <span class="op">=</span> <span class="op">-</span><span class="fl">2</span><span class="op">)</span> <span class="op">&lt;</span> <span class="st">"26"</span> <span class="op">~</span> <span class="st">"Male"</span>,
@@ -4241,7 +4408,7 @@ B01001_047
             sum_moe <span class="op">=</span> <span class="fu"><a href="https://walker-data.com/tidycensus/reference/moe_sum.html">moe_sum</a></span><span class="op">(</span><span class="va">moe</span>, <span class="va">estimate</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="inline-table"><table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:summarize-moe-show">Table 3.22: </span>Grouped margins of error
+<span id="tab:summarize-moe-show">Table 3.23: </span>Grouped margins of error
 </caption>
 <thead><tr>
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
@@ -4266,10 +4433,10 @@ sum_moe
 Female
 </td>
 <td style="text-align:right;">
-55
+165
 </td>
 <td style="text-align:right;">
-30.90307
+170.72493
 </td>
 </tr>
 <tr>
@@ -4280,10 +4447,10 @@ Female
 Male
 </td>
 <td style="text-align:right;">
-83
+64
 </td>
 <td style="text-align:right;">
-39.15354
+34.43835
 </td>
 </tr>
 <tr>
@@ -4294,10 +4461,10 @@ Male
 Female
 </td>
 <td style="text-align:right;">
-167
+170
 </td>
 <td style="text-align:right;">
-57.49783
+57.26255
 </td>
 </tr>
 <tr>
@@ -4308,10 +4475,10 @@ Female
 Male
 </td>
 <td style="text-align:right;">
-153
+128
 </td>
 <td style="text-align:right;">
-50.85273
+47.51842
 </td>
 </tr>
 <tr>
@@ -4322,10 +4489,10 @@ Male
 Female
 </td>
 <td style="text-align:right;">
-273
+155
 </td>
 <td style="text-align:right;">
-108.80257
+77.48548
 </td>
 </tr>
 <tr>
@@ -4336,10 +4503,10 @@ Female
 Male
 </td>
 <td style="text-align:right;">
-225
+136
 </td>
 <td style="text-align:right;">
-90.27181
+85.53362
 </td>
 </tr>
 <tr>
@@ -4350,10 +4517,10 @@ Male
 Female
 </td>
 <td style="text-align:right;">
-188
+207
 </td>
 <td style="text-align:right;">
-70.24956
+82.03658
 </td>
 </tr>
 <tr>
@@ -4364,10 +4531,10 @@ Female
 Male
 </td>
 <td style="text-align:right;">
-117
+110
 </td>
 <td style="text-align:right;">
-64.54456
+58.89822
 </td>
 </tr>
 <tr>
@@ -4378,10 +4545,10 @@ Male
 Female
 </td>
 <td style="text-align:right;">
-164
+157
 </td>
 <td style="text-align:right;">
-98.66610
+110.97297
 </td>
 </tr>
 <tr>
@@ -4392,10 +4559,10 @@ Female
 Male
 </td>
 <td style="text-align:right;">
-129
+91
 </td>
 <td style="text-align:right;">
-77.89095
+59.97499
 </td>
 </tr>
 </tbody>
@@ -4403,7 +4570,7 @@ Male
 <p>The margins of error relative to their estimates are now much more reasonable than in the disaggregated data.</p>
 <p>That said, <a href="https://www2.census.gov/programs-surveys/acs/tech_docs/statistical_testing/2019_Instructions_for_Stat_Testing_ACS.pdf?">the Census Bureau issues a note of caution</a> <span class="citation">(<a href="references.html#ref-acs_moe" role="doc-biblioref">American Community Survey Office 2020</a>)</span>:</p>
 <blockquote>
-<p>All [derived MOE methods] are approximations and users should be cautious in using them. This is because these methods do not consider the correlation or covariance between the basic estimates. They may be overestimates or underestimates of the derived estimate’s standard error depending on whether the two basic estimates are highly correlated in either the positive or negative direction. As a result, the approximated standard error may not match direct calculations of standard errors or calculations obtained through other methods.</p>
+<p>All derived MOE methods are approximations and users should be cautious in using them. This is because these methods do not consider the correlation or covariance between the basic estimates. They may be overestimates or underestimates of the derived estimate’s standard error depending on whether the two basic estimates are highly correlated in either the positive or negative direction. As a result, the approximated standard error may not match direct calculations of standard errors or calculations obtained through other methods.</p>
 </blockquote>
 <p>This means that your “best bet” is to first search the ACS tables to see if your data are found in aggregated form elsewhere before doing the aggregation and MOE estimation yourself. In many cases, you’ll find aggregated information in the ACS combined tables, Data Profile, or Subject Tables that will include pre-computed margins of error for you.</p>
 </div>
@@ -4473,7 +4640,7 @@ Male
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Analyzing US Census Data</strong>: Methods, Maps, and Models in R" was written by Kyle E. Walker. It was last built on 2022-01-31.</p>
+    <p>"<strong>Analyzing US Census Data</strong>: Methods, Maps, and Models in R" was written by Kyle E. Walker. It was last built on 2022-04-12.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

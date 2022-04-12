@@ -40,9 +40,9 @@ library(tidyverse)
 
 ```
 ## ✓ ggplot2 3.3.5     ✓ purrr   0.3.4
-## ✓ tibble  3.1.6     ✓ dplyr   1.0.7
-## ✓ tidyr   1.1.4     ✓ stringr 1.4.0
-## ✓ readr   2.1.1     ✓ forcats 0.5.1
+## ✓ tibble  3.1.6     ✓ dplyr   1.0.8
+## ✓ tidyr   1.2.0     ✓ stringr 1.4.0
+## ✓ readr   2.1.2     ✓ forcats 0.5.1
 ```
 
 ```
@@ -55,14 +55,14 @@ Eight tidyverse packages are loaded: **ggplot2**, **tibble** [@muller2021_tibble
 
 ### Sorting and filtering data
 
-For a first example, let's request data on median age from the 2015-2019 ACS with `get_acs()` for all counties in the United States. This requires specifying `geography = "county"` and leaving state set to `NULL`, the default.
+For a first example, let's request data on median age from the 2016-2020 ACS with `get_acs()` for all counties in the United States. This requires specifying `geography = "county"` and leaving state set to `NULL`, the default.
 
 
 ```r
 median_age <- get_acs(
   geography = "county",
   variables = "B01002_001",
-  year = 2019
+  year = 2020
 )
 ```
 
@@ -82,70 +82,70 @@ median_age <- get_acs(
    <td style="text-align:left;"> 01001 </td>
    <td style="text-align:left;"> Autauga County, Alabama </td>
    <td style="text-align:left;"> B01002_001 </td>
-   <td style="text-align:right;"> 38.2 </td>
+   <td style="text-align:right;"> 38.6 </td>
    <td style="text-align:right;"> 0.6 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 01003 </td>
    <td style="text-align:left;"> Baldwin County, Alabama </td>
    <td style="text-align:left;"> B01002_001 </td>
-   <td style="text-align:right;"> 43.0 </td>
-   <td style="text-align:right;"> 0.3 </td>
+   <td style="text-align:right;"> 43.2 </td>
+   <td style="text-align:right;"> 0.4 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 01005 </td>
    <td style="text-align:left;"> Barbour County, Alabama </td>
    <td style="text-align:left;"> B01002_001 </td>
-   <td style="text-align:right;"> 40.4 </td>
-   <td style="text-align:right;"> 0.5 </td>
+   <td style="text-align:right;"> 40.1 </td>
+   <td style="text-align:right;"> 0.6 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 01007 </td>
    <td style="text-align:left;"> Bibb County, Alabama </td>
    <td style="text-align:left;"> B01002_001 </td>
-   <td style="text-align:right;"> 40.9 </td>
-   <td style="text-align:right;"> 1.3 </td>
+   <td style="text-align:right;"> 39.9 </td>
+   <td style="text-align:right;"> 1.2 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 01009 </td>
    <td style="text-align:left;"> Blount County, Alabama </td>
    <td style="text-align:left;"> B01002_001 </td>
-   <td style="text-align:right;"> 40.7 </td>
-   <td style="text-align:right;"> 0.3 </td>
+   <td style="text-align:right;"> 41.0 </td>
+   <td style="text-align:right;"> 0.5 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 01011 </td>
    <td style="text-align:left;"> Bullock County, Alabama </td>
    <td style="text-align:left;"> B01002_001 </td>
-   <td style="text-align:right;"> 40.2 </td>
-   <td style="text-align:right;"> 2.3 </td>
+   <td style="text-align:right;"> 39.7 </td>
+   <td style="text-align:right;"> 1.9 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 01013 </td>
    <td style="text-align:left;"> Butler County, Alabama </td>
    <td style="text-align:left;"> B01002_001 </td>
-   <td style="text-align:right;"> 40.8 </td>
-   <td style="text-align:right;"> 0.7 </td>
+   <td style="text-align:right;"> 41.2 </td>
+   <td style="text-align:right;"> 0.6 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 01015 </td>
    <td style="text-align:left;"> Calhoun County, Alabama </td>
    <td style="text-align:left;"> B01002_001 </td>
-   <td style="text-align:right;"> 39.6 </td>
-   <td style="text-align:right;"> 0.3 </td>
+   <td style="text-align:right;"> 39.5 </td>
+   <td style="text-align:right;"> 0.4 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 01017 </td>
    <td style="text-align:left;"> Chambers County, Alabama </td>
    <td style="text-align:left;"> B01002_001 </td>
-   <td style="text-align:right;"> 42.0 </td>
+   <td style="text-align:right;"> 41.9 </td>
    <td style="text-align:right;"> 0.7 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 01019 </td>
    <td style="text-align:left;"> Cherokee County, Alabama </td>
    <td style="text-align:left;"> B01002_001 </td>
-   <td style="text-align:right;"> 46.5 </td>
+   <td style="text-align:right;"> 46.8 </td>
    <td style="text-align:right;"> 0.5 </td>
   </tr>
 </tbody>
@@ -171,18 +171,18 @@ arrange(median_age, estimate)
  </thead>
 <tbody>
   <tr>
+   <td style="text-align:left;"> 35011 </td>
+   <td style="text-align:left;"> De Baca County, New Mexico </td>
+   <td style="text-align:left;"> B01002_001 </td>
+   <td style="text-align:right;"> 22.2 </td>
+   <td style="text-align:right;"> 6.9 </td>
+  </tr>
+  <tr>
    <td style="text-align:left;"> 51678 </td>
    <td style="text-align:left;"> Lexington city, Virginia </td>
    <td style="text-align:left;"> B01002_001 </td>
-   <td style="text-align:right;"> 22.3 </td>
-   <td style="text-align:right;"> 0.7 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 51750 </td>
-   <td style="text-align:left;"> Radford city, Virginia </td>
-   <td style="text-align:left;"> B01002_001 </td>
-   <td style="text-align:right;"> 23.4 </td>
-   <td style="text-align:right;"> 0.5 </td>
+   <td style="text-align:right;"> 22.2 </td>
+   <td style="text-align:right;"> 0.8 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 16065 </td>
@@ -195,8 +195,22 @@ arrange(median_age, estimate)
    <td style="text-align:left;"> 46121 </td>
    <td style="text-align:left;"> Todd County, South Dakota </td>
    <td style="text-align:left;"> B01002_001 </td>
-   <td style="text-align:right;"> 23.8 </td>
-   <td style="text-align:right;"> 0.4 </td>
+   <td style="text-align:right;"> 23.6 </td>
+   <td style="text-align:right;"> 0.6 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 51750 </td>
+   <td style="text-align:left;"> Radford city, Virginia </td>
+   <td style="text-align:left;"> B01002_001 </td>
+   <td style="text-align:right;"> 23.7 </td>
+   <td style="text-align:right;"> 0.6 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 13053 </td>
+   <td style="text-align:left;"> Chattahoochee County, Georgia </td>
+   <td style="text-align:left;"> B01002_001 </td>
+   <td style="text-align:right;"> 24.0 </td>
+   <td style="text-align:right;"> 0.7 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 02158 </td>
@@ -206,44 +220,30 @@ arrange(median_age, estimate)
    <td style="text-align:right;"> 0.2 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 13053 </td>
-   <td style="text-align:left;"> Chattahoochee County, Georgia </td>
-   <td style="text-align:left;"> B01002_001 </td>
-   <td style="text-align:right;"> 24.5 </td>
-   <td style="text-align:right;"> 0.5 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 53075 </td>
-   <td style="text-align:left;"> Whitman County, Washington </td>
-   <td style="text-align:left;"> B01002_001 </td>
-   <td style="text-align:right;"> 24.7 </td>
-   <td style="text-align:right;"> 0.3 </td>
-  </tr>
-  <tr>
    <td style="text-align:left;"> 49049 </td>
    <td style="text-align:left;"> Utah County, Utah </td>
    <td style="text-align:left;"> B01002_001 </td>
-   <td style="text-align:right;"> 24.8 </td>
+   <td style="text-align:right;"> 25.0 </td>
    <td style="text-align:right;"> 0.1 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 46027 </td>
    <td style="text-align:left;"> Clay County, South Dakota </td>
    <td style="text-align:left;"> B01002_001 </td>
-   <td style="text-align:right;"> 24.9 </td>
-   <td style="text-align:right;"> 0.4 </td>
+   <td style="text-align:right;"> 25.2 </td>
+   <td style="text-align:right;"> 0.5 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 51830 </td>
-   <td style="text-align:left;"> Williamsburg city, Virginia </td>
+   <td style="text-align:left;"> 53075 </td>
+   <td style="text-align:left;"> Whitman County, Washington </td>
    <td style="text-align:left;"> B01002_001 </td>
-   <td style="text-align:right;"> 24.9 </td>
-   <td style="text-align:right;"> 0.7 </td>
+   <td style="text-align:right;"> 25.2 </td>
+   <td style="text-align:right;"> 0.2 </td>
   </tr>
 </tbody>
 </table>
 
-Per the 2015-2019 ACS, the two youngest "counties" in the United States are independent cities in Virginia, which are treated as county-equivalents. Both Lexington and Radford are college towns; Lexington is home to both Washington & Lee University and the Virginia Military Institute, and Radford houses Radford University. The youngest *county* then by median age is Madison County, Idaho.
+Per the 2016-2020 ACS, the youngest county is De Baca County, New Mexico. Two of the five youngest "counties" in the United States are independent cities in Virginia, which are treated as county-equivalents. Both Lexington and Radford are college towns; Lexington is home to both Washington & Lee University and the Virginia Military Institute, and Radford houses Radford University.
 
 To retrieve the *oldest* counties in the United States by median age, an analyst can use the `desc()` function available in **dplyr** to sort the `estimate` column in descending order.
 
@@ -268,76 +268,76 @@ arrange(median_age, desc(estimate))
    <td style="text-align:left;"> 12119 </td>
    <td style="text-align:left;"> Sumter County, Florida </td>
    <td style="text-align:left;"> B01002_001 </td>
-   <td style="text-align:right;"> 67.4 </td>
+   <td style="text-align:right;"> 68.0 </td>
+   <td style="text-align:right;"> 0.3 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 48301 </td>
+   <td style="text-align:left;"> Loving County, Texas </td>
+   <td style="text-align:left;"> B01002_001 </td>
+   <td style="text-align:right;"> 62.2 </td>
+   <td style="text-align:right;"> 37.8 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 48243 </td>
+   <td style="text-align:left;"> Jeff Davis County, Texas </td>
+   <td style="text-align:left;"> B01002_001 </td>
+   <td style="text-align:right;"> 61.3 </td>
+   <td style="text-align:right;"> 36.8 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 08027 </td>
+   <td style="text-align:left;"> Custer County, Colorado </td>
+   <td style="text-align:left;"> B01002_001 </td>
+   <td style="text-align:right;"> 60.1 </td>
+   <td style="text-align:right;"> 3.4 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 12015 </td>
+   <td style="text-align:left;"> Charlotte County, Florida </td>
+   <td style="text-align:left;"> B01002_001 </td>
+   <td style="text-align:right;"> 59.5 </td>
    <td style="text-align:right;"> 0.2 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 51091 </td>
    <td style="text-align:left;"> Highland County, Virginia </td>
    <td style="text-align:left;"> B01002_001 </td>
-   <td style="text-align:right;"> 60.9 </td>
-   <td style="text-align:right;"> 3.5 </td>
+   <td style="text-align:right;"> 59.5 </td>
+   <td style="text-align:right;"> 4.8 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 08027 </td>
-   <td style="text-align:left;"> Custer County, Colorado </td>
+   <td style="text-align:left;"> 35003 </td>
+   <td style="text-align:left;"> Catron County, New Mexico </td>
    <td style="text-align:left;"> B01002_001 </td>
-   <td style="text-align:right;"> 59.7 </td>
+   <td style="text-align:right;"> 59.4 </td>
    <td style="text-align:right;"> 2.6 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 12015 </td>
-   <td style="text-align:left;"> Charlotte County, Florida </td>
-   <td style="text-align:left;"> B01002_001 </td>
-   <td style="text-align:right;"> 59.1 </td>
-   <td style="text-align:right;"> 0.2 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 41069 </td>
-   <td style="text-align:left;"> Wheeler County, Oregon </td>
-   <td style="text-align:left;"> B01002_001 </td>
-   <td style="text-align:right;"> 59.0 </td>
-   <td style="text-align:right;"> 3.3 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 51133 </td>
    <td style="text-align:left;"> Northumberland County, Virginia </td>
    <td style="text-align:left;"> B01002_001 </td>
-   <td style="text-align:right;"> 58.9 </td>
+   <td style="text-align:right;"> 59.3 </td>
    <td style="text-align:right;"> 0.7 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 26131 </td>
    <td style="text-align:left;"> Ontonagon County, Michigan </td>
    <td style="text-align:left;"> B01002_001 </td>
-   <td style="text-align:right;"> 58.6 </td>
-   <td style="text-align:right;"> 0.4 </td>
+   <td style="text-align:right;"> 59.1 </td>
+   <td style="text-align:right;"> 0.5 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 35021 </td>
-   <td style="text-align:left;"> Harding County, New Mexico </td>
+   <td style="text-align:left;"> 48443 </td>
+   <td style="text-align:left;"> Terrell County, Texas </td>
    <td style="text-align:left;"> B01002_001 </td>
-   <td style="text-align:right;"> 58.5 </td>
-   <td style="text-align:right;"> 5.5 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 53031 </td>
-   <td style="text-align:left;"> Jefferson County, Washington </td>
-   <td style="text-align:left;"> B01002_001 </td>
-   <td style="text-align:right;"> 58.3 </td>
-   <td style="text-align:right;"> 0.7 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 26001 </td>
-   <td style="text-align:left;"> Alcona County, Michigan </td>
-   <td style="text-align:left;"> B01002_001 </td>
-   <td style="text-align:right;"> 58.2 </td>
-   <td style="text-align:right;"> 0.3 </td>
+   <td style="text-align:right;"> 59.1 </td>
+   <td style="text-align:right;"> 9.4 </td>
   </tr>
 </tbody>
 </table>
 
-The oldest county in the United States by almost 7 years over the second-oldest is Sumter County, Florida. Sumter County is home to The Villages, a Census-designated place that includes a large age-restricted community [also called The Villages](https://www.thevillages.com/).
+The oldest county in the United States is Sumter County, Florida. Sumter County is home to The Villages, a Census-designated place that includes a large age-restricted community [also called The Villages](https://www.thevillages.com/).
 
 The tidyverse includes several tools for parsing datasets that allow for exploration beyond sorting and browsing data. The `filter()` function in **dplyr** queries a dataset for rows where a given condition evaluates to `TRUE`, and retains those rows only. For analysts who are familiar with databases and SQL, this is equivalent to a `WHERE` clause. This helps analysts subset their data for specific areas by their characteristics, and answer questions like "how many counties in the US have a median age of 50 or older?"
 
@@ -359,79 +359,79 @@ filter(median_age, estimate >= 50)
  </thead>
 <tbody>
   <tr>
+   <td style="text-align:left;"> 02105 </td>
+   <td style="text-align:left;"> Hoonah-Angoon Census Area, Alaska </td>
+   <td style="text-align:left;"> B01002_001 </td>
+   <td style="text-align:right;"> 52.1 </td>
+   <td style="text-align:right;"> 2.9 </td>
+  </tr>
+  <tr>
    <td style="text-align:left;"> 04007 </td>
    <td style="text-align:left;"> Gila County, Arizona </td>
    <td style="text-align:left;"> B01002_001 </td>
-   <td style="text-align:right;"> 50.2 </td>
+   <td style="text-align:right;"> 50.4 </td>
    <td style="text-align:right;"> 0.2 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 04012 </td>
    <td style="text-align:left;"> La Paz County, Arizona </td>
    <td style="text-align:left;"> B01002_001 </td>
-   <td style="text-align:right;"> 56.5 </td>
-   <td style="text-align:right;"> 0.5 </td>
+   <td style="text-align:right;"> 57.4 </td>
+   <td style="text-align:right;"> 0.6 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 04015 </td>
    <td style="text-align:left;"> Mohave County, Arizona </td>
    <td style="text-align:left;"> B01002_001 </td>
-   <td style="text-align:right;"> 51.6 </td>
-   <td style="text-align:right;"> 0.3 </td>
+   <td style="text-align:right;"> 52.3 </td>
+   <td style="text-align:right;"> 0.2 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 04025 </td>
    <td style="text-align:left;"> Yavapai County, Arizona </td>
    <td style="text-align:left;"> B01002_001 </td>
-   <td style="text-align:right;"> 53.4 </td>
-   <td style="text-align:right;"> 0.1 </td>
+   <td style="text-align:right;"> 54.1 </td>
+   <td style="text-align:right;"> 0.2 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 05005 </td>
    <td style="text-align:left;"> Baxter County, Arkansas </td>
    <td style="text-align:left;"> B01002_001 </td>
-   <td style="text-align:right;"> 52.2 </td>
-   <td style="text-align:right;"> 0.3 </td>
+   <td style="text-align:right;"> 52.3 </td>
+   <td style="text-align:right;"> 0.5 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 05089 </td>
    <td style="text-align:left;"> Marion County, Arkansas </td>
    <td style="text-align:left;"> B01002_001 </td>
-   <td style="text-align:right;"> 52.2 </td>
-   <td style="text-align:right;"> 0.5 </td>
+   <td style="text-align:right;"> 52.1 </td>
+   <td style="text-align:right;"> 0.8 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 05097 </td>
    <td style="text-align:left;"> Montgomery County, Arkansas </td>
    <td style="text-align:left;"> B01002_001 </td>
-   <td style="text-align:right;"> 50.4 </td>
+   <td style="text-align:right;"> 50.6 </td>
    <td style="text-align:right;"> 0.8 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 05137 </td>
    <td style="text-align:left;"> Stone County, Arkansas </td>
    <td style="text-align:left;"> B01002_001 </td>
-   <td style="text-align:right;"> 50.1 </td>
-   <td style="text-align:right;"> 0.7 </td>
+   <td style="text-align:right;"> 50.0 </td>
+   <td style="text-align:right;"> 0.5 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 06003 </td>
-   <td style="text-align:left;"> Alpine County, California </td>
+   <td style="text-align:left;"> 06009 </td>
+   <td style="text-align:left;"> Calaveras County, California </td>
    <td style="text-align:left;"> B01002_001 </td>
-   <td style="text-align:right;"> 52.2 </td>
-   <td style="text-align:right;"> 8.8 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 06005 </td>
-   <td style="text-align:left;"> Amador County, California </td>
-   <td style="text-align:left;"> B01002_001 </td>
-   <td style="text-align:right;"> 50.5 </td>
-   <td style="text-align:right;"> 0.4 </td>
+   <td style="text-align:right;"> 52.8 </td>
+   <td style="text-align:right;"> 0.6 </td>
   </tr>
 </tbody>
 </table>
 
-Functions like `arrange()` and `filter()` operate on row values and organize data by row. Other tidyverse functions, like **tidyr**'s `separate()`, operate on columns. The `NAME` column, returned by default by most **tidycensus** functions, contains a basic description of the location that can be more intuitive than the `GEOID`. For the 2015-2019 ACS, `NAME` is formatted as "X County, Y", where X is the county name and Y is the state name. `separate()` can split this column into two columns where one retains the county name and the other retains the state; this can be useful for analysts who need to complete a comparative analysis by state.
+Functions like `arrange()` and `filter()` operate on row values and organize data by row. Other tidyverse functions, like **tidyr**'s `separate()`, operate on columns. The `NAME` column, returned by default by most **tidycensus** functions, contains a basic description of the location that can be more intuitive than the `GEOID`. For the 2016-2020 ACS, `NAME` is formatted as "X County, Y", where X is the county name and Y is the state name. `separate()` can split this column into two columns where one retains the county name and the other retains the state; this can be useful for analysts who need to complete a comparative analysis by state.
 
 
 ```r
@@ -461,7 +461,7 @@ separate(
    <td style="text-align:left;"> Autauga County </td>
    <td style="text-align:left;"> Alabama </td>
    <td style="text-align:left;"> B01002_001 </td>
-   <td style="text-align:right;"> 38.2 </td>
+   <td style="text-align:right;"> 38.6 </td>
    <td style="text-align:right;"> 0.6 </td>
   </tr>
   <tr>
@@ -469,63 +469,63 @@ separate(
    <td style="text-align:left;"> Baldwin County </td>
    <td style="text-align:left;"> Alabama </td>
    <td style="text-align:left;"> B01002_001 </td>
-   <td style="text-align:right;"> 43.0 </td>
-   <td style="text-align:right;"> 0.3 </td>
+   <td style="text-align:right;"> 43.2 </td>
+   <td style="text-align:right;"> 0.4 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 01005 </td>
    <td style="text-align:left;"> Barbour County </td>
    <td style="text-align:left;"> Alabama </td>
    <td style="text-align:left;"> B01002_001 </td>
-   <td style="text-align:right;"> 40.4 </td>
-   <td style="text-align:right;"> 0.5 </td>
+   <td style="text-align:right;"> 40.1 </td>
+   <td style="text-align:right;"> 0.6 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 01007 </td>
    <td style="text-align:left;"> Bibb County </td>
    <td style="text-align:left;"> Alabama </td>
    <td style="text-align:left;"> B01002_001 </td>
-   <td style="text-align:right;"> 40.9 </td>
-   <td style="text-align:right;"> 1.3 </td>
+   <td style="text-align:right;"> 39.9 </td>
+   <td style="text-align:right;"> 1.2 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 01009 </td>
    <td style="text-align:left;"> Blount County </td>
    <td style="text-align:left;"> Alabama </td>
    <td style="text-align:left;"> B01002_001 </td>
-   <td style="text-align:right;"> 40.7 </td>
-   <td style="text-align:right;"> 0.3 </td>
+   <td style="text-align:right;"> 41.0 </td>
+   <td style="text-align:right;"> 0.5 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 01011 </td>
    <td style="text-align:left;"> Bullock County </td>
    <td style="text-align:left;"> Alabama </td>
    <td style="text-align:left;"> B01002_001 </td>
-   <td style="text-align:right;"> 40.2 </td>
-   <td style="text-align:right;"> 2.3 </td>
+   <td style="text-align:right;"> 39.7 </td>
+   <td style="text-align:right;"> 1.9 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 01013 </td>
    <td style="text-align:left;"> Butler County </td>
    <td style="text-align:left;"> Alabama </td>
    <td style="text-align:left;"> B01002_001 </td>
-   <td style="text-align:right;"> 40.8 </td>
-   <td style="text-align:right;"> 0.7 </td>
+   <td style="text-align:right;"> 41.2 </td>
+   <td style="text-align:right;"> 0.6 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 01015 </td>
    <td style="text-align:left;"> Calhoun County </td>
    <td style="text-align:left;"> Alabama </td>
    <td style="text-align:left;"> B01002_001 </td>
-   <td style="text-align:right;"> 39.6 </td>
-   <td style="text-align:right;"> 0.3 </td>
+   <td style="text-align:right;"> 39.5 </td>
+   <td style="text-align:right;"> 0.4 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 01017 </td>
    <td style="text-align:left;"> Chambers County </td>
    <td style="text-align:left;"> Alabama </td>
    <td style="text-align:left;"> B01002_001 </td>
-   <td style="text-align:right;"> 42.0 </td>
+   <td style="text-align:right;"> 41.9 </td>
    <td style="text-align:right;"> 0.7 </td>
   </tr>
   <tr>
@@ -533,25 +533,25 @@ separate(
    <td style="text-align:left;"> Cherokee County </td>
    <td style="text-align:left;"> Alabama </td>
    <td style="text-align:left;"> B01002_001 </td>
-   <td style="text-align:right;"> 46.5 </td>
+   <td style="text-align:right;"> 46.8 </td>
    <td style="text-align:right;"> 0.5 </td>
   </tr>
 </tbody>
 </table>
 
-::: {.rmdnote}
+::: rmdnote
 You may have noticed above that existing variable names are unquoted when referenced in tidyverse functions. Many tidyverse functions use non-standard evaluation to refer to column names, which means that column names can be used as arguments directly without quotation marks. Non-standard evaluation makes interactive programming faster, especially for beginners; however, it can introduce some complications when writing your own functions or R packages. A full treatment of non-standard evaluation is beyond the scope of this book; Hadley Wickham's *Advanced R* [@wickham2019a] is the best resource on the topic if you'd like to learn more.
 :::
 
 ### Using summary variables and calculating new columns
 
-Data in Census and ACS tables, as in the example above, are frequently comprised of variables that individually constitute sub-categories such as the numbers of households in different household income bands. One limitation of the approach above, however, is that the data - and the resulting analysis - return estimated counts, which are difficult to compare across geographies. For example, Maricopa County in Arizona is the state's most populous county with 4.3 million residents; the second-largest county, Pima, only has just over 1 million residents and six of the state's 15 counties have fewer than 100,000 residents. In turn, comparing Maricopa's estimates with those of smaller counties in the state would often be inappropriate.
+Data in Census and ACS tables, as in the example above, are frequently comprised of variables that individually constitute sub-categories such as the numbers of households in different household income bands. One limitation of the approach above, however, is that the data and the resulting analysis return estimated counts, which are difficult to compare across geographies. For example, Maricopa County in Arizona is the state's most populous county with 4.3 million residents; the second-largest county, Pima, only has just over 1 million residents and six of the state's 15 counties have fewer than 100,000 residents. In turn, comparing Maricopa's estimates with those of smaller counties in the state would often be inappropriate.
 
 A solution to this issue might involve **normalizing** the estimated count data by dividing it by the overall population from which the sub-group is derived. Appropriate denominators for ACS tables are frequently found in the tables themselves as variables. In ACS table B19001, which covers the number of households by income bands, the variable `B19001_001` represents the total number of households in a given enumeration unit, which we removed from our analysis earlier. Given that this variable is an appropriate denominator for the other variables in the table, it merits its own column to facilitate the calculation of proportions or percentages.
 
-In **tidycensus**, this can be accomplished by supplying a variable ID to the `summary_var` parameter in both the `get_acs()` and `get_decennial()` functions. Doing so will create two new columns for the decennial Census datasets - `summary_var` and `summary_value`, representing the summary variable ID and the summary variable's value - and three new columns for the ACS datasets, `summary_var`, `summary_est`, and `summary_moe`, which includes the ACS estimate and margin of error for the summary variable.
+In **tidycensus**, this can be accomplished by supplying a variable ID to the `summary_var` parameter in both the `get_acs()` and `get_decennial()` functions. When using `get_decennial()`, doing so will create two new columns for the decennial Census datasets, `summary_var` and `summary_value`, representing the summary variable ID and the summary variable's value. When using `get_acs()`, using `summary_var` creates three new columns for the ACS datasets, `summary_var`, `summary_est`, and `summary_moe`, which include the ACS estimate and margin of error for the summary variable.
 
-With this information in hand, normalizing data is straightforward. The following example uses the `summary_var` parameter to compare the population of counties in Arizona by race & Hispanic origin with their baseline populations, using data from the 2015-2019 ACS.
+With this information in hand, normalizing data is straightforward. The following example uses the `summary_var` parameter to compare the population of counties in Arizona by race & Hispanic origin with their baseline populations, using data from the 2016-2020 ACS.
 
 
 ```r
@@ -568,7 +568,8 @@ az_race <- get_acs(
   geography = "county",
   state = "AZ",
   variables = race_vars,
-  summary_var = "B03002_001"
+  summary_var = "B03002_001",
+  year = 2020
 ) 
 ```
 
@@ -590,96 +591,96 @@ az_race <- get_acs(
    <td style="text-align:left;"> 04001 </td>
    <td style="text-align:left;"> Apache County, Arizona </td>
    <td style="text-align:left;"> White </td>
-   <td style="text-align:right;"> 13022 </td>
-   <td style="text-align:right;"> 4 </td>
-   <td style="text-align:right;"> 71511 </td>
+   <td style="text-align:right;"> 12993 </td>
+   <td style="text-align:right;"> 56 </td>
+   <td style="text-align:right;"> 71714 </td>
    <td style="text-align:right;"> NA </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 04001 </td>
    <td style="text-align:left;"> Apache County, Arizona </td>
    <td style="text-align:left;"> Black </td>
-   <td style="text-align:right;"> 373 </td>
-   <td style="text-align:right;"> 138 </td>
-   <td style="text-align:right;"> 71511 </td>
+   <td style="text-align:right;"> 544 </td>
+   <td style="text-align:right;"> 56 </td>
+   <td style="text-align:right;"> 71714 </td>
    <td style="text-align:right;"> NA </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 04001 </td>
    <td style="text-align:left;"> Apache County, Arizona </td>
    <td style="text-align:left;"> Native </td>
-   <td style="text-align:right;"> 52285 </td>
-   <td style="text-align:right;"> 234 </td>
-   <td style="text-align:right;"> 71511 </td>
+   <td style="text-align:right;"> 51979 </td>
+   <td style="text-align:right;"> 327 </td>
+   <td style="text-align:right;"> 71714 </td>
    <td style="text-align:right;"> NA </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 04001 </td>
    <td style="text-align:left;"> Apache County, Arizona </td>
    <td style="text-align:left;"> Asian </td>
-   <td style="text-align:right;"> 246 </td>
-   <td style="text-align:right;"> 78 </td>
-   <td style="text-align:right;"> 71511 </td>
+   <td style="text-align:right;"> 262 </td>
+   <td style="text-align:right;"> 76 </td>
+   <td style="text-align:right;"> 71714 </td>
    <td style="text-align:right;"> NA </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 04001 </td>
    <td style="text-align:left;"> Apache County, Arizona </td>
    <td style="text-align:left;"> HIPI </td>
-   <td style="text-align:right;"> 16 </td>
-   <td style="text-align:right;"> 16 </td>
-   <td style="text-align:right;"> 71511 </td>
+   <td style="text-align:right;"> 49 </td>
+   <td style="text-align:right;"> 14 </td>
+   <td style="text-align:right;"> 71714 </td>
    <td style="text-align:right;"> NA </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 04001 </td>
    <td style="text-align:left;"> Apache County, Arizona </td>
    <td style="text-align:left;"> Hispanic </td>
-   <td style="text-align:right;"> 4531 </td>
+   <td style="text-align:right;"> 4751 </td>
    <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> 71511 </td>
+   <td style="text-align:right;"> 71714 </td>
    <td style="text-align:right;"> NA </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 04003 </td>
    <td style="text-align:left;"> Cochise County, Arizona </td>
    <td style="text-align:left;"> White </td>
-   <td style="text-align:right;"> 69216 </td>
-   <td style="text-align:right;"> 235 </td>
-   <td style="text-align:right;"> 125867 </td>
+   <td style="text-align:right;"> 69095 </td>
+   <td style="text-align:right;"> 350 </td>
+   <td style="text-align:right;"> 126442 </td>
    <td style="text-align:right;"> NA </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 04003 </td>
    <td style="text-align:left;"> Cochise County, Arizona </td>
    <td style="text-align:left;"> Black </td>
-   <td style="text-align:right;"> 4620 </td>
-   <td style="text-align:right;"> 247 </td>
-   <td style="text-align:right;"> 125867 </td>
+   <td style="text-align:right;"> 4512 </td>
+   <td style="text-align:right;"> 378 </td>
+   <td style="text-align:right;"> 126442 </td>
    <td style="text-align:right;"> NA </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 04003 </td>
    <td style="text-align:left;"> Cochise County, Arizona </td>
    <td style="text-align:left;"> Native </td>
-   <td style="text-align:right;"> 1142 </td>
-   <td style="text-align:right;"> 191 </td>
-   <td style="text-align:right;"> 125867 </td>
+   <td style="text-align:right;"> 1058 </td>
+   <td style="text-align:right;"> 176 </td>
+   <td style="text-align:right;"> 126442 </td>
    <td style="text-align:right;"> NA </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 04003 </td>
    <td style="text-align:left;"> Cochise County, Arizona </td>
    <td style="text-align:left;"> Asian </td>
-   <td style="text-align:right;"> 2431 </td>
-   <td style="text-align:right;"> 162 </td>
-   <td style="text-align:right;"> 125867 </td>
+   <td style="text-align:right;"> 2371 </td>
+   <td style="text-align:right;"> 241 </td>
+   <td style="text-align:right;"> 126442 </td>
    <td style="text-align:right;"> NA </td>
   </tr>
 </tbody>
 </table>
 
-By using dplyr's `mutate()` function, we calculate a new column, `percent`, representing the percentage of each Census tract's population that corresponds to each racial/ethnic group in 2015-2019. The `select()` function, also in dplyr, retains only those columns that we need to view.
+By using dplyr's `mutate()` function, we calculate a new column, `percent`, representing the percentage of each Census tract's population that corresponds to each racial/ethnic group in 2016-2020. The `select()` function, also in dplyr, retains only those columns that we need to view.
 
 
 ```r
@@ -701,52 +702,52 @@ az_race_percent <- az_race %>%
   <tr>
    <td style="text-align:left;"> Apache County, Arizona </td>
    <td style="text-align:left;"> White </td>
-   <td style="text-align:right;"> 18.2097859 </td>
+   <td style="text-align:right;"> 18.1178013 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Apache County, Arizona </td>
    <td style="text-align:left;"> Black </td>
-   <td style="text-align:right;"> 0.5215981 </td>
+   <td style="text-align:right;"> 0.7585688 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Apache County, Arizona </td>
    <td style="text-align:left;"> Native </td>
-   <td style="text-align:right;"> 73.1146257 </td>
+   <td style="text-align:right;"> 72.4809661 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Apache County, Arizona </td>
    <td style="text-align:left;"> Asian </td>
-   <td style="text-align:right;"> 0.3440030 </td>
+   <td style="text-align:right;"> 0.3653401 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Apache County, Arizona </td>
    <td style="text-align:left;"> HIPI </td>
-   <td style="text-align:right;"> 0.0223742 </td>
+   <td style="text-align:right;"> 0.0683270 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Apache County, Arizona </td>
    <td style="text-align:left;"> Hispanic </td>
-   <td style="text-align:right;"> 6.3360882 </td>
+   <td style="text-align:right;"> 6.6249268 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Cochise County, Arizona </td>
    <td style="text-align:left;"> White </td>
-   <td style="text-align:right;"> 54.9913798 </td>
+   <td style="text-align:right;"> 54.6456083 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Cochise County, Arizona </td>
    <td style="text-align:left;"> Black </td>
-   <td style="text-align:right;"> 3.6705411 </td>
+   <td style="text-align:right;"> 3.5684345 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Cochise County, Arizona </td>
    <td style="text-align:left;"> Native </td>
-   <td style="text-align:right;"> 0.9073069 </td>
+   <td style="text-align:right;"> 0.8367473 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Cochise County, Arizona </td>
    <td style="text-align:left;"> Asian </td>
-   <td style="text-align:right;"> 1.9314038 </td>
+   <td style="text-align:right;"> 1.8751681 </td>
   </tr>
 </tbody>
 </table>
@@ -797,52 +798,52 @@ largest_group <- az_race_percent %>%
   <tr>
    <td style="text-align:left;"> Apache County, Arizona </td>
    <td style="text-align:left;"> Native </td>
-   <td style="text-align:right;"> 73.11463 </td>
+   <td style="text-align:right;"> 72.48097 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Cochise County, Arizona </td>
    <td style="text-align:left;"> White </td>
-   <td style="text-align:right;"> 54.99138 </td>
+   <td style="text-align:right;"> 54.64561 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Coconino County, Arizona </td>
    <td style="text-align:left;"> White </td>
-   <td style="text-align:right;"> 54.05170 </td>
+   <td style="text-align:right;"> 53.80798 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Gila County, Arizona </td>
    <td style="text-align:left;"> White </td>
-   <td style="text-align:right;"> 62.25302 </td>
+   <td style="text-align:right;"> 61.85232 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Graham County, Arizona </td>
    <td style="text-align:left;"> White </td>
-   <td style="text-align:right;"> 50.85799 </td>
+   <td style="text-align:right;"> 50.88764 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Greenlee County, Arizona </td>
    <td style="text-align:left;"> Hispanic </td>
-   <td style="text-align:right;"> 46.79689 </td>
+   <td style="text-align:right;"> 47.26889 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> La Paz County, Arizona </td>
    <td style="text-align:left;"> White </td>
-   <td style="text-align:right;"> 57.39912 </td>
+   <td style="text-align:right;"> 57.18089 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Maricopa County, Arizona </td>
    <td style="text-align:left;"> White </td>
-   <td style="text-align:right;"> 55.24102 </td>
+   <td style="text-align:right;"> 54.55515 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Mohave County, Arizona </td>
    <td style="text-align:left;"> White </td>
-   <td style="text-align:right;"> 77.29074 </td>
+   <td style="text-align:right;"> 76.69694 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Navajo County, Arizona </td>
    <td style="text-align:left;"> Native </td>
-   <td style="text-align:right;"> 43.52613 </td>
+   <td style="text-align:right;"> 42.71386 </td>
   </tr>
 </tbody>
 </table>
@@ -869,27 +870,27 @@ az_race_percent %>%
 <tbody>
   <tr>
    <td style="text-align:left;"> Asian </td>
-   <td style="text-align:right;"> 0.9238513 </td>
+   <td style="text-align:right;"> 0.9918415 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Black </td>
-   <td style="text-align:right;"> 1.1155627 </td>
+   <td style="text-align:right;"> 1.2857283 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> HIPI </td>
-   <td style="text-align:right;"> 0.1210654 </td>
+   <td style="text-align:right;"> 0.1070384 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Hispanic </td>
-   <td style="text-align:right;"> 30.1555247 </td>
+   <td style="text-align:right;"> 30.4721836 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Native </td>
-   <td style="text-align:right;"> 3.5811804 </td>
+   <td style="text-align:right;"> 3.6344427 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> White </td>
-   <td style="text-align:right;"> 54.0517009 </td>
+   <td style="text-align:right;"> 53.8079773 </td>
   </tr>
 </tbody>
 </table>
@@ -913,7 +914,7 @@ mn_hh_income <- get_acs(
 ```
 
 <table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
-<caption>(\#tab:mn-hh-income-show)Table B19001 for counties in Minnesota</caption>
+<caption>(\#tab:mn-hh-income-show)Table B19001 for counties in Minnesota, 2012-2016 ACS</caption>
  <thead>
   <tr>
    <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"> GEOID </th>
@@ -1199,12 +1200,12 @@ oglala_lakota_age <- get_acs(
   state = "SD",
   county = "Oglala Lakota",
   table = "B01001",
-  year = 2019
+  year = 2020
 )
 ```
 
 <table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
-<caption>(\#tab:oglala-lakota-show)2015-2019 age table for Oglala Lakota County, SD</caption>
+<caption>(\#tab:oglala-lakota-show)2016-2020 age table for Oglala Lakota County, SD</caption>
  <thead>
   <tr>
    <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"> GEOID </th>
@@ -1219,85 +1220,85 @@ oglala_lakota_age <- get_acs(
    <td style="text-align:left;"> 46102 </td>
    <td style="text-align:left;"> Oglala Lakota County, South Dakota </td>
    <td style="text-align:left;"> B01001_001 </td>
-   <td style="text-align:right;"> 14335 </td>
+   <td style="text-align:right;"> 14277 </td>
    <td style="text-align:right;"> NA </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 46102 </td>
    <td style="text-align:left;"> Oglala Lakota County, South Dakota </td>
    <td style="text-align:left;"> B01001_002 </td>
-   <td style="text-align:right;"> 7024 </td>
-   <td style="text-align:right;"> 126 </td>
+   <td style="text-align:right;"> 6930 </td>
+   <td style="text-align:right;"> 132 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 46102 </td>
    <td style="text-align:left;"> Oglala Lakota County, South Dakota </td>
    <td style="text-align:left;"> B01001_003 </td>
-   <td style="text-align:right;"> 771 </td>
-   <td style="text-align:right;"> 58 </td>
+   <td style="text-align:right;"> 761 </td>
+   <td style="text-align:right;"> 66 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 46102 </td>
    <td style="text-align:left;"> Oglala Lakota County, South Dakota </td>
    <td style="text-align:left;"> B01001_004 </td>
-   <td style="text-align:right;"> 697 </td>
-   <td style="text-align:right;"> 97 </td>
+   <td style="text-align:right;"> 794 </td>
+   <td style="text-align:right;"> 128 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 46102 </td>
    <td style="text-align:left;"> Oglala Lakota County, South Dakota </td>
    <td style="text-align:left;"> B01001_005 </td>
-   <td style="text-align:right;"> 829 </td>
-   <td style="text-align:right;"> 88 </td>
+   <td style="text-align:right;"> 707 </td>
+   <td style="text-align:right;"> 123 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 46102 </td>
    <td style="text-align:left;"> Oglala Lakota County, South Dakota </td>
    <td style="text-align:left;"> B01001_006 </td>
-   <td style="text-align:right;"> 393 </td>
-   <td style="text-align:right;"> 14 </td>
+   <td style="text-align:right;"> 394 </td>
+   <td style="text-align:right;"> 20 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 46102 </td>
    <td style="text-align:left;"> Oglala Lakota County, South Dakota </td>
    <td style="text-align:left;"> B01001_007 </td>
-   <td style="text-align:right;"> 263 </td>
-   <td style="text-align:right;"> 41 </td>
+   <td style="text-align:right;"> 227 </td>
+   <td style="text-align:right;"> 15 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 46102 </td>
    <td style="text-align:left;"> Oglala Lakota County, South Dakota </td>
    <td style="text-align:left;"> B01001_008 </td>
-   <td style="text-align:right;"> 98 </td>
-   <td style="text-align:right;"> 59 </td>
+   <td style="text-align:right;"> 85 </td>
+   <td style="text-align:right;"> 53 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 46102 </td>
    <td style="text-align:left;"> Oglala Lakota County, South Dakota </td>
    <td style="text-align:left;"> B01001_009 </td>
-   <td style="text-align:right;"> 158 </td>
-   <td style="text-align:right;"> 59 </td>
+   <td style="text-align:right;"> 165 </td>
+   <td style="text-align:right;"> 70 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 46102 </td>
    <td style="text-align:left;"> Oglala Lakota County, South Dakota </td>
    <td style="text-align:left;"> B01001_010 </td>
-   <td style="text-align:right;"> 375 </td>
-   <td style="text-align:right;"> 88 </td>
+   <td style="text-align:right;"> 356 </td>
+   <td style="text-align:right;"> 101 </td>
   </tr>
 </tbody>
 </table>
 
-To understand how the age composition of the county has changed over the past 10 years, we may want to look at the 2005-2009 ACS for the county. Normally, we would just change the year argument to `2009`:
+To understand how the age composition of the county has changed over the past 10 years, we may want to look at the 2006-2010 ACS for the county. Normally, we would just change the year argument to `2010`:
 
 
 ```r
-oglala_lakota_age_09 <- get_acs(
+oglala_lakota_age_10 <- get_acs(
   geography = "county",
   state = "SD",
   county = "Oglala Lakota",
   table = "B01001",
-  year = 2009
+  year = 2010
 )
 ```
 
@@ -1305,21 +1306,21 @@ oglala_lakota_age_09 <- get_acs(
 ## Error: Your API call has errors.  The API message returned is .
 ```
 
-The request errors, and we don't get an informative error message back from the API as was discussed in Section \@ref(debugging-tidycensus-errors). The problem here is that Oglala Lakota County had a different name in 2009, Shannon County, meaning that the `county = "Oglala Lakota"` argument will not return any data. In turn, the equivalent code for the 2005-2009 ACS would use `county = "Shannon"`.
+The request errors, and we don't get an informative error message back from the API as was discussed in Section \@ref(debugging-tidycensus-errors). The problem here is that Oglala Lakota County had a different name in 2010, Shannon County, meaning that the `county = "Oglala Lakota"` argument will not return any data. In turn, the equivalent code for the 2006-2010 ACS would use `county = "Shannon"`.
 
 
 ```r
-oglala_lakota_age_09 <- get_acs(
+oglala_lakota_age_10 <- get_acs(
   geography = "county",
   state = "SD",
   county = "Shannon",
   table = "B01001",
-  year = 2009
+  year = 2010
 )
 ```
 
 <table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
-<caption>(\#tab:shannon-county-age-show)2005-2009 age table for Oglala Lakota County, SD (then named Shannon County)</caption>
+<caption>(\#tab:shannon-county-age-show)200-2010 age table for Oglala Lakota County, SD (then named Shannon County)</caption>
  <thead>
   <tr>
    <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"> GEOID </th>
@@ -1334,71 +1335,71 @@ oglala_lakota_age_09 <- get_acs(
    <td style="text-align:left;"> 46113 </td>
    <td style="text-align:left;"> Shannon County, South Dakota </td>
    <td style="text-align:left;"> B01001_001 </td>
-   <td style="text-align:right;"> 13593 </td>
-   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 13437 </td>
+   <td style="text-align:right;"> NA </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 46113 </td>
    <td style="text-align:left;"> Shannon County, South Dakota </td>
    <td style="text-align:left;"> B01001_002 </td>
-   <td style="text-align:right;"> 6469 </td>
-   <td style="text-align:right;"> 238 </td>
+   <td style="text-align:right;"> 6553 </td>
+   <td style="text-align:right;"> 47 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 46113 </td>
    <td style="text-align:left;"> Shannon County, South Dakota </td>
    <td style="text-align:left;"> B01001_003 </td>
-   <td style="text-align:right;"> 739 </td>
+   <td style="text-align:right;"> 770 </td>
    <td style="text-align:right;"> 99 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 46113 </td>
    <td style="text-align:left;"> Shannon County, South Dakota </td>
    <td style="text-align:left;"> B01001_004 </td>
-   <td style="text-align:right;"> 574 </td>
-   <td style="text-align:right;"> 144 </td>
+   <td style="text-align:right;"> 565 </td>
+   <td style="text-align:right;"> 151 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 46113 </td>
    <td style="text-align:left;"> Shannon County, South Dakota </td>
    <td style="text-align:left;"> B01001_005 </td>
-   <td style="text-align:right;"> 823 </td>
-   <td style="text-align:right;"> 122 </td>
+   <td style="text-align:right;"> 833 </td>
+   <td style="text-align:right;"> 151 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 46113 </td>
    <td style="text-align:left;"> Shannon County, South Dakota </td>
    <td style="text-align:left;"> B01001_006 </td>
-   <td style="text-align:right;"> 498 </td>
-   <td style="text-align:right;"> 129 </td>
+   <td style="text-align:right;"> 541 </td>
+   <td style="text-align:right;"> 47 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 46113 </td>
    <td style="text-align:left;"> Shannon County, South Dakota </td>
    <td style="text-align:left;"> B01001_007 </td>
-   <td style="text-align:right;"> 291 </td>
-   <td style="text-align:right;"> 39 </td>
+   <td style="text-align:right;"> 275 </td>
+   <td style="text-align:right;"> 99 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 46113 </td>
    <td style="text-align:left;"> Shannon County, South Dakota </td>
    <td style="text-align:left;"> B01001_008 </td>
-   <td style="text-align:right;"> 213 </td>
-   <td style="text-align:right;"> 98 </td>
+   <td style="text-align:right;"> 164 </td>
+   <td style="text-align:right;"> 89 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 46113 </td>
    <td style="text-align:left;"> Shannon County, South Dakota </td>
    <td style="text-align:left;"> B01001_009 </td>
-   <td style="text-align:right;"> 147 </td>
-   <td style="text-align:right;"> 74 </td>
+   <td style="text-align:right;"> 143 </td>
+   <td style="text-align:right;"> 54 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 46113 </td>
    <td style="text-align:left;"> Shannon County, South Dakota </td>
    <td style="text-align:left;"> B01001_010 </td>
-   <td style="text-align:right;"> 341 </td>
-   <td style="text-align:right;"> 110 </td>
+   <td style="text-align:right;"> 342 </td>
+   <td style="text-align:right;"> 83 </td>
   </tr>
 </tbody>
 </table>
@@ -1535,7 +1536,90 @@ The values are completely different, and clearly not percentages! This is becaus
 
 ### Preparing time-series ACS estimates
 
-A safer way to perform time-series analysis of the ACS, then, is to use the Detailed Tables. While this option lacks the convenience of the pre-computed estimates in the Data Profile, it ensures that variable IDs will remain consistent across years allowing for consistent and correct analysis. That said, there still are some potential pitfalls to account for when using the Detailed Tables. The Census Bureau will add and remove variables from survey to survey depending on data needs and data availability. For example, questions are sometimes added and removed from the ACS survey meaning that you won't always be able to get every data point for every year and geography combination. In turn, it is still important to check on data availability using `load_variables()` for the years you plan to analyze before carrying out your time-series analysis.
+The safest option for time-series analysis in the ACS is to use the Comparison Profile Tables. These tables are available for both the 1-year and 5-year ACS, and allow for comparison of demographic indicators over the past five years for a given year. Using the Comparison Profile tables also brings the benefit of additional variable harmonization, such as inflation-adjusted income estimates.
+
+Data from the Comparison Profile are accessed just like other ACS variables using `get_acs()`. The example below illustrates how to get data from the ACS Comparison Profile on inflation-adjusted median household income for counties and county-equivalents in Alaska.
+
+
+```r
+ak_income_compare <- get_acs(
+  geography = "county",
+  variables = c(
+    income15 = "CP03_2015_062",
+    income20 = "CP03_2020_062"
+  ),
+  state = "AK",
+  year = 2020
+)
+```
+
+For the 2016-2020 ACS, the "comparison year" is 2015, representing the closest non-overlapping 5-year dataset, which in this case is 2011-2015. We can examine the results, which are inflation-adjusted for appropriate comparison:
+
+<table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<caption>(\#tab:alaska-cp-data-show)Comparative income data from the ACS CP tables</caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"> GEOID </th>
+   <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"> NAME </th>
+   <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"> variable </th>
+   <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"> estimate </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> 02016 </td>
+   <td style="text-align:left;"> Aleutians West Census Area, Alaska </td>
+   <td style="text-align:left;"> income15 </td>
+   <td style="text-align:right;"> 92500 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 02016 </td>
+   <td style="text-align:left;"> Aleutians West Census Area, Alaska </td>
+   <td style="text-align:left;"> income20 </td>
+   <td style="text-align:right;"> 87443 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 02020 </td>
+   <td style="text-align:left;"> Anchorage Municipality, Alaska </td>
+   <td style="text-align:left;"> income15 </td>
+   <td style="text-align:right;"> 85534 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 02020 </td>
+   <td style="text-align:left;"> Anchorage Municipality, Alaska </td>
+   <td style="text-align:left;"> income20 </td>
+   <td style="text-align:right;"> 84813 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 02050 </td>
+   <td style="text-align:left;"> Bethel Census Area, Alaska </td>
+   <td style="text-align:left;"> income15 </td>
+   <td style="text-align:right;"> 55692 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 02050 </td>
+   <td style="text-align:left;"> Bethel Census Area, Alaska </td>
+   <td style="text-align:left;"> income20 </td>
+   <td style="text-align:right;"> 54400 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 02090 </td>
+   <td style="text-align:left;"> Fairbanks North Star Borough, Alaska </td>
+   <td style="text-align:left;"> income15 </td>
+   <td style="text-align:right;"> 77590 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 02090 </td>
+   <td style="text-align:left;"> Fairbanks North Star Borough, Alaska </td>
+   <td style="text-align:left;"> income20 </td>
+   <td style="text-align:right;"> 76464 </td>
+  </tr>
+</tbody>
+</table>
+
+#### Iterating over ACS years with tidyverse tools
+
+Using the Detailed Tables also represents a safer option than the Data Profile, as it ensures that variable IDs will remain consistent across years allowing for consistent and correct analysis. That said, there still are some potential pitfalls to account for when using the Detailed Tables. The Census Bureau will add and remove variables from survey to survey depending on data needs and data availability. For example, questions are sometimes added and removed from the ACS survey meaning that you won't always be able to get every data point for every year and geography combination. In turn, it is still important to check on data availability using `load_variables()` for the years you plan to analyze before carrying out your time-series analysis.
 
 Let's re-engineer the analysis above on educational attainment in Colorado counties, which below will be computed for a time series from 2010 to 2019. Information on "bachelor's degree or higher" is split by sex and across different tiers of educational attainment in the detailed tables, found in ACS table 15002. Given that we only need a few variables (representing estimates of populations age 25+ who have finished a 4-year degree or graduate degrees, by sex), we'll request those variables directly rather than the entire B15002 table.
 
@@ -1888,7 +1972,8 @@ The confidence level of the MOE can be controlled with the `moe_level` argument 
 get_acs(
   geography = "county",
   state = "Rhode Island",
-  variables = "B19013_001"
+  variables = "B19013_001",
+  year = 2020
 )
 ```
 
@@ -1908,36 +1993,36 @@ get_acs(
    <td style="text-align:left;"> 44001 </td>
    <td style="text-align:left;"> Bristol County, Rhode Island </td>
    <td style="text-align:left;"> B19013_001 </td>
-   <td style="text-align:right;"> 83092 </td>
-   <td style="text-align:right;"> 4339 </td>
+   <td style="text-align:right;"> 85413 </td>
+   <td style="text-align:right;"> 6122 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 44003 </td>
    <td style="text-align:left;"> Kent County, Rhode Island </td>
    <td style="text-align:left;"> B19013_001 </td>
-   <td style="text-align:right;"> 73521 </td>
-   <td style="text-align:right;"> 1703 </td>
+   <td style="text-align:right;"> 75857 </td>
+   <td style="text-align:right;"> 2022 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 44005 </td>
    <td style="text-align:left;"> Newport County, Rhode Island </td>
    <td style="text-align:left;"> B19013_001 </td>
-   <td style="text-align:right;"> 79454 </td>
-   <td style="text-align:right;"> 2611 </td>
+   <td style="text-align:right;"> 84282 </td>
+   <td style="text-align:right;"> 2629 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 44007 </td>
    <td style="text-align:left;"> Providence County, Rhode Island </td>
    <td style="text-align:left;"> B19013_001 </td>
-   <td style="text-align:right;"> 58974 </td>
-   <td style="text-align:right;"> 1051 </td>
+   <td style="text-align:right;"> 62323 </td>
+   <td style="text-align:right;"> 1270 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 44009 </td>
    <td style="text-align:left;"> Washington County, Rhode Island </td>
    <td style="text-align:left;"> B19013_001 </td>
-   <td style="text-align:right;"> 85531 </td>
-   <td style="text-align:right;"> 2042 </td>
+   <td style="text-align:right;"> 86970 </td>
+   <td style="text-align:right;"> 3651 </td>
   </tr>
 </tbody>
 </table>
@@ -1950,6 +2035,7 @@ get_acs(
   geography = "county",
   state = "Rhode Island",
   variables = "B19013_001",
+  year = 2020,
   moe_level = 99
 )
 ```
@@ -1970,58 +2056,81 @@ get_acs(
    <td style="text-align:left;"> 44001 </td>
    <td style="text-align:left;"> Bristol County, Rhode Island </td>
    <td style="text-align:left;"> B19013_001 </td>
-   <td style="text-align:right;"> 83092 </td>
-   <td style="text-align:right;"> 6752.486 </td>
+   <td style="text-align:right;"> 85413 </td>
+   <td style="text-align:right;"> 9527.246 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 44003 </td>
    <td style="text-align:left;"> Kent County, Rhode Island </td>
    <td style="text-align:left;"> B19013_001 </td>
-   <td style="text-align:right;"> 73521 </td>
-   <td style="text-align:right;"> 2650.261 </td>
+   <td style="text-align:right;"> 75857 </td>
+   <td style="text-align:right;"> 3146.699 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 44005 </td>
    <td style="text-align:left;"> Newport County, Rhode Island </td>
    <td style="text-align:left;"> B19013_001 </td>
-   <td style="text-align:right;"> 79454 </td>
-   <td style="text-align:right;"> 4063.319 </td>
+   <td style="text-align:right;"> 84282 </td>
+   <td style="text-align:right;"> 4091.331 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 44007 </td>
    <td style="text-align:left;"> Providence County, Rhode Island </td>
    <td style="text-align:left;"> B19013_001 </td>
-   <td style="text-align:right;"> 58974 </td>
-   <td style="text-align:right;"> 1635.599 </td>
+   <td style="text-align:right;"> 62323 </td>
+   <td style="text-align:right;"> 1976.413 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 44009 </td>
    <td style="text-align:left;"> Washington County, Rhode Island </td>
    <td style="text-align:left;"> B19013_001 </td>
-   <td style="text-align:right;"> 85531 </td>
-   <td style="text-align:right;"> 3177.824 </td>
+   <td style="text-align:right;"> 86970 </td>
+   <td style="text-align:right;"> 5681.799 </td>
   </tr>
 </tbody>
 </table>
 
 ### Calculating derived margins of error in tidycensus
 
-For small geographies or small populations, margins of error can get quite large, in some cases exceeding their corresponding estimates. In the example below, we can examine data on age groups by sex for the population age 65 and older for Census tracts in Salt Lake County, Utah.
+For small geographies or small populations, margins of error can get quite large, in some cases exceeding their corresponding estimates. In the example below, we can examine data on age groups by sex for the population age 65 and older for Census tracts in Salt Lake County, Utah. We will first generate a vector of variable IDs for which we want to request data from the ACS using some base R functionality.
+
+In this workflow, an analyst has used `load_variables()` to look up the variables that represent estimates for populations age 65 and up; this includes `B01001_020` through `B01001_025` for males, and `B01001_044` through `B01001_049` for females. Typing out each variable individually would be tedious, so an analyst can use string concatenation to generate the required vector of variable IDs as follows:
 
 
 ```r
 vars <- paste0("B01001_0", c(20:25, 44:49))
 
+vars
+```
+
+```
+##  [1] "B01001_020" "B01001_021" "B01001_022" "B01001_023" "B01001_024"
+##  [6] "B01001_025" "B01001_044" "B01001_045" "B01001_046" "B01001_047"
+## [11] "B01001_048" "B01001_049"
+```
+
+When R evaluates nested expressions like this, it starts with the inner-most expressions then evaluates them from the inside out. The steps taken to assemble the correct vector of variable IDs are as follows:
+
+-   First, the expressions `20:25` and `44:49` are evaluated. The colon operator `:` in base R, when used between two numbers, will generate a vector of numbers from the first to the second at intervals of 1. This creates vectors of the integers 20 through 25 and 44 through 49, which will serve as the suffixes for the variable IDs.
+
+-   Second, the `c()` function is used to combine the two vectors of integers into a single vector.
+
+-   Third, the `paste0()` function concatenates the string prefix `"B01001_0"` with each of the integers in the vector created with `c()` and returns a vector of variable IDs. `paste0()` is a convenient extension of the more flexible `paste()` function that concatenates strings with no spaces in between them by default.
+
+The resulting variables object, named `vars`, can now be used to request variables in a call to `get_acs()`.
+
+
+```r
 salt_lake <- get_acs(
   geography = "tract",
   variables = vars,
   state = "Utah",
   county = "Salt Lake",
-  year = 2019
+  year = 2020
 )
 ```
 
-Let's focus on a specific Census tract in Salt Lake County using `filter()`:
+We will now want to examine the margins of error around the estimates in the returned data. Let's focus on a specific Census tract in Salt Lake County using `filter()`:
 
 
 ```r
@@ -2046,62 +2155,62 @@ example_tract %>%
   <tr>
    <td style="text-align:left;"> 49035100100 </td>
    <td style="text-align:left;"> B01001_020 </td>
-   <td style="text-align:right;"> 12 </td>
+   <td style="text-align:right;"> 11 </td>
    <td style="text-align:right;"> 13 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 49035100100 </td>
    <td style="text-align:left;"> B01001_021 </td>
-   <td style="text-align:right;"> 36 </td>
-   <td style="text-align:right;"> 23 </td>
+   <td style="text-align:right;"> 25 </td>
+   <td style="text-align:right;"> 18 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 49035100100 </td>
    <td style="text-align:left;"> B01001_022 </td>
-   <td style="text-align:right;"> 8 </td>
-   <td style="text-align:right;"> 11 </td>
+   <td style="text-align:right;"> 7 </td>
+   <td style="text-align:right;"> 10 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 49035100100 </td>
    <td style="text-align:left;"> B01001_023 </td>
-   <td style="text-align:right;"> 5 </td>
-   <td style="text-align:right;"> 8 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 7 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 49035100100 </td>
    <td style="text-align:left;"> B01001_024 </td>
    <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 11 </td>
+   <td style="text-align:right;"> 12 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 49035100100 </td>
    <td style="text-align:left;"> B01001_025 </td>
-   <td style="text-align:right;"> 22 </td>
-   <td style="text-align:right;"> 23 </td>
+   <td style="text-align:right;"> 17 </td>
+   <td style="text-align:right;"> 20 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 49035100100 </td>
    <td style="text-align:left;"> B01001_044 </td>
    <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 11 </td>
+   <td style="text-align:right;"> 12 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 49035100100 </td>
    <td style="text-align:left;"> B01001_045 </td>
-   <td style="text-align:right;"> 11 </td>
-   <td style="text-align:right;"> 13 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 7 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 49035100100 </td>
    <td style="text-align:left;"> B01001_046 </td>
-   <td style="text-align:right;"> 27 </td>
-   <td style="text-align:right;"> 20 </td>
+   <td style="text-align:right;"> 21 </td>
+   <td style="text-align:right;"> 17 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 49035100100 </td>
    <td style="text-align:left;"> B01001_047 </td>
-   <td style="text-align:right;"> 10 </td>
-   <td style="text-align:right;"> 12 </td>
+   <td style="text-align:right;"> 123 </td>
+   <td style="text-align:right;"> 168 </td>
   </tr>
 </tbody>
 </table>
@@ -2160,62 +2269,62 @@ salt_lake_grouped <- salt_lake %>%
   <tr>
    <td style="text-align:left;"> 49035100100 </td>
    <td style="text-align:left;"> Female </td>
-   <td style="text-align:right;"> 55 </td>
-   <td style="text-align:right;"> 30.90307 </td>
+   <td style="text-align:right;"> 165 </td>
+   <td style="text-align:right;"> 170.72493 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 49035100100 </td>
    <td style="text-align:left;"> Male </td>
-   <td style="text-align:right;"> 83 </td>
-   <td style="text-align:right;"> 39.15354 </td>
+   <td style="text-align:right;"> 64 </td>
+   <td style="text-align:right;"> 34.43835 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 49035100200 </td>
    <td style="text-align:left;"> Female </td>
-   <td style="text-align:right;"> 167 </td>
-   <td style="text-align:right;"> 57.49783 </td>
+   <td style="text-align:right;"> 170 </td>
+   <td style="text-align:right;"> 57.26255 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 49035100200 </td>
    <td style="text-align:left;"> Male </td>
-   <td style="text-align:right;"> 153 </td>
-   <td style="text-align:right;"> 50.85273 </td>
+   <td style="text-align:right;"> 128 </td>
+   <td style="text-align:right;"> 47.51842 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 49035100306 </td>
    <td style="text-align:left;"> Female </td>
-   <td style="text-align:right;"> 273 </td>
-   <td style="text-align:right;"> 108.80257 </td>
+   <td style="text-align:right;"> 155 </td>
+   <td style="text-align:right;"> 77.48548 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 49035100306 </td>
    <td style="text-align:left;"> Male </td>
-   <td style="text-align:right;"> 225 </td>
-   <td style="text-align:right;"> 90.27181 </td>
+   <td style="text-align:right;"> 136 </td>
+   <td style="text-align:right;"> 85.53362 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 49035100307 </td>
    <td style="text-align:left;"> Female </td>
-   <td style="text-align:right;"> 188 </td>
-   <td style="text-align:right;"> 70.24956 </td>
+   <td style="text-align:right;"> 207 </td>
+   <td style="text-align:right;"> 82.03658 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 49035100307 </td>
    <td style="text-align:left;"> Male </td>
-   <td style="text-align:right;"> 117 </td>
-   <td style="text-align:right;"> 64.54456 </td>
+   <td style="text-align:right;"> 110 </td>
+   <td style="text-align:right;"> 58.89822 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 49035100308 </td>
    <td style="text-align:left;"> Female </td>
-   <td style="text-align:right;"> 164 </td>
-   <td style="text-align:right;"> 98.66610 </td>
+   <td style="text-align:right;"> 157 </td>
+   <td style="text-align:right;"> 110.97297 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 49035100308 </td>
    <td style="text-align:left;"> Male </td>
-   <td style="text-align:right;"> 129 </td>
-   <td style="text-align:right;"> 77.89095 </td>
+   <td style="text-align:right;"> 91 </td>
+   <td style="text-align:right;"> 59.97499 </td>
   </tr>
 </tbody>
 </table>
@@ -2224,7 +2333,7 @@ The margins of error relative to their estimates are now much more reasonable th
 
 That said, [the Census Bureau issues a note of caution](https://www2.census.gov/programs-surveys/acs/tech_docs/statistical_testing/2019_Instructions_for_Stat_Testing_ACS.pdf?) [@acs_moe]:
 
-> All [derived MOE methods] are approximations and users should be cautious in using them. This is because these methods do not consider the correlation or covariance between the basic estimates. They may be overestimates or underestimates of the derived estimate's standard error depending on whether the two basic estimates are highly correlated in either the positive or negative direction. As a result, the approximated standard error may not match direct calculations of standard errors or calculations obtained through other methods.
+> All derived MOE methods are approximations and users should be cautious in using them. This is because these methods do not consider the correlation or covariance between the basic estimates. They may be overestimates or underestimates of the derived estimate's standard error depending on whether the two basic estimates are highly correlated in either the positive or negative direction. As a result, the approximated standard error may not match direct calculations of standard errors or calculations obtained through other methods.
 
 This means that your "best bet" is to first search the ACS tables to see if your data are found in aggregated form elsewhere before doing the aggregation and MOE estimation yourself. In many cases, you'll find aggregated information in the ACS combined tables, Data Profile, or Subject Tables that will include pre-computed margins of error for you.
 

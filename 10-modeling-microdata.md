@@ -6,15 +6,15 @@ A major benefit of using the individual-level microdata returned by `get_pums()`
 
 Analysts must pay careful attention to the structure of the PUMS datasets in order to produce accurate estimates and handle errors appropriately. PUMS datasets are *weighted* samples, in which each person or household is not considered unique or individual, but rather representative of multiple other persons or households. In turn, analyses and tabulations using PUMS data must use appropriate tools for handling weighting variables to accurately produce estimates. Fortunately, tidyverse tools like **dplyr**, covered elsewhere in this book, are excellent for producing these tabulations and handling survey weights
 
-As covered in Chapter 3, data from the American Community Survey are based on a sample and in turn characterized by error. This means that ACS data acquired with `get_pums()` are similarly characterized by error, which can be substantial when cross-tabulations are highly specific. Fortunately, the US Census Bureau provides *replicate weights* to help analysts generate standard errors around tabulated estimates with PUMS data as they take into account the complex structure of the survey sample. While working with replicate weights has traditionally been cumbersome for analysts, tidycensus with help from the **survey** [@lumley2010] and **srvyr** [@ellis2021] R packages has integrated tools for handling replicate weights and correctly estimating standard errors when tabulating and modeling data. These workflows will be covered later in this chapter.
+As covered in Chapter 3, data from the American Community Survey are based on a sample and in turn characterized by error. This means that ACS data acquired with `get_pums()` are similarly characterized by error, which can be substantial when cross-tabulations are highly specific. Fortunately, the US Census Bureau provides *replicate weights* to help analysts generate standard errors around tabulated estimates with PUMS data as they take into account the complex structure of the survey sample. While working with replicate weights has traditionally been cumbersome for analysts, **tidycensus** with help from the **survey** [@lumley2010] and **srvyr** [@ellis2021] R packages has integrated tools for handling replicate weights and correctly estimating standard errors when tabulating and modeling data. These workflows will be covered later in this chapter.
 
 ## PUMS data and the tidyverse
 
-As discussed in Chapter \@ref(introduction-to-census-microdata), `get_pums()` automatically returns data with both household (`WGTP`) and person (`PWGTP`) weights. These weights can loosely be interpreted as the number of households - or persons - represented by each individual row in the PUMS data. Appropriate use of these weights columns is essential for tabulating accurate estimates of population characteristics with PUMS data. Fortunately, weighted tabulations work quite well within familiar tidyverse workflows, such as those covered in Chapter \@ref(wrangling-census-data-with-tidyverse-tools).
+As discussed in Chapter \@ref(introduction-to-census-microdata), `get_pums()` automatically returns data with both household (`WGTP`) and person (`PWGTP`) weights. These weights can loosely be interpreted as the number of households or persons represented by each individual row in the PUMS data. Appropriate use of these weights columns is essential for tabulating accurate estimates of population characteristics with PUMS data. Fortunately, weighted tabulations work quite well within familiar tidyverse workflows, such as those covered in Chapter \@ref(wrangling-census-data-with-tidyverse-tools).
 
 ### Basic tabulation of weights with tidyverse tools
 
-Let's get some basic sample PUMS data from the 2015-2019 ACS for Mississippi with information on sex and age.
+Let's get some basic sample PUMS data from the 2016-2020 ACS for Mississippi with information on sex and age.
 
 
 ```r
@@ -25,7 +25,7 @@ ms_pums <- get_pums(
   variables = c("SEX", "AGEP"),
   state = "MS",
   survey = "acs5",
-  year = 2019,
+  year = 2020,
   recode = TRUE
 )
 ```
@@ -49,65 +49,65 @@ Let's take a quick look at our data:
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:left;"> 2015000000200 </td>
+   <td style="text-align:left;"> 2016000000411 </td>
    <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 9 </td>
-   <td style="text-align:right;"> 10 </td>
-   <td style="text-align:right;"> 53 </td>
-   <td style="text-align:left;"> 28 </td>
-   <td style="text-align:left;"> 2 </td>
-   <td style="text-align:left;"> Mississippi/MS </td>
-   <td style="text-align:left;"> Female </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2015000000200 </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 9 </td>
-   <td style="text-align:right;"> 16 </td>
-   <td style="text-align:right;"> 33 </td>
-   <td style="text-align:left;"> 28 </td>
-   <td style="text-align:left;"> 1 </td>
-   <td style="text-align:left;"> Mississippi/MS </td>
-   <td style="text-align:left;"> Male </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2015000000200 </td>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 9 </td>
-   <td style="text-align:right;"> 17 </td>
-   <td style="text-align:right;"> 32 </td>
-   <td style="text-align:left;"> 28 </td>
-   <td style="text-align:left;"> 1 </td>
-   <td style="text-align:left;"> Mississippi/MS </td>
-   <td style="text-align:left;"> Male </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2015000000379 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 23 </td>
-   <td style="text-align:right;"> 23 </td>
-   <td style="text-align:right;"> 42 </td>
-   <td style="text-align:left;"> 28 </td>
-   <td style="text-align:left;"> 1 </td>
-   <td style="text-align:left;"> Mississippi/MS </td>
-   <td style="text-align:left;"> Male </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2015000000379 </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 23 </td>
-   <td style="text-align:right;"> 22 </td>
-   <td style="text-align:right;"> 37 </td>
-   <td style="text-align:left;"> 28 </td>
-   <td style="text-align:left;"> 2 </td>
-   <td style="text-align:left;"> Mississippi/MS </td>
-   <td style="text-align:left;"> Female </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2015000000379 </td>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 23 </td>
+   <td style="text-align:right;"> 54 </td>
+   <td style="text-align:right;"> 54 </td>
    <td style="text-align:right;"> 30 </td>
+   <td style="text-align:left;"> 28 </td>
+   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:left;"> Mississippi/MS </td>
+   <td style="text-align:left;"> Male </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2016000000411 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 54 </td>
+   <td style="text-align:right;"> 95 </td>
+   <td style="text-align:right;"> 22 </td>
+   <td style="text-align:left;"> 28 </td>
+   <td style="text-align:left;"> 2 </td>
+   <td style="text-align:left;"> Mississippi/MS </td>
+   <td style="text-align:left;"> Female </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2016000000739 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 27 </td>
+   <td style="text-align:right;"> 26 </td>
+   <td style="text-align:right;"> 51 </td>
+   <td style="text-align:left;"> 28 </td>
+   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:left;"> Mississippi/MS </td>
+   <td style="text-align:left;"> Male </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2016000000739 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 27 </td>
+   <td style="text-align:right;"> 17 </td>
+   <td style="text-align:right;"> 17 </td>
+   <td style="text-align:left;"> 28 </td>
+   <td style="text-align:left;"> 2 </td>
+   <td style="text-align:left;"> Mississippi/MS </td>
+   <td style="text-align:left;"> Female </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2016000000803 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 30 </td>
+   <td style="text-align:left;"> 28 </td>
+   <td style="text-align:left;"> 2 </td>
+   <td style="text-align:left;"> Mississippi/MS </td>
+   <td style="text-align:left;"> Female </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2016000000803 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 4 </td>
    <td style="text-align:right;"> 8 </td>
    <td style="text-align:left;"> 28 </td>
    <td style="text-align:left;"> 1 </td>
@@ -115,44 +115,44 @@ Let's take a quick look at our data:
    <td style="text-align:left;"> Male </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2015000000379 </td>
-   <td style="text-align:right;"> 4 </td>
-   <td style="text-align:right;"> 23 </td>
-   <td style="text-align:right;"> 30 </td>
-   <td style="text-align:right;"> 7 </td>
-   <td style="text-align:left;"> 28 </td>
-   <td style="text-align:left;"> 1 </td>
-   <td style="text-align:left;"> Mississippi/MS </td>
-   <td style="text-align:left;"> Male </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2015000000530 </td>
+   <td style="text-align:left;"> 2016000000858 </td>
    <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 66 </td>
-   <td style="text-align:right;"> 65 </td>
-   <td style="text-align:right;"> 33 </td>
-   <td style="text-align:left;"> 28 </td>
-   <td style="text-align:left;"> 2 </td>
-   <td style="text-align:left;"> Mississippi/MS </td>
-   <td style="text-align:left;"> Female </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2015000000530 </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 66 </td>
-   <td style="text-align:right;"> 67 </td>
-   <td style="text-align:right;"> 15 </td>
+   <td style="text-align:right;"> 9 </td>
+   <td style="text-align:right;"> 9 </td>
+   <td style="text-align:right;"> 90 </td>
    <td style="text-align:left;"> 28 </td>
    <td style="text-align:left;"> 1 </td>
    <td style="text-align:left;"> Mississippi/MS </td>
    <td style="text-align:left;"> Male </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2015000000530 </td>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 66 </td>
-   <td style="text-align:right;"> 55 </td>
-   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:left;"> 2016000000858 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 9 </td>
+   <td style="text-align:right;"> 24 </td>
+   <td style="text-align:right;"> 63 </td>
+   <td style="text-align:left;"> 28 </td>
+   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:left;"> Mississippi/MS </td>
+   <td style="text-align:left;"> Male </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2016000000901 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 16 </td>
+   <td style="text-align:right;"> 16 </td>
+   <td style="text-align:right;"> 70 </td>
+   <td style="text-align:left;"> 28 </td>
+   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:left;"> Mississippi/MS </td>
+   <td style="text-align:left;"> Male </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2016000000901 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 16 </td>
+   <td style="text-align:right;"> 24 </td>
+   <td style="text-align:right;"> 65 </td>
    <td style="text-align:left;"> 28 </td>
    <td style="text-align:left;"> 2 </td>
    <td style="text-align:left;"> Mississippi/MS </td>
@@ -169,7 +169,7 @@ sum(ms_pums$PWGTP)
 ```
 
 ```
-## [1] 2984418
+## [1] 2981835
 ```
 
 We can perform similar calculations with tidyverse tools. The `count()` function in the dplyr package performs a simple tabulation of your data. The optional `wt` argument in `count()` allows you to specify a weight column, which in this case will be our person-weight.
@@ -183,10 +183,10 @@ ms_pums %>% count(wt = PWGTP)
 ## # A tibble: 1 × 1
 ##         n
 ##     <dbl>
-## 1 2984418
+## 1 2981835
 ```
 
-`count()` has the additional benefit of allowing for the specification of one our more columns that will be grouped and tabulated. For example, we could tabulate data by unique values of age and sex in Mississippi:
+`count()` has the additional benefit of allowing for the specification of one our more columns that will be grouped and tabulated. For example, we could tabulate data by unique values of age and sex in Mississippi. The `wt` argument in `count()` specifies the `PWGTP` column as the appropriate weight for data tabulation.
 
 
 ```r
@@ -198,16 +198,16 @@ ms_pums %>%
 ## # A tibble: 186 × 3
 ##    SEX_label  AGEP     n
 ##    <ord>     <dbl> <dbl>
-##  1 Male          0 18232
-##  2 Male          1 19104
-##  3 Male          2 18399
-##  4 Male          3 18810
-##  5 Male          4 20597
-##  6 Male          5 18066
-##  7 Male          6 20756
-##  8 Male          7 20989
-##  9 Male          8 20548
-## 10 Male          9 21852
+##  1 Male          0 18111
+##  2 Male          1 19206
+##  3 Male          2 18507
+##  4 Male          3 18558
+##  5 Male          4 20054
+##  6 Male          5 17884
+##  7 Male          6 18875
+##  8 Male          7 18775
+##  9 Male          8 19316
+## 10 Male          9 20866
 ## # … with 176 more rows
 ```
 
@@ -224,8 +224,8 @@ ms_pums %>%
 ## # A tibble: 2 × 2
 ##   SEX        n
 ##   <chr>  <dbl>
-## 1 1     200306
-## 2 2     260737
+## 1 1     206504
+## 2 2     267707
 ```
 
 We can then use `get_acs()` to check our answer:
@@ -234,15 +234,16 @@ We can then use `get_acs()` to check our answer:
 ```r
 get_acs(geography = "state",
         state = "MS",
-        variables = c("DP05_0030", "DP05_0031"))
+        variables = c("DP05_0030", "DP05_0031"),
+        year = 2020)
 ```
 
 ```
 ## # A tibble: 2 × 5
 ##   GEOID NAME        variable  estimate   moe
 ##   <chr> <chr>       <chr>        <dbl> <dbl>
-## 1 28    Mississippi DP05_0030   200258   413
-## 2 28    Mississippi DP05_0031   260764   468
+## 1 28    Mississippi DP05_0030   206518   547
+## 2 28    Mississippi DP05_0031   267752   466
 ```
 
 We notice that our tabulations are very close to the ACS estimates available in `get_acs()`, and well within the margin of error. When we are doing tabulations with microdata, it is important to remember that we are tabulating data based on a smaller subsample of information than is available to the aggregate ACS estimates. In turn, as the US Census Bureau reminds us [@pums_readme]:
@@ -265,6 +266,7 @@ hh_variables <- c("PUMA", "GRPIP", "RAC1P",
 ms_hh_data <- get_pums(
   variables = hh_variables, 
   state = "MS",
+  year = 2020,
   variables_filter = list(
     SPORDER = 1,
     TEN = 3
@@ -299,11 +301,11 @@ We can take a quick look at our data:
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:left;"> 2015000000530 </td>
+   <td style="text-align:left;"> 2017000908503 </td>
    <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 66 </td>
    <td style="text-align:right;"> 65 </td>
-   <td style="text-align:right;"> 48 </td>
+   <td style="text-align:right;"> 65 </td>
+   <td style="text-align:right;"> 18 </td>
    <td style="text-align:left;"> 01300 </td>
    <td style="text-align:left;"> 28 </td>
    <td style="text-align:left;"> 3 </td>
@@ -317,47 +319,47 @@ We can take a quick look at our data:
    <td style="text-align:left;"> Black or African American alone </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2015000008312 </td>
+   <td style="text-align:left;"> 2017000909310 </td>
    <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 32 </td>
-   <td style="text-align:right;"> 33 </td>
-   <td style="text-align:right;"> 68 </td>
-   <td style="text-align:left;"> 01500 </td>
+   <td style="text-align:right;"> 11 </td>
+   <td style="text-align:right;"> 12 </td>
+   <td style="text-align:right;"> 63 </td>
+   <td style="text-align:left;"> 00600 </td>
    <td style="text-align:left;"> 28 </td>
    <td style="text-align:left;"> 3 </td>
    <td style="text-align:left;"> 3 </td>
    <td style="text-align:left;"> 01 </td>
-   <td style="text-align:left;"> 3 </td>
+   <td style="text-align:left;"> 2 </td>
    <td style="text-align:left;"> Mississippi/MS </td>
    <td style="text-align:left;"> Rented </td>
    <td style="text-align:left;"> Other family household: Female householder, no spouse present </td>
    <td style="text-align:left;"> Not Spanish/Hispanic/Latino </td>
-   <td style="text-align:left;"> American Indian alone </td>
+   <td style="text-align:left;"> Black or African American alone </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2015000008617 </td>
+   <td style="text-align:left;"> 2017000909754 </td>
    <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 41 </td>
+   <td style="text-align:right;"> 40 </td>
    <td style="text-align:right;"> 8 </td>
-   <td style="text-align:right;"> 8 </td>
-   <td style="text-align:right;"> 14 </td>
-   <td style="text-align:left;"> 01500 </td>
+   <td style="text-align:left;"> 02000 </td>
    <td style="text-align:left;"> 28 </td>
    <td style="text-align:left;"> 3 </td>
-   <td style="text-align:left;"> 7 </td>
-   <td style="text-align:left;"> 02 </td>
-   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:left;"> 5 </td>
+   <td style="text-align:left;"> 01 </td>
+   <td style="text-align:left;"> 9 </td>
    <td style="text-align:left;"> Mississippi/MS </td>
    <td style="text-align:left;"> Rented </td>
-   <td style="text-align:left;"> Nonfamily household: Female householder: Not living alone </td>
-   <td style="text-align:left;"> Mexican </td>
-   <td style="text-align:left;"> White alone </td>
+   <td style="text-align:left;"> Nonfamily household: Male householder: Not living alone </td>
+   <td style="text-align:left;"> Not Spanish/Hispanic/Latino </td>
+   <td style="text-align:left;"> Two or More Races </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2015000009259 </td>
+   <td style="text-align:left;"> 2017000910334 </td>
    <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 32 </td>
-   <td style="text-align:right;"> 32 </td>
-   <td style="text-align:right;"> 59 </td>
+   <td style="text-align:right;"> 25 </td>
+   <td style="text-align:right;"> 25 </td>
+   <td style="text-align:right;"> 8 </td>
    <td style="text-align:left;"> 01400 </td>
    <td style="text-align:left;"> 28 </td>
    <td style="text-align:left;"> 3 </td>
@@ -371,22 +373,22 @@ We can take a quick look at our data:
    <td style="text-align:left;"> White alone </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2015000009659 </td>
+   <td style="text-align:left;"> 2017000910561 </td>
    <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 4 </td>
-   <td style="text-align:right;"> 5 </td>
-   <td style="text-align:right;"> 39 </td>
-   <td style="text-align:left;"> 00600 </td>
+   <td style="text-align:right;"> 10 </td>
+   <td style="text-align:right;"> 11 </td>
+   <td style="text-align:right;"> 31 </td>
+   <td style="text-align:left;"> 01100 </td>
    <td style="text-align:left;"> 28 </td>
    <td style="text-align:left;"> 3 </td>
-   <td style="text-align:left;"> 4 </td>
+   <td style="text-align:left;"> 3 </td>
    <td style="text-align:left;"> 01 </td>
-   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:left;"> 2 </td>
    <td style="text-align:left;"> Mississippi/MS </td>
    <td style="text-align:left;"> Rented </td>
-   <td style="text-align:left;"> Nonfamily household: Male householder: Living alone </td>
+   <td style="text-align:left;"> Other family household: Female householder, no spouse present </td>
    <td style="text-align:left;"> Not Spanish/Hispanic/Latino </td>
-   <td style="text-align:left;"> White alone </td>
+   <td style="text-align:left;"> Black or African American alone </td>
   </tr>
 </tbody>
 </table>
@@ -437,37 +439,37 @@ We can now check our result:
   <tr>
    <td style="text-align:left;"> Black </td>
    <td style="text-align:left;"> Married </td>
-   <td style="text-align:right;"> 0.1821176 </td>
+   <td style="text-align:right;"> 0.1625791 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Black </td>
    <td style="text-align:left;"> Not married </td>
-   <td style="text-align:right;"> 0.4167467 </td>
+   <td style="text-align:right;"> 0.4080033 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Hispanic </td>
    <td style="text-align:left;"> Married </td>
-   <td style="text-align:right;"> 0.1723502 </td>
+   <td style="text-align:right;"> 0.1716087 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Hispanic </td>
    <td style="text-align:left;"> Not married </td>
-   <td style="text-align:right;"> 0.3006062 </td>
+   <td style="text-align:right;"> 0.3569935 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> White </td>
    <td style="text-align:left;"> Married </td>
-   <td style="text-align:right;"> 0.1349339 </td>
+   <td style="text-align:right;"> 0.1266644 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> White </td>
    <td style="text-align:left;"> Not married </td>
-   <td style="text-align:right;"> 0.3299732 </td>
+   <td style="text-align:right;"> 0.3356546 </td>
   </tr>
 </tbody>
 </table>
 
-The demographic group in this example with the largest rent burden is Black, Not married; nearly 42 percent of households in this group pay over 40 percent of their incomes in gross rent. The least rent-burdened group is White, Married, with a value under 14 percent. For each of the three racial/ethnic groups, there is a distinctive financial advantage for married-couple households over non-married households; this is particularly pronounced for Black householders.
+The demographic group in this example with the largest rent burden is Black, Not married; nearly 41 percent of households in this group pay over 40 percent of their incomes in gross rent. The least rent-burdened group is White, Married, with a value under 13 percent. For each of the three racial/ethnic groups, there is a distinctive financial advantage for married-couple households over non-married households; this is particularly pronounced for Black householders.
 
 ## Mapping PUMS data
 
@@ -479,7 +481,7 @@ library(tigris)
 library(tmap)
 options(tigris_use_cache = TRUE)
 
-ms_pumas <- pumas("MS", cb = TRUE)
+ms_pumas <- pumas("MS", year = 2020)
 
 plot(ms_pumas$geometry)
 ```
@@ -542,7 +544,7 @@ where $x$ is the PUMS estimate and $x_r$ is the rth weighted estimate.
 
 With respect to SDR standard errors, the PUMS documentation acknowledges (p. 12),
 
-> Successive Difference Replication (SDR) standard errors and margins of error are expected to be more accurate than generalized variance formulas (GVF) standard errorsand margins of error, although they may be more inconvenient for some users to calculate.
+> Successive Difference Replication (SDR) standard errors and margins of error are expected to be more accurate than generalized variance formulas (GVF) standard errors and margins of error, although they may be more inconvenient for some users to calculate.
 
 The "inconvenience" is generally due to the need to download 80 additional weighting variables and prepare the equation written above. The `rep_weights` parameter in `get_pums()` makes it easier for users to retrieve the replicate weights variables without having to request all 80 directly. In a call to `get_pums()`, an analyst can use `rep_weights = "person"` for person-weights, `"housing"` for household weights, or `"both"` to get both sets.
 
@@ -554,6 +556,7 @@ ms_hh_replicate <- get_pums(
   variables = c("TEN", hh_variables), 
   state = "MS",
   recode = TRUE,
+  year = 2020,
   variables_filter = list(
     SPORDER = 1
   ),
@@ -644,32 +647,32 @@ ms_hh_svy %>%
   <tr>
    <td style="text-align:left;"> 00100 </td>
    <td style="text-align:left;"> Married couple household </td>
-   <td style="text-align:right;"> 5067 </td>
-   <td style="text-align:right;"> 406.0426 </td>
+   <td style="text-align:right;"> 5579 </td>
+   <td style="text-align:right;"> 494.9350 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 00100 </td>
    <td style="text-align:left;"> Other family household: Male householder, no spouse present </td>
-   <td style="text-align:right;"> 1342 </td>
-   <td style="text-align:right;"> 207.5266 </td>
+   <td style="text-align:right;"> 1474 </td>
+   <td style="text-align:right;"> 236.1260 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 00100 </td>
    <td style="text-align:left;"> Other family household: Female householder, no spouse present </td>
-   <td style="text-align:right;"> 3657 </td>
-   <td style="text-align:right;"> 321.1575 </td>
+   <td style="text-align:right;"> 3684 </td>
+   <td style="text-align:right;"> 312.6579 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 00100 </td>
    <td style="text-align:left;"> Nonfamily household: Male householder: Living alone </td>
-   <td style="text-align:right;"> 2042 </td>
-   <td style="text-align:right;"> 236.2904 </td>
+   <td style="text-align:right;"> 1814 </td>
+   <td style="text-align:right;"> 251.1036 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 00100 </td>
    <td style="text-align:left;"> Nonfamily household: Male householder: Not living alone </td>
-   <td style="text-align:right;"> 796 </td>
-   <td style="text-align:right;"> 157.2994 </td>
+   <td style="text-align:right;"> 710 </td>
+   <td style="text-align:right;"> 162.1937 </td>
   </tr>
 </tbody>
 </table>
@@ -713,38 +716,38 @@ ms_svy_summary <- ms_hh_svy %>%
   <tr>
    <td style="text-align:left;"> Black </td>
    <td style="text-align:left;"> Married </td>
-   <td style="text-align:right;"> 0.1821176 </td>
-   <td style="text-align:right;"> 0.0133532 </td>
+   <td style="text-align:right;"> 0.1625791 </td>
+   <td style="text-align:right;"> 0.0135852 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Black </td>
    <td style="text-align:left;"> Not married </td>
-   <td style="text-align:right;"> 0.4167467 </td>
-   <td style="text-align:right;"> 0.0065519 </td>
+   <td style="text-align:right;"> 0.4080033 </td>
+   <td style="text-align:right;"> 0.0081999 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Hispanic </td>
    <td style="text-align:left;"> Married </td>
-   <td style="text-align:right;"> 0.1723502 </td>
-   <td style="text-align:right;"> 0.0323387 </td>
+   <td style="text-align:right;"> 0.1716087 </td>
+   <td style="text-align:right;"> 0.0339661 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Hispanic </td>
    <td style="text-align:left;"> Not married </td>
-   <td style="text-align:right;"> 0.3006062 </td>
-   <td style="text-align:right;"> 0.0292211 </td>
+   <td style="text-align:right;"> 0.3569935 </td>
+   <td style="text-align:right;"> 0.0418501 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> White </td>
    <td style="text-align:left;"> Married </td>
-   <td style="text-align:right;"> 0.1349339 </td>
-   <td style="text-align:right;"> 0.0100294 </td>
+   <td style="text-align:right;"> 0.1266644 </td>
+   <td style="text-align:right;"> 0.0118274 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> White </td>
    <td style="text-align:left;"> Not married </td>
-   <td style="text-align:right;"> 0.3299732 </td>
-   <td style="text-align:right;"> 0.0078680 </td>
+   <td style="text-align:right;"> 0.3356546 </td>
+   <td style="text-align:right;"> 0.0078927 </td>
   </tr>
 </tbody>
 </table>
@@ -772,11 +775,11 @@ ms_svy_summary_moe <- ms_svy_summary %>%
 ggplot(ms_svy_summary_moe, aes(x = prop_above_40, 
                                y = reorder(label, 
                                            prop_above_40))) +
-  geom_errorbarh(aes(xmin = prop_above_40 - prop_above_40_moe, 
+  geom_errorbar(aes(xmin = prop_above_40 - prop_above_40_moe, 
                      xmax = prop_above_40 + prop_above_40_moe)) +
   geom_point(size = 3, color = "navy") +
   labs(title = "Rent burdened-households in Mississippi",
-       x = "2015-2019 ACS estimate (from PUMS data)",
+       x = "2016-2020 ACS estimate (from PUMS data)",
        y = "",
        caption = "Rent-burdened defined when gross rent is 40 percent or more\nof household income. Error bars represent a 90 percent confidence level.") +
   scale_x_continuous(labels = scales::percent) + 
@@ -797,6 +800,17 @@ The rich complexity of demographic data available in the PUMS samples allow for 
 Before estimating the model, data should be acquired with `get_pums()` along with appropriate replicate weights. The example below will model whether or not an individual in the labor force aged between 25 and 49 changed residences in the past year as a function of educational attainment, wages, age, class of worker, and family status in Rhode Island.
 
 
+```r
+ri_pums_to_model <- get_pums(
+  variables = c("PUMA", "SEX", "MIG",
+                "AGEP", "SCHL", "WAGP", 
+                "COW", "ESR", "MAR", "NOC"),
+  state = "RI",
+  survey = "acs5",
+  year = 2020,
+  rep_weights = "person"
+)
+```
 
 
 
@@ -890,30 +904,30 @@ summary(migration_model)
 ## 
 ## Coefficients:
 ##                 Estimate Std. Error t value Pr(>|t|)    
-## (Intercept)     1.359008   0.422778   3.214 0.002036 ** 
-## log(wages)     -0.084403   0.041105  -2.053 0.044066 *  
-## sexmale         0.213784   0.045971   4.650 1.67e-05 ***
-## age            -0.066995   0.006814  -9.832 1.74e-14 ***
-## emp_typepublic -0.164864   0.101945  -1.617 0.110683    
-## emp_typeself   -0.280710   0.174457  -1.609 0.112453    
-## childyes       -0.071226   0.106742  -0.667 0.506960    
-## marriedyes     -0.251970   0.099971  -2.520 0.014185 *  
-## collegeyes      0.255534   0.073107   3.495 0.000858 ***
-## PUMA00102       0.025984   0.154107   0.169 0.866627    
-## PUMA00103       0.205204   0.136145   1.507 0.136594    
-## PUMA00104       0.148371   0.162379   0.914 0.364233    
-## PUMA00201       0.121383   0.135285   0.897 0.372902    
-## PUMA00300       0.390764   0.149024   2.622 0.010872 *  
-## PUMA00400      -0.211051   0.177898  -1.186 0.239799    
+## (Intercept)     1.489784   0.496118   3.003  0.00379 ** 
+## log(wages)     -0.098089   0.047027  -2.086  0.04093 *  
+## sexmale         0.249331   0.056123   4.443 3.53e-05 ***
+## age            -0.068431   0.008195  -8.350 6.98e-12 ***
+## emp_typepublic -0.057571   0.099477  -0.579  0.56477    
+## emp_typeself   -0.243479   0.196835  -1.237  0.22055    
+## childyes       -0.192214   0.105508  -1.822  0.07309 .  
+## marriedyes     -0.141021   0.115814  -1.218  0.22776    
+## collegeyes      0.256121   0.094649   2.706  0.00869 ** 
+## PUMA00102       0.098035   0.150894   0.650  0.51818    
+## PUMA00103       0.102302   0.162798   0.628  0.53195    
+## PUMA00104       0.187429   0.184095   1.018  0.31240    
+## PUMA00201       0.190723   0.135870   1.404  0.16516    
+## PUMA00300       0.288592   0.179487   1.608  0.11271    
+## PUMA00400      -0.329335   0.202088  -1.630  0.10801    
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## (Dispersion parameter for quasibinomial family taken to be 10979.98)
+## (Dispersion parameter for quasibinomial family taken to be 10453.18)
 ## 
 ## Number of Fisher Scoring iterations: 5
 ```
 
-The model identifies some notable differences in recent migrants relative to non-migrants, controlling for other demographic factors. Males are more likely to have moved than females, as are younger people relative to older people in the subpopulation. Married individuals are more stationary, whereas college-educated individuals in the sample are much more likely to have moved. The PUMAs are included as a categorical predictor largely to control for geographic differences in the state; however the model suggests that current residents in the Newport PUMA are slightly more likely to have moved than residents of northwest Rhode Island, the reference PUMA.
+The model identifies some notable differences in recent migrants relative to non-migrants, controlling for other demographic factors. Males are more likely to have moved than females, as are younger people relative to older people in the subpopulation. Individuals with children are slightly more stationary, whereas college-educated individuals in the sample are more likely to have moved. The PUMAs are included as a categorical predictor largely to control for geographic differences in the state; the model does not identify any substantive differences among Rhode Island PUMAs in this analysis.
 
 ## Exercises
 

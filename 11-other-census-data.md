@@ -55,6 +55,9 @@ The example below uses `read_nhgis_sf()` to read in spatial and demographic data
 library(ipumsr)
 library(tidyverse)
 
+# Note: the NHGIS file name depends on a download number
+# that is unique to each user, so your file names will be 
+# different from the code below
 nyc_1910 <- read_nhgis_sf(
   data_file = "data/NHGIS/nhgis0099_csv.zip",
   shape_file = "data/NHGIS/nhgis0099_shape/nhgis0099_shapefile_tl2000_us_tract_1910.zip",
@@ -72,7 +75,7 @@ nyc_1910 <- read_nhgis_sf(
 ## Reading geography...
 ## options:        ENCODING=latin1 
 ## Reading layer `US_tract_1910' from data source 
-##   `/tmp/RtmpQoBW7X/file98f363f9be6/US_tract_1910.shp' using driver `ESRI Shapefile'
+##   `/tmp/RtmpNzvjve/filea302fb301da/US_tract_1910.shp' using driver `ESRI Shapefile'
 ## Simple feature collection with 1989 features and 6 fields
 ## Geometry type: MULTIPOLYGON
 ## Dimension:     XY
@@ -254,19 +257,21 @@ ggplot(nyc_pctfb, aes(fill = pct_fb)) +
 
 Manhattan's Lower East Side stands out as the part of the city with the largest proportion of foreign-born residents in 1910, with percentages exceeding 60%.
 
-An alternative view could focus on one of the specific groups represented in the columns in the dataset. For example, the number of Italy-born residents by Census tract is represented in the column `A6G014`; this type of information could be represented by either a graduated symbol map or a dot-density map. Using techniques learned in Section \@ref(dot-density-maps), `st_sample()` in the code below generates one dot for approximately every 100 Italian immigrants. Next, the Census tracts are dissolved with the `st_union()` function to generate a base layer on top of which the dots will be plotted.
+An alternative view could focus on one of the specific groups represented in the columns in the dataset. For example, the number of Italy-born residents by Census tract is represented in the column `A6G014`; this type of information could be represented by either a graduated symbol map or a dot-density map. Using techniques learned in Section \@ref(dot-density-maps), we can use the `as_dot_density()` function in the **tidycensus** package to generate one dot for approximately every 100 Italian immigrants. Next, the Census tracts are dissolved with the `st_union()` function to generate a base layer on top of which the dots will be plotted.
 
 
 ```r
+library(tidycensus)
+
 italy_dots <- nyc_1910_proj %>%
-  st_sample(size = as.integer(.$A6G014 / 100)) %>%
-  st_sf()
+  as_dot_density(
+    value = "A6G014",
+    values_per_dot = 100
+  )
 
 nyc_base <- nyc_1910_proj %>%
   st_union()
 ```
-
-
 
 In Section \@ref(dot-density-maps), we used `tmap::tm_dots()` to create a dot-density map. ggplot2 and `geom_sf()` also work well for dot-density mapping; cartographers can either use `geom_sf()` with a very small `size` argument, or set `shape = "."` where each data point will be represented by a single pixel on the screen.
 
@@ -298,7 +303,7 @@ A core focus of Chapter 10 was the use of sampling weights to appropriately anal
 
 This means that decennial Census records that reflect periods 72 years ago or older can be made available to researchers by the IPUMS team. In fact, complete-count Census microdata can be downloaded from IPUMS at the person-level for the Census years 1850-1940, and at the household level for years earlier than 1850.
 
-The availability of complete-count Census records offers a tremendous analytic opportunity for researchers, but also comes with some challenges. The largest ACS microdata sample - the 2015-2019 5-year ACS - has around 16 million records, which can be read into memory on a standard desktop computer with 16GB RAM. Complete-count Census data can have records exceeding 100 million, which will not be possible to read into memory in R on a standard computer. This chapter covers R-based workflows for handling massive Census microdata without needing to upgrade one's computer or set up a cloud computing instance. The solution presented involves setting up a local database with PostgreSQL and the DBeaver platform, then interacting with microdata in that database using R's tidyverse and database interface tooling.
+The availability of complete-count Census records offers a tremendous analytic opportunity for researchers, but also comes with some challenges. The largest ACS microdata sample - the 2016-2020 5-year ACS - has around 16 million records, which can be read into memory on a standard desktop computer with 16GB RAM. Complete-count Census data can have records exceeding 100 million, which will not be possible to read into memory in R on a standard computer. This chapter covers R-based workflows for handling massive Census microdata without needing to upgrade one's computer or set up a cloud computing instance. The solution presented involves setting up a local database with PostgreSQL and the DBeaver platform, then interacting with microdata in that database using R's tidyverse and database interface tooling.
 
 ### Getting microdata from IPUMS
 
@@ -539,7 +544,7 @@ To this point, this book has focused on a smaller number of US Census Bureau dat
 
 **censusapi** [@recht2021] is an R package designed to give R users access to *all* of the US Census Bureau's API endpoints. Unlike **tidycensus**, which only focuses on a select number of datasets, **censusapi**'s `getCensus()` function can be widely applied to the hundreds of possible datasets the Census Bureau makes available. **censusapi** requires some knowledge of how to structure Census Bureau API requests to work; however this makes the package more flexible than **tidycensus** and may be preferable for users who want to submit highly customized queries to the decennial Census or ACS APIs.
 
-censusapi uses the same Census API key as **tidycensus**, though references it with the R environment variable `CENSUS_KEY`. If this environment variable is set in a user's `.Renviron` file, functions in **censusapi** will pick up the key without having to supply it directly.
+**censusapi** uses the same Census API key as **tidycensus**, though references it with the R environment variable `CENSUS_KEY`. If this environment variable is set in a user's `.Renviron` file, functions in **censusapi** will pick up the key without having to supply it directly.
 
 The **usethis** package [@wickham_and_bryan2021] is the most user-friendly way to work with the `.Renviron` file in R with its function `edit_r_environ()`. Calling this function will bring up the `.Renviron` file in a text editor, allowing users to set environment variables that will be made available to R when R starts up.
 
@@ -550,7 +555,7 @@ library(usethis)
 edit_r_environ()
 ```
 
-Add the line `CENSUS_KEY='YOUR KEY HERE'` to your `.Renviron` file, replacing the `YOUR KEY HERE` text with your API key.
+Add the line `CENSUS_KEY='YOUR KEY HERE'` to your `.Renviron` file, replacing the `YOUR KEY HERE` text with your API key, then restart R to get access to your key.
 
 **censusapi**'s core function is `getCensus()`, which translates R code to Census API queries. The `name` argument references the API name; the [censusapi documentation](https://www.hrecht.com/censusapi/articles/example-masterlist.html) or the function `listCensusApis()` helps you understand how to format this.
 
@@ -609,30 +614,6 @@ tx_econ17 <- getCensus(
   </tr>
   <tr>
    <td style="text-align:left;"> 48 </td>
-   <td style="text-align:left;"> 153 </td>
-   <td style="text-align:left;"> 0 </td>
-   <td style="text-align:left;"> 0 </td>
-   <td style="text-align:left;"> 0500000US48153 </td>
-   <td style="text-align:left;"> 72 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 48 </td>
-   <td style="text-align:left;"> 233 </td>
-   <td style="text-align:left;"> 724 </td>
-   <td style="text-align:left;"> 8430 </td>
-   <td style="text-align:left;"> 0500000US48233 </td>
-   <td style="text-align:left;"> 72 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 48 </td>
-   <td style="text-align:left;"> 503 </td>
-   <td style="text-align:left;"> 506 </td>
-   <td style="text-align:left;"> 7077 </td>
-   <td style="text-align:left;"> 0500000US48503 </td>
-   <td style="text-align:left;"> 72 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 48 </td>
    <td style="text-align:left;"> 055 </td>
    <td style="text-align:left;"> 910 </td>
    <td style="text-align:left;"> 15247 </td>
@@ -657,10 +638,34 @@ tx_econ17 <- getCensus(
   </tr>
   <tr>
    <td style="text-align:left;"> 48 </td>
+   <td style="text-align:left;"> 315 </td>
+   <td style="text-align:left;"> 396 </td>
+   <td style="text-align:left;"> 4953 </td>
+   <td style="text-align:left;"> 0500000US48315 </td>
+   <td style="text-align:left;"> 72 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 48 </td>
    <td style="text-align:left;"> 383 </td>
    <td style="text-align:left;"> 140 </td>
    <td style="text-align:left;"> 2178 </td>
    <td style="text-align:left;"> 0500000US48383 </td>
+   <td style="text-align:left;"> 72 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 48 </td>
+   <td style="text-align:left;"> 387 </td>
+   <td style="text-align:left;"> 0 </td>
+   <td style="text-align:left;"> 0 </td>
+   <td style="text-align:left;"> 0500000US48387 </td>
+   <td style="text-align:left;"> 72 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 48 </td>
+   <td style="text-align:left;"> 501 </td>
+   <td style="text-align:left;"> 147 </td>
+   <td style="text-align:left;"> 1867 </td>
+   <td style="text-align:left;"> 0500000US48501 </td>
    <td style="text-align:left;"> 72 </td>
   </tr>
 </tbody>
@@ -706,7 +711,7 @@ As these are *modeled* estimates, state-level influences on the county-level est
 
 Another very useful package for working with Census Bureau data is the **lehdr** R package [@green2021], which access the Longitudinal and Employer-Household Dynamics (LEHD) Origin-Destination Employment Statistics (LODES) data. LODES is not available from the Census API, meriting an alternative package and approach. LODES includes synthetic estimates of residential, workplace, and residential-workplace links at the Census block level, allowing for highly detailed geographic analysis of jobs and commuter patterns over time.
 
-The core function implemented in **lehdr** is `grab_lodes()`, which downloads a LODES file of a specified `lodes_type` (either `"rac"` for residential, `"wac"` for workplace, or `"od"` for origin-destination) for a given state and year. While the raw LODES data are available at the Census block level, the `agg_geo` parameter offers a convenient way to roll up estimates to higher levels of aggregation. For origin-destination data, the `state_part = "main"` argument below captures within-state commuters; use `state_part = "aux"` to get commuters from out-of-state.
+The core function implemented in **lehdr** is `grab_lodes()`, which downloads a LODES file of a specified `lodes_type` (either `"rac"` for residential, `"wac"` for workplace, or `"od"` for origin-destination) for a given state and year. While the raw LODES data are available at the Census block level, the `agg_geo` parameter offers a convenient way to roll up estimates to higher levels of aggregation. For origin-destination data, the `state_part = "main"` argument below captures within-state commuters; use `state_part = "aux"` to get commuters from out-of-state. The optional argument `use_cache = TRUE` stores downloaded LODES data in a cache directory on the user's computer; this is recommended to avoid having to re-download data for future analyses.
 
 
 ```r
@@ -714,13 +719,15 @@ library(lehdr)
 library(tidycensus)
 library(sf)
 library(tidyverse)
+library(tigris)
 
 wa_lodes_od <- grab_lodes(
   state = "wa",
   year = 2018,
   lodes_type = "od",
   agg_geo = "tract",
-  state_part = "main"
+  state_part = "main",
+  use_cache = TRUE
 )
 ```
 
@@ -910,7 +917,7 @@ The result is a dataset that shows tract-to-tract commute flows (`S000`) and bro
 </tbody>
 </table>
 
-**lehdr** can be used for a variety of purposes including transportation and economic development planning. For example, the workflow below illustrates how to use LODES data to understand the origins of commuters to the Microsoft campus (represented by its Census tract) in Redmond, Washington. Commuters from LODES will be normalized by the total population age 18 and up, acquired with tidycensus for 2018 Census tracts in Seattle-area counties. The dataset `ms_commuters` will include Census tract geometries (obtained with `geometry = TRUE` in tidycensus) and an estimate of the number of Microsoft-area commuters per 1000 adults in that Census tract.
+**lehdr** can be used for a variety of purposes including transportation and economic development planning. For example, the workflow below illustrates how to use LODES data to understand the origins of commuters to the Microsoft campus (represented by its Census tract) in Redmond, Washington. Commuters from LODES will be normalized by the total population age 18 and up, acquired with **tidycensus** for 2018 Census tracts in Seattle-area counties. The dataset `ms_commuters` will include Census tract geometries (obtained with `geometry = TRUE` in **tidycensus**) and an estimate of the number of Microsoft-area commuters per 1000 adults in that Census tract.
 
 
 ```r
@@ -929,10 +936,11 @@ microsoft <- filter(wa_lodes_od, w_tract == "53033022803")
 ms_commuters <- seattle_adults %>%
   left_join(microsoft, by = c("GEOID" = "h_tract")) %>%
   mutate(ms_per_1000 = 1000 * (S000 / estimate)) %>%
-  st_transform(6596)
+  st_transform(6596) %>%
+  erase_water(area_threshold = 0.99)
 ```
 
-The result can be visualized on a map with **ggplot2**, or alternatively with any of the mapping tools introduced in Chapter \@ref(mapping-census-data-with-r).
+The result can be visualized on a map with **ggplot2**, or alternatively with any of the mapping tools introduced in Chapter \@ref(mapping-census-data-with-r). Note the use of the `erase_water()` function from the **tigris** package introduced in Section \@ref(better-cartography-with-spatial-overlay) with a high area threshold to remove large bodies of water like Lake Washington from the Census tract shapes.
 
 
 ```r
@@ -1203,12 +1211,30 @@ maui_accom <- bls_api(seriesid = "SMU15279807072100001",
  </thead>
 <tbody>
   <tr>
+   <td style="text-align:right;"> 2022 </td>
+   <td style="text-align:left;"> M02 </td>
+   <td style="text-align:left;"> February </td>
+   <td style="text-align:left;"> true </td>
+   <td style="text-align:right;"> 11.3 </td>
+   <td style="text-align:left;"> P Preliminary </td>
+   <td style="text-align:left;"> SMU15279807072100001 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 2022 </td>
+   <td style="text-align:left;"> M01 </td>
+   <td style="text-align:left;"> January </td>
+   <td style="text-align:left;"> NA </td>
+   <td style="text-align:right;"> 11.1 </td>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:left;"> SMU15279807072100001 </td>
+  </tr>
+  <tr>
    <td style="text-align:right;"> 2021 </td>
    <td style="text-align:left;"> M12 </td>
    <td style="text-align:left;"> December </td>
-   <td style="text-align:left;"> true </td>
-   <td style="text-align:right;"> 9.7 </td>
-   <td style="text-align:left;"> P Preliminary </td>
+   <td style="text-align:left;"> NA </td>
+   <td style="text-align:right;"> 11.4 </td>
+   <td style="text-align:left;">  </td>
    <td style="text-align:left;"> SMU15279807072100001 </td>
   </tr>
   <tr>
@@ -1216,7 +1242,7 @@ maui_accom <- bls_api(seriesid = "SMU15279807072100001",
    <td style="text-align:left;"> M11 </td>
    <td style="text-align:left;"> November </td>
    <td style="text-align:left;"> NA </td>
-   <td style="text-align:right;"> 9.5 </td>
+   <td style="text-align:right;"> 10.9 </td>
    <td style="text-align:left;">  </td>
    <td style="text-align:left;"> SMU15279807072100001 </td>
   </tr>
@@ -1225,7 +1251,7 @@ maui_accom <- bls_api(seriesid = "SMU15279807072100001",
    <td style="text-align:left;"> M10 </td>
    <td style="text-align:left;"> October </td>
    <td style="text-align:left;"> NA </td>
-   <td style="text-align:right;"> 9.3 </td>
+   <td style="text-align:right;"> 10.7 </td>
    <td style="text-align:left;">  </td>
    <td style="text-align:left;"> SMU15279807072100001 </td>
   </tr>
@@ -1234,25 +1260,7 @@ maui_accom <- bls_api(seriesid = "SMU15279807072100001",
    <td style="text-align:left;"> M09 </td>
    <td style="text-align:left;"> September </td>
    <td style="text-align:left;"> NA </td>
-   <td style="text-align:right;"> 9.5 </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> SMU15279807072100001 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 2021 </td>
-   <td style="text-align:left;"> M08 </td>
-   <td style="text-align:left;"> August </td>
-   <td style="text-align:left;"> NA </td>
-   <td style="text-align:right;"> 9.7 </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> SMU15279807072100001 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 2021 </td>
-   <td style="text-align:left;"> M07 </td>
-   <td style="text-align:left;"> July </td>
-   <td style="text-align:left;"> NA </td>
-   <td style="text-align:right;"> 9.6 </td>
+   <td style="text-align:right;"> 10.9 </td>
    <td style="text-align:left;">  </td>
    <td style="text-align:left;"> SMU15279807072100001 </td>
   </tr>
@@ -1383,7 +1391,7 @@ The breath of R's developer ecosystem means that in many cases if you have a nee
 
 Most data API packages in R will rely on the **httr** R package [@wickham_httr], which provides R functions for common HTTP requests such as `GET`, `POST`, and `PUT`, among others. In this example, we'll use the `httr::GET()` function to make a request to the new [Department of Housing and Urban Development Comprehensive Affordable Housing Strategy (CHAS) API](https://www.huduser.gov/portal/dataset/chas-api.html). This will require getting a HUD API token and storing it as an environment variable as described earlier in this chapter.
 
-Every API will be structured differently with respect to how it accepts queries and authenticates with API tokens. In this example, the documentation instructs users to pass the API token in the HTTP request with the `Authentication: Bearer` header. The example URL in the documentation, [`https://www.huduser.gov/hudapi/public/chas?type=3&year=2012-2016&stateId=51&entityId=59`](https://www.huduser.gov/hudapi/public/chas?type=3&year=2012-2016&stateId=51&entityId=59), is passed to `GET()`, and the `add_headers()` function in httr is used to assemble an appropriate string to send to the API.
+Every API will be structured differently with respect to how it accepts queries and authenticates with API tokens. In this example, the documentation instructs users to pass the API token in the HTTP request with the `Authentication: Bearer` header. The example URL in the documentation, [`https://www.huduser.gov/hudapi/public/chas?type=3&year=2012-2016&stateId=51&entityId=59`](https://www.huduser.gov/hudapi/public/chas?type=3&year=2012-2016&stateId=51&entityId=59), is passed to `GET()`, and the `add_headers()` function in **httr** is used to assemble an appropriate string to send to the API.
 
 
 ```r
@@ -1873,4 +1881,4 @@ The function returns affordable data for Alexandria, Virginia in a format that i
 
 -   Visit <https://ipums.org> and spend some time exploring NHGIS and/or IPUMS. Attempt to replicate the NHGIS workflow for a different variable and time period.
 
--   Explore the **censusapi** package and create a request to a Census API endpoint using the package that you weren't previously familiar with. Join the data to shapes you've obtained with **tigris** and make a map of your data.
+-   Explore the **censusapi** package and create a request to a Census API endpoint using a dataset that you weren't previously familiar with. Join the data to shapes you've obtained with **tigris** and make a map of your data.

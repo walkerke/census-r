@@ -744,7 +744,7 @@ hispanic_by_metro <- st_join(
 </tbody>
 </table>
 
-The output dataset has been reduced from 5,265 Census tracts to 3,201 as a result of the inner spatial join. Notably, the output dataset now includes information for each Census tract about the metropolitan area that it falls within. This enables group-wise data visualization and analysis across metro areas such as a faceted plot:
+The output dataset has been reduced from 5,265 Census tracts to 3,189 as a result of the inner spatial join. Notably, the output dataset now includes information for each Census tract about the metropolitan area that it falls within. This enables group-wise data visualization and analysis across metro areas such as a faceted plot:
 
 
 ```r
@@ -822,6 +822,158 @@ plot(median_by_metro[1,]$geometry)
 
 The returned geometry represents the extent of the given metropolitan area (in the above example, Austin-Round Rock). The analytic process we carried out not only summarized the data by group, it also summarized the geometry by group. The typical name for this geometric process in geographic information systems is a *dissolve* operation, where geometries are identified by group and combined to return a single larger geometry. In this case, the Census tracts are dissolved by metropolitan area, returning metropolitan area geometries. This type of process is extremely useful when creating custom geographies (e.g. sales territories) from Census geometry building blocks that may belong to the same group.
 
+## Small area time-series analysis
+
+Previous chapters of this book covered techniques and methods for analyzing demographic change over time in the US Census. Section \@ref(comparing-acs-estimates-over-time) introduced the ACS Comparison Profile along with how to use iteration to get multiple years of data from the ACS Detailed Tables; Section \@ref(visualizing-acs-estimates-over-time) then illustrated how to visualize time-series ACS data. These techniques, however, are typically only appropriate for larger geographies like counties that rarely change shape over time. In contrast, smaller geographies like Census tracts and block groups are re-drawn by the US Census Bureau with every decennial US Census, making time-series analysis for smaller areas difficult.
+
+For example, we can compare Census tract boundaries for a fast-growing area of Gilbert, Arizona (southeast of Phoenix) for 2010 and 2020.
+
+<div class="figure">
+<img src="07-spatial-analysis-census_files/figure-html/gilbert_compare-1.png" alt="Comparison of Census tracts in Gilbert, AZ from the 2010 and 2020 Census" width="100%" />
+<p class="caption">(\#fig:gilbert_compare)Comparison of Census tracts in Gilbert, AZ from the 2010 and 2020 Census</p>
+</div>
+
+As discussed in Section \@ref(understanding-yearly-differences-in-tigerline-files), the US Census Bureau tries to keep Census tract sizes relatively consistent at around 4,000 people. If a tract grows too large between Census years, the Census Bureau will subdivide it into multiple Census tracts when re-drawing tracts for the next decennial Census. In this example from Arizona, the tract shown was divided into five tracts in 2020.
+
+While this partitioning of Census tracts makes practical sense and allows for more granular demographic analysis in 2020, it also makes time-series comparisons difficult. This is particularly important with the release of the 2016-2020 ACS, which is the first ACS dataset to use 2020 Census boundaries. A common method for resolving this issue in geographic information science is *areal interpolation*. Areal interpolation refers to the allocation of data from one set of zones to a second overlapping set of zones that may or may not perfectly align spatially. In cases of mis-alignment, some type of weighting scheme needs to be specified to determine how to allocate partial data in areas of overlap. Two such approaches for interpolation are outlined here: *area-weighted interpolation* and *population-weighted interpolation*.
+
+To get started, let's obtain some comparison data for Maricopa County, AZ on the number of people working from home in the 2011-2015 ACS (which uses 2010 boundaries) and the 2016-2020 ACS (which uses 2020 boundaries). We will use both interpolation methods to allocate 2011-2015 data to 2020 Census tracts.
+
+
+```r
+library(tidycensus)
+library(tidyverse)
+library(tigris)
+library(sf)
+options(tigris_use_cache = TRUE)
+
+# CRS: NAD 83 / Arizona Central
+wfh_15 <- get_acs(
+  geography = "tract",
+  variables = "B08006_017",
+  year = 2015,
+  state = "AZ",
+  county = "Maricopa",
+  geometry = TRUE
+) %>%
+  select(estimate) %>%
+  st_transform(26949)
+
+wfh_20 <- get_acs(
+  geography = "tract",
+  variables = "B08006_017",
+  year = 2020,
+  state = "AZ",
+  county = "Maricopa",
+  geometry = TRUE
+ ) %>%
+  st_transform(26949)
+```
+
+### Area-weighted areal interpolation
+
+*Area-weighted areal interpolation* is implemented in **sf** with the `st_interpolate_aw()` function. This method uses the area of overlap of geometries as the interpolation weights. From a technical standpoint, an intersection is computed between the origin geometries and the destination geometries. Weights are then computed as the proportion of the overall origin area comprised by the intersection. Area weights used to estimate data at 2020 geographies for the Census tract in Gilbert are illustrated below.
+
+<div class="figure">
+<img src="07-spatial-analysis-census_files/figure-html/gilbert-area-weights-1.png" alt="Illustration of area weights" width="100%" />
+<p class="caption">(\#fig:gilbert-area-weights)Illustration of area weights</p>
+</div>
+
+Those weights are applied to target variables (in this case, the information on workers from home) in accordance with the value of the `extensive` argument. If `extensive = TRUE`, as used below, weighted sums will be computed. Alternatively, if `extensive = FALSE`, the function returns weighted means.
+
+
+```r
+wfh_interpolate_aw <- st_interpolate_aw(
+  wfh_15,
+  wfh_20,
+  extensive = TRUE
+) %>%
+  mutate(GEOID = wfh_20$GEOID)
+```
+
+### Population-weighted areal interpolation
+
+When a user computes area-weighted areal interpolation with `st_interpolate_aw()`, the function prints the following warning: `st_interpolate_aw assumes attributes are constant or uniform over areas of x`. This assumption that proportionally larger *areas* also have proportionally more *people* is often incorrect with respect to the geography of human settlements, and can be a source of error when using this method. An alternative method, *population-weighted areal interpolation*, can represent an improvement. As opposed to using area-based weights, population-weighted techniques estimate the populations of the intersections between origin and destination from a third dataset, then use those values for interpolation weights.
+
+This method is implemented in **tidycensus** with the `interpolate_pw()` function. This function is specified in a similar way to `st_interpolate_aw()`, but also requires a third dataset to be used as weights, and optionally a weight column to determine the relative influence of each feature in the weights dataset. For many purposes, **tidycensus** users will want to use Census blocks as the weights dataset, though users can bring alternative datasets as well. 2020 Census blocks acquired with the **tigris** package have the added benefit of `POP20` and `HU20` columns in the dataset that represent population and housing unit counts, respectively, either one of which could be used to weight each block.
+
+
+```r
+maricopa_blocks <- blocks(
+  state = "AZ",
+  county = "Maricopa",
+  year = 2020
+)
+
+wfh_interpolate_pw <- interpolate_pw(
+  wfh_15,
+  wfh_20,
+  to_id = "GEOID",
+  extensive = TRUE, 
+  weights = maricopa_blocks,
+  weight_column = "POP20",
+  crs = 26949
+)
+```
+
+`interpolate_pw()` uses a *weighted centroid* approach to interpolation, where the input Census blocks are first converted to centroids, then joined to the origin/destination intersections to produce population weights. An illustration of this process is found below; the map on the left-hand side shows the block centroid weights, and the map on the right-hand side shows the population weights used for each 2020 Census tract.
+
+<div class="figure">
+<img src="07-spatial-analysis-census_files/figure-html/gilbert-pop-weights-1.png" alt="Illustration of block centroids and population weights" width="100%" />
+<p class="caption">(\#fig:gilbert-pop-weights)Illustration of block centroids and population weights</p>
+</div>
+
+The population-based weights differ significantly from the area-based weights for the Census tract in Gilbert. Notably, the southern-most Census tract in the example only had an area weight of 0.167, whereas the population weighting revealed that over 30 percent of the origin tract's population is actually located there. This leads to substantive differences in the results of the area- and population-weighted approaches, as illustrated in the figure below.
+
+<div class="figure">
+<img src="07-spatial-analysis-census_files/figure-html/wfh-estimate-map-1.png" alt="Comparison of area-weighted and population-weighted interpolation results" width="100%" />
+<p class="caption">(\#fig:wfh-estimate-map)Comparison of area-weighted and population-weighted interpolation results</p>
+</div>
+
+The area-weighted method under-estimates the population in geographically smaller tracts, and over-estimates in larger ones; in contrast, the population-weighted method takes the underlying population distribution into account.
+
+### Making small-area comparisons
+
+As these methods have interpolated 2011-2015 ACS estimates to 2020 Census tracts, 2011-2015 and 2016-2020 ACS data can now be compared at consistent geographies. To do this, we will join the population-weighted interpolated 2011-2015 data to the original 2016-2020 data using `left_join()` (as covered in Section \@ref(cartographic-workflows-with-non-census-data)), taking care to drop the geometry of the dataset on the right-hand side of the join and to specify a `suffix` argument to distinguish the two ACS estimates. We then calculate change over time from these estimates and map the result.
+
+
+```r
+library(mapboxapi)
+
+wfh_shift <- wfh_20 %>%
+  left_join(st_drop_geometry(wfh_interpolate_pw), 
+            by = "GEOID",
+            suffix = c("_2020", "_2015")) %>%
+  mutate(wfh_shift = estimate_2020 - estimate_2015)
+
+maricopa_basemap <- layer_static_mapbox(
+  location = wfh_shift,
+  style_id = "dark-v9",
+  username = "mapbox"
+)
+
+ggplot() + 
+  maricopa_basemap + 
+  geom_sf(data = wfh_shift, aes(fill = wfh_shift), color = NA, 
+          alpha = 0.8) + 
+  scale_fill_distiller(palette = "PuOr", direction = -1) + 
+  labs(fill = "Shift, 2011-2015 to\n2016-2020 ACS",
+       title = "Change in work-from-home population",
+       subtitle = "Maricopa County, Arizona") + 
+  theme_void()
+```
+
+<div class="figure">
+<img src="07-spatial-analysis-census_files/figure-html/map-maricopa-change-1.png" alt="Map of shift in workers from home, Maricopa County Arizona" width="100%" />
+<p class="caption">(\#fig:map-maricopa-change)Map of shift in workers from home, Maricopa County Arizona</p>
+</div>
+
+Notable increases in tract-level working from home are found in locations like Gilbert, Scottsdale, and Tempe on the eastern side of the metropolitan area. That said, these results may simply be a function of overall population growth in those tracts, which means that a follow-up analysis should examine change in the share of the population working from home. This would require interpolating a total workforce denominator column and calculating a percentage. Fortunately, both interpolation methods introduced in this section will interpolate all numeric columns in an input dataset, so wide-form data or data with a summary variable acquired by **tidycensus** will work well for this purpose.
+
+::: rmdwarning
+As discussed in Section \@ref(calculating-derived-margins-of-error-in-tidycensus), derived margins of error (even for sums) require special methods. Given the complexity of the interpolation methods covered here, direct interpolation of margin of error columns will not take these methods into account. Analysts should interpret such columns with caution.
+:::
+
 ## Distance and proximity analysis
 
 A common use case for spatially-referenced demographic data is the analysis of *accessibility*. This might include studying the relative accessibility of different demographic groups to resources within a given region, or analyzing the characteristics of potential customers who live within a given distance of a store. Conceptually, there are a variety of ways to measure accessibility. The most straightforward method, computationally, is using straight-line (Euclidean) distances over geographic data in a projected coordinate system. A more computationally complex - but potentially more accurate - method involves the use of transportation networks to model accessibility, where proximity is measured not based on distance from a given location but instead based on travel times for a given transit mode, such as walking, cycling, or driving. This section will illustrate both types of approaches. Let's consider the topic of accessibility to Level I and Level II trauma hospitals by Census tract in the state of Iowa. 2019 Census tract boundaries are acquired from **tigris**, and we use `st_read()` to read in a shapefile of hospital locations acquired from the US Department of Homeland Security.
@@ -841,14 +993,15 @@ hospital_url <- "https://opendata.arcgis.com/api/v3/datasets/6ac5e325468c4cb9b90
 
 trauma <- st_read(hospital_url) %>%
   filter(str_detect(TRAUMA, "LEVEL I\\b|LEVEL II\\b|RTH|RTC")) %>%
-  st_transform(26975)
+  st_transform(26975) %>%
+  distinct(ID, .keep_all = TRUE)
 ```
 
 ```
 ## Reading layer `Hospitals' from data source 
 ##   `https://opendata.arcgis.com/api/v3/datasets/6ac5e325468c4cb9b905f1728d6fbf0f_0/downloads/data?format=geojson&spatialRefId=4326' 
 ##   using driver `GeoJSON'
-## Simple feature collection with 7596 features and 32 fields
+## Simple feature collection with 68775 features and 33 fields
 ## Geometry type: POINT
 ## Dimension:     XY
 ## Bounding box:  xmin: -176.6403 ymin: -14.29024 xmax: 145.7245 ymax: 71.29773
@@ -866,7 +1019,7 @@ names(trauma)
 ## [16] "LATITUDE"   "LONGITUDE"  "NAICS_CODE" "NAICS_DESC" "SOURCE"    
 ## [21] "SOURCEDATE" "VAL_METHOD" "VAL_DATE"   "WEBSITE"    "STATE_ID"  
 ## [26] "ALT_NAME"   "ST_FIPS"    "OWNER"      "TTL_STAFF"  "BEDS"      
-## [31] "TRAUMA"     "HELIPAD"    "geometry"
+## [31] "TRAUMA"     "HELIPAD"    "GlobalID"   "geometry"
 ```
 
 ### Calculating distances
@@ -931,7 +1084,15 @@ hist(min_dist)
 <p class="caption">(\#fig:get-min-dist)Base R histogram of minimum distances to trauma centers</p>
 </div>
 
-While many tracts are within 10km of a trauma center, around 16 percent of Iowa Census tracts are beyond 100km from a Level I or II trauma center, suggesting significant accessibility issues for these areas.
+::: rmdnote
+The code that extracts minimum distances from the distance matrix includes some notation that may be unfamiliar to readers.
+
+-   The `apply()` function from base R is used to iterate over rows of the matrix. Matrices are a data structure not handled by the `map_*()` family of functions in the tidyverse, so base R methods must be used. In the example pipeline, the `apply()` function inherits the `dist` matrix object as its first argument. The second argument, `1`, refers to the margin of the matrix that `apply()` will iterate over; `1` references rows (which we want), whereas `2` would be used for columns. `min` then is the function to be applied to each row, giving us the minimum distance to a hospital for each Census tract.
+
+-   The `divide_by()` function in the **magrittr** package is a convenience arithmetic function to be used in analytic pipelines as R's arithmetic operators (e.g. `/` for division) won't work in this way. In this example, it divides all the values by 1000 to convert meters to kilometers.
+:::
+
+While many tracts are within 10km of a trauma center, around 16 percent of Iowa Census tracts in 2019 are beyond 100km from a Level I or II trauma center, suggesting significant accessibility issues for these areas.
 
 ### Calculating travel times
 
@@ -944,7 +1105,7 @@ If you are using **mapboxapi** for the first time, visit [mapbox.com](), registe
 
 ```r
 library(mapboxapi)
-# mb_access_token("pk.eybcasq..., install = TRUE)
+# mb_access_token("pk.eybcasq...", install = TRUE)
 
 times <- mb_matrix(ia_tracts, ia_trauma)
 ```
@@ -989,7 +1150,7 @@ ggplot(ia_tracts, aes(fill = time)) +
 The map illustrates considerable accessibility gaps to trauma centers across the state. Whereas urban residents typically live within 20 minutes of a trauma center, travel times in rural Iowa can exceed two hours.
 
 ::: rmdnote
-An advantage to using a package like **mapboxapi** for routing and travel times is that users can connect directly to a hosted routing engine using an API. Due to rate limitations, however, web APIs are likely inadequate for more advanced users who need to compute travel times at scale. There are several R packages that can connect to user-hosted routing engines which may be better-suited to such tasks. These packages include [osrm](https://github.com/rCarto/osrm) for the Open Source Routing Machine; [opentripplanner](https://docs.ropensci.org/opentripplanner/) for OpenTripPlanner; and [r5r](https://ipeagit.github.io/r5r/) for R5.
+An advantage to using a package like **mapboxapi** for routing and travel times is that users can connect directly to a hosted routing engine using an API. Due to rate limitations, however, web APIs are likely inadequate for more advanced users who need to compute travel times at scale. There are several R packages that can connect to user-hosted routing engines which may be better-suited to such tasks. These packages include [**osrm**](https://github.com/rCarto/osrm) for the Open Source Routing Machine; [**opentripplanner**](https://docs.ropensci.org/opentripplanner/) for OpenTripPlanner; and [**r5r**](https://ipeagit.github.io/r5r/) for R5.
 :::
 
 ### Catchment areas with buffers and isochrones
@@ -1014,7 +1175,7 @@ An alternative option is to create network-based *isochrones*, which are polygon
 iso10min <- mb_isochrone(iowa_methodist, time = 10)
 ```
 
-We can visualize the comparative extents of these two methods in Des Moines. Run the code on your own computer to get a synced interactive map showing the two methods.
+We can visualize the comparative extents of these two methods in Des Moines. Run the code on your own computer to get a synced interactive map showing the two methods. The `makeAwesomeIcon()` function in **leaflet** creates a custom icon appropriate for a medical facility; [many other icons are available for common points of interest](http://rstudio.github.io/leaflet/markers.html#awesome-icons).
 
 
 ```r
@@ -1050,9 +1211,9 @@ The comparative maps illustrate the differences between the two methods quite cl
 
 ### Computing demographic estimates for zones with areal interpolation
 
-Common to both methods, however, is a mis-alignment between their geometries and those of any Census geographies we may use to infer catchment area demographics. As opposed to the spatial overlay analysis matching Census tracts to metropolitan areas earlier in this chapter, Census tracts or block groups on the edge of the catchment area will only be partially included in the catchment. A common method for resolving this issue in geographic information science is *areal interpolation*. Areal interpolation refers to the allocation of data from one set of zones to a second overlapping set of zones that may or may not perfectly align spatially. In cases of mis-alignment, some type of weighting scheme needs to be specified to determine how to allocate partial data in areas of overlap.
+Common to both methods, however, is a mis-alignment between their geometries and those of any Census geographies we may use to infer catchment area demographics. As opposed to the spatial overlay analysis matching Census tracts to metropolitan areas earlier in this chapter, Census tracts or block groups on the edge of the catchment area will only be partially included in the catchment. Areal interpolation methods like those introduced in Section \@ref(small-area-time-series-analysis) can be used here to estimate the demographics of both the buffer zone and isochrone.
 
-Let's produce interpolated estimates of the percentage of population in poverty for both catchment area definitions. This will require obtaining block-group level poverty information from the ACS for Polk County, Iowa, which encompasses both the buffer and the isochrone. The variables requested from the ACS include the number of family households with incomes below the poverty line along with total number of family households to serve as a denominator.
+Let's produce interpolated estimates of the percentage of population in poverty for both catchment area definitions. This will require obtaining block group-level poverty information from the ACS for Polk County, Iowa, which encompasses both the buffer and the isochrone. The variables requested from the ACS include the number of family households with incomes below the poverty line along with total number of family households to serve as a denominator.
 
 
 ```r
@@ -1064,29 +1225,39 @@ polk_poverty <- get_acs(
   county = "Polk",
   geometry = TRUE,
   output = "wide",
-  year = 2019
+  year = 2020
 ) %>%
   select(poverty_denomE, poverty_numE) %>%
   st_transform(26975)
 ```
 
-*Area-weighted areal interpolation* is implemented in **sf** with the `st_interpolate_aw()` function. This method uses the area of overlap of geometries as the interpolation weights. This means that, in this example, Census tracts that fall entirely within the 5km buffer polygon will receive a weight of 1. Census tracts that overlap the edge of the buffer area will receive a weight commensurate with the proportion of their area that falls within the buffer area. Those weights are applied to target variables (in this case, the poverty information) in accordance with the value of the `extensive` argument. If `extensive = TRUE`, as used below, weighted sums will be computed. Alternatively, if `extensive = FALSE`, the function returns weighted means.
-
 
 ```r
 library(glue)
 
-buffer_pov <- st_interpolate_aw(
-  polk_poverty, 
-  st_transform(buf5km, 26975),
-  extensive = TRUE
+polk_blocks <- blocks(
+  state = "IA",
+  county = "Polk",
+  year = 2020
+)
+
+buffer_pov <- interpolate_pw(
+  from = polk_poverty, 
+  to = buf5km,
+  extensive = TRUE,
+  weights = polk_blocks,
+  weight_column = "POP20",
+  crs = 26975
 ) %>%
   mutate(pct_poverty = 100 * (poverty_numE / poverty_denomE))
 
-iso_pov <- st_interpolate_aw(
-  polk_poverty, 
-  st_transform(iso10min, 26975),
-  extensive = TRUE
+iso_pov <- interpolate_pw(
+  from = polk_poverty, 
+  to = iso10min,
+  extensive = TRUE,
+  weights = polk_blocks,
+  weight_column = "POP20",
+  crs = 26975
 ) %>%
   mutate(pct_poverty = 100 * (poverty_numE / poverty_denomE))
 
@@ -1095,7 +1266,7 @@ print(glue("Family poverty (5km buffer method): {round(buffer_pov$pct_poverty, 1
 ```
 
 ```
-## Family poverty (5km buffer method): 13.5%
+## Family poverty (5km buffer method): 14.2%
 ```
 
 ```r
@@ -1103,7 +1274,7 @@ print(glue("Family poverty (10min isochrone method): {round(iso_pov$pct_poverty,
 ```
 
 ```
-## Family poverty (10min isochrone method): 13.9%
+## Family poverty (10min isochrone method): 14.3%
 ```
 
 The two methods return slightly different results, illustrating how the definition of catchment area impacts downstream analyses.
@@ -1127,13 +1298,13 @@ ny <- get_acs(
   variables = "B19013_001", 
   state = "NY", 
   county = "New York", 
-  year = 2019,
+  year = 2020,
   geometry = TRUE
 )
 
 ggplot(ny) + 
   geom_sf(aes(fill = estimate)) + 
-  scale_fill_viridis_c(labels = scales::dollar) + 
+  scale_fill_viridis_c(labels = scales::label_dollar()) + 
   theme_void() + 
   labs(fill = "Median household\nincome")
 ```
@@ -1151,45 +1322,34 @@ tidycensus allows users to get TIGER/Line instead of cartographic boundary shape
 
 
 ```r
-# CRS: NAD83(2011) / New York Long Island
 ny2 <- get_acs(
   geography = "tract",
   variables = "B19013_001", 
   state = "NY", 
   county = "New York", 
   geometry = TRUE, 
-  year = 2019,
+  year = 2020,
   cb = FALSE
 ) %>%
   st_transform(6538)
 ```
 
-Next, tools in the **tigris** and **sf** package can be used to remove the water area from Manhattan's Census tracts. **sf** allows users to "erase" one geometry from another, [akin to tools available in desktop GIS software](http://pro.arcgis.com/en/pro-app/tool-reference/analysis/erase.htm). The `st_erase()` function defined below is not exported by the package, but is defined in the documentation for `st_difference()`.
-
-The geometry used to "erase" water area from the tract polygons is obtained by the `area_water()` function in **tigris**.
+Next, the `erase_water()` function in the **tigris** package will be used to remove water area from the Census tracts. `erase_water()` works by auto-detecting US counties that surround an input dataset, obtaining an area water shapefile from the Census Bureau for those counties, then computing an *erase* operation to remove those water areas from the input dataset. Using TIGER/Line geometries with `cb = FALSE` is recommended as they will align with the input water areas and minimize the creation of *sliver polygons*, which are small polygons that can be created from the overlay of inconsistent spatial datasets.
 
 
 ```r
-library(sf)
-library(tigris)
-
-st_erase <- function(x, y) {
-  st_difference(x, st_union(y))
-}
-
-ny_water <- area_water("NY", "New York", year = 2019) %>%
-  st_transform(6538)
-
-ny_erase <- st_erase(ny2, ny_water)
+ny_erase <- erase_water(ny2)
 ```
 
-After performing this operation, we can map the result:
+Although it is not used here, `erase_water()` has an optional argument, `area_threshold`, that defines the area percentile threshold at which water areas are kept for the erase operation. The default of 0.75, used here, erases water areas with a size percentile of 75 percent and up (so, the top 25 percent). A lower area threshold can produce more accurate shapes, but can slow down the operation substantially.
+
+After erasing water area from Manhattan's Census tracts with `erase_water()`, we can map the result:
 
 
 ```r
 ggplot(ny_erase) + 
   geom_sf(aes(fill = estimate)) + 
-  scale_fill_viridis_c(labels = scales::dollar) + 
+  scale_fill_viridis_c(labels = scales::label_dollar()) + 
   theme_void() + 
   labs(fill = "Median household\nincome")
 ```
@@ -1217,7 +1377,7 @@ library(spdep)
 options(tigris_use_cache = TRUE)
 
 # CRS: NAD83 / Texas North Central
-dfw <- core_based_statistical_areas(cb = TRUE, year = 2019) %>%
+dfw <- core_based_statistical_areas(cb = TRUE, year = 2020) %>%
   filter(str_detect(NAME, "Dallas")) %>%
   st_transform(32138)
 
@@ -1225,7 +1385,7 @@ dfw_tracts <- get_acs(
   geography = "tract",
   variables = "B01002_001",
   state = "TX",
-  year = 2019,
+  year = 2020,
   geometry = TRUE
 ) %>%
   st_transform(32138) %>%
@@ -1242,7 +1402,7 @@ ggplot(dfw_tracts) +
 
 ### Understanding spatial neighborhoods
 
-Exploratory spatial data analysis relies on the concept of a *neighborhood*, which is a representation of how a given geographic feature interrelates with other features nearby. The workhorse package for exploratory spatial data analysis in R is **spdep**, which includes a wide range of tools for exploring and modeling spatial data. As part of this framework, **spdep** supports a variety of neighborhood definitions. These definitions include:
+Exploratory spatial data analysis relies on the concept of a *neighborhood*, which is a representation of how a given geographic feature (e.g. a given point, line, or polygon) interrelates with other features nearby. The workhorse package for exploratory spatial data analysis in R is **spdep**, which includes a wide range of tools for exploring and modeling spatial data. As part of this framework, **spdep** supports a variety of neighborhood definitions. These definitions include:
 
 -   *Proximity-based neighbors*, where neighboring features are identified based on some measure of distance. Neighbors might be defined as those that fall within a given distance threshold (e.g. all features within 2km of a given feature) or as *k*-nearest neighbors (e.g. the nearest eight features to a given feature).
 -   *Graph-based neighbors*, where neighbors are defined through network relationships (e.g. along a street network).
@@ -1259,23 +1419,23 @@ summary(neighbors)
 
 ```
 ## Neighbour list object:
-## Number of regions: 1310 
-## Number of nonzero links: 8446 
-## Percentage nonzero weights: 0.4921625 
-## Average number of links: 6.447328 
+## Number of regions: 1699 
+## Number of nonzero links: 10930 
+## Percentage nonzero weights: 0.378646 
+## Average number of links: 6.433196 
 ## Link number distribution:
 ## 
-##   2   3   4   5   6   7   8   9  10  11  12  13  16 
-##   6  43 111 254 286 291 159  94  30  20  11   4   1 
-## 6 least connected regions:
-## 15 626 663 768 823 824 with 2 links
+##   2   3   4   5   6   7   8   9  10  11  12  13  14  15  17 
+##   8  50 173 307 395 343 220 109  46  28  11   5   2   1   1 
+## 8 least connected regions:
+## 33 620 697 753 1014 1358 1579 1642 with 2 links
 ## 1 most connected region:
-## 924 with 16 links
+## 1635 with 17 links
 ```
 
-On average, the Census tracts in the Dallas-Fort Worth metropolitan area have 6.44 neighbors. The minimum number of neighbors in the dataset is 2 (there are six such tracts), and the maximum number of neighbors is 16 (the tract at row index 924). An important caveat to keep in mind here is that tracts with few neighbors may actually have more neighbors than listed here given that we have restricted the tract dataset to those tracts within the Dallas-Fort Worth metropolitan area. In turn, our analysis will be influenced by *edge effects* as neighborhoods on the edge of the metropolitan area are artificially restricted.
+On average, the Census tracts in the Dallas-Fort Worth metropolitan area have 6.43 neighbors. The minimum number of neighbors in the dataset is 2 (there are eight such tracts), and the maximum number of neighbors is 17 (the tract at row index 1635). An important caveat to keep in mind here is that tracts with few neighbors may actually have more neighbors than listed here given that we have restricted the tract dataset to those tracts within the Dallas-Fort Worth metropolitan area. In turn, our analysis will be influenced by *edge effects* as neighborhoods on the edge of the metropolitan area are artificially restricted.
 
-Neighborhood relationships can be visualized using plotting functionality in **spdep**:
+Neighborhood relationships can be visualized using plotting functionality in **spdep**, with blue lines connecting each polygon with its neighbors.
 
 
 ```r
@@ -1305,7 +1465,7 @@ neighbors[[1]]
 ```
 
 ```
-##  [1]   47  153  227  246  353  613  660  751  942 1025 1208
+## [1]   45  585  674 1152 1580
 ```
 
 ### Generating the spatial weights matrix
@@ -1322,19 +1482,18 @@ weights$weights[[1]]
 ```
 
 ```
-##  [1] 0.09090909 0.09090909 0.09090909 0.09090909 0.09090909 0.09090909
-##  [7] 0.09090909 0.09090909 0.09090909 0.09090909 0.09090909
+## [1] 0.2 0.2 0.2 0.2 0.2
 ```
 
-Given that the Census tract at row index 1 has eleven neighbors, each neighbor is assigned the weight 0.0909.
+Given that the Census tract at row index 1 has five neighbors, each neighbor is assigned the weight 0.2.
 
 ## Global and local spatial autocorrelation
 
-The row-standardized spatial weights object named `weights` provides the needed information to perform exploratory spatial data analysis of educational attainment in the Dallas-Fort Worth metropolitan area. In many cases, an analyst may be interested in understanding how the attributes of geographic features relate to those of their neighbors. Formally, this concept is called *spatial autocorrelation*. The concept of spatial autocorrelation relates to Waldo Tobler's famous "first law of geography," which reads [@tobler1970]:
+The row-standardized spatial weights object named `weights` provides the needed information to perform exploratory spatial data analysis of median age in the Dallas-Fort Worth metropolitan area. In many cases, an analyst may be interested in understanding how the attributes of geographic features relate to those of their neighbors. Formally, this concept is called *spatial autocorrelation*. The concept of spatial autocorrelation relates to Waldo Tobler's famous "first law of geography," which reads [@tobler1970]:
 
 > Everything is related to everything else, but near things are more related than distant things.
 
-This formulation informs much of the theory behind spatial data science and geographical inquiry more broadly. With respect to the exploratory spatial analysis of Census data, we might be interested in the degree to which a given attribute clusters spatially, and subsequently where those clusters are found. One such way to assess clustering is to assess the degree to which attribute values are similar to or differ from those of their neighbors as defined by a weights matrix. Patterns can in turn be explained as follows:
+This formulation informs much of the theory behind spatial data science and geographical inquiry more broadly. With respect to the exploratory spatial analysis of Census data, we might be interested in the degree to which a given Census variable clusters spatially, and subsequently where those clusters are found. One such way to assess clustering is to assess the degree to which ACS estimates are similar to or differ from those of their neighbors as defined by a weights matrix. Patterns can in turn be explained as follows:
 
 -   *Spatial clustering*: data values tend to be similar to neighboring data values;
 -   *Spatial uniformity*: data values tend to differ from neighboring data values;
@@ -1351,7 +1510,7 @@ Spatial weights matrices can be used to calculate the *spatial lag* of a given a
 dfw_tracts$lag_estimate <- lag.listw(weights, dfw_tracts$estimate)
 ```
 
-The code above creates a new column in `dfw_tracts`, `lag_estimate`, that represents the mean percentage of bachelor's degree holders for the neighbors of each Census tract in the Dallas-Fort Worth metropolitan area. Using this information, we can draw a scatterplot of the ACS estimate vs. its lagged mean to do a preliminary assessment of spatial clustering in the data.
+The code above creates a new column in `dfw_tracts`, `lag_estimate`, that represents the average median age for the neighbors of each Census tract in the Dallas-Fort Worth metropolitan area. Using this information, we can draw a scatterplot of the ACS estimate vs. its lagged mean to do a preliminary assessment of spatial clustering in the data.
 
 
 ```r
@@ -1362,7 +1521,7 @@ ggplot(dfw_tracts, aes(x = estimate, y = lag_estimate)) +
   labs(title = "Median age by Census tract, Dallas-Fort Worth TX",
        x = "Median age",
        y = "Spatial lag, median age", 
-       caption = "Data source: 2015-2019 ACS via the tidycensus R package.\nSpatial relationships based on queens-case polygon contiguity.")
+       caption = "Data source: 2016-2020 ACS via the tidycensus R package.\nSpatial relationships based on queens-case polygon contiguity.")
 ```
 
 <div class="figure">
@@ -1392,14 +1551,14 @@ moran.test(dfw_tracts$estimate, weights)
 ## data:  dfw_tracts$estimate  
 ## weights: weights    
 ## 
-## Moran I statistic standard deviate = 22.979, p-value < 2.2e-16
+## Moran I statistic standard deviate = 21.264, p-value < 2.2e-16
 ## alternative hypothesis: greater
 ## sample estimates:
 ## Moran I statistic       Expectation          Variance 
-##      0.3593580070     -0.0007639419      0.0002456130
+##      0.2924898552     -0.0005889282      0.0001899598
 ```
 
-The Moran's $I$ statistic of 0.359 is positive, and the small *p*-value suggests that we reject the null hypothesis of spatial randomness in our dataset. (See Section \@ref(a-first-regression-model) for additional discussion of *p-*values). In a practical sense, this means that Census tracts with older populations tend to be located near one another, and Census tracts with younger populations also tend to be found in the same areas.
+The Moran's $I$ statistic of 0.292 is positive, and the small *p*-value suggests that we reject the null hypothesis of spatial randomness in our dataset. (See Section \@ref(a-first-regression-model) for additional discussion of *p-*values). As the statistic is positive, it suggests that our data are *spatially clustered*; a negative statistic would suggest spatial uniformity. In a practical sense, this means that Census tracts with older populations tend to be located near one another, and Census tracts with younger populations also tend to be found in the same areas.
 
 ### Local spatial autocorrelation
 
@@ -1453,6 +1612,8 @@ ggplot(dfw_tracts) +
 <img src="07-spatial-analysis-census_files/figure-html/local-g-z-scores-1.png" alt="Map of local Gi* scores with significant clusters highlighted" width="100%" />
 <p class="caption">(\#fig:local-g-z-scores)Map of local Gi* scores with significant clusters highlighted</p>
 </div>
+
+The red areas on the resulting map are representative of "high" clustering of median age, where neighborhoods with older populations are surrounded by other older-age neighborhoods. "Low" clusters are represented in blue, which reflect clustering of Census tracts with comparatively youthful populations.
 
 ### Identifying clusters and spatial outliers with local indicators of spatial association (LISA)
 
@@ -1522,79 +1683,79 @@ Our result appears as follows:
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:left;"> 48113019204 </td>
-   <td style="text-align:right;"> -0.9083914 </td>
-   <td style="text-align:right;"> -0.3654568 </td>
-   <td style="text-align:right;"> 0.3322315 </td>
-   <td style="text-align:right;"> -0.0019753 </td>
-   <td style="text-align:right;"> 0.0767748 </td>
-   <td style="text-align:right;"> 1.2061629 </td>
-   <td style="text-align:right;"> 0.2277547 </td>
-   <td style="text-align:right;"> 0.234 </td>
-   <td style="text-align:right;"> 0.117 </td>
-   <td style="text-align:right;"> -0.1346414 </td>
-   <td style="text-align:right;"> -0.0136394 </td>
-   <td style="text-align:left;"> MULTIPOLYGON (((761835.4 21... </td>
+   <td style="text-align:left;"> 48113018205 </td>
+   <td style="text-align:right;"> -1.2193253 </td>
+   <td style="text-align:right;"> -0.3045734 </td>
+   <td style="text-align:right;"> 0.3715928 </td>
+   <td style="text-align:right;"> 0.0200412 </td>
+   <td style="text-align:right;"> 0.2808648 </td>
+   <td style="text-align:right;"> 0.6633464 </td>
+   <td style="text-align:right;"> 0.5071087 </td>
+   <td style="text-align:right;"> 0.542 </td>
+   <td style="text-align:right;"> 0.271 </td>
+   <td style="text-align:right;"> -0.3203130 </td>
+   <td style="text-align:right;"> -0.0596145 </td>
+   <td style="text-align:left;"> MULTIPOLYGON (((775616.1 21... </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 48113015500 </td>
-   <td style="text-align:right;"> -1.0195775 </td>
-   <td style="text-align:right;"> -0.7515397 </td>
-   <td style="text-align:right;"> 0.7668383 </td>
-   <td style="text-align:right;"> -0.0115062 </td>
-   <td style="text-align:right;"> 0.1304586 </td>
-   <td style="text-align:right;"> 2.1549417 </td>
-   <td style="text-align:right;"> 0.0311664 </td>
-   <td style="text-align:right;"> 0.022 </td>
-   <td style="text-align:right;"> 0.011 </td>
-   <td style="text-align:right;"> -0.2059971 </td>
-   <td style="text-align:right;"> -0.0706536 </td>
-   <td style="text-align:left;"> MULTIPOLYGON (((738672.9 21... </td>
+   <td style="text-align:left;"> 48113018508 </td>
+   <td style="text-align:right;"> -0.4251677 </td>
+   <td style="text-align:right;"> -0.7634200 </td>
+   <td style="text-align:right;"> 0.3247727 </td>
+   <td style="text-align:right;"> 0.0072807 </td>
+   <td style="text-align:right;"> 0.0472315 </td>
+   <td style="text-align:right;"> 1.4608877 </td>
+   <td style="text-align:right;"> 0.1440463 </td>
+   <td style="text-align:right;"> 0.108 </td>
+   <td style="text-align:right;"> 0.054 </td>
+   <td style="text-align:right;"> -0.4863840 </td>
+   <td style="text-align:right;"> 0.5944294 </td>
+   <td style="text-align:left;"> MULTIPOLYGON (((766435.2 21... </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 48439102000 </td>
-   <td style="text-align:right;"> -0.3365773 </td>
-   <td style="text-align:right;"> -0.1822783 </td>
-   <td style="text-align:right;"> 0.0613976 </td>
-   <td style="text-align:right;"> 0.0029962 </td>
-   <td style="text-align:right;"> 0.0163324 </td>
-   <td style="text-align:right;"> 0.4569814 </td>
-   <td style="text-align:right;"> 0.6476844 </td>
-   <td style="text-align:right;"> 0.670 </td>
-   <td style="text-align:right;"> 0.335 </td>
-   <td style="text-align:right;"> -0.1938830 </td>
-   <td style="text-align:right;"> -0.0417957 </td>
-   <td style="text-align:left;"> MULTIPOLYGON (((705890.8 21... </td>
+   <td style="text-align:left;"> 48439105008 </td>
+   <td style="text-align:right;"> -0.8516598 </td>
+   <td style="text-align:right;"> -0.5222314 </td>
+   <td style="text-align:right;"> 0.4450254 </td>
+   <td style="text-align:right;"> 0.0015109 </td>
+   <td style="text-align:right;"> 0.1479757 </td>
+   <td style="text-align:right;"> 1.1529556 </td>
+   <td style="text-align:right;"> 0.2489286 </td>
+   <td style="text-align:right;"> 0.256 </td>
+   <td style="text-align:right;"> 0.128 </td>
+   <td style="text-align:right;"> -0.3859569 </td>
+   <td style="text-align:right;"> 0.3579499 </td>
+   <td style="text-align:left;"> MULTIPOLYGON (((708333.6 21... </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 48121020503 </td>
-   <td style="text-align:right;"> -1.0195775 </td>
-   <td style="text-align:right;"> 0.3662775 </td>
-   <td style="text-align:right;"> -0.3737336 </td>
-   <td style="text-align:right;"> 0.0185373 </td>
-   <td style="text-align:right;"> 0.2419147 </td>
-   <td style="text-align:right;"> -0.7975446 </td>
-   <td style="text-align:right;"> 0.4251348 </td>
-   <td style="text-align:right;"> 0.390 </td>
-   <td style="text-align:right;"> 0.195 </td>
-   <td style="text-align:right;"> -0.2628396 </td>
-   <td style="text-align:right;"> 0.1497801 </td>
-   <td style="text-align:left;"> MULTIPOLYGON (((727489.9 21... </td>
+   <td style="text-align:left;"> 48113014409 </td>
+   <td style="text-align:right;"> -1.2634452 </td>
+   <td style="text-align:right;"> -0.8590131 </td>
+   <td style="text-align:right;"> 1.0859551 </td>
+   <td style="text-align:right;"> -0.0138130 </td>
+   <td style="text-align:right;"> 0.4009882 </td>
+   <td style="text-align:right;"> 1.7367421 </td>
+   <td style="text-align:right;"> 0.0824327 </td>
+   <td style="text-align:right;"> 0.064 </td>
+   <td style="text-align:right;"> 0.032 </td>
+   <td style="text-align:right;"> -0.4768307 </td>
+   <td style="text-align:right;"> 0.7486170 </td>
+   <td style="text-align:left;"> MULTIPOLYGON (((737242.6 21... </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 48439113710 </td>
-   <td style="text-align:right;"> -0.2730424 </td>
-   <td style="text-align:right;"> 0.6588028 </td>
-   <td style="text-align:right;"> -0.1800185 </td>
-   <td style="text-align:right;"> 0.0004427 </td>
-   <td style="text-align:right;"> 0.0244266 </td>
-   <td style="text-align:right;"> -1.1546556 </td>
-   <td style="text-align:right;"> 0.2482315 </td>
-   <td style="text-align:right;"> 0.272 </td>
-   <td style="text-align:right;"> 0.136 </td>
-   <td style="text-align:right;"> -0.2869858 </td>
-   <td style="text-align:right;"> 0.0021632 </td>
-   <td style="text-align:left;"> MULTIPOLYGON (((730154.3 21... </td>
+   <td style="text-align:left;"> 48113018135 </td>
+   <td style="text-align:right;"> -0.3810478 </td>
+   <td style="text-align:right;"> 0.6042959 </td>
+   <td style="text-align:right;"> -0.2304013 </td>
+   <td style="text-align:right;"> -0.0018729 </td>
+   <td style="text-align:right;"> 0.0216931 </td>
+   <td style="text-align:right;"> -1.5515979 </td>
+   <td style="text-align:right;"> 0.1207585 </td>
+   <td style="text-align:right;"> 0.132 </td>
+   <td style="text-align:right;"> 0.066 </td>
+   <td style="text-align:right;"> -0.5140187 </td>
+   <td style="text-align:right;"> 0.8965318 </td>
+   <td style="text-align:left;"> MULTIPOLYGON (((782974 2136... </td>
   </tr>
 </tbody>
 </table>
@@ -1641,7 +1802,7 @@ ggplot(dfw_lisa_clusters, aes(x = scaled_estimate,
 <p class="caption">(\#fig:dfw-quadrant-plot)LISA quadrant scatterplot</p>
 </div>
 
-Observations falling in the top-right quadrant represent "high-high" clusters, where older Census tracts are also surrounded by older tracts in their spatial neighborhoods. Statistically significant clusters - those with a *p*-value less than or equal to 0.05 - are colored red on the chart. The bottom-left quadrant also represents spatial clusters, but instead includes younger tracts that are also surrounded by younger tracts. The top-left and bottom-right quadrants are home to the spatial outliers, where values are dissimilar from their neighbors.
+Observations falling in the top-right quadrant represent "high-high" clusters, where Census tracts with higher median ages are also surrounded by Census tracts with older populations. Statistically significant clusters - those with a *p*-value less than or equal to 0.05 - are colored red on the chart. The bottom-left quadrant also represents spatial clusters, but instead includes lower-median-age tracts that are also surrounded by tracts with similarly low median ages. The top-left and bottom-right quadrants are home to the spatial outliers, where values are dissimilar from their neighbors.
 
 GeoDa also implements a "cluster map" where observations are visualized in relationship to their cluster membership and statistical significance. The code below reproduces the GeoDa cluster map using **ggplot2** and `geom_sf()`.
 
@@ -1673,5 +1834,5 @@ Using the lasso select tool, you can click and drag on either the scatterplot or
 ## Exercises
 
 1.  Identify a different core-based statistical area of interest and use the methods introduced in this chapter to extract Census tracts or block groups for that CBSA.
-2.  Replicate the `st_erase()` cartographic workflow for a different county with significant water area; a good choice is King County, Washington. Be sure to transform your data to an appropriate projected coordinate system (selected with `suggest_crs()`) first. If the operation creates too many "holes" for water areas, try filtering down the water dataset by its `AWATER` column and retaining only the largest water areas, then re-run and see what you get.
+2.  Replicate the `erase_water()` cartographic workflow for a different county with significant water area; a good choice is King County, Washington. Be sure to transform your data to an appropriate projected coordinate system (selected with `suggest_crs()`) first. If the operation is too slow, try re-running with a higher area threshold and seeing what you get back.
 3.  Acquire a spatial dataset with **tidycensus** for a region of interest and a variable of interest to you. Follow the instructions in this chapter to generate a spatial weights matrix, then compute a hot-spot analysis with `localG()`.

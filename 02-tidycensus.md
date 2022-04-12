@@ -6,7 +6,7 @@ The **tidycensus** package [@walker_and_herman2021], first released in 2017, is 
 
 As discussed in the previous chapter, the US Census Bureau makes a wide range of datasets available to the user community through their APIs and other data download resources. **tidycensus** is not a comprehensive portal to these data resources; instead, it focuses on a select number of datasets implemented in a series of core functions. These core functions in **tidycensus** include:
 
--   `get_decennial()`, which requests data from the US Decennial Census APIs for 2000 and 2010. When 2020 Census data are released via the API, R users will be able to access it with this function as well.
+-   `get_decennial()`, which requests data from the US Decennial Census APIs for 2000, 2010, and 2020.
 
 -   `get_acs()`, which requests data from the 1-year and 5-year American Community Survey samples. Data are available from the 1-year ACS back to 2005 and the 5-year ACS back to 2005-2009.
 
@@ -205,12 +205,12 @@ Similarly, `get_acs()` retrieves data from the American Community Survey. As dis
 born_in_mexico <- get_acs(
   geography = "state", 
   variables = "B05006_150",
-  year = 2019
+  year = 2020
 )
 ```
 
 <table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
-<caption>(\#tab:acs-5-year-show)Mexican-born population by state, 2015-2019 5-year ACS</caption>
+<caption>(\#tab:acs-5-year-show)Mexican-born population by state, 2016-2020 5-year ACS</caption>
  <thead>
   <tr>
    <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"> GEOID </th>
@@ -225,76 +225,76 @@ born_in_mexico <- get_acs(
    <td style="text-align:left;"> 01 </td>
    <td style="text-align:left;"> Alabama </td>
    <td style="text-align:left;"> B05006_150 </td>
-   <td style="text-align:right;"> 49052 </td>
-   <td style="text-align:right;"> 2202 </td>
+   <td style="text-align:right;"> 46927 </td>
+   <td style="text-align:right;"> 1846 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 02 </td>
    <td style="text-align:left;"> Alaska </td>
    <td style="text-align:left;"> B05006_150 </td>
-   <td style="text-align:right;"> 4528 </td>
-   <td style="text-align:right;"> 798 </td>
+   <td style="text-align:right;"> 4181 </td>
+   <td style="text-align:right;"> 709 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 04 </td>
    <td style="text-align:left;"> Arizona </td>
    <td style="text-align:left;"> B05006_150 </td>
-   <td style="text-align:right;"> 511861 </td>
-   <td style="text-align:right;"> 7420 </td>
+   <td style="text-align:right;"> 510639 </td>
+   <td style="text-align:right;"> 8028 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 05 </td>
    <td style="text-align:left;"> Arkansas </td>
    <td style="text-align:left;"> B05006_150 </td>
-   <td style="text-align:right;"> 59271 </td>
-   <td style="text-align:right;"> 2101 </td>
+   <td style="text-align:right;"> 60236 </td>
+   <td style="text-align:right;"> 2182 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 06 </td>
    <td style="text-align:left;"> California </td>
    <td style="text-align:left;"> B05006_150 </td>
-   <td style="text-align:right;"> 4076121 </td>
-   <td style="text-align:right;"> 23048 </td>
+   <td style="text-align:right;"> 3962910 </td>
+   <td style="text-align:right;"> 25353 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 08 </td>
    <td style="text-align:left;"> Colorado </td>
    <td style="text-align:left;"> B05006_150 </td>
-   <td style="text-align:right;"> 225372 </td>
-   <td style="text-align:right;"> 4757 </td>
+   <td style="text-align:right;"> 215778 </td>
+   <td style="text-align:right;"> 4888 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 09 </td>
    <td style="text-align:left;"> Connecticut </td>
    <td style="text-align:left;"> B05006_150 </td>
-   <td style="text-align:right;"> 27399 </td>
-   <td style="text-align:right;"> 2056 </td>
+   <td style="text-align:right;"> 28086 </td>
+   <td style="text-align:right;"> 2144 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 10 </td>
    <td style="text-align:left;"> Delaware </td>
    <td style="text-align:left;"> B05006_150 </td>
-   <td style="text-align:right;"> 16663 </td>
-   <td style="text-align:right;"> 1145 </td>
+   <td style="text-align:right;"> 14616 </td>
+   <td style="text-align:right;"> 1065 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 11 </td>
    <td style="text-align:left;"> District of Columbia </td>
    <td style="text-align:left;"> B05006_150 </td>
-   <td style="text-align:right;"> 4022 </td>
-   <td style="text-align:right;"> 856 </td>
+   <td style="text-align:right;"> 4026 </td>
+   <td style="text-align:right;"> 761 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 12 </td>
    <td style="text-align:left;"> Florida </td>
    <td style="text-align:left;"> B05006_150 </td>
-   <td style="text-align:right;"> 266547 </td>
-   <td style="text-align:right;"> 6349 </td>
+   <td style="text-align:right;"> 257933 </td>
+   <td style="text-align:right;"> 6418 </td>
   </tr>
 </tbody>
 </table>
 
-If the year is not specified, `get_acs()` defaults to the most recent five-year ACS sample, which at the time of this writing is 2015-2019. The data returned is similar in structure to that returned by `get_decennial()`, but includes an `estimate` column (for the ACS estimate) and `moe` column (for the margin of error around that estimate) instead of a `value` column. Different years and different surveys are available by adjusting the `year` and `survey` parameters. `survey` defaults to the 5-year ACS; however this can be changed to the 1-year ACS by using the argument `survey = "acs1"`. For example, the following code will fetch data from the 1-year ACS for 2019:
+If the year is not specified, `get_acs()` defaults to the most recent five-year ACS sample, which at the time of this writing is 2016-2020. The data returned is similar in structure to that returned by `get_decennial()`, but includes an `estimate` column (for the ACS estimate) and `moe` column (for the margin of error around that estimate) instead of a `value` column. Different years and different surveys are available by adjusting the `year` and `survey` parameters. `survey` defaults to the 5-year ACS; however this can be changed to the 1-year ACS by using the argument `survey = "acs1"`. For example, the following code will fetch data from the 1-year ACS for 2019:
 
 
 ```r
@@ -393,19 +393,30 @@ born_in_mexico_1yr <- get_acs(
 
 Note the differences between the 5-year ACS estimates and the 1-year ACS estimates shown. For states with larger Mexican-born populations like Arizona, California, and Colorado, the 1-year ACS data will represent the most up-to-date estimates, albeit characterized by larger margins of error relative to their estimates. For states with smaller Mexican-born populations like Alabama, Alaska, and Arkansas, however, the estimate returns `NA`, R's notation representing missing data. If you encounter this in your data's `estimate` column, it will generally mean that the estimate is too small for a given geography to be deemed reliable by the Census Bureau. In this case, only the states with the largest Mexican-born populations have data available for that variable in the 1-year ACS, meaning that the 5-year ACS should be used to make full state-wise comparisons if desired.
 
-Variables from the ACS detailed tables, data profiles, summary tables, and supplemental estimates are available through **tidycensus**'s `get_acs()` function; the function will auto-detect from which dataset to look for variables based on their names. Alternatively, users can supply a table name to the `table` parameter in `get_acs()`; this will return data for every variable in that table. For example, to get all variables associated with table B01001, which covers sex broken down by age, from the 2015-2019 5-year ACS:
+::: rmdnote
+If users try accessing data from the 2020 1-year ACS in **tidycensus**, they will encounter the following error:
+
+    Error: The regular 1-year ACS was not released in 2020 due to low response rates.
+    The Census Bureau released a set of experimental estimates for the 2020 1-year ACS
+    that are not available in tidycensus.
+    These estimates can be downloaded at https://www.census.gov/programs-surveys/acs/data/experimental-data/1-year.html.
+
+This means that for 1-year ACS data, **tidycensus** users will need to use older datasets (2019 and earlier) or access 2021 data once it is released in late 2022.
+:::
+
+Variables from the ACS detailed tables, data profiles, summary tables, comparison profile, and supplemental estimates are available through **tidycensus**'s `get_acs()` function; the function will auto-detect from which dataset to look for variables based on their names. Alternatively, users can supply a table name to the table parameter in get_acs(); this will return data for every variable in that table. For example, to get all variables associated with table B01001, which covers sex broken down by age, from the 2016-2020 5-year ACS:
 
 
 ```r
 age_table <- get_acs(
   geography = "state", 
   table = "B01001",
-  year = 2019
+  year = 2020
 )
 ```
 
 <table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
-<caption>(\#tab:state-age-table-show)Table B01001 by state from the 2015-2019 5-year ACS</caption>
+<caption>(\#tab:state-age-table-show)Table B01001 by state from the 2016-2020 5-year ACS</caption>
  <thead>
   <tr>
    <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"> GEOID </th>
@@ -420,71 +431,71 @@ age_table <- get_acs(
    <td style="text-align:left;"> 01 </td>
    <td style="text-align:left;"> Alabama </td>
    <td style="text-align:left;"> B01001_001 </td>
-   <td style="text-align:right;"> 4876250 </td>
+   <td style="text-align:right;"> 4893186 </td>
    <td style="text-align:right;"> NA </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 01 </td>
    <td style="text-align:left;"> Alabama </td>
    <td style="text-align:left;"> B01001_002 </td>
-   <td style="text-align:right;"> 2359355 </td>
-   <td style="text-align:right;"> 1270 </td>
+   <td style="text-align:right;"> 2365734 </td>
+   <td style="text-align:right;"> 1090 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 01 </td>
    <td style="text-align:left;"> Alabama </td>
    <td style="text-align:left;"> B01001_003 </td>
-   <td style="text-align:right;"> 149090 </td>
-   <td style="text-align:right;"> 704 </td>
+   <td style="text-align:right;"> 149579 </td>
+   <td style="text-align:right;"> 672 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 01 </td>
    <td style="text-align:left;"> Alabama </td>
    <td style="text-align:left;"> B01001_004 </td>
-   <td style="text-align:right;"> 153494 </td>
-   <td style="text-align:right;"> 2290 </td>
+   <td style="text-align:right;"> 150937 </td>
+   <td style="text-align:right;"> 2202 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 01 </td>
    <td style="text-align:left;"> Alabama </td>
    <td style="text-align:left;"> B01001_005 </td>
-   <td style="text-align:right;"> 158617 </td>
-   <td style="text-align:right;"> 2274 </td>
+   <td style="text-align:right;"> 160287 </td>
+   <td style="text-align:right;"> 2159 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 01 </td>
    <td style="text-align:left;"> Alabama </td>
    <td style="text-align:left;"> B01001_006 </td>
-   <td style="text-align:right;"> 98257 </td>
-   <td style="text-align:right;"> 468 </td>
+   <td style="text-align:right;"> 96832 </td>
+   <td style="text-align:right;"> 565 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 01 </td>
    <td style="text-align:left;"> Alabama </td>
    <td style="text-align:left;"> B01001_007 </td>
-   <td style="text-align:right;"> 64980 </td>
-   <td style="text-align:right;"> 834 </td>
+   <td style="text-align:right;"> 65459 </td>
+   <td style="text-align:right;"> 961 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 01 </td>
    <td style="text-align:left;"> Alabama </td>
    <td style="text-align:left;"> B01001_008 </td>
-   <td style="text-align:right;"> 35870 </td>
-   <td style="text-align:right;"> 1436 </td>
+   <td style="text-align:right;"> 36705 </td>
+   <td style="text-align:right;"> 1467 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 01 </td>
    <td style="text-align:left;"> Alabama </td>
    <td style="text-align:left;"> B01001_009 </td>
-   <td style="text-align:right;"> 35040 </td>
-   <td style="text-align:right;"> 1472 </td>
+   <td style="text-align:right;"> 33089 </td>
+   <td style="text-align:right;"> 1547 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 01 </td>
    <td style="text-align:left;"> Alabama </td>
    <td style="text-align:left;"> B01001_010 </td>
-   <td style="text-align:right;"> 95065 </td>
-   <td style="text-align:right;"> 1916 </td>
+   <td style="text-align:right;"> 93871 </td>
+   <td style="text-align:right;"> 2045 </td>
   </tr>
 </tbody>
 </table>
@@ -497,65 +508,36 @@ The `geography` parameter in `get_acs()` and `get_decennial()` allows users to r
 
 The only geographies available in 2000 are `"state"`, `"county"`, `"county subdivision"`, `"tract"`, `"block group"`, and `"place"`. Some geographies available from the Census API are not available in tidycensus at the moment as they require more complex hierarchy specification than the package supports, and not all variables are available at every geography.
 
-+--------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------+-----------------------+------------------------------------------------------------------+
 | Geography                                                                            | Definition                                                                        | Available by          | Available in                                                     |
-+======================================================================================+===================================================================================+=======================+==================================================================+
+|-------------------|------------------|------------------|------------------|
 | `"us"`                                                                               | United States                                                                     |                       | `get_acs()`, `get_decennial()`, `get_estimates()`                |
-+--------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------+-----------------------+------------------------------------------------------------------+
 | `"region"`                                                                           | Census region                                                                     |                       | `get_acs()`, `get_decennial()`, `get_estimates()`                |
-+--------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------+-----------------------+------------------------------------------------------------------+
 | `"division"`                                                                         | Census division                                                                   |                       | `get_acs()`, `get_decennial()`, `get_estimates()`                |
-+--------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------+-----------------------+------------------------------------------------------------------+
 | `"state"`                                                                            | State or equivalent                                                               | state                 | `get_acs()`, `get_decennial()`, `get_estimates()`, `get_flows()` |
-+--------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------+-----------------------+------------------------------------------------------------------+
 | `"county"`                                                                           | County or equivalent                                                              | state, county         | `get_acs()`, `get_decennial()`, `get_estimates()`, `get_flows()` |
-+--------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------+-----------------------+------------------------------------------------------------------+
 | `"county subdivision"`                                                               | County subdivision                                                                | **state**, county     | `get_acs()`, `get_decennial()`, `get_estimates()`, `get_flows()` |
-+--------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------+-----------------------+------------------------------------------------------------------+
 | `"tract"`                                                                            | Census tract                                                                      | **state**, county     | `get_acs()`, `get_decennial()`                                   |
-+--------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------+-----------------------+------------------------------------------------------------------+
 | `"block group"`                                                                      | Census block group                                                                | **state**, county     | `get_acs()` (2013-), `get_decennial()`                           |
-+--------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------+-----------------------+------------------------------------------------------------------+
 | `"block"`                                                                            | Census block                                                                      | **state**, **county** | `get_decennial()`                                                |
-+--------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------+-----------------------+------------------------------------------------------------------+
 | `"place"`                                                                            | Census-designated place                                                           | state                 | `get_acs()`, `get_decennial()`, `get_estimates()`                |
-+--------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------+-----------------------+------------------------------------------------------------------+
 | `"alaska native regional corporation"`                                               | Alaska native regional corporation                                                | state                 | `get_acs()`, `get_decennial()`                                   |
-+--------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------+-----------------------+------------------------------------------------------------------+
 | `"american indian area/alaska native area/hawaiian home land"`                       | Federal and state-recognized American Indian reservations and Hawaiian home lands | state                 | `get_acs()`, `get_decennial()`                                   |
-+--------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------+-----------------------+------------------------------------------------------------------+
 | `"american indian area/alaska native area (reservation or statistical entity only)"` | Only reservations and statistical entities                                        | state                 | `get_acs()`, `get_decennial()`                                   |
-+--------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------+-----------------------+------------------------------------------------------------------+
 | `"american indian area (off-reservation trust land only)/hawaiian home land"`        | Only off-reservation trust lands and Hawaiian home lands                          | state                 | `get_acs()`,                                                     |
-+--------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------+-----------------------+------------------------------------------------------------------+
 | `"metropolitan statistical area/micropolitan statistical area"` OR `"cbsa"`          | Core-based statistical area                                                       | state                 | `get_acs()`, `get_decennial()`, `get_estimates()`, `get_flows()` |
-+--------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------+-----------------------+------------------------------------------------------------------+
 | `"combined statistical area"`                                                        | Combined statistical area                                                         | state                 | `get_acs()`, `get_decennial()`, `get_estimates()`                |
-+--------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------+-----------------------+------------------------------------------------------------------+
 | `"new england city and town area"`                                                   | New England city/town area                                                        | state                 | `get_acs()`, `get_decennial()`                                   |
-+--------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------+-----------------------+------------------------------------------------------------------+
 | `"combined new england city and town area"`                                          | Combined New England area                                                         | state                 | `get_acs()`, `get_decennial()`                                   |
-+--------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------+-----------------------+------------------------------------------------------------------+
 | `"urban area"`                                                                       | Census-defined urbanized areas                                                    |                       | `get_acs()`, `get_decennial()`                                   |
-+--------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------+-----------------------+------------------------------------------------------------------+
 | `"congressional district"`                                                           | Congressional district for the year-appropriate Congress                          | state                 | `get_acs()`, `get_decennial()`                                   |
-+--------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------+-----------------------+------------------------------------------------------------------+
 | `"school district (elementary)"`                                                     | Elementary school district                                                        | **state**             | `get_acs()`, `get_decennial()`                                   |
-+--------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------+-----------------------+------------------------------------------------------------------+
 | `"school district (secondary)"`                                                      | Secondary school district                                                         | **state**             | `get_acs()`, `get_decennial()`                                   |
-+--------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------+-----------------------+------------------------------------------------------------------+
 | `"school district (unified)"`                                                        | Unified school district                                                           | **state**             | `get_acs()`, `get_decennial()`                                   |
-+--------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------+-----------------------+------------------------------------------------------------------+
 | `"public use microdata area"`                                                        | PUMA (geography associated with Census microdata samples)                         | state                 | `get_acs()`                                                      |
-+--------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------+-----------------------+------------------------------------------------------------------+
 | `"zip code tabulation area"` OR `"zcta"`                                             | Zip code tabulation area                                                          | state                 | `get_acs()`, `get_decennial()`                                   |
-+--------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------+-----------------------+------------------------------------------------------------------+
 | `"state legislative district (upper chamber)"`                                       | State senate districts                                                            | **state**             | `get_acs()`, `get_decennial()`                                   |
-+--------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------+-----------------------+------------------------------------------------------------------+
 | `"state legislative district (lower chamber)"`                                       | State house districts                                                             | **state**             | `get_acs()`, `get_decennial()`                                   |
-+--------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------+-----------------------+------------------------------------------------------------------+
 | `"voting district"`                                                                  | Voting districts (2020 only)                                                      | **state**             | `get_decennial()`                                                |
-+--------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------+-----------------------+------------------------------------------------------------------+
 
 The geography parameter must be typed exactly as specified in the table above to request data correctly from the Census API; use the guide above as a reference and copy-paste for longer strings. For core-based statistical areas and zip code tabulation areas, two heavily-requested geographies, the aliases `"cbsa"` and `"zcta"` can be used, respectively, to fetch data for those geographies.
 
@@ -564,7 +546,7 @@ The geography parameter must be typed exactly as specified in the table above to
 cbsa_population <- get_acs(
   geography = "cbsa",
   variables = "B01003_001",
-  year = 2019
+  year = 2020
 )
 ```
 
@@ -584,70 +566,70 @@ cbsa_population <- get_acs(
    <td style="text-align:left;"> 10100 </td>
    <td style="text-align:left;"> Aberdeen, SD Micro Area </td>
    <td style="text-align:left;"> B01003_001 </td>
-   <td style="text-align:right;"> 42824 </td>
+   <td style="text-align:right;"> 42864 </td>
    <td style="text-align:right;"> NA </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 10140 </td>
    <td style="text-align:left;"> Aberdeen, WA Micro Area </td>
    <td style="text-align:left;"> B01003_001 </td>
-   <td style="text-align:right;"> 72779 </td>
+   <td style="text-align:right;"> 73769 </td>
    <td style="text-align:right;"> NA </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 10180 </td>
    <td style="text-align:left;"> Abilene, TX Metro Area </td>
    <td style="text-align:left;"> B01003_001 </td>
-   <td style="text-align:right;"> 170669 </td>
+   <td style="text-align:right;"> 171354 </td>
    <td style="text-align:right;"> NA </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 10220 </td>
    <td style="text-align:left;"> Ada, OK Micro Area </td>
    <td style="text-align:left;"> B01003_001 </td>
-   <td style="text-align:right;"> 38355 </td>
+   <td style="text-align:right;"> 38385 </td>
    <td style="text-align:right;"> NA </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 10300 </td>
    <td style="text-align:left;"> Adrian, MI Micro Area </td>
    <td style="text-align:left;"> B01003_001 </td>
-   <td style="text-align:right;"> 98381 </td>
+   <td style="text-align:right;"> 98310 </td>
    <td style="text-align:right;"> NA </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 10380 </td>
    <td style="text-align:left;"> Aguadilla-Isabela, PR Metro Area </td>
    <td style="text-align:left;"> B01003_001 </td>
-   <td style="text-align:right;"> 301107 </td>
+   <td style="text-align:right;"> 295172 </td>
    <td style="text-align:right;"> NA </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 10420 </td>
    <td style="text-align:left;"> Akron, OH Metro Area </td>
    <td style="text-align:left;"> B01003_001 </td>
-   <td style="text-align:right;"> 703845 </td>
+   <td style="text-align:right;"> 703286 </td>
    <td style="text-align:right;"> NA </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 10460 </td>
    <td style="text-align:left;"> Alamogordo, NM Micro Area </td>
    <td style="text-align:left;"> B01003_001 </td>
-   <td style="text-align:right;"> 66137 </td>
+   <td style="text-align:right;"> 66804 </td>
    <td style="text-align:right;"> NA </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 10500 </td>
    <td style="text-align:left;"> Albany, GA Metro Area </td>
    <td style="text-align:left;"> B01003_001 </td>
-   <td style="text-align:right;"> 148436 </td>
+   <td style="text-align:right;"> 147431 </td>
    <td style="text-align:right;"> NA </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 10540 </td>
    <td style="text-align:left;"> Albany-Lebanon, OR Metro Area </td>
    <td style="text-align:left;"> B01003_001 </td>
-   <td style="text-align:right;"> 125048 </td>
+   <td style="text-align:right;"> 127216 </td>
    <td style="text-align:right;"> NA </td>
   </tr>
 </tbody>
@@ -665,7 +647,7 @@ wi_income <- get_acs(
   geography = "county", 
   variables = "B19013_001", 
   state = "WI",
-  year = 2019
+  year = 2020
 )
 ```
 
@@ -685,71 +667,71 @@ wi_income <- get_acs(
    <td style="text-align:left;"> 55001 </td>
    <td style="text-align:left;"> Adams County, Wisconsin </td>
    <td style="text-align:left;"> B19013_001 </td>
-   <td style="text-align:right;"> 46369 </td>
-   <td style="text-align:right;"> 1834 </td>
+   <td style="text-align:right;"> 48906 </td>
+   <td style="text-align:right;"> 2387 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 55003 </td>
    <td style="text-align:left;"> Ashland County, Wisconsin </td>
    <td style="text-align:left;"> B19013_001 </td>
-   <td style="text-align:right;"> 42510 </td>
-   <td style="text-align:right;"> 2858 </td>
+   <td style="text-align:right;"> 47869 </td>
+   <td style="text-align:right;"> 3190 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 55005 </td>
    <td style="text-align:left;"> Barron County, Wisconsin </td>
    <td style="text-align:left;"> B19013_001 </td>
-   <td style="text-align:right;"> 52703 </td>
-   <td style="text-align:right;"> 2104 </td>
+   <td style="text-align:right;"> 52346 </td>
+   <td style="text-align:right;"> 2092 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 55007 </td>
    <td style="text-align:left;"> Bayfield County, Wisconsin </td>
    <td style="text-align:left;"> B19013_001 </td>
-   <td style="text-align:right;"> 56096 </td>
-   <td style="text-align:right;"> 1877 </td>
+   <td style="text-align:right;"> 57257 </td>
+   <td style="text-align:right;"> 2496 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 55009 </td>
    <td style="text-align:left;"> Brown County, Wisconsin </td>
    <td style="text-align:left;"> B19013_001 </td>
-   <td style="text-align:right;"> 62340 </td>
-   <td style="text-align:right;"> 1112 </td>
+   <td style="text-align:right;"> 64728 </td>
+   <td style="text-align:right;"> 1419 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 55011 </td>
    <td style="text-align:left;"> Buffalo County, Wisconsin </td>
    <td style="text-align:left;"> B19013_001 </td>
-   <td style="text-align:right;"> 57829 </td>
-   <td style="text-align:right;"> 1873 </td>
+   <td style="text-align:right;"> 58364 </td>
+   <td style="text-align:right;"> 1871 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 55013 </td>
    <td style="text-align:left;"> Burnett County, Wisconsin </td>
    <td style="text-align:left;"> B19013_001 </td>
-   <td style="text-align:right;"> 52672 </td>
-   <td style="text-align:right;"> 1388 </td>
+   <td style="text-align:right;"> 53555 </td>
+   <td style="text-align:right;"> 2513 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 55015 </td>
    <td style="text-align:left;"> Calumet County, Wisconsin </td>
    <td style="text-align:left;"> B19013_001 </td>
-   <td style="text-align:right;"> 75814 </td>
-   <td style="text-align:right;"> 2425 </td>
+   <td style="text-align:right;"> 76065 </td>
+   <td style="text-align:right;"> 2314 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 55017 </td>
    <td style="text-align:left;"> Chippewa County, Wisconsin </td>
    <td style="text-align:left;"> B19013_001 </td>
-   <td style="text-align:right;"> 59742 </td>
-   <td style="text-align:right;"> 1759 </td>
+   <td style="text-align:right;"> 61215 </td>
+   <td style="text-align:right;"> 2064 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 55019 </td>
    <td style="text-align:left;"> Clark County, Wisconsin </td>
    <td style="text-align:left;"> B19013_001 </td>
-   <td style="text-align:right;"> 54012 </td>
-   <td style="text-align:right;"> 1223 </td>
+   <td style="text-align:right;"> 54463 </td>
+   <td style="text-align:right;"> 1089 </td>
   </tr>
 </tbody>
 </table>
@@ -764,7 +746,8 @@ dane_income <- get_acs(
   geography = "tract", 
   variables = "B19013_001", 
   state = "WI", 
-  county = "Dane"
+  county = "Dane",
+  year = 2020
 )
 ```
 
@@ -784,71 +767,71 @@ dane_income <- get_acs(
    <td style="text-align:left;"> 55025000100 </td>
    <td style="text-align:left;"> Census Tract 1, Dane County, Wisconsin </td>
    <td style="text-align:left;"> B19013_001 </td>
-   <td style="text-align:right;"> 72471 </td>
-   <td style="text-align:right;"> 12984 </td>
+   <td style="text-align:right;"> 74054 </td>
+   <td style="text-align:right;"> 15662 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 55025000201 </td>
    <td style="text-align:left;"> Census Tract 2.01, Dane County, Wisconsin </td>
    <td style="text-align:left;"> B19013_001 </td>
-   <td style="text-align:right;"> 94821 </td>
-   <td style="text-align:right;"> 11860 </td>
+   <td style="text-align:right;"> 92460 </td>
+   <td style="text-align:right;"> 27067 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 55025000202 </td>
    <td style="text-align:left;"> Census Tract 2.02, Dane County, Wisconsin </td>
    <td style="text-align:left;"> B19013_001 </td>
-   <td style="text-align:right;"> 84145 </td>
-   <td style="text-align:right;"> 7021 </td>
+   <td style="text-align:right;"> 88092 </td>
+   <td style="text-align:right;"> 5189 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 55025000204 </td>
    <td style="text-align:left;"> Census Tract 2.04, Dane County, Wisconsin </td>
    <td style="text-align:left;"> B19013_001 </td>
-   <td style="text-align:right;"> 79617 </td>
-   <td style="text-align:right;"> 11823 </td>
+   <td style="text-align:right;"> 82717 </td>
+   <td style="text-align:right;"> 12175 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 55025000205 </td>
    <td style="text-align:left;"> Census Tract 2.05, Dane County, Wisconsin </td>
    <td style="text-align:left;"> B19013_001 </td>
-   <td style="text-align:right;"> 91326 </td>
-   <td style="text-align:right;"> 13453 </td>
+   <td style="text-align:right;"> 100000 </td>
+   <td style="text-align:right;"> 17506 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 55025000300 </td>
-   <td style="text-align:left;"> Census Tract 3, Dane County, Wisconsin </td>
+   <td style="text-align:left;"> 55025000301 </td>
+   <td style="text-align:left;"> Census Tract 3.01, Dane County, Wisconsin </td>
    <td style="text-align:left;"> B19013_001 </td>
-   <td style="text-align:right;"> 53778 </td>
-   <td style="text-align:right;"> 7593 </td>
+   <td style="text-align:right;"> 37016 </td>
+   <td style="text-align:right;"> 11524 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 55025000302 </td>
+   <td style="text-align:left;"> Census Tract 3.02, Dane County, Wisconsin </td>
+   <td style="text-align:left;"> B19013_001 </td>
+   <td style="text-align:right;"> 117321 </td>
+   <td style="text-align:right;"> 28723 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 55025000401 </td>
    <td style="text-align:left;"> Census Tract 4.01, Dane County, Wisconsin </td>
    <td style="text-align:left;"> B19013_001 </td>
-   <td style="text-align:right;"> 98178 </td>
-   <td style="text-align:right;"> 7330 </td>
+   <td style="text-align:right;"> 100434 </td>
+   <td style="text-align:right;"> 12108 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 55025000402 </td>
    <td style="text-align:left;"> Census Tract 4.02, Dane County, Wisconsin </td>
    <td style="text-align:left;"> B19013_001 </td>
-   <td style="text-align:right;"> 107440 </td>
-   <td style="text-align:right;"> 6585 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 55025000405 </td>
-   <td style="text-align:left;"> Census Tract 4.05, Dane County, Wisconsin </td>
-   <td style="text-align:left;"> B19013_001 </td>
-   <td style="text-align:right;"> 68911 </td>
-   <td style="text-align:right;"> 4141 </td>
+   <td style="text-align:right;"> 105850 </td>
+   <td style="text-align:right;"> 12205 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 55025000406 </td>
    <td style="text-align:left;"> Census Tract 4.06, Dane County, Wisconsin </td>
    <td style="text-align:left;"> B19013_001 </td>
-   <td style="text-align:right;"> 74489 </td>
-   <td style="text-align:right;"> 10451 </td>
+   <td style="text-align:right;"> 74009 </td>
+   <td style="text-align:right;"> 2811 </td>
   </tr>
 </tbody>
 </table>
@@ -889,9 +872,13 @@ There are only 23 rows in this dataset, representing the 23 counties that meet t
 
 One additional challenge when searching for Census variables is understanding variable IDs, which are required to fetch data from the Census and ACS APIs. There are thousands of variables available across the different datasets and summary files. To make searching easier for R users, **tidycensus** offers the `load_variables()` function. This function obtains a dataset of variables from the Census Bureau website and formats it for fast searching, ideally in RStudio.
 
-The function takes two required arguments: `year`, which takes the year or endyear of the Census dataset or ACS sample, and the dataset name - one of `sf1`, `sf3`, `pl`, `acs1`, or `acs5`. For the ACS datasets, append `/profile` for the Data Profile, and `/summary` for the Summary Tables. As this function requires processing thousands of variables from the Census Bureau which may take a few moments depending on the user's internet connection, the user can specify `cache = TRUE` in the function call to store the data in the user's cache directory for future access. On subsequent calls of the `load_variables()` function, `cache = TRUE` will direct the function to look in the cache directory for the variables rather than the Census website.
+The function takes two required arguments: `year`, which takes the year or endyear of the Census dataset or ACS sample, and `dataset`, which references the dataset name. For the 2000 or 2010 Decennial Census, use `"sf1"` or `"sf2"` as the dataset name to access variables from Summary Files 1 and 2, respectively. The 2000 Decennial Census also accepts `"sf3"` and `"sf4"` for Summary Files 3 and 4. For 2020, the only dataset supported at the time of this writing is `"pl"` for the PL-94171 Redistricting dataset; more datasets will be supported as the 2020 Census data are released. An example request would look like `load_variables(year = 2020, dataset = "pl")` for variables from the 2020 Decennial Census Redistricting data.
 
-`load_variables()` works as follows:
+For variables from the American Community Survey, users should specify the dataset as `"acs1"` for the 1-year ACS or `"acs5"` for the 5-year ACS. If no suffix to these dataset names is specified, users will retrieve data from the ACS Detailed Tables. Variables from the ACS Data Profile, Summary Tables, and Comparison Profile are also available by appending the suffixes `/profile`, `/summary`, or `/cprofile`, respectively. For example, a user requesting variables from the 2020 5-year ACS Detailed Tables would specify `load_variables(year = 2020, dataset = "acs5")`; a request for variables from the Data Profile then would be `load_variables(year = 2020, dataset = "acs5/profile")`. In addition to these datasets, the ACS Supplemental Estimates variables can be accessed with the dataset name `"acsse"`.
+
+As this function requires processing thousands of variables from the Census Bureau which may take a few moments depending on the user's internet connection, the user can specify `cache = TRUE` in the function call to store the data in the user's cache directory for future access. On subsequent calls of the `load_variables()` function, `cache = TRUE` will direct the function to look in the cache directory for the variables rather than the Census website.
+
+An example of how `load_variables()` works is as follows:
 
 
 ```r
@@ -905,6 +892,7 @@ v16 <- load_variables(2016, "acs5", cache = TRUE)
    <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"> name </th>
    <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"> label </th>
    <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"> concept </th>
+   <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"> geography </th>
   </tr>
  </thead>
 <tbody>
@@ -912,56 +900,66 @@ v16 <- load_variables(2016, "acs5", cache = TRUE)
    <td style="text-align:left;"> B00001_001 </td>
    <td style="text-align:left;"> Estimate!!Total </td>
    <td style="text-align:left;"> UNWEIGHTED SAMPLE COUNT OF THE POPULATION </td>
+   <td style="text-align:left;"> block group </td>
   </tr>
   <tr>
    <td style="text-align:left;"> B00002_001 </td>
    <td style="text-align:left;"> Estimate!!Total </td>
    <td style="text-align:left;"> UNWEIGHTED SAMPLE HOUSING UNITS </td>
+   <td style="text-align:left;"> block group </td>
   </tr>
   <tr>
    <td style="text-align:left;"> B01001_001 </td>
    <td style="text-align:left;"> Estimate!!Total </td>
    <td style="text-align:left;"> SEX BY AGE </td>
+   <td style="text-align:left;"> block group </td>
   </tr>
   <tr>
    <td style="text-align:left;"> B01001_002 </td>
    <td style="text-align:left;"> Estimate!!Total!!Male </td>
    <td style="text-align:left;"> SEX BY AGE </td>
+   <td style="text-align:left;"> block group </td>
   </tr>
   <tr>
    <td style="text-align:left;"> B01001_003 </td>
    <td style="text-align:left;"> Estimate!!Total!!Male!!Under 5 years </td>
    <td style="text-align:left;"> SEX BY AGE </td>
+   <td style="text-align:left;"> block group </td>
   </tr>
   <tr>
    <td style="text-align:left;"> B01001_004 </td>
    <td style="text-align:left;"> Estimate!!Total!!Male!!5 to 9 years </td>
    <td style="text-align:left;"> SEX BY AGE </td>
+   <td style="text-align:left;"> block group </td>
   </tr>
   <tr>
    <td style="text-align:left;"> B01001_005 </td>
    <td style="text-align:left;"> Estimate!!Total!!Male!!10 to 14 years </td>
    <td style="text-align:left;"> SEX BY AGE </td>
+   <td style="text-align:left;"> block group </td>
   </tr>
   <tr>
    <td style="text-align:left;"> B01001_006 </td>
    <td style="text-align:left;"> Estimate!!Total!!Male!!15 to 17 years </td>
    <td style="text-align:left;"> SEX BY AGE </td>
+   <td style="text-align:left;"> block group </td>
   </tr>
   <tr>
    <td style="text-align:left;"> B01001_007 </td>
    <td style="text-align:left;"> Estimate!!Total!!Male!!18 and 19 years </td>
    <td style="text-align:left;"> SEX BY AGE </td>
+   <td style="text-align:left;"> block group </td>
   </tr>
   <tr>
    <td style="text-align:left;"> B01001_008 </td>
    <td style="text-align:left;"> Estimate!!Total!!Male!!20 years </td>
    <td style="text-align:left;"> SEX BY AGE </td>
+   <td style="text-align:left;"> block group </td>
   </tr>
 </tbody>
 </table>
 
-The returned data frame has three columns: `name`, which refers to the Census variable ID; `label`, which is a descriptive data label for the variable; and `concept`, which refers to the topic of the data and often corresponds to a table of Census data. As illustrated above, the data frame can be filtered using tidyverse tools for variable exploration. However, the RStudio integrated development environment includes an interactive data viewer which is ideal for browsing this dataset, and allows for interactive sorting and filtering. The data viewer can be accessed with the `View()` function:
+The returned data frame always has three columns: `name`, which refers to the Census variable ID; `label`, which is a descriptive data label for the variable; and `concept`, which refers to the topic of the data and often corresponds to a table of Census data. For the 5-year ACS detailed tables, the returned data frame also includes a fourth column, `geography`, which specifies the smallest geography at which a given variable is available from the Census API. As illustrated above, the data frame can be filtered using tidyverse tools for variable exploration. However, the RStudio integrated development environment includes an interactive data viewer which is ideal for browsing this dataset, and allows for interactive sorting and filtering. The data viewer can be accessed with the `View()` function:
 
 
 ```r
@@ -977,7 +975,7 @@ By browsing the table in this way, users can identify the appropriate variable I
 
 ## Data structure in tidycensus
 
-Key to the design philosophy of tidycensus is its interpretation of tidy data. Following @wickham2014, "tidy" data are defined as follows:
+Key to the design philosophy of **tidycensus** is its interpretation of tidy data. Following @wickham2014, "tidy" data are defined as follows:
 
 1.  Each observation forms a row;
 2.  Each variable forms a column;
@@ -1637,7 +1635,7 @@ For geographies outside the core Census hierarchy, GEOIDs will uniquely identify
 
 ### Renaming variable IDs
 
-Census variables IDs can be cumbersome to type and remember in the course of an R session. As such, **tidycensus** has built-in tools to automatically rename the variable IDs if requested by a user. For example, let's say that a user is requesting data on median household income (variable ID `B19013_001`) and median age (variable ID `B01002_001`). By passing a *named* vector to the `variables` parameter in `get_acs()` or `get_decennial()`, the functions will return the desired names rather than the Census variable IDs. Let's examine this for counties in Georgia from the 2015-2019 five-year ACS.
+Census variables IDs can be cumbersome to type and remember in the course of an R session. As such, **tidycensus** has built-in tools to automatically rename the variable IDs if requested by a user. For example, let's say that a user is requesting data on median household income (variable ID `B19013_001`) and median age (variable ID `B01002_001`). By passing a *named* vector to the `variables` parameter in `get_acs()` or `get_decennial()`, the functions will return the desired names rather than the Census variable IDs. Let's examine this for counties in Georgia from the 2016-2020 five-year ACS.
 
 
 ```r
@@ -1646,7 +1644,7 @@ ga <- get_acs(
   state = "Georgia",
   variables = c(medinc = "B19013_001",
                 medage = "B01002_001"),
-  year = 2019
+  year = 2020
 )
 ```
 
@@ -1666,71 +1664,71 @@ ga <- get_acs(
    <td style="text-align:left;"> 13001 </td>
    <td style="text-align:left;"> Appling County, Georgia </td>
    <td style="text-align:left;"> medage </td>
-   <td style="text-align:right;"> 40.3 </td>
-   <td style="text-align:right;"> 1.4 </td>
+   <td style="text-align:right;"> 39.9 </td>
+   <td style="text-align:right;"> 1.7 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 13001 </td>
    <td style="text-align:left;"> Appling County, Georgia </td>
    <td style="text-align:left;"> medinc </td>
-   <td style="text-align:right;"> 40304.0 </td>
-   <td style="text-align:right;"> 5180.0 </td>
+   <td style="text-align:right;"> 37924.0 </td>
+   <td style="text-align:right;"> 4761.0 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 13003 </td>
    <td style="text-align:left;"> Atkinson County, Georgia </td>
    <td style="text-align:left;"> medage </td>
-   <td style="text-align:right;"> 36.4 </td>
+   <td style="text-align:right;"> 35.9 </td>
+   <td style="text-align:right;"> 1.5 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 13003 </td>
+   <td style="text-align:left;"> Atkinson County, Georgia </td>
+   <td style="text-align:left;"> medinc </td>
+   <td style="text-align:right;"> 35703.0 </td>
+   <td style="text-align:right;"> 5493.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 13005 </td>
+   <td style="text-align:left;"> Bacon County, Georgia </td>
+   <td style="text-align:left;"> medage </td>
+   <td style="text-align:right;"> 36.5 </td>
    <td style="text-align:right;"> 1.0 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 13003 </td>
-   <td style="text-align:left;"> Atkinson County, Georgia </td>
-   <td style="text-align:left;"> medinc </td>
-   <td style="text-align:right;"> 37197.0 </td>
-   <td style="text-align:right;"> 3686.0 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 13005 </td>
-   <td style="text-align:left;"> Bacon County, Georgia </td>
-   <td style="text-align:left;"> medage </td>
-   <td style="text-align:right;"> 36.7 </td>
-   <td style="text-align:right;"> 0.7 </td>
-  </tr>
-  <tr>
    <td style="text-align:left;"> 13005 </td>
    <td style="text-align:left;"> Bacon County, Georgia </td>
    <td style="text-align:left;"> medinc </td>
-   <td style="text-align:right;"> 37519.0 </td>
-   <td style="text-align:right;"> 5492.0 </td>
+   <td style="text-align:right;"> 36692.0 </td>
+   <td style="text-align:right;"> 3774.0 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 13007 </td>
    <td style="text-align:left;"> Baker County, Georgia </td>
    <td style="text-align:left;"> medage </td>
-   <td style="text-align:right;"> 46.1 </td>
-   <td style="text-align:right;"> 5.5 </td>
+   <td style="text-align:right;"> 52.2 </td>
+   <td style="text-align:right;"> 4.8 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 13007 </td>
    <td style="text-align:left;"> Baker County, Georgia </td>
    <td style="text-align:left;"> medinc </td>
-   <td style="text-align:right;"> 32917.0 </td>
-   <td style="text-align:right;"> 6967.0 </td>
+   <td style="text-align:right;"> 34034.0 </td>
+   <td style="text-align:right;"> 9879.0 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 13009 </td>
    <td style="text-align:left;"> Baldwin County, Georgia </td>
    <td style="text-align:left;"> medage </td>
-   <td style="text-align:right;"> 35.5 </td>
-   <td style="text-align:right;"> 0.3 </td>
+   <td style="text-align:right;"> 35.8 </td>
+   <td style="text-align:right;"> 0.5 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 13009 </td>
    <td style="text-align:left;"> Baldwin County, Georgia </td>
    <td style="text-align:left;"> medinc </td>
-   <td style="text-align:right;"> 43672.0 </td>
-   <td style="text-align:right;"> 3736.0 </td>
+   <td style="text-align:right;"> 46250.0 </td>
+   <td style="text-align:right;"> 4707.0 </td>
   </tr>
 </tbody>
 </table>
@@ -1744,7 +1742,8 @@ ga_wide <- get_acs(
   state = "Georgia",
   variables = c(medinc = "B19013_001",
                 medage = "B01002_001"),
-  output = "wide"
+  output = "wide",
+  year = 2020
 )
 ```
 
@@ -1762,84 +1761,84 @@ ga_wide <- get_acs(
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:left;"> 13005 </td>
-   <td style="text-align:left;"> Bacon County, Georgia </td>
-   <td style="text-align:right;"> 37519 </td>
-   <td style="text-align:right;"> 5492 </td>
-   <td style="text-align:right;"> 36.7 </td>
-   <td style="text-align:right;"> 0.7 </td>
+   <td style="text-align:left;"> 13001 </td>
+   <td style="text-align:left;"> Appling County, Georgia </td>
+   <td style="text-align:right;"> 37924 </td>
+   <td style="text-align:right;"> 4761 </td>
+   <td style="text-align:right;"> 39.9 </td>
+   <td style="text-align:right;"> 1.7 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 13025 </td>
-   <td style="text-align:left;"> Brantley County, Georgia </td>
-   <td style="text-align:right;"> 38857 </td>
-   <td style="text-align:right;"> 3480 </td>
-   <td style="text-align:right;"> 41.1 </td>
-   <td style="text-align:right;"> 0.8 </td>
+   <td style="text-align:left;"> 13003 </td>
+   <td style="text-align:left;"> Atkinson County, Georgia </td>
+   <td style="text-align:right;"> 35703 </td>
+   <td style="text-align:right;"> 5493 </td>
+   <td style="text-align:right;"> 35.9 </td>
+   <td style="text-align:right;"> 1.5 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 13005 </td>
+   <td style="text-align:left;"> Bacon County, Georgia </td>
+   <td style="text-align:right;"> 36692 </td>
+   <td style="text-align:right;"> 3774 </td>
+   <td style="text-align:right;"> 36.5 </td>
+   <td style="text-align:right;"> 1.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 13007 </td>
+   <td style="text-align:left;"> Baker County, Georgia </td>
+   <td style="text-align:right;"> 34034 </td>
+   <td style="text-align:right;"> 9879 </td>
+   <td style="text-align:right;"> 52.2 </td>
+   <td style="text-align:right;"> 4.8 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 13011 </td>
+   <td style="text-align:left;"> Banks County, Georgia </td>
+   <td style="text-align:right;"> 50912 </td>
+   <td style="text-align:right;"> 4278 </td>
+   <td style="text-align:right;"> 41.5 </td>
+   <td style="text-align:right;"> 1.1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 13013 </td>
+   <td style="text-align:left;"> Barrow County, Georgia </td>
+   <td style="text-align:right;"> 62990 </td>
+   <td style="text-align:right;"> 2562 </td>
+   <td style="text-align:right;"> 36.0 </td>
+   <td style="text-align:right;"> 0.3 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 13017 </td>
    <td style="text-align:left;"> Ben Hill County, Georgia </td>
-   <td style="text-align:right;"> 32229 </td>
-   <td style="text-align:right;"> 3845 </td>
-   <td style="text-align:right;"> 39.9 </td>
-   <td style="text-align:right;"> 1.1 </td>
+   <td style="text-align:right;"> 32077 </td>
+   <td style="text-align:right;"> 4008 </td>
+   <td style="text-align:right;"> 39.5 </td>
+   <td style="text-align:right;"> 1.4 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 13033 </td>
-   <td style="text-align:left;"> Burke County, Georgia </td>
-   <td style="text-align:right;"> 44151 </td>
-   <td style="text-align:right;"> 2438 </td>
-   <td style="text-align:right;"> 37.4 </td>
-   <td style="text-align:right;"> 0.6 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 13047 </td>
-   <td style="text-align:left;"> Catoosa County, Georgia </td>
-   <td style="text-align:right;"> 56235 </td>
-   <td style="text-align:right;"> 2290 </td>
-   <td style="text-align:right;"> 40.4 </td>
-   <td style="text-align:right;"> 0.4 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 13053 </td>
-   <td style="text-align:left;"> Chattahoochee County, Georgia </td>
-   <td style="text-align:right;"> 47096 </td>
-   <td style="text-align:right;"> 5158 </td>
-   <td style="text-align:right;"> 24.5 </td>
-   <td style="text-align:right;"> 0.5 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 13055 </td>
-   <td style="text-align:left;"> Chattooga County, Georgia </td>
-   <td style="text-align:right;"> 36807 </td>
-   <td style="text-align:right;"> 2268 </td>
-   <td style="text-align:right;"> 39.4 </td>
-   <td style="text-align:right;"> 0.7 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 13073 </td>
-   <td style="text-align:left;"> Columbia County, Georgia </td>
-   <td style="text-align:right;"> 82339 </td>
-   <td style="text-align:right;"> 3532 </td>
-   <td style="text-align:right;"> 36.9 </td>
-   <td style="text-align:right;"> 0.4 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 13087 </td>
-   <td style="text-align:left;"> Decatur County, Georgia </td>
-   <td style="text-align:right;"> 41481 </td>
-   <td style="text-align:right;"> 3584 </td>
-   <td style="text-align:right;"> 37.8 </td>
-   <td style="text-align:right;"> 0.6 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 13115 </td>
-   <td style="text-align:left;"> Floyd County, Georgia </td>
-   <td style="text-align:right;"> 48336 </td>
-   <td style="text-align:right;"> 2266 </td>
-   <td style="text-align:right;"> 38.3 </td>
+   <td style="text-align:left;"> 13021 </td>
+   <td style="text-align:left;"> Bibb County, Georgia </td>
+   <td style="text-align:right;"> 41317 </td>
+   <td style="text-align:right;"> 1220 </td>
+   <td style="text-align:right;"> 36.3 </td>
    <td style="text-align:right;"> 0.3 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 13023 </td>
+   <td style="text-align:left;"> Bleckley County, Georgia </td>
+   <td style="text-align:right;"> 46992 </td>
+   <td style="text-align:right;"> 6279 </td>
+   <td style="text-align:right;"> 36.0 </td>
+   <td style="text-align:right;"> 1.5 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 13027 </td>
+   <td style="text-align:left;"> Brooks County, Georgia </td>
+   <td style="text-align:right;"> 37516 </td>
+   <td style="text-align:right;"> 4438 </td>
+   <td style="text-align:right;"> 43.6 </td>
+   <td style="text-align:right;"> 0.9 </td>
   </tr>
 </tbody>
 </table>
@@ -1852,7 +1851,7 @@ As mentioned earlier in this chapter, **tidycensus** does not grant access to al
 
 ### Using `get_estimates()`
 
-The [Population Estimates Program](https://www.census.gov/programs-surveys/popest.html), or PEP, provides yearly estimates of the US population and its components between decennial Censuses. It differs from the ACS in that it is not directly based on a dedicated survey, but rather projects forward data from the most recent decennial Census based on birth, death, and migration rates.
+The [Population Estimates Program](https://www.census.gov/programs-surveys/popest.html), or PEP, provides yearly estimates of the US population and its components between decennial Censuses. It differs from the ACS in that it is not directly based on a dedicated survey, but rather projects forward data from the most recent decennial Census based on birth, death, and migration rates. In turn, estimates in the PEP will differ slightly from what you may see in data returned by `get_acs()`, as the estimates are produced using a different methodology.
 
 One advantage of using the PEP to retrieve data is that allows you to access the indicators used to produce the intercensal population estimates. These indicators can be specified as variables direction in the `get_estimates()` function in **tidycensus**, or requested in bulk by using the `product` argument. The products available include `"population"`, `"components"`, `"housing"`, and `"characteristics"`. For example, we can request all components of change population estimates for 2019 for a specific county:
 
@@ -1944,13 +1943,13 @@ queens_components <- get_estimates(
 </tbody>
 </table>
 
-Alternatively, a single variable or vector of variables can be requested with the `variable` argument, and the `output = "wide"` argument can also be used to spread the variable names across the columns.
+The returned variables include raw values for births and deaths (`BIRTHS` and `DEATHS`) during the previous 12 months, defined as mid-year 2018 (July 1) to mid-year 2019. Crude rates per 1000 people in Queens County are also available with `RBIRTH` and `RDEATH`. `NATURALINC`, the natural increase, then measures the number of births minus the number of deaths. Net domestic and international migration are also available as counts and rates, and the `NETMIG` variable accounts for the overall migration, domestic and international included. Alternatively, a single variable or vector of variables can be requested with the `variable` argument, and the `output = "wide"` argument can also be used to spread the variable names across the columns.
 
 The `product = "characteristics"` argument also has some unique options. The argument `breakdown` lets users get breakdowns of population estimates for the US, states, and counties by `"AGEGROUP"`, `"RACE"`, `"SEX"`, or `"HISP"` (Hispanic origin). If set to `TRUE`, the `breakdown_labels` argument will return informative labels for the population estimates. For example, to get population estimates by sex and Hispanic origin for metropolitan areas, we can use the following code:
 
 
 ```r
-louisiana_age_hisp <- get_estimates(
+louisiana_sex_hisp <- get_estimates(
   geography = "state",
   product = "characteristics",
   breakdown = c("SEX", "HISP"),
@@ -2038,6 +2037,8 @@ louisiana_age_hisp <- get_estimates(
 </tbody>
 </table>
 
+The `value` column gives the estimate characterized by the population labels in the `SEX` and `HISP` columns. For example, the estimated population value in 2019 for Hispanic males in Louisiana was 131,071.
+
 ### Using `get_flows()`
 
 As of version 1.0, **tidycensus** also includes support for the ACS Migration Flows API. The flows API returns information on both in- and out-migration for states, counties, and metropolitan areas. By default, the function allows for analysis of in-migrants, emigrants, and net migration for a given geography using data from a given 5-year ACS sample. In the example below, we request migration data for Honolulu County, Hawaii. In-migration for world regions is available along with out-migration and net migration for US locations.
@@ -2048,8 +2049,7 @@ honolulu_migration <- get_flows(
   geography = "county",
   state = "HI",
   county = "Honolulu",
-  year = 2018,
-  show_call = TRUE
+  year = 2019
 )
 ```
 
@@ -2073,8 +2073,8 @@ honolulu_migration <- get_flows(
    <td style="text-align:left;"> Honolulu County, Hawaii </td>
    <td style="text-align:left;"> Africa </td>
    <td style="text-align:left;"> MOVEDIN </td>
-   <td style="text-align:right;"> 86 </td>
-   <td style="text-align:right;"> 70 </td>
+   <td style="text-align:right;"> 152 </td>
+   <td style="text-align:right;"> 156 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 15003 </td>
@@ -2100,8 +2100,8 @@ honolulu_migration <- get_flows(
    <td style="text-align:left;"> Honolulu County, Hawaii </td>
    <td style="text-align:left;"> Asia </td>
    <td style="text-align:left;"> MOVEDIN </td>
-   <td style="text-align:right;"> 7620 </td>
-   <td style="text-align:right;"> 891 </td>
+   <td style="text-align:right;"> 7680 </td>
+   <td style="text-align:right;"> 884 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 15003 </td>
@@ -2127,8 +2127,8 @@ honolulu_migration <- get_flows(
    <td style="text-align:left;"> Honolulu County, Hawaii </td>
    <td style="text-align:left;"> Central America </td>
    <td style="text-align:left;"> MOVEDIN </td>
-   <td style="text-align:right;"> 228 </td>
-   <td style="text-align:right;"> 98 </td>
+   <td style="text-align:right;"> 192 </td>
+   <td style="text-align:right;"> 100 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 15003 </td>
@@ -2154,8 +2154,8 @@ honolulu_migration <- get_flows(
    <td style="text-align:left;"> Honolulu County, Hawaii </td>
    <td style="text-align:left;"> Caribbean </td>
    <td style="text-align:left;"> MOVEDIN </td>
-   <td style="text-align:right;"> 106 </td>
-   <td style="text-align:right;"> 94 </td>
+   <td style="text-align:right;"> 97 </td>
+   <td style="text-align:right;"> 78 </td>
   </tr>
 </tbody>
 </table>
@@ -2242,8 +2242,10 @@ The printed URL [`https://api.census.gov/data/2019/acs/acs5/profile?get=DP02_006
 ...
 ```
 
+A common use-case for `show_call = TRUE` is to understand what data is available from the API, especially if functions in **tidycensus** are returning `NA` in certain rows. If the raw API call itself contains missing values for given variables, this will confirm that the requested data are not available from the API at a given geography.
+
 ## Exercises
 
 1.  Review the available geographies in tidycensus from the geography table in this chapter. Acquire data on median age (variable `B01002_001`) for a geography we have not yet used.
 
-2.  Use the `load_variables()` function to find a variable that interests you that we haven't used yet. Use `get_acs()` to fetch data from the 2015-2019 ACS for counties in the state where you live, where you have visited, or where you would like to visit.
+2.  Use the `load_variables()` function to find a variable that interests you that we haven't used yet. Use `get_acs()` to fetch data from the 2016-2020 ACS for counties in the state where you live, where you have visited, or where you would like to visit.
