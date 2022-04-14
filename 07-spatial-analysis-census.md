@@ -829,8 +829,8 @@ Previous chapters of this book covered techniques and methods for analyzing demo
 For example, we can compare Census tract boundaries for a fast-growing area of Gilbert, Arizona (southeast of Phoenix) for 2010 and 2020.
 
 <div class="figure">
-<img src="07-spatial-analysis-census_files/figure-html/gilbert_compare-1.png" alt="Comparison of Census tracts in Gilbert, AZ from the 2010 and 2020 Census" width="100%" />
-<p class="caption">(\#fig:gilbert_compare)Comparison of Census tracts in Gilbert, AZ from the 2010 and 2020 Census</p>
+<img src="07-spatial-analysis-census_files/figure-html/gilbert-compare-1.png" alt="Comparison of Census tracts in Gilbert, AZ from the 2010 and 2020 Census" width="100%" />
+<p class="caption">(\#fig:gilbert-compare)Comparison of Census tracts in Gilbert, AZ from the 2010 and 2020 Census</p>
 </div>
 
 As discussed in Section \@ref(understanding-yearly-differences-in-tigerline-files), the US Census Bureau tries to keep Census tract sizes relatively consistent at around 4,000 people. If a tract grows too large between Census years, the Census Bureau will subdivide it into multiple Census tracts when re-drawing tracts for the next decennial Census. In this example from Arizona, the tract shown was divided into five tracts in 2020.
@@ -969,6 +969,8 @@ ggplot() +
 </div>
 
 Notable increases in tract-level working from home are found in locations like Gilbert, Scottsdale, and Tempe on the eastern side of the metropolitan area. That said, these results may simply be a function of overall population growth in those tracts, which means that a follow-up analysis should examine change in the share of the population working from home. This would require interpolating a total workforce denominator column and calculating a percentage. Fortunately, both interpolation methods introduced in this section will interpolate all numeric columns in an input dataset, so wide-form data or data with a summary variable acquired by **tidycensus** will work well for this purpose.
+
+An advantage of using either area-weighted or population-weighted areal interpolation as covered in this section is that they can be implemented entirely with data available in **tidycensus** and **tigris**. Some users may be interested in alternative weights using datasets not included in these packages, like land use/land cover data, or may want to use more sophisticated regression-based approaches. While they are not covered here, @schroeder2013 provides a good overview of these methods.
 
 ::: rmdwarning
 As discussed in Section \@ref(calculating-derived-margins-of-error-in-tidycensus), derived margins of error (even for sums) require special methods. Given the complexity of the interpolation methods covered here, direct interpolation of margin of error columns will not take these methods into account. Analysts should interpret such columns with caution.
@@ -1168,11 +1170,15 @@ iowa_methodist <- filter(ia_trauma, NAME == "IOWA METHODIST MEDICAL CENTER")
 buf5km <- st_buffer(iowa_methodist, dist = 5000) 
 ```
 
-An alternative option is to create network-based *isochrones*, which are polygons that represent the accessible area around a given location within a given travel time for a given travel mode. Isochrones are implemented in the **mapboxapi** package with the `mb_isochrone()` function. The example below draws a 10-minute driving isochrone around Iowa Methodist.
+An alternative option is to create network-based *isochrones*, which are polygons that represent the accessible area around a given location within a given travel time for a given travel mode. Isochrones are implemented in the **mapboxapi** package with the `mb_isochrone()` function. Mapbox isochrones default to traffic conditions associated with the date and time at which the function is called; this can be adjusted with the `depart_at` parameter for historical traffic. The example below draws a 10-minute driving isochrone around Iowa Methodist for a Tuesday during evening rush hour.
 
 
 ```r
-iso10min <- mb_isochrone(iowa_methodist, time = 10)
+iso10min <- mb_isochrone(
+  iowa_methodist, 
+  time = 10, 
+  depart_at = "2022-04-05T17:00"
+  )
 ```
 
 We can visualize the comparative extents of these two methods in Des Moines. Run the code on your own computer to get a synced interactive map showing the two methods. The `makeAwesomeIcon()` function in **leaflet** creates a custom icon appropriate for a medical facility; [many other icons are available for common points of interest](http://rstudio.github.io/leaflet/markers.html#awesome-icons).
@@ -1231,6 +1237,8 @@ polk_poverty <- get_acs(
   st_transform(26975)
 ```
 
+We can then use population-weighted areal interpolation with `interpolate_pw()` function in **tidycensus** to estimate family poverty in both the buffer zone and the isochrone. Block weights for Polk County are obtained with **tigris**, and both the numerator and denominator columns are interpolated.
+
 
 ```r
 library(glue)
@@ -1260,26 +1268,35 @@ iso_pov <- interpolate_pw(
   crs = 26975
 ) %>%
   mutate(pct_poverty = 100 * (poverty_numE / poverty_denomE))
-
-
-print(glue("Family poverty (5km buffer method): {round(buffer_pov$pct_poverty, 1)}%"))
 ```
 
-```
-## Family poverty (5km buffer method): 14.2%
-```
-
-```r
-print(glue("Family poverty (10min isochrone method): {round(iso_pov$pct_poverty, 1)}%"))
-```
-
-```
-## Family poverty (10min isochrone method): 14.3%
-```
+<table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<caption>(\#tab:catchment-results)Comparison of buffer and isochrone catchment areas</caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"> Method </th>
+   <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"> Families in poverty </th>
+   <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"> Total families </th>
+   <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"> Percent </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> 5km buffer </td>
+   <td style="text-align:right;"> 3015.328 </td>
+   <td style="text-align:right;"> 21261.01 </td>
+   <td style="text-align:right;"> 14.2 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 10min isochrone </td>
+   <td style="text-align:right;"> 3150.716 </td>
+   <td style="text-align:right;"> 23292.38 </td>
+   <td style="text-align:right;"> 13.5 </td>
+  </tr>
+</tbody>
+</table>
 
 The two methods return slightly different results, illustrating how the definition of catchment area impacts downstream analyses.
-
-Following up on Section \@ref(understanding-yearly-differences-in-tigerline-files), areal interpolation is also a common method used to adjust population data aggregated to inconsistent Census boundaries over time. However, it can introduce inaccuracies in sparsely populated areas, which can be improved with a population-weighted interpolation approach. While this approach is not covered here, @schroeder2013 provide a good discussion of the method.
 
 ## Better cartography with spatial overlay
 

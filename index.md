@@ -2,7 +2,7 @@
 title: "Analyzing US Census Data"
 subtitle: "Methods, Maps, and Models in R"
 author: "Kyle E. Walker"
-date: "2022-04-12"
+date: "2022-04-13"
 site: bookdown::bookdown_site
 knit: bookdown::render_book
 output: bookdown::bs4_book
@@ -134,8 +134,8 @@ The examples in this book were created with the following R package versions:
   </tr>
   <tr>
    <td style="text-align:left;"> geobr </td>
-   <td style="text-align:left;"> 1.6.4 </td>
-   <td style="text-align:left;"> CRAN (R 4.1.2) </td>
+   <td style="text-align:left;"> 1.6.5999 </td>
+   <td style="text-align:left;"> Github (ipeaGIT/geobr\@d2132cd6e0d1c371a3cb871487bd3a312c40072f) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> geofacet </td>
@@ -209,7 +209,7 @@ The examples in this book were created with the following R package versions:
   </tr>
   <tr>
    <td style="text-align:left;"> mapboxapi </td>
-   <td style="text-align:left;"> 0.3.2.9000 </td>
+   <td style="text-align:left;"> 0.3.3.9000 </td>
    <td style="text-align:left;"> local </td>
   </tr>
   <tr>
@@ -289,7 +289,7 @@ The examples in this book were created with the following R package versions:
   </tr>
   <tr>
    <td style="text-align:left;"> tidycensus </td>
-   <td style="text-align:left;"> 1.1.9.9000 </td>
+   <td style="text-align:left;"> 1.2 </td>
    <td style="text-align:left;"> local </td>
   </tr>
   <tr>

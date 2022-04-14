@@ -604,28 +604,33 @@ Figure 5.12: Tarrant County, TX Census tracts, 1990-2020
 <p>Tarrant County added 180 new Census tracts between 1990 and 2020. As the plot shows, many of these tracts are found in fast-growing parts of the county in the northeast and southeast. Notably, these changes in Census tract geography have downstream implications as well for time-series analysis, as covered in Section <a href="wrangling-census-data-with-tidyverse-tools.html#time-series-analysis-some-cautions">3.4.1</a>. Data at the Census tract level in 2010, for example, will be tabulated differently than in 2020 because the tract geographies are different. One common method for adjusting demographic data between disparate zonal configurations is <em>areal interpolation</em>, a topic covered in Section <a href="spatial-analysis-with-us-census-data.html#computing-demographic-estimates-for-zones-with-areal-interpolation">7.4.4</a>.</p>
 <p>The default year of shapefiles in <strong>tigris</strong> is typically updated when cartographic boundary shapefiles for that year become fully available. At the time of this writing, the default year is 2020. This will be changed to 2021 pending full data availability of the cartographic boundary shapefiles for that year later in 2022. If users need the 2021 boundaries in their projects and do not want to type <code>year = 2021</code> for each dataset, the command <code>options(tigris_year = 2021)</code> can be used. This will direct <strong>tigris</strong> to download the 2021 shapefiles when available without having to specify the year explicitly.</p>
 </div>
-<div id="combining-tigris-datasets-need-to-update" class="section level3" number="5.3.4">
+<div id="combining-tigris-datasets" class="section level3" number="5.3.4">
 <h3>
-<span class="header-section-number">5.3.4</span> Combining tigris datasets (need to update)<a class="anchor" aria-label="anchor" href="#combining-tigris-datasets-need-to-update"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.3.4</span> Combining tigris datasets<a class="anchor" aria-label="anchor" href="#combining-tigris-datasets"><i class="fas fa-link"></i></a>
 </h3>
-<p>For smaller geographies like Census tracts, block groups, and blocks, the Census Bureau stores shapefiles by state and does not provide a national file. For some geographic features, datasets are further subdivided by county. In these instances, <strong>tigris</strong> users must specify a state and/or county to appropriately make a request to the Census Bureau website for data.</p>
-<p>That said, a common request from <strong>tigris</strong> users is to obtain <em>all shapes</em> for the United States. For example, a national demographic study may require all 241,900 block groups in the United States. While this option is not directly available in <strong>tigris</strong>, national datasets are straightforward to create with <strong>tidyverse</strong> tools. As covered in several examples thus far in this book, the <code><a href="https://purrr.tidyverse.org/reference/map.html">purrr::map()</a></code> family of functions iterate over a sequence of values and combine function results as directed by a user. For tigris users, the <code><a href="https://purrr.tidyverse.org/reference/map.html">map_dfr()</a></code> function will prove especially useful as it row-binds datasets to create its output. The built-in <code>state.abb</code> vector in R gives us postal codes of all 50 US states; if Washington, DC or Puerto Rico are required in your analysis, add these to the vector with <code><a href="https://rdrr.io/r/base/c.html">c()</a></code> as shown below.</p>
-<p>Once the vector of state codes is prepared, a user can iterate over those codes with <code><a href="https://purrr.tidyverse.org/reference/map.html">map_dfr()</a></code> and produce a national block group dataset, shown for 2020 below.</p>
+<p>For years 2019 and later, the US Census Bureau has started releasing national small-area cartographic boundary files, including commonly-requested geographies like block groups, Census tracts, and places. In <strong>tigris</strong>, a user only needs to specify <code>cb = TRUE</code> and leave the state blank to get a national dataset. One line of code in <strong>tigris</strong> is all you need to get 242,303 US block groups for 2020:</p>
 <div class="sourceCode" id="cb146"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">us_bgs_2020</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tigris/man/block_groups.html">block_groups</a></span><span class="op">(</span>cb <span class="op">=</span> <span class="cn">TRUE</span>, year <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">us_bgs_2020</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] 242303</code></pre>
+<p>However, this is not an option for years 2018 and earlier, which means that <strong>tigris</strong> users must turn to alternative methods to generate national datasets. Such datasets are straightforward to create with <strong>tidyverse</strong> tools. As covered in several examples thus far in this book, the <code><a href="https://purrr.tidyverse.org/reference/map.html">purrr::map()</a></code> family of functions iterate over a sequence of values and combine function results as directed by a user. For tigris users, the <code><a href="https://purrr.tidyverse.org/reference/map.html">map_dfr()</a></code> function will prove especially useful as it row-binds datasets to create its output. The built-in <code>state.abb</code> vector in R gives us postal codes of all 50 US states; if Washington, DC or Puerto Rico are required in your analysis, add these to the vector with <code><a href="https://rdrr.io/r/base/c.html">c()</a></code> as shown below.</p>
+<p>Once the vector of state codes is prepared, a user can iterate over those codes with <code><a href="https://purrr.tidyverse.org/reference/map.html">map_dfr()</a></code> and produce a national block group dataset, shown for 2018 below.</p>
+<div class="sourceCode" id="cb148"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">state_codes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">state.abb</span>, <span class="st">"DC"</span>, <span class="st">"PR"</span><span class="op">)</span>
 
-<span class="va">us_bgs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_dfr</a></span><span class="op">(</span>
+<span class="va">us_bgs_2018</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_dfr</a></span><span class="op">(</span>
   <span class="va">state_codes</span>, 
   <span class="op">~</span><span class="fu"><a href="https://rdrr.io/pkg/tigris/man/block_groups.html">block_groups</a></span><span class="op">(</span>
     state <span class="op">=</span> <span class="va">.x</span>, 
     cb <span class="op">=</span> <span class="cn">TRUE</span>, 
-    year <span class="op">=</span> <span class="fl">2020</span>
+    year <span class="op">=</span> <span class="fl">2018</span>
   <span class="op">)</span>
 <span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">us_bgs</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] 241900</code></pre>
-<p>If you are not using shapefile caching, this process will be slowed by the time it takes to download each block group shapefile from the Census Bureau website. However, if you have a local cache of block group shapefiles as illustrated in this section, loading and combining all 241,900 block groups for use in your analysis should only take a few seconds.</p>
+<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">us_bgs_2018</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] 220016</code></pre>
+<p>If you are not using shapefile caching, this process will be slowed by the time it takes to download each block group shapefile from the Census Bureau website. However, if you have a local cache of block group shapefiles as illustrated in this section, loading and combining all 220,016 block groups for use in your analysis should only take a few seconds.</p>
 </div>
 </div>
 <div id="coordinate-reference-systems" class="section level2" number="5.4">
@@ -634,7 +639,7 @@ Figure 5.12: Tarrant County, TX Census tracts, 1990-2020
 </h2>
 <p>For geographic data to appropriately represent locations in mapping and spatial analysis, they must be <em>referenced</em> to some model of the Earth’s surface correctly. In simpler terms - a data model of the state of Florida should represent where Florida is actually located relative to other locations! This is defined with a <em>coordinate reference system</em> (CRS), which specifies not only how data coordinates should be mapped to a model of the Earth’s surface but also how measurements should be computed using a given dataset. A more complete discussion of coordinate reference systems is found in <span class="citation">(<a href="references.html#ref-lovelace_geocomputation_2019" role="doc-biblioref">Lovelace, Nowosad, and Muenchow 2019</a>)</span>; an overview of how to work with coordinate systems in relationship to <strong>tigris</strong> is covered below.</p>
 <p>By default, datasets returned by tigris are stored in a <em>geographic coordinate system</em>, in which coordinates are represented as longitude and latitude relative to a three-dimensional model of the earth. The <code><a href="https://r-spatial.github.io/sf/reference/st_crs.html">st_crs()</a></code> function in the sf package helps us check the CRS of our data; let’s do this for counties in Florida.</p>
-<div class="sourceCode" id="cb148"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb150"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span>
 
 <span class="va">fl_counties</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tigris/man/counties.html">counties</a></span><span class="op">(</span><span class="st">"FL"</span>, cb <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
@@ -665,7 +670,7 @@ Figure 5.12: Tarrant County, TX Census tracts, 1990-2020
 </h3>
 <p>The core function implemented in <strong>crsuggest</strong> is <code><a href="https://rdrr.io/pkg/crsuggest/man/suggest_crs.html">suggest_crs()</a></code>, which returns a tibble of possible choices for a suitable projected CRS for your data. The function works by analyzing the geometry of your input dataset then comparing it to a built-in dataset of CRS extents and choosing the CRSs that minimize the <a href="https://en.wikipedia.org/wiki/Hausdorff_distance">Hausdorff distance</a> between your dataset and those extents.</p>
 <p>Let’s try this out for the Florida counties dataset.</p>
-<div class="sourceCode" id="cb150"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb152"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">crsuggest</span><span class="op">)</span>
 
 <span class="va">fl_crs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/crsuggest/man/suggest_crs.html">suggest_crs</a></span><span class="op">(</span><span class="va">fl_counties</span><span class="op">)</span></code></pre></div>
@@ -897,7 +902,7 @@ m
 </tbody>
 </table></div>
 <p>The “best choice” is the CRS “Florida GDL Albers” coordinate reference system, which is available with four different variations on the NAD1983 datum. “Florida GDL” refers to the Florida Geographic Data Library which distributes all of its data in this <a href="https://www.fgdl.org/metadataexplorer/fgdlfaq.html#3.1">state-wide equal-area coordinate reference system</a>. Other large states with large or irregular extents like Florida (Texas is one such example) maintain statewide coordinate reference systems like this suitable for statewide mapping and analysis. Let’s choose the third entry, “NAD83 (HARN) / Florida GDL Albers”, which is recommended on the Florida GDL website. Coordinate reference system transformations in <strong>sf</strong> are implemented in the <code><a href="https://r-spatial.github.io/sf/reference/st_transform.html">st_transform()</a></code> function, used below.</p>
-<div class="sourceCode" id="cb151"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb153"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">fl_projected</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html">st_transform</a></span><span class="op">(</span><span class="va">fl_counties</span>, crs <span class="op">=</span> <span class="fl">3087</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">fl_projected</span><span class="op">)</span></code></pre></div>
@@ -928,7 +933,7 @@ m
 ## 93 MULTIPOLYGON (((555139.5 42...
 ## 94 MULTIPOLYGON (((622427 6727...</code></pre>
 <p>Note that the coordinates for the bounding box and the feature geometry have changed to much larger numbers; they are expressed in meters rather than the decimal degrees used by the NAD83 geographic coordinate system. Let’s take a closer look at our selected CRS:</p>
-<div class="sourceCode" id="cb153"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb155"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_crs.html">st_crs</a></span><span class="op">(</span><span class="va">fl_projected</span><span class="op">)</span></code></pre></div>
 <pre><code>## Coordinate Reference System:
 ##   User input: EPSG:3087 
@@ -981,7 +986,7 @@ m
 <span class="header-section-number">5.4.2</span> Plotting with <code>coord_sf()</code><a class="anchor" aria-label="anchor" href="#plotting-with-coord_sf"><i class="fas fa-link"></i></a>
 </h3>
 <p>When visualizing simple feature geometries with ggplot2’s <code><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf()</a></code>, the <code><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">coord_sf()</a></code> method allows you to specify a coordinate reference system transformation to be used for the visualization. While <code><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">coord_sf()</a></code> will inherit the CRS of the spatial object plotted with <code><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf()</a></code> by default, it can also modify the displayed CRS of a spatial object without performing a CRS transformation with <code><a href="https://r-spatial.github.io/sf/reference/st_transform.html">st_transform()</a></code>. For example:</p>
-<div class="sourceCode" id="cb155"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb157"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>scipen <span class="op">=</span> <span class="fl">999</span><span class="op">)</span>
 
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">fl_counties</span><span class="op">)</span> <span class="op">+</span> 
@@ -994,7 +999,7 @@ Figure 5.13: ggplot2 map with CRS specified
 </p>
 </div>
 <p>While the data are displayed on the plot in the requested coordinate reference system, the underlying <em>graticule</em> (the grid lines and axis tick labels) default to longitude/latitude. To show the coordinates of the projected coordinate reference system, the argument <code>datum</code> can be used which controls the gridlines.</p>
-<div class="sourceCode" id="cb156"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb158"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">fl_counties</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">coord_sf</a></span><span class="op">(</span>crs <span class="op">=</span> <span class="fl">3087</span>, datum <span class="op">=</span> <span class="fl">3087</span><span class="op">)</span></code></pre></div>
@@ -1017,7 +1022,7 @@ Figure 5.14: ggplot2 plot with modified graticule
 </h3>
 <p>A common problem for national display of the United States is the fragmented nature of US states and territories geographically. The continental United States can be displayed on a map in a relatively straightforward way, and there are a number of projected coordinate reference systems designed for correct display of the continental US. Often, analysts and cartographers then have to make decisions about how to handle Alaska, Hawaii, and Puerto Rico, which cannot be reasonably plotted using default US projections.</p>
 <p>For example, let’s take a US states shapefile obtained with tigris at low resolution and use ggplot2 to visualize it in the default geographic CRS, NAD 1983:</p>
-<div class="sourceCode" id="cb157"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb159"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">us_states</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tigris/man/states.html">states</a></span><span class="op">(</span>cb <span class="op">=</span> <span class="cn">TRUE</span>, resolution <span class="op">=</span> <span class="st">"20m"</span><span class="op">)</span>
 
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">us_states</span><span class="op">)</span> <span class="op">+</span> 
@@ -1030,7 +1035,7 @@ Figure 5.15: Default CRS for US states
 </p>
 </div>
 <p>The plot does not work well, in part because the Aleutian Islands in far west Alaska cross the 180 degree line of longitude and are plotted on the opposite side of the map. In response, a projected coordinate reference system appropriate for the United States <em>could</em> be used, such as the continental US Albers Equal Area projection:</p>
-<div class="sourceCode" id="cb158"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb160"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">us_states</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">coord_sf</a></span><span class="op">(</span>crs <span class="op">=</span> <span class="st">'ESRI:102003'</span><span class="op">)</span> <span class="op">+</span> 
@@ -1043,7 +1048,7 @@ Figure 5.16: Equal-area CRS for US states
 </div>
 <p>While this representation puts all territories in their appropriate locations, it is clearly not appropriate for Alaska, Hawaii, and Puerto Rico which appear distorted. This coordinate reference system is also not ideal for comparative mapping of states given the large amount of blank space between the states on the map.</p>
 <p><strong>tigris</strong> offers a solution to this problem with the <code><a href="https://rdrr.io/pkg/tigris/man/shift_geometry.html">shift_geometry()</a></code> function. <code><a href="https://rdrr.io/pkg/tigris/man/shift_geometry.html">shift_geometry()</a></code> takes an opinionated approach to the shifting and rescaling of Alaska, Hawaii, and Puerto Rico geometries to offer four options for an alternative view of the US. The function works by projecting geometries in Alaska, Hawaii, and Puerto Rico to appropriate coordinate reference systems for those areas, then re-sizing the geometries (if requested) and moving them to an alternative layout in relationship to the rest of the US using the Albers Equal Area CRS.</p>
-<div class="sourceCode" id="cb159"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb161"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">us_states_shifted</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tigris/man/shift_geometry.html">shift_geometry</a></span><span class="op">(</span><span class="va">us_states</span><span class="op">)</span>
 
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">us_states_shifted</span><span class="op">)</span> <span class="op">+</span> 
@@ -1056,7 +1061,7 @@ Figure 5.17: US states with shifted and rescaled geometry
 </p>
 </div>
 <p>This view uses two default arguments: <code>preserve_area = FALSE</code>, which shrinks Alaska and inflates Hawaii and Puerto Rico, and <code>position = "below"</code>, which places these areas below the continental United States. Alternatively, we can set <code>preserve_area = TRUE</code> and <code>position = "outside"</code> (used together below, but they can be mixed and matched) for a different view:</p>
-<div class="sourceCode" id="cb160"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb162"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">us_states_outside</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tigris/man/shift_geometry.html">shift_geometry</a></span><span class="op">(</span><span class="va">us_states</span>, 
                                     preserve_area <span class="op">=</span> <span class="cn">TRUE</span>,
                                     position <span class="op">=</span> <span class="st">"outside"</span><span class="op">)</span>
@@ -1078,7 +1083,7 @@ Figure 5.18: US states with shifted geometry and consistent area
 </h3>
 <p>As discussed earlier in this chapter, most datasets obtained with tigris are returned with geometry type <code>POLYGON</code> or <code>MULTIPOLYGON</code>, reflecting the fact that Census geometries are generally areal units to which Census data are aggregated. While this makes sense for many applications, there are some instances in which the default geometry type of Census shapes is not necessary.</p>
 <p>For example, let’s say we are making a simple plot of the largest cities in the state of Texas. The <code><a href="https://rdrr.io/pkg/tigris/man/places.html">places()</a></code> function can obtain city geometries, and the <code><a href="https://rdrr.io/pkg/tigris/man/states.html">states()</a></code> function gives us the outline of the state of Texas. Two successive calls to <code><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf()</a></code> create a graphic that displays those cities on top of the state outline.</p>
-<div class="sourceCode" id="cb161"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb163"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tx_places</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tigris/man/places.html">places</a></span><span class="op">(</span><span class="st">"TX"</span>, cb <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">NAME</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Dallas"</span>, <span class="st">"Fort Worth"</span>, <span class="st">"Houston"</span>,
                      <span class="st">"Austin"</span>, <span class="st">"San Antonio"</span>, <span class="st">"El Paso"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
@@ -1100,7 +1105,7 @@ Figure 5.19: Large cities in Texas
 </div>
 <p>The issue with this graphic is that city geographies are actually quite irregular and disjoint in practice. All six cities spread across large areas, have holes, and even in some cases include portions that are detached from the main part of the city. This information is important for local planning purposes, but are unnecessary for a state-wide map.</p>
 <p>An alternative representation is possible by converting the city polygons to points where each point represents the <em>centroid</em> of each polygon, placed at their geometric centers. In sf, this conversion is implemented with the function <code><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_centroid()</a></code>. Below, we use <code><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_centroid()</a></code> to convert the polygons to central points, and plot those points over the outline of Texas.</p>
-<div class="sourceCode" id="cb162"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb164"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tx_centroids</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_centroid</a></span><span class="op">(</span><span class="va">tx_places</span><span class="op">)</span>
 
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
@@ -1120,10 +1125,10 @@ Figure 5.20: Large cities in Texas represented as points
 <span class="header-section-number">5.5.3</span> Exploding multipolygon geometries to single parts<a class="anchor" aria-label="anchor" href="#exploding-multipolygon-geometries-to-single-parts"><i class="fas fa-link"></i></a>
 </h3>
 <p>Generally speaking, areal Census features are returned with the geometry type <code>MULTIPOLYGON</code>. This makes sense as many Census shapes - including several states - include disconnected areas such as islands that belong to the same Census area. As this is particularly significant in Florida, let’s return to the Florida counties dataset used earlier in this chapter, and take the example of Lee County on Florida’s western coast.</p>
-<div class="sourceCode" id="cb163"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb165"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">lee</span> <span class="op">&lt;-</span> <span class="va">fl_projected</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">NAME</span> <span class="op">==</span> <span class="st">"Lee"</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb164"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb166"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html">mapview</a></span><span class="op">(</span><span class="va">lee</span><span class="op">)</span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:lee-mapview-show"></span>
@@ -1134,7 +1139,7 @@ Figure 5.21: Lee County, Florida
 </p>
 </div>
 <p>The Lee County polygon has four distinct parts as displayed on the map: the mainland area that contains the cities of Cape Coral and Fort Myers, and three disjoint island areas. Other islands can be further extracted using techniques covered in Chapter 7. Understandably, these four areas are interpreted by R as a single feature:</p>
-<div class="sourceCode" id="cb165"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb167"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">lee</span></code></pre></div>
 <pre><code>## Simple feature collection with 1 feature and 12 fields
 ## Geometry type: MULTIPOLYGON
@@ -1146,7 +1151,7 @@ Figure 5.21: Lee County, Florida
 ##   STATE_NAME LSAD      ALAND     AWATER                       geometry
 ## 1    Florida   06 2022803068 1900583561 MULTIPOLYGON (((580415.7 30...</code></pre>
 <p>Specific parts of the multipolygon Lee County object can be extracted by <em>exploding</em> the multipart geometry into single parts. This is accomplished with sf’s function <code><a href="https://r-spatial.github.io/sf/reference/st_cast.html">st_cast()</a></code>, which can convert spatial objects from one geometry type to another. In this example, we will “cast” Lee County as a <code>POLYGON</code> object which will create a separate row for each non-contiguous area. For analysts coming from a desktop GIS background, this will perform a similar operation to “Multipart to Singlepart” geoprocessing tools.</p>
-<div class="sourceCode" id="cb167"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb169"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">lee_singlepart</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_cast.html">st_cast</a></span><span class="op">(</span><span class="va">lee</span>, <span class="st">"POLYGON"</span><span class="op">)</span>
 
 <span class="va">lee_singlepart</span></code></pre></div>
@@ -1166,7 +1171,7 @@ Figure 5.21: Lee County, Florida
 ## 1.2    Florida   06 2022803068 1900583561 POLYGON ((572595.8 298881, ...
 ## 1.3    Florida   06 2022803068 1900583561 POLYGON ((571477.3 310583.5...</code></pre>
 <p>The resulting spatial object now has four rows. Using row indexing, we can extract any of these rows as an individual object, such as the area representing Sanibel Island.</p>
-<div class="sourceCode" id="cb169"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb171"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sanibel</span> <span class="op">&lt;-</span> <span class="va">lee_singlepart</span><span class="op">[</span><span class="fl">2</span>,<span class="op">]</span>
 
 <span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html">mapview</a></span><span class="op">(</span><span class="va">sanibel</span><span class="op">)</span></code></pre></div>
@@ -1215,7 +1220,7 @@ Figure 5.22: Sanibel Island, Florida
 <li><a class="nav-link" href="#tigerline-and-cartographic-boundary-shapefiles"><span class="header-section-number">5.3.1</span> TIGER/Line and cartographic boundary shapefiles</a></li>
 <li><a class="nav-link" href="#caching-tigris-data"><span class="header-section-number">5.3.2</span> Caching tigris data</a></li>
 <li><a class="nav-link" href="#understanding-yearly-differences-in-tigerline-files"><span class="header-section-number">5.3.3</span> Understanding yearly differences in TIGER/Line files</a></li>
-<li><a class="nav-link" href="#combining-tigris-datasets-need-to-update"><span class="header-section-number">5.3.4</span> Combining tigris datasets (need to update)</a></li>
+<li><a class="nav-link" href="#combining-tigris-datasets"><span class="header-section-number">5.3.4</span> Combining tigris datasets</a></li>
 </ul>
 </li>
 <li>
@@ -1248,7 +1253,7 @@ Figure 5.22: Sanibel Island, Florida
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Analyzing US Census Data</strong>: Methods, Maps, and Models in R" was written by Kyle E. Walker. It was last built on 2022-04-12.</p>
+    <p>"<strong>Analyzing US Census Data</strong>: Methods, Maps, and Models in R" was written by Kyle E. Walker. It was last built on 2022-04-13.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

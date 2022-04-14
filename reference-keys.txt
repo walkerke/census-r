@@ -150,6 +150,7 @@ tab:hispanic-by-metro-show
 fig:plot-hispanic-by-metro
 tab:median-by-metro-show
 fig:plot-metro-geometry
+fig:gilbert-compare
 fig:gilbert-area-weights
 fig:gilbert-pop-weights
 fig:wfh-estimate-map
@@ -158,6 +159,7 @@ fig:identify-iowa-hospitals
 fig:get-min-dist
 fig:show-min-times
 fig:synced-map
+tab:catchment-results
 fig:manhattan
 fig:plot-erase-manhattan
 fig:plot-neighbors
@@ -344,7 +346,7 @@ tigris-workflows
 tigerline-and-cartographic-boundary-shapefiles
 caching-tigris-data
 understanding-yearly-differences-in-tigerline-files
-combining-tigris-datasets-need-to-update
+combining-tigris-datasets
 coordinate-reference-systems
 using-the-crsuggest-package
 plotting-with-coord_sf
