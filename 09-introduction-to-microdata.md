@@ -266,7 +266,7 @@ wy_with_vacant <- get_pums(
 ```
 
 ```
-## Downloading: 16 kB     Downloading: 16 kB     Downloading: 16 kB     Downloading: 16 kB     Downloading: 16 kB     Downloading: 16 kB     Downloading: 23 kB     Downloading: 23 kB     Downloading: 36 kB     Downloading: 36 kB     Downloading: 45 kB     Downloading: 45 kB     Downloading: 54 kB     Downloading: 54 kB     Downloading: 63 kB     Downloading: 63 kB     Downloading: 63 kB     Downloading: 63 kB     Downloading: 63 kB     Downloading: 63 kB     Downloading: 72 kB     Downloading: 72 kB     Downloading: 72 kB     Downloading: 72 kB     Downloading: 72 kB     Downloading: 72 kB     Downloading: 81 kB     Downloading: 81 kB     Downloading: 81 kB     Downloading: 81 kB     Downloading: 81 kB     Downloading: 81 kB     Downloading: 90 kB     Downloading: 90 kB     Downloading: 90 kB     Downloading: 90 kB     Downloading: 99 kB     Downloading: 99 kB     Downloading: 110 kB     Downloading: 110 kB     Downloading: 110 kB     Downloading: 110 kB     Downloading: 120 kB     Downloading: 120 kB     Downloading: 120 kB     Downloading: 120 kB     Downloading: 130 kB     Downloading: 130 kB     Downloading: 130 kB     Downloading: 130 kB     Downloading: 130 kB     Downloading: 130 kB     Downloading: 130 kB     Downloading: 130 kB     Downloading: 130 kB     Downloading: 130 kB     Downloading: 130 kB     Downloading: 130 kB     Downloading: 140 kB     Downloading: 140 kB     Downloading: 140 kB     Downloading: 140 kB     Downloading: 140 kB     Downloading: 140 kB     Downloading: 150 kB     Downloading: 150 kB     Downloading: 160 kB     Downloading: 160 kB     Downloading: 160 kB     Downloading: 160 kB     Downloading: 170 kB     Downloading: 170 kB     Downloading: 180 kB     Downloading: 180 kB     Downloading: 180 kB     Downloading: 180 kB     Downloading: 190 kB     Downloading: 190 kB     Downloading: 190 kB     Downloading: 190 kB     Downloading: 190 kB     Downloading: 190 kB     Downloading: 190 kB     Downloading: 190 kB     Downloading: 190 kB     Downloading: 190 kB     Downloading: 190 kB     Downloading: 190 kB     Downloading: 200 kB     Downloading: 200 kB     Downloading: 210 kB     Downloading: 210 kB     Downloading: 210 kB     Downloading: 210 kB     Downloading: 210 kB     Downloading: 210 kB     Downloading: 210 kB     Downloading: 210 kB     Downloading: 220 kB     Downloading: 220 kB     Downloading: 230 kB     Downloading: 230 kB     Downloading: 250 kB     Downloading: 250 kB     Downloading: 250 kB     Downloading: 250 kB     Downloading: 250 kB     Downloading: 250 kB     Downloading: 250 kB     Downloading: 250 kB     Downloading: 250 kB     Downloading: 250 kB     Downloading: 270 kB     Downloading: 270 kB     Downloading: 270 kB     Downloading: 270 kB     Downloading: 270 kB     Downloading: 270 kB     Downloading: 270 kB     Downloading: 270 kB     Downloading: 270 kB     Downloading: 270 kB     Downloading: 270 kB     Downloading: 270 kB     Downloading: 270 kB     Downloading: 270 kB     Downloading: 280 kB     Downloading: 280 kB     Downloading: 280 kB     Downloading: 280 kB     Downloading: 300 kB     Downloading: 300 kB     Downloading: 300 kB     Downloading: 300 kB     Downloading: 300 kB     Downloading: 300 kB     Downloading: 320 kB     Downloading: 320 kB     Downloading: 320 kB     Downloading: 320 kB     Downloading: 320 kB     Downloading: 320 kB     Downloading: 320 kB     Downloading: 320 kB     Downloading: 320 kB     Downloading: 320 kB     Downloading: 320 kB     Downloading: 320 kB     Downloading: 330 kB     Downloading: 330 kB     Downloading: 330 kB     Downloading: 330 kB     Downloading: 330 kB     Downloading: 330 kB     Downloading: 13 kB     Downloading: 13 kB     Downloading: 13 kB     Downloading: 13 kB     Downloading: 13 kB     Downloading: 13 kB
+## Downloading: 16 kB     Downloading: 16 kB     Downloading: 16 kB     Downloading: 16 kB     Downloading: 33 kB     Downloading: 33 kB     Downloading: 33 kB     Downloading: 33 kB     Downloading: 33 kB     Downloading: 33 kB     Downloading: 36 kB     Downloading: 36 kB     Downloading: 43 kB     Downloading: 43 kB     Downloading: 45 kB     Downloading: 45 kB     Downloading: 61 kB     Downloading: 61 kB     Downloading: 63 kB     Downloading: 63 kB     Downloading: 63 kB     Downloading: 63 kB     Downloading: 63 kB     Downloading: 63 kB     Downloading: 63 kB     Downloading: 63 kB     Downloading: 72 kB     Downloading: 72 kB     Downloading: 72 kB     Downloading: 72 kB     Downloading: 72 kB     Downloading: 72 kB     Downloading: 72 kB     Downloading: 72 kB     Downloading: 81 kB     Downloading: 81 kB     Downloading: 88 kB     Downloading: 88 kB     Downloading: 90 kB     Downloading: 90 kB     Downloading: 99 kB     Downloading: 99 kB     Downloading: 110 kB     Downloading: 110 kB     Downloading: 110 kB     Downloading: 110 kB     Downloading: 120 kB     Downloading: 120 kB     Downloading: 120 kB     Downloading: 120 kB     Downloading: 130 kB     Downloading: 130 kB     Downloading: 130 kB     Downloading: 130 kB     Downloading: 130 kB     Downloading: 130 kB     Downloading: 130 kB     Downloading: 130 kB     Downloading: 130 kB     Downloading: 130 kB     Downloading: 130 kB     Downloading: 130 kB     Downloading: 130 kB     Downloading: 130 kB     Downloading: 130 kB     Downloading: 130 kB     Downloading: 130 kB     Downloading: 130 kB     Downloading: 140 kB     Downloading: 140 kB     Downloading: 140 kB     Downloading: 140 kB     Downloading: 150 kB     Downloading: 150 kB     Downloading: 160 kB     Downloading: 160 kB     Downloading: 160 kB     Downloading: 160 kB     Downloading: 170 kB     Downloading: 170 kB     Downloading: 170 kB     Downloading: 170 kB     Downloading: 180 kB     Downloading: 180 kB     Downloading: 190 kB     Downloading: 190 kB     Downloading: 190 kB     Downloading: 190 kB     Downloading: 190 kB     Downloading: 190 kB     Downloading: 190 kB     Downloading: 190 kB     Downloading: 190 kB     Downloading: 190 kB     Downloading: 190 kB     Downloading: 190 kB     Downloading: 190 kB     Downloading: 190 kB     Downloading: 190 kB     Downloading: 190 kB     Downloading: 190 kB     Downloading: 190 kB     Downloading: 200 kB     Downloading: 200 kB     Downloading: 200 kB     Downloading: 200 kB     Downloading: 210 kB     Downloading: 210 kB     Downloading: 210 kB     Downloading: 210 kB     Downloading: 220 kB     Downloading: 220 kB     Downloading: 220 kB     Downloading: 220 kB     Downloading: 240 kB     Downloading: 240 kB     Downloading: 240 kB     Downloading: 240 kB     Downloading: 240 kB     Downloading: 240 kB     Downloading: 240 kB     Downloading: 240 kB     Downloading: 240 kB     Downloading: 240 kB     Downloading: 260 kB     Downloading: 260 kB     Downloading: 260 kB     Downloading: 260 kB     Downloading: 260 kB     Downloading: 260 kB     Downloading: 260 kB     Downloading: 260 kB     Downloading: 260 kB     Downloading: 260 kB     Downloading: 260 kB     Downloading: 260 kB     Downloading: 260 kB     Downloading: 260 kB     Downloading: 270 kB     Downloading: 270 kB     Downloading: 270 kB     Downloading: 270 kB     Downloading: 270 kB     Downloading: 270 kB     Downloading: 290 kB     Downloading: 290 kB     Downloading: 310 kB     Downloading: 310 kB     Downloading: 310 kB     Downloading: 310 kB     Downloading: 310 kB     Downloading: 310 kB     Downloading: 310 kB     Downloading: 310 kB     Downloading: 310 kB     Downloading: 310 kB     Downloading: 310 kB     Downloading: 310 kB     Downloading: 320 kB     Downloading: 320 kB     Downloading: 320 kB     Downloading: 320 kB     Downloading: 320 kB     Downloading: 320 kB     Downloading: 320 kB     Downloading: 320 kB     Downloading: 320 kB     Downloading: 320 kB     Downloading: 330 kB     Downloading: 330 kB     Downloading: 330 kB     Downloading: 330 kB     Downloading: 330 kB     Downloading: 330 kB     Downloading: 8.6 kB     Downloading: 8.6 kB     Downloading: 13 kB     Downloading: 13 kB     Downloading: 13 kB     Downloading: 13 kB     Downloading: 13 kB     Downloading: 13 kB
 ```
 
 <table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
@@ -286,20 +286,9 @@ wy_with_vacant <- get_pums(
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:left;"> 2019HU0094511 </td>
+   <td style="text-align:left;"> 2019HU0045716 </td>
    <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> 157 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:left;"> 56 </td>
-   <td style="text-align:left;"> 1 </td>
-   <td style="text-align:left;"> b </td>
-   <td style="text-align:left;"> NA </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2019HU0271067 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> 268 </td>
+   <td style="text-align:right;"> 183 </td>
    <td style="text-align:right;"> NA </td>
    <td style="text-align:right;"> NA </td>
    <td style="text-align:left;"> 56 </td>
@@ -308,20 +297,9 @@ wy_with_vacant <- get_pums(
    <td style="text-align:left;"> NA </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2019HU0466134 </td>
+   <td style="text-align:left;"> 2019HU0052088 </td>
    <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> 158 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:left;"> 56 </td>
-   <td style="text-align:left;"> 1 </td>
-   <td style="text-align:left;"> b </td>
-   <td style="text-align:left;"> NA </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2019HU0650356 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> 243 </td>
+   <td style="text-align:right;"> 31 </td>
    <td style="text-align:right;"> NA </td>
    <td style="text-align:right;"> NA </td>
    <td style="text-align:left;"> 56 </td>
@@ -330,20 +308,9 @@ wy_with_vacant <- get_pums(
    <td style="text-align:left;"> NA </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2019HU0707994 </td>
+   <td style="text-align:left;"> 2019HU0100907 </td>
    <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> 30 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:left;"> 56 </td>
-   <td style="text-align:left;"> 1 </td>
-   <td style="text-align:left;"> b </td>
-   <td style="text-align:left;"> NA </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2019HU0720346 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> 100 </td>
+   <td style="text-align:right;"> 23 </td>
    <td style="text-align:right;"> NA </td>
    <td style="text-align:right;"> NA </td>
    <td style="text-align:left;"> 56 </td>
@@ -352,20 +319,9 @@ wy_with_vacant <- get_pums(
    <td style="text-align:left;"> NA </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2019HU0885957 </td>
+   <td style="text-align:left;"> 2019HU0111896 </td>
    <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> 170 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:left;"> 56 </td>
-   <td style="text-align:left;"> 1 </td>
-   <td style="text-align:left;"> b </td>
-   <td style="text-align:left;"> NA </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2019HU0905994 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> 45 </td>
+   <td style="text-align:right;"> 275 </td>
    <td style="text-align:right;"> NA </td>
    <td style="text-align:right;"> NA </td>
    <td style="text-align:left;"> 56 </td>
@@ -374,9 +330,9 @@ wy_with_vacant <- get_pums(
    <td style="text-align:left;"> NA </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2019HU0928583 </td>
+   <td style="text-align:left;"> 2019HU0135435 </td>
    <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> 25 </td>
+   <td style="text-align:right;"> 74 </td>
    <td style="text-align:right;"> NA </td>
    <td style="text-align:right;"> NA </td>
    <td style="text-align:left;"> 56 </td>
@@ -385,9 +341,53 @@ wy_with_vacant <- get_pums(
    <td style="text-align:left;"> NA </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2019HU0929765 </td>
+   <td style="text-align:left;"> 2019HU0185463 </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> 214 </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:left;"> 56 </td>
+   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:left;"> b </td>
+   <td style="text-align:left;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2019HU0191018 </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> 253 </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:left;"> 56 </td>
+   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:left;"> b </td>
+   <td style="text-align:left;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2019HU0226443 </td>
    <td style="text-align:right;"> NA </td>
    <td style="text-align:right;"> 57 </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:left;"> 56 </td>
+   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:left;"> b </td>
+   <td style="text-align:left;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2019HU0289503 </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> 217 </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:left;"> 56 </td>
+   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:left;"> b </td>
+   <td style="text-align:left;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2019HU0301839 </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> 163 </td>
    <td style="text-align:right;"> NA </td>
    <td style="text-align:right;"> NA </td>
    <td style="text-align:left;"> 56 </td>
@@ -838,93 +838,93 @@ wy_age_by_puma <- get_pums(
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:left;"> 2015000001990 </td>
+   <td style="text-align:left;"> 2015000004982 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 28 </td>
+   <td style="text-align:right;"> 29 </td>
+   <td style="text-align:right;"> 39 </td>
+   <td style="text-align:left;"> 00200 </td>
+   <td style="text-align:left;"> 56 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2015000004982 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 28 </td>
+   <td style="text-align:right;"> 25 </td>
+   <td style="text-align:right;"> 36 </td>
+   <td style="text-align:left;"> 00200 </td>
+   <td style="text-align:left;"> 56 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2015000004982 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 28 </td>
+   <td style="text-align:right;"> 29 </td>
+   <td style="text-align:right;"> 10 </td>
+   <td style="text-align:left;"> 00200 </td>
+   <td style="text-align:left;"> 56 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2015000004982 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 28 </td>
+   <td style="text-align:right;"> 25 </td>
+   <td style="text-align:right;"> 8 </td>
+   <td style="text-align:left;"> 00200 </td>
+   <td style="text-align:left;"> 56 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2015000005881 </td>
    <td style="text-align:right;"> 1 </td>
    <td style="text-align:right;"> 27 </td>
-   <td style="text-align:right;"> 26 </td>
-   <td style="text-align:right;"> 67 </td>
-   <td style="text-align:left;"> 00300 </td>
-   <td style="text-align:left;"> 56 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2015000006752 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 5 </td>
-   <td style="text-align:right;"> 5 </td>
-   <td style="text-align:right;"> 86 </td>
+   <td style="text-align:right;"> 28 </td>
+   <td style="text-align:right;"> 74 </td>
    <td style="text-align:left;"> 00100 </td>
    <td style="text-align:left;"> 56 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2015000006752 </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 5 </td>
-   <td style="text-align:right;"> 6 </td>
-   <td style="text-align:right;"> 83 </td>
+   <td style="text-align:left;"> 2015000007222 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 8 </td>
+   <td style="text-align:right;"> 61 </td>
    <td style="text-align:left;"> 00100 </td>
    <td style="text-align:left;"> 56 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2015000006847 </td>
+   <td style="text-align:left;"> 2015000008820 </td>
    <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 29 </td>
-   <td style="text-align:right;"> 29 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 12 </td>
+   <td style="text-align:right;"> 28 </td>
+   <td style="text-align:left;"> 00400 </td>
+   <td style="text-align:left;"> 56 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2015000008875 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 18 </td>
+   <td style="text-align:right;"> 18 </td>
    <td style="text-align:right;"> 61 </td>
    <td style="text-align:left;"> 00300 </td>
    <td style="text-align:left;"> 56 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2015000007045 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 23 </td>
-   <td style="text-align:right;"> 23 </td>
-   <td style="text-align:right;"> 62 </td>
-   <td style="text-align:left;"> 00300 </td>
-   <td style="text-align:left;"> 56 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2015000007045 </td>
+   <td style="text-align:left;"> 2015000008875 </td>
    <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 23 </td>
+   <td style="text-align:right;"> 18 </td>
    <td style="text-align:right;"> 19 </td>
-   <td style="text-align:right;"> 66 </td>
+   <td style="text-align:right;"> 58 </td>
    <td style="text-align:left;"> 00300 </td>
    <td style="text-align:left;"> 56 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2015000007045 </td>
+   <td style="text-align:left;"> 2015000008875 </td>
    <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 23 </td>
-   <td style="text-align:right;"> 34 </td>
-   <td style="text-align:right;"> 35 </td>
+   <td style="text-align:right;"> 18 </td>
+   <td style="text-align:right;"> 22 </td>
+   <td style="text-align:right;"> 14 </td>
    <td style="text-align:left;"> 00300 </td>
-   <td style="text-align:left;"> 56 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2015000007382 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 17 </td>
-   <td style="text-align:right;"> 17 </td>
-   <td style="text-align:right;"> 33 </td>
-   <td style="text-align:left;"> 00500 </td>
-   <td style="text-align:left;"> 56 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2015000010448 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 9 </td>
-   <td style="text-align:right;"> 9 </td>
-   <td style="text-align:right;"> 69 </td>
-   <td style="text-align:left;"> 00100 </td>
-   <td style="text-align:left;"> 56 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2015000010448 </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 9 </td>
-   <td style="text-align:right;"> 9 </td>
-   <td style="text-align:right;"> 77 </td>
-   <td style="text-align:left;"> 00100 </td>
    <td style="text-align:left;"> 56 </td>
   </tr>
 </tbody>
@@ -960,92 +960,92 @@ wy_puma_subset <- get_pums(
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:left;"> 2015000008887 </td>
+   <td style="text-align:left;"> 2015000010667 </td>
    <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 32 </td>
-   <td style="text-align:left;"> 00500 </td>
-   <td style="text-align:left;"> 56 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2015000011835 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 18 </td>
-   <td style="text-align:right;"> 18 </td>
-   <td style="text-align:right;"> 73 </td>
-   <td style="text-align:left;"> 00500 </td>
-   <td style="text-align:left;"> 56 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2015000020297 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 11 </td>
-   <td style="text-align:right;"> 11 </td>
-   <td style="text-align:right;"> 71 </td>
-   <td style="text-align:left;"> 00500 </td>
-   <td style="text-align:left;"> 56 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2015000020297 </td>
-   <td style="text-align:right;"> 2 </td>
    <td style="text-align:right;"> 11 </td>
    <td style="text-align:right;"> 12 </td>
-   <td style="text-align:right;"> 66 </td>
+   <td style="text-align:right;"> 38 </td>
    <td style="text-align:left;"> 00500 </td>
    <td style="text-align:left;"> 56 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2015000026229 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 17 </td>
-   <td style="text-align:right;"> 17 </td>
-   <td style="text-align:right;"> 28 </td>
-   <td style="text-align:left;"> 00500 </td>
-   <td style="text-align:left;"> 56 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2015000026229 </td>
+   <td style="text-align:left;"> 2015000010667 </td>
    <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 17 </td>
-   <td style="text-align:right;"> 13 </td>
-   <td style="text-align:right;"> 19 </td>
+   <td style="text-align:right;"> 11 </td>
+   <td style="text-align:right;"> 14 </td>
+   <td style="text-align:right;"> 36 </td>
    <td style="text-align:left;"> 00500 </td>
    <td style="text-align:left;"> 56 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2015000033620 </td>
+   <td style="text-align:left;"> 2015000010667 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 11 </td>
+   <td style="text-align:right;"> 14 </td>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:left;"> 00500 </td>
+   <td style="text-align:left;"> 56 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2015000018572 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 8 </td>
+   <td style="text-align:right;"> 8 </td>
+   <td style="text-align:right;"> 80 </td>
+   <td style="text-align:left;"> 00500 </td>
+   <td style="text-align:left;"> 56 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2015000040346 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 24 </td>
+   <td style="text-align:right;"> 23 </td>
+   <td style="text-align:right;"> 54 </td>
+   <td style="text-align:left;"> 00500 </td>
+   <td style="text-align:left;"> 56 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2015000040346 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 24 </td>
+   <td style="text-align:right;"> 31 </td>
+   <td style="text-align:right;"> 55 </td>
+   <td style="text-align:left;"> 00500 </td>
+   <td style="text-align:left;"> 56 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2015000042859 </td>
    <td style="text-align:right;"> 1 </td>
    <td style="text-align:right;"> 7 </td>
-   <td style="text-align:right;"> 6 </td>
-   <td style="text-align:right;"> 78 </td>
+   <td style="text-align:right;"> 8 </td>
+   <td style="text-align:right;"> 60 </td>
    <td style="text-align:left;"> 00500 </td>
    <td style="text-align:left;"> 56 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2015000044674 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 14 </td>
-   <td style="text-align:right;"> 13 </td>
-   <td style="text-align:right;"> 40 </td>
-   <td style="text-align:left;"> 00500 </td>
-   <td style="text-align:left;"> 56 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2015000044674 </td>
+   <td style="text-align:left;"> 2015000042859 </td>
    <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 14 </td>
-   <td style="text-align:right;"> 14 </td>
-   <td style="text-align:right;"> 50 </td>
+   <td style="text-align:right;"> 7 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 53 </td>
    <td style="text-align:left;"> 00500 </td>
    <td style="text-align:left;"> 56 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2015000044674 </td>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 14 </td>
-   <td style="text-align:right;"> 10 </td>
+   <td style="text-align:left;"> 2015000047414 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 17 </td>
    <td style="text-align:right;"> 16 </td>
+   <td style="text-align:right;"> 60 </td>
+   <td style="text-align:left;"> 00500 </td>
+   <td style="text-align:left;"> 56 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2015000047414 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 17 </td>
+   <td style="text-align:right;"> 35 </td>
+   <td style="text-align:right;"> 72 </td>
    <td style="text-align:left;"> 00500 </td>
    <td style="text-align:left;"> 56 </td>
   </tr>
