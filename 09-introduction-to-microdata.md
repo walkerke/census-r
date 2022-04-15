@@ -265,10 +265,6 @@ wy_with_vacant <- get_pums(
   arrange(VACS)
 ```
 
-```
-## Downloading: 16 kB     Downloading: 16 kB     Downloading: 16 kB     Downloading: 16 kB     Downloading: 33 kB     Downloading: 33 kB     Downloading: 33 kB     Downloading: 33 kB     Downloading: 33 kB     Downloading: 33 kB     Downloading: 36 kB     Downloading: 36 kB     Downloading: 43 kB     Downloading: 43 kB     Downloading: 45 kB     Downloading: 45 kB     Downloading: 61 kB     Downloading: 61 kB     Downloading: 63 kB     Downloading: 63 kB     Downloading: 63 kB     Downloading: 63 kB     Downloading: 63 kB     Downloading: 63 kB     Downloading: 63 kB     Downloading: 63 kB     Downloading: 72 kB     Downloading: 72 kB     Downloading: 72 kB     Downloading: 72 kB     Downloading: 72 kB     Downloading: 72 kB     Downloading: 72 kB     Downloading: 72 kB     Downloading: 81 kB     Downloading: 81 kB     Downloading: 88 kB     Downloading: 88 kB     Downloading: 90 kB     Downloading: 90 kB     Downloading: 99 kB     Downloading: 99 kB     Downloading: 110 kB     Downloading: 110 kB     Downloading: 110 kB     Downloading: 110 kB     Downloading: 120 kB     Downloading: 120 kB     Downloading: 120 kB     Downloading: 120 kB     Downloading: 130 kB     Downloading: 130 kB     Downloading: 130 kB     Downloading: 130 kB     Downloading: 130 kB     Downloading: 130 kB     Downloading: 130 kB     Downloading: 130 kB     Downloading: 130 kB     Downloading: 130 kB     Downloading: 130 kB     Downloading: 130 kB     Downloading: 130 kB     Downloading: 130 kB     Downloading: 130 kB     Downloading: 130 kB     Downloading: 130 kB     Downloading: 130 kB     Downloading: 140 kB     Downloading: 140 kB     Downloading: 140 kB     Downloading: 140 kB     Downloading: 150 kB     Downloading: 150 kB     Downloading: 160 kB     Downloading: 160 kB     Downloading: 160 kB     Downloading: 160 kB     Downloading: 170 kB     Downloading: 170 kB     Downloading: 170 kB     Downloading: 170 kB     Downloading: 180 kB     Downloading: 180 kB     Downloading: 190 kB     Downloading: 190 kB     Downloading: 190 kB     Downloading: 190 kB     Downloading: 190 kB     Downloading: 190 kB     Downloading: 190 kB     Downloading: 190 kB     Downloading: 190 kB     Downloading: 190 kB     Downloading: 190 kB     Downloading: 190 kB     Downloading: 190 kB     Downloading: 190 kB     Downloading: 190 kB     Downloading: 190 kB     Downloading: 190 kB     Downloading: 190 kB     Downloading: 200 kB     Downloading: 200 kB     Downloading: 200 kB     Downloading: 200 kB     Downloading: 210 kB     Downloading: 210 kB     Downloading: 210 kB     Downloading: 210 kB     Downloading: 220 kB     Downloading: 220 kB     Downloading: 220 kB     Downloading: 220 kB     Downloading: 240 kB     Downloading: 240 kB     Downloading: 240 kB     Downloading: 240 kB     Downloading: 240 kB     Downloading: 240 kB     Downloading: 240 kB     Downloading: 240 kB     Downloading: 240 kB     Downloading: 240 kB     Downloading: 260 kB     Downloading: 260 kB     Downloading: 260 kB     Downloading: 260 kB     Downloading: 260 kB     Downloading: 260 kB     Downloading: 260 kB     Downloading: 260 kB     Downloading: 260 kB     Downloading: 260 kB     Downloading: 260 kB     Downloading: 260 kB     Downloading: 260 kB     Downloading: 260 kB     Downloading: 270 kB     Downloading: 270 kB     Downloading: 270 kB     Downloading: 270 kB     Downloading: 270 kB     Downloading: 270 kB     Downloading: 290 kB     Downloading: 290 kB     Downloading: 310 kB     Downloading: 310 kB     Downloading: 310 kB     Downloading: 310 kB     Downloading: 310 kB     Downloading: 310 kB     Downloading: 310 kB     Downloading: 310 kB     Downloading: 310 kB     Downloading: 310 kB     Downloading: 310 kB     Downloading: 310 kB     Downloading: 320 kB     Downloading: 320 kB     Downloading: 320 kB     Downloading: 320 kB     Downloading: 320 kB     Downloading: 320 kB     Downloading: 320 kB     Downloading: 320 kB     Downloading: 320 kB     Downloading: 320 kB     Downloading: 330 kB     Downloading: 330 kB     Downloading: 330 kB     Downloading: 330 kB     Downloading: 330 kB     Downloading: 330 kB     Downloading: 8.6 kB     Downloading: 8.6 kB     Downloading: 13 kB     Downloading: 13 kB     Downloading: 13 kB     Downloading: 13 kB     Downloading: 13 kB     Downloading: 13 kB
-```
-
 <table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
 <caption>(\#tab:return-vacant-show)1-year ACS PUMS data with vacant housing units</caption>
  <thead>
@@ -455,11 +451,24 @@ wy_pums_recoded <- get_pums(
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:left;"> 2019GQ0000335 </td>
+   <td style="text-align:left;"> 2019GQ0009731 </td>
    <td style="text-align:right;"> 1 </td>
    <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 206 </td>
-   <td style="text-align:right;"> 17 </td>
+   <td style="text-align:right;"> 47 </td>
+   <td style="text-align:right;"> 28 </td>
+   <td style="text-align:left;"> 56 </td>
+   <td style="text-align:left;"> b </td>
+   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:left;"> Wyoming/WY </td>
+   <td style="text-align:left;"> N/A (GQ/vacant) </td>
+   <td style="text-align:left;"> Male </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2019GQ0010758 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 27 </td>
+   <td style="text-align:right;"> 54 </td>
    <td style="text-align:left;"> 56 </td>
    <td style="text-align:left;"> b </td>
    <td style="text-align:left;"> 2 </td>
@@ -468,89 +477,37 @@ wy_pums_recoded <- get_pums(
    <td style="text-align:left;"> Female </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2019GQ0000958 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 50 </td>
-   <td style="text-align:right;"> 37 </td>
-   <td style="text-align:left;"> 56 </td>
-   <td style="text-align:left;"> b </td>
-   <td style="text-align:left;"> 1 </td>
-   <td style="text-align:left;"> Wyoming/WY </td>
-   <td style="text-align:left;"> N/A (GQ/vacant) </td>
-   <td style="text-align:left;"> Male </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2019GQ0009156 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 33 </td>
-   <td style="text-align:right;"> 75 </td>
-   <td style="text-align:left;"> 56 </td>
-   <td style="text-align:left;"> b </td>
-   <td style="text-align:left;"> 2 </td>
-   <td style="text-align:left;"> Wyoming/WY </td>
-   <td style="text-align:left;"> N/A (GQ/vacant) </td>
-   <td style="text-align:left;"> Female </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2019GQ0012426 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 23 </td>
-   <td style="text-align:right;"> 21 </td>
-   <td style="text-align:left;"> 56 </td>
-   <td style="text-align:left;"> b </td>
-   <td style="text-align:left;"> 2 </td>
-   <td style="text-align:left;"> Wyoming/WY </td>
-   <td style="text-align:left;"> N/A (GQ/vacant) </td>
-   <td style="text-align:left;"> Female </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2019GQ0015243 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 209 </td>
-   <td style="text-align:right;"> 94 </td>
-   <td style="text-align:left;"> 56 </td>
-   <td style="text-align:left;"> b </td>
-   <td style="text-align:left;"> 1 </td>
-   <td style="text-align:left;"> Wyoming/WY </td>
-   <td style="text-align:left;"> N/A (GQ/vacant) </td>
-   <td style="text-align:left;"> Male </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2019GQ0018773 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 273 </td>
-   <td style="text-align:right;"> 26 </td>
-   <td style="text-align:left;"> 56 </td>
-   <td style="text-align:left;"> b </td>
-   <td style="text-align:left;"> 1 </td>
-   <td style="text-align:left;"> Wyoming/WY </td>
-   <td style="text-align:left;"> N/A (GQ/vacant) </td>
-   <td style="text-align:left;"> Male </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2019GQ0019978 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 6 </td>
-   <td style="text-align:right;"> 16 </td>
-   <td style="text-align:left;"> 56 </td>
-   <td style="text-align:left;"> b </td>
-   <td style="text-align:left;"> 1 </td>
-   <td style="text-align:left;"> Wyoming/WY </td>
-   <td style="text-align:left;"> N/A (GQ/vacant) </td>
-   <td style="text-align:left;"> Male </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2019GQ0022931 </td>
+   <td style="text-align:left;"> 2019GQ0014986 </td>
    <td style="text-align:right;"> 1 </td>
    <td style="text-align:right;"> 0 </td>
    <td style="text-align:right;"> 67 </td>
-   <td style="text-align:right;"> 18 </td>
+   <td style="text-align:right;"> 43 </td>
+   <td style="text-align:left;"> 56 </td>
+   <td style="text-align:left;"> b </td>
+   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:left;"> Wyoming/WY </td>
+   <td style="text-align:left;"> N/A (GQ/vacant) </td>
+   <td style="text-align:left;"> Male </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2019GQ0016090 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 57 </td>
+   <td style="text-align:right;"> 19 </td>
+   <td style="text-align:left;"> 56 </td>
+   <td style="text-align:left;"> b </td>
+   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:left;"> Wyoming/WY </td>
+   <td style="text-align:left;"> N/A (GQ/vacant) </td>
+   <td style="text-align:left;"> Male </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2019GQ0020825 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 24 </td>
+   <td style="text-align:right;"> 20 </td>
    <td style="text-align:left;"> 56 </td>
    <td style="text-align:left;"> b </td>
    <td style="text-align:left;"> 2 </td>
@@ -559,10 +516,49 @@ wy_pums_recoded <- get_pums(
    <td style="text-align:left;"> Female </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2019GQ0032421 </td>
+   <td style="text-align:left;"> 2019GQ0022170 </td>
    <td style="text-align:right;"> 1 </td>
    <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 113 </td>
+   <td style="text-align:right;"> 73 </td>
+   <td style="text-align:right;"> 18 </td>
+   <td style="text-align:left;"> 56 </td>
+   <td style="text-align:left;"> b </td>
+   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:left;"> Wyoming/WY </td>
+   <td style="text-align:left;"> N/A (GQ/vacant) </td>
+   <td style="text-align:left;"> Male </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2019GQ0022185 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 32 </td>
+   <td style="text-align:right;"> 14 </td>
+   <td style="text-align:left;"> 56 </td>
+   <td style="text-align:left;"> b </td>
+   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:left;"> Wyoming/WY </td>
+   <td style="text-align:left;"> N/A (GQ/vacant) </td>
+   <td style="text-align:left;"> Male </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2019GQ0023934 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 75 </td>
+   <td style="text-align:right;"> 51 </td>
+   <td style="text-align:left;"> 56 </td>
+   <td style="text-align:left;"> b </td>
+   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:left;"> Wyoming/WY </td>
+   <td style="text-align:left;"> N/A (GQ/vacant) </td>
+   <td style="text-align:left;"> Male </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2019GQ0026378 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 40 </td>
    <td style="text-align:right;"> 94 </td>
    <td style="text-align:left;"> 56 </td>
    <td style="text-align:left;"> b </td>
@@ -572,11 +568,11 @@ wy_pums_recoded <- get_pums(
    <td style="text-align:left;"> Female </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2019GQ0033045 </td>
+   <td style="text-align:left;"> 2019GQ0027977 </td>
    <td style="text-align:right;"> 1 </td>
    <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 10 </td>
-   <td style="text-align:right;"> 44 </td>
+   <td style="text-align:right;"> 48 </td>
+   <td style="text-align:right;"> 22 </td>
    <td style="text-align:left;"> 56 </td>
    <td style="text-align:left;"> b </td>
    <td style="text-align:left;"> 1 </td>
@@ -838,93 +834,93 @@ wy_age_by_puma <- get_pums(
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:left;"> 2015000004982 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 28 </td>
-   <td style="text-align:right;"> 29 </td>
-   <td style="text-align:right;"> 39 </td>
-   <td style="text-align:left;"> 00200 </td>
-   <td style="text-align:left;"> 56 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2015000004982 </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 28 </td>
-   <td style="text-align:right;"> 25 </td>
-   <td style="text-align:right;"> 36 </td>
-   <td style="text-align:left;"> 00200 </td>
-   <td style="text-align:left;"> 56 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2015000004982 </td>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 28 </td>
-   <td style="text-align:right;"> 29 </td>
-   <td style="text-align:right;"> 10 </td>
-   <td style="text-align:left;"> 00200 </td>
-   <td style="text-align:left;"> 56 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2015000004982 </td>
-   <td style="text-align:right;"> 4 </td>
-   <td style="text-align:right;"> 28 </td>
-   <td style="text-align:right;"> 25 </td>
-   <td style="text-align:right;"> 8 </td>
-   <td style="text-align:left;"> 00200 </td>
-   <td style="text-align:left;"> 56 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2015000005881 </td>
+   <td style="text-align:left;"> 2015000001990 </td>
    <td style="text-align:right;"> 1 </td>
    <td style="text-align:right;"> 27 </td>
-   <td style="text-align:right;"> 28 </td>
-   <td style="text-align:right;"> 74 </td>
-   <td style="text-align:left;"> 00100 </td>
-   <td style="text-align:left;"> 56 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2015000007222 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 8 </td>
-   <td style="text-align:right;"> 61 </td>
-   <td style="text-align:left;"> 00100 </td>
-   <td style="text-align:left;"> 56 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2015000008820 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 12 </td>
-   <td style="text-align:right;"> 28 </td>
-   <td style="text-align:left;"> 00400 </td>
-   <td style="text-align:left;"> 56 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2015000008875 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 18 </td>
-   <td style="text-align:right;"> 18 </td>
-   <td style="text-align:right;"> 61 </td>
+   <td style="text-align:right;"> 26 </td>
+   <td style="text-align:right;"> 67 </td>
    <td style="text-align:left;"> 00300 </td>
    <td style="text-align:left;"> 56 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2015000008875 </td>
+   <td style="text-align:left;"> 2015000006752 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 86 </td>
+   <td style="text-align:left;"> 00100 </td>
+   <td style="text-align:left;"> 56 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2015000006752 </td>
    <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 18 </td>
-   <td style="text-align:right;"> 19 </td>
-   <td style="text-align:right;"> 58 </td>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 83 </td>
+   <td style="text-align:left;"> 00100 </td>
+   <td style="text-align:left;"> 56 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2015000006847 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 29 </td>
+   <td style="text-align:right;"> 29 </td>
+   <td style="text-align:right;"> 61 </td>
    <td style="text-align:left;"> 00300 </td>
    <td style="text-align:left;"> 56 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2015000008875 </td>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 18 </td>
-   <td style="text-align:right;"> 22 </td>
-   <td style="text-align:right;"> 14 </td>
+   <td style="text-align:left;"> 2015000007045 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 23 </td>
+   <td style="text-align:right;"> 23 </td>
+   <td style="text-align:right;"> 62 </td>
    <td style="text-align:left;"> 00300 </td>
+   <td style="text-align:left;"> 56 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2015000007045 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 23 </td>
+   <td style="text-align:right;"> 19 </td>
+   <td style="text-align:right;"> 66 </td>
+   <td style="text-align:left;"> 00300 </td>
+   <td style="text-align:left;"> 56 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2015000007045 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 23 </td>
+   <td style="text-align:right;"> 34 </td>
+   <td style="text-align:right;"> 35 </td>
+   <td style="text-align:left;"> 00300 </td>
+   <td style="text-align:left;"> 56 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2015000007382 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 17 </td>
+   <td style="text-align:right;"> 17 </td>
+   <td style="text-align:right;"> 33 </td>
+   <td style="text-align:left;"> 00500 </td>
+   <td style="text-align:left;"> 56 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2015000010448 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 9 </td>
+   <td style="text-align:right;"> 9 </td>
+   <td style="text-align:right;"> 69 </td>
+   <td style="text-align:left;"> 00100 </td>
+   <td style="text-align:left;"> 56 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2015000010448 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 9 </td>
+   <td style="text-align:right;"> 9 </td>
+   <td style="text-align:right;"> 77 </td>
+   <td style="text-align:left;"> 00100 </td>
    <td style="text-align:left;"> 56 </td>
   </tr>
 </tbody>
@@ -960,92 +956,92 @@ wy_puma_subset <- get_pums(
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:left;"> 2015000010667 </td>
+   <td style="text-align:left;"> 2015000007382 </td>
    <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 11 </td>
-   <td style="text-align:right;"> 12 </td>
-   <td style="text-align:right;"> 38 </td>
+   <td style="text-align:right;"> 17 </td>
+   <td style="text-align:right;"> 17 </td>
+   <td style="text-align:right;"> 33 </td>
    <td style="text-align:left;"> 00500 </td>
    <td style="text-align:left;"> 56 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2015000010667 </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 11 </td>
-   <td style="text-align:right;"> 14 </td>
-   <td style="text-align:right;"> 36 </td>
-   <td style="text-align:left;"> 00500 </td>
-   <td style="text-align:left;"> 56 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2015000010667 </td>
+   <td style="text-align:left;"> 2015000014560 </td>
+   <td style="text-align:right;"> 1 </td>
    <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 11 </td>
-   <td style="text-align:right;"> 14 </td>
-   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 56 </td>
    <td style="text-align:left;"> 00500 </td>
    <td style="text-align:left;"> 56 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2015000018572 </td>
+   <td style="text-align:left;"> 2015000017683 </td>
    <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 8 </td>
-   <td style="text-align:right;"> 8 </td>
-   <td style="text-align:right;"> 80 </td>
-   <td style="text-align:left;"> 00500 </td>
-   <td style="text-align:left;"> 56 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2015000040346 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 24 </td>
-   <td style="text-align:right;"> 23 </td>
+   <td style="text-align:right;"> 17 </td>
+   <td style="text-align:right;"> 16 </td>
    <td style="text-align:right;"> 54 </td>
    <td style="text-align:left;"> 00500 </td>
    <td style="text-align:left;"> 56 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2015000040346 </td>
+   <td style="text-align:left;"> 2015000017683 </td>
    <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 24 </td>
-   <td style="text-align:right;"> 31 </td>
-   <td style="text-align:right;"> 55 </td>
+   <td style="text-align:right;"> 17 </td>
+   <td style="text-align:right;"> 7 </td>
+   <td style="text-align:right;"> 54 </td>
    <td style="text-align:left;"> 00500 </td>
    <td style="text-align:left;"> 56 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2015000042859 </td>
+   <td style="text-align:left;"> 2015000024415 </td>
    <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 7 </td>
-   <td style="text-align:right;"> 8 </td>
-   <td style="text-align:right;"> 60 </td>
+   <td style="text-align:right;"> 13 </td>
+   <td style="text-align:right;"> 13 </td>
+   <td style="text-align:right;"> 74 </td>
    <td style="text-align:left;"> 00500 </td>
    <td style="text-align:left;"> 56 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2015000042859 </td>
+   <td style="text-align:left;"> 2015000024415 </td>
    <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 13 </td>
+   <td style="text-align:right;"> 15 </td>
+   <td style="text-align:right;"> 68 </td>
+   <td style="text-align:left;"> 00500 </td>
+   <td style="text-align:left;"> 56 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2015000024421 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 6 </td>
    <td style="text-align:right;"> 7 </td>
+   <td style="text-align:right;"> 47 </td>
+   <td style="text-align:left;"> 00500 </td>
+   <td style="text-align:left;"> 56 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2015000035380 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 4 </td>
    <td style="text-align:right;"> 4 </td>
    <td style="text-align:right;"> 53 </td>
    <td style="text-align:left;"> 00500 </td>
    <td style="text-align:left;"> 56 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2015000047414 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 17 </td>
-   <td style="text-align:right;"> 16 </td>
-   <td style="text-align:right;"> 60 </td>
+   <td style="text-align:left;"> 2015000035380 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 62 </td>
    <td style="text-align:left;"> 00500 </td>
    <td style="text-align:left;"> 56 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2015000047414 </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 17 </td>
-   <td style="text-align:right;"> 35 </td>
-   <td style="text-align:right;"> 72 </td>
+   <td style="text-align:left;"> 2015000035380 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 29 </td>
    <td style="text-align:left;"> 00500 </td>
    <td style="text-align:left;"> 56 </td>
   </tr>

@@ -75,7 +75,7 @@ nyc_1910 <- read_nhgis_sf(
 ## Reading geography...
 ## options:        ENCODING=latin1 
 ## Reading layer `US_tract_1910' from data source 
-##   `/tmp/RtmpUTRqLN/file18cc5431260e/US_tract_1910.shp' using driver `ESRI Shapefile'
+##   `/tmp/RtmpQ8o0Hb/file432745ce8fb4/US_tract_1910.shp' using driver `ESRI Shapefile'
 ## Simple feature collection with 1989 features and 6 fields
 ## Geometry type: MULTIPOLYGON
 ## Dimension:     XY
@@ -614,22 +614,6 @@ tx_econ17 <- getCensus(
   </tr>
   <tr>
    <td style="text-align:left;"> 48 </td>
-   <td style="text-align:left;"> 389 </td>
-   <td style="text-align:left;"> 664 </td>
-   <td style="text-align:left;"> 14641 </td>
-   <td style="text-align:left;"> 0500000US48389 </td>
-   <td style="text-align:left;"> 72 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 48 </td>
-   <td style="text-align:left;"> 223 </td>
-   <td style="text-align:left;"> 1048 </td>
-   <td style="text-align:left;"> 16011 </td>
-   <td style="text-align:left;"> 0500000US48223 </td>
-   <td style="text-align:left;"> 72 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 48 </td>
    <td style="text-align:left;"> 055 </td>
    <td style="text-align:left;"> 910 </td>
    <td style="text-align:left;"> 15247 </td>
@@ -666,6 +650,22 @@ tx_econ17 <- getCensus(
    <td style="text-align:left;"> 140 </td>
    <td style="text-align:left;"> 2178 </td>
    <td style="text-align:left;"> 0500000US48383 </td>
+   <td style="text-align:left;"> 72 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 48 </td>
+   <td style="text-align:left;"> 387 </td>
+   <td style="text-align:left;"> 0 </td>
+   <td style="text-align:left;"> 0 </td>
+   <td style="text-align:left;"> 0500000US48387 </td>
+   <td style="text-align:left;"> 72 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 48 </td>
+   <td style="text-align:left;"> 501 </td>
+   <td style="text-align:left;"> 147 </td>
+   <td style="text-align:left;"> 1867 </td>
+   <td style="text-align:left;"> 0500000US48501 </td>
    <td style="text-align:left;"> 72 </td>
   </tr>
 </tbody>

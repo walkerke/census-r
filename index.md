@@ -289,7 +289,7 @@ The examples in this book were created with the following R package versions:
   </tr>
   <tr>
    <td style="text-align:left;"> tidycensus </td>
-   <td style="text-align:left;"> 1.2 </td>
+   <td style="text-align:left;"> 1.2.0.9000 </td>
    <td style="text-align:left;"> local </td>
   </tr>
   <tr>
