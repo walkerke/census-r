@@ -916,11 +916,11 @@ wfh_interpolate_pw <- interpolate_pw(
 )
 ```
 
-`interpolate_pw()` uses a *weighted centroid* approach to interpolation, where the input Census blocks are first converted to centroids, then joined to the origin/destination intersections to produce population weights. An illustration of this process is found below; the map on the left-hand side shows the block centroid weights, and the map on the right-hand side shows the population weights used for each 2020 Census tract.
+`interpolate_pw()` as implemented here uses a *weighted block point* approach to interpolation, where the input Census blocks are first converted to points using the `st_point_on_surface()` function from the **sf** package, then joined to the origin/destination intersections to produce population weights. An illustration of this process is found below; the map on the left-hand side shows the block weights as points, and the map on the right-hand side shows the population weights used for each 2020 Census tract.
 
 <div class="figure">
-<img src="07-spatial-analysis-census_files/figure-html/gilbert-pop-weights-1.png" alt="Illustration of block centroids and population weights" width="100%" />
-<p class="caption">(\#fig:gilbert-pop-weights)Illustration of block centroids and population weights</p>
+<img src="07-spatial-analysis-census_files/figure-html/gilbert-pop-weights-1.png" alt="Illustration of block points and population weights" width="100%" />
+<p class="caption">(\#fig:gilbert-pop-weights)Illustration of block points and population weights</p>
 </div>
 
 The population-based weights differ significantly from the area-based weights for the Census tract in Gilbert. Notably, the southern-most Census tract in the example only had an area weight of 0.167, whereas the population weighting revealed that over 30 percent of the origin tract's population is actually located there. This leads to substantive differences in the results of the area- and population-weighted approaches, as illustrated in the figure below.
@@ -1283,14 +1283,14 @@ iso_pov <- interpolate_pw(
 <tbody>
   <tr>
    <td style="text-align:left;"> 5km buffer </td>
-   <td style="text-align:right;"> 3015.328 </td>
-   <td style="text-align:right;"> 21261.01 </td>
-   <td style="text-align:right;"> 14.2 </td>
+   <td style="text-align:right;"> 2961.475 </td>
+   <td style="text-align:right;"> 21175.79 </td>
+   <td style="text-align:right;"> 14.0 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 10min isochrone </td>
-   <td style="text-align:right;"> 3150.716 </td>
-   <td style="text-align:right;"> 23292.38 </td>
+   <td style="text-align:right;"> 3118.447 </td>
+   <td style="text-align:right;"> 23065.89 </td>
    <td style="text-align:right;"> 13.5 </td>
   </tr>
 </tbody>
