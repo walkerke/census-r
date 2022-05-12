@@ -2,7 +2,7 @@
 title: "Analyzing US Census Data"
 subtitle: "Methods, Maps, and Models in R"
 author: "Kyle E. Walker"
-date: "2022-04-18"
+date: "2022-05-12"
 site: bookdown::bookdown_site
 knit: bookdown::render_book
 output: bookdown::bs4_book
@@ -21,15 +21,15 @@ description: "This book is an overview of how practitioners can acquire, wrangle
 
 # Preface {.unnumbered}
 
-This is the online home of *Analyzing US Census Data: Methods, Maps, and Models in R*, a forthcoming book published with [CRC Press](https://www.routledge.com/our-products/books).
+This is the online home of *Analyzing US Census Data: Methods, Maps, and Models in R*, a forthcoming book published with CRC Press. [Pre-order a hard copy of the book from this link!](https://www.routledge.com/Analyzing-US-Census-Data-Methods-Maps-and-Models-in-R/Walker/p/book/9781032366449)
 
-<img src="img/crc.png" width="20%" />
+<img src="img/book_cover.png" width="30%" />
 
-<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/2.0/"><img src="https://i.creativecommons.org/l/by-nc-nd/2.0/88x31.png" alt="Creative Commons License" style="border-width:0"/></a><br/> The online version of the book is published with the [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0) license](https://creativecommons.org/licenses/by-nc-nd/4.0/).
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img src="https://i.creativecommons.org/l/by-nc-nd/2.0/88x31.png" alt="Creative Commons License" style="border-width:0"/></a><br/> The online version of the book is published with the [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0) license](https://creativecommons.org/licenses/by-nc-nd/4.0/).
 
 To support the development of the book and help me maintain this free online version, please consider one of the following:
 
--   Purchasing a hard copy of the book from CRC Press (expected publication 2022);
+-   [Purchasing a hard copy of the book from CRC Press](https://www.routledge.com/Analyzing-US-Census-Data-Methods-Maps-and-Models-in-R/Walker/p/book/9781032366449) (available now for pre-order; expected publication October 2022);
 
 -   Contributing to the book by filing an issue or making a pull request at [the book's GitHub repository](https://github.com/walkerke/census-with-r-book);
 
@@ -92,7 +92,7 @@ At the time of the most recent book build, the following R version was used:
 
 
 ```
-## R version 4.1.3 (2022-03-10) -- "One Push-Up"
+## R version 4.2.0 (2022-04-22) -- "Vigorous Calisthenics"
 ```
 
 The examples in this book were created with the following R package versions:
@@ -129,8 +129,8 @@ The examples in this book were created with the following R package versions:
   </tr>
   <tr>
    <td style="text-align:left;"> dplyr </td>
-   <td style="text-align:left;"> 1.0.8 </td>
-   <td style="text-align:left;"> CRAN (R 4.1.2) </td>
+   <td style="text-align:left;"> 1.0.9 </td>
+   <td style="text-align:left;"> CRAN (R 4.2.0) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> geobr </td>
@@ -149,8 +149,8 @@ The examples in this book were created with the following R package versions:
   </tr>
   <tr>
    <td style="text-align:left;"> ggiraph </td>
-   <td style="text-align:left;"> 0.8.1 </td>
-   <td style="text-align:left;"> CRAN (R 4.1.2) </td>
+   <td style="text-align:left;"> 0.8.2 </td>
+   <td style="text-align:left;"> CRAN (R 4.2.0) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> ggplot2 </td>
@@ -169,8 +169,8 @@ The examples in this book were created with the following R package versions:
   </tr>
   <tr>
    <td style="text-align:left;"> httr </td>
-   <td style="text-align:left;"> 1.4.2 </td>
-   <td style="text-align:left;"> CRAN (R 4.1.0) </td>
+   <td style="text-align:left;"> 1.4.3 </td>
+   <td style="text-align:left;"> CRAN (R 4.2.0) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> idbr </td>
@@ -284,13 +284,13 @@ The examples in this book were created with the following R package versions:
   </tr>
   <tr>
    <td style="text-align:left;"> tibble </td>
-   <td style="text-align:left;"> 3.1.6 </td>
-   <td style="text-align:left;"> CRAN (R 4.1.1) </td>
+   <td style="text-align:left;"> 3.1.7 </td>
+   <td style="text-align:left;"> CRAN (R 4.2.0) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> tidycensus </td>
-   <td style="text-align:left;"> 1.2.0.9000 </td>
-   <td style="text-align:left;"> local </td>
+   <td style="text-align:left;"> 1.2.1.9000 </td>
+   <td style="text-align:left;"> Github (walkerke/tidycensus\@7b3b9f0e2b8093c5c860cfd7f018a4280334bb08) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> tidyr </td>
@@ -310,7 +310,7 @@ The examples in this book were created with the following R package versions:
   <tr>
    <td style="text-align:left;"> tigris </td>
    <td style="text-align:left;"> 1.6.0.9000 </td>
-   <td style="text-align:left;"> local </td>
+   <td style="text-align:left;"> Github (walkerke/tigris\@2ca3ecc3c0362a63dc6880736ee8434417ad1d5c) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> tmap </td>

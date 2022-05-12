@@ -1003,7 +1003,7 @@ trauma <- st_read(hospital_url) %>%
 ## Reading layer `Hospitals' from data source 
 ##   `https://opendata.arcgis.com/api/v3/datasets/6ac5e325468c4cb9b905f1728d6fbf0f_0/downloads/data?format=geojson&spatialRefId=4326' 
 ##   using driver `GeoJSON'
-## Simple feature collection with 68775 features and 33 fields
+## Simple feature collection with 76398 features and 33 fields
 ## Geometry type: POINT
 ## Dimension:     XY
 ## Bounding box:  xmin: -176.6403 ymin: -14.29024 xmax: 145.7245 ymax: 71.29773
@@ -1289,9 +1289,9 @@ iso_pov <- interpolate_pw(
   </tr>
   <tr>
    <td style="text-align:left;"> 10min isochrone </td>
-   <td style="text-align:right;"> 3118.447 </td>
-   <td style="text-align:right;"> 23065.89 </td>
-   <td style="text-align:right;"> 13.5 </td>
+   <td style="text-align:right;"> 3012.457 </td>
+   <td style="text-align:right;"> 21885.65 </td>
+   <td style="text-align:right;"> 13.8 </td>
   </tr>
 </tbody>
 </table>
