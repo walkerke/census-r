@@ -2,7 +2,7 @@
 title: "Analyzing US Census Data"
 subtitle: "Methods, Maps, and Models in R"
 author: "Kyle E. Walker"
-date: "2022-05-12"
+date: "2022-08-05"
 site: bookdown::bookdown_site
 knit: bookdown::render_book
 output: bookdown::bs4_book
@@ -92,7 +92,7 @@ At the time of the most recent book build, the following R version was used:
 
 
 ```
-## R version 4.2.0 (2022-04-22) -- "Vigorous Calisthenics"
+## R version 4.2.1 (2022-06-23) -- "Funny-Looking Kid"
 ```
 
 The examples in this book were created with the following R package versions:
@@ -103,219 +103,180 @@ The examples in this book were created with the following R package versions:
   <tr>
    <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"> package </th>
    <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"> version </th>
-   <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"> source </th>
   </tr>
  </thead>
 <tbody>
   <tr>
    <td style="text-align:left;"> blscrapeR </td>
    <td style="text-align:left;"> 3.2.0 </td>
-   <td style="text-align:left;"> CRAN (R 4.1.1) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> cancensus </td>
    <td style="text-align:left;"> 0.4.8 </td>
-   <td style="text-align:left;"> CRAN (R 4.1.2) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> censusapi </td>
    <td style="text-align:left;"> 0.7.2 </td>
-   <td style="text-align:left;"> Github (hrecht/censusapi\@b085e9d1a59a77da4ceb465d88d09332e3901e29) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> crsuggest </td>
-   <td style="text-align:left;"> 0.3.1 </td>
-   <td style="text-align:left;"> CRAN (R 4.1.0) </td>
+   <td style="text-align:left;"> 0.4 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> dplyr </td>
    <td style="text-align:left;"> 1.0.9 </td>
-   <td style="text-align:left;"> CRAN (R 4.2.0) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> geobr </td>
    <td style="text-align:left;"> 1.6.5999 </td>
-   <td style="text-align:left;"> Github (ipeaGIT/geobr\@d2132cd6e0d1c371a3cb871487bd3a312c40072f) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> geofacet </td>
    <td style="text-align:left;"> 0.2.0 </td>
-   <td style="text-align:left;"> CRAN (R 4.1.0) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> ggbeeswarm </td>
    <td style="text-align:left;"> 0.6.0 </td>
-   <td style="text-align:left;"> CRAN (R 4.1.0) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> ggiraph </td>
    <td style="text-align:left;"> 0.8.2 </td>
-   <td style="text-align:left;"> CRAN (R 4.2.0) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> ggplot2 </td>
-   <td style="text-align:left;"> 3.3.5 </td>
-   <td style="text-align:left;"> CRAN (R 4.1.0) </td>
+   <td style="text-align:left;"> 3.3.6.9000 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> ggridges </td>
    <td style="text-align:left;"> 0.5.3 </td>
-   <td style="text-align:left;"> CRAN (R 4.1.0) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> GWmodel </td>
    <td style="text-align:left;"> 2.2-8 </td>
-   <td style="text-align:left;"> CRAN (R 4.1.2) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> httr </td>
    <td style="text-align:left;"> 1.4.3 </td>
-   <td style="text-align:left;"> CRAN (R 4.2.0) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> idbr </td>
    <td style="text-align:left;"> 1.0 </td>
-   <td style="text-align:left;"> CRAN (R 4.1.0) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> inegiR </td>
    <td style="text-align:left;"> 3.0.0 </td>
-   <td style="text-align:left;"> Github (Eflores89/inegiR\@692bf6ae518947062636d459d574a8563eec739f) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> ipumsr </td>
    <td style="text-align:left;"> 0.4.5 </td>
-   <td style="text-align:left;"> CRAN (R 4.1.0) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> jsonlite </td>
    <td style="text-align:left;"> 1.8.0 </td>
-   <td style="text-align:left;"> CRAN (R 4.1.2) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> leaflet </td>
    <td style="text-align:left;"> 2.1.1 </td>
-   <td style="text-align:left;"> CRAN (R 4.1.3) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> leafsync </td>
    <td style="text-align:left;"> 0.1.1.9002 </td>
-   <td style="text-align:left;"> Github (r-spatial/leafsync\@e4c25d9cfbf3da2ec1ee4e1048944d81450e70d3) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> lehdr </td>
    <td style="text-align:left;"> 1.0.1 </td>
-   <td style="text-align:left;"> CRAN (R 4.1.3) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> mapboxapi </td>
-   <td style="text-align:left;"> 0.3.3.9000 </td>
-   <td style="text-align:left;"> local </td>
+   <td style="text-align:left;"> 0.4 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> mapview </td>
    <td style="text-align:left;"> 2.10.0 </td>
-   <td style="text-align:left;"> CRAN (R 4.1.2) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> mxmaps </td>
    <td style="text-align:left;"> 2020.0.0 </td>
-   <td style="text-align:left;"> Github (diegovalle/mxmaps\@8a4c1b906fb6655d4063fb9ed062271074209f2e) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> plotly </td>
    <td style="text-align:left;"> 4.10.0 </td>
-   <td style="text-align:left;"> CRAN (R 4.1.2) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> purrr </td>
    <td style="text-align:left;"> 0.3.4 </td>
-   <td style="text-align:left;"> CRAN (R 4.1.0) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> raster </td>
    <td style="text-align:left;"> 3.5-15 </td>
-   <td style="text-align:left;"> CRAN (R 4.1.2) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> readr </td>
    <td style="text-align:left;"> 2.1.2 </td>
-   <td style="text-align:left;"> CRAN (R 4.1.2) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> rKenyaCensus </td>
    <td style="text-align:left;"> 0.0.2 </td>
-   <td style="text-align:left;"> Github (Shelmith-Kariuki/rKenyaCensus\@6db00e5b1b71a781e6def15dd98a4828b6d960bc) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> segregation </td>
    <td style="text-align:left;"> 0.6.0.9000 </td>
-   <td style="text-align:left;"> Github (elbersb/segregation\@57a904850b4d6ce83bd8f5ba5f00bf07852035be) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> sf </td>
-   <td style="text-align:left;"> 1.0-7 </td>
-   <td style="text-align:left;"> CRAN (R 4.1.2) </td>
+   <td style="text-align:left;"> 1.0-8 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> spatialreg </td>
    <td style="text-align:left;"> 1.2-1 </td>
-   <td style="text-align:left;"> CRAN (R 4.1.2) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> spdep </td>
    <td style="text-align:left;"> 1.1-13 </td>
-   <td style="text-align:left;"> CRAN (R 4.1.2) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> srvyr </td>
    <td style="text-align:left;"> 1.1.0 </td>
-   <td style="text-align:left;"> CRAN (R 4.1.2) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> stringr </td>
    <td style="text-align:left;"> 1.4.0 </td>
-   <td style="text-align:left;"> CRAN (R 4.1.0) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> survey </td>
    <td style="text-align:left;"> 4.1-1 </td>
-   <td style="text-align:left;"> CRAN (R 4.1.2) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> tibble </td>
    <td style="text-align:left;"> 3.1.7 </td>
-   <td style="text-align:left;"> CRAN (R 4.2.0) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> tidycensus </td>
-   <td style="text-align:left;"> 1.2.1.9000 </td>
-   <td style="text-align:left;"> Github (walkerke/tidycensus\@7b3b9f0e2b8093c5c860cfd7f018a4280334bb08) </td>
+   <td style="text-align:left;"> 1.2.2.9000 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> tidyr </td>
    <td style="text-align:left;"> 1.2.0 </td>
-   <td style="text-align:left;"> CRAN (R 4.1.2) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> tidyUSDA </td>
    <td style="text-align:left;"> 0.3.2 </td>
-   <td style="text-align:left;"> CRAN (R 4.1.2) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> tidyverse </td>
    <td style="text-align:left;"> 1.3.1 </td>
-   <td style="text-align:left;"> CRAN (R 4.1.2) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> tigris </td>
-   <td style="text-align:left;"> 1.6.0.9000 </td>
-   <td style="text-align:left;"> Github (walkerke/tigris\@2ca3ecc3c0362a63dc6880736ee8434417ad1d5c) </td>
+   <td style="text-align:left;"> 1.6.1 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> tmap </td>
    <td style="text-align:left;"> 3.3-3 </td>
-   <td style="text-align:left;"> CRAN (R 4.1.2) </td>
   </tr>
 </tbody>
 </table>
+
+## Funding acknowledgment {.unnumbered}
+
+Funding for this book comes in part from [National Science Foundation grant BCS-1739662, "Demographic Inversion In US Metropolitan Areas."](https://www.nsf.gov/awardsearch/showAward?AWD_ID=1739662)

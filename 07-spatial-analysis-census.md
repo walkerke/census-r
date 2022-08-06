@@ -1003,7 +1003,7 @@ trauma <- st_read(hospital_url) %>%
 ## Reading layer `Hospitals' from data source 
 ##   `https://opendata.arcgis.com/api/v3/datasets/6ac5e325468c4cb9b905f1728d6fbf0f_0/downloads/data?format=geojson&spatialRefId=4326' 
 ##   using driver `GeoJSON'
-## Simple feature collection with 76398 features and 33 fields
+## Simple feature collection with 7623 features and 32 fields
 ## Geometry type: POINT
 ## Dimension:     XY
 ## Bounding box:  xmin: -176.6403 ymin: -14.29024 xmax: 145.7245 ymax: 71.29773
@@ -1021,7 +1021,7 @@ names(trauma)
 ## [16] "LATITUDE"   "LONGITUDE"  "NAICS_CODE" "NAICS_DESC" "SOURCE"    
 ## [21] "SOURCEDATE" "VAL_METHOD" "VAL_DATE"   "WEBSITE"    "STATE_ID"  
 ## [26] "ALT_NAME"   "ST_FIPS"    "OWNER"      "TTL_STAFF"  "BEDS"      
-## [31] "TRAUMA"     "HELIPAD"    "GlobalID"   "geometry"
+## [31] "TRAUMA"     "HELIPAD"    "geometry"
 ```
 
 ### Calculating distances
@@ -1170,13 +1170,14 @@ iowa_methodist <- filter(ia_trauma, NAME == "IOWA METHODIST MEDICAL CENTER")
 buf5km <- st_buffer(iowa_methodist, dist = 5000) 
 ```
 
-An alternative option is to create network-based *isochrones*, which are polygons that represent the accessible area around a given location within a given travel time for a given travel mode. Isochrones are implemented in the **mapboxapi** package with the `mb_isochrone()` function. Mapbox isochrones default to traffic conditions associated with the date and time at which the function is called; this can be adjusted with the `depart_at` parameter for historical traffic. The example below draws a 10-minute driving isochrone around Iowa Methodist for a Tuesday during evening rush hour.
+An alternative option is to create network-based *isochrones*, which are polygons that represent the accessible area around a given location within a given travel time for a given travel mode. Isochrones are implemented in the **mapboxapi** package with the `mb_isochrone()` function. Mapbox isochrones default to typical driving conditions around a location; this can be adjusted with the `depart_at` parameter for historical traffic and the argument \`profile = "driving-traffic". The example below draws a 10-minute driving isochrone around Iowa Methodist for a Tuesday during evening rush hour.
 
 
 ```r
 iso10min <- mb_isochrone(
   iowa_methodist, 
   time = 10, 
+  profile = "driving-traffic",
   depart_at = "2022-04-05T17:00"
   )
 ```
@@ -1289,9 +1290,9 @@ iso_pov <- interpolate_pw(
   </tr>
   <tr>
    <td style="text-align:left;"> 10min isochrone </td>
-   <td style="text-align:right;"> 3012.457 </td>
-   <td style="text-align:right;"> 21885.65 </td>
-   <td style="text-align:right;"> 13.8 </td>
+   <td style="text-align:right;"> 2869.237 </td>
+   <td style="text-align:right;"> 20637.67 </td>
+   <td style="text-align:right;"> 13.9 </td>
   </tr>
 </tbody>
 </table>

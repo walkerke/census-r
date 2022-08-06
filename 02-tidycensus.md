@@ -145,28 +145,10 @@ aian_2020 <- get_decennial(
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:left;"> 01 </td>
-   <td style="text-align:left;"> Alabama </td>
+   <td style="text-align:left;"> 42 </td>
+   <td style="text-align:left;"> Pennsylvania </td>
    <td style="text-align:left;"> P1_005N </td>
-   <td style="text-align:right;"> 33625 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 02 </td>
-   <td style="text-align:left;"> Alaska </td>
-   <td style="text-align:left;"> P1_005N </td>
-   <td style="text-align:right;"> 111575 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 04 </td>
-   <td style="text-align:left;"> Arizona </td>
-   <td style="text-align:left;"> P1_005N </td>
-   <td style="text-align:right;"> 319512 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 05 </td>
-   <td style="text-align:left;"> Arkansas </td>
-   <td style="text-align:left;"> P1_005N </td>
-   <td style="text-align:right;"> 27177 </td>
+   <td style="text-align:right;"> 31052 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 06 </td>
@@ -175,10 +157,28 @@ aian_2020 <- get_decennial(
    <td style="text-align:right;"> 631016 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 08 </td>
-   <td style="text-align:left;"> Colorado </td>
+   <td style="text-align:left;"> 54 </td>
+   <td style="text-align:left;"> West Virginia </td>
    <td style="text-align:left;"> P1_005N </td>
-   <td style="text-align:right;"> 74129 </td>
+   <td style="text-align:right;"> 3706 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 49 </td>
+   <td style="text-align:left;"> Utah </td>
+   <td style="text-align:left;"> P1_005N </td>
+   <td style="text-align:right;"> 41644 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 36 </td>
+   <td style="text-align:left;"> New York </td>
+   <td style="text-align:left;"> P1_005N </td>
+   <td style="text-align:right;"> 149690 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 11 </td>
+   <td style="text-align:left;"> District of Columbia </td>
+   <td style="text-align:left;"> P1_005N </td>
+   <td style="text-align:right;"> 3193 </td>
   </tr>
 </tbody>
 </table>
@@ -1557,62 +1557,62 @@ cimarron_blocks <- get_decennial(
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:left;"> 400259503001110 </td>
-   <td style="text-align:left;"> Block 1110, Block Group 1, Census Tract 9503, Cimarron County, Oklahoma </td>
-   <td style="text-align:left;"> H1_001N </td>
-   <td style="text-align:right;"> 4 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 400259503001157 </td>
-   <td style="text-align:left;"> Block 1157, Block Group 1, Census Tract 9503, Cimarron County, Oklahoma </td>
-   <td style="text-align:left;"> H1_001N </td>
-   <td style="text-align:right;"> 1 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 400259501001837 </td>
-   <td style="text-align:left;"> Block 1837, Block Group 1, Census Tract 9501, Cimarron County, Oklahoma </td>
+   <td style="text-align:left;"> 400259501001501 </td>
+   <td style="text-align:left;"> Block 1501, Block Group 1, Census Tract 9501, Cimarron County, Oklahoma </td>
    <td style="text-align:left;"> H1_001N </td>
    <td style="text-align:right;"> 0 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 400259501001751 </td>
-   <td style="text-align:left;"> Block 1751, Block Group 1, Census Tract 9501, Cimarron County, Oklahoma </td>
+   <td style="text-align:left;"> 400259501001504 </td>
+   <td style="text-align:left;"> Block 1504, Block Group 1, Census Tract 9501, Cimarron County, Oklahoma </td>
    <td style="text-align:left;"> H1_001N </td>
    <td style="text-align:right;"> 0 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 400259501001906 </td>
-   <td style="text-align:left;"> Block 1906, Block Group 1, Census Tract 9501, Cimarron County, Oklahoma </td>
+   <td style="text-align:left;"> 400259501001507 </td>
+   <td style="text-align:left;"> Block 1507, Block Group 1, Census Tract 9501, Cimarron County, Oklahoma </td>
+   <td style="text-align:left;"> H1_001N </td>
+   <td style="text-align:right;"> 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 400259501001511 </td>
+   <td style="text-align:left;"> Block 1511, Block Group 1, Census Tract 9501, Cimarron County, Oklahoma </td>
+   <td style="text-align:left;"> H1_001N </td>
+   <td style="text-align:right;"> 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 400259501001514 </td>
+   <td style="text-align:left;"> Block 1514, Block Group 1, Census Tract 9501, Cimarron County, Oklahoma </td>
+   <td style="text-align:left;"> H1_001N </td>
+   <td style="text-align:right;"> 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 400259501001517 </td>
+   <td style="text-align:left;"> Block 1517, Block Group 1, Census Tract 9501, Cimarron County, Oklahoma </td>
+   <td style="text-align:left;"> H1_001N </td>
+   <td style="text-align:right;"> 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 400259501001521 </td>
+   <td style="text-align:left;"> Block 1521, Block Group 1, Census Tract 9501, Cimarron County, Oklahoma </td>
    <td style="text-align:left;"> H1_001N </td>
    <td style="text-align:right;"> 2 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 400259501001996 </td>
-   <td style="text-align:left;"> Block 1996, Block Group 1, Census Tract 9501, Cimarron County, Oklahoma </td>
-   <td style="text-align:left;"> H1_001N </td>
-   <td style="text-align:right;"> 2 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 400259503001208 </td>
-   <td style="text-align:left;"> Block 1208, Block Group 1, Census Tract 9503, Cimarron County, Oklahoma </td>
-   <td style="text-align:left;"> H1_001N </td>
-   <td style="text-align:right;"> 4 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 400259501001888 </td>
-   <td style="text-align:left;"> Block 1888, Block Group 1, Census Tract 9501, Cimarron County, Oklahoma </td>
+   <td style="text-align:left;"> 400259501001538 </td>
+   <td style="text-align:left;"> Block 1538, Block Group 1, Census Tract 9501, Cimarron County, Oklahoma </td>
    <td style="text-align:left;"> H1_001N </td>
    <td style="text-align:right;"> 0 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 400259503001047 </td>
-   <td style="text-align:left;"> Block 1047, Block Group 1, Census Tract 9503, Cimarron County, Oklahoma </td>
+   <td style="text-align:left;"> 400259501001542 </td>
+   <td style="text-align:left;"> Block 1542, Block Group 1, Census Tract 9501, Cimarron County, Oklahoma </td>
    <td style="text-align:left;"> H1_001N </td>
-   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 0 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 400259501001313 </td>
-   <td style="text-align:left;"> Block 1313, Block Group 1, Census Tract 9501, Cimarron County, Oklahoma </td>
+   <td style="text-align:left;"> 400259501001545 </td>
+   <td style="text-align:left;"> Block 1545, Block Group 1, Census Tract 9501, Cimarron County, Oklahoma </td>
    <td style="text-align:left;"> H1_001N </td>
    <td style="text-align:right;"> 0 </td>
   </tr>

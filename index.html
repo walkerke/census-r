@@ -18,8 +18,8 @@
 <meta name="twitter:description" content="This book is an overview of how practitioners can acquire, wrangle, visualize, and model US Census data with the R programming language.">
 <meta name="twitter:image" content="https://walker-data.com/census-r/04-visualizing-census-data_files/figure-html/visualize-error-bars-1.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="libs/bootstrap-4.5.3/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.5.3/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.4/tabs.js"></script><script src="libs/bs3compat-0.2.4/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><script src="libs/plotly-binding-4.10.0/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
 <script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet">
@@ -138,7 +138,7 @@
 </h2>
 <p>This book was written using RStudio’s <a href="https://rstudio.github.io/visual-markdown-editing/">Visual Editor for R Markdown</a>, and published with the <strong>bookdown</strong> R package <span class="citation">(<a href="references.html#ref-xie2016" role="doc-biblioref">Xie 2016</a>)</span>.</p>
 <p>At the time of the most recent book build, the following R version was used:</p>
-<pre><code>## R version 4.2.0 (2022-04-22) -- "Vigorous Calisthenics"</code></pre>
+<pre><code>## R version 4.2.1 (2022-06-23) -- "Funny-Looking Kid"</code></pre>
 <p>The examples in this book were created with the following R package versions:</p>
 <div class="inline-table"><table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
 <caption>
@@ -151,9 +151,6 @@ package
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
 version
 </th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
-source
-</th>
 </tr></thead>
 <tbody>
 <tr>
@@ -163,9 +160,6 @@ blscrapeR
 <td style="text-align:left;">
 3.2.0
 </td>
-<td style="text-align:left;">
-CRAN (R 4.1.1)
-</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -173,9 +167,6 @@ cancensus
 </td>
 <td style="text-align:left;">
 0.4.8
-</td>
-<td style="text-align:left;">
-CRAN (R 4.1.2)
 </td>
 </tr>
 <tr>
@@ -185,19 +176,13 @@ censusapi
 <td style="text-align:left;">
 0.7.2
 </td>
-<td style="text-align:left;">
-Github (hrecht/censusapi@b085e9d1a59a77da4ceb465d88d09332e3901e29)
-</td>
 </tr>
 <tr>
 <td style="text-align:left;">
 crsuggest
 </td>
 <td style="text-align:left;">
-0.3.1
-</td>
-<td style="text-align:left;">
-CRAN (R 4.1.0)
+0.4
 </td>
 </tr>
 <tr>
@@ -207,9 +192,6 @@ dplyr
 <td style="text-align:left;">
 1.0.9
 </td>
-<td style="text-align:left;">
-CRAN (R 4.2.0)
-</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -217,9 +199,6 @@ geobr
 </td>
 <td style="text-align:left;">
 1.6.5999
-</td>
-<td style="text-align:left;">
-Github (ipeaGIT/geobr@d2132cd6e0d1c371a3cb871487bd3a312c40072f)
 </td>
 </tr>
 <tr>
@@ -229,9 +208,6 @@ geofacet
 <td style="text-align:left;">
 0.2.0
 </td>
-<td style="text-align:left;">
-CRAN (R 4.1.0)
-</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -239,9 +215,6 @@ ggbeeswarm
 </td>
 <td style="text-align:left;">
 0.6.0
-</td>
-<td style="text-align:left;">
-CRAN (R 4.1.0)
 </td>
 </tr>
 <tr>
@@ -251,19 +224,13 @@ ggiraph
 <td style="text-align:left;">
 0.8.2
 </td>
-<td style="text-align:left;">
-CRAN (R 4.2.0)
-</td>
 </tr>
 <tr>
 <td style="text-align:left;">
 ggplot2
 </td>
 <td style="text-align:left;">
-3.3.5
-</td>
-<td style="text-align:left;">
-CRAN (R 4.1.0)
+3.3.6.9000
 </td>
 </tr>
 <tr>
@@ -273,9 +240,6 @@ ggridges
 <td style="text-align:left;">
 0.5.3
 </td>
-<td style="text-align:left;">
-CRAN (R 4.1.0)
-</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -283,9 +247,6 @@ GWmodel
 </td>
 <td style="text-align:left;">
 2.2-8
-</td>
-<td style="text-align:left;">
-CRAN (R 4.1.2)
 </td>
 </tr>
 <tr>
@@ -295,9 +256,6 @@ httr
 <td style="text-align:left;">
 1.4.3
 </td>
-<td style="text-align:left;">
-CRAN (R 4.2.0)
-</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -305,9 +263,6 @@ idbr
 </td>
 <td style="text-align:left;">
 1.0
-</td>
-<td style="text-align:left;">
-CRAN (R 4.1.0)
 </td>
 </tr>
 <tr>
@@ -317,9 +272,6 @@ inegiR
 <td style="text-align:left;">
 3.0.0
 </td>
-<td style="text-align:left;">
-Github (Eflores89/inegiR@692bf6ae518947062636d459d574a8563eec739f)
-</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -327,9 +279,6 @@ ipumsr
 </td>
 <td style="text-align:left;">
 0.4.5
-</td>
-<td style="text-align:left;">
-CRAN (R 4.1.0)
 </td>
 </tr>
 <tr>
@@ -339,9 +288,6 @@ jsonlite
 <td style="text-align:left;">
 1.8.0
 </td>
-<td style="text-align:left;">
-CRAN (R 4.1.2)
-</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -349,9 +295,6 @@ leaflet
 </td>
 <td style="text-align:left;">
 2.1.1
-</td>
-<td style="text-align:left;">
-CRAN (R 4.1.3)
 </td>
 </tr>
 <tr>
@@ -361,9 +304,6 @@ leafsync
 <td style="text-align:left;">
 0.1.1.9002
 </td>
-<td style="text-align:left;">
-Github (r-spatial/leafsync@e4c25d9cfbf3da2ec1ee4e1048944d81450e70d3)
-</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -372,19 +312,13 @@ lehdr
 <td style="text-align:left;">
 1.0.1
 </td>
-<td style="text-align:left;">
-CRAN (R 4.1.3)
-</td>
 </tr>
 <tr>
 <td style="text-align:left;">
 mapboxapi
 </td>
 <td style="text-align:left;">
-0.3.3.9000
-</td>
-<td style="text-align:left;">
-local
+0.4
 </td>
 </tr>
 <tr>
@@ -394,9 +328,6 @@ mapview
 <td style="text-align:left;">
 2.10.0
 </td>
-<td style="text-align:left;">
-CRAN (R 4.1.2)
-</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -404,9 +335,6 @@ mxmaps
 </td>
 <td style="text-align:left;">
 2020.0.0
-</td>
-<td style="text-align:left;">
-Github (diegovalle/mxmaps@8a4c1b906fb6655d4063fb9ed062271074209f2e)
 </td>
 </tr>
 <tr>
@@ -416,9 +344,6 @@ plotly
 <td style="text-align:left;">
 4.10.0
 </td>
-<td style="text-align:left;">
-CRAN (R 4.1.2)
-</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -426,9 +351,6 @@ purrr
 </td>
 <td style="text-align:left;">
 0.3.4
-</td>
-<td style="text-align:left;">
-CRAN (R 4.1.0)
 </td>
 </tr>
 <tr>
@@ -438,9 +360,6 @@ raster
 <td style="text-align:left;">
 3.5-15
 </td>
-<td style="text-align:left;">
-CRAN (R 4.1.2)
-</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -448,9 +367,6 @@ readr
 </td>
 <td style="text-align:left;">
 2.1.2
-</td>
-<td style="text-align:left;">
-CRAN (R 4.1.2)
 </td>
 </tr>
 <tr>
@@ -460,9 +376,6 @@ rKenyaCensus
 <td style="text-align:left;">
 0.0.2
 </td>
-<td style="text-align:left;">
-Github (Shelmith-Kariuki/rKenyaCensus@6db00e5b1b71a781e6def15dd98a4828b6d960bc)
-</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -471,19 +384,13 @@ segregation
 <td style="text-align:left;">
 0.6.0.9000
 </td>
-<td style="text-align:left;">
-Github (elbersb/segregation@57a904850b4d6ce83bd8f5ba5f00bf07852035be)
-</td>
 </tr>
 <tr>
 <td style="text-align:left;">
 sf
 </td>
 <td style="text-align:left;">
-1.0-7
-</td>
-<td style="text-align:left;">
-CRAN (R 4.1.2)
+1.0-8
 </td>
 </tr>
 <tr>
@@ -493,9 +400,6 @@ spatialreg
 <td style="text-align:left;">
 1.2-1
 </td>
-<td style="text-align:left;">
-CRAN (R 4.1.2)
-</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -503,9 +407,6 @@ spdep
 </td>
 <td style="text-align:left;">
 1.1-13
-</td>
-<td style="text-align:left;">
-CRAN (R 4.1.2)
 </td>
 </tr>
 <tr>
@@ -515,9 +416,6 @@ srvyr
 <td style="text-align:left;">
 1.1.0
 </td>
-<td style="text-align:left;">
-CRAN (R 4.1.2)
-</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -525,9 +423,6 @@ stringr
 </td>
 <td style="text-align:left;">
 1.4.0
-</td>
-<td style="text-align:left;">
-CRAN (R 4.1.0)
 </td>
 </tr>
 <tr>
@@ -537,9 +432,6 @@ survey
 <td style="text-align:left;">
 4.1-1
 </td>
-<td style="text-align:left;">
-CRAN (R 4.1.2)
-</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -548,19 +440,13 @@ tibble
 <td style="text-align:left;">
 3.1.7
 </td>
-<td style="text-align:left;">
-CRAN (R 4.2.0)
-</td>
 </tr>
 <tr>
 <td style="text-align:left;">
 tidycensus
 </td>
 <td style="text-align:left;">
-1.2.1.9000
-</td>
-<td style="text-align:left;">
-Github (walkerke/tidycensus@7b3b9f0e2b8093c5c860cfd7f018a4280334bb08)
+1.2.2.9000
 </td>
 </tr>
 <tr>
@@ -570,9 +456,6 @@ tidyr
 <td style="text-align:left;">
 1.2.0
 </td>
-<td style="text-align:left;">
-CRAN (R 4.1.2)
-</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -580,9 +463,6 @@ tidyUSDA
 </td>
 <td style="text-align:left;">
 0.3.2
-</td>
-<td style="text-align:left;">
-CRAN (R 4.1.2)
 </td>
 </tr>
 <tr>
@@ -592,19 +472,13 @@ tidyverse
 <td style="text-align:left;">
 1.3.1
 </td>
-<td style="text-align:left;">
-CRAN (R 4.1.2)
-</td>
 </tr>
 <tr>
 <td style="text-align:left;">
 tigris
 </td>
 <td style="text-align:left;">
-1.6.0.9000
-</td>
-<td style="text-align:left;">
-Github (walkerke/tigris@2ca3ecc3c0362a63dc6880736ee8434417ad1d5c)
+1.6.1
 </td>
 </tr>
 <tr>
@@ -614,12 +488,15 @@ tmap
 <td style="text-align:left;">
 3.3-3
 </td>
-<td style="text-align:left;">
-CRAN (R 4.1.2)
-</td>
 </tr>
 </tbody>
 </table></div>
+</div>
+<div id="funding-acknowledgment" class="section level2 unnumbered">
+<h2>Funding acknowledgment<a class="anchor" aria-label="anchor" href="#funding-acknowledgment"><i class="fas fa-link"></i></a>
+</h2>
+<p>Funding for this book comes in part from <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=1739662">National Science Foundation grant BCS-1739662, “Demographic Inversion In US Metropolitan Areas.”</a></p>
+
 </div>
 </div>
   <div class="chapter-nav">
@@ -633,6 +510,7 @@ CRAN (R 4.1.2)
 <li><a class="nav-link" href="#who-this-book-is-for">Who this book is for</a></li>
 <li><a class="nav-link" href="#about-the-author">About the author</a></li>
 <li><a class="nav-link" href="#technical-details">Technical details</a></li>
+<li><a class="nav-link" href="#funding-acknowledgment">Funding acknowledgment</a></li>
 </ul>
 
       <div class="book-extra">
@@ -649,7 +527,7 @@ CRAN (R 4.1.2)
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Analyzing US Census Data</strong>: Methods, Maps, and Models in R" was written by Kyle E. Walker. It was last built on 2022-05-12.</p>
+    <p>"<strong>Analyzing US Census Data</strong>: Methods, Maps, and Models in R" was written by Kyle E. Walker. It was last built on 2022-08-05.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

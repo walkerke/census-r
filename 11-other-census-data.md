@@ -75,7 +75,7 @@ nyc_1910 <- read_nhgis_sf(
 ## Reading geography...
 ## options:        ENCODING=latin1 
 ## Reading layer `US_tract_1910' from data source 
-##   `/tmp/RtmpxkL8Qy/file7ea34374fcfb/US_tract_1910.shp' using driver `ESRI Shapefile'
+##   `/tmp/RtmpcA1uDB/file3e2c6a85b784/US_tract_1910.shp' using driver `ESRI Shapefile'
 ## Simple feature collection with 1989 features and 6 fields
 ## Geometry type: MULTIPOLYGON
 ## Dimension:     XY
@@ -242,7 +242,7 @@ The result can be visualized with any of the mapping packages covered in Chapter
 ```r
 ggplot(nyc_pctfb, aes(fill = pct_fb)) + 
   geom_sf(color = NA) + 
-  scale_fill_viridis_c(option = "magma", labels = scales::percent) + 
+  scale_fill_viridis_c(option = "rocket", labels = scales::percent, direction = -1) + 
   theme_void(base_family = "Verdana") + 
   labs(title = "Percent foreign-born by Census tract, 1910",
        subtitle = "New York City",
@@ -390,6 +390,8 @@ conn <- dbConnect(
 )
 ```
 
+
+
 Once connected to the database, the database extension to **dplyr**, **dbplyr**, facilitates interaction with database tables [@wickham2021_dbplyr]. `tbl()` links to the connection object `conn` to retrieve data from the database; the `in_schema()` function points `tbl()` to the `census1910` table in the `ipums` schema.
 
 Printing the new object `census1910` shows the general structure of the 1910 Census microdata:
@@ -403,7 +405,7 @@ census1910
 
 ```
 ## # Source:   table<"ipums"."census1910"> [?? x 13]
-## # Database: postgres [postgres@localhost:5432/postgres]
+## # Database: postgres [postgres@localhost:5433/postgres]
 ##     YEAR sample serial  hhwt statefip    gq pernum perwt   sex   age marst   lit
 ##    <int>  <int>  <int> <dbl>    <int> <int>  <int> <dbl> <int> <int> <int> <int>
 ##  1  1910 191004      1     1        2     1      1     1     1    43     6     4
@@ -432,7 +434,7 @@ census1910 %>% summarize(n())
 
 ```
 ## # Source:   lazy query [?? x 1]
-## # Database: postgres [postgres@localhost:5432/postgres]
+## # Database: postgres [postgres@localhost:5433/postgres]
 ##      `n()`
 ##    <int64>
 ## 1 92404011
@@ -460,7 +462,7 @@ census1910 %>%
 
 ```
 ## # Source:   lazy query [?? x 3]
-## # Database: postgres [postgres@localhost:5432/postgres]
+## # Database: postgres [postgres@localhost:5433/postgres]
 ## # Groups:   sex
 ##     sex   lit     num
 ##   <int> <int> <int64>
@@ -614,58 +616,58 @@ tx_econ17 <- getCensus(
   </tr>
   <tr>
    <td style="text-align:left;"> 48 </td>
-   <td style="text-align:left;"> 237 </td>
-   <td style="text-align:left;"> 0 </td>
-   <td style="text-align:left;"> 0 </td>
-   <td style="text-align:left;"> 0500000US48237 </td>
+   <td style="text-align:left;"> 383 </td>
+   <td style="text-align:left;"> 140 </td>
+   <td style="text-align:left;"> 2178 </td>
+   <td style="text-align:left;"> 0500000US48383 </td>
    <td style="text-align:left;"> 72 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 48 </td>
-   <td style="text-align:left;"> 389 </td>
-   <td style="text-align:left;"> 664 </td>
-   <td style="text-align:left;"> 14641 </td>
-   <td style="text-align:left;"> 0500000US48389 </td>
+   <td style="text-align:left;"> 473 </td>
+   <td style="text-align:left;"> 1007 </td>
+   <td style="text-align:left;"> 16093 </td>
+   <td style="text-align:left;"> 0500000US48473 </td>
    <td style="text-align:left;"> 72 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 48 </td>
-   <td style="text-align:left;"> 267 </td>
-   <td style="text-align:left;"> 0 </td>
-   <td style="text-align:left;"> 0 </td>
-   <td style="text-align:left;"> 0500000US48267 </td>
+   <td style="text-align:left;"> 017 </td>
+   <td style="text-align:left;"> 214 </td>
+   <td style="text-align:left;"> 3325 </td>
+   <td style="text-align:left;"> 0500000US48017 </td>
    <td style="text-align:left;"> 72 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 48 </td>
-   <td style="text-align:left;"> 503 </td>
-   <td style="text-align:left;"> 506 </td>
-   <td style="text-align:left;"> 7077 </td>
-   <td style="text-align:left;"> 0500000US48503 </td>
+   <td style="text-align:left;"> 105 </td>
+   <td style="text-align:left;"> 274 </td>
+   <td style="text-align:left;"> 3118 </td>
+   <td style="text-align:left;"> 0500000US48105 </td>
    <td style="text-align:left;"> 72 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 48 </td>
-   <td style="text-align:left;"> 251 </td>
-   <td style="text-align:left;"> 4512 </td>
-   <td style="text-align:left;"> 60929 </td>
-   <td style="text-align:left;"> 0500000US48251 </td>
+   <td style="text-align:left;"> 207 </td>
+   <td style="text-align:left;"> 109 </td>
+   <td style="text-align:left;"> 1282 </td>
+   <td style="text-align:left;"> 0500000US48207 </td>
    <td style="text-align:left;"> 72 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 48 </td>
-   <td style="text-align:left;"> 055 </td>
-   <td style="text-align:left;"> 910 </td>
-   <td style="text-align:left;"> 15247 </td>
-   <td style="text-align:left;"> 0500000US48055 </td>
+   <td style="text-align:left;"> 369 </td>
+   <td style="text-align:left;"> 85 </td>
+   <td style="text-align:left;"> 1043 </td>
+   <td style="text-align:left;"> 0500000US48369 </td>
    <td style="text-align:left;"> 72 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 48 </td>
-   <td style="text-align:left;"> 487 </td>
+   <td style="text-align:left;"> 185 </td>
    <td style="text-align:left;"> 394 </td>
-   <td style="text-align:left;"> 5233 </td>
-   <td style="text-align:left;"> 0500000US48487 </td>
+   <td style="text-align:left;"> 5841 </td>
+   <td style="text-align:left;"> 0500000US48185 </td>
    <td style="text-align:left;"> 72 </td>
   </tr>
 </tbody>
@@ -1212,11 +1214,38 @@ maui_accom <- bls_api(seriesid = "SMU15279807072100001",
 <tbody>
   <tr>
    <td style="text-align:right;"> 2022 </td>
+   <td style="text-align:left;"> M06 </td>
+   <td style="text-align:left;"> June </td>
+   <td style="text-align:left;"> true </td>
+   <td style="text-align:right;"> 12.0 </td>
+   <td style="text-align:left;"> P Preliminary </td>
+   <td style="text-align:left;"> SMU15279807072100001 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 2022 </td>
+   <td style="text-align:left;"> M05 </td>
+   <td style="text-align:left;"> May </td>
+   <td style="text-align:left;"> NA </td>
+   <td style="text-align:right;"> 11.9 </td>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:left;"> SMU15279807072100001 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 2022 </td>
+   <td style="text-align:left;"> M04 </td>
+   <td style="text-align:left;"> April </td>
+   <td style="text-align:left;"> NA </td>
+   <td style="text-align:right;"> 11.8 </td>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:left;"> SMU15279807072100001 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 2022 </td>
    <td style="text-align:left;"> M03 </td>
    <td style="text-align:left;"> March </td>
-   <td style="text-align:left;"> true </td>
+   <td style="text-align:left;"> NA </td>
    <td style="text-align:right;"> 11.5 </td>
-   <td style="text-align:left;"> P Preliminary </td>
+   <td style="text-align:left;">  </td>
    <td style="text-align:left;"> SMU15279807072100001 </td>
   </tr>
   <tr>
@@ -1234,33 +1263,6 @@ maui_accom <- bls_api(seriesid = "SMU15279807072100001",
    <td style="text-align:left;"> January </td>
    <td style="text-align:left;"> NA </td>
    <td style="text-align:right;"> 11.1 </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> SMU15279807072100001 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 2021 </td>
-   <td style="text-align:left;"> M12 </td>
-   <td style="text-align:left;"> December </td>
-   <td style="text-align:left;"> NA </td>
-   <td style="text-align:right;"> 11.4 </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> SMU15279807072100001 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 2021 </td>
-   <td style="text-align:left;"> M11 </td>
-   <td style="text-align:left;"> November </td>
-   <td style="text-align:left;"> NA </td>
-   <td style="text-align:right;"> 10.9 </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> SMU15279807072100001 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 2021 </td>
-   <td style="text-align:left;"> M10 </td>
-   <td style="text-align:left;"> October </td>
-   <td style="text-align:left;"> NA </td>
-   <td style="text-align:right;"> 10.7 </td>
    <td style="text-align:left;">  </td>
    <td style="text-align:left;"> SMU15279807072100001 </td>
   </tr>

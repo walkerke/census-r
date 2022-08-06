@@ -49,114 +49,114 @@ Let's take a quick look at our data:
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:left;"> 2016000000411 </td>
+   <td style="text-align:left;"> 2017000908120 </td>
    <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 54 </td>
-   <td style="text-align:right;"> 54 </td>
-   <td style="text-align:right;"> 30 </td>
+   <td style="text-align:right;"> 34 </td>
+   <td style="text-align:right;"> 33 </td>
+   <td style="text-align:right;"> 78 </td>
    <td style="text-align:left;"> 28 </td>
    <td style="text-align:left;"> 1 </td>
    <td style="text-align:left;"> Mississippi/MS </td>
    <td style="text-align:left;"> Male </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2016000000411 </td>
+   <td style="text-align:left;"> 2017000908120 </td>
    <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 54 </td>
-   <td style="text-align:right;"> 95 </td>
-   <td style="text-align:right;"> 22 </td>
+   <td style="text-align:right;"> 34 </td>
+   <td style="text-align:right;"> 18 </td>
+   <td style="text-align:right;"> 76 </td>
    <td style="text-align:left;"> 28 </td>
    <td style="text-align:left;"> 2 </td>
    <td style="text-align:left;"> Mississippi/MS </td>
    <td style="text-align:left;"> Female </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2016000000739 </td>
+   <td style="text-align:left;"> 2017000908139 </td>
    <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 27 </td>
-   <td style="text-align:right;"> 26 </td>
-   <td style="text-align:right;"> 51 </td>
-   <td style="text-align:left;"> 28 </td>
-   <td style="text-align:left;"> 1 </td>
-   <td style="text-align:left;"> Mississippi/MS </td>
-   <td style="text-align:left;"> Male </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2016000000739 </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 27 </td>
-   <td style="text-align:right;"> 17 </td>
-   <td style="text-align:right;"> 17 </td>
+   <td style="text-align:right;"> 7 </td>
+   <td style="text-align:right;"> 7 </td>
+   <td style="text-align:right;"> 59 </td>
    <td style="text-align:left;"> 28 </td>
    <td style="text-align:left;"> 2 </td>
    <td style="text-align:left;"> Mississippi/MS </td>
    <td style="text-align:left;"> Female </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2016000000803 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 30 </td>
-   <td style="text-align:left;"> 28 </td>
-   <td style="text-align:left;"> 2 </td>
-   <td style="text-align:left;"> Mississippi/MS </td>
-   <td style="text-align:left;"> Female </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2016000000803 </td>
+   <td style="text-align:left;"> 2017000908139 </td>
    <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 4 </td>
-   <td style="text-align:right;"> 8 </td>
+   <td style="text-align:right;"> 7 </td>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 64 </td>
    <td style="text-align:left;"> 28 </td>
    <td style="text-align:left;"> 1 </td>
    <td style="text-align:left;"> Mississippi/MS </td>
    <td style="text-align:left;"> Male </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2016000000858 </td>
+   <td style="text-align:left;"> 2017000908358 </td>
    <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 9 </td>
-   <td style="text-align:right;"> 9 </td>
-   <td style="text-align:right;"> 90 </td>
-   <td style="text-align:left;"> 28 </td>
-   <td style="text-align:left;"> 1 </td>
-   <td style="text-align:left;"> Mississippi/MS </td>
-   <td style="text-align:left;"> Male </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2016000000858 </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 9 </td>
-   <td style="text-align:right;"> 24 </td>
-   <td style="text-align:right;"> 63 </td>
-   <td style="text-align:left;"> 28 </td>
-   <td style="text-align:left;"> 1 </td>
-   <td style="text-align:left;"> Mississippi/MS </td>
-   <td style="text-align:left;"> Male </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2016000000901 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 16 </td>
-   <td style="text-align:right;"> 16 </td>
-   <td style="text-align:right;"> 70 </td>
-   <td style="text-align:left;"> 28 </td>
-   <td style="text-align:left;"> 1 </td>
-   <td style="text-align:left;"> Mississippi/MS </td>
-   <td style="text-align:left;"> Male </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2016000000901 </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 16 </td>
-   <td style="text-align:right;"> 24 </td>
+   <td style="text-align:right;"> 36 </td>
+   <td style="text-align:right;"> 36 </td>
    <td style="text-align:right;"> 65 </td>
    <td style="text-align:left;"> 28 </td>
    <td style="text-align:left;"> 2 </td>
    <td style="text-align:left;"> Mississippi/MS </td>
    <td style="text-align:left;"> Female </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2017000908358 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 36 </td>
+   <td style="text-align:right;"> 22 </td>
+   <td style="text-align:right;"> 72 </td>
+   <td style="text-align:left;"> 28 </td>
+   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:left;"> Mississippi/MS </td>
+   <td style="text-align:left;"> Male </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2017000908372 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 61 </td>
+   <td style="text-align:left;"> 28 </td>
+   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:left;"> Mississippi/MS </td>
+   <td style="text-align:left;"> Male </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2017000908372 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 57 </td>
+   <td style="text-align:left;"> 28 </td>
+   <td style="text-align:left;"> 2 </td>
+   <td style="text-align:left;"> Mississippi/MS </td>
+   <td style="text-align:left;"> Female </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2017000908503 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 65 </td>
+   <td style="text-align:right;"> 65 </td>
+   <td style="text-align:right;"> 46 </td>
+   <td style="text-align:left;"> 28 </td>
+   <td style="text-align:left;"> 2 </td>
+   <td style="text-align:left;"> Mississippi/MS </td>
+   <td style="text-align:left;"> Female </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2017000908503 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 65 </td>
+   <td style="text-align:right;"> 57 </td>
+   <td style="text-align:right;"> 16 </td>
+   <td style="text-align:left;"> 28 </td>
+   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:left;"> Mississippi/MS </td>
+   <td style="text-align:left;"> Male </td>
   </tr>
 </tbody>
 </table>
@@ -301,66 +301,84 @@ We can take a quick look at our data:
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:left;"> 2016000000803 </td>
+   <td style="text-align:left;"> 2017000908503 </td>
    <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 22 </td>
-   <td style="text-align:left;"> 01600 </td>
+   <td style="text-align:right;"> 65 </td>
+   <td style="text-align:right;"> 65 </td>
+   <td style="text-align:right;"> 18 </td>
+   <td style="text-align:left;"> 01300 </td>
    <td style="text-align:left;"> 28 </td>
    <td style="text-align:left;"> 3 </td>
    <td style="text-align:left;"> 3 </td>
    <td style="text-align:left;"> 01 </td>
-   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:left;"> 2 </td>
    <td style="text-align:left;"> Mississippi/MS </td>
    <td style="text-align:left;"> Rented </td>
    <td style="text-align:left;"> Other family household: Female householder, no spouse present </td>
+   <td style="text-align:left;"> Not Spanish/Hispanic/Latino </td>
+   <td style="text-align:left;"> Black or African American alone </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2017000909310 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 11 </td>
+   <td style="text-align:right;"> 12 </td>
+   <td style="text-align:right;"> 63 </td>
+   <td style="text-align:left;"> 00600 </td>
+   <td style="text-align:left;"> 28 </td>
+   <td style="text-align:left;"> 3 </td>
+   <td style="text-align:left;"> 3 </td>
+   <td style="text-align:left;"> 01 </td>
+   <td style="text-align:left;"> 2 </td>
+   <td style="text-align:left;"> Mississippi/MS </td>
+   <td style="text-align:left;"> Rented </td>
+   <td style="text-align:left;"> Other family household: Female householder, no spouse present </td>
+   <td style="text-align:left;"> Not Spanish/Hispanic/Latino </td>
+   <td style="text-align:left;"> Black or African American alone </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2017000909754 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 41 </td>
+   <td style="text-align:right;"> 40 </td>
+   <td style="text-align:right;"> 8 </td>
+   <td style="text-align:left;"> 02000 </td>
+   <td style="text-align:left;"> 28 </td>
+   <td style="text-align:left;"> 3 </td>
+   <td style="text-align:left;"> 5 </td>
+   <td style="text-align:left;"> 01 </td>
+   <td style="text-align:left;"> 9 </td>
+   <td style="text-align:left;"> Mississippi/MS </td>
+   <td style="text-align:left;"> Rented </td>
+   <td style="text-align:left;"> Nonfamily household: Male householder: Not living alone </td>
+   <td style="text-align:left;"> Not Spanish/Hispanic/Latino </td>
+   <td style="text-align:left;"> Two or More Races </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2017000910334 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 25 </td>
+   <td style="text-align:right;"> 25 </td>
+   <td style="text-align:right;"> 8 </td>
+   <td style="text-align:left;"> 01400 </td>
+   <td style="text-align:left;"> 28 </td>
+   <td style="text-align:left;"> 3 </td>
+   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:left;"> 01 </td>
+   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:left;"> Mississippi/MS </td>
+   <td style="text-align:left;"> Rented </td>
+   <td style="text-align:left;"> Married couple household </td>
    <td style="text-align:left;"> Not Spanish/Hispanic/Latino </td>
    <td style="text-align:left;"> White alone </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2016000000901 </td>
+   <td style="text-align:left;"> 2017000910561 </td>
    <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 16 </td>
-   <td style="text-align:right;"> 16 </td>
-   <td style="text-align:right;"> 25 </td>
-   <td style="text-align:left;"> 02000 </td>
-   <td style="text-align:left;"> 28 </td>
-   <td style="text-align:left;"> 3 </td>
-   <td style="text-align:left;"> 1 </td>
-   <td style="text-align:left;"> 01 </td>
-   <td style="text-align:left;"> 2 </td>
-   <td style="text-align:left;"> Mississippi/MS </td>
-   <td style="text-align:left;"> Rented </td>
-   <td style="text-align:left;"> Married couple household </td>
-   <td style="text-align:left;"> Not Spanish/Hispanic/Latino </td>
-   <td style="text-align:left;"> Black or African American alone </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2016000001645 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 26 </td>
-   <td style="text-align:right;"> 26 </td>
-   <td style="text-align:right;"> 12 </td>
-   <td style="text-align:left;"> 01900 </td>
-   <td style="text-align:left;"> 28 </td>
-   <td style="text-align:left;"> 3 </td>
-   <td style="text-align:left;"> 6 </td>
-   <td style="text-align:left;"> 01 </td>
-   <td style="text-align:left;"> 2 </td>
-   <td style="text-align:left;"> Mississippi/MS </td>
-   <td style="text-align:left;"> Rented </td>
-   <td style="text-align:left;"> Nonfamily household: Female householder: Living alone </td>
-   <td style="text-align:left;"> Not Spanish/Hispanic/Latino </td>
-   <td style="text-align:left;"> Black or African American alone </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2016000002367 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 7 </td>
-   <td style="text-align:right;"> 7 </td>
-   <td style="text-align:right;"> 27 </td>
-   <td style="text-align:left;"> 00800 </td>
+   <td style="text-align:right;"> 10 </td>
+   <td style="text-align:right;"> 11 </td>
+   <td style="text-align:right;"> 31 </td>
+   <td style="text-align:left;"> 01100 </td>
    <td style="text-align:left;"> 28 </td>
    <td style="text-align:left;"> 3 </td>
    <td style="text-align:left;"> 3 </td>
@@ -369,24 +387,6 @@ We can take a quick look at our data:
    <td style="text-align:left;"> Mississippi/MS </td>
    <td style="text-align:left;"> Rented </td>
    <td style="text-align:left;"> Other family household: Female householder, no spouse present </td>
-   <td style="text-align:left;"> Not Spanish/Hispanic/Latino </td>
-   <td style="text-align:left;"> Black or African American alone </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2016000002946 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 8 </td>
-   <td style="text-align:right;"> 8 </td>
-   <td style="text-align:right;"> 11 </td>
-   <td style="text-align:left;"> 01800 </td>
-   <td style="text-align:left;"> 28 </td>
-   <td style="text-align:left;"> 3 </td>
-   <td style="text-align:left;"> 1 </td>
-   <td style="text-align:left;"> 01 </td>
-   <td style="text-align:left;"> 2 </td>
-   <td style="text-align:left;"> Mississippi/MS </td>
-   <td style="text-align:left;"> Rented </td>
-   <td style="text-align:left;"> Married couple household </td>
    <td style="text-align:left;"> Not Spanish/Hispanic/Latino </td>
    <td style="text-align:left;"> Black or African American alone </td>
   </tr>

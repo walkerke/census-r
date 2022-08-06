@@ -18,8 +18,8 @@
 <meta name="twitter:description" content="As discussed in previous chapters of this book, Census and ACS data are associated with geographies, which are units at which the data are aggregated. These defined geographies are represented in...">
 <meta name="twitter:image" content="https://walker-data.com/census-r/04-visualizing-census-data_files/figure-html/visualize-error-bars-1.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="libs/bootstrap-4.5.3/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.5.3/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.4/tabs.js"></script><script src="libs/bs3compat-0.2.4/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><script src="libs/plotly-binding-4.10.0/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
 <script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet">
@@ -258,9 +258,9 @@ Figure 5.7: Block groups in Washington, DC
 <p>The above examples have provided a sampling of some of the datasets available in <strong>tigris</strong>; a full enumeration of available datasets and the functions to access them are found in the guide below.</p>
 <div class="inline-table"><table class="table table-sm">
 <colgroup>
-<col width="36%">
-<col width="42%">
-<col width="20%">
+<col width="34%">
+<col width="41%">
+<col width="23%">
 </colgroup>
 <thead><tr class="header">
 <th>Function</th>
@@ -271,177 +271,177 @@ Figure 5.7: Block groups in Washington, DC
 <tr class="odd">
 <td><code><a href="https://rdrr.io/pkg/tigris/man/nation.html">nation()</a></code></td>
 <td>cartographic (1:5m; 1:20m)</td>
-<td>2013-2020</td>
+<td>2013-</td>
 </tr>
 <tr class="even">
 <td><code><a href="https://rdrr.io/pkg/tigris/man/divisions.html">divisions()</a></code></td>
 <td>cartographic (1:500k; 1:5m; 1:20m)</td>
-<td>2013-2020</td>
+<td>2013-</td>
 </tr>
 <tr class="odd">
 <td><code><a href="https://rdrr.io/pkg/tigris/man/regions.html">regions()</a></code></td>
 <td>cartographic (1:500k; 1:5m; 1:20m)</td>
-<td>2013-2020</td>
+<td>2013-</td>
 </tr>
 <tr class="even">
 <td><code><a href="https://rdrr.io/pkg/tigris/man/states.html">states()</a></code></td>
 <td>TIGER/Line; cartographic (1:500k; 1:5m; 1:20m)</td>
-<td>1990, 2000, 2010-2020</td>
+<td>1990, 2000, 2010-</td>
 </tr>
 <tr class="odd">
 <td><code><a href="https://rdrr.io/pkg/tigris/man/counties.html">counties()</a></code></td>
 <td>TIGER/Line; cartographic (1:500k; 1:5m; 1:20m)</td>
-<td>1990, 2000, 2010-2020</td>
+<td>1990, 2000, 2010-</td>
 </tr>
 <tr class="even">
 <td><code><a href="https://rdrr.io/pkg/tigris/man/tracts.html">tracts()</a></code></td>
 <td>TIGER/Line; cartographic (1:500k)</td>
-<td>1990, 2000, 2010-2020</td>
+<td>1990, 2000, 2010-</td>
 </tr>
 <tr class="odd">
 <td><code><a href="https://rdrr.io/pkg/tigris/man/block_groups.html">block_groups()</a></code></td>
 <td>TIGER/Line; cartographic (1:500k)</td>
-<td>1990, 2000, 2010-2020</td>
+<td>1990, 2000, 2010-</td>
 </tr>
 <tr class="even">
 <td><code><a href="https://rdrr.io/pkg/tigris/man/blocks.html">blocks()</a></code></td>
 <td>TIGER/Line</td>
-<td>2000, 2010-2020</td>
+<td>2000, 2010-</td>
 </tr>
 <tr class="odd">
 <td><code><a href="https://rdrr.io/pkg/tigris/man/places.html">places()</a></code></td>
 <td>TIGER/Line; cartographic (1:500k)</td>
-<td>2011-2020</td>
+<td>2011-</td>
 </tr>
 <tr class="even">
 <td><code><a href="https://rdrr.io/pkg/tigris/man/pumas.html">pumas()</a></code></td>
 <td>TIGER/Line; cartographic (1:500k)</td>
-<td>2012-2020</td>
+<td>2012-</td>
 </tr>
 <tr class="odd">
 <td><code><a href="https://rdrr.io/pkg/tigris/man/school_districts.html">school_districts()</a></code></td>
 <td>TIGER/Line; cartographic</td>
-<td>2011-2020</td>
+<td>2011-</td>
 </tr>
 <tr class="even">
 <td><code><a href="https://rdrr.io/pkg/tigris/man/zctas.html">zctas()</a></code></td>
 <td>TIGER/Line; cartographic (1:500k)</td>
-<td>2000, 2010, 2012-2020</td>
+<td>2000, 2010, 2012-</td>
 </tr>
 <tr class="odd">
 <td><code><a href="https://rdrr.io/pkg/tigris/man/congressional_districts.html">congressional_districts()</a></code></td>
 <td>TIGER/Line; cartographic (1:500k; 1:5m; 1:20m)</td>
-<td>2011-2020</td>
+<td>2011-</td>
 </tr>
 <tr class="even">
 <td><code><a href="https://rdrr.io/pkg/tigris/man/state_legislative_districts.html">state_legislative_districts()</a></code></td>
 <td>TIGER/Line; cartographic (1:500k)</td>
-<td>2011-2020</td>
+<td>2011-</td>
 </tr>
 <tr class="odd">
 <td><code><a href="https://rdrr.io/pkg/tigris/man/voting_districts.html">voting_districts()</a></code></td>
 <td>TIGER/Line</td>
-<td>2012, 2020</td>
+<td>2012, 2020-</td>
 </tr>
 <tr class="even">
 <td><code><a href="https://rdrr.io/pkg/tigris/man/area_water.html">area_water()</a></code></td>
 <td>TIGER/Line</td>
-<td>2011-2020</td>
+<td>2011-</td>
 </tr>
 <tr class="odd">
 <td><code><a href="https://rdrr.io/pkg/tigris/man/linear_water.html">linear_water()</a></code></td>
 <td>TIGER/Line</td>
-<td>2011-2020</td>
+<td>2011-</td>
 </tr>
 <tr class="even">
 <td><code><a href="https://rdrr.io/pkg/tigris/man/coastline.html">coastline()</a></code></td>
 <td>TIGER/Line()</td>
-<td>2013-2020</td>
+<td>2013-</td>
 </tr>
 <tr class="odd">
 <td><code><a href="https://rdrr.io/pkg/tigris/man/core_based_statistical_areas.html">core_based_statistical_areas()</a></code></td>
 <td>TIGER/Line; cartographic (1:500k; 1:5m; 1:20m)</td>
-<td>2011-2020</td>
+<td>2011-</td>
 </tr>
 <tr class="even">
 <td><code><a href="https://rdrr.io/pkg/tigris/man/combined_statistical_areas.html">combined_statistical_areas()</a></code></td>
 <td>TIGER/Line; cartographic (1:500k; 1:5m; 1:20m)</td>
-<td>2011-2020</td>
+<td>2011-</td>
 </tr>
 <tr class="odd">
 <td><code><a href="https://rdrr.io/pkg/tigris/man/metro_divisions.html">metro_divisions()</a></code></td>
 <td>TIGER/Line</td>
-<td>2011-2020</td>
+<td>2011-</td>
 </tr>
 <tr class="even">
 <td><code><a href="https://rdrr.io/pkg/tigris/man/new_england.html">new_england()</a></code></td>
 <td>TIGER/Line; cartographic (1:500k)</td>
-<td>2011-2020</td>
+<td>2011-</td>
 </tr>
 <tr class="odd">
 <td><code><a href="https://rdrr.io/pkg/tigris/man/county_subdivisions.html">county_subdivisions()</a></code></td>
 <td>TIGER/Line; cartographic (1:500k)</td>
-<td>2010-2020</td>
+<td>2010-</td>
 </tr>
 <tr class="even">
 <td><code><a href="https://rdrr.io/pkg/tigris/man/urban_areas.html">urban_areas()</a></code></td>
 <td>TIGER/Line; cartographic (1:500k)</td>
-<td>2012-2020</td>
+<td>2012-</td>
 </tr>
 <tr class="odd">
 <td><code><a href="https://rdrr.io/pkg/tigris/man/primary_roads.html">primary_roads()</a></code></td>
 <td>TIGER/Line</td>
-<td>2011-2020</td>
+<td>2011-</td>
 </tr>
 <tr class="even">
 <td><code><a href="https://rdrr.io/pkg/tigris/man/primary_secondary_roads.html">primary_secondary_roads()</a></code></td>
 <td>TIGER/Line</td>
-<td>2011-2020</td>
+<td>2011-</td>
 </tr>
 <tr class="odd">
 <td><code><a href="https://rdrr.io/pkg/tigris/man/roads.html">roads()</a></code></td>
 <td>TIGER/Line</td>
-<td>2011-2020</td>
+<td>2011-</td>
 </tr>
 <tr class="even">
 <td><code><a href="https://rdrr.io/pkg/tigris/man/rails.html">rails()</a></code></td>
 <td>TIGER/Line</td>
-<td>2011-2020</td>
+<td>2011-</td>
 </tr>
 <tr class="odd">
 <td><code><a href="https://rdrr.io/pkg/tigris/man/native_areas.html">native_areas()</a></code></td>
 <td>TIGER/Line; cartographic (1:500k)</td>
-<td>2011-2020</td>
+<td>2011-</td>
 </tr>
 <tr class="even">
 <td><code><a href="https://rdrr.io/pkg/tigris/man/alaska_native_regional_corporations.html">alaska_native_regional_corporations()</a></code></td>
 <td>TIGER/Line; cartographic (1:500k)</td>
-<td>2011-2020</td>
+<td>2011-</td>
 </tr>
 <tr class="odd">
 <td><code><a href="https://rdrr.io/pkg/tigris/man/tribal_block_groups.html">tribal_block_groups()</a></code></td>
 <td>TIGER/Line</td>
-<td>2011-2020</td>
+<td>2011-</td>
 </tr>
 <tr class="even">
 <td><code><a href="https://rdrr.io/pkg/tigris/man/tribal_census_tracts.html">tribal_census_tracts()</a></code></td>
 <td>TIGER/Line</td>
-<td>2011-2020</td>
+<td>2011-</td>
 </tr>
 <tr class="odd">
 <td><code><a href="https://rdrr.io/pkg/tigris/man/tribal_subdivisions_national.html">tribal_subdivisions_national()</a></code></td>
 <td>TIGER/Line</td>
-<td>2011-2020</td>
+<td>2011-</td>
 </tr>
 <tr class="even">
 <td><code><a href="https://rdrr.io/pkg/tigris/man/landmarks.html">landmarks()</a></code></td>
 <td>TIGER/Line</td>
-<td>2011-2020</td>
+<td>2011-</td>
 </tr>
 <tr class="odd">
 <td><code><a href="https://rdrr.io/pkg/tigris/man/military.html">military()</a></code></td>
 <td>TIGER/Line</td>
-<td>2011-2020</td>
+<td>2011-</td>
 </tr>
 </tbody>
 </table></div>
@@ -1253,7 +1253,7 @@ Figure 5.22: Sanibel Island, Florida
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Analyzing US Census Data</strong>: Methods, Maps, and Models in R" was written by Kyle E. Walker. It was last built on 2022-05-12.</p>
+    <p>"<strong>Analyzing US Census Data</strong>: Methods, Maps, and Models in R" was written by Kyle E. Walker. It was last built on 2022-08-05.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

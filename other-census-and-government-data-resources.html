@@ -18,8 +18,8 @@
 <meta name="twitter:description" content="Most of the examples covered in the book to this point use data from recent US Census Bureau datasets such as the Decennial Census since 2000 and the American Community Survey. These datasets are...">
 <meta name="twitter:image" content="https://walker-data.com/census-r/04-visualizing-census-data_files/figure-html/visualize-error-bars-1.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="libs/bootstrap-4.5.3/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.5.3/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.4/tabs.js"></script><script src="libs/bs3compat-0.2.4/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><script src="libs/plotly-binding-4.10.0/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
 <script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet">
@@ -144,7 +144,7 @@ Figure 11.2: NHGIS Select Data screen
 ## Reading geography...
 ## options:        ENCODING=latin1 
 ## Reading layer `US_tract_1910' from data source 
-##   `/tmp/RtmpxkL8Qy/file7ea34374fcfb/US_tract_1910.shp' using driver `ESRI Shapefile'
+##   `/tmp/RtmpcA1uDB/file3e2c6a85b784/US_tract_1910.shp' using driver `ESRI Shapefile'
 ## Simple feature collection with 1989 features and 6 fields
 ## Geometry type: MULTIPOLYGON
 ## Dimension:     XY
@@ -400,7 +400,7 @@ Figure 11.5: NYC Census tracts with an area-appropriate CRS
 <div class="sourceCode" id="cb404"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">nyc_pctfb</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">pct_fb</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span>color <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span> <span class="op">+</span> 
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html">scale_fill_viridis_c</a></span><span class="op">(</span>option <span class="op">=</span> <span class="st">"magma"</span>, labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org/reference/percent_format.html">percent</a></span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html">scale_fill_viridis_c</a></span><span class="op">(</span>option <span class="op">=</span> <span class="st">"rocket"</span>, labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org/reference/percent_format.html">percent</a></span>, direction <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span>base_family <span class="op">=</span> <span class="st">"Verdana"</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Percent foreign-born by Census tract, 1910"</span>,
        subtitle <span class="op">=</span> <span class="st">"New York City"</span>,
@@ -766,36 +766,16 @@ NAICS2017
 48
 </td>
 <td style="text-align:left;">
-237
+383
 </td>
 <td style="text-align:left;">
-0
+140
 </td>
 <td style="text-align:left;">
-0
+2178
 </td>
 <td style="text-align:left;">
-0500000US48237
-</td>
-<td style="text-align:left;">
-72
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-48
-</td>
-<td style="text-align:left;">
-389
-</td>
-<td style="text-align:left;">
-664
-</td>
-<td style="text-align:left;">
-14641
-</td>
-<td style="text-align:left;">
-0500000US48389
+0500000US48383
 </td>
 <td style="text-align:left;">
 72
@@ -806,36 +786,16 @@ NAICS2017
 48
 </td>
 <td style="text-align:left;">
-267
+473
 </td>
 <td style="text-align:left;">
-0
+1007
 </td>
 <td style="text-align:left;">
-0
+16093
 </td>
 <td style="text-align:left;">
-0500000US48267
-</td>
-<td style="text-align:left;">
-72
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-48
-</td>
-<td style="text-align:left;">
-503
-</td>
-<td style="text-align:left;">
-506
-</td>
-<td style="text-align:left;">
-7077
-</td>
-<td style="text-align:left;">
-0500000US48503
+0500000US48473
 </td>
 <td style="text-align:left;">
 72
@@ -846,36 +806,16 @@ NAICS2017
 48
 </td>
 <td style="text-align:left;">
-251
+017
 </td>
 <td style="text-align:left;">
-4512
+214
 </td>
 <td style="text-align:left;">
-60929
+3325
 </td>
 <td style="text-align:left;">
-0500000US48251
-</td>
-<td style="text-align:left;">
-72
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-48
-</td>
-<td style="text-align:left;">
-055
-</td>
-<td style="text-align:left;">
-910
-</td>
-<td style="text-align:left;">
-15247
-</td>
-<td style="text-align:left;">
-0500000US48055
+0500000US48017
 </td>
 <td style="text-align:left;">
 72
@@ -886,16 +826,76 @@ NAICS2017
 48
 </td>
 <td style="text-align:left;">
-487
+105
+</td>
+<td style="text-align:left;">
+274
+</td>
+<td style="text-align:left;">
+3118
+</td>
+<td style="text-align:left;">
+0500000US48105
+</td>
+<td style="text-align:left;">
+72
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+48
+</td>
+<td style="text-align:left;">
+207
+</td>
+<td style="text-align:left;">
+109
+</td>
+<td style="text-align:left;">
+1282
+</td>
+<td style="text-align:left;">
+0500000US48207
+</td>
+<td style="text-align:left;">
+72
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+48
+</td>
+<td style="text-align:left;">
+369
+</td>
+<td style="text-align:left;">
+85
+</td>
+<td style="text-align:left;">
+1043
+</td>
+<td style="text-align:left;">
+0500000US48369
+</td>
+<td style="text-align:left;">
+72
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+48
+</td>
+<td style="text-align:left;">
+185
 </td>
 <td style="text-align:left;">
 394
 </td>
 <td style="text-align:left;">
-5233
+5841
 </td>
 <td style="text-align:left;">
-0500000US48487
+0500000US48185
 </td>
 <td style="text-align:left;">
 72
@@ -2010,19 +2010,85 @@ seriesID
 2022
 </td>
 <td style="text-align:left;">
+M06
+</td>
+<td style="text-align:left;">
+June
+</td>
+<td style="text-align:left;">
+true
+</td>
+<td style="text-align:right;">
+12.0
+</td>
+<td style="text-align:left;">
+P Preliminary
+</td>
+<td style="text-align:left;">
+SMU15279807072100001
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2022
+</td>
+<td style="text-align:left;">
+M05
+</td>
+<td style="text-align:left;">
+May
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+11.9
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+SMU15279807072100001
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2022
+</td>
+<td style="text-align:left;">
+M04
+</td>
+<td style="text-align:left;">
+April
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+11.8
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+SMU15279807072100001
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2022
+</td>
+<td style="text-align:left;">
 M03
 </td>
 <td style="text-align:left;">
 March
 </td>
 <td style="text-align:left;">
-true
+NA
 </td>
 <td style="text-align:right;">
 11.5
 </td>
 <td style="text-align:left;">
-P Preliminary
 </td>
 <td style="text-align:left;">
 SMU15279807072100001
@@ -2065,72 +2131,6 @@ NA
 </td>
 <td style="text-align:right;">
 11.1
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-SMU15279807072100001
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-2021
-</td>
-<td style="text-align:left;">
-M12
-</td>
-<td style="text-align:left;">
-December
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:right;">
-11.4
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-SMU15279807072100001
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-2021
-</td>
-<td style="text-align:left;">
-M11
-</td>
-<td style="text-align:left;">
-November
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:right;">
-10.9
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-SMU15279807072100001
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-2021
-</td>
-<td style="text-align:left;">
-M10
-</td>
-<td style="text-align:left;">
-October
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:right;">
-10.7
 </td>
 <td style="text-align:left;">
 </td>
@@ -3462,7 +3462,7 @@ A10
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Analyzing US Census Data</strong>: Methods, Maps, and Models in R" was written by Kyle E. Walker. It was last built on 2022-05-12.</p>
+    <p>"<strong>Analyzing US Census Data</strong>: Methods, Maps, and Models in R" was written by Kyle E. Walker. It was last built on 2022-08-05.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
