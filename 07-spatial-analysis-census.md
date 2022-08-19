@@ -1170,7 +1170,7 @@ iowa_methodist <- filter(ia_trauma, NAME == "IOWA METHODIST MEDICAL CENTER")
 buf5km <- st_buffer(iowa_methodist, dist = 5000) 
 ```
 
-An alternative option is to create network-based *isochrones*, which are polygons that represent the accessible area around a given location within a given travel time for a given travel mode. Isochrones are implemented in the **mapboxapi** package with the `mb_isochrone()` function. Mapbox isochrones default to typical driving conditions around a location; this can be adjusted with the `depart_at` parameter for historical traffic and the argument \`profile = "driving-traffic". The example below draws a 10-minute driving isochrone around Iowa Methodist for a Tuesday during evening rush hour.
+An alternative option is to create network-based *isochrones*, which are polygons that represent the accessible area around a given location within a given travel time for a given travel mode. Isochrones are implemented in the **mapboxapi** package with the `mb_isochrone()` function. Mapbox isochrones default to typical driving conditions around a location; this can be adjusted with the `depart_at` parameter for historical traffic and the argument `profile = "driving-traffic"`. The example below draws a 10-minute driving isochrone around Iowa Methodist for a Tuesday during evening rush hour.
 
 
 ```r
@@ -1290,9 +1290,9 @@ iso_pov <- interpolate_pw(
   </tr>
   <tr>
    <td style="text-align:left;"> 10min isochrone </td>
-   <td style="text-align:right;"> 2869.237 </td>
-   <td style="text-align:right;"> 20637.67 </td>
-   <td style="text-align:right;"> 13.9 </td>
+   <td style="text-align:right;"> 3048.835 </td>
+   <td style="text-align:right;"> 22433.20 </td>
+   <td style="text-align:right;"> 13.6 </td>
   </tr>
 </tbody>
 </table>

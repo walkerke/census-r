@@ -19,7 +19,7 @@
 <meta name="twitter:image" content="https://walker-data.com/census-r/04-visualizing-census-data_files/figure-html/visualize-error-bars-1.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><script src="libs/plotly-binding-4.10.0/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
 <script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet">
@@ -1807,7 +1807,7 @@ Figure 7.16: Map of travel-times to trauma centers by Census tract in Iowa
 <code class="sourceCode R"><span class="va">iowa_methodist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">ia_trauma</span>, <span class="va">NAME</span> <span class="op">==</span> <span class="st">"IOWA METHODIST MEDICAL CENTER"</span><span class="op">)</span>
 
 <span class="va">buf5km</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_buffer</a></span><span class="op">(</span><span class="va">iowa_methodist</span>, dist <span class="op">=</span> <span class="fl">5000</span><span class="op">)</span> </code></pre></div>
-<p>An alternative option is to create network-based <em>isochrones</em>, which are polygons that represent the accessible area around a given location within a given travel time for a given travel mode. Isochrones are implemented in the <strong>mapboxapi</strong> package with the <code><a href="https://rdrr.io/pkg/mapboxapi/man/mb_isochrone.html">mb_isochrone()</a></code> function. Mapbox isochrones default to typical driving conditions around a location; this can be adjusted with the <code>depart_at</code> parameter for historical traffic and the argument `profile = “driving-traffic”. The example below draws a 10-minute driving isochrone around Iowa Methodist for a Tuesday during evening rush hour.</p>
+<p>An alternative option is to create network-based <em>isochrones</em>, which are polygons that represent the accessible area around a given location within a given travel time for a given travel mode. Isochrones are implemented in the <strong>mapboxapi</strong> package with the <code><a href="https://rdrr.io/pkg/mapboxapi/man/mb_isochrone.html">mb_isochrone()</a></code> function. Mapbox isochrones default to typical driving conditions around a location; this can be adjusted with the <code>depart_at</code> parameter for historical traffic and the argument <code>profile = "driving-traffic"</code>. The example below draws a 10-minute driving isochrone around Iowa Methodist for a Tuesday during evening rush hour.</p>
 <div class="sourceCode" id="cb257"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">iso10min</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mapboxapi/man/mb_isochrone.html">mb_isochrone</a></span><span class="op">(</span>
   <span class="va">iowa_methodist</span>, 
@@ -1932,13 +1932,13 @@ Percent
 10min isochrone
 </td>
 <td style="text-align:right;">
-2869.237
+3048.835
 </td>
 <td style="text-align:right;">
-20637.67
+22433.20
 </td>
 <td style="text-align:right;">
-13.9
+13.6
 </td>
 </tr>
 </tbody>
@@ -2660,7 +2660,7 @@ Figure 7.26: View of LISA Shiny app with linked brushing enabled
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Analyzing US Census Data</strong>: Methods, Maps, and Models in R" was written by Kyle E. Walker. It was last built on 2022-08-05.</p>
+    <p>"<strong>Analyzing US Census Data</strong>: Methods, Maps, and Models in R" was written by Kyle E. Walker. It was last built on 2022-08-19.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -2,7 +2,7 @@
 title: "Analyzing US Census Data"
 subtitle: "Methods, Maps, and Models in R"
 author: "Kyle E. Walker"
-date: "2022-08-05"
+date: "2022-08-19"
 site: bookdown::bookdown_site
 knit: bookdown::render_book
 output: bookdown::bs4_book
@@ -188,7 +188,7 @@ The examples in this book were created with the following R package versions:
   </tr>
   <tr>
    <td style="text-align:left;"> mapboxapi </td>
-   <td style="text-align:left;"> 0.4 </td>
+   <td style="text-align:left;"> 0.4.1.9000 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> mapview </td>
@@ -208,7 +208,7 @@ The examples in this book were created with the following R package versions:
   </tr>
   <tr>
    <td style="text-align:left;"> raster </td>
-   <td style="text-align:left;"> 3.5-15 </td>
+   <td style="text-align:left;"> 3.5-21 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> readr </td>
@@ -248,7 +248,7 @@ The examples in this book were created with the following R package versions:
   </tr>
   <tr>
    <td style="text-align:left;"> tibble </td>
-   <td style="text-align:left;"> 3.1.7 </td>
+   <td style="text-align:left;"> 3.1.8 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> tidycensus </td>
