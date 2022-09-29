@@ -144,7 +144,7 @@ Figure 11.2: NHGIS Select Data screen
 ## Reading geography...
 ## options:        ENCODING=latin1 
 ## Reading layer `US_tract_1910' from data source 
-##   `/tmp/RtmpVsHT6g/file472d3e2b656e/US_tract_1910.shp' using driver `ESRI Shapefile'
+##   `/tmp/RtmpaRdFEl/file156f4241e63d/US_tract_1910.shp' using driver `ESRI Shapefile'
 ## Simple feature collection with 1989 features and 6 fields
 ## Geometry type: MULTIPOLYGON
 ## Dimension:     XY
@@ -552,8 +552,7 @@ Figure 11.12: DBeaver data view
 ##  8  1910 191004      5     1        2     1      2     1     1    35     6     4
 ##  9  1910 191004      5     1        2     1      3     1     1    45     2     4
 ## 10  1910 191004      5     1        2     1      4     1     1    55     6     4
-## # … with more rows, and 1 more variable: histid &lt;chr&gt;
-## # ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names</code></pre>
+## # … with more rows, and 1 more variable: histid &lt;chr&gt;</code></pre>
 <p>Our data have 13 columns and an unknown number of rows; the database table is so large that <strong>dbplyr</strong> won’t calculate this automatically. However, the connection to the database allows for interaction with the 1910 Census microdata using familiar tidyverse workflows, which are addressed in the next section.</p>
 </div>
 <div id="analyzing-big-census-microdata-in-r" class="section level3" number="11.2.4">
@@ -1497,7 +1496,7 @@ Figure 11.15: Map of commuter origins to the Microsoft Campus area, Seattle-area
 <span class="fu"><a href="https://rdrr.io/pkg/blscrapeR/man/set_bls_key.html">set_bls_key</a></span><span class="op">(</span><span class="st">"YOUR KEY HERE"</span><span class="op">)</span></code></pre></div>
 <p><strong>blscrapeR</strong> includes a number of helper functions to assist users with some of the most commonly requested statistics. For example, the <code><a href="https://rdrr.io/pkg/blscrapeR/man/get_bls_county.html">get_bls_county()</a></code> function fetches employment data for all counties in the US for a given month.</p>
 <div class="sourceCode" id="cb424"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">latest_employment</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/blscrapeR/man/get_bls_county.html">get_bls_county</a></span><span class="op">(</span><span class="st">"May 2021"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">latest_employment</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/blscrapeR/man/get_bls_county.html">get_bls_county</a></span><span class="op">(</span><span class="st">"May 2022"</span><span class="op">)</span></code></pre></div>
 <div class="inline-table"><table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:show-bls-county">Table 11.4: </span>May 2021 employment data from the BLS
@@ -1549,19 +1548,19 @@ CN0100100000000
 Autauga County, AL
 </td>
 <td style="text-align:left;">
-2021-05-01
+2022-05-01
 </td>
 <td style="text-align:right;">
-26257
+26916
 </td>
 <td style="text-align:right;">
-25565
+26362
 </td>
 <td style="text-align:right;">
-692
+554
 </td>
 <td style="text-align:right;">
-2.6
+2.1
 </td>
 <td style="text-align:left;">
 01001
@@ -1581,19 +1580,19 @@ CN0100300000000
 Baldwin County, AL
 </td>
 <td style="text-align:left;">
-2021-05-01
+2022-05-01
 </td>
 <td style="text-align:right;">
-100091
+101761
 </td>
 <td style="text-align:right;">
-97283
+99568
 </td>
 <td style="text-align:right;">
-2808
+2193
 </td>
 <td style="text-align:right;">
-2.8
+2.2
 </td>
 <td style="text-align:left;">
 01003
@@ -1613,19 +1612,19 @@ CN0100500000000
 Barbour County, AL
 </td>
 <td style="text-align:left;">
-2021-05-01
+2022-05-01
 </td>
 <td style="text-align:right;">
-8148
+8220
 </td>
 <td style="text-align:right;">
-7704
+7920
 </td>
 <td style="text-align:right;">
-444
+300
 </td>
 <td style="text-align:right;">
-5.4
+3.6
 </td>
 <td style="text-align:left;">
 01005
@@ -1645,19 +1644,19 @@ CN0100700000000
 Bibb County, AL
 </td>
 <td style="text-align:left;">
-2021-05-01
+2022-05-01
 </td>
 <td style="text-align:right;">
-8554
+8769
 </td>
 <td style="text-align:right;">
-8250
+8574
 </td>
 <td style="text-align:right;">
-304
+195
 </td>
 <td style="text-align:right;">
-3.6
+2.2
 </td>
 <td style="text-align:left;">
 01007
@@ -1677,19 +1676,19 @@ CN0100900000000
 Blount County, AL
 </td>
 <td style="text-align:left;">
-2021-05-01
+2022-05-01
 </td>
 <td style="text-align:right;">
-24977
+25868
 </td>
 <td style="text-align:right;">
-24421
+25356
 </td>
 <td style="text-align:right;">
-556
+512
 </td>
 <td style="text-align:right;">
-2.2
+2.0
 </td>
 <td style="text-align:left;">
 01009
@@ -1709,19 +1708,19 @@ CN0101100000000
 Bullock County, AL
 </td>
 <td style="text-align:left;">
-2021-05-01
+2022-05-01
 </td>
 <td style="text-align:right;">
-4412
+4469
 </td>
 <td style="text-align:right;">
-4239
+4346
 </td>
 <td style="text-align:right;">
-173
+123
 </td>
 <td style="text-align:right;">
-3.9
+2.8
 </td>
 <td style="text-align:left;">
 01011
@@ -1741,19 +1740,19 @@ CN0101300000000
 Butler County, AL
 </td>
 <td style="text-align:left;">
-2021-05-01
+2022-05-01
 </td>
 <td style="text-align:right;">
-8739
+8759
 </td>
 <td style="text-align:right;">
-8289
+8451
 </td>
 <td style="text-align:right;">
-450
+308
 </td>
 <td style="text-align:right;">
-5.1
+3.5
 </td>
 <td style="text-align:left;">
 01013
@@ -1773,19 +1772,19 @@ CN0101500000000
 Calhoun County, AL
 </td>
 <td style="text-align:left;">
-2021-05-01
+2022-05-01
 </td>
 <td style="text-align:right;">
-46083
+46602
 </td>
 <td style="text-align:right;">
-44232
+45262
 </td>
 <td style="text-align:right;">
-1851
+1340
 </td>
 <td style="text-align:right;">
-4.0
+2.9
 </td>
 <td style="text-align:left;">
 01015
@@ -1805,19 +1804,19 @@ CN0101700000000
 Chambers County, AL
 </td>
 <td style="text-align:left;">
-2021-05-01
+2022-05-01
 </td>
 <td style="text-align:right;">
-15639
+15887
 </td>
 <td style="text-align:right;">
-15057
+15509
 </td>
 <td style="text-align:right;">
-582
+378
 </td>
 <td style="text-align:right;">
-3.7
+2.4
 </td>
 <td style="text-align:left;">
 01017
@@ -1837,19 +1836,19 @@ CN0101900000000
 Cherokee County, AL
 </td>
 <td style="text-align:left;">
-2021-05-01
+2022-05-01
 </td>
 <td style="text-align:right;">
-12029
+11683
 </td>
 <td style="text-align:right;">
-11741
+11440
 </td>
 <td style="text-align:right;">
-288
+243
 </td>
 <td style="text-align:right;">
-2.4
+2.1
 </td>
 <td style="text-align:left;">
 01019
@@ -2011,19 +2010,63 @@ seriesID
 2022
 </td>
 <td style="text-align:left;">
+M08
+</td>
+<td style="text-align:left;">
+August
+</td>
+<td style="text-align:left;">
+true
+</td>
+<td style="text-align:right;">
+12.1
+</td>
+<td style="text-align:left;">
+P Preliminary
+</td>
+<td style="text-align:left;">
+SMU15279807072100001
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2022
+</td>
+<td style="text-align:left;">
+M07
+</td>
+<td style="text-align:left;">
+July
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+12.1
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+SMU15279807072100001
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2022
+</td>
+<td style="text-align:left;">
 M06
 </td>
 <td style="text-align:left;">
 June
 </td>
 <td style="text-align:left;">
-true
+NA
 </td>
 <td style="text-align:right;">
 12.0
 </td>
 <td style="text-align:left;">
-P Preliminary
 </td>
 <td style="text-align:left;">
 SMU15279807072100001
@@ -2095,50 +2138,6 @@ NA
 SMU15279807072100001
 </td>
 </tr>
-<tr>
-<td style="text-align:right;">
-2022
-</td>
-<td style="text-align:left;">
-M02
-</td>
-<td style="text-align:left;">
-February
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:right;">
-11.3
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-SMU15279807072100001
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-2022
-</td>
-<td style="text-align:left;">
-M01
-</td>
-<td style="text-align:left;">
-January
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:right;">
-11.1
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-SMU15279807072100001
-</td>
-</tr>
 </tbody>
 </table></div>
 <p>This time series can be visualized with <strong>ggplot2</strong>:</p>
@@ -2149,8 +2148,8 @@ SMU15279807072100001
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"darkgreen"</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">maui_accom</span><span class="op">$</span><span class="va">value</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">42</span>, <span class="fl">12</span><span class="op">)</span>,
-                     labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Jan"</span>, <span class="fl">2018</span><span class="op">:</span><span class="fl">2021</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">54</span>, <span class="fl">12</span><span class="op">)</span>,
+                     labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Jan"</span>, <span class="fl">2018</span><span class="op">:</span><span class="fl">2022</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">""</span>,
        y <span class="op">=</span> <span class="st">"Number of jobs (in 1000s)"</span>,
        title <span class="op">=</span> <span class="st">"Accommodation employment in Maui, Hawaii"</span>,
@@ -3463,7 +3462,7 @@ A10
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Analyzing US Census Data</strong>: Methods, Maps, and Models in R" was written by Kyle E. Walker. It was last built on 2022-08-19.</p>
+    <p>"<strong>Analyzing US Census Data</strong>: Methods, Maps, and Models in R" was written by Kyle E. Walker. It was last built on 2022-09-29.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

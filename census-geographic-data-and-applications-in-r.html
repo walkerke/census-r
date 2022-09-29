@@ -258,9 +258,9 @@ Figure 5.7: Block groups in Washington, DC
 <p>The above examples have provided a sampling of some of the datasets available in <strong>tigris</strong>; a full enumeration of available datasets and the functions to access them are found in the guide below.</p>
 <div class="inline-table"><table class="table table-sm">
 <colgroup>
-<col width="37%">
-<col width="44%">
-<col width="17%">
+<col width="35%">
+<col width="41%">
+<col width="23%">
 </colgroup>
 <thead><tr class="header">
 <th>Function</th>
@@ -465,7 +465,12 @@ Figure 5.7: Block groups in Washington, DC
 
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">la_tracts</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="05-census-geographic-data_files/figure-html/los-alamos-ggplot-1-1.png" width="100%"></div>
+<div class="figure">
+<span style="display:block;" id="fig:los-alamos-ggplot-1"></span>
+<img src="05-census-geographic-data_files/figure-html/los-alamos-ggplot-1-1.png" alt="Census tracts in Los Alamos County plotted with ggplot2" width="100%"><p class="caption">
+Figure 5.8: Census tracts in Los Alamos County plotted with ggplot2
+</p>
+</div>
 <p>By default, ggplot2 includes its standard grey grid with latitude and longitude values displayed along the axes. For many cartographic applications, an analyst will want to remove this background information. The <code><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void()</a></code> function strips the background grid and axis labels from the plot accordingly:</p>
 <div class="sourceCode" id="cb138"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">la_tracts</span><span class="op">)</span> <span class="op">+</span> 
@@ -474,7 +479,7 @@ Figure 5.7: Block groups in Washington, DC
 <div class="figure">
 <span style="display:block;" id="fig:los-alamos-ggplot-2"></span>
 <img src="05-census-geographic-data_files/figure-html/los-alamos-ggplot-2-1.png" alt="A ggplot2 map with a blank background" width="100%"><p class="caption">
-Figure 5.8: A ggplot2 map with a blank background
+Figure 5.9: A ggplot2 map with a blank background
 </p>
 </div>
 <p>Section <a href="exploring-us-census-data-with-visualization.html#visualizing-group-wise-comparisons">4.6</a> introduced the concept of <em>faceted plots</em> to compare different views, which is also a very useful concept for geographic visualization. Faceted mapping will be addressed directly in the next chapter. For comparative spatial plots, the <strong>patchwork</strong> R package <span class="citation">(<a href="references.html#ref-pedersen2020" role="doc-biblioref">Pedersen 2020</a>)</span> works very well for arranging a multi-plot layout. Below, we’ll use patchwork to put two <strong>ggplot2</strong> spatial plots - one of Census tracts and one of block groups in Los Alamos County - side-by-side using the <code>+</code> operator.</p>
@@ -497,7 +502,7 @@ Figure 5.8: A ggplot2 map with a blank background
 <div class="figure">
 <span style="display:block;" id="fig:los-alamos-patchwork"></span>
 <img src="05-census-geographic-data_files/figure-html/los-alamos-patchwork-1.png" alt="Comparing Census tracts and block groups" width="100%"><p class="caption">
-Figure 5.9: Comparing Census tracts and block groups
+Figure 5.10: Comparing Census tracts and block groups
 </p>
 </div>
 <p>Alternatively, <strong>patchwork</strong> allows R users to arrange plots vertically using the <code>/</code> operator.</p>
@@ -517,7 +522,7 @@ Figure 5.9: Comparing Census tracts and block groups
 <iframe src="img/leaflet/la_tracts.html" width="100%" height="500px" data-external="1">
 </iframe>
 <p class="caption">
-Figure 5.10: Interactive view of Los Alamos, NM
+Figure 5.11: Interactive view of Los Alamos, NM
 </p>
 </div>
 <p>Clicking on a Census tract shape reveals a pop-up with attribute information found in the dataset. Additionally, users can change the underlying basemap to understand the geographic context surrounding their data. <strong>mapview</strong> also includes significant functionality for interactive mapping and data display beyond this basic example; some of these features are covered in the next chapter.</p>
@@ -552,7 +557,7 @@ Figure 5.10: Interactive view of Los Alamos, NM
 <div class="figure">
 <span style="display:block;" id="fig:compare-cb"></span>
 <img src="05-census-geographic-data_files/figure-html/compare-cb-1.png" alt="Comparison of TIGER/Line and cartographic boundary files for Michigan counties" width="100%"><p class="caption">
-Figure 5.11: Comparison of TIGER/Line and cartographic boundary files for Michigan counties
+Figure 5.12: Comparison of TIGER/Line and cartographic boundary files for Michigan counties
 </p>
 </div>
 <p>While the TIGER/Line shapefiles may represent “official” areas of counties - which include water area - they look very unfamiliar to viewers expecting a usual representation of land area in Michigan. As the cartographic boundary file shows islands and a distinct coastline, it will be the better option for most thematic mapping projects. When using the <code>cb = TRUE</code> argument with counties and larger geographies, users can also specify one of three resolutions with the <code>resolution</code> argument: <code>"500k"</code> (the default), <code>"5m"</code>, or <code>"20m"</code>, with higher values representing more generalized boundaries and smaller file sizes.</p>
@@ -598,7 +603,7 @@ Figure 5.11: Comparison of TIGER/Line and cartographic boundary files for Michig
 <div class="figure">
 <span style="display:block;" id="fig:plot-differences"></span>
 <img src="05-census-geographic-data_files/figure-html/plot-differences-1.png" alt="Tarrant County, TX Census tracts, 1990-2020" width="100%"><p class="caption">
-Figure 5.12: Tarrant County, TX Census tracts, 1990-2020
+Figure 5.13: Tarrant County, TX Census tracts, 1990-2020
 </p>
 </div>
 <p>Tarrant County added 180 new Census tracts between 1990 and 2020. As the plot shows, many of these tracts are found in fast-growing parts of the county in the northeast and southeast. Notably, these changes in Census tract geography have downstream implications as well for time-series analysis, as covered in Section <a href="wrangling-census-data-with-tidyverse-tools.html#time-series-analysis-some-cautions">3.4.1</a>. Data at the Census tract level in 2010, for example, will be tabulated differently than in 2020 because the tract geographies are different. One common method for adjusting demographic data between disparate zonal configurations is <em>areal interpolation</em>, a topic covered in Section <a href="spatial-analysis-with-us-census-data.html#computing-demographic-estimates-for-zones-with-areal-interpolation">7.4.4</a>.</p>
@@ -995,7 +1000,7 @@ m
 <div class="figure">
 <span style="display:block;" id="fig:coord-sf"></span>
 <img src="05-census-geographic-data_files/figure-html/coord-sf-1.png" alt="ggplot2 map with CRS specified" width="100%"><p class="caption">
-Figure 5.13: ggplot2 map with CRS specified
+Figure 5.14: ggplot2 map with CRS specified
 </p>
 </div>
 <p>While the data are displayed on the plot in the requested coordinate reference system, the underlying <em>graticule</em> (the grid lines and axis tick labels) default to longitude/latitude. To show the coordinates of the projected coordinate reference system, the argument <code>datum</code> can be used which controls the gridlines.</p>
@@ -1006,7 +1011,7 @@ Figure 5.13: ggplot2 map with CRS specified
 <div class="figure">
 <span style="display:block;" id="fig:modify-graticule"></span>
 <img src="05-census-geographic-data_files/figure-html/modify-graticule-1.png" alt="ggplot2 plot with modified graticule" width="100%"><p class="caption">
-Figure 5.14: ggplot2 plot with modified graticule
+Figure 5.15: ggplot2 plot with modified graticule
 </p>
 </div>
 </div>
@@ -1031,7 +1036,7 @@ Figure 5.14: ggplot2 plot with modified graticule
 <div class="figure">
 <span style="display:block;" id="fig:default-counties"></span>
 <img src="05-census-geographic-data_files/figure-html/default-counties-1.png" alt="Default CRS for US states" width="100%"><p class="caption">
-Figure 5.15: Default CRS for US states
+Figure 5.16: Default CRS for US states
 </p>
 </div>
 <p>The plot does not work well, in part because the Aleutian Islands in far west Alaska cross the 180 degree line of longitude and are plotted on the opposite side of the map. In response, a projected coordinate reference system appropriate for the United States <em>could</em> be used, such as the continental US Albers Equal Area projection:</p>
@@ -1043,7 +1048,7 @@ Figure 5.15: Default CRS for US states
 <div class="figure">
 <span style="display:block;" id="fig:esri-crs"></span>
 <img src="05-census-geographic-data_files/figure-html/esri-crs-1.png" alt="Equal-area CRS for US states" width="100%"><p class="caption">
-Figure 5.16: Equal-area CRS for US states
+Figure 5.17: Equal-area CRS for US states
 </p>
 </div>
 <p>While this representation puts all territories in their appropriate locations, it is clearly not appropriate for Alaska, Hawaii, and Puerto Rico which appear distorted. This coordinate reference system is also not ideal for comparative mapping of states given the large amount of blank space between the states on the map.</p>
@@ -1057,7 +1062,7 @@ Figure 5.16: Equal-area CRS for US states
 <div class="figure">
 <span style="display:block;" id="fig:shift-geometry-1"></span>
 <img src="05-census-geographic-data_files/figure-html/shift-geometry-1-1.png" alt="US states with shifted and rescaled geometry" width="100%"><p class="caption">
-Figure 5.17: US states with shifted and rescaled geometry
+Figure 5.18: US states with shifted and rescaled geometry
 </p>
 </div>
 <p>This view uses two default arguments: <code>preserve_area = FALSE</code>, which shrinks Alaska and inflates Hawaii and Puerto Rico, and <code>position = "below"</code>, which places these areas below the continental United States. Alternatively, we can set <code>preserve_area = TRUE</code> and <code>position = "outside"</code> (used together below, but they can be mixed and matched) for a different view:</p>
@@ -1072,7 +1077,7 @@ Figure 5.17: US states with shifted and rescaled geometry
 <div class="figure">
 <span style="display:block;" id="fig:shift-geometry-2"></span>
 <img src="05-census-geographic-data_files/figure-html/shift-geometry-2-1.png" alt="US states with shifted geometry and consistent area" width="100%"><p class="caption">
-Figure 5.18: US states with shifted geometry and consistent area
+Figure 5.19: US states with shifted geometry and consistent area
 </p>
 </div>
 <p>The areas of Alaska, Hawaii, and Puerto Rico are preserved relative to the continental United States, and the three areas are directionally in their correct positions while still in proximity to the continental US for national display. In addition to spatial objects obtained with tigris, <code><a href="https://rdrr.io/pkg/tigris/man/shift_geometry.html">shift_geometry()</a></code> can shift and rescale other geographic datasets for display in this way. Just make sure you use the same arguments in <code><a href="https://rdrr.io/pkg/tigris/man/shift_geometry.html">shift_geometry()</a></code> for all layers or they will end up misaligned!</p>
@@ -1100,7 +1105,7 @@ Figure 5.18: US states with shifted geometry and consistent area
 <div class="figure">
 <span style="display:block;" id="fig:plot-cities"></span>
 <img src="05-census-geographic-data_files/figure-html/plot-cities-1.png" alt="Large cities in Texas" width="100%"><p class="caption">
-Figure 5.19: Large cities in Texas
+Figure 5.20: Large cities in Texas
 </p>
 </div>
 <p>The issue with this graphic is that city geographies are actually quite irregular and disjoint in practice. All six cities spread across large areas, have holes, and even in some cases include portions that are detached from the main part of the city. This information is important for local planning purposes, but are unnecessary for a state-wide map.</p>
@@ -1115,7 +1120,7 @@ Figure 5.19: Large cities in Texas
 <div class="figure">
 <span style="display:block;" id="fig:tx-centroids"></span>
 <img src="05-census-geographic-data_files/figure-html/tx-centroids-1.png" alt="Large cities in Texas represented as points" width="100%"><p class="caption">
-Figure 5.20: Large cities in Texas represented as points
+Figure 5.21: Large cities in Texas represented as points
 </p>
 </div>
 <p>The cities are displayed as circles rather than as irregular polygons, which makes more sense for visualization of the cities’ locations at this scale.</p>
@@ -1135,7 +1140,7 @@ Figure 5.20: Large cities in Texas represented as points
 <iframe src="img/leaflet/lee_county.html" width="100%" height="500px" data-external="1">
 </iframe>
 <p class="caption">
-Figure 5.21: Lee County, Florida
+Figure 5.22: Lee County, Florida
 </p>
 </div>
 <p>The Lee County polygon has four distinct parts as displayed on the map: the mainland area that contains the cities of Cape Coral and Fort Myers, and three disjoint island areas. Other islands can be further extracted using techniques covered in Chapter 7. Understandably, these four areas are interpreted by R as a single feature:</p>
@@ -1180,7 +1185,7 @@ Figure 5.21: Lee County, Florida
 <iframe src="img/leaflet/sanibel.html" width="100%" height="500px" data-external="1">
 </iframe>
 <p class="caption">
-Figure 5.22: Sanibel Island, Florida
+Figure 5.23: Sanibel Island, Florida
 </p>
 </div>
 </div>
@@ -1253,7 +1258,7 @@ Figure 5.22: Sanibel Island, Florida
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Analyzing US Census Data</strong>: Methods, Maps, and Models in R" was written by Kyle E. Walker. It was last built on 2022-08-19.</p>
+    <p>"<strong>Analyzing US Census Data</strong>: Methods, Maps, and Models in R" was written by Kyle E. Walker. It was last built on 2022-09-29.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

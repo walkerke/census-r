@@ -218,7 +218,7 @@ These three core geometries (point, line, and polygon) can be encoded in more co
 The above examples have provided a sampling of some of the datasets available in **tigris**; a full enumeration of available datasets and the functions to access them are found in the guide below.
 
 | Function                                | Datasets available                             | Years available   |
-|-----------------------------------------|------------------------------------------------|-------------------|
+|--------------------------|------------------------------|-----------------|
 | `nation()`                              | cartographic (1:5m; 1:20m)                     | 2013-             |
 | `divisions()`                           | cartographic (1:500k; 1:5m; 1:20m)             | 2013-             |
 | `regions()`                             | cartographic (1:500k; 1:5m; 1:20m)             | 2013-             |
@@ -277,7 +277,10 @@ ggplot(la_tracts) +
   geom_sf()
 ```
 
-<img src="05-census-geographic-data_files/figure-html/los-alamos-ggplot-1-1.png" width="100%" />
+<div class="figure">
+<img src="05-census-geographic-data_files/figure-html/los-alamos-ggplot-1-1.png" alt="Census tracts in Los Alamos County plotted with ggplot2" width="100%" />
+<p class="caption">(\#fig:los-alamos-ggplot-1)Census tracts in Los Alamos County plotted with ggplot2</p>
+</div>
 
 By default, ggplot2 includes its standard grey grid with latitude and longitude values displayed along the axes. For many cartographic applications, an analyst will want to remove this background information. The `theme_void()` function strips the background grid and axis labels from the plot accordingly:
 

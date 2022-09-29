@@ -2,7 +2,7 @@
 title: "Analyzing US Census Data"
 subtitle: "Methods, Maps, and Models in R"
 author: "Kyle E. Walker"
-date: "2022-08-19"
+date: "2022-09-29"
 site: bookdown::bookdown_site
 knit: bookdown::render_book
 output: bookdown::bs4_book
@@ -124,7 +124,7 @@ The examples in this book were created with the following R package versions:
   </tr>
   <tr>
    <td style="text-align:left;"> dplyr </td>
-   <td style="text-align:left;"> 1.0.9 </td>
+   <td style="text-align:left;"> 1.0.10 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> geobr </td>
@@ -156,7 +156,7 @@ The examples in this book were created with the following R package versions:
   </tr>
   <tr>
    <td style="text-align:left;"> httr </td>
-   <td style="text-align:left;"> 1.4.3 </td>
+   <td style="text-align:left;"> 1.4.4 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> idbr </td>
@@ -188,7 +188,7 @@ The examples in this book were created with the following R package versions:
   </tr>
   <tr>
    <td style="text-align:left;"> mapboxapi </td>
-   <td style="text-align:left;"> 0.4.1.9000 </td>
+   <td style="text-align:left;"> 0.5 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> mapview </td>
@@ -252,11 +252,11 @@ The examples in this book were created with the following R package versions:
   </tr>
   <tr>
    <td style="text-align:left;"> tidycensus </td>
-   <td style="text-align:left;"> 1.2.2.9000 </td>
+   <td style="text-align:left;"> 1.2.3.9000 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> tidyr </td>
-   <td style="text-align:left;"> 1.2.0 </td>
+   <td style="text-align:left;"> 1.2.1 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> tidyUSDA </td>
@@ -268,7 +268,7 @@ The examples in this book were created with the following R package versions:
   </tr>
   <tr>
    <td style="text-align:left;"> tigris </td>
-   <td style="text-align:left;"> 1.6.1 </td>
+   <td style="text-align:left;"> 2.0 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> tmap </td>

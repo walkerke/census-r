@@ -75,7 +75,7 @@ nyc_1910 <- read_nhgis_sf(
 ## Reading geography...
 ## options:        ENCODING=latin1 
 ## Reading layer `US_tract_1910' from data source 
-##   `/tmp/RtmpVsHT6g/file472d3e2b656e/US_tract_1910.shp' using driver `ESRI Shapefile'
+##   `/tmp/RtmpaRdFEl/file156f4241e63d/US_tract_1910.shp' using driver `ESRI Shapefile'
 ## Simple feature collection with 1989 features and 6 fields
 ## Geometry type: MULTIPOLYGON
 ## Dimension:     XY
@@ -419,7 +419,6 @@ census1910
 ##  9  1910 191004      5     1        2     1      3     1     1    45     2     4
 ## 10  1910 191004      5     1        2     1      4     1     1    55     6     4
 ## # … with more rows, and 1 more variable: histid <chr>
-## # ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names
 ```
 
 Our data have 13 columns and an unknown number of rows; the database table is so large that **dbplyr** won't calculate this automatically. However, the connection to the database allows for interaction with the 1910 Census microdata using familiar tidyverse workflows, which are addressed in the next section.
@@ -977,7 +976,7 @@ set_bls_key("YOUR KEY HERE")
 
 
 ```r
-latest_employment <- get_bls_county("May 2021")
+latest_employment <- get_bls_county("May 2022")
 ```
 
 <table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
@@ -1002,11 +1001,11 @@ latest_employment <- get_bls_county("May 2021")
    <td style="text-align:left;"> 01 </td>
    <td style="text-align:left;"> 001 </td>
    <td style="text-align:left;"> Autauga County, AL </td>
-   <td style="text-align:left;"> 2021-05-01 </td>
-   <td style="text-align:right;"> 26257 </td>
-   <td style="text-align:right;"> 25565 </td>
-   <td style="text-align:right;"> 692 </td>
-   <td style="text-align:right;"> 2.6 </td>
+   <td style="text-align:left;"> 2022-05-01 </td>
+   <td style="text-align:right;"> 26916 </td>
+   <td style="text-align:right;"> 26362 </td>
+   <td style="text-align:right;"> 554 </td>
+   <td style="text-align:right;"> 2.1 </td>
    <td style="text-align:left;"> 01001 </td>
   </tr>
   <tr>
@@ -1014,11 +1013,11 @@ latest_employment <- get_bls_county("May 2021")
    <td style="text-align:left;"> 01 </td>
    <td style="text-align:left;"> 003 </td>
    <td style="text-align:left;"> Baldwin County, AL </td>
-   <td style="text-align:left;"> 2021-05-01 </td>
-   <td style="text-align:right;"> 100091 </td>
-   <td style="text-align:right;"> 97283 </td>
-   <td style="text-align:right;"> 2808 </td>
-   <td style="text-align:right;"> 2.8 </td>
+   <td style="text-align:left;"> 2022-05-01 </td>
+   <td style="text-align:right;"> 101761 </td>
+   <td style="text-align:right;"> 99568 </td>
+   <td style="text-align:right;"> 2193 </td>
+   <td style="text-align:right;"> 2.2 </td>
    <td style="text-align:left;"> 01003 </td>
   </tr>
   <tr>
@@ -1026,11 +1025,11 @@ latest_employment <- get_bls_county("May 2021")
    <td style="text-align:left;"> 01 </td>
    <td style="text-align:left;"> 005 </td>
    <td style="text-align:left;"> Barbour County, AL </td>
-   <td style="text-align:left;"> 2021-05-01 </td>
-   <td style="text-align:right;"> 8148 </td>
-   <td style="text-align:right;"> 7704 </td>
-   <td style="text-align:right;"> 444 </td>
-   <td style="text-align:right;"> 5.4 </td>
+   <td style="text-align:left;"> 2022-05-01 </td>
+   <td style="text-align:right;"> 8220 </td>
+   <td style="text-align:right;"> 7920 </td>
+   <td style="text-align:right;"> 300 </td>
+   <td style="text-align:right;"> 3.6 </td>
    <td style="text-align:left;"> 01005 </td>
   </tr>
   <tr>
@@ -1038,11 +1037,11 @@ latest_employment <- get_bls_county("May 2021")
    <td style="text-align:left;"> 01 </td>
    <td style="text-align:left;"> 007 </td>
    <td style="text-align:left;"> Bibb County, AL </td>
-   <td style="text-align:left;"> 2021-05-01 </td>
-   <td style="text-align:right;"> 8554 </td>
-   <td style="text-align:right;"> 8250 </td>
-   <td style="text-align:right;"> 304 </td>
-   <td style="text-align:right;"> 3.6 </td>
+   <td style="text-align:left;"> 2022-05-01 </td>
+   <td style="text-align:right;"> 8769 </td>
+   <td style="text-align:right;"> 8574 </td>
+   <td style="text-align:right;"> 195 </td>
+   <td style="text-align:right;"> 2.2 </td>
    <td style="text-align:left;"> 01007 </td>
   </tr>
   <tr>
@@ -1050,11 +1049,11 @@ latest_employment <- get_bls_county("May 2021")
    <td style="text-align:left;"> 01 </td>
    <td style="text-align:left;"> 009 </td>
    <td style="text-align:left;"> Blount County, AL </td>
-   <td style="text-align:left;"> 2021-05-01 </td>
-   <td style="text-align:right;"> 24977 </td>
-   <td style="text-align:right;"> 24421 </td>
-   <td style="text-align:right;"> 556 </td>
-   <td style="text-align:right;"> 2.2 </td>
+   <td style="text-align:left;"> 2022-05-01 </td>
+   <td style="text-align:right;"> 25868 </td>
+   <td style="text-align:right;"> 25356 </td>
+   <td style="text-align:right;"> 512 </td>
+   <td style="text-align:right;"> 2.0 </td>
    <td style="text-align:left;"> 01009 </td>
   </tr>
   <tr>
@@ -1062,11 +1061,11 @@ latest_employment <- get_bls_county("May 2021")
    <td style="text-align:left;"> 01 </td>
    <td style="text-align:left;"> 011 </td>
    <td style="text-align:left;"> Bullock County, AL </td>
-   <td style="text-align:left;"> 2021-05-01 </td>
-   <td style="text-align:right;"> 4412 </td>
-   <td style="text-align:right;"> 4239 </td>
-   <td style="text-align:right;"> 173 </td>
-   <td style="text-align:right;"> 3.9 </td>
+   <td style="text-align:left;"> 2022-05-01 </td>
+   <td style="text-align:right;"> 4469 </td>
+   <td style="text-align:right;"> 4346 </td>
+   <td style="text-align:right;"> 123 </td>
+   <td style="text-align:right;"> 2.8 </td>
    <td style="text-align:left;"> 01011 </td>
   </tr>
   <tr>
@@ -1074,11 +1073,11 @@ latest_employment <- get_bls_county("May 2021")
    <td style="text-align:left;"> 01 </td>
    <td style="text-align:left;"> 013 </td>
    <td style="text-align:left;"> Butler County, AL </td>
-   <td style="text-align:left;"> 2021-05-01 </td>
-   <td style="text-align:right;"> 8739 </td>
-   <td style="text-align:right;"> 8289 </td>
-   <td style="text-align:right;"> 450 </td>
-   <td style="text-align:right;"> 5.1 </td>
+   <td style="text-align:left;"> 2022-05-01 </td>
+   <td style="text-align:right;"> 8759 </td>
+   <td style="text-align:right;"> 8451 </td>
+   <td style="text-align:right;"> 308 </td>
+   <td style="text-align:right;"> 3.5 </td>
    <td style="text-align:left;"> 01013 </td>
   </tr>
   <tr>
@@ -1086,11 +1085,11 @@ latest_employment <- get_bls_county("May 2021")
    <td style="text-align:left;"> 01 </td>
    <td style="text-align:left;"> 015 </td>
    <td style="text-align:left;"> Calhoun County, AL </td>
-   <td style="text-align:left;"> 2021-05-01 </td>
-   <td style="text-align:right;"> 46083 </td>
-   <td style="text-align:right;"> 44232 </td>
-   <td style="text-align:right;"> 1851 </td>
-   <td style="text-align:right;"> 4.0 </td>
+   <td style="text-align:left;"> 2022-05-01 </td>
+   <td style="text-align:right;"> 46602 </td>
+   <td style="text-align:right;"> 45262 </td>
+   <td style="text-align:right;"> 1340 </td>
+   <td style="text-align:right;"> 2.9 </td>
    <td style="text-align:left;"> 01015 </td>
   </tr>
   <tr>
@@ -1098,11 +1097,11 @@ latest_employment <- get_bls_county("May 2021")
    <td style="text-align:left;"> 01 </td>
    <td style="text-align:left;"> 017 </td>
    <td style="text-align:left;"> Chambers County, AL </td>
-   <td style="text-align:left;"> 2021-05-01 </td>
-   <td style="text-align:right;"> 15639 </td>
-   <td style="text-align:right;"> 15057 </td>
-   <td style="text-align:right;"> 582 </td>
-   <td style="text-align:right;"> 3.7 </td>
+   <td style="text-align:left;"> 2022-05-01 </td>
+   <td style="text-align:right;"> 15887 </td>
+   <td style="text-align:right;"> 15509 </td>
+   <td style="text-align:right;"> 378 </td>
+   <td style="text-align:right;"> 2.4 </td>
    <td style="text-align:left;"> 01017 </td>
   </tr>
   <tr>
@@ -1110,11 +1109,11 @@ latest_employment <- get_bls_county("May 2021")
    <td style="text-align:left;"> 01 </td>
    <td style="text-align:left;"> 019 </td>
    <td style="text-align:left;"> Cherokee County, AL </td>
-   <td style="text-align:left;"> 2021-05-01 </td>
-   <td style="text-align:right;"> 12029 </td>
-   <td style="text-align:right;"> 11741 </td>
-   <td style="text-align:right;"> 288 </td>
-   <td style="text-align:right;"> 2.4 </td>
+   <td style="text-align:left;"> 2022-05-01 </td>
+   <td style="text-align:right;"> 11683 </td>
+   <td style="text-align:right;"> 11440 </td>
+   <td style="text-align:right;"> 243 </td>
+   <td style="text-align:right;"> 2.1 </td>
    <td style="text-align:left;"> 01019 </td>
   </tr>
 </tbody>
@@ -1215,11 +1214,29 @@ maui_accom <- bls_api(seriesid = "SMU15279807072100001",
 <tbody>
   <tr>
    <td style="text-align:right;"> 2022 </td>
+   <td style="text-align:left;"> M08 </td>
+   <td style="text-align:left;"> August </td>
+   <td style="text-align:left;"> true </td>
+   <td style="text-align:right;"> 12.1 </td>
+   <td style="text-align:left;"> P Preliminary </td>
+   <td style="text-align:left;"> SMU15279807072100001 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 2022 </td>
+   <td style="text-align:left;"> M07 </td>
+   <td style="text-align:left;"> July </td>
+   <td style="text-align:left;"> NA </td>
+   <td style="text-align:right;"> 12.1 </td>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:left;"> SMU15279807072100001 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 2022 </td>
    <td style="text-align:left;"> M06 </td>
    <td style="text-align:left;"> June </td>
-   <td style="text-align:left;"> true </td>
+   <td style="text-align:left;"> NA </td>
    <td style="text-align:right;"> 12.0 </td>
-   <td style="text-align:left;"> P Preliminary </td>
+   <td style="text-align:left;">  </td>
    <td style="text-align:left;"> SMU15279807072100001 </td>
   </tr>
   <tr>
@@ -1249,24 +1266,6 @@ maui_accom <- bls_api(seriesid = "SMU15279807072100001",
    <td style="text-align:left;">  </td>
    <td style="text-align:left;"> SMU15279807072100001 </td>
   </tr>
-  <tr>
-   <td style="text-align:right;"> 2022 </td>
-   <td style="text-align:left;"> M02 </td>
-   <td style="text-align:left;"> February </td>
-   <td style="text-align:left;"> NA </td>
-   <td style="text-align:right;"> 11.3 </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> SMU15279807072100001 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 2022 </td>
-   <td style="text-align:left;"> M01 </td>
-   <td style="text-align:left;"> January </td>
-   <td style="text-align:left;"> NA </td>
-   <td style="text-align:right;"> 11.1 </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> SMU15279807072100001 </td>
-  </tr>
 </tbody>
 </table>
 
@@ -1280,8 +1279,8 @@ maui_accom %>%
   geom_line(color = "darkgreen") + 
   theme_minimal() + 
   scale_y_continuous(limits = c(0, max(maui_accom$value) + 1)) + 
-  scale_x_continuous(breaks = seq(1, 42, 12),
-                     labels = paste("Jan", 2018:2021)) + 
+  scale_x_continuous(breaks = seq(1, 54, 12),
+                     labels = paste("Jan", 2018:2022)) + 
   labs(x = "",
        y = "Number of jobs (in 1000s)",
        title = "Accommodation employment in Maui, Hawaii",

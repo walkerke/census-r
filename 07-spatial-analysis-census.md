@@ -1290,9 +1290,9 @@ iso_pov <- interpolate_pw(
   </tr>
   <tr>
    <td style="text-align:left;"> 10min isochrone </td>
-   <td style="text-align:right;"> 3048.835 </td>
-   <td style="text-align:right;"> 22433.20 </td>
-   <td style="text-align:right;"> 13.6 </td>
+   <td style="text-align:right;"> 2887.777 </td>
+   <td style="text-align:right;"> 19964.69 </td>
+   <td style="text-align:right;"> 14.5 </td>
   </tr>
 </tbody>
 </table>

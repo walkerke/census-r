@@ -87,6 +87,7 @@ fig:los-alamos-water
 fig:dc-landmarks
 fig:dc-roads
 fig:dc-polygons
+fig:los-alamos-ggplot-1
 fig:los-alamos-ggplot-2
 fig:los-alamos-patchwork
 fig:la-tracts-mapview
