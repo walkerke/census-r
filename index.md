@@ -2,7 +2,7 @@
 title: "Analyzing US Census Data"
 subtitle: "Methods, Maps, and Models in R"
 author: "Kyle E. Walker"
-date: "2022-09-29"
+date: "2022-12-07"
 site: bookdown::bookdown_site
 knit: bookdown::render_book
 output: bookdown::bs4_book
@@ -92,7 +92,7 @@ At the time of the most recent book build, the following R version was used:
 
 
 ```
-## R version 4.2.1 (2022-06-23) -- "Funny-Looking Kid"
+## R version 4.2.2 Patched (2022-11-10 r83330) -- "Innocent and Trusting"
 ```
 
 The examples in this book were created with the following R package versions:
@@ -144,7 +144,7 @@ The examples in this book were created with the following R package versions:
   </tr>
   <tr>
    <td style="text-align:left;"> ggplot2 </td>
-   <td style="text-align:left;"> 3.3.6.9000 </td>
+   <td style="text-align:left;"> 3.4.0 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> ggridges </td>
@@ -172,7 +172,7 @@ The examples in this book were created with the following R package versions:
   </tr>
   <tr>
    <td style="text-align:left;"> jsonlite </td>
-   <td style="text-align:left;"> 1.8.0 </td>
+   <td style="text-align:left;"> 1.8.3 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> leaflet </td>
@@ -204,7 +204,7 @@ The examples in this book were created with the following R package versions:
   </tr>
   <tr>
    <td style="text-align:left;"> purrr </td>
-   <td style="text-align:left;"> 0.3.4 </td>
+   <td style="text-align:left;"> 0.3.5 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> raster </td>
@@ -224,7 +224,7 @@ The examples in this book were created with the following R package versions:
   </tr>
   <tr>
    <td style="text-align:left;"> sf </td>
-   <td style="text-align:left;"> 1.0-8 </td>
+   <td style="text-align:left;"> 1.0-9 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> spatialreg </td>
@@ -240,7 +240,7 @@ The examples in this book were created with the following R package versions:
   </tr>
   <tr>
    <td style="text-align:left;"> stringr </td>
-   <td style="text-align:left;"> 1.4.0 </td>
+   <td style="text-align:left;"> 1.5.0 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> survey </td>
@@ -252,7 +252,7 @@ The examples in this book were created with the following R package versions:
   </tr>
   <tr>
    <td style="text-align:left;"> tidycensus </td>
-   <td style="text-align:left;"> 1.2.3.9000 </td>
+   <td style="text-align:left;"> 1.3 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> tidyr </td>

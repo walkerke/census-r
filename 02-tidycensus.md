@@ -1557,62 +1557,62 @@ cimarron_blocks <- get_decennial(
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:left;"> 400259501001984 </td>
-   <td style="text-align:left;"> Block 1984, Block Group 1, Census Tract 9501, Cimarron County, Oklahoma </td>
+   <td style="text-align:left;"> 400259501001501 </td>
+   <td style="text-align:left;"> Block 1501, Block Group 1, Census Tract 9501, Cimarron County, Oklahoma </td>
    <td style="text-align:left;"> H1_001N </td>
    <td style="text-align:right;"> 0 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 400259503001035 </td>
-   <td style="text-align:left;"> Block 1035, Block Group 1, Census Tract 9503, Cimarron County, Oklahoma </td>
+   <td style="text-align:left;"> 400259501001504 </td>
+   <td style="text-align:left;"> Block 1504, Block Group 1, Census Tract 9501, Cimarron County, Oklahoma </td>
    <td style="text-align:left;"> H1_001N </td>
    <td style="text-align:right;"> 0 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 400259503001068 </td>
-   <td style="text-align:left;"> Block 1068, Block Group 1, Census Tract 9503, Cimarron County, Oklahoma </td>
-   <td style="text-align:left;"> H1_001N </td>
-   <td style="text-align:right;"> 5 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 400259503001146 </td>
-   <td style="text-align:left;"> Block 1146, Block Group 1, Census Tract 9503, Cimarron County, Oklahoma </td>
+   <td style="text-align:left;"> 400259501001507 </td>
+   <td style="text-align:left;"> Block 1507, Block Group 1, Census Tract 9501, Cimarron County, Oklahoma </td>
    <td style="text-align:left;"> H1_001N </td>
    <td style="text-align:right;"> 0 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 400259503001197 </td>
-   <td style="text-align:left;"> Block 1197, Block Group 1, Census Tract 9503, Cimarron County, Oklahoma </td>
+   <td style="text-align:left;"> 400259501001511 </td>
+   <td style="text-align:left;"> Block 1511, Block Group 1, Census Tract 9501, Cimarron County, Oklahoma </td>
    <td style="text-align:left;"> H1_001N </td>
-   <td style="text-align:right;"> 7 </td>
+   <td style="text-align:right;"> 0 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 400259503001218 </td>
-   <td style="text-align:left;"> Block 1218, Block Group 1, Census Tract 9503, Cimarron County, Oklahoma </td>
+   <td style="text-align:left;"> 400259501001514 </td>
+   <td style="text-align:left;"> Block 1514, Block Group 1, Census Tract 9501, Cimarron County, Oklahoma </td>
+   <td style="text-align:left;"> H1_001N </td>
+   <td style="text-align:right;"> 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 400259501001517 </td>
+   <td style="text-align:left;"> Block 1517, Block Group 1, Census Tract 9501, Cimarron County, Oklahoma </td>
+   <td style="text-align:left;"> H1_001N </td>
+   <td style="text-align:right;"> 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 400259501001521 </td>
+   <td style="text-align:left;"> Block 1521, Block Group 1, Census Tract 9501, Cimarron County, Oklahoma </td>
    <td style="text-align:left;"> H1_001N </td>
    <td style="text-align:right;"> 2 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 400259501001067 </td>
-   <td style="text-align:left;"> Block 1067, Block Group 1, Census Tract 9501, Cimarron County, Oklahoma </td>
+   <td style="text-align:left;"> 400259501001538 </td>
+   <td style="text-align:left;"> Block 1538, Block Group 1, Census Tract 9501, Cimarron County, Oklahoma </td>
    <td style="text-align:left;"> H1_001N </td>
    <td style="text-align:right;"> 0 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 400259501001118 </td>
-   <td style="text-align:left;"> Block 1118, Block Group 1, Census Tract 9501, Cimarron County, Oklahoma </td>
+   <td style="text-align:left;"> 400259501001542 </td>
+   <td style="text-align:left;"> Block 1542, Block Group 1, Census Tract 9501, Cimarron County, Oklahoma </td>
    <td style="text-align:left;"> H1_001N </td>
    <td style="text-align:right;"> 0 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 400259501001141 </td>
-   <td style="text-align:left;"> Block 1141, Block Group 1, Census Tract 9501, Cimarron County, Oklahoma </td>
-   <td style="text-align:left;"> H1_001N </td>
-   <td style="text-align:right;"> 0 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 400259501001223 </td>
-   <td style="text-align:left;"> Block 1223, Block Group 1, Census Tract 9501, Cimarron County, Oklahoma </td>
+   <td style="text-align:left;"> 400259501001545 </td>
+   <td style="text-align:left;"> Block 1545, Block Group 1, Census Tract 9501, Cimarron County, Oklahoma </td>
    <td style="text-align:left;"> H1_001N </td>
    <td style="text-align:right;"> 0 </td>
   </tr>

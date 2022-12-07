@@ -75,7 +75,7 @@ nyc_1910 <- read_nhgis_sf(
 ## Reading geography...
 ## options:        ENCODING=latin1 
 ## Reading layer `US_tract_1910' from data source 
-##   `/tmp/RtmpaRdFEl/file156f4241e63d/US_tract_1910.shp' using driver `ESRI Shapefile'
+##   `/tmp/RtmpEORC2U/file5ae14834694/US_tract_1910.shp' using driver `ESRI Shapefile'
 ## Simple feature collection with 1989 features and 6 fields
 ## Geometry type: MULTIPOLYGON
 ## Dimension:     XY
@@ -991,7 +991,7 @@ latest_employment <- get_bls_county("May 2022")
    <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"> labor_force </th>
    <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"> employed </th>
    <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"> unemployed </th>
-   <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"> unemployed_rate </th>
+   <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"> unemployed_rate </th>
    <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"> fips </th>
   </tr>
  </thead>
@@ -1005,7 +1005,7 @@ latest_employment <- get_bls_county("May 2022")
    <td style="text-align:right;"> 26916 </td>
    <td style="text-align:right;"> 26362 </td>
    <td style="text-align:right;"> 554 </td>
-   <td style="text-align:right;"> 2.1 </td>
+   <td style="text-align:left;"> 2.1 </td>
    <td style="text-align:left;"> 01001 </td>
   </tr>
   <tr>
@@ -1017,7 +1017,7 @@ latest_employment <- get_bls_county("May 2022")
    <td style="text-align:right;"> 101761 </td>
    <td style="text-align:right;"> 99568 </td>
    <td style="text-align:right;"> 2193 </td>
-   <td style="text-align:right;"> 2.2 </td>
+   <td style="text-align:left;"> 2.2 </td>
    <td style="text-align:left;"> 01003 </td>
   </tr>
   <tr>
@@ -1029,7 +1029,7 @@ latest_employment <- get_bls_county("May 2022")
    <td style="text-align:right;"> 8220 </td>
    <td style="text-align:right;"> 7920 </td>
    <td style="text-align:right;"> 300 </td>
-   <td style="text-align:right;"> 3.6 </td>
+   <td style="text-align:left;"> 3.6 </td>
    <td style="text-align:left;"> 01005 </td>
   </tr>
   <tr>
@@ -1041,7 +1041,7 @@ latest_employment <- get_bls_county("May 2022")
    <td style="text-align:right;"> 8769 </td>
    <td style="text-align:right;"> 8574 </td>
    <td style="text-align:right;"> 195 </td>
-   <td style="text-align:right;"> 2.2 </td>
+   <td style="text-align:left;"> 2.2 </td>
    <td style="text-align:left;"> 01007 </td>
   </tr>
   <tr>
@@ -1053,7 +1053,7 @@ latest_employment <- get_bls_county("May 2022")
    <td style="text-align:right;"> 25868 </td>
    <td style="text-align:right;"> 25356 </td>
    <td style="text-align:right;"> 512 </td>
-   <td style="text-align:right;"> 2.0 </td>
+   <td style="text-align:left;"> 2.0 </td>
    <td style="text-align:left;"> 01009 </td>
   </tr>
   <tr>
@@ -1065,7 +1065,7 @@ latest_employment <- get_bls_county("May 2022")
    <td style="text-align:right;"> 4469 </td>
    <td style="text-align:right;"> 4346 </td>
    <td style="text-align:right;"> 123 </td>
-   <td style="text-align:right;"> 2.8 </td>
+   <td style="text-align:left;"> 2.8 </td>
    <td style="text-align:left;"> 01011 </td>
   </tr>
   <tr>
@@ -1077,7 +1077,7 @@ latest_employment <- get_bls_county("May 2022")
    <td style="text-align:right;"> 8759 </td>
    <td style="text-align:right;"> 8451 </td>
    <td style="text-align:right;"> 308 </td>
-   <td style="text-align:right;"> 3.5 </td>
+   <td style="text-align:left;"> 3.5 </td>
    <td style="text-align:left;"> 01013 </td>
   </tr>
   <tr>
@@ -1089,7 +1089,7 @@ latest_employment <- get_bls_county("May 2022")
    <td style="text-align:right;"> 46602 </td>
    <td style="text-align:right;"> 45262 </td>
    <td style="text-align:right;"> 1340 </td>
-   <td style="text-align:right;"> 2.9 </td>
+   <td style="text-align:left;"> 2.9 </td>
    <td style="text-align:left;"> 01015 </td>
   </tr>
   <tr>
@@ -1101,7 +1101,7 @@ latest_employment <- get_bls_county("May 2022")
    <td style="text-align:right;"> 15887 </td>
    <td style="text-align:right;"> 15509 </td>
    <td style="text-align:right;"> 378 </td>
-   <td style="text-align:right;"> 2.4 </td>
+   <td style="text-align:left;"> 2.4 </td>
    <td style="text-align:left;"> 01017 </td>
   </tr>
   <tr>
@@ -1113,7 +1113,7 @@ latest_employment <- get_bls_county("May 2022")
    <td style="text-align:right;"> 11683 </td>
    <td style="text-align:right;"> 11440 </td>
    <td style="text-align:right;"> 243 </td>
-   <td style="text-align:right;"> 2.1 </td>
+   <td style="text-align:left;"> 2.1 </td>
    <td style="text-align:left;"> 01019 </td>
   </tr>
 </tbody>
@@ -1214,11 +1214,29 @@ maui_accom <- bls_api(seriesid = "SMU15279807072100001",
 <tbody>
   <tr>
    <td style="text-align:right;"> 2022 </td>
+   <td style="text-align:left;"> M10 </td>
+   <td style="text-align:left;"> October </td>
+   <td style="text-align:left;"> true </td>
+   <td style="text-align:right;"> 12.3 </td>
+   <td style="text-align:left;"> P Preliminary </td>
+   <td style="text-align:left;"> SMU15279807072100001 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 2022 </td>
+   <td style="text-align:left;"> M09 </td>
+   <td style="text-align:left;"> September </td>
+   <td style="text-align:left;"> NA </td>
+   <td style="text-align:right;"> 12.1 </td>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:left;"> SMU15279807072100001 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 2022 </td>
    <td style="text-align:left;"> M08 </td>
    <td style="text-align:left;"> August </td>
-   <td style="text-align:left;"> true </td>
-   <td style="text-align:right;"> 12.1 </td>
-   <td style="text-align:left;"> P Preliminary </td>
+   <td style="text-align:left;"> NA </td>
+   <td style="text-align:right;"> 12.2 </td>
+   <td style="text-align:left;">  </td>
    <td style="text-align:left;"> SMU15279807072100001 </td>
   </tr>
   <tr>
@@ -1245,24 +1263,6 @@ maui_accom <- bls_api(seriesid = "SMU15279807072100001",
    <td style="text-align:left;"> May </td>
    <td style="text-align:left;"> NA </td>
    <td style="text-align:right;"> 11.9 </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> SMU15279807072100001 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 2022 </td>
-   <td style="text-align:left;"> M04 </td>
-   <td style="text-align:left;"> April </td>
-   <td style="text-align:left;"> NA </td>
-   <td style="text-align:right;"> 11.8 </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> SMU15279807072100001 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 2022 </td>
-   <td style="text-align:left;"> M03 </td>
-   <td style="text-align:left;"> March </td>
-   <td style="text-align:left;"> NA </td>
-   <td style="text-align:right;"> 11.5 </td>
    <td style="text-align:left;">  </td>
    <td style="text-align:left;"> SMU15279807072100001 </td>
   </tr>

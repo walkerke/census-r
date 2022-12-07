@@ -301,94 +301,94 @@ We can take a quick look at our data:
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:left;"> 2019HU0266269 </td>
+   <td style="text-align:left;"> 2017000908503 </td>
    <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 14 </td>
-   <td style="text-align:right;"> 14 </td>
-   <td style="text-align:right;"> 101 </td>
-   <td style="text-align:left;"> 01100 </td>
-   <td style="text-align:left;"> 28 </td>
-   <td style="text-align:left;"> 3 </td>
-   <td style="text-align:left;"> 6 </td>
-   <td style="text-align:left;"> 01 </td>
-   <td style="text-align:left;"> 1 </td>
-   <td style="text-align:left;"> Mississippi/MS </td>
-   <td style="text-align:left;"> Rented </td>
-   <td style="text-align:left;"> Nonfamily household: Female householder: Living alone </td>
-   <td style="text-align:left;"> Not Spanish/Hispanic/Latino </td>
-   <td style="text-align:left;"> White alone </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2019HU0266529 </td>
-   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 65 </td>
+   <td style="text-align:right;"> 65 </td>
    <td style="text-align:right;"> 18 </td>
-   <td style="text-align:right;"> 17 </td>
-   <td style="text-align:right;"> 27 </td>
-   <td style="text-align:left;"> 02000 </td>
+   <td style="text-align:left;"> 01300 </td>
    <td style="text-align:left;"> 28 </td>
    <td style="text-align:left;"> 3 </td>
-   <td style="text-align:left;"> 1 </td>
-   <td style="text-align:left;"> 01 </td>
-   <td style="text-align:left;"> 1 </td>
-   <td style="text-align:left;"> Mississippi/MS </td>
-   <td style="text-align:left;"> Rented </td>
-   <td style="text-align:left;"> Married couple household </td>
-   <td style="text-align:left;"> Not Spanish/Hispanic/Latino </td>
-   <td style="text-align:left;"> White alone </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2019HU0266712 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 105 </td>
-   <td style="text-align:right;"> 105 </td>
-   <td style="text-align:right;"> 57 </td>
-   <td style="text-align:left;"> 02000 </td>
-   <td style="text-align:left;"> 28 </td>
    <td style="text-align:left;"> 3 </td>
-   <td style="text-align:left;"> 4 </td>
-   <td style="text-align:left;"> 01 </td>
-   <td style="text-align:left;"> 1 </td>
-   <td style="text-align:left;"> Mississippi/MS </td>
-   <td style="text-align:left;"> Rented </td>
-   <td style="text-align:left;"> Nonfamily household: Male householder: Living alone </td>
-   <td style="text-align:left;"> Not Spanish/Hispanic/Latino </td>
-   <td style="text-align:left;"> White alone </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2019HU0268193 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 13 </td>
-   <td style="text-align:right;"> 13 </td>
-   <td style="text-align:right;"> 18 </td>
-   <td style="text-align:left;"> 00500 </td>
-   <td style="text-align:left;"> 28 </td>
-   <td style="text-align:left;"> 3 </td>
-   <td style="text-align:left;"> 1 </td>
    <td style="text-align:left;"> 01 </td>
    <td style="text-align:left;"> 2 </td>
    <td style="text-align:left;"> Mississippi/MS </td>
    <td style="text-align:left;"> Rented </td>
-   <td style="text-align:left;"> Married couple household </td>
+   <td style="text-align:left;"> Other family household: Female householder, no spouse present </td>
    <td style="text-align:left;"> Not Spanish/Hispanic/Latino </td>
    <td style="text-align:left;"> Black or African American alone </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2019HU0268829 </td>
+   <td style="text-align:left;"> 2017000909310 </td>
    <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 22 </td>
-   <td style="text-align:left;"> 00400 </td>
+   <td style="text-align:right;"> 11 </td>
+   <td style="text-align:right;"> 12 </td>
+   <td style="text-align:right;"> 63 </td>
+   <td style="text-align:left;"> 00600 </td>
    <td style="text-align:left;"> 28 </td>
    <td style="text-align:left;"> 3 </td>
-   <td style="text-align:left;"> 4 </td>
+   <td style="text-align:left;"> 3 </td>
+   <td style="text-align:left;"> 01 </td>
+   <td style="text-align:left;"> 2 </td>
+   <td style="text-align:left;"> Mississippi/MS </td>
+   <td style="text-align:left;"> Rented </td>
+   <td style="text-align:left;"> Other family household: Female householder, no spouse present </td>
+   <td style="text-align:left;"> Not Spanish/Hispanic/Latino </td>
+   <td style="text-align:left;"> Black or African American alone </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2017000909754 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 41 </td>
+   <td style="text-align:right;"> 40 </td>
+   <td style="text-align:right;"> 8 </td>
+   <td style="text-align:left;"> 02000 </td>
+   <td style="text-align:left;"> 28 </td>
+   <td style="text-align:left;"> 3 </td>
+   <td style="text-align:left;"> 5 </td>
+   <td style="text-align:left;"> 01 </td>
+   <td style="text-align:left;"> 9 </td>
+   <td style="text-align:left;"> Mississippi/MS </td>
+   <td style="text-align:left;"> Rented </td>
+   <td style="text-align:left;"> Nonfamily household: Male householder: Not living alone </td>
+   <td style="text-align:left;"> Not Spanish/Hispanic/Latino </td>
+   <td style="text-align:left;"> Two or More Races </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2017000910334 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 25 </td>
+   <td style="text-align:right;"> 25 </td>
+   <td style="text-align:right;"> 8 </td>
+   <td style="text-align:left;"> 01400 </td>
+   <td style="text-align:left;"> 28 </td>
+   <td style="text-align:left;"> 3 </td>
+   <td style="text-align:left;"> 1 </td>
    <td style="text-align:left;"> 01 </td>
    <td style="text-align:left;"> 1 </td>
    <td style="text-align:left;"> Mississippi/MS </td>
    <td style="text-align:left;"> Rented </td>
-   <td style="text-align:left;"> Nonfamily household: Male householder: Living alone </td>
+   <td style="text-align:left;"> Married couple household </td>
    <td style="text-align:left;"> Not Spanish/Hispanic/Latino </td>
    <td style="text-align:left;"> White alone </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2017000910561 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 10 </td>
+   <td style="text-align:right;"> 11 </td>
+   <td style="text-align:right;"> 31 </td>
+   <td style="text-align:left;"> 01100 </td>
+   <td style="text-align:left;"> 28 </td>
+   <td style="text-align:left;"> 3 </td>
+   <td style="text-align:left;"> 3 </td>
+   <td style="text-align:left;"> 01 </td>
+   <td style="text-align:left;"> 2 </td>
+   <td style="text-align:left;"> Mississippi/MS </td>
+   <td style="text-align:left;"> Rented </td>
+   <td style="text-align:left;"> Other family household: Female householder, no spouse present </td>
+   <td style="text-align:left;"> Not Spanish/Hispanic/Latino </td>
+   <td style="text-align:left;"> Black or African American alone </td>
   </tr>
 </tbody>
 </table>

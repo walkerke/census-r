@@ -39,10 +39,10 @@ library(tidyverse)
 ```
 
 ```
-## ✔ ggplot2 3.3.6.9000     ✔ purrr   0.3.4     
-## ✔ tibble  3.1.8          ✔ dplyr   1.0.10    
-## ✔ tidyr   1.2.1          ✔ stringr 1.4.0     
-## ✔ readr   2.1.2          ✔ forcats 0.5.1
+## ✔ ggplot2 3.4.0      ✔ purrr   0.3.5 
+## ✔ tibble  3.1.8      ✔ dplyr   1.0.10
+## ✔ tidyr   1.2.1      ✔ stringr 1.5.0 
+## ✔ readr   2.1.2      ✔ forcats 0.5.2
 ```
 
 ```
