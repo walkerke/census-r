@@ -895,7 +895,7 @@ wfh_interpolate_aw <- st_interpolate_aw(
 
 When a user computes area-weighted areal interpolation with `st_interpolate_aw()`, the function prints the following warning: `st_interpolate_aw assumes attributes are constant or uniform over areas of x`. This assumption that proportionally larger *areas* also have proportionally more *people* is often incorrect with respect to the geography of human settlements, and can be a source of error when using this method. An alternative method, *population-weighted areal interpolation*, can represent an improvement. As opposed to using area-based weights, population-weighted techniques estimate the populations of the intersections between origin and destination from a third dataset, then use those values for interpolation weights.
 
-This method is implemented in **tidycensus** with the `interpolate_pw()` function. This function is specified in a similar way to `st_interpolate_aw()`, but also requires a third dataset to be used as weights, and optionally a weight column to determine the relative influence of each feature in the weights dataset. For many purposes, **tidycensus** users will want to use Census blocks as the weights dataset, though users can bring alternative datasets as well. 2020 Census blocks acquired with the **tigris** package have the added benefit of `POP20` and `HU20` columns in the dataset that represent population and housing unit counts, respectively, either one of which could be used to weight each block.
+This method is implemented in **tidycensus** with the `interpolate_pw()` function. This function is specified in a similar way to `st_interpolate_aw()`, but also requires a third dataset to be used as weights, and optionally a weight column to determine the relative influence of each feature in the weights dataset. For many purposes, **tidycensus** users will want to use Census blocks as the weights dataset, though users can bring alternative datasets as well. 2020 Census blocks acquired with the **tigris** package have the added benefit of `POP20` and `HOUSING20` columns in the dataset that represent population and housing unit counts, respectively, either one of which could be used to weight each block.
 
 
 ```r
@@ -991,7 +991,7 @@ options(tigris_use_cache = TRUE)
 ia_tracts <- tracts("IA", cb = TRUE, year = 2019) %>%
   st_transform(26975)
 
-hospital_url <- "https://opendata.arcgis.com/api/v3/datasets/6ac5e325468c4cb9b905f1728d6fbf0f_0/downloads/data?format=geojson&spatialRefId=4326"
+hospital_url <- "https://services1.arcgis.com/Hp6G80Pky0om7QvQ/arcgis/rest/services/Hospital/FeatureServer/0/query?outFields=*&where=1%3D1&f=geojson"
 
 trauma <- st_read(hospital_url) %>%
   filter(str_detect(TRAUMA, "LEVEL I\\b|LEVEL II\\b|RTH|RTC")) %>%
@@ -1000,10 +1000,10 @@ trauma <- st_read(hospital_url) %>%
 ```
 
 ```
-## Reading layer `Hospitals' from data source 
-##   `https://opendata.arcgis.com/api/v3/datasets/6ac5e325468c4cb9b905f1728d6fbf0f_0/downloads/data?format=geojson&spatialRefId=4326' 
+## Reading layer `OGRGeoJSON' from data source 
+##   `https://services1.arcgis.com/Hp6G80Pky0om7QvQ/arcgis/rest/services/Hospital/FeatureServer/0/query?outFields=*&where=1%3D1&f=geojson' 
 ##   using driver `GeoJSON'
-## Simple feature collection with 7623 features and 32 fields
+## Simple feature collection with 8013 features and 32 fields
 ## Geometry type: POINT
 ## Dimension:     XY
 ## Bounding box:  xmin: -176.6403 ymin: -14.29024 xmax: 145.7245 ymax: 71.29773
@@ -1061,12 +1061,12 @@ dist[1:5, 1:5]
 
 ```
 ## Units: [m]
-##           [,1]      [,2]     [,3]     [,4]     [,5]
-## [1,] 279570.18 279188.81 385140.7 383863.7 257745.5
-## [2,] 298851.01 298409.46 400428.5 399022.9 276955.8
-## [3,] 350121.53 347800.57 353428.8 350263.3 404616.0
-## [4,] 361742.20 360450.59 421691.6 419364.9 369415.7
-## [5,]  66762.19  63479.67 143552.1 143935.5 194001.0
+##          [,1]      [,2]       [,3]      [,4]     [,5]
+## [1,] 257675.1 279570.18 266595.998 279188.81 385140.7
+## [2,] 276887.3 298851.01 284447.086 298409.46 400428.5
+## [3,] 404511.8 350121.53 303529.967 347800.57 353428.8
+## [4,] 369333.5 361742.20 331904.542 360450.59 421691.6
+## [5,] 193886.8  66762.19   9716.301  63479.67 143552.1
 ```
 
 A glimpse at the matrix shows distances (in meters) between the first five Census tracts in the dataset and the first five hospitals. When considering *accessibility*, we may be interested in the distance to the *nearest* hospital to each Census tract. The code below extracts the minimum distance from the matrix for each row, converts to a vector, and divides each value by 1000 to convert values to kilometers. A quick histogram visualizes the distribution of minimum distances.
@@ -1165,7 +1165,7 @@ The example below illustrates the distance-based approach using a *buffer*, impl
 
 
 ```r
-iowa_methodist <- filter(ia_trauma, NAME == "IOWA METHODIST MEDICAL CENTER")
+iowa_methodist <- filter(ia_trauma, ID == "0009850308")
 
 buf5km <- st_buffer(iowa_methodist, dist = 5000) 
 ```
@@ -1290,9 +1290,9 @@ iso_pov <- interpolate_pw(
   </tr>
   <tr>
    <td style="text-align:left;"> 10min isochrone </td>
-   <td style="text-align:right;"> 2991.402 </td>
-   <td style="text-align:right;"> 21510.42 </td>
-   <td style="text-align:right;"> 13.9 </td>
+   <td style="text-align:right;"> 3187.727 </td>
+   <td style="text-align:right;"> 23557.76 </td>
+   <td style="text-align:right;"> 13.5 </td>
   </tr>
 </tbody>
 </table>

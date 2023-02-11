@@ -121,6 +121,7 @@ fig:diverging-palette
 fig:categorical-palette
 fig:symbol-map
 fig:faceted-map
+fig:make-dot-map
 fig:election-map
 fig:show-boston-zctas
 tab:boston-se-data-show

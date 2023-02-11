@@ -39,10 +39,10 @@ library(tidyverse)
 ```
 
 ```
-## ✔ ggplot2 3.4.0      ✔ purrr   0.3.5 
-## ✔ tibble  3.1.8      ✔ dplyr   1.0.10
-## ✔ tidyr   1.2.1      ✔ stringr 1.5.0 
-## ✔ readr   2.1.2      ✔ forcats 0.5.2
+## ✔ ggplot2 3.4.0     ✔ purrr   1.0.1
+## ✔ tibble  3.1.8     ✔ dplyr   1.1.0
+## ✔ tidyr   1.3.0     ✔ stringr 1.5.0
+## ✔ readr   2.1.3     ✔ forcats 1.0.0
 ```
 
 ```
@@ -1303,7 +1303,11 @@ oglala_lakota_age_10 <- get_acs(
 ```
 
 ```
-## Error: Your API call has errors.  The API message returned is .
+## Error in `map()`:
+## ℹ In index: 1.
+## ℹ With name: 1.
+## Caused by error:
+## ! Your API call has errors.  The API message returned is .
 ```
 
 The request errors, and we don't get an informative error message back from the API as was discussed in Section \@ref(debugging-tidycensus-errors). The problem here is that Oglala Lakota County had a different name in 2010, Shannon County, meaning that the `county = "Oglala Lakota"` argument will not return any data. In turn, the equivalent code for the 2006-2010 ACS would use `county = "Shannon"`.
@@ -1961,7 +1965,7 @@ This particular format is suitable for data display or writing to an Excel sprea
 
 ## Handling margins of error in the American Community Survey with tidycensus
 
-A topic of critical importance when working with data from the American Community Survey is the *margin of error*. As opposed to the decennial US Census, which is based on a complete enumeration of the US population, the ACS is based on a sample with estimates characterized by margins of error. By default, MOEs are returned at a 90 percent confidence level. This can be translated roughtly as "we are 90 percent sure that the true value falls within a range defined by the estimate plus or minus the margin of error."
+A topic of critical importance when working with data from the American Community Survey is the *margin of error*. As opposed to the decennial US Census, which is based on a complete enumeration of the US population, the ACS is based on a sample with estimates characterized by margins of error. By default, MOEs are returned at a 90 percent confidence level. This can be translated roughly as "we are 90 percent sure that the true value falls within a range defined by the estimate plus or minus the margin of error."
 
 As discussed in Chapter 2, **tidycensus** takes an opinionated approach to margins of error. When applicable, **tidycensus** will always return the margin of error associated with an estimate, and does not have an option available to return estimates only. For "tidy" or long-form data, these margins of error will be found in the `moe` column; for wide-form data, margins of error will be found in columns with an `M` suffix.
 

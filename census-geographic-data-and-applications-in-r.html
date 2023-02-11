@@ -19,11 +19,11 @@
 <meta name="twitter:image" content="https://walker-data.com/census-r/04-visualizing-census-data_files/figure-html/visualize-error-bars-1.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.18/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.1.9900/transition.js"></script><script src="libs/bs3compat-0.4.1.9900/tabs.js"></script><script src="libs/bs3compat-0.4.1.9900/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2.9000/transition.js"></script><script src="libs/bs3compat-0.4.2.9000/tabs.js"></script><script src="libs/bs3compat-0.4.2.9000/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><script src="libs/plotly-binding-4.10.0/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
-<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet">
-<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script><script src="libs/d3-bundle-5.16.0/d3-bundle.min.js"></script><script src="libs/d3-lasso-0.0.5/d3-lasso.min.js"></script><script src="libs/save-svg-as-png-1.4.17/save-svg-as-png.min.js"></script><link href="libs/ggiraphjs-0.4.2/ggiraphjs.min.css" rel="stylesheet">
+<script src="libs/htmlwidgets-1.6.1/htmlwidgets.js"></script><script src="libs/plotly-binding-4.10.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script><script src="libs/d3-bundle-5.16.0/d3-bundle.min.js"></script><script src="libs/d3-lasso-0.0.5/d3-lasso.min.js"></script><script src="libs/save-svg-as-png-1.4.17/save-svg-as-png.min.js"></script><link href="libs/ggiraphjs-0.4.2/ggiraphjs.min.css" rel="stylesheet">
 <script src="libs/ggiraphjs-0.4.2/ggiraphjs.min.js"></script><script src="libs/girafe-binding-0.8.2/girafe.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-6KFYZ3W36Z"></script><script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -68,6 +68,7 @@
 <li><a class="" href="other-census-and-government-data-resources.html"><span class="header-section-number">11</span> Other Census and government data resources</a></li>
 <li><a class="" href="working-with-census-data-outside-the-united-states.html"><span class="header-section-number">12</span> Working with Census data outside the United States</a></li>
 <li><a class="" href="conclusion.html">Conclusion</a></li>
+<li><a class="" href="errata.html">Errata</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
 
@@ -258,9 +259,9 @@ Figure 5.7: Block groups in Washington, DC
 <p>The above examples have provided a sampling of some of the datasets available in <strong>tigris</strong>; a full enumeration of available datasets and the functions to access them are found in the guide below.</p>
 <div class="inline-table"><table class="table table-sm">
 <colgroup>
-<col width="34%">
-<col width="40%">
-<col width="25%">
+<col width="37%">
+<col width="44%">
+<col width="17%">
 </colgroup>
 <thead><tr class="header">
 <th>Function</th>
@@ -619,12 +620,12 @@ Figure 5.13: Tarrant County, TX Census tracts, 1990-2020
 
 <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">us_bgs_2020</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 242303</code></pre>
-<p>However, this is not an option for years 2018 and earlier, which means that <strong>tigris</strong> users must turn to alternative methods to generate national datasets. Such datasets are straightforward to create with <strong>tidyverse</strong> tools. As covered in several examples thus far in this book, the <code><a href="https://purrr.tidyverse.org/reference/map.html">purrr::map()</a></code> family of functions iterate over a sequence of values and combine function results as directed by a user. For tigris users, the <code><a href="https://purrr.tidyverse.org/reference/map.html">map_dfr()</a></code> function will prove especially useful as it row-binds datasets to create its output. The built-in <code>state.abb</code> vector in R gives us postal codes of all 50 US states; if Washington, DC or Puerto Rico are required in your analysis, add these to the vector with <code><a href="https://rdrr.io/r/base/c.html">c()</a></code> as shown below.</p>
-<p>Once the vector of state codes is prepared, a user can iterate over those codes with <code><a href="https://purrr.tidyverse.org/reference/map.html">map_dfr()</a></code> and produce a national block group dataset, shown for 2018 below.</p>
+<p>However, this is not an option for years 2018 and earlier, which means that <strong>tigris</strong> users must turn to alternative methods to generate national datasets. Such datasets are straightforward to create with <strong>tidyverse</strong> tools. As covered in several examples thus far in this book, the <code><a href="https://purrr.tidyverse.org/reference/map.html">purrr::map()</a></code> family of functions iterate over a sequence of values and combine function results as directed by a user. For tigris users, the <code><a href="https://purrr.tidyverse.org/reference/map_dfr.html">map_dfr()</a></code> function will prove especially useful as it row-binds datasets to create its output. The built-in <code>state.abb</code> vector in R gives us postal codes of all 50 US states; if Washington, DC or Puerto Rico are required in your analysis, add these to the vector with <code><a href="https://rdrr.io/r/base/c.html">c()</a></code> as shown below.</p>
+<p>Once the vector of state codes is prepared, a user can iterate over those codes with <code><a href="https://purrr.tidyverse.org/reference/map_dfr.html">map_dfr()</a></code> and produce a national block group dataset, shown for 2018 below.</p>
 <div class="sourceCode" id="cb148"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">state_codes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">state.abb</span>, <span class="st">"DC"</span>, <span class="st">"PR"</span><span class="op">)</span>
 
-<span class="va">us_bgs_2018</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_dfr</a></span><span class="op">(</span>
+<span class="va">us_bgs_2018</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html">map_dfr</a></span><span class="op">(</span>
   <span class="va">state_codes</span>, 
   <span class="op">~</span><span class="fu"><a href="https://rdrr.io/pkg/tigris/man/block_groups.html">block_groups</a></span><span class="op">(</span>
     state <span class="op">=</span> <span class="va">.x</span>, 
@@ -1251,7 +1252,7 @@ Figure 5.23: Sanibel Island, Florida
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Analyzing US Census Data</strong>: Methods, Maps, and Models in R" was written by Kyle E. Walker. It was last built on 2022-12-07.</p>
+    <p>"<strong>Analyzing US Census Data</strong>: Methods, Maps, and Models in R" was written by Kyle E. Walker. It was last built on 2023-02-10.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

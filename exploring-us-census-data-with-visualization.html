@@ -19,11 +19,11 @@
 <meta name="twitter:image" content="https://walker-data.com/census-r/04-visualizing-census-data_files/figure-html/visualize-error-bars-1.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.18/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.1.9900/transition.js"></script><script src="libs/bs3compat-0.4.1.9900/tabs.js"></script><script src="libs/bs3compat-0.4.1.9900/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2.9000/transition.js"></script><script src="libs/bs3compat-0.4.2.9000/tabs.js"></script><script src="libs/bs3compat-0.4.2.9000/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><script src="libs/plotly-binding-4.10.0/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
-<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet">
-<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script><script src="libs/d3-bundle-5.16.0/d3-bundle.min.js"></script><script src="libs/d3-lasso-0.0.5/d3-lasso.min.js"></script><script src="libs/save-svg-as-png-1.4.17/save-svg-as-png.min.js"></script><link href="libs/ggiraphjs-0.4.2/ggiraphjs.min.css" rel="stylesheet">
+<script src="libs/htmlwidgets-1.6.1/htmlwidgets.js"></script><script src="libs/plotly-binding-4.10.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script><script src="libs/d3-bundle-5.16.0/d3-bundle.min.js"></script><script src="libs/d3-lasso-0.0.5/d3-lasso.min.js"></script><script src="libs/save-svg-as-png-1.4.17/save-svg-as-png.min.js"></script><link href="libs/ggiraphjs-0.4.2/ggiraphjs.min.css" rel="stylesheet">
 <script src="libs/ggiraphjs-0.4.2/ggiraphjs.min.js"></script><script src="libs/girafe-binding-0.8.2/girafe.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-6KFYZ3W36Z"></script><script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -68,6 +68,7 @@
 <li><a class="" href="other-census-and-government-data-resources.html"><span class="header-section-number">11</span> Other Census and government data resources</a></li>
 <li><a class="" href="working-with-census-data-outside-the-united-states.html"><span class="header-section-number">12</span> Working with Census data outside the United States</a></li>
 <li><a class="" href="conclusion.html">Conclusion</a></li>
+<li><a class="" href="errata.html">Errata</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
 
@@ -1060,12 +1061,12 @@ Figure 4.11: Median household income by county in Maine with error bars shown
 <span class="header-section-number">4.4</span> Visualizing ACS estimates over time<a class="anchor" aria-label="anchor" href="#visualizing-acs-estimates-over-time"><i class="fas fa-link"></i></a>
 </h2>
 <p>Section <a href="wrangling-census-data-with-tidyverse-tools.html#preparing-time-series-acs-estimates">3.4.2</a> covered how to obtain a time series of ACS estimates to explore temporal demographic shifts. While the output table usefully represented the time series of educational attainment in Colorado counties, data visualization is also commonly used to illustrate change over time. Arguably the most common chart type chosen for time-series visualization is the line chart, which <strong>ggplot2</strong> handles capably with the <code><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line()</a></code> function.</p>
-<p>For an illustrative example, we’ll obtain 1-year ACS data from 2005 through 2019 on median home value for Deschutes County, Oregon, home to the city of Bend and large numbers of in-migrants in recent years from the Bay Area in California. As in Chapter 3, <code><a href="https://purrr.tidyverse.org/reference/map.html">map_dfr()</a></code> is used to iterate over a named vector of years, creating a time-series dataset of median home value in Deschutes County since 2005, and we use the formula specification for anonymous functions so that <code>~ .x</code> translates to <code>function(x) x</code>.</p>
+<p>For an illustrative example, we’ll obtain 1-year ACS data from 2005 through 2019 on median home value for Deschutes County, Oregon, home to the city of Bend and large numbers of in-migrants in recent years from the Bay Area in California. As in Chapter 3, <code><a href="https://purrr.tidyverse.org/reference/map_dfr.html">map_dfr()</a></code> is used to iterate over a named vector of years, creating a time-series dataset of median home value in Deschutes County since 2005, and we use the formula specification for anonymous functions so that <code>~ .x</code> translates to <code>function(x) x</code>.</p>
 <div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">years</span> <span class="op">&lt;-</span> <span class="fl">2005</span><span class="op">:</span><span class="fl">2019</span>
 <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">years</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">years</span>
 
-<span class="va">deschutes_value</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_dfr</a></span><span class="op">(</span><span class="va">years</span>, <span class="op">~</span><span class="op">{</span>
+<span class="va">deschutes_value</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html">map_dfr</a></span><span class="op">(</span><span class="va">years</span>, <span class="op">~</span><span class="op">{</span>
   <span class="fu"><a href="https://walker-data.com/tidycensus/reference/get_acs.html">get_acs</a></span><span class="op">(</span>
     geography <span class="op">=</span> <span class="st">"county"</span>,
     variables <span class="op">=</span> <span class="st">"B25077_001"</span>,
@@ -1383,7 +1384,7 @@ AGEGROUP
 Utah
 </td>
 <td style="text-align:right;">
-3205958.0
+3205958
 </td>
 <td style="text-align:left;">
 Both sexes
@@ -1400,7 +1401,7 @@ All ages
 Utah
 </td>
 <td style="text-align:right;">
-247803.0
+247803
 </td>
 <td style="text-align:left;">
 Both sexes
@@ -1417,7 +1418,7 @@ Age 0 to 4 years
 Utah
 </td>
 <td style="text-align:right;">
-258976.0
+258976
 </td>
 <td style="text-align:left;">
 Both sexes
@@ -1434,13 +1435,13 @@ Age 5 to 9 years
 Utah
 </td>
 <td style="text-align:right;">
-31.3
+267985
 </td>
 <td style="text-align:left;">
 Both sexes
 </td>
 <td style="text-align:left;">
-Median age
+Age 10 to 14 years
 </td>
 </tr>
 <tr>
@@ -1451,13 +1452,13 @@ Median age
 Utah
 </td>
 <td style="text-align:right;">
-1614917.0
+253847
 </td>
 <td style="text-align:left;">
-Male
+Both sexes
 </td>
 <td style="text-align:left;">
-All ages
+Age 15 to 19 years
 </td>
 </tr>
 <tr>
@@ -1468,13 +1469,13 @@ All ages
 Utah
 </td>
 <td style="text-align:right;">
-132868.0
+264652
 </td>
 <td style="text-align:left;">
-Male
+Both sexes
 </td>
 <td style="text-align:left;">
-Age 5 to 9 years
+Age 20 to 24 years
 </td>
 </tr>
 <tr>
@@ -1485,13 +1486,13 @@ Age 5 to 9 years
 Utah
 </td>
 <td style="text-align:right;">
-30.6
+251376
 </td>
 <td style="text-align:left;">
-Male
+Both sexes
 </td>
 <td style="text-align:left;">
-Median age
+Age 25 to 29 years
 </td>
 </tr>
 <tr>
@@ -1502,13 +1503,13 @@ Median age
 Utah
 </td>
 <td style="text-align:right;">
-1591041.0
+220430
 </td>
 <td style="text-align:left;">
-Female
+Both sexes
 </td>
 <td style="text-align:left;">
-All ages
+Age 30 to 34 years
 </td>
 </tr>
 <tr>
@@ -1519,13 +1520,13 @@ All ages
 Utah
 </td>
 <td style="text-align:right;">
-126108.0
+231242
 </td>
 <td style="text-align:left;">
-Female
+Both sexes
 </td>
 <td style="text-align:left;">
-Age 5 to 9 years
+Age 35 to 39 years
 </td>
 </tr>
 <tr>
@@ -1536,13 +1537,13 @@ Age 5 to 9 years
 Utah
 </td>
 <td style="text-align:right;">
-23039.0
+212211
 </td>
 <td style="text-align:left;">
-Female
+Both sexes
 </td>
 <td style="text-align:left;">
-Age 80 to 84 years
+Age 40 to 44 years
 </td>
 </tr>
 </tbody>
@@ -1583,6 +1584,23 @@ AGEGROUP
 Utah
 </td>
 <td style="text-align:right;">
+-127060
+</td>
+<td style="text-align:left;">
+Male
+</td>
+<td style="text-align:left;">
+Age 0 to 4 years
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+49
+</td>
+<td style="text-align:left;">
+Utah
+</td>
+<td style="text-align:right;">
 -132868
 </td>
 <td style="text-align:left;">
@@ -1590,40 +1608,6 @@ Male
 </td>
 <td style="text-align:left;">
 Age 5 to 9 years
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-49
-</td>
-<td style="text-align:left;">
-Utah
-</td>
-<td style="text-align:right;">
-126108
-</td>
-<td style="text-align:left;">
-Female
-</td>
-<td style="text-align:left;">
-Age 5 to 9 years
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-49
-</td>
-<td style="text-align:left;">
-Utah
-</td>
-<td style="text-align:right;">
-23039
-</td>
-<td style="text-align:left;">
-Female
-</td>
-<td style="text-align:left;">
-Age 80 to 84 years
 </td>
 </tr>
 <tr>
@@ -1668,40 +1652,6 @@ Age 15 to 19 years
 Utah
 </td>
 <td style="text-align:right;">
-130045
-</td>
-<td style="text-align:left;">
-Female
-</td>
-<td style="text-align:left;">
-Age 10 to 14 years
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-49
-</td>
-<td style="text-align:left;">
-Utah
-</td>
-<td style="text-align:right;">
-124535
-</td>
-<td style="text-align:left;">
-Female
-</td>
-<td style="text-align:left;">
-Age 15 to 19 years
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-49
-</td>
-<td style="text-align:left;">
-Utah
-</td>
-<td style="text-align:right;">
 -135806
 </td>
 <td style="text-align:left;">
@@ -1719,13 +1669,13 @@ Age 20 to 24 years
 Utah
 </td>
 <td style="text-align:right;">
-128846
+-129179
 </td>
 <td style="text-align:left;">
-Female
+Male
 </td>
 <td style="text-align:left;">
-Age 20 to 24 years
+Age 25 to 29 years
 </td>
 </tr>
 <tr>
@@ -1743,6 +1693,57 @@ Male
 </td>
 <td style="text-align:left;">
 Age 30 to 34 years
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+49
+</td>
+<td style="text-align:left;">
+Utah
+</td>
+<td style="text-align:right;">
+-117335
+</td>
+<td style="text-align:left;">
+Male
+</td>
+<td style="text-align:left;">
+Age 35 to 39 years
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+49
+</td>
+<td style="text-align:left;">
+Utah
+</td>
+<td style="text-align:right;">
+-108090
+</td>
+<td style="text-align:left;">
+Male
+</td>
+<td style="text-align:left;">
+Age 40 to 44 years
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+49
+</td>
+<td style="text-align:left;">
+Utah
+</td>
+<td style="text-align:right;">
+-89984
+</td>
+<td style="text-align:left;">
+Male
+</td>
+<td style="text-align:left;">
+Age 45 to 49 years
 </td>
 </tr>
 </tbody>
@@ -2378,8 +2379,8 @@ Figure 4.21: Geofaceted population pyramids of US states
 <span class="fu"><a href="https://rdrr.io/pkg/plotly/man/ggplotly.html">ggplotly</a></span><span class="op">(</span><span class="va">utah_pyramid</span><span class="op">)</span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:plotly-pyramid"></span>
-<div id="htmlwidget-e7d6767b0a1d485994c2" style="width:100%;height:480px;" class="plotly html-widget"></div>
-<script type="application/json" data-for="htmlwidget-e7d6767b0a1d485994c2">{"x":{"data":[{"orientation":"v","width":[126108,23039,130045,124535,128846,108654,113907,104121,86950,78972,75578,64309,49913,120743,122197,75046,35411,22667],"base":[1.525,16.525,2.525,3.525,4.525,6.525,7.525,8.525,9.525,11.525,12.525,13.525,14.525,0.525,5.525,10.525,15.525,17.525],"x":[63054,11519.5,65022.5,62267.5,64423,54327,56953.5,52060.5,43475,39486,37789,32154.5,24956.5,60371.5,61098.5,37523,17705.5,11333.5],"y":[0.95,0.950000000000003,0.95,0.95,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.95,0.949999999999999,0.949999999999999,0.950000000000001,0.950000000000003],"text":["value:  126108<br />AGEGROUP: Age 5 to 9 years<br />SEX: Female","value:   23039<br />AGEGROUP: Age 80 to 84 years<br />SEX: Female","value:  130045<br />AGEGROUP: Age 10 to 14 years<br />SEX: Female","value:  124535<br />AGEGROUP: Age 15 to 19 years<br />SEX: Female","value:  128846<br />AGEGROUP: Age 20 to 24 years<br />SEX: Female","value:  108654<br />AGEGROUP: Age 30 to 34 years<br />SEX: Female","value:  113907<br />AGEGROUP: Age 35 to 39 years<br />SEX: Female","value:  104121<br />AGEGROUP: Age 40 to 44 years<br />SEX: Female","value:   86950<br />AGEGROUP: Age 45 to 49 years<br />SEX: Female","value:   78972<br />AGEGROUP: Age 55 to 59 years<br />SEX: Female","value:   75578<br />AGEGROUP: Age 60 to 64 years<br />SEX: Female","value:   64309<br />AGEGROUP: Age 65 to 69 years<br />SEX: Female","value:   49913<br />AGEGROUP: Age 70 to 74 years<br />SEX: Female","value:  120743<br />AGEGROUP: Age 0 to 4 years<br />SEX: Female","value:  122197<br />AGEGROUP: Age 25 to 29 years<br />SEX: Female","value:   75046<br />AGEGROUP: Age 50 to 54 years<br />SEX: Female","value:   35411<br />AGEGROUP: Age 75 to 79 years<br />SEX: Female","value:   22667<br />AGEGROUP: Age 85 years and older<br />SEX: Female"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(139,0,0,0.75)","line":{"width":null,"color":"transparent"}},"name":"Female","legendgroup":"Female","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[132868,137940,129312,135806,111776,117335,108090,89984,76536,72048,59874,45370,19148,15907,127060,129179,76450,30234],"base":[1.525,2.525,3.525,4.525,6.525,7.525,8.525,9.525,11.525,12.525,13.525,14.525,16.525,17.525,0.525,5.525,10.525,15.525],"x":[-66434,-68970,-64656,-67903,-55888,-58667.5,-54045,-44992,-38268,-36024,-29937,-22685,-9574,-7953.5,-63530,-64589.5,-38225,-15117],"y":[0.95,0.95,0.95,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.950000000000003,0.950000000000003,0.95,0.949999999999999,0.949999999999999,0.950000000000001],"text":["value: -132868<br />AGEGROUP: Age 5 to 9 years<br />SEX: Male","value: -137940<br />AGEGROUP: Age 10 to 14 years<br />SEX: Male","value: -129312<br />AGEGROUP: Age 15 to 19 years<br />SEX: Male","value: -135806<br />AGEGROUP: Age 20 to 24 years<br />SEX: Male","value: -111776<br />AGEGROUP: Age 30 to 34 years<br />SEX: Male","value: -117335<br />AGEGROUP: Age 35 to 39 years<br />SEX: Male","value: -108090<br />AGEGROUP: Age 40 to 44 years<br />SEX: Male","value:  -89984<br />AGEGROUP: Age 45 to 49 years<br />SEX: Male","value:  -76536<br />AGEGROUP: Age 55 to 59 years<br />SEX: Male","value:  -72048<br />AGEGROUP: Age 60 to 64 years<br />SEX: Male","value:  -59874<br />AGEGROUP: Age 65 to 69 years<br />SEX: Male","value:  -45370<br />AGEGROUP: Age 70 to 74 years<br />SEX: Male","value:  -19148<br />AGEGROUP: Age 80 to 84 years<br />SEX: Male","value:  -15907<br />AGEGROUP: Age 85 years and older<br />SEX: Male","value: -127060<br />AGEGROUP: Age 0 to 4 years<br />SEX: Male","value: -129179<br />AGEGROUP: Age 25 to 29 years<br />SEX: Male","value:  -76450<br />AGEGROUP: Age 50 to 54 years<br />SEX: Male","value:  -30234<br />AGEGROUP: Age 75 to 79 years<br />SEX: Male"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(0,0,128,0.75)","line":{"width":null,"color":"transparent"}},"name":"Male","legendgroup":"Male","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":46.2864259028643,"r":7.97011207970112,"b":27.8953922789539,"l":104.408468244085},"font":{"color":"rgba(0,0,0,1)","family":"Verdana","size":15.9402241594022},"title":{"text":"Population structure in Utah","font":{"color":"rgba(0,0,0,1)","family":"Verdana","size":19.1282689912827},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-154000,154000],"tickmode":"array","ticktext":["150k","100k","50k","0k","50k","100k","150k"],"tickvals":[-150000,-100000,-50000,0,50000,100000,150000],"categoryorder":"array","categoryarray":["150k","100k","50k","0k","50k","100k","150k"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.98505603985056,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"Verdana","size":12.7521793275218},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0,"zeroline":false,"anchor":"y","title":{"text":"","font":{"color":"rgba(0,0,0,1)","family":"Verdana","size":15.9402241594022}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.4,18.6],"tickmode":"array","ticktext":["0 to 4","5 to 9","10 to 14","15 to 19","20 to 24","25 to 29","30 to 34","35 to 39","40 to 44","45 to 49","50 to 54","55 to 59","60 to 64","65 to 69","70 to 74","75 to 79","80 to 84","85 and older"],"tickvals":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18],"categoryorder":"array","categoryarray":["0 to 4","5 to 9","10 to 14","15 to 19","20 to 24","25 to 29","30 to 34","35 to 39","40 to 44","45 to 49","50 to 54","55 to 59","60 to 64","65 to 69","70 to 74","75 to 79","80 to 84","85 and older"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.98505603985056,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"Verdana","size":12.7521793275218},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0,"zeroline":false,"anchor":"x","title":{"text":"2019 Census Bureau population estimate","font":{"color":"rgba(0,0,0,1)","family":"Verdana","size":15.9402241594022}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"Verdana","size":12.7521793275218},"title":{"text":"","font":{"color":"rgba(0,0,0,1)","family":"Verdana","size":15.9402241594022}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"59b9265b3df7":{"x":{},"y":{},"fill":{},"type":"bar"}},"cur_data":"59b9265b3df7","visdat":{"59b9265b3df7":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script><p class="caption">
+<div class="plotly html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-696a86347534af574a24" style="width:100%;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-696a86347534af574a24">{"x":{"data":[{"orientation":"v","width":[120743,126108,130045,124535,128846,122197,108654,113907,104121,86950,75046,78972,75578,64309,49913,35411,23039,22667],"base":[0.525,1.525,2.525,3.525,4.525,5.525,6.525,7.525,8.525,9.525,10.525,11.525,12.525,13.525,14.525,15.525,16.525,17.525],"x":[60371.5,63054,65022.5,62267.5,64423,61098.5,54327,56953.5,52060.5,43475,37523,39486,37789,32154.5,24956.5,17705.5,11519.5,11333.5],"y":[0.95,0.95,0.95,0.95,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.950000000000001,0.950000000000003,0.950000000000003],"text":["value:  120743<br />AGEGROUP: Age 0 to 4 years<br />SEX: Female","value:  126108<br />AGEGROUP: Age 5 to 9 years<br />SEX: Female","value:  130045<br />AGEGROUP: Age 10 to 14 years<br />SEX: Female","value:  124535<br />AGEGROUP: Age 15 to 19 years<br />SEX: Female","value:  128846<br />AGEGROUP: Age 20 to 24 years<br />SEX: Female","value:  122197<br />AGEGROUP: Age 25 to 29 years<br />SEX: Female","value:  108654<br />AGEGROUP: Age 30 to 34 years<br />SEX: Female","value:  113907<br />AGEGROUP: Age 35 to 39 years<br />SEX: Female","value:  104121<br />AGEGROUP: Age 40 to 44 years<br />SEX: Female","value:   86950<br />AGEGROUP: Age 45 to 49 years<br />SEX: Female","value:   75046<br />AGEGROUP: Age 50 to 54 years<br />SEX: Female","value:   78972<br />AGEGROUP: Age 55 to 59 years<br />SEX: Female","value:   75578<br />AGEGROUP: Age 60 to 64 years<br />SEX: Female","value:   64309<br />AGEGROUP: Age 65 to 69 years<br />SEX: Female","value:   49913<br />AGEGROUP: Age 70 to 74 years<br />SEX: Female","value:   35411<br />AGEGROUP: Age 75 to 79 years<br />SEX: Female","value:   23039<br />AGEGROUP: Age 80 to 84 years<br />SEX: Female","value:   22667<br />AGEGROUP: Age 85 years and older<br />SEX: Female"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(139,0,0,0.75)","line":{"width":1.88976377952756,"color":"transparent"}},"name":"Female","legendgroup":"Female","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[127060,132868,137940,129312,135806,129179,111776,117335,108090,89984,76450,76536,72048,59874,45370,30234,19148,15907],"base":[0.525,1.525,2.525,3.525,4.525,5.525,6.525,7.525,8.525,9.525,10.525,11.525,12.525,13.525,14.525,15.525,16.525,17.525],"x":[-63530,-66434,-68970,-64656,-67903,-64589.5,-55888,-58667.5,-54045,-44992,-38225,-38268,-36024,-29937,-22685,-15117,-9574,-7953.5],"y":[0.95,0.95,0.95,0.95,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.949999999999999,0.950000000000001,0.950000000000003,0.950000000000003],"text":["value: -127060<br />AGEGROUP: Age 0 to 4 years<br />SEX: Male","value: -132868<br />AGEGROUP: Age 5 to 9 years<br />SEX: Male","value: -137940<br />AGEGROUP: Age 10 to 14 years<br />SEX: Male","value: -129312<br />AGEGROUP: Age 15 to 19 years<br />SEX: Male","value: -135806<br />AGEGROUP: Age 20 to 24 years<br />SEX: Male","value: -129179<br />AGEGROUP: Age 25 to 29 years<br />SEX: Male","value: -111776<br />AGEGROUP: Age 30 to 34 years<br />SEX: Male","value: -117335<br />AGEGROUP: Age 35 to 39 years<br />SEX: Male","value: -108090<br />AGEGROUP: Age 40 to 44 years<br />SEX: Male","value:  -89984<br />AGEGROUP: Age 45 to 49 years<br />SEX: Male","value:  -76450<br />AGEGROUP: Age 50 to 54 years<br />SEX: Male","value:  -76536<br />AGEGROUP: Age 55 to 59 years<br />SEX: Male","value:  -72048<br />AGEGROUP: Age 60 to 64 years<br />SEX: Male","value:  -59874<br />AGEGROUP: Age 65 to 69 years<br />SEX: Male","value:  -45370<br />AGEGROUP: Age 70 to 74 years<br />SEX: Male","value:  -30234<br />AGEGROUP: Age 75 to 79 years<br />SEX: Male","value:  -19148<br />AGEGROUP: Age 80 to 84 years<br />SEX: Male","value:  -15907<br />AGEGROUP: Age 85 years and older<br />SEX: Male"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(0,0,128,0.75)","line":{"width":1.88976377952756,"color":"transparent"}},"name":"Male","legendgroup":"Male","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":46.2864259028643,"r":7.97011207970112,"b":27.8953922789539,"l":104.408468244085},"font":{"color":"rgba(0,0,0,1)","family":"Verdana","size":15.9402241594022},"title":{"text":"Population structure in Utah","font":{"color":"rgba(0,0,0,1)","family":"Verdana","size":19.1282689912827},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-154000,154000],"tickmode":"array","ticktext":["150k","100k","50k","0k","50k","100k","150k"],"tickvals":[-150000,-100000,-50000,0,50000,100000,150000],"categoryorder":"array","categoryarray":["150k","100k","50k","0k","50k","100k","150k"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.98505603985056,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"Verdana","size":12.7521793275218},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.724555643609193,"zeroline":false,"anchor":"y","title":{"text":"","font":{"color":"rgba(0,0,0,1)","family":"Verdana","size":15.9402241594022}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.4,18.6],"tickmode":"array","ticktext":["0 to 4","5 to 9","10 to 14","15 to 19","20 to 24","25 to 29","30 to 34","35 to 39","40 to 44","45 to 49","50 to 54","55 to 59","60 to 64","65 to 69","70 to 74","75 to 79","80 to 84","85 and older"],"tickvals":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18],"categoryorder":"array","categoryarray":["0 to 4","5 to 9","10 to 14","15 to 19","20 to 24","25 to 29","30 to 34","35 to 39","40 to 44","45 to 49","50 to 54","55 to 59","60 to 64","65 to 69","70 to 74","75 to 79","80 to 84","85 and older"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.98505603985056,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"Verdana","size":12.7521793275218},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.724555643609193,"zeroline":false,"anchor":"x","title":{"text":"2019 Census Bureau population estimate","font":{"color":"rgba(0,0,0,1)","family":"Verdana","size":15.9402241594022}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"Verdana","size":12.7521793275218},"title":{"text":"","font":{"color":"rgba(0,0,0,1)","family":"Verdana","size":15.9402241594022}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"60c51631ba70":{"x":{},"y":{},"fill":{},"type":"bar"}},"cur_data":"60c51631ba70","visdat":{"60c51631ba70":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script><p class="caption">
 Figure 4.22: An interactive population pyramid rendered with ggplotly
 </p>
 </div>
@@ -2462,7 +2463,7 @@ Figure 4.22: An interactive population pyramid rendered with ggplotly
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Analyzing US Census Data</strong>: Methods, Maps, and Models in R" was written by Kyle E. Walker. It was last built on 2022-12-07.</p>
+    <p>"<strong>Analyzing US Census Data</strong>: Methods, Maps, and Models in R" was written by Kyle E. Walker. It was last built on 2023-02-10.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

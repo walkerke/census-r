@@ -2,7 +2,7 @@
 title: "Analyzing US Census Data"
 subtitle: "Methods, Maps, and Models in R"
 author: "Kyle E. Walker"
-date: "2022-12-07"
+date: "2023-02-10"
 site: bookdown::bookdown_site
 knit: bookdown::render_book
 output: bookdown::bs4_book
@@ -124,7 +124,7 @@ The examples in this book were created with the following R package versions:
   </tr>
   <tr>
    <td style="text-align:left;"> dplyr </td>
-   <td style="text-align:left;"> 1.0.10 </td>
+   <td style="text-align:left;"> 1.1.0 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> geobr </td>
@@ -172,7 +172,7 @@ The examples in this book were created with the following R package versions:
   </tr>
   <tr>
    <td style="text-align:left;"> jsonlite </td>
-   <td style="text-align:left;"> 1.8.3 </td>
+   <td style="text-align:left;"> 1.8.4 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> leaflet </td>
@@ -200,11 +200,11 @@ The examples in this book were created with the following R package versions:
   </tr>
   <tr>
    <td style="text-align:left;"> plotly </td>
-   <td style="text-align:left;"> 4.10.0 </td>
+   <td style="text-align:left;"> 4.10.1 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> purrr </td>
-   <td style="text-align:left;"> 0.3.5 </td>
+   <td style="text-align:left;"> 1.0.1 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> raster </td>
@@ -212,7 +212,7 @@ The examples in this book were created with the following R package versions:
   </tr>
   <tr>
    <td style="text-align:left;"> readr </td>
-   <td style="text-align:left;"> 2.1.2 </td>
+   <td style="text-align:left;"> 2.1.3 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> rKenyaCensus </td>
@@ -252,11 +252,11 @@ The examples in this book were created with the following R package versions:
   </tr>
   <tr>
    <td style="text-align:left;"> tidycensus </td>
-   <td style="text-align:left;"> 1.3 </td>
+   <td style="text-align:left;"> 1.3.2 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> tidyr </td>
-   <td style="text-align:left;"> 1.2.1 </td>
+   <td style="text-align:left;"> 1.3.0 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> tidyUSDA </td>
@@ -268,7 +268,7 @@ The examples in this book were created with the following R package versions:
   </tr>
   <tr>
    <td style="text-align:left;"> tigris </td>
-   <td style="text-align:left;"> 2.0 </td>
+   <td style="text-align:left;"> 2.0.1 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> tmap </td>

@@ -19,11 +19,11 @@
 <meta name="twitter:image" content="https://walker-data.com/census-r/04-visualizing-census-data_files/figure-html/visualize-error-bars-1.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.18/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.1.9900/transition.js"></script><script src="libs/bs3compat-0.4.1.9900/tabs.js"></script><script src="libs/bs3compat-0.4.1.9900/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2.9000/transition.js"></script><script src="libs/bs3compat-0.4.2.9000/tabs.js"></script><script src="libs/bs3compat-0.4.2.9000/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><script src="libs/plotly-binding-4.10.0/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
-<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet">
-<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script><script src="libs/d3-bundle-5.16.0/d3-bundle.min.js"></script><script src="libs/d3-lasso-0.0.5/d3-lasso.min.js"></script><script src="libs/save-svg-as-png-1.4.17/save-svg-as-png.min.js"></script><link href="libs/ggiraphjs-0.4.2/ggiraphjs.min.css" rel="stylesheet">
+<script src="libs/htmlwidgets-1.6.1/htmlwidgets.js"></script><script src="libs/plotly-binding-4.10.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script><script src="libs/d3-bundle-5.16.0/d3-bundle.min.js"></script><script src="libs/d3-lasso-0.0.5/d3-lasso.min.js"></script><script src="libs/save-svg-as-png-1.4.17/save-svg-as-png.min.js"></script><link href="libs/ggiraphjs-0.4.2/ggiraphjs.min.css" rel="stylesheet">
 <script src="libs/ggiraphjs-0.4.2/ggiraphjs.min.js"></script><script src="libs/girafe-binding-0.8.2/girafe.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-6KFYZ3W36Z"></script><script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -68,6 +68,7 @@
 <li><a class="" href="other-census-and-government-data-resources.html"><span class="header-section-number">11</span> Other Census and government data resources</a></li>
 <li><a class="" href="working-with-census-data-outside-the-united-states.html"><span class="header-section-number">12</span> Working with Census data outside the United States</a></li>
 <li><a class="" href="conclusion.html">Conclusion</a></li>
+<li><a class="" href="errata.html">Errata</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
 
@@ -127,7 +128,7 @@ Figure 7.1: Conceptual view of GIS layers
 
 <span class="co"># CRS used: NAD83(2011) Kansas Regional Coordinate System </span>
 <span class="co"># Zone 11 (for Kansas City)</span>
-<span class="va">ks_mo_tracts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_dfr</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"KS"</span>, <span class="st">"MO"</span><span class="op">)</span>, <span class="op">~</span><span class="op">{</span>
+<span class="va">ks_mo_tracts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html">map_dfr</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"KS"</span>, <span class="st">"MO"</span><span class="op">)</span>, <span class="op">~</span><span class="op">{</span>
   <span class="fu"><a href="https://rdrr.io/pkg/tigris/man/tracts.html">tracts</a></span><span class="op">(</span><span class="va">.x</span>, cb <span class="op">=</span> <span class="cn">TRUE</span>, year <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span>
 <span class="op">}</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/tigris/man/tigris-exports.html">%&gt;%</a></span>
   <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html">st_transform</a></span><span class="op">(</span><span class="fl">8528</span><span class="op">)</span>  
@@ -1579,7 +1580,7 @@ Figure 7.10: Illustration of area weights
 <span class="header-section-number">7.3.2</span> Population-weighted areal interpolation<a class="anchor" aria-label="anchor" href="#population-weighted-areal-interpolation"><i class="fas fa-link"></i></a>
 </h3>
 <p>When a user computes area-weighted areal interpolation with <code><a href="https://r-spatial.github.io/sf/reference/interpolate_aw.html">st_interpolate_aw()</a></code>, the function prints the following warning: <code>st_interpolate_aw assumes attributes are constant or uniform over areas of x</code>. This assumption that proportionally larger <em>areas</em> also have proportionally more <em>people</em> is often incorrect with respect to the geography of human settlements, and can be a source of error when using this method. An alternative method, <em>population-weighted areal interpolation</em>, can represent an improvement. As opposed to using area-based weights, population-weighted techniques estimate the populations of the intersections between origin and destination from a third dataset, then use those values for interpolation weights.</p>
-<p>This method is implemented in <strong>tidycensus</strong> with the <code><a href="https://walker-data.com/tidycensus/reference/interpolate_pw.html">interpolate_pw()</a></code> function. This function is specified in a similar way to <code><a href="https://r-spatial.github.io/sf/reference/interpolate_aw.html">st_interpolate_aw()</a></code>, but also requires a third dataset to be used as weights, and optionally a weight column to determine the relative influence of each feature in the weights dataset. For many purposes, <strong>tidycensus</strong> users will want to use Census blocks as the weights dataset, though users can bring alternative datasets as well. 2020 Census blocks acquired with the <strong>tigris</strong> package have the added benefit of <code>POP20</code> and <code>HU20</code> columns in the dataset that represent population and housing unit counts, respectively, either one of which could be used to weight each block.</p>
+<p>This method is implemented in <strong>tidycensus</strong> with the <code><a href="https://walker-data.com/tidycensus/reference/interpolate_pw.html">interpolate_pw()</a></code> function. This function is specified in a similar way to <code><a href="https://r-spatial.github.io/sf/reference/interpolate_aw.html">st_interpolate_aw()</a></code>, but also requires a third dataset to be used as weights, and optionally a weight column to determine the relative influence of each feature in the weights dataset. For many purposes, <strong>tidycensus</strong> users will want to use Census blocks as the weights dataset, though users can bring alternative datasets as well. 2020 Census blocks acquired with the <strong>tigris</strong> package have the added benefit of <code>POP20</code> and <code>HOUSING20</code> columns in the dataset that represent population and housing unit counts, respectively, either one of which could be used to weight each block.</p>
 <div class="sourceCode" id="cb242"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">maricopa_blocks</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tigris/man/blocks.html">blocks</a></span><span class="op">(</span>
   state <span class="op">=</span> <span class="st">"AZ"</span>,
@@ -1669,16 +1670,16 @@ Figure 7.13: Map of shift in workers from home, Maricopa County Arizona
 <span class="va">ia_tracts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tigris/man/tracts.html">tracts</a></span><span class="op">(</span><span class="st">"IA"</span>, cb <span class="op">=</span> <span class="cn">TRUE</span>, year <span class="op">=</span> <span class="fl">2019</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/tigris/man/tigris-exports.html">%&gt;%</a></span>
   <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html">st_transform</a></span><span class="op">(</span><span class="fl">26975</span><span class="op">)</span>
 
-<span class="va">hospital_url</span> <span class="op">&lt;-</span> <span class="st">"https://opendata.arcgis.com/api/v3/datasets/6ac5e325468c4cb9b905f1728d6fbf0f_0/downloads/data?format=geojson&amp;spatialRefId=4326"</span>
+<span class="va">hospital_url</span> <span class="op">&lt;-</span> <span class="st">"https://services1.arcgis.com/Hp6G80Pky0om7QvQ/arcgis/rest/services/Hospital/FeatureServer/0/query?outFields=*&amp;where=1%3D1&amp;f=geojson"</span>
 
 <span class="va">trauma</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html">st_read</a></span><span class="op">(</span><span class="va">hospital_url</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/tigris/man/tigris-exports.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html">str_detect</a></span><span class="op">(</span><span class="va">TRAUMA</span>, <span class="st">"LEVEL I\\b|LEVEL II\\b|RTH|RTC"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/tigris/man/tigris-exports.html">%&gt;%</a></span>
   <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html">st_transform</a></span><span class="op">(</span><span class="fl">26975</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/tigris/man/tigris-exports.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="va">ID</span>, .keep_all <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<pre><code>## Reading layer `Hospitals' from data source 
-##   `https://opendata.arcgis.com/api/v3/datasets/6ac5e325468c4cb9b905f1728d6fbf0f_0/downloads/data?format=geojson&amp;spatialRefId=4326' 
+<pre><code>## Reading layer `OGRGeoJSON' from data source 
+##   `https://services1.arcgis.com/Hp6G80Pky0om7QvQ/arcgis/rest/services/Hospital/FeatureServer/0/query?outFields=*&amp;where=1%3D1&amp;f=geojson' 
 ##   using driver `GeoJSON'
-## Simple feature collection with 7623 features and 32 fields
+## Simple feature collection with 8013 features and 32 fields
 ## Geometry type: POINT
 ## Dimension:     XY
 ## Bounding box:  xmin: -176.6403 ymin: -14.29024 xmax: 145.7245 ymax: 71.29773
@@ -1722,12 +1723,12 @@ Figure 7.14: Level I or II trauma centers within 100km of Iowa
 
 <span class="va">dist</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span></code></pre></div>
 <pre><code>## Units: [m]
-##           [,1]      [,2]     [,3]     [,4]     [,5]
-## [1,] 279570.18 279188.81 385140.7 383863.7 257745.5
-## [2,] 298851.01 298409.46 400428.5 399022.9 276955.8
-## [3,] 350121.53 347800.57 353428.8 350263.3 404616.0
-## [4,] 361742.20 360450.59 421691.6 419364.9 369415.7
-## [5,]  66762.19  63479.67 143552.1 143935.5 194001.0</code></pre>
+##          [,1]      [,2]       [,3]      [,4]     [,5]
+## [1,] 257675.1 279570.18 266595.998 279188.81 385140.7
+## [2,] 276887.3 298851.01 284447.086 298409.46 400428.5
+## [3,] 404511.8 350121.53 303529.967 347800.57 353428.8
+## [4,] 369333.5 361742.20 331904.542 360450.59 421691.6
+## [5,] 193886.8  66762.19   9716.301  63479.67 143552.1</code></pre>
 <p>A glimpse at the matrix shows distances (in meters) between the first five Census tracts in the dataset and the first five hospitals. When considering <em>accessibility</em>, we may be interested in the distance to the <em>nearest</em> hospital to each Census tract. The code below extracts the minimum distance from the matrix for each row, converts to a vector, and divides each value by 1000 to convert values to kilometers. A quick histogram visualizes the distribution of minimum distances.</p>
 <div class="sourceCode" id="cb251"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">min_dist</span> <span class="op">&lt;-</span> <span class="va">dist</span> <span class="op"><a href="https://rdrr.io/pkg/tigris/man/tigris-exports.html">%&gt;%</a></span>
@@ -1804,7 +1805,7 @@ Figure 7.16: Map of travel-times to trauma centers by Census tract in Iowa
 <p>As with the matrix-based accessibility approach outlined above, catchment area-based proximity can be modeled with either Euclidean distances or network travel times as well. Let’s consider the example of <a href="https://www.unitypoint.org/desmoines/iowa-methodist-medical-center.aspx">Iowa Methodist Medical Center in Des Moines</a>, one of two Level I trauma centers in the state of Iowa.</p>
 <p>The example below illustrates the distance-based approach using a <em>buffer</em>, implemented with the <code><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_buffer()</a></code> function in <strong>sf</strong>. A buffer is a common GIS operation that represents the area within a given distance of a location. The code below creates a 5km buffer around Iowa Methodist Medical Center by using the argument <code>dist = 5000</code>.</p>
 <div class="sourceCode" id="cb256"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">iowa_methodist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">ia_trauma</span>, <span class="va">NAME</span> <span class="op">==</span> <span class="st">"IOWA METHODIST MEDICAL CENTER"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">iowa_methodist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">ia_trauma</span>, <span class="va">ID</span> <span class="op">==</span> <span class="st">"0009850308"</span><span class="op">)</span>
 
 <span class="va">buf5km</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_buffer</a></span><span class="op">(</span><span class="va">iowa_methodist</span>, dist <span class="op">=</span> <span class="fl">5000</span><span class="op">)</span> </code></pre></div>
 <p>An alternative option is to create network-based <em>isochrones</em>, which are polygons that represent the accessible area around a given location within a given travel time for a given travel mode. Isochrones are implemented in the <strong>mapboxapi</strong> package with the <code><a href="https://rdrr.io/pkg/mapboxapi/man/mb_isochrone.html">mb_isochrone()</a></code> function. Mapbox isochrones default to typical driving conditions around a location; this can be adjusted with the <code>depart_at</code> parameter for historical traffic and the argument <code>profile = "driving-traffic"</code>. The example below draws a 10-minute driving isochrone around Iowa Methodist for a Tuesday during evening rush hour.</p>
@@ -1932,13 +1933,13 @@ Percent
 10min isochrone
 </td>
 <td style="text-align:right;">
-2991.402
+3187.727
 </td>
 <td style="text-align:right;">
-21510.42
+23557.76
 </td>
 <td style="text-align:right;">
-13.9
+13.5
 </td>
 </tr>
 </tbody>
@@ -2253,13 +2254,13 @@ I_i = z_i \sum_j w_{ij} z_j,
   alternative <span class="op">=</span> <span class="st">"two.sided"</span>
 <span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/tigris/man/tigris-exports.html">%&gt;%</a></span>
   <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/tigris/man/tigris-exports.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://purrr.tidyverse.org/reference/set_names.html">set_names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"local_i"</span>, <span class="st">"exp_i"</span>, <span class="st">"var_i"</span>, <span class="st">"z_i"</span>, <span class="st">"p_i"</span>,
+  <span class="fu"><a href="https://rlang.r-lib.org/reference/set_names.html">set_names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"local_i"</span>, <span class="st">"exp_i"</span>, <span class="st">"var_i"</span>, <span class="st">"z_i"</span>, <span class="st">"p_i"</span>,
               <span class="st">"p_i_sim"</span>, <span class="st">"pi_sim_folded"</span>, <span class="st">"skewness"</span>, <span class="st">"kurtosis"</span><span class="op">)</span><span class="op">)</span>
 
 <span class="va">dfw_lisa_df</span> <span class="op">&lt;-</span> <span class="va">dfw_tracts</span> <span class="op"><a href="https://rdrr.io/pkg/tigris/man/tigris-exports.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">GEOID</span>, <span class="va">scaled_estimate</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/tigris/man/tigris-exports.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>lagged_estimate <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/spdep/reference/lag.listw.html">lag.listw</a></span><span class="op">(</span><span class="va">weights</span>, <span class="va">scaled_estimate</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/tigris/man/tigris-exports.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_cols</a></span><span class="op">(</span><span class="va">dfw_lisa</span><span class="op">)</span></code></pre></div>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_cols.html">bind_cols</a></span><span class="op">(</span><span class="va">dfw_lisa</span><span class="op">)</span></code></pre></div>
 <p>The above code uses the following steps:</p>
 <ol style="list-style-type: decimal">
 <li>First, a random number seed is set given that we are using the conditional permutation approach to calculating statistical significance. This will ensure reproducibility of results when the process is re-run.</li>
@@ -2660,7 +2661,7 @@ Figure 7.26: View of LISA Shiny app with linked brushing enabled
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Analyzing US Census Data</strong>: Methods, Maps, and Models in R" was written by Kyle E. Walker. It was last built on 2022-12-07.</p>
+    <p>"<strong>Analyzing US Census Data</strong>: Methods, Maps, and Models in R" was written by Kyle E. Walker. It was last built on 2023-02-10.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
