@@ -2213,8 +2213,8 @@ Figure 7.22: Map of local Gi* scores
 <div class="sourceCode" id="cb278"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dfw_tracts</span> <span class="op">&lt;-</span> <span class="va">dfw_tracts</span> <span class="op"><a href="https://rdrr.io/pkg/tigris/man/tigris-exports.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>hotspot <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span><span class="op">(</span>
-    <span class="va">localG</span> <span class="op">&gt;=</span> <span class="fl">2.56</span> <span class="op">~</span> <span class="st">"High cluster"</span>,
-    <span class="va">localG</span> <span class="op">&lt;=</span> <span class="op">-</span><span class="fl">2.56</span> <span class="op">~</span> <span class="st">"Low cluster"</span>,
+    <span class="va">localG</span> <span class="op">&gt;=</span> <span class="fl">2.576</span> <span class="op">~</span> <span class="st">"High cluster"</span>,
+    <span class="va">localG</span> <span class="op">&lt;=</span> <span class="op">-</span><span class="fl">2.576</span> <span class="op">~</span> <span class="st">"Low cluster"</span>,
     <span class="cn">TRUE</span> <span class="op">~</span> <span class="st">"Not significant"</span>
   <span class="op">)</span><span class="op">)</span>
 
