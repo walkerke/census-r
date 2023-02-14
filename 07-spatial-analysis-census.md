@@ -1286,13 +1286,13 @@ iso_pov <- interpolate_pw(
    <td style="text-align:left;"> 5km buffer </td>
    <td style="text-align:right;"> 2961.475 </td>
    <td style="text-align:right;"> 21175.79 </td>
-   <td style="text-align:right;"> 14.0 </td>
+   <td style="text-align:right;"> 14 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 10min isochrone </td>
-   <td style="text-align:right;"> 3187.727 </td>
-   <td style="text-align:right;"> 23557.76 </td>
-   <td style="text-align:right;"> 13.5 </td>
+   <td style="text-align:right;"> 3046.986 </td>
+   <td style="text-align:right;"> 21825.73 </td>
+   <td style="text-align:right;"> 14 </td>
   </tr>
 </tbody>
 </table>
@@ -1615,8 +1615,8 @@ Given that the returned results are z-scores, an analyst can choose hot spot thr
 ```r
 dfw_tracts <- dfw_tracts %>%
   mutate(hotspot = case_when(
-    localG >= 2.56 ~ "High cluster",
-    localG <= -2.56 ~ "Low cluster",
+    localG >= 2.576 ~ "High cluster",
+    localG <= -2.576 ~ "Low cluster",
     TRUE ~ "Not significant"
   ))
 

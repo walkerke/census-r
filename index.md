@@ -2,7 +2,7 @@
 title: "Analyzing US Census Data"
 subtitle: "Methods, Maps, and Models in R"
 author: "Kyle E. Walker"
-date: "2023-02-10"
+date: "2023-02-14"
 site: bookdown::bookdown_site
 knit: bookdown::render_book
 output: bookdown::bs4_book
@@ -252,7 +252,7 @@ The examples in this book were created with the following R package versions:
   </tr>
   <tr>
    <td style="text-align:left;"> tidycensus </td>
-   <td style="text-align:left;"> 1.3.2 </td>
+   <td style="text-align:left;"> 1.3.2.9000 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> tidyr </td>

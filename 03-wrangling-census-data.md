@@ -2061,35 +2061,35 @@ get_acs(
    <td style="text-align:left;"> Bristol County, Rhode Island </td>
    <td style="text-align:left;"> B19013_001 </td>
    <td style="text-align:right;"> 85413 </td>
-   <td style="text-align:right;"> 9527.246 </td>
+   <td style="text-align:right;"> 9586.791 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 44003 </td>
    <td style="text-align:left;"> Kent County, Rhode Island </td>
    <td style="text-align:left;"> B19013_001 </td>
    <td style="text-align:right;"> 75857 </td>
-   <td style="text-align:right;"> 3146.699 </td>
+   <td style="text-align:right;"> 3166.366 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 44005 </td>
    <td style="text-align:left;"> Newport County, Rhode Island </td>
    <td style="text-align:left;"> B19013_001 </td>
    <td style="text-align:right;"> 84282 </td>
-   <td style="text-align:right;"> 4091.331 </td>
+   <td style="text-align:right;"> 4116.902 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 44007 </td>
    <td style="text-align:left;"> Providence County, Rhode Island </td>
    <td style="text-align:left;"> B19013_001 </td>
    <td style="text-align:right;"> 62323 </td>
-   <td style="text-align:right;"> 1976.413 </td>
+   <td style="text-align:right;"> 1988.766 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 44009 </td>
    <td style="text-align:left;"> Washington County, Rhode Island </td>
    <td style="text-align:left;"> B19013_001 </td>
    <td style="text-align:right;"> 86970 </td>
-   <td style="text-align:right;"> 5681.799 </td>
+   <td style="text-align:right;"> 5717.311 </td>
   </tr>
 </tbody>
 </table>
