@@ -49,54 +49,10 @@ Let's take a quick look at our data:
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:left;"> 2019HU0266184 </td>
+   <td style="text-align:left;"> 2016000000411 </td>
    <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 13 </td>
-   <td style="text-align:right;"> 13 </td>
-   <td style="text-align:right;"> 65 </td>
-   <td style="text-align:left;"> 28 </td>
-   <td style="text-align:left;"> 2 </td>
-   <td style="text-align:left;"> Mississippi/MS </td>
-   <td style="text-align:left;"> Female </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2019HU0266184 </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 13 </td>
-   <td style="text-align:right;"> 13 </td>
-   <td style="text-align:right;"> 66 </td>
-   <td style="text-align:left;"> 28 </td>
-   <td style="text-align:left;"> 1 </td>
-   <td style="text-align:left;"> Mississippi/MS </td>
-   <td style="text-align:left;"> Male </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2019HU0266184 </td>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 13 </td>
-   <td style="text-align:right;"> 26 </td>
-   <td style="text-align:right;"> 38 </td>
-   <td style="text-align:left;"> 28 </td>
-   <td style="text-align:left;"> 2 </td>
-   <td style="text-align:left;"> Mississippi/MS </td>
-   <td style="text-align:left;"> Female </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2019HU0266184 </td>
-   <td style="text-align:right;"> 4 </td>
-   <td style="text-align:right;"> 13 </td>
-   <td style="text-align:right;"> 39 </td>
-   <td style="text-align:right;"> 25 </td>
-   <td style="text-align:left;"> 28 </td>
-   <td style="text-align:left;"> 1 </td>
-   <td style="text-align:left;"> Mississippi/MS </td>
-   <td style="text-align:left;"> Male </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2019HU0266184 </td>
-   <td style="text-align:right;"> 5 </td>
-   <td style="text-align:right;"> 13 </td>
-   <td style="text-align:right;"> 27 </td>
+   <td style="text-align:right;"> 54 </td>
+   <td style="text-align:right;"> 54 </td>
    <td style="text-align:right;"> 30 </td>
    <td style="text-align:left;"> 28 </td>
    <td style="text-align:left;"> 1 </td>
@@ -104,59 +60,103 @@ Let's take a quick look at our data:
    <td style="text-align:left;"> Male </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2019HU0266269 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 14 </td>
-   <td style="text-align:right;"> 14 </td>
-   <td style="text-align:right;"> 29 </td>
+   <td style="text-align:left;"> 2016000000411 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 54 </td>
+   <td style="text-align:right;"> 95 </td>
+   <td style="text-align:right;"> 22 </td>
    <td style="text-align:left;"> 28 </td>
    <td style="text-align:left;"> 2 </td>
    <td style="text-align:left;"> Mississippi/MS </td>
    <td style="text-align:left;"> Female </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2019HU0266281 </td>
+   <td style="text-align:left;"> 2016000000739 </td>
    <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 12 </td>
-   <td style="text-align:right;"> 11 </td>
-   <td style="text-align:right;"> 82 </td>
+   <td style="text-align:right;"> 27 </td>
+   <td style="text-align:right;"> 26 </td>
+   <td style="text-align:right;"> 51 </td>
    <td style="text-align:left;"> 28 </td>
    <td style="text-align:left;"> 1 </td>
    <td style="text-align:left;"> Mississippi/MS </td>
    <td style="text-align:left;"> Male </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2019HU0266281 </td>
+   <td style="text-align:left;"> 2016000000739 </td>
    <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 12 </td>
-   <td style="text-align:right;"> 15 </td>
-   <td style="text-align:right;"> 78 </td>
+   <td style="text-align:right;"> 27 </td>
+   <td style="text-align:right;"> 17 </td>
+   <td style="text-align:right;"> 17 </td>
    <td style="text-align:left;"> 28 </td>
    <td style="text-align:left;"> 2 </td>
    <td style="text-align:left;"> Mississippi/MS </td>
    <td style="text-align:left;"> Female </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2019HU0266324 </td>
+   <td style="text-align:left;"> 2016000000803 </td>
    <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 51 </td>
-   <td style="text-align:right;"> 50 </td>
-   <td style="text-align:right;"> 55 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 30 </td>
    <td style="text-align:left;"> 28 </td>
    <td style="text-align:left;"> 2 </td>
    <td style="text-align:left;"> Mississippi/MS </td>
    <td style="text-align:left;"> Female </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2019HU0266324 </td>
+   <td style="text-align:left;"> 2016000000803 </td>
    <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 51 </td>
-   <td style="text-align:right;"> 64 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 8 </td>
+   <td style="text-align:left;"> 28 </td>
+   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:left;"> Mississippi/MS </td>
+   <td style="text-align:left;"> Male </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2016000000858 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 9 </td>
+   <td style="text-align:right;"> 9 </td>
+   <td style="text-align:right;"> 90 </td>
+   <td style="text-align:left;"> 28 </td>
+   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:left;"> Mississippi/MS </td>
+   <td style="text-align:left;"> Male </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2016000000858 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 9 </td>
+   <td style="text-align:right;"> 24 </td>
+   <td style="text-align:right;"> 63 </td>
+   <td style="text-align:left;"> 28 </td>
+   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:left;"> Mississippi/MS </td>
+   <td style="text-align:left;"> Male </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2016000000901 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 16 </td>
+   <td style="text-align:right;"> 16 </td>
+   <td style="text-align:right;"> 70 </td>
+   <td style="text-align:left;"> 28 </td>
+   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:left;"> Mississippi/MS </td>
+   <td style="text-align:left;"> Male </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2016000000901 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 16 </td>
+   <td style="text-align:right;"> 24 </td>
    <td style="text-align:right;"> 65 </td>
    <td style="text-align:left;"> 28 </td>
-   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:left;"> 2 </td>
    <td style="text-align:left;"> Mississippi/MS </td>
-   <td style="text-align:left;"> Male </td>
+   <td style="text-align:left;"> Female </td>
   </tr>
 </tbody>
 </table>

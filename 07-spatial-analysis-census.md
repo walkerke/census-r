@@ -1286,13 +1286,13 @@ iso_pov <- interpolate_pw(
    <td style="text-align:left;"> 5km buffer </td>
    <td style="text-align:right;"> 2961.475 </td>
    <td style="text-align:right;"> 21175.79 </td>
-   <td style="text-align:right;"> 14 </td>
+   <td style="text-align:right;"> 14.0 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 10min isochrone </td>
-   <td style="text-align:right;"> 3046.986 </td>
-   <td style="text-align:right;"> 21825.73 </td>
-   <td style="text-align:right;"> 14 </td>
+   <td style="text-align:right;"> 3258.285 </td>
+   <td style="text-align:right;"> 24318.46 </td>
+   <td style="text-align:right;"> 13.4 </td>
   </tr>
 </tbody>
 </table>

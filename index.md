@@ -2,7 +2,7 @@
 title: "Analyzing US Census Data"
 subtitle: "Methods, Maps, and Models in R"
 author: "Kyle E. Walker"
-date: "2023-02-14"
+date: "2023-02-17"
 site: bookdown::bookdown_site
 knit: bookdown::render_book
 output: bookdown::bs4_book
@@ -21,7 +21,7 @@ description: "This book is an overview of how practitioners can acquire, wrangle
 
 # Preface {.unnumbered}
 
-This is the online home of *Analyzing US Census Data: Methods, Maps, and Models in R*, a forthcoming book published with CRC Press. [Pre-order a hard copy of the book from this link!](https://www.routledge.com/Analyzing-US-Census-Data-Methods-Maps-and-Models-in-R/Walker/p/book/9781032366449)
+This is the online home of *Analyzing US Census Data: Methods, Maps, and Models in R*, a book published with CRC Press in 2023.
 
 <img src="img/book_cover.png" width="30%" />
 
@@ -29,7 +29,11 @@ This is the online home of *Analyzing US Census Data: Methods, Maps, and Models 
 
 To support the development of the book and help me maintain this free online version, please consider one of the following:
 
--   [Purchasing a hard copy of the book from CRC Press](https://www.routledge.com/Analyzing-US-Census-Data-Methods-Maps-and-Models-in-R/Walker/p/book/9781032366449) (available now for pre-order; expected publication October 2022);
+-   Purchasing a hard copy of the book;
+
+    -   [Buy from Routledge](https://www.routledge.com/Analyzing-US-Census-Data-Methods-Maps-and-Models-in-R/Walker/p/book/9781032366449)
+
+    -   [Buy on Amazon](https://www.amazon.com/Analyzing-US-Census-Data-Methods/dp/1032366443)
 
 -   Contributing to the book by filing an issue or making a pull request at [the book's GitHub repository](https://github.com/walkerke/census-with-r-book);
 
@@ -39,7 +43,7 @@ To support the development of the book and help me maintain this free online ver
 
 ## About the book {.unnumbered}
 
-Census data are widely used in the United States across numerous research and applied fields, including education, business, journalism, and many others. Until recently, the process of working with US Census data has required the use of a wide array of web interfaces and software platforms to prepare, map, and present data products. The goal of this book is to illustrate the utility of the R programming language for handling these tasks, allowing Census data users to manage their projects in a single computing environment.
+Census data is widely used in the United States across numerous research and applied fields, including education, business, journalism, and many others. Until recently, the process of working with US Census data has required the use of a wide array of web interfaces and software platforms to prepare, map, and present data products. The goal of this book is to illustrate the utility of the R programming language for handling these tasks, allowing Census data users to manage their projects in a single computing environment.
 
 The book focuses on two types of Census data products commonly used by analysts:
 
